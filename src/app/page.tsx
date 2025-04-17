@@ -198,8 +198,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* Auto-scrolling Gallery */}
-      <section className="w-full overflow-hidden">
+      {/* Auto-scrolling Gallery - directly connected to Toast section */}
+      <section className="w-full overflow-hidden p-0 m-0 flex flex-col">
         {/* Desktop gallery */}
         <div className="hidden sm:flex animate-scroll will-change-transform hardware-accelerated">
           <div className="flex">
@@ -274,82 +274,137 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Mobile gallery - wider images and faster scroll */}
-        <div className="flex sm:hidden animate-scroll-mobile will-change-transform hardware-accelerated">
-          <div className="flex">
-            {/* Mobile optimized gallery images */}
-            <div className="flex-none w-[300px] h-[300px] relative">
-              <Image
-                src="/images/gallery1.jpg"
-                alt="Gallery Image 1"
-                fill
-                className="object-cover"
-                loading="lazy"
-                sizes="300px"
-                quality={70}
-              />
+        {/* Mobile gallery - Simple scrollable gallery */}
+        <div className="sm:hidden block p-0 m-0">
+          <div className="relative">
+            {/* Subtle arrow indicator for scrolling */}
+            <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10 pointer-events-none">
+              <span className="bg-black/30 text-white p-2 rounded-full inline-flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 18l6-6-6-6"></path>
+                </svg>
+              </span>
             </div>
-            <div className="flex-none w-[300px] h-[300px] relative">
-              <Image
-                src="/images/gallery3.jpg"
-                alt="Gallery Image 3"
-                fill
-                className="object-cover"
-                loading="lazy"
-                sizes="300px"
-                quality={70}
-              />
-            </div>
-            <div className="flex-none w-[300px] h-[300px] relative">
-              <Image
-                src="/images/gallery5.jpg"
-                alt="Gallery Image 5"
-                fill
-                className="object-cover"
-                loading="lazy"
-                sizes="300px"
-                quality={70}
-              />
-            </div>
-            {/* Duplicate set for seamless scrolling */}
-            <div className="flex-none w-[300px] h-[300px] relative">
-              <Image
-                src="/images/gallery1.jpg"
-                alt="Gallery Image 1"
-                fill
-                className="object-cover"
-                loading="lazy"
-                sizes="300px"
-                quality={70}
-              />
-            </div>
-            <div className="flex-none w-[300px] h-[300px] relative">
-              <Image
-                src="/images/gallery3.jpg"
-                alt="Gallery Image 3"
-                fill
-                className="object-cover"
-                loading="lazy"
-                sizes="300px"
-                quality={70}
-              />
-            </div>
-            <div className="flex-none w-[300px] h-[300px] relative">
-              <Image
-                src="/images/gallery5.jpg"
-                alt="Gallery Image 5"
-                fill
-                className="object-cover"
-                loading="lazy"
-                sizes="300px"
-                quality={70}
-              />
+
+            {/* Simple scrollable container - no padding, no scrollbar */}
+            <div className="overflow-x-auto scrollbar-hide pb-0 mb-0">
+              <div className="flex w-max pb-0 mb-0">
+                <div className="w-[100vw] h-[250px] flex-shrink-0 overflow-hidden">
+                  <img
+                    src="/images/gallery1.jpg"
+                    alt="Gallery Image 1"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="w-[100vw] h-[250px] flex-shrink-0 overflow-hidden">
+                  <img
+                    src="/images/gallery3.jpg"
+                    alt="Gallery Image 3"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="w-[100vw] h-[250px] flex-shrink-0 overflow-hidden">
+                  <img
+                    src="/images/gallery5.jpg"
+                    alt="Gallery Image 5"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="w-[100vw] h-[250px] flex-shrink-0 overflow-hidden">
+                  <img
+                    src="/images/gallery1.jpg"
+                    alt="Gallery Image 1"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="w-[100vw] h-[250px] flex-shrink-0 overflow-hidden">
+                  <img
+                    src="/images/gallery3.jpg"
+                    alt="Gallery Image 3"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </section>
-      {/* Toast Section */}
-      <section className="h-[40vh] w-full bg-[#1e1e1e] text-white">
+
+        {/* Auto-scrolling gallery for desktop */}
+        <div className="hidden sm:block">
+          <div className="relative overflow-hidden">
+            <div className="flex animate-scroll will-change-transform hardware-accelerated">
+              <div className="flex-none w-[400px] h-[400px] relative">
+                <Image
+                  src="/images/gallery1.jpg"
+                  alt="Gallery Image 1"
+                  fill
+                  className="object-cover"
+                  loading="lazy"
+                  sizes="400px"
+                  quality={70}
+                />
+              </div>
+              <div className="flex-none w-[400px] h-[400px] relative">
+                <Image
+                  src="/images/gallery3.jpg"
+                  alt="Gallery Image 3"
+                  fill
+                  className="object-cover"
+                  loading="lazy"
+                  sizes="400px"
+                  quality={70}
+                />
+              </div>
+              <div className="flex-none w-[400px] h-[400px] relative">
+                <Image
+                  src="/images/gallery5.jpg"
+                  alt="Gallery Image 5"
+                  fill
+                  className="object-cover"
+                  loading="lazy"
+                  sizes="400px"
+                  quality={70}
+                />
+              </div>
+              <div className="flex-none w-[400px] h-[400px] relative">
+                <Image
+                  src="/images/gallery1.jpg"
+                  alt="Gallery Image 1"
+                  fill
+                  className="object-cover"
+                  loading="lazy"
+                  sizes="400px"
+                  quality={70}
+                />
+              </div>
+              <div className="flex-none w-[400px] h-[400px] relative">
+                <Image
+                  src="/images/gallery3.jpg"
+                  alt="Gallery Image 3"
+                  fill
+                  className="object-cover"
+                  loading="lazy"
+                  sizes="400px"
+                  quality={70}
+                />
+              </div>
+              <div className="flex-none w-[400px] h-[400px] relative">
+                <Image
+                  src="/images/gallery5.jpg"
+                  alt="Gallery Image 5"
+                  fill
+                  className="object-cover"
+                  loading="lazy"
+                  sizes="400px"
+                  quality={70}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+      {/* Toast Section - directly connected to gallery */}
+      <div className="h-[40vh] w-full bg-[#1e1e1e] text-white">
         <div className="h-full w-full bg-cover bg-center flex items-center justify-center p-8" style={{ backgroundImage: "url('/images/event3.jpg')" }}>
           <div className="text-center">
             <h2 className="text-3xl font-playfair mb-2">{"We Host. You Toast."}</h2>
@@ -357,9 +412,10 @@ export default function HomePage() {
             <Button className="uppercase bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-[240px] text-center">{"View All"}</Button>
           </div>
         </div>
+      </div>
       </section>
       {/* What's Happening Section */}
-      <section className="w-full py-0">
+      <section className="w-full py-0 -mt-1">
         <div className="grid grid-cols-1 md:grid-cols-[55%_45%]">
           <div className="h-[50vh] md:h-[80vh] w-full bg-cover bg-center" style={{ backgroundImage: "url('/images/whats-happening.jpg')" }}></div>
           <div className="h-[50vh] md:h-[80vh] relative w-full flex flex-col justify-center p-6 md:p-16" style={{ backgroundImage: "url('/images/whats-happening-bg.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
@@ -377,7 +433,7 @@ export default function HomePage() {
         </div>
       </section>
       {/* Testimonials */}
-      <section className="w-full relative py-16">
+      <section className="w-full relative py-16 -mt-1">
         {/* Full-width background image - using CSS background for better performance */}
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/testimonial.jpg')" }}></div>
 
@@ -439,7 +495,7 @@ export default function HomePage() {
         </div>
       </section>
       {/* Visit Us Section */}
-      <section className="min-h-[80vh] w-full bg-cover bg-center flex items-center justify-center text-center px-8 py-16 relative" style={{ backgroundImage: "url('/images/location.jpg')" }}>
+      <section className="min-h-[80vh] w-full bg-cover bg-center flex items-center justify-center text-center px-8 py-16 relative -mt-1" style={{ backgroundImage: "url('/images/location.jpg')" }}>
         {/* Dark overlay for better text visibility */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/30"></div>
 
@@ -454,7 +510,7 @@ export default function HomePage() {
         </div>
       </section>
       {/* Footer */}
-      <footer className="h-40 w-full relative flex items-center justify-center mt-0 pt-0">
+      <footer className="h-40 w-full relative flex items-center justify-center -mt-1 pt-0">
         {/* Thin separator line */}
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-white/20 z-10"></div>
 

@@ -38,14 +38,38 @@ body {
     will-change: transform;
   }
 
-  /* Mobile-specific faster animation */
+  /* Mobile-specific faster animation - not used anymore */
   .animate-scroll-mobile {
-    animation: scroll 30s linear infinite;
+    animation: scroll 8s linear infinite;
     will-change: transform;
   }
 
   .animate-fadeIn {
     animation: fadeIn 0.5s ease-in-out forwards;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+
+  /* Touch scrolling utilities */
+  .touch-pan-x {
+    touch-action: pan-x;
+  }
+
+  /* Snap scrolling */
+  .snap-x {
+    scroll-snap-type: x mandatory;
+  }
+
+  .snap-mandatory > * {
+    scroll-snap-align: start;
   }
 }
 
