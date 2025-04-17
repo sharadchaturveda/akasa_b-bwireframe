@@ -19,20 +19,20 @@ export default function ChefPage() {
             <h1 className="text-5xl font-serif mb-6">Meet Our Chef</h1>
             <h2 className="text-3xl font-serif mb-4">Chef Akhilesh Pathak</h2>
             <p className="text-lg mb-6">
-                Hailing from the vibrant culinary melting pot of Kolkata, Chef Akhilesh’s culinary journey spans over two decades, initially nurtured by his mother’s guidance and refined through extensive exploration of India’s diverse gastronomic landscape. 
+                Hailing from the vibrant culinary melting pot of Kolkata, Chef Akhilesh&apos;s culinary journey spans over two decades, initially nurtured by his mother&apos;s guidance and refined through extensive exploration of India&apos;s diverse gastronomic landscape. 
             </p>
             <p className="text-lg mb-6">
               His philosophy is simple: respect the ingredients, honor the tradition, and push the boundaries 
-              of what's possible. Every dish tells a story, and every meal is an opportunity to create something 
+              of what&apos;s possible. Every dish tells a story, and every meal is an opportunity to create something 
               extraordinary.
             </p>
             <div className="space-y-4">
               <h3 className="text-2xl font-serif">Notable Achievements</h3>
               <ul className="list-disc list-inside space-y-2">
-                <li>Michelin Star - 2018, 2019, 2020</li>
-                <li>Asia's 50 Best Restaurants - 2021, 2022</li>
-                <li>James Beard Award Finalist - 2023</li>
-                <li>Featured in "Chef's Table" - Netflix Series</li>
+                <li>Michelin Star &ndash; 2018, 2019, 2020</li>
+                <li>Asia&apos;s 50 Best Restaurants &ndash; 2021, 2022</li>
+                <li>James Beard Award Finalist &ndash; 2023</li>
+                <li>Featured in &quot;Chef&apos;s Table&quot; &ndash; Netflix Series</li>
               </ul>
             </div>
           </div>
