@@ -27,7 +27,7 @@ export default function HomePage() {
             </Link>
           ))}
         </div>
-
+        
         {/* Mobile Navigation */}
         <div className="md:hidden flex justify-between items-center">
           <Link href="/" className="uppercase tracking-wide text-lg font-montserrat text-white">{"Akasa"}</Link>
@@ -93,7 +93,7 @@ export default function HomePage() {
             <h3 className="text-2xl font-montserrat text-white mb-2">{"Not just a meal."}</h3>
             <h2 className="text-4xl font-playfair text-white mb-6">{"An experience."}</h2>
             <p className="font-montserrat text-white mb-8 leading-relaxed">
-              {"We work closely with local farmers to bring you the freshest seasonal ingredients. Inspired by India’s rich culinary heritage, we use heirloom grains, vibrant spices, and pasture-raised meats to craft soulful dishes. Enjoy them the traditional way—family style. Whether you order à la carte or try our chef’s selection, everything is served to share."}
+              {"We work closely with local farmers to bring you the freshest seasonal ingredients. Inspired by India&apos;s rich culinary heritage, we use heirloom grains, vibrant spices, and pasture-raised meats to craft soulful dishes. Enjoy them the traditional way—family style. Whether you order à la carte or try our chef&apos;s selection, everything is served to share."}
             </p>
             <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-[240px] px-6 text-center" showArrow>
               {"Our Location"}
@@ -332,7 +332,7 @@ export default function HomePage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
               {/* Testimonial 1 */}
               <div className="bg-[#0D0D0D]/90 p-8 rounded-lg border border-[#8B4513]/30 hover:translate-y-[-2px] transition-transform duration-200 shadow-xl">
-                <div className="text-7xl text-[#8B4513] font-lora leading-none mb-4">"</div>
+                <div className="text-7xl text-[#8B4513] font-lora leading-none mb-4">&quot;</div>
                 <blockquote className="text-xl italic font-lora text-white">
                   {"Every bite was a revelation. The space, the staff, the food—everything sings."}
                   <footer className="mt-6 text-base not-italic text-gray-300 flex items-center justify-center font-montserrat">
@@ -344,7 +344,7 @@ export default function HomePage() {
 
               {/* Testimonial 2 */}
               <div className="bg-[#0D0D0D]/90 p-8 rounded-lg border border-[#8B4513]/30 hover:translate-y-[-2px] transition-transform duration-200 shadow-xl">
-                <div className="text-7xl text-[#8B4513] font-lora leading-none mb-4">"</div>
+                <div className="text-7xl text-[#8B4513] font-lora leading-none mb-4">&quot;</div>
                 <blockquote className="text-xl italic font-lora text-white">
                   {"An unforgettable dining experience that blends tradition with innovation. The attention to detail is remarkable."}
                   <footer className="mt-6 text-base not-italic text-gray-300 flex items-center justify-center font-montserrat">
@@ -356,9 +356,9 @@ export default function HomePage() {
 
               {/* Testimonial 3 */}
               <div className="bg-[#0D0D0D]/90 p-8 rounded-lg border border-[#8B4513]/30 hover:translate-y-[-2px] transition-transform duration-200 shadow-xl">
-                <div className="text-7xl text-[#8B4513] font-lora leading-none mb-4">"</div>
+                <div className="text-7xl text-[#8B4513] font-lora leading-none mb-4">&quot;</div>
                 <blockquote className="text-xl italic font-lora text-white">
-                  {"The flavors transported me back to my grandmother's kitchen in Delhi. Authentic yet elevated in every way."}
+                  {"The flavors transported me back to my grandmother&apos;s kitchen in Delhi. Authentic yet elevated in every way."}
                   <footer className="mt-6 text-base not-italic text-gray-300 flex items-center justify-center font-montserrat">
                     <span className="w-8 h-[1px] bg-[#8B4513] mr-3"></span>
                     {"Priya Patel, Food Blogger"}

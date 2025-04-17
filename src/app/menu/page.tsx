@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -34,7 +33,7 @@ export default function MenuPage() {
     <main className="min-h-screen bg-black text-white">
       <div className="container mx-auto px-8 py-24">
         <h1 className="text-5xl font-serif mb-12 text-center">{"Our Menu"}</h1>
-        
+
         {menuSections.map((section) => (
           <div key={section.title} className="mb-16">
             <h2 className="text-3xl font-serif mb-8">{section.title}</h2>
@@ -62,4 +61,4 @@ export default function MenuPage() {
       </div>
     </main>
   );
-} 
+}
