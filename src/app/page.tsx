@@ -61,7 +61,7 @@ export default function HomePage() {
             <h3 className="text-2xl text-[#1A2A3A] mb-2">Not just a meal.</h3>
             <h2 className="text-4xl text-[#1A2A3A] mb-6">An experience.</h2>
             <p className="text-[#1A2A3A] mb-8 leading-relaxed">
-              We build meaningful relationships with our suppliers, especially the farmers who bring us the finest and freshest seasonal produce. We prize heirloom vegetables and pasture raised meats. We are driven by a passion to create dishes that burst with rich, wholesome flavor. We encourage you to dine family style, whether you order a la carte or our chef's choice experience, dishes are served as they come and are meant to be shared.
+              We build meaningful relationships with our suppliers, especially the farmers who bring us the finest and freshest seasonal produce. We prize heirloom vegetables and pasture raised meats. We are driven by a passion to create dishes that burst with rich, wholesome flavor. We encourage you to dine family style, whether you order a la carte or our chef&apos;s choice experience, dishes are served as they come and are meant to be shared.
             </p>
             <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A]" showArrow>
               Our Location
@@ -83,8 +83,8 @@ export default function HomePage() {
               
               <div>
                 <p className="text-gray-300 text-sm">dinner:</p>
-                <p className="text-white text-lg">5pm - 9:30pm, Monday–Thursday, Sunday</p>
-                <p className="text-white text-lg">5pm–10pm, Friday & Saturday</p>
+                <p className="text-white text-lg">5pm - 9:30pm, Monday&ndash;Thursday, Sunday</p>
+                <p className="text-white text-lg">5pm&ndash;10pm, Friday &amp; Saturday</p>
               </div>
             </div>
 
@@ -103,8 +103,8 @@ export default function HomePage() {
       {/* Accolades */}
       <section className="h-screen w-full bg-cover bg-center flex items-center justify-start p-17" style={{ backgroundImage: "url('/images/awards.jpg')" }}>
         <div className="max-w-md ml-8">
-          <h2 className="text-2xl font-serif mb-2">Finalists & Flattered</h2>
-          <p className="text-base italic mb-6">Selected for the James Beard Foundation Award – and it's just the beginning.</p>
+          <h2 className="text-2xl font-serif mb-2">Finalists &amp; Flattered</h2>
+          <p className="text-base italic mb-6">Selected for the James Beard Foundation Award &ndash; and it&apos;s just the beginning.</p>
           <div className="space-y-4">
             <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full" showArrow>
               Order Online
@@ -210,7 +210,7 @@ export default function HomePage() {
       <section className="h-screen w-full bg-cover bg-center flex items-center justify-center text-center px-8" style={{ backgroundImage: "url('/images/location.jpg')" }}>
         <div>
           <h2 className="text-3xl font-serif mb-2">Visit Us</h2>
-          <p className="text-lg">123 Rustic Lane, Singapore | Tue–Sun: 11am – 10pm</p>
+          <p className="text-lg">123 Rustic Lane, Singapore | Tue&ndash;Sun: 11am &ndash; 10pm</p>
           <div className="mt-6 space-x-4">
             <Button className="uppercase px-5 py-2 bg-white text-[#1A2A3A]">Order Online</Button>
             <Button className="uppercase px-5 py-2 bg-[#1A2A3A] text-white">Reserve</Button>
@@ -236,14 +236,14 @@ export default function HomePage() {
         <div className="bg-cover bg-center h-full" style={{ backgroundImage: "url('/images/testimonial.jpg')" }}></div>
         <div className="flex items-center justify-center p-12">
           <blockquote className="text-xl italic font-serif max-w-md">
-            "Every bite was a revelation. The space, the staff, the food—everything sings."
+            &quot;Every bite was a revelation. The space, the staff, the food&mdash;everything sings.&quot;
           </blockquote>
         </div>
       </section>
 
       {/* Footer */}
       <footer className="h-20 w-full bg-[#1A2A3A] flex items-center justify-center">
-        <p className="text-sm opacity-70">© 2025 Akasa Singapore</p>
+        <p className="text-sm opacity-70">&copy; 2025 Akasa Singapore</p>
       </footer>
     </main>
   );
