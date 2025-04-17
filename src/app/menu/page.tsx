@@ -23,8 +23,8 @@ export default function MenuPage() {
     {
       title: "Desserts",
       items: [
-        { name: "Chocolate Souffl&eacute;", price: "$16", description: "Warm chocolate souffl&eacute; with vanilla ice cream" },
-        { name: "Cr&egrave;me Br&ucirc;l&eacute;e", price: "$14", description: "Classic vanilla bean with caramelized sugar" },
+        { name: "Chocolate Soufflé", price: "$16", description: "Warm chocolate soufflé with vanilla ice cream" },
+        { name: "Crème Brûlée", price: "$14", description: "Classic vanilla bean with caramelized sugar" },
         { name: "Cheese Selection", price: "$22", description: "Artisanal cheeses with honey and nuts" }
       ]
     }
@@ -33,7 +33,7 @@ export default function MenuPage() {
   return (
     <main className="min-h-screen bg-black text-white">
       <div className="container mx-auto px-8 py-24">
-        <h1 className="text-5xl font-serif mb-12 text-center">Our Menu</h1>
+        <h1 className="text-5xl font-serif mb-12 text-center">{"Our Menu"}</h1>
         
         {menuSections.map((section) => (
           <div key={section.title} className="mb-16">
@@ -55,7 +55,7 @@ export default function MenuPage() {
         <div className="text-center mt-12">
           <Link href="/reservations">
             <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full max-w-xs" showArrow>
-              Make a Reservation
+              {"Make a Reservation"}
             </Button>
           </Link>
         </div>

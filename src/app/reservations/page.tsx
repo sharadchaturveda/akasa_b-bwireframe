@@ -5,12 +5,12 @@ export default function ReservationsPage() {
     <main className="min-h-screen bg-black text-white">
       <div className="container mx-auto px-8 py-24">
         <div className="max-w-2xl mx-auto">
-          <h1 className="text-5xl font-serif mb-12 text-center">Make a Reservation</h1>
+          <h1 className="text-5xl font-serif mb-12 text-center">{"Make a Reservation"}</h1>
           
           <form className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
-                <label htmlFor="date" className="block mb-2">Date</label>
+                <label htmlFor="date" className="block mb-2">{"Date"}</label>
                 <input
                   type="date"
                   id="date"
@@ -19,7 +19,7 @@ export default function ReservationsPage() {
                 />
               </div>
               <div>
-                <label htmlFor="time" className="block mb-2">Time</label>
+                <label htmlFor="time" className="block mb-2">{"Time"}</label>
                 <input
                   type="time"
                   id="time"
@@ -31,35 +31,35 @@ export default function ReservationsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
-                <label htmlFor="guests" className="block mb-2">Number of Guests</label>
+                <label htmlFor="guests" className="block mb-2">{"Number of Guests"}</label>
                 <select
                   id="guests"
                   className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded text-white"
                   required
                 >
-                  <option value="">Select number of guests</option>
+                  <option value="">{"Select number of guests"}</option>
                   {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-                    <option key={num} value={num}>{num} {num === 1 ? 'guest' : 'guests'}</option>
+                    <option key={num} value={num}>{`${num} ${num === 1 ? "guest" : "guests"}`}</option>
                   ))}
                 </select>
               </div>
               <div>
-                <label htmlFor="occasion" className="block mb-2">Occasion</label>
+                <label htmlFor="occasion" className="block mb-2">{"Occasion"}</label>
                 <select
                   id="occasion"
                   className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded text-white"
                 >
-                  <option value="">Select occasion</option>
-                  <option value="birthday">Birthday</option>
-                  <option value="anniversary">Anniversary</option>
-                  <option value="business">Business</option>
-                  <option value="other">Other</option>
+                  <option value="">{"Select occasion"}</option>
+                  <option value="birthday">{"Birthday"}</option>
+                  <option value="anniversary">{"Anniversary"}</option>
+                  <option value="business">{"Business"}</option>
+                  <option value="other">{"Other"}</option>
                 </select>
               </div>
             </div>
 
             <div>
-              <label htmlFor="name" className="block mb-2">Full Name</label>
+              <label htmlFor="name" className="block mb-2">{"Full Name"}</label>
               <input
                 type="text"
                 id="name"
@@ -69,7 +69,7 @@ export default function ReservationsPage() {
             </div>
 
             <div>
-              <label htmlFor="email" className="block mb-2">Email</label>
+              <label htmlFor="email" className="block mb-2">{"Email"}</label>
               <input
                 type="email"
                 id="email"
@@ -79,7 +79,7 @@ export default function ReservationsPage() {
             </div>
 
             <div>
-              <label htmlFor="phone" className="block mb-2">Phone Number</label>
+              <label htmlFor="phone" className="block mb-2">{"Phone Number"}</label>
               <input
                 type="tel"
                 id="phone"
@@ -89,7 +89,7 @@ export default function ReservationsPage() {
             </div>
 
             <div>
-              <label htmlFor="notes" className="block mb-2">Special Requests</label>
+              <label htmlFor="notes" className="block mb-2">{"Special Requests"}</label>
               <textarea
                 id="notes"
                 rows={4}
@@ -99,7 +99,7 @@ export default function ReservationsPage() {
 
             <div className="text-center">
               <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full max-w-xs" showArrow>
-                Book Now
+                {"Book Now"}
               </Button>
             </div>
           </form>
