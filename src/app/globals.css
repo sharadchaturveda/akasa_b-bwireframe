@@ -43,6 +43,10 @@ body {
     animation: scroll 30s linear infinite;
     will-change: transform;
   }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.5s ease-in-out forwards;
+  }
 }
 
 @keyframes scroll {
@@ -54,6 +58,17 @@ body {
   }
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Optimize performance */
 img, video {
   max-width: 100%;
@@ -61,9 +76,17 @@ img, video {
 }
 
 /* Improve scrolling performance */
-* {
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Apply hardware acceleration selectively to improve performance */
+.hardware-accelerated {
+  transform: translateZ(0);
 }
 
 /* Reduce animation work for offscreen elements */

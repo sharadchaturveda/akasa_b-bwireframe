@@ -1,14 +1,23 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function HomePage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const navItems = [
     { name: "HOME", path: "/" },
     { name: "MENU", path: "/menu" },
     { name: "OUR CHEF", path: "/chef" },
     { name: "RESERVATIONS", path: "/reservations" }
   ];
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
 
   return (
     <main className="w-full bg-black text-white overflow-x-hidden">
@@ -27,13 +36,51 @@ export default function HomePage() {
             </Link>
           ))}
         </div>
-        
+
         {/* Mobile Navigation */}
         <div className="md:hidden flex justify-between items-center">
           <Link href="/" className="uppercase tracking-wide text-lg font-montserrat text-white">{"Akasa"}</Link>
-          <button className="text-white p-2 rounded-md border border-white/20">
-            <span className="font-montserrat text-sm uppercase tracking-widest">{"Menu"}</span>
+          <button
+            onClick={toggleMobileMenu}
+            className="text-white p-2 rounded-md border border-white/20 flex items-center justify-center transition-all duration-300 hover:bg-white/10"
+            aria-label="Toggle menu"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
           </button>
+        </div>
+
+        {/* Mobile Menu Overlay */}
+        <div className={`fixed inset-0 bg-black/95 z-40 md:hidden flex flex-col items-center justify-center transition-opacity duration-300 will-change-opacity ${mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+          {/* Close button at top right */}
+          <button
+            onClick={toggleMobileMenu}
+            className="absolute top-4 right-4 text-white p-3 rounded-full bg-[#1A2A3A] hover:bg-[#0A1A2A] transition-all duration-300 flex items-center justify-center shadow-lg"
+            aria-label="Close menu"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+
+          <div className={`flex flex-col items-center gap-8 transition-transform duration-500 ${mobileMenuOpen ? 'translate-y-0' : 'translate-y-10'}`}>
+            {navItems.map((item, index) => (
+              <Link
+                key={item.name}
+                href={item.path}
+                className={`uppercase tracking-wider text-xl font-montserrat text-white hover:text-white/80 transition-all duration-300 relative group opacity-0 animate-fadeIn`}
+                onClick={() => setMobileMenuOpen(false)}
+                style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'forwards' }}
+              >
+                {item.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white group-hover:w-full transition-all duration-300"></span>
+              </Link>
+            ))}
+          </div>
         </div>
       </header>
 
@@ -43,8 +90,8 @@ export default function HomePage() {
           <Image
             src="/images/logo.png"
             alt="Akasa Logo"
-            width={3840}
-            height={3840}
+            width={450}
+            height={450}
             className="w-[250px] sm:w-[350px] md:w-[450px] h-auto"
             priority
             quality={80}
@@ -93,7 +140,7 @@ export default function HomePage() {
             <h3 className="text-2xl font-montserrat text-white mb-2">{"Not just a meal."}</h3>
             <h2 className="text-4xl font-playfair text-white mb-6">{"An experience."}</h2>
             <p className="font-montserrat text-white mb-8 leading-relaxed">
-              {"We work closely with local farmers to bring you the freshest seasonal ingredients. Inspired by India&apos;s rich culinary heritage, we use heirloom grains, vibrant spices, and pasture-raised meats to craft soulful dishes. Enjoy them the traditional way—family style. Whether you order à la carte or try our chef&apos;s selection, everything is served to share."}
+              {"We work closely with local farmers to bring you the freshest seasonal ingredients. Inspired by India's rich culinary heritage, we use heirloom grains, vibrant spices, and pasture-raised meats to craft soulful dishes. Enjoy them the traditional way—family style. Whether you order à la carte or try our chef's selection, everything is served to share."}
             </p>
             <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-[240px] px-6 text-center" showArrow>
               {"Our Location"}
@@ -154,7 +201,7 @@ export default function HomePage() {
       {/* Auto-scrolling Gallery */}
       <section className="w-full overflow-hidden">
         {/* Desktop gallery */}
-        <div className="hidden sm:flex animate-scroll">
+        <div className="hidden sm:flex animate-scroll will-change-transform hardware-accelerated">
           <div className="flex">
             {/* First set of images - reduced for better performance */}
             <div className="flex-none w-[400px] h-[400px] relative">
@@ -164,6 +211,8 @@ export default function HomePage() {
                 fill
                 className="object-cover"
                 loading="lazy"
+                sizes="(max-width: 640px) 300px, 400px"
+                quality={70}
               />
             </div>
             <div className="flex-none w-[400px] h-[400px] relative">
@@ -173,6 +222,8 @@ export default function HomePage() {
                 fill
                 className="object-cover"
                 loading="lazy"
+                sizes="(max-width: 640px) 300px, 400px"
+                quality={70}
               />
             </div>
             <div className="flex-none w-[400px] h-[400px] relative">
@@ -182,6 +233,8 @@ export default function HomePage() {
                 fill
                 className="object-cover"
                 loading="lazy"
+                sizes="(max-width: 640px) 300px, 400px"
+                quality={70}
               />
             </div>
             {/* Duplicate set for seamless scrolling */}
@@ -192,6 +245,8 @@ export default function HomePage() {
                 fill
                 className="object-cover"
                 loading="lazy"
+                sizes="(max-width: 640px) 300px, 400px"
+                quality={70}
               />
             </div>
             <div className="flex-none w-[400px] h-[400px] relative">
@@ -201,6 +256,8 @@ export default function HomePage() {
                 fill
                 className="object-cover"
                 loading="lazy"
+                sizes="(max-width: 640px) 300px, 400px"
+                quality={70}
               />
             </div>
             <div className="flex-none w-[400px] h-[400px] relative">
@@ -210,13 +267,15 @@ export default function HomePage() {
                 fill
                 className="object-cover"
                 loading="lazy"
+                sizes="(max-width: 640px) 300px, 400px"
+                quality={70}
               />
             </div>
           </div>
         </div>
 
         {/* Mobile gallery - wider images and faster scroll */}
-        <div className="flex sm:hidden animate-scroll-mobile">
+        <div className="flex sm:hidden animate-scroll-mobile will-change-transform hardware-accelerated">
           <div className="flex">
             {/* Mobile optimized gallery images */}
             <div className="flex-none w-[300px] h-[300px] relative">
@@ -226,6 +285,8 @@ export default function HomePage() {
                 fill
                 className="object-cover"
                 loading="lazy"
+                sizes="300px"
+                quality={70}
               />
             </div>
             <div className="flex-none w-[300px] h-[300px] relative">
@@ -235,6 +296,8 @@ export default function HomePage() {
                 fill
                 className="object-cover"
                 loading="lazy"
+                sizes="300px"
+                quality={70}
               />
             </div>
             <div className="flex-none w-[300px] h-[300px] relative">
@@ -244,6 +307,8 @@ export default function HomePage() {
                 fill
                 className="object-cover"
                 loading="lazy"
+                sizes="300px"
+                quality={70}
               />
             </div>
             {/* Duplicate set for seamless scrolling */}
@@ -254,6 +319,8 @@ export default function HomePage() {
                 fill
                 className="object-cover"
                 loading="lazy"
+                sizes="300px"
+                quality={70}
               />
             </div>
             <div className="flex-none w-[300px] h-[300px] relative">
@@ -263,6 +330,8 @@ export default function HomePage() {
                 fill
                 className="object-cover"
                 loading="lazy"
+                sizes="300px"
+                quality={70}
               />
             </div>
             <div className="flex-none w-[300px] h-[300px] relative">
@@ -272,6 +341,8 @@ export default function HomePage() {
                 fill
                 className="object-cover"
                 loading="lazy"
+                sizes="300px"
+                quality={70}
               />
             </div>
           </div>
@@ -306,61 +377,59 @@ export default function HomePage() {
         </div>
       </section>
       {/* Testimonials */}
-      <section className="min-h-screen w-full relative py-16 sm:py-0">
-        {/* Full-width background image */}
+      <section className="w-full relative py-16">
+        {/* Full-width background image - using CSS background for better performance */}
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/testimonial.jpg')" }}></div>
 
         {/* Overlay with gradient for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/60 to-black/70"></div>
 
         {/* Content container */}
-        <div className="relative h-full flex flex-col items-center justify-center px-4 sm:px-8 py-16 z-10">
-          <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-4xl sm:text-5xl font-playfair mb-4 text-white">{"Through the Grapevine"}</h2>
-            <p className="text-lg font-montserrat text-gray-200 mb-12 italic">{"What our guests are saying"}</p>
+        <div className="relative flex flex-col items-center justify-center px-4 sm:px-8 py-16 z-10">
+          <div className="w-full max-w-6xl mx-auto text-center">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair mb-4 text-white">{"Through the Grapevine"}</h2>
+            <p className="text-lg font-montserrat text-gray-200 mb-8 italic">{"What our guests are saying"}</p>
 
-            {/* Decorative element - Elegant divider */}
-            <div className="flex items-center justify-center mb-8 sm:mb-16">
+            {/* Simplified decorative element for better performance */}
+            <div className="flex items-center justify-center mb-8">
               <div className="w-16 h-[1px] bg-[#8B4513]"></div>
-              <div className="w-3 h-3 mx-2 rounded-full bg-[#8B4513]"></div>
-              <div className="w-32 h-[1px] bg-[#8B4513]"></div>
               <div className="w-3 h-3 mx-2 rounded-full bg-[#8B4513]"></div>
               <div className="w-16 h-[1px] bg-[#8B4513]"></div>
             </div>
 
-            {/* Testimonials container */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
-              {/* Testimonial 1 */}
-              <div className="bg-[#0D0D0D]/90 p-8 rounded-lg border border-[#8B4513]/30 hover:translate-y-[-2px] transition-transform duration-200 shadow-xl">
-                <div className="text-7xl text-[#8B4513] font-lora leading-none mb-4">&quot;</div>
-                <blockquote className="text-xl italic font-lora text-white">
+            {/* Testimonials container - single column on mobile, 3 columns on desktop */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+              {/* Testimonial 1 - simplified for better performance */}
+              <div className="bg-[#0D0D0D]/90 p-4 sm:p-6 rounded-lg border border-[#8B4513]/30 shadow-lg">
+                <div className="text-5xl sm:text-6xl text-[#8B4513] font-lora leading-none mb-3">&quot;</div>
+                <blockquote className="text-base sm:text-lg italic font-lora text-white">
                   {"Every bite was a revelation. The space, the staff, the food—everything sings."}
-                  <footer className="mt-6 text-base not-italic text-gray-300 flex items-center justify-center font-montserrat">
-                    <span className="w-8 h-[1px] bg-[#8B4513] mr-3"></span>
+                  <footer className="mt-4 text-sm not-italic text-gray-300 flex items-center justify-center font-montserrat">
+                    <span className="w-6 h-[1px] bg-[#8B4513] mr-2"></span>
                     {"Sarah Johnson, Food Critic"}
                   </footer>
                 </blockquote>
               </div>
 
-              {/* Testimonial 2 */}
-              <div className="bg-[#0D0D0D]/90 p-8 rounded-lg border border-[#8B4513]/30 hover:translate-y-[-2px] transition-transform duration-200 shadow-xl">
-                <div className="text-7xl text-[#8B4513] font-lora leading-none mb-4">&quot;</div>
-                <blockquote className="text-xl italic font-lora text-white">
-                  {"An unforgettable dining experience that blends tradition with innovation. The attention to detail is remarkable."}
-                  <footer className="mt-6 text-base not-italic text-gray-300 flex items-center justify-center font-montserrat">
-                    <span className="w-8 h-[1px] bg-[#8B4513] mr-3"></span>
+              {/* Testimonial 2 - simplified for better performance */}
+              <div className="bg-[#0D0D0D]/90 p-4 sm:p-6 rounded-lg border border-[#8B4513]/30 shadow-lg">
+                <div className="text-5xl sm:text-6xl text-[#8B4513] font-lora leading-none mb-3">&quot;</div>
+                <blockquote className="text-base sm:text-lg italic font-lora text-white">
+                  {"An unforgettable dining experience that blends tradition with innovation."}
+                  <footer className="mt-4 text-sm not-italic text-gray-300 flex items-center justify-center font-montserrat">
+                    <span className="w-6 h-[1px] bg-[#8B4513] mr-2"></span>
                     {"Michael Chen, Regular Patron"}
                   </footer>
                 </blockquote>
               </div>
 
-              {/* Testimonial 3 */}
-              <div className="bg-[#0D0D0D]/90 p-8 rounded-lg border border-[#8B4513]/30 hover:translate-y-[-2px] transition-transform duration-200 shadow-xl">
-                <div className="text-7xl text-[#8B4513] font-lora leading-none mb-4">&quot;</div>
-                <blockquote className="text-xl italic font-lora text-white">
-                  {"The flavors transported me back to my grandmother&apos;s kitchen in Delhi. Authentic yet elevated in every way."}
-                  <footer className="mt-6 text-base not-italic text-gray-300 flex items-center justify-center font-montserrat">
-                    <span className="w-8 h-[1px] bg-[#8B4513] mr-3"></span>
+              {/* Testimonial 3 - simplified for better performance */}
+              <div className="bg-[#0D0D0D]/90 p-4 sm:p-6 rounded-lg border border-[#8B4513]/30 shadow-lg">
+                <div className="text-5xl sm:text-6xl text-[#8B4513] font-lora leading-none mb-3">&quot;</div>
+                <blockquote className="text-base sm:text-lg italic font-lora text-white">
+                  {"The flavors transported me back to my grandmother's kitchen in Delhi. Authentic yet elevated."}
+                  <footer className="mt-4 text-sm not-italic text-gray-300 flex items-center justify-center font-montserrat">
+                    <span className="w-6 h-[1px] bg-[#8B4513] mr-2"></span>
                     {"Priya Patel, Food Blogger"}
                   </footer>
                 </blockquote>
@@ -370,7 +439,7 @@ export default function HomePage() {
         </div>
       </section>
       {/* Visit Us Section */}
-      <section className="h-[90vh] sm:h-[90vh] w-full bg-cover bg-center flex items-center justify-center text-center px-8 relative" style={{ backgroundImage: "url('/images/location.jpg')" }}>
+      <section className="min-h-[80vh] w-full bg-cover bg-center flex items-center justify-center text-center px-8 py-16 relative" style={{ backgroundImage: "url('/images/location.jpg')" }}>
         {/* Dark overlay for better text visibility */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/30"></div>
 
@@ -379,8 +448,8 @@ export default function HomePage() {
           <p className="text-lg font-montserrat text-white mb-8" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>{"79 Robinson Road, #01-03 Capitasky, Tanjong Pagar, Singapore 068897"}</p>
           <p className="text-base font-montserrat text-white mb-8" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>{"Monday to Saturday: 11:30am to 10:00pm"}</p>
           <div className="flex flex-col md:flex-row gap-4 justify-center">
-            <Button className="uppercase bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-[240px] text-center">{"Order Online"}</Button>
-            <Button className="uppercase bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-[240px] text-center">{"Reserve"}</Button>
+            <Button className="uppercase bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full sm:w-[240px] text-center">{"Order Online"}</Button>
+            <Button className="uppercase bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full sm:w-[240px] text-center">{"Reserve"}</Button>
           </div>
         </div>
       </section>
