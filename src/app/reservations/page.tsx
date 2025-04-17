@@ -98,7 +98,7 @@ export default function ReservationsPage() {
             </div>
 
             <div className="text-center">
-              <Button type="submit" className="px-8 py-3 bg-white text-black uppercase">
+              <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full max-w-xs" showArrow>
                 Book Now
               </Button>
             </div>

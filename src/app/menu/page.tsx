@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function MenuPage() {
   const menuSections = [
@@ -22,8 +23,8 @@ export default function MenuPage() {
     {
       title: "Desserts",
       items: [
-        { name: "Chocolate Soufflé", price: "$16", description: "Warm chocolate soufflé with vanilla ice cream" },
-        { name: "Crème Brûlée", price: "$14", description: "Classic vanilla bean with caramelized sugar" },
+        { name: "Chocolate Souffl&eacute;", price: "$16", description: "Warm chocolate souffl&eacute; with vanilla ice cream" },
+        { name: "Cr&egrave;me Br&ucirc;l&eacute;e", price: "$14", description: "Classic vanilla bean with caramelized sugar" },
         { name: "Cheese Selection", price: "$22", description: "Artisanal cheeses with honey and nuts" }
       ]
     }
@@ -52,10 +53,10 @@ export default function MenuPage() {
         ))}
 
         <div className="text-center mt-12">
-          <Link href="/reservations" className="inline-block">
-            <button className="px-6 py-3 bg-white text-black uppercase hover:bg-gray-100 transition-colors">
+          <Link href="/reservations">
+            <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full max-w-xs" showArrow>
               Make a Reservation
-            </button>
+            </Button>
           </Link>
         </div>
       </div>

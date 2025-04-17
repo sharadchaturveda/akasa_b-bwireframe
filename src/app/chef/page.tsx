@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function ChefPage() {
   return (
@@ -34,6 +36,13 @@ export default function ChefPage() {
                 <li>James Beard Award Finalist &ndash; 2023</li>
                 <li>Featured in &quot;Chef&apos;s Table&quot; &ndash; Netflix Series</li>
               </ul>
+            </div>
+            <div className="mt-8">
+              <Link href="/reservations">
+                <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full" showArrow>
+                  Make a Reservation
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

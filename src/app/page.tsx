@@ -13,7 +13,7 @@ export default function HomePage() {
   return (
     <main className="w-full bg-black text-white overflow-x-hidden">
       {/* Header */}
-      <header className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-8 py-6 bg-transparent">
+      <header className="w-full z-50 flex justify-between items-center px-8 py-6 bg-transparent">
         {navItems.map((item) => (
           <Link 
             key={item.name} 
@@ -38,7 +38,7 @@ export default function HomePage() {
           />
         </div>
         <div className="text-center z-20 mt-[400px]">
-          <h1 className="text-5xl md:text-7xl font-serif uppercase mb-6">Honest. Goodness. Eats.</h1>
+          <h1 className="text-5xl md:text-7xl font-serif uppercase mb-6">Finest Indian Cuisine</h1>
           <Button variant="default" className="uppercase px-6 py-3 bg-white text-black">Explore Menu</Button>
         </div>
         <div className="absolute inset-0 bg-black/30"></div>
@@ -56,14 +56,14 @@ export default function HomePage() {
       {/* Brand Philosophy Section */}
       <section className="h-[40vh] w-full grid grid-cols-[45%_55%]">
         {/* Left Side - Brand Philosophy */}
-        <div className="bg-[#E8F0F7] p-16 flex flex-col justify-center">
+        <div className="bg-[#E8D5C4] p-16 flex flex-col justify-center">
           <div className="max-w-md">
-            <h3 className="text-2xl text-[#1A2A3A] mb-2">Not just a meal.</h3>
-            <h2 className="text-4xl text-[#1A2A3A] mb-6">An experience.</h2>
-            <p className="text-[#1A2A3A] mb-8 leading-relaxed">
-              We build meaningful relationships with our suppliers, especially the farmers who bring us the finest and freshest seasonal produce. We prize heirloom vegetables and pasture raised meats. We are driven by a passion to create dishes that burst with rich, wholesome flavor. We encourage you to dine family style, whether you order a la carte or our chef&apos;s choice experience, dishes are served as they come and are meant to be shared.
+            <h3 className="text-2xl text-[#3A2D1E] mb-2">Not just a meal.</h3>
+            <h2 className="text-4xl text-[#3A2D1E] mb-6">An experience.</h2>
+            <p className="text-[#3A2D1E] mb-8 leading-relaxed">
+              We build meaningful relationships with our suppliers, especially the farmers who bring us the finest and freshest seasonal produce. We prize heirloom vegetables and pasture raised meats. We are driven by a passion to create dishes that burst with rich, wholesome flavor. We encourage you to dine family style, whether you order a la carte or our chef's choice experience, dishes are served as they come and are meant to be shared.
             </p>
-            <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A]" showArrow>
+            <Button className="bg-[#3A2D1E] text-white hover:bg-[#2A1D0E]" showArrow>
               Our Location
             </Button>
           </div>
@@ -78,21 +78,21 @@ export default function HomePage() {
             <div className="space-y-6">
               <div>
                 <p className="text-gray-300 text-sm">brunch:</p>
-                <p className="text-white text-lg">10am - 2pm, Saturday</p>
+                <p className="text-white text-lg">10am to 2pm, Saturday</p>
               </div>
               
               <div>
                 <p className="text-gray-300 text-sm">dinner:</p>
-                <p className="text-white text-lg">5pm - 9:30pm, Monday&ndash;Thursday, Sunday</p>
-                <p className="text-white text-lg">5pm&ndash;10pm, Friday &amp; Saturday</p>
+                <p className="text-white text-lg">5pm to 9:30pm, Monday to Thursday, Sunday</p>
+                <p className="text-white text-lg">5pm to 10pm, Friday & Saturday</p>
               </div>
             </div>
 
             <div className="mt-12 space-y-4">
-              <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full" showArrow>
+              <Button className="bg-[#3A2D1E] text-white hover:bg-[#2A1D0E] w-full" showArrow>
                 Order Online
               </Button>
-              <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full" showArrow>
+              <Button className="bg-[#3A2D1E] text-white hover:bg-[#2A1D0E] w-full" showArrow>
                 Make a Reservation
               </Button>
             </div>
@@ -103,13 +103,13 @@ export default function HomePage() {
       {/* Accolades */}
       <section className="h-screen w-full bg-cover bg-center flex items-center justify-start p-17" style={{ backgroundImage: "url('/images/awards.jpg')" }}>
         <div className="max-w-md ml-8">
-          <h2 className="text-2xl font-serif mb-2">Finalists &amp; Flattered</h2>
-          <p className="text-base italic mb-6">Selected for the James Beard Foundation Award &ndash; and it&apos;s just the beginning.</p>
+          <h2 className="text-2xl font-serif mb-2">Finalists & Flattered</h2>
+          <p className="text-base italic mb-6">Selected for the James Beard Foundation Award - and it's just the beginning.</p>
           <div className="space-y-4">
-            <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full" showArrow>
+            <Button className="bg-[#3A2D1E] text-white hover:bg-[#2A1D0E] w-full" showArrow>
               Order Online
             </Button>
-            <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full" showArrow>
+            <Button className="bg-[#3A2D1E] text-white hover:bg-[#2A1D0E] w-full" showArrow>
               Make a Reservation
             </Button>
           </div>
@@ -210,40 +210,40 @@ export default function HomePage() {
       <section className="h-screen w-full bg-cover bg-center flex items-center justify-center text-center px-8" style={{ backgroundImage: "url('/images/location.jpg')" }}>
         <div>
           <h2 className="text-3xl font-serif mb-2">Visit Us</h2>
-          <p className="text-lg">123 Rustic Lane, Singapore | Tue&ndash;Sun: 11am &ndash; 10pm</p>
+          <p className="text-lg">123 Rustic Lane, Singapore | Tue to Sun: 11am to 10pm</p>
           <div className="mt-6 space-x-4">
-            <Button className="uppercase px-5 py-2 bg-white text-[#1A2A3A]">Order Online</Button>
-            <Button className="uppercase px-5 py-2 bg-[#1A2A3A] text-white">Reserve</Button>
+            <Button className="uppercase px-5 py-2 bg-white text-black">Order Online</Button>
+            <Button className="uppercase px-5 py-2 bg-yellow-600 text-white">Reserve</Button>
           </div>
         </div>
       </section>
 
       {/* Events */}
-      <section className="h-screen w-full bg-[#1A2A3A] text-white grid grid-cols-1 md:grid-cols-3">
+      <section className="h-screen w-full bg-[#1e1e1e] text-white grid grid-cols-1 md:grid-cols-3">
         <div className="bg-cover bg-center h-full" style={{ backgroundImage: "url('/images/event1.jpg')" }}></div>
         <div className="bg-cover bg-center h-full" style={{ backgroundImage: "url('/images/event2.jpg')" }}></div>
         <div className="bg-cover bg-center h-full flex items-center justify-center p-8" style={{ backgroundImage: "url('/images/event3.jpg')" }}>
           <div className="text-center">
             <h2 className="text-3xl font-serif mb-2">We Host. You Toast.</h2>
             <p className="mb-4">Let us craft your private dining experience with flavor and flair.</p>
-            <Button className="uppercase px-5 py-2 bg-white text-[#1A2A3A]">View All</Button>
+            <Button className="uppercase px-5 py-2 bg-white text-black">View All</Button>
           </div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="h-screen w-full grid grid-cols-1 md:grid-cols-2 bg-[#1A2A3A]">
+      <section className="h-screen w-full grid grid-cols-1 md:grid-cols-2 bg-black">
         <div className="bg-cover bg-center h-full" style={{ backgroundImage: "url('/images/testimonial.jpg')" }}></div>
         <div className="flex items-center justify-center p-12">
           <blockquote className="text-xl italic font-serif max-w-md">
-            &quot;Every bite was a revelation. The space, the staff, the food&mdash;everything sings.&quot;
+            "Every bite was a revelation. The space, the staff, the food—everything sings."
           </blockquote>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="h-20 w-full bg-[#1A2A3A] flex items-center justify-center">
-        <p className="text-sm opacity-70">&copy; 2025 Akasa Singapore</p>
+      <footer className="h-20 w-full bg-black flex items-center justify-center">
+        <p className="text-sm opacity-70">© 2025 Akasa Singapore</p>
       </footer>
     </main>
   );
