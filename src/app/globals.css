@@ -34,13 +34,13 @@ body {
 
 @layer utilities {
   .animate-scroll {
-    animation: scroll 60s linear infinite;
+    animation: scroll 30s linear infinite;
     will-change: transform;
   }
 
-  /* Mobile-specific faster animation - not used anymore */
+  /* Mobile-specific faster animation for infinite scrolling */
   .animate-scroll-mobile {
-    animation: scroll 8s linear infinite;
+    animation: scroll 20s linear infinite;
     will-change: transform;
   }
 
@@ -111,6 +111,41 @@ img, video {
 /* Apply hardware acceleration selectively to improve performance */
 .hardware-accelerated {
   transform: translateZ(0);
+}
+
+/* Fix for black bars during fast scrolling */
+html, body {
+  overscroll-behavior: none;
+  overflow-x: hidden;
+  background-color: black;
+  scroll-behavior: smooth; /* Smoother scrolling */
+}
+
+/* Ensure sections connect properly */
+section {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  margin-top: -1px;
+  margin-bottom: -1px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  will-change: transform; /* Optimize for animations/transitions */
+}
+
+/* Optimize image rendering */
+img, Image {
+  backface-visibility: hidden; /* Prevents flickering */
+  transform: translateZ(0); /* Hardware acceleration */
+  -webkit-font-smoothing: subpixel-antialiased;
+  image-rendering: auto;
+}
+
+/* Prevent layout shifts */
+.image-container {
+  position: relative;
+  overflow: hidden;
+  background-color: #111; /* Placeholder color while loading */
 }
 
 /* Reduce animation work for offscreen elements */

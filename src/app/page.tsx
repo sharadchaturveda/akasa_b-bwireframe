@@ -3,11 +3,14 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
+// Component for the Akasa Restaurant homepage
 export default function HomePage() {
+  // State for mobile menu
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Navigation items
   const navItems = [
     { name: "HOME", path: "/" },
     { name: "MENU", path: "/menu" },
@@ -19,9 +22,98 @@ export default function HomePage() {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  // ===== SCROLL BEHAVIOR EFFECTS =====
+
+  // Fix for black bars during fast scrolling
+  useEffect(() => {
+    // Prevent overscroll behavior - client-side only
+    if (typeof document !== 'undefined') {
+      document.body.style.overscrollBehavior = 'none';
+
+      // Fix for iOS momentum scrolling
+      const handleTouchMove = (e: TouchEvent) => {
+        // Only prevent default if we're at the top or bottom of the page
+        if (window.scrollY <= 0 && e.touches[0].clientY > 50) {
+          e.preventDefault();
+        } else if (window.scrollY + window.innerHeight >= document.body.scrollHeight && e.touches[0].clientY < window.innerHeight - 50) {
+          e.preventDefault();
+        }
+      };
+
+      document.addEventListener('touchmove', handleTouchMove, { passive: false });
+
+      return () => {
+        document.removeEventListener('touchmove', handleTouchMove);
+      };
+    }
+  }, []);
+
+  // Set up bidirectional infinite scrolling for the gallery
+  useEffect(() => {
+    // Only run on client-side to prevent hydration mismatch
+    if (typeof window !== 'undefined') {
+      // Gallery infinite scroll setup
+      const galleryScroll = document.getElementById('gallery-scroll');
+      const galleryContainer = document.getElementById('gallery-container');
+
+      if (galleryScroll && galleryContainer) {
+        // Preload all gallery images to prevent loading during scrolling
+        const preloadImages = () => {
+          const images = galleryContainer.querySelectorAll('img');
+          images.forEach(img => {
+            if (img.getAttribute('loading') === 'lazy') {
+              // Create a new Image object to preload
+              const preloadImg = new window.Image();
+              preloadImg.src = img.src;
+            }
+          });
+        };
+
+        // Preload images after a short delay
+        const preloadTimeout = setTimeout(preloadImages, 1000);
+
+        // Use a more efficient scroll handler with throttling
+        let scrollTimeout: number | null = null;
+        const handleScroll = () => {
+          if (scrollTimeout) return; // Skip if already scheduled
+
+          scrollTimeout = window.setTimeout(() => {
+            const scrollLeft = galleryScroll.scrollLeft;
+            const containerWidth = galleryContainer.scrollWidth;
+            const viewportWidth = galleryScroll.clientWidth;
+
+            // If we're near the beginning, jump to a similar position near the end
+            if (scrollLeft < viewportWidth / 2) {
+              // Calculate how many full sets of images we have
+              const imageSetWidth = containerWidth / 2;
+              galleryScroll.scrollLeft = scrollLeft + imageSetWidth;
+            }
+
+            // If we're near the end, jump to a similar position near the beginning
+            if (scrollLeft > containerWidth - viewportWidth * 1.5) {
+              // Calculate how many full sets of images we have
+              const imageSetWidth = containerWidth / 2;
+              galleryScroll.scrollLeft = scrollLeft - imageSetWidth;
+            }
+
+            scrollTimeout = null;
+          }, 50); // Throttle to 50ms
+        };
+
+        galleryScroll.addEventListener('scroll', handleScroll, { passive: true });
+
+        return () => {
+          galleryScroll.removeEventListener('scroll', handleScroll);
+          clearTimeout(preloadTimeout);
+          if (scrollTimeout) clearTimeout(scrollTimeout);
+        };
+      }
+    }
+  }, []);
+
   return (
     <main className="w-full bg-black text-white overflow-x-hidden">
-      {/* Header */}
+      {/* ===== HEADER & NAVIGATION ===== */}
       <header className="absolute top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 md:py-6">
         {/* Desktop Navigation */}
         <div className="hidden md:flex justify-between items-center">
@@ -84,8 +176,8 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="h-screen w-full bg-cover bg-center flex items-center justify-center relative" style={{ backgroundImage: "url('/images/hero.jpg')" }}>
+      {/* ===== HERO SECTION ===== */}
+      <section className="h-screen w-full bg-cover bg-center flex items-center justify-center relative" style={{ backgroundImage: "url('/images/hero.jpg?quality=75&width=1920')" }}>
         <div className="absolute inset-0 flex items-center justify-center" style={{ top: '-15%', bottom: '40%' }}>
           <Image
             src="/images/logo.png"
@@ -94,7 +186,7 @@ export default function HomePage() {
             height={450}
             className="w-[250px] sm:w-[350px] md:w-[450px] h-auto"
             priority
-            quality={80}
+            quality={75}
           />
         </div>
         <div className="text-center relative z-20">
@@ -102,7 +194,7 @@ export default function HomePage() {
             <div className="flex flex-col items-center">
               <span className="text-sm md:text-base text-white/80 font-montserrat tracking-[0.3em] uppercase mb-2">{"Experience"}</span>
               <h1 className="relative font-playfair text-4xl sm:text-5xl md:text-6xl text-white italic mb-2">
-                {"Finest Indian Cuisine"}
+                {"Exquisite Indian Cuisine"}
               </h1>
               <div className="flex items-center justify-center w-full mb-4">
                 <div className="h-[1px] w-12 md:w-16 bg-white/40"></div>
@@ -114,7 +206,7 @@ export default function HomePage() {
                 </div>
                 <div className="h-[1px] w-12 md:w-16 bg-white/40"></div>
               </div>
-              <span className="text-xs md:text-sm text-white/70 font-montserrat tracking-wider">{"ESTABLISHED 1995"}</span>
+              <span className="text-xs md:text-sm text-white/70 font-montserrat tracking-wider">{"Fine Dining at the Heart of Singapore"}</span>
             </div>
           </div>
           <Button variant="default" className="uppercase bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-[240px] text-center">{"Explore Menu"}</Button>
@@ -131,7 +223,7 @@ export default function HomePage() {
       </section>
       */}
 
-      {/* Brand Philosophy Section */}
+      {/* ===== BRAND PHILOSOPHY & LOCATION ===== */}
       <section className="min-h-[80vh] w-full grid grid-cols-1 md:grid-cols-[45%_55%]">
         {/* Left Side - Brand Philosophy */}
         <div className="relative p-6 md:p-16 flex flex-col justify-center" style={{ backgroundImage: "url('/images/philosophy-bg.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
@@ -177,7 +269,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* Accolades */}
+      {/* ===== ACCOLADES & AWARDS ===== */}
       <section className="min-h-screen sm:h-screen w-full bg-cover bg-center relative py-16 sm:py-0" style={{ backgroundImage: "url('/images/awards.jpg')" }}>
         {/* Dark overlay for better text visibility */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20"></div>
@@ -198,47 +290,74 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* Auto-scrolling Gallery - directly connected to Toast section */}
+      {/* ===== GALLERY & PRIVATE DINING ===== */}
       <section className="w-full overflow-hidden p-0 m-0 flex flex-col">
-        {/* Desktop gallery */}
+        {/* Desktop gallery - Auto-scrolling */}
         <div className="hidden sm:flex animate-scroll will-change-transform hardware-accelerated">
           <div className="flex">
-            {/* First set of images - reduced for better performance */}
-            <div className="flex-none w-[400px] h-[400px] relative">
+            {/* First set of images - optimized for performance */}
+            <div className="flex-none w-[400px] h-[400px] relative image-container">
               <Image
                 src="/images/gallery1.jpg"
                 alt="Gallery Image 1"
                 fill
                 className="object-cover"
-                loading="lazy"
+                loading="eager" /* Change to eager for visible images */
                 sizes="(max-width: 640px) 300px, 400px"
-                quality={70}
+                quality={65}
+                priority={true} /* Prioritize loading */
               />
             </div>
-            <div className="flex-none w-[400px] h-[400px] relative">
+            <div className="flex-none w-[400px] h-[400px] relative image-container">
+              <Image
+                src="/images/gallery2.jpg"
+                alt="Gallery Image 2"
+                fill
+                className="object-cover"
+                loading="eager" /* Change to eager for visible images */
+                sizes="(max-width: 640px) 300px, 400px"
+                quality={65}
+                priority={true} /* Prioritize loading */
+              />
+            </div>
+            <div className="flex-none w-[400px] h-[400px] relative image-container">
               <Image
                 src="/images/gallery3.jpg"
                 alt="Gallery Image 3"
                 fill
                 className="object-cover"
-                loading="lazy"
+                loading="eager" /* Change to eager for visible images */
                 sizes="(max-width: 640px) 300px, 400px"
-                quality={70}
+                quality={65}
+                priority={true} /* Prioritize loading */
               />
             </div>
-            <div className="flex-none w-[400px] h-[400px] relative">
+            <div className="flex-none w-[400px] h-[400px] relative image-container">
+              <Image
+                src="/images/gallery6.jpg"
+                alt="Gallery Image 6"
+                fill
+                className="object-cover"
+                loading="eager"
+                sizes="(max-width: 640px) 300px, 400px"
+                quality={65}
+                priority={true}
+              />
+            </div>
+            <div className="flex-none w-[400px] h-[400px] relative image-container">
               <Image
                 src="/images/gallery5.jpg"
                 alt="Gallery Image 5"
                 fill
                 className="object-cover"
-                loading="lazy"
+                loading="eager"
                 sizes="(max-width: 640px) 300px, 400px"
-                quality={70}
+                quality={65}
+                priority={true}
               />
             </div>
             {/* Duplicate set for seamless scrolling */}
-            <div className="flex-none w-[400px] h-[400px] relative">
+            <div className="flex-none w-[400px] h-[400px] relative image-container">
               <Image
                 src="/images/gallery1.jpg"
                 alt="Gallery Image 1"
@@ -246,38 +365,36 @@ export default function HomePage() {
                 className="object-cover"
                 loading="lazy"
                 sizes="(max-width: 640px) 300px, 400px"
-                quality={70}
+                quality={65}
               />
             </div>
-            <div className="flex-none w-[400px] h-[400px] relative">
+            <div className="flex-none w-[400px] h-[400px] relative image-container">
               <Image
-                src="/images/gallery3.jpg"
-                alt="Gallery Image 3"
+                src="/images/gallery7.jpg"
+                alt="Gallery Image 7"
                 fill
                 className="object-cover"
                 loading="lazy"
                 sizes="(max-width: 640px) 300px, 400px"
-                quality={70}
-              />
-            </div>
-            <div className="flex-none w-[400px] h-[400px] relative">
-              <Image
-                src="/images/gallery5.jpg"
-                alt="Gallery Image 5"
-                fill
-                className="object-cover"
-                loading="lazy"
-                sizes="(max-width: 640px) 300px, 400px"
-                quality={70}
+                quality={65}
               />
             </div>
           </div>
         </div>
 
-        {/* Mobile gallery - Simple scrollable gallery */}
+        {/* Mobile gallery - Manual scrolling with bidirectional navigation */}
         <div className="sm:hidden block p-0 m-0">
           <div className="relative">
-            {/* Subtle arrow indicator for scrolling */}
+            {/* Left arrow indicator */}
+            <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10 pointer-events-none">
+              <span className="bg-black/30 text-white p-2 rounded-full inline-flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M15 18l-6-6 6-6"></path>
+                </svg>
+              </span>
+            </div>
+
+            {/* Right arrow indicator */}
             <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10 pointer-events-none">
               <span className="bg-black/30 text-white p-2 rounded-full inline-flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -286,42 +403,122 @@ export default function HomePage() {
               </span>
             </div>
 
-            {/* Simple scrollable container - no padding, no scrollbar */}
-            <div className="overflow-x-auto scrollbar-hide pb-0 mb-0">
-              <div className="flex w-max pb-0 mb-0">
-                <div className="w-[100vw] h-[250px] flex-shrink-0 overflow-hidden">
+            {/* Bidirectional infinite scrollable container */}
+            <div className="overflow-x-auto scrollbar-hide pb-0 mb-0 snap-x snap-mandatory" id="gallery-scroll">
+              <div className="flex w-max pb-0 mb-0" id="gallery-container">
+                {/* Gallery images for manual scrolling */}
+                <div className="w-[100vw] h-[250px] flex-shrink-0 overflow-hidden snap-center image-container">
                   <img
                     src="/images/gallery1.jpg"
                     alt="Gallery Image 1"
                     className="w-full h-full object-cover"
+                    loading="eager" /* Change to eager for visible images */
+                    width="640" /* Add explicit dimensions */
+                    height="250"
+                    decoding="async" /* Decode images asynchronously */
+                    fetchPriority="high" /* Higher priority for visible images */
                   />
                 </div>
-                <div className="w-[100vw] h-[250px] flex-shrink-0 overflow-hidden">
+                <div className="w-[100vw] h-[250px] flex-shrink-0 overflow-hidden snap-center image-container">
                   <img
                     src="/images/gallery3.jpg"
                     alt="Gallery Image 3"
                     className="w-full h-full object-cover"
+                    loading="eager"
+                    width="640"
+                    height="250"
+                    decoding="async"
+                    fetchPriority="high"
                   />
                 </div>
-                <div className="w-[100vw] h-[250px] flex-shrink-0 overflow-hidden">
+                <div className="w-[100vw] h-[250px] flex-shrink-0 overflow-hidden snap-center image-container">
                   <img
                     src="/images/gallery5.jpg"
                     alt="Gallery Image 5"
                     className="w-full h-full object-cover"
+                    loading="eager"
+                    width="640"
+                    height="250"
+                    decoding="async"
+                    fetchPriority="high"
                   />
                 </div>
-                <div className="w-[100vw] h-[250px] flex-shrink-0 overflow-hidden">
+                <div className="w-[100vw] h-[250px] flex-shrink-0 overflow-hidden snap-center image-container">
                   <img
                     src="/images/gallery1.jpg"
                     alt="Gallery Image 1"
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    width="640"
+                    height="250"
+                    decoding="async"
                   />
                 </div>
-                <div className="w-[100vw] h-[250px] flex-shrink-0 overflow-hidden">
+                <div className="w-[100vw] h-[250px] flex-shrink-0 overflow-hidden snap-center image-container">
                   <img
                     src="/images/gallery3.jpg"
                     alt="Gallery Image 3"
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    width="640"
+                    height="250"
+                    decoding="async"
+                  />
+                </div>
+                <div className="w-[100vw] h-[250px] flex-shrink-0 overflow-hidden snap-center image-container">
+                  <img
+                    src="/images/gallery5.jpg"
+                    alt="Gallery Image 5"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    width="640"
+                    height="250"
+                    decoding="async"
+                  />
+                </div>
+                <div className="w-[100vw] h-[250px] flex-shrink-0 overflow-hidden snap-center image-container">
+                  <img
+                    src="/images/gallery1.jpg"
+                    alt="Gallery Image 1"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    width="640"
+                    height="250"
+                    decoding="async"
+                  />
+                </div>
+                <div className="w-[100vw] h-[250px] flex-shrink-0 overflow-hidden snap-center image-container">
+                  <img
+                    src="/images/gallery3.jpg"
+                    alt="Gallery Image 3"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    width="640"
+                    height="250"
+                    decoding="async"
+                  />
+                </div>
+                {/* Additional gallery images */}
+                <div className="w-[100vw] h-[250px] flex-shrink-0 overflow-hidden snap-center image-container">
+                  <img
+                    src="/images/gallery6.jpg"
+                    alt="Gallery Image 6"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    width="640"
+                    height="250"
+                    decoding="async"
+                  />
+                </div>
+                <div className="w-[100vw] h-[250px] flex-shrink-0 overflow-hidden snap-center image-container">
+                  <img
+                    src="/images/gallery7.jpg"
+                    alt="Gallery Image 7"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    width="640"
+                    height="250"
+                    decoding="async"
                   />
                 </div>
               </div>
@@ -329,96 +526,22 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Auto-scrolling gallery for desktop */}
-        <div className="hidden sm:block">
-          <div className="relative overflow-hidden">
-            <div className="flex animate-scroll will-change-transform hardware-accelerated">
-              <div className="flex-none w-[400px] h-[400px] relative">
-                <Image
-                  src="/images/gallery1.jpg"
-                  alt="Gallery Image 1"
-                  fill
-                  className="object-cover"
-                  loading="lazy"
-                  sizes="400px"
-                  quality={70}
-                />
-              </div>
-              <div className="flex-none w-[400px] h-[400px] relative">
-                <Image
-                  src="/images/gallery3.jpg"
-                  alt="Gallery Image 3"
-                  fill
-                  className="object-cover"
-                  loading="lazy"
-                  sizes="400px"
-                  quality={70}
-                />
-              </div>
-              <div className="flex-none w-[400px] h-[400px] relative">
-                <Image
-                  src="/images/gallery5.jpg"
-                  alt="Gallery Image 5"
-                  fill
-                  className="object-cover"
-                  loading="lazy"
-                  sizes="400px"
-                  quality={70}
-                />
-              </div>
-              <div className="flex-none w-[400px] h-[400px] relative">
-                <Image
-                  src="/images/gallery1.jpg"
-                  alt="Gallery Image 1"
-                  fill
-                  className="object-cover"
-                  loading="lazy"
-                  sizes="400px"
-                  quality={70}
-                />
-              </div>
-              <div className="flex-none w-[400px] h-[400px] relative">
-                <Image
-                  src="/images/gallery3.jpg"
-                  alt="Gallery Image 3"
-                  fill
-                  className="object-cover"
-                  loading="lazy"
-                  sizes="400px"
-                  quality={70}
-                />
-              </div>
-              <div className="flex-none w-[400px] h-[400px] relative">
-                <Image
-                  src="/images/gallery5.jpg"
-                  alt="Gallery Image 5"
-                  fill
-                  className="object-cover"
-                  loading="lazy"
-                  sizes="400px"
-                  quality={70}
-                />
-              </div>
+        {/* Private Dining Promotion */}
+        <div className="h-[40vh] w-full bg-[#1e1e1e] text-white">
+          <div className="h-full w-full bg-cover bg-center flex items-center justify-center p-8" style={{ backgroundImage: "url('/images/event3.jpg?quality=75&width=1000')" }}>
+            <div className="text-center">
+              <h2 className="text-3xl font-playfair mb-2">{"We Host. You Toast."}</h2>
+              <p className="mb-4 font-montserrat">{"Let us craft your private dining experience with flavor and flair."}</p>
+              <Button className="uppercase bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-[240px] text-center">{"View All"}</Button>
             </div>
           </div>
         </div>
-
-      {/* Toast Section - directly connected to gallery */}
-      <div className="h-[40vh] w-full bg-[#1e1e1e] text-white">
-        <div className="h-full w-full bg-cover bg-center flex items-center justify-center p-8" style={{ backgroundImage: "url('/images/event3.jpg')" }}>
-          <div className="text-center">
-            <h2 className="text-3xl font-playfair mb-2">{"We Host. You Toast."}</h2>
-            <p className="mb-4 font-montserrat">{"Let us craft your private dining experience with flavor and flair."}</p>
-            <Button className="uppercase bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-[240px] text-center">{"View All"}</Button>
-          </div>
-        </div>
-      </div>
       </section>
-      {/* What's Happening Section */}
-      <section className="w-full py-0 -mt-1">
+      {/* ===== WHAT'S HAPPENING ===== */}
+      <section className="w-full py-0">
         <div className="grid grid-cols-1 md:grid-cols-[55%_45%]">
-          <div className="h-[50vh] md:h-[80vh] w-full bg-cover bg-center" style={{ backgroundImage: "url('/images/whats-happening.jpg')" }}></div>
-          <div className="h-[50vh] md:h-[80vh] relative w-full flex flex-col justify-center p-6 md:p-16" style={{ backgroundImage: "url('/images/whats-happening-bg.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
+          <div className="h-[50vh] md:h-[80vh] w-full bg-cover bg-center" style={{ backgroundImage: "url('/images/whats-happening.jpg?quality=75&width=1200')" }}></div>
+          <div className="h-[50vh] md:h-[80vh] relative w-full flex flex-col justify-center p-6 md:p-16" style={{ backgroundImage: "url('/images/whats-happening-bg.jpg?quality=75&width=1200')", backgroundSize: "cover", backgroundPosition: "center" }}>
             <div className="absolute inset-0 bg-black/40"></div>
             <div className="relative">
               <h2 className="text-4xl font-playfair text-white mb-6">{"What's Happening"}</h2>
@@ -432,10 +555,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* Testimonials */}
-      <section className="w-full relative py-16 -mt-1">
+      {/* ===== TESTIMONIALS ===== */}
+      <section className="w-full relative py-16">
         {/* Full-width background image - using CSS background for better performance */}
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/testimonial.jpg')" }}></div>
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/testimonial.jpg?quality=75&width=1200')" }}></div>
 
         {/* Overlay with gradient for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/60 to-black/70"></div>
@@ -494,8 +617,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* Visit Us Section */}
-      <section className="min-h-[80vh] w-full bg-cover bg-center flex items-center justify-center text-center px-8 py-16 relative -mt-1" style={{ backgroundImage: "url('/images/location.jpg')" }}>
+      {/* ===== VISIT US ===== */}
+      <section className="min-h-[80vh] w-full bg-cover bg-center flex items-center justify-center text-center px-8 py-16 relative" style={{ backgroundImage: "url('/images/location.jpg?quality=75&width=1200')" }}>
         {/* Dark overlay for better text visibility */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/30"></div>
 
@@ -509,13 +632,13 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* Footer */}
-      <footer className="h-40 w-full relative flex items-center justify-center -mt-1 pt-0">
+      {/* ===== FOOTER ===== */}
+      <footer className="h-40 w-full relative flex items-center justify-center pt-0">
         {/* Thin separator line */}
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-white/20 z-10"></div>
 
         {/* Background image */}
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/footer-bg.jpg')" }}></div>
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/footer-bg.jpg?quality=75&width=1200')" }}></div>
 
         {/* Dark overlay for better text visibility */}
         <div className="absolute inset-0 bg-black/70"></div>
