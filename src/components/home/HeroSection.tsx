@@ -8,26 +8,38 @@ import { memo } from "react";
 // Memoized logo component for better performance
 const Logo = memo(function Logo() {
   return (
-    <Image
-      src="/images/logo.png"
-      alt="Akasa Logo"
-      width={450}
-      height={450}
-      className="w-[250px] sm:w-[350px] md:w-[450px] h-auto"
-      priority
-      quality={75}
-    />
+    <div className="will-change-transform" style={{ transform: 'translateZ(0)' }}>
+      <Image
+        src="/images/logo.png"
+        alt="Akasa Logo"
+        width={450}
+        height={450}
+        className="w-[250px] sm:w-[350px] md:w-[450px] h-auto"
+        priority
+        quality={60}
+        loading="eager"
+        fetchPriority="high"
+      />
+    </div>
   );
 });
 
 // Memoized hero section for better performance
 const HeroSection = memo(function HeroSection() {
   return (
-    <section className="h-screen w-full bg-cover bg-center flex items-center justify-center relative" style={{ backgroundImage: "url('/images/hero.jpg?quality=75&width=1920')" }}>
-      <div className="absolute inset-0 flex items-center justify-center" style={{ top: '-15%', bottom: '40%' }}>
+    <section
+      className="h-screen w-full bg-cover bg-center flex flex-col items-center justify-center relative pt-16"
+      style={{
+        backgroundImage: "url('/images/hero.jpg?quality=60&width=1200')",
+        willChange: 'transform',
+        backfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden'
+      }}
+    >
+      <div className="absolute inset-0 flex items-start justify-center pt-8 md:pt-12" style={{ top: '-5%', bottom: '50%' }}>
         <Logo />
       </div>
-      <div className="text-center relative z-20">
+      <div className="text-center relative z-20 mt-16 md:mt-24">
         <div className="mb-10">
           <div className="flex flex-col items-center">
             <span className="text-sm md:text-base text-white/80 font-montserrat tracking-[0.3em] uppercase mb-2">{"Experience"}</span>

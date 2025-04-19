@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, memo, useCallback } from "react";
+import { useEffect, useRef, memo } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -16,13 +16,13 @@ const GALLERY_IMAGES = [
 ];
 
 // Memoized desktop gallery image component
-const DesktopGalleryImage = memo(function DesktopGalleryImage({
-  src,
-  alt,
-  priority = false
-}: {
-  src: string;
-  alt: string;
+const DesktopGalleryImage = memo(function DesktopGalleryImage({ 
+  src, 
+  alt, 
+  priority = false 
+}: { 
+  src: string; 
+  alt: string; 
   priority?: boolean;
 }) {
   return (
@@ -43,20 +43,20 @@ const DesktopGalleryImage = memo(function DesktopGalleryImage({
 
 // Memoized mobile gallery image component
 const MobileGalleryImage = memo(function MobileGalleryImage({
-  src,
-  alt,
+  src, 
+  alt, 
   priority = false,
-  setKey = ""
-}: {
-  src: string;
-  alt: string;
+  index = 0
+}: { 
+  src: string; 
+  alt: string; 
   priority?: boolean;
-  setKey?: string;
+  index?: number;
 }) {
   return (
-    <div
-      key={`${setKey}-${src}`}
-      className="w-[90vw] h-[250px] flex-shrink-0 snap-center p-2"
+    <div 
+      className="min-w-[80vw] h-[250px] flex-shrink-0 snap-center px-2"
+      style={{ scrollSnapAlign: 'center' }}
     >
       <div className="w-full h-full relative rounded-lg overflow-hidden">
         <img
@@ -67,6 +67,7 @@ const MobileGalleryImage = memo(function MobileGalleryImage({
           width="640"
           height="250"
           fetchPriority={priority ? "high" : "auto"}
+          draggable="false"
         />
       </div>
     </div>
@@ -74,66 +75,49 @@ const MobileGalleryImage = memo(function MobileGalleryImage({
 });
 
 const GallerySection = memo(function GallerySection() {
-  // Refs for mobile gallery scrolling
+  // Simple ref for the mobile gallery
   const mobileGalleryRef = useRef<HTMLDivElement>(null);
-  const mobileContainerRef = useRef<HTMLDivElement>(null);
-
-  // Memoized scroll handler for better performance
-  const handleScroll = useCallback(() => {
-    const galleryScroll = mobileGalleryRef.current;
-    const galleryContainer = mobileContainerRef.current;
-
-    if (!galleryScroll || !galleryContainer) return;
-
-    const scrollLeft = galleryScroll.scrollLeft;
-    const containerWidth = galleryContainer.scrollWidth;
-    const viewportWidth = galleryScroll.clientWidth;
-
-    // If we're near the beginning, jump to the middle set
-    if (scrollLeft < viewportWidth / 2) {
-      // Calculate position of the middle set
-      const middleSetPosition = containerWidth / 3;
-      // Use requestAnimationFrame for smoother visual updates
-      requestAnimationFrame(() => {
-        galleryScroll.scrollLeft = scrollLeft + middleSetPosition;
-      });
-    }
-
-    // If we're near the end, jump to the beginning of the last set
-    if (scrollLeft > containerWidth - viewportWidth * 1.5) {
-      // Calculate position of the first set
-      const firstSetPosition = containerWidth / 3;
-      // Use requestAnimationFrame for smoother visual updates
-      requestAnimationFrame(() => {
-        galleryScroll.scrollLeft = scrollLeft - firstSetPosition;
-      });
-    }
-  }, []);
-
-  // Set up bidirectional infinite scrolling for mobile gallery
+  
+  // Simple initialization for mobile gallery
   useEffect(() => {
     if (typeof window === 'undefined') return;
-
+    
     const galleryScroll = mobileGalleryRef.current;
-    const galleryContainer = mobileContainerRef.current;
-
-    if (!galleryScroll || !galleryContainer) return;
-
-    // Initialize scroll position to the middle set
-    // This ensures we can scroll both left and right
-    requestAnimationFrame(() => {
-      const containerWidth = galleryContainer.scrollWidth;
-      const middlePosition = containerWidth / 3;
-      galleryScroll.scrollLeft = middlePosition;
-    });
-
-    // Use passive event listener for better performance
-    galleryScroll.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-      galleryScroll.removeEventListener('scroll', handleScroll);
+    if (!galleryScroll) return;
+    
+    // Add proper smooth scrolling behavior
+    galleryScroll.style.scrollBehavior = 'smooth';
+    
+    // Center the gallery on the first item
+    const firstItem = galleryScroll.querySelector('.snap-center');
+    if (firstItem) {
+      const scrollLeft = firstItem.getBoundingClientRect().left + 
+        galleryScroll.scrollLeft - 
+        (galleryScroll.getBoundingClientRect().width - firstItem.getBoundingClientRect().width) / 2;
+      
+      // Use requestAnimationFrame for smoother visual updates
+      requestAnimationFrame(() => {
+        galleryScroll.scrollLeft = scrollLeft;
+      });
+    }
+    
+    // Add proper touch handling for mobile devices
+    const preventBodyScroll = (e: TouchEvent) => {
+      // Only prevent default if we're swiping horizontally
+      if (Math.abs(e.touches[0].clientX - e.touches[0].clientX) > 
+          Math.abs(e.touches[0].clientY - e.touches[0].clientY)) {
+        e.preventDefault();
+      }
     };
-  }, [handleScroll]);
+    
+    // Add event listener with passive: false to allow preventDefault
+    galleryScroll.addEventListener('touchmove', preventBodyScroll, { passive: false });
+    
+    return () => {
+      galleryScroll.removeEventListener('touchmove', preventBodyScroll);
+    };
+  }, []);
+
   return (
     <section className="w-full overflow-hidden p-0 m-0 flex flex-col">
       {/* Desktop gallery - Auto-scrolling with optimized rendering */}
@@ -148,7 +132,7 @@ const GallerySection = memo(function GallerySection() {
               priority={index < 3}
             />
           ))}
-
+          
           {/* Duplicate first few images for seamless scrolling */}
           {GALLERY_IMAGES.slice(0, 3).map((image, index) => (
             <DesktopGalleryImage
@@ -160,7 +144,7 @@ const GallerySection = memo(function GallerySection() {
         </div>
       </div>
 
-      {/* Mobile gallery - bidirectional infinite scroll */}
+      {/* Mobile gallery - Simple, reliable touch-friendly scroll */}
       <div className="sm:hidden block">
         <div className="relative">
           {/* Left arrow indicator */}
@@ -181,44 +165,24 @@ const GallerySection = memo(function GallerySection() {
             </span>
           </div>
 
-          {/* Bidirectional infinite scrollable container */}
-          <div
-            className="overflow-x-auto snap-x snap-mandatory scrollbar-hide touch-pan-x"
+          {/* Simple scrollable container with proper snapping */}
+          <div 
+            className="overflow-x-auto snap-x snap-mandatory scrollbar-hide touch-pan-x pb-4"
             ref={mobileGalleryRef}
-            style={{ WebkitOverflowScrolling: 'touch' }}
+            style={{ 
+              WebkitOverflowScrolling: 'touch',
+              scrollPadding: '0 10%'
+            }}
           >
-            <div
-              className="flex"
-              ref={mobileContainerRef}
-            >
-              {/* First set of images */}
+            <div className="flex px-[10vw]">
+              {/* Gallery images with proper spacing and snap points */}
               {GALLERY_IMAGES.map((image, index) => (
                 <MobileGalleryImage
-                  key={`first-${index}`}
+                  key={index}
                   src={image.src}
                   alt={image.alt}
                   priority={index < 2}
-                  setKey="first"
-                />
-              ))}
-
-              {/* Middle set of images (duplicated) */}
-              {GALLERY_IMAGES.map((image, index) => (
-                <MobileGalleryImage
-                  key={`middle-${index}`}
-                  src={image.src}
-                  alt={image.alt}
-                  setKey="middle"
-                />
-              ))}
-
-              {/* Last set of images (duplicated) */}
-              {GALLERY_IMAGES.map((image, index) => (
-                <MobileGalleryImage
-                  key={`last-${index}`}
-                  src={image.src}
-                  alt={image.alt}
-                  setKey="last"
+                  index={index}
                 />
               ))}
             </div>

@@ -9,35 +9,36 @@ import Navigation from "@/components/home/Navigation";
 import ScrollBehavior from "@/components/home/ScrollBehavior";
 import HeroSection from "@/components/home/HeroSection";
 
-// Dynamic imports for non-critical components with loading optimization
+// Dynamic imports with improved loading strategy
+// Only load components when they're needed (lazy loading with suspense)
 const BrandPhilosophy = dynamic(
   () => import("@/components/home/BrandPhilosophy").then(mod => mod.default),
-  { loading: () => <div className="h-[50vh] bg-black"></div> }
+  { loading: () => <div className="h-[50vh] bg-black animate-pulse"></div> }
 );
 
 const AccoladesSection = dynamic(
   () => import("@/components/home/AccoladesSection").then(mod => mod.default),
-  { loading: () => <div className="h-[50vh] bg-black"></div> }
+  { loading: () => <div className="h-[50vh] bg-black animate-pulse"></div> }
 );
 
 const GallerySection = dynamic(
   () => import("@/components/home/GallerySection").then(mod => mod.default),
-  { loading: () => <div className="h-[50vh] bg-black"></div> }
+  { loading: () => <div className="h-[50vh] bg-black animate-pulse"></div> }
 );
 
 const WhatsHappeningSection = dynamic(
   () => import("@/components/home/WhatsHappeningSection").then(mod => mod.default),
-  { loading: () => <div className="h-[50vh] bg-black"></div> }
+  { loading: () => <div className="h-[50vh] bg-black animate-pulse"></div> }
 );
 
 const TestimonialsSection = dynamic(
   () => import("@/components/home/TestimonialsSection").then(mod => mod.default),
-  { loading: () => <div className="h-[50vh] bg-black"></div> }
+  { loading: () => <div className="h-[50vh] bg-black animate-pulse"></div> }
 );
 
 const VisitUsSection = dynamic(
   () => import("@/components/home/VisitUsSection").then(mod => mod.default),
-  { loading: () => <div className="h-[50vh] bg-black"></div> }
+  { loading: () => <div className="h-[50vh] bg-black animate-pulse"></div> }
 );
 
 const Footer = dynamic(
@@ -53,7 +54,17 @@ export default function HomePage() {
   // Dynamic imports improve initial load time and enable code splitting
 
   return (
-    <main className="w-full min-h-screen bg-black text-white overflow-x-hidden will-change-transform hardware-accelerated scroll-view">
+    <main
+      className="w-full min-h-screen bg-black text-white overflow-x-hidden scroll-view"
+      style={{
+        willChange: 'transform',
+        backfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden',
+        WebkitOverflowScrolling: 'touch',
+        WebkitFontSmoothing: 'antialiased',
+        MozOsxFontSmoothing: 'grayscale'
+      }}
+    >
       {/* Apply scroll behavior fixes */}
       <ScrollBehavior />
       {/* ===== HEADER & NAVIGATION ===== */}

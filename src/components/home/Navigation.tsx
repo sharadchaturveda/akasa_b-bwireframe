@@ -26,9 +26,14 @@ const NavLink = memo(function NavLink({
   return isMobile ? (
     <Link
       href={path}
-      className={`uppercase tracking-wider text-xl font-montserrat text-white hover:text-white/80 transition-all duration-300 relative group opacity-0 animate-fadeIn`}
+      className={`uppercase tracking-wider text-xl font-montserrat text-white hover:text-white/80 transition-all duration-300 relative group opacity-0 animate-fadeIn py-2 px-4 touch-manipulation`}
       onClick={onClick}
-      style={{ animationDelay: `${navItems.findIndex(item => item.name === name) * 100}ms`, animationFillMode: 'forwards' }}
+      style={{
+        animationDelay: `${navItems.findIndex(item => item.name === name) * 100}ms`,
+        animationFillMode: 'forwards',
+        touchAction: 'manipulation'
+      }}
+      role="menuitem"
     >
       {name}
       <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white group-hover:w-full transition-all duration-300"></span>
@@ -36,7 +41,8 @@ const NavLink = memo(function NavLink({
   ) : (
     <Link
       href={path}
-      className="uppercase tracking-wider text-base font-montserrat text-white hover:text-white/80 transition-colors duration-200 relative group"
+      className="uppercase tracking-wider text-base font-montserrat text-white hover:text-white/80 transition-colors duration-200 relative group py-2 px-3"
+      style={{ touchAction: 'manipulation' }}
     >
       {name}
       <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white group-hover:w-full transition-all duration-300"></span>
@@ -71,8 +77,9 @@ export default function Navigation() {
         <Link href="/" className="uppercase tracking-wide text-lg font-montserrat text-white">{"Akasa"}</Link>
         <button
           onClick={toggleMobileMenu}
-          className="text-white p-2 rounded-md border border-white/20 flex items-center justify-center transition-all duration-300 hover:bg-white/10"
+          className="text-white p-3 rounded-md border border-white/20 flex items-center justify-center transition-all duration-300 hover:bg-white/10 touch-manipulation"
           aria-label="Toggle menu"
+          style={{ touchAction: 'manipulation' }}
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -82,13 +89,19 @@ export default function Navigation() {
         </button>
       </div>
 
-      {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 bg-black/95 z-40 md:hidden flex flex-col items-center justify-center transition-opacity duration-300 will-change-opacity ${mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-        {/* Close button at top right */}
+      {/* Mobile Menu Overlay - Improved for accessibility and performance */}
+      <div
+        className={`fixed inset-0 bg-black/95 z-40 md:hidden flex flex-col items-center justify-center transition-opacity duration-300 will-change-opacity ${mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Main navigation"
+      >
+        {/* Close button with improved touch target */}
         <button
           onClick={toggleMobileMenu}
-          className="absolute top-4 right-4 text-white p-3 rounded-full bg-[#1A2A3A] hover:bg-[#0A1A2A] transition-all duration-300 flex items-center justify-center shadow-lg"
+          className="absolute top-4 right-4 text-white p-3 rounded-full bg-[#1A2A3A] hover:bg-[#0A1A2A] transition-all duration-300 flex items-center justify-center shadow-lg touch-manipulation"
           aria-label="Close menu"
+          style={{ touchAction: 'manipulation' }}
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -96,7 +109,10 @@ export default function Navigation() {
           </svg>
         </button>
 
-        <div className={`flex flex-col items-center gap-8 transition-transform duration-500 ${mobileMenuOpen ? 'translate-y-0' : 'translate-y-10'}`}>
+        <div
+          className={`flex flex-col items-center gap-8 transition-all duration-500 w-full px-6 ${mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+          role="menu"
+        >
           {navItems.map((item) => (
             <NavLink
               key={item.name}
