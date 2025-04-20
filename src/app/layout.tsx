@@ -52,18 +52,22 @@ export default function RootLayout({
         {/* Defer non-critical JavaScript */}
         <script dangerouslySetInnerHTML={{ __html: `
           // Defer non-critical JavaScript
-          document.addEventListener('DOMContentLoaded', function() {
-            // Add a small delay to prioritize rendering
-            setTimeout(function() {
-              // Load non-critical resources after page is interactive
-              var links = document.querySelectorAll('link[data-defer]');
-              for (var i = 0; i < links.length; i++) {
-                var link = links[i];
-                link.setAttribute('href', link.getAttribute('data-href'));
-                link.removeAttribute('data-defer');
-              }
-            }, 1000);
-          });
+          if (typeof window !== 'undefined') {
+            document.addEventListener('DOMContentLoaded', function() {
+              // Add a small delay to prioritize rendering
+              setTimeout(function() {
+                // Load non-critical resources after page is interactive
+                var links = document.querySelectorAll('link[data-defer]');
+                for (var i = 0; i < links.length; i++) {
+                  var link = links[i];
+                  if (link.getAttribute('data-href')) {
+                    link.setAttribute('href', link.getAttribute('data-href'));
+                    link.removeAttribute('data-defer');
+                  }
+                }
+              }, 1000);
+            });
+          }
         `}} />
       </head>
       <body

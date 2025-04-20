@@ -36,9 +36,15 @@ const HeroSection = memo(function HeroSection() {
         WebkitBackfaceVisibility: 'hidden'
       }}
     >
-      <div className="absolute inset-0 flex items-start justify-center pt-8 md:pt-12" style={{ top: '-5%', bottom: '50%' }}>
+      {/* Dark overlay - placed first so it doesn't cover interactive elements */}
+      <div className="absolute inset-0 bg-black/30 z-10"></div>
+
+      {/* Logo */}
+      <div className="absolute inset-0 flex items-start justify-center pt-8 md:pt-12 z-20" style={{ top: '-5%', bottom: '50%' }}>
         <Logo />
       </div>
+
+      {/* Content */}
       <div className="text-center relative z-20 mt-16 md:mt-24">
         <div className="mb-10">
           <div className="flex flex-col items-center">
@@ -63,7 +69,6 @@ const HeroSection = memo(function HeroSection() {
           <Button variant="default" className="uppercase bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-[240px] text-center">{"Explore Menu"}</Button>
         </Link>
       </div>
-      <div className="absolute inset-0 bg-black/30"></div>
     </section>
   );
 });

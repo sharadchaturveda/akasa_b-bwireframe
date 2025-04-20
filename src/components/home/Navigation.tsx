@@ -1,13 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useCallback, memo } from "react";
+import { useState, useCallback, memo, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
-// Navigation items - memoized outside component to prevent re-creation
-const navItems = [
+// Navigation items for homepage - memoized outside component to prevent re-creation
+const homeNavItems = [
+  { name: "MENUS", path: "/menu" },
+  { name: "EVENTS", path: "/events" },
+  { name: "OFFERS", path: "/offers" },
+  { name: "RESERVATIONS", path: "/reservations" }
+];
+
+// Navigation items for other pages - includes Home link
+const otherPagesNavItems = [
   { name: "HOME", path: "/" },
-  { name: "MENU", path: "/menu" },
-  { name: "OUR CHEF", path: "/chef" },
+  { name: "MENUS", path: "/menu" },
+  { name: "EVENTS", path: "/events" },
   { name: "RESERVATIONS", path: "/reservations" }
 ];
 
@@ -16,12 +25,14 @@ const NavLink = memo(function NavLink({
   name,
   path,
   isMobile = false,
-  onClick = () => {}
+  onClick = () => {},
+  index = 0
 }: {
   name: string;
   path: string;
   isMobile?: boolean;
   onClick?: () => void;
+  index?: number;
 }) {
   return isMobile ? (
     <Link
@@ -29,7 +40,7 @@ const NavLink = memo(function NavLink({
       className={`uppercase tracking-wider text-xl font-montserrat text-white hover:text-white/80 transition-all duration-300 relative group opacity-0 animate-fadeIn py-2 px-4 touch-manipulation`}
       onClick={onClick}
       style={{
-        animationDelay: `${navItems.findIndex(item => item.name === name) * 100}ms`,
+        animationDelay: `${(index || 0) * 100}ms`,
         animationFillMode: 'forwards',
         touchAction: 'manipulation'
       }}
@@ -51,6 +62,12 @@ const NavLink = memo(function NavLink({
 });
 
 export default function Navigation() {
+  // Get current pathname to determine which navigation items to show
+  const pathname = usePathname() || '/';
+
+  // Use homepage navigation items if on homepage, otherwise use other pages navigation items
+  const navItems = pathname === '/' ? homeNavItems : otherPagesNavItems;
+
   // State for mobile menu
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -63,11 +80,12 @@ export default function Navigation() {
     <header className="absolute top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 md:py-6">
       {/* Desktop Navigation */}
       <div className="hidden md:flex justify-between items-center">
-        {navItems.map((item) => (
+        {navItems.map((item, index) => (
           <NavLink
             key={item.name}
             name={item.name}
             path={item.path}
+            index={index}
           />
         ))}
       </div>
@@ -113,13 +131,14 @@ export default function Navigation() {
           className={`flex flex-col items-center gap-8 transition-all duration-500 w-full px-6 ${mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
           role="menu"
         >
-          {navItems.map((item) => (
+          {navItems.map((item, index) => (
             <NavLink
               key={item.name}
               name={item.name}
               path={item.path}
               isMobile={true}
               onClick={() => setMobileMenuOpen(false)}
+              index={index}
             />
           ))}
         </div>

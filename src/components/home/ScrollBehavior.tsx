@@ -85,9 +85,8 @@ export default function ScrollBehavior() {
               animation-duration: 60s !important;
             }
 
-            /* Optimize images */
+            /* Additional image optimizations for mobile */
             img {
-              content-visibility: auto;
               contain: content;
             }
           }
