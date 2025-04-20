@@ -95,7 +95,8 @@ export default function ScrollBehavior() {
       }
 
       // Fix for iOS momentum scrolling
-      document.documentElement.style.webkitOverflowScrolling = 'touch';
+      // Use setAttribute for non-standard CSS properties
+      document.documentElement.setAttribute('style', 'overflow-scrolling: touch; -webkit-overflow-scrolling: touch;');
     };
 
     // Apply fixes with requestAnimationFrame for better timing

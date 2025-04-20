@@ -1,6 +1,7 @@
 "use client";
 
 import { memo } from "react";
+import Image from "next/image";
 
 // Gallery images array
 const GALLERY_IMAGES = [
@@ -17,11 +18,15 @@ const MobileGallery = memo(function MobileGallery() {
     <div className="block sm:hidden w-full overflow-x-auto">
       <div className="flex">
         {GALLERY_IMAGES.map((image, index) => (
-          <div key={index} className="w-[80vw] h-[250px] flex-shrink-0">
-            <img
+          <div key={index} className="w-[80vw] h-[250px] flex-shrink-0 relative">
+            <Image
               src={image.src}
               alt={image.alt}
-              className="w-full h-full object-cover"
+              fill
+              sizes="80vw"
+              className="object-cover"
+              priority={index < 2}
+              quality={75}
             />
           </div>
         ))}

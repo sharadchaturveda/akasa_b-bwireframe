@@ -60,7 +60,6 @@ export default function HomePage() {
         willChange: 'transform',
         backfaceVisibility: 'hidden',
         WebkitBackfaceVisibility: 'hidden',
-        WebkitOverflowScrolling: 'touch',
         WebkitFontSmoothing: 'antialiased',
         MozOsxFontSmoothing: 'grayscale'
       }}
