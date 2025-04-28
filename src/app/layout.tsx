@@ -47,7 +47,7 @@ export default function RootLayout({
       <head>
         {/* Preload critical assets */}
         <link rel="preload" href="/images/hero.jpg?quality=60&width=1200" as="image" />
-        <link rel="preload" href="/images/logo.png" as="image" />
+        <link rel="preload" href="/images/logo.svg" as="image" type="image/svg+xml" />
 
         {/* Defer non-critical JavaScript */}
         <script dangerouslySetInnerHTML={{ __html: `
