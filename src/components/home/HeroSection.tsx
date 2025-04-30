@@ -5,10 +5,17 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { memo } from "react";
 
-// Memoized logo component for better performance
+// Memoized logo component for better performance and CLS
 const Logo = memo(function Logo() {
   return (
-    <div className="relative w-[250px] sm:w-[350px] md:w-[450px] h-[250px] sm:h-[350px] md:h-[450px]">
+    <div
+      className="relative w-[250px] sm:w-[350px] md:w-[450px] h-[250px] sm:h-[350px] md:h-[450px]"
+      style={{
+        // Fixed dimensions to prevent CLS
+        aspectRatio: '1/1',
+        contain: 'layout'
+      }}
+    >
       <Image
         src="/images/common/logo.svg"
         alt="Akasa Logo"
@@ -17,6 +24,7 @@ const Logo = memo(function Logo() {
         className="object-contain"
         priority
         loading="eager"
+        fetchPriority="high"
       />
     </div>
   );
@@ -28,15 +36,23 @@ const HeroSection = memo(function HeroSection() {
     <section
       className="h-screen w-full bg-black flex flex-col items-center justify-center relative pt-16"
     >
-      {/* Background image with explicit dimensions to prevent layout shifts */}
-      <div
-        className="absolute inset-0 bg-cover bg-center z-0"
-        style={{
-          backgroundImage: "url('/images/home/hero.jpg?quality=60&width=1200')",
-          backgroundSize: "cover",
-          backgroundPosition: "center"
-        }}
-      ></div>
+      {/* LCP Image - Using Image component for better optimization */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/home/hero.jpg"
+          alt="Hero background"
+          fill
+          priority={true}
+          fetchPriority="high"
+          sizes="100vw"
+          quality={60}
+          className="object-cover"
+          style={{
+            objectPosition: "center",
+          }}
+          id="lcp-image" // Add ID for LCP tracking
+        />
+      </div>
 
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/30 z-10"></div>

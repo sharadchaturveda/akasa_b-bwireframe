@@ -1,9 +1,23 @@
 "use client";
 
 import Image from "next/image";
-import { memo } from "react";
+import { memo, useEffect } from "react";
 
 const FeaturedDishesSection = memo(function FeaturedDishesSection() {
+  // Add image loading optimization
+  useEffect(() => {
+    // Add loaded class to images when they finish loading
+    const images = document.querySelectorAll('.dish-card img');
+    images.forEach(img => {
+      if (img.complete) {
+        img.classList.add('loaded');
+      } else {
+        img.onload = () => {
+          img.classList.add('loaded');
+        };
+      }
+    });
+  }, []);
   // Featured dishes for the gallery
   const featuredDishes = [
     {
@@ -51,48 +65,128 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
   ];
 
   return (
-    <section className="w-full bg-[url('/images/menu/gallery5.jpg')] bg-cover bg-fixed py-16 relative">
-      <div className="absolute inset-0 bg-black/75"></div>
+    <section className="w-full bg-black py-20 relative overflow-hidden">
+      {/* New background image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/home/philosophy-bg.jpg"
+          alt="Background"
+          fill
+          sizes="100vw"
+          className="object-cover"
+          quality={40}
+          loading="lazy"
+          style={{
+            objectPosition: "center",
+            opacity: 0.2 // Slightly more visible but still subtle
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black/90"></div>
+      </div>
+
+      {/* Decorative elements */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#E6C78B]/10 to-transparent rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-[#E6C78B]/10 to-transparent rounded-full blur-3xl"></div>
+
       <div className="container mx-auto px-4 md:px-8 relative z-10">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl font-playfair mb-4">{"Featured Dishes"}</h2>
-          <p className="text-lg font-montserrat text-white/70 max-w-2xl mx-auto">
+        {/* Elegant heading with decorative elements */}
+        <div className="text-center mb-20 relative">
+          <div className="flex justify-center mb-6">
+            <div className="relative w-20 h-20 flex items-center justify-center">
+              <div className="absolute inset-0 rounded-full border border-[#E6C78B]/30"></div>
+              <svg className="w-10 h-10 text-[#E6C78B]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8.1,13.34L3.91,9.16C2.35,7.59 2.35,5.06 3.91,3.5L10.93,10.5L8.1,13.34M14.88,11.53L13.41,13L20.29,19.88L18.88,21.29L12,14.41L5.12,21.29L3.71,19.88L13.47,10.12C12.76,8.59 13.26,6.44 14.85,4.85C16.76,2.93 19.5,2.57 20.96,4.03C22.43,5.5 22.07,8.24 20.15,10.15C18.56,11.74 16.41,12.24 14.88,11.53Z" />
+              </svg>
+            </div>
+          </div>
+
+          <h2 className="text-4xl md:text-6xl font-playfair mb-6 relative inline-block">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E6C78B] to-[#D4B679]">Featured Dishes</span>
+            <div className="absolute -bottom-3 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[#E6C78B]/80 to-transparent"></div>
+          </h2>
+
+          <p className="text-lg md:text-xl font-montserrat text-white/80 max-w-3xl mx-auto leading-relaxed italic">
             {"A showcase of our most celebrated creations, each dish representing the pinnacle of Indian culinary artistry."}
           </p>
+
+          {/* Decorative divider */}
+          <div className="flex items-center justify-center mt-10">
+            <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#E6C78B]/50 to-transparent"></div>
+            <div className="w-2 h-2 rounded-full bg-[#E6C78B]/50 mx-2"></div>
+            <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#E6C78B]/50 to-transparent"></div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Fancy dish cards with hover effects */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {featuredDishes.map((dish, index) => (
-            <div key={index} className="bg-black/80 backdrop-blur-sm rounded-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
-              <div className="relative h-[250px] overflow-hidden">
-                <Image
-                  src={dish.image}
-                  alt={dish.name}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute top-4 right-4 bg-[#E6C78B] text-black px-3 py-1 rounded-full text-xs font-medium">
-                  {dish.category}
-                </div>
-              </div>
+            <div
+              key={index}
+              className="group relative dish-card"
+            >
+              {/* Card background with subtle glow effect */}
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#E6C78B]/0 via-[#E6C78B]/30 to-[#E6C78B]/0 rounded-lg blur opacity-0 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
 
-              <div className="p-6">
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-xl font-playfair">{dish.name}</h3>
-                  <span className="text-[#E6C78B] font-medium">{dish.price}</span>
+              <div className="relative bg-black/80 backdrop-blur-sm border border-white/5 rounded-lg overflow-hidden transition-all duration-500 group-hover:shadow-[0_0_25px_rgba(230,199,139,0.2)]">
+                {/* Dish image with fancy overlay effects */}
+                <div className="relative h-[280px] overflow-hidden">
+                  <Image
+                    src={`${dish.image}?quality=75&width=800`}
+                    alt={dish.name}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                    quality={75}
+                  />
+
+                  {/* Elegant gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
+
+                  {/* Category badge with animation */}
+                  <div className="absolute top-4 right-4 z-10">
+                    <div className="bg-[#E6C78B] text-black px-4 py-1.5 rounded-full text-xs font-medium shadow-lg transform group-hover:scale-105 transition-transform duration-300">
+                      {dish.category}
+                    </div>
+                  </div>
+
+                  {/* Decorative corner accent */}
+                  <div className="absolute top-0 left-0 w-12 h-12 border-t border-l border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
-                <p className="text-white/70 text-sm mb-4">{dish.description}</p>
-                <button className="text-[#E6C78B] text-sm font-medium flex items-center justify-center group-hover:underline">
-                  <span>Order Now</span>
-                  <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </button>
+
+                {/* Dish content with elegant styling */}
+                <div className="p-8 relative">
+                  {/* Decorative corner accent */}
+                  <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                  <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-2xl font-playfair text-white group-hover:text-[#E6C78B] transition-colors duration-300">{dish.name}</h3>
+                    <span className="text-[#E6C78B] font-medium text-lg">{dish.price}</span>
+                  </div>
+
+                  <p className="text-white/70 font-montserrat text-sm mb-6 leading-relaxed">{dish.description}</p>
+
+                  {/* Fancy animated button */}
+                  <button className="group/btn relative overflow-hidden inline-flex items-center text-[#E6C78B] text-sm font-medium transition-all duration-300 hover:text-black">
+                    {/* Button background animation */}
+                    <span className="absolute inset-0 rounded-full bg-[#E6C78B]/10 w-full transform scale-x-0 group-hover/btn:scale-x-100 transition-transform origin-left duration-300"></span>
+                    <span className="absolute inset-0 rounded-full bg-[#E6C78B] w-full transform scale-x-0 group-hover/btn:scale-x-100 transition-transform origin-left duration-300 delay-100"></span>
+
+                    <span className="relative px-4 py-2 flex items-center">
+                      <span>Order Now</span>
+                      <svg className="ml-2 w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      {/* No custom animations needed anymore */}
     </section>
   );
 });

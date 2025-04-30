@@ -8,7 +8,6 @@ import CategoriesSection from "@/components/events/CategoriesSection";
 import EventListingsSection from "@/components/events/EventListingsSection";
 import TestimonialsSection from "@/components/events/TestimonialsSection";
 import InquiryFormSection from "@/components/events/InquiryFormSection";
-import FAQSection from "@/components/events/FAQSection";
 
 export default function EventsPage() {
   // State for active event category
@@ -82,7 +81,6 @@ export default function EventsPage() {
       />
       <TestimonialsSection />
       <InquiryFormSection />
-      <FAQSection />
       <Footer />
     </main>
   );

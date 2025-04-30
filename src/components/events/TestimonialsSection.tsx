@@ -22,7 +22,16 @@ const TestimonialsSection = memo(function TestimonialsSection() {
   ];
 
   return (
-    <section className="w-full bg-[url('/images/menu/gallery3.jpg')] bg-cover bg-center py-16 relative">
+    <section className="w-full bg-black py-16 relative">
+      {/* Background image with optimized loading */}
+      <div
+        className="absolute inset-0 bg-cover bg-center z-0 opacity-30"
+        style={{
+          backgroundImage: "url('/images/menu/gallery3.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center"
+        }}
+      ></div>
       <div className="absolute inset-0 bg-black/70"></div>
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="text-center mb-12">
@@ -32,9 +41,9 @@ const TestimonialsSection = memo(function TestimonialsSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="bg-black/80 backdrop-blur-sm p-6 rounded-lg">
+            <div key={index} className="bg-black/80 backdrop-blur-sm p-6 border border-[#1A2A3A]">
               <svg className="w-10 h-10 text-[#E6C78B] mb-4 opacity-50" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
               </svg>

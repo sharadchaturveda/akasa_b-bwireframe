@@ -1,0 +1,65 @@
+/* Home page specific styles */
+.hero-section {
+  height: 100vh;
+  width: 100%;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-top: 4rem;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.hero-content {
+  text-align: center;
+  position: relative;
+  z-index: 20;
+  margin-top: 4rem;
+}
+
+@media (min-width: 768px) {
+  .hero-content {
+    margin-top: 6rem;
+  }
+}
+
+/* Brand Philosophy section styles */
+.brand-philosophy {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .brand-philosophy {
+    grid-template-columns: 40% 60%;
+  }
+}
+
+/* Gallery section styles */
+.gallery-image {
+  width: 400px;
+  height: 400px;
+  flex: none;
+  position: relative;
+  overflow: hidden;
+}
+
+/* What's Happening section styles */
+.whats-happening {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .whats-happening {
+    grid-template-columns: 60% 40%;
+  }
+}

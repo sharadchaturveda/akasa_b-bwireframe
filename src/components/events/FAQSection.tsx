@@ -23,7 +23,16 @@ const FAQSection = memo(function FAQSection() {
   ];
 
   return (
-    <section className="w-full bg-[url('/images/menu/gallery1.jpg')] bg-cover bg-center py-16 relative">
+    <section className="w-full bg-black py-16 relative">
+      {/* Background image with optimized loading */}
+      <div
+        className="absolute inset-0 bg-cover bg-center z-0 opacity-30"
+        style={{
+          backgroundImage: "url('/images/menu/gallery1.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center"
+        }}
+      ></div>
       <div className="absolute inset-0 bg-black/75"></div>
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="max-w-3xl mx-auto">
@@ -34,9 +43,9 @@ const FAQSection = memo(function FAQSection() {
             </p>
           </div>
 
-          <div className="space-y-6">
+          <div className="divide-y divide-[#1A2A3A]">
             {faqs.map((faq, index) => (
-              <div key={index} className="bg-black/80 backdrop-blur-sm p-6 rounded-lg">
+              <div key={index} className="bg-black/80 backdrop-blur-sm p-6">
                 <h3 className="text-xl font-playfair mb-3">{faq.question}</h3>
                 <p className="text-white/80">{faq.answer}</p>
               </div>
