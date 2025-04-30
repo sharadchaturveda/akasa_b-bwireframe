@@ -74,7 +74,9 @@ const nextConfig = {
             test: /[\\/]node_modules[\\/]/,
             name(module) {
               // Get the name of the package
-              const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+              if (!module.context) return 'npm.unknown';
+              const match = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/);
+              const packageName = match ? match[1] : 'unknown';
               return `npm.${packageName.replace('@', '')}`;
             },
             priority: 30,
