@@ -14,7 +14,7 @@ import Footer from "@/components/home/Footer";
 // Simple homepage component
 export default function HomePage() {
   return (
-    <main className="w-full min-h-screen bg-black text-white overflow-x-hidden">
+    <main className="w-full min-h-screen bg-black text-white">
       <ScrollBehavior />
       <Navigation />
       <HeroSection />
