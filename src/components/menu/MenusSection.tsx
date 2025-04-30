@@ -99,16 +99,16 @@ const MenusSection = memo(function MenusSection() {
                     <p className="text-white/80 mb-6 font-montserrat">{menu.description}</p>
 
                     <button
-                      className="group/btn relative overflow-hidden bg-transparent border border-[#E6C78B] text-[#E6C78B] px-6 py-3 text-sm font-medium flex items-center transition-all duration-300 hover:text-black"
+                      className="group inline-flex items-center justify-center rounded-full text-sm font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-6 py-3"
                       onClick={(e) => {
                         e.stopPropagation();
                         window.open(menu.pdfUrl, '_blank');
                       }}
                     >
-                      {/* Button background animation */}
-                      <span className="absolute inset-0 bg-[#E6C78B] transform -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-300"></span>
+                      {/* Gold fill animation */}
+                      <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
 
-                      <span className="relative flex items-center">
+                      <span className="relative flex items-center group-hover:text-black transition-colors duration-300">
                         <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
@@ -122,20 +122,17 @@ const MenusSection = memo(function MenusSection() {
           ))}
         </div>
 
-        {/* Fancy reservation button */}
+        {/* Standardized reservation button */}
         <div className="text-center">
           <Link href="/reservations">
-            <button className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-transparent border-2 border-[#E6C78B] overflow-hidden transition-all duration-300">
-              {/* Button background animation */}
-              <span className="absolute inset-0 bg-gradient-to-r from-[#E6C78B] to-[#D4B679] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
-
-              <span className="relative flex items-center text-white group-hover:text-black transition-colors duration-300">
+            <Button className="px-8 py-4 text-lg">
+              <span className="flex items-center">
                 Make a Reservation
                 <svg className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </span>
-            </button>
+            </Button>
           </Link>
         </div>
       </div>

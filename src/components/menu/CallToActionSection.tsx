@@ -15,12 +15,12 @@ const CallToActionSection = memo(function CallToActionSection() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/reservations">
-            <Button className="bg-[#E6C78B] text-black hover:bg-[#D4B679] w-[180px]">
+            <Button className="w-[180px]">
               {"Reserve a Table"}
             </Button>
           </Link>
           <Link href="/order">
-            <Button className="bg-transparent border border-white text-white hover:bg-white/10 w-[180px]">
+            <Button className="w-[180px]">
               {"Order Online"}
             </Button>
           </Link>

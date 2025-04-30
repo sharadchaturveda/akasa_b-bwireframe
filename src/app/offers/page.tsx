@@ -55,11 +55,11 @@ const HeroSection = memo(function HeroSection() {
             {"Discover our exclusive deals and seasonal promotions designed to enhance your dining experience at Akasa."}
           </p>
 
-          {/* Fancy button */}
+          {/* Standardized button */}
           <Link href="#current-offers">
-            <button className="group relative overflow-hidden inline-flex items-center px-8 py-4 bg-transparent border-2 border-[#E6C78B] text-white text-sm font-medium transition-all duration-300 rounded-md">
-              {/* Button background animation */}
-              <span className="absolute inset-0 rounded-md bg-gradient-to-r from-[#E6C78B] to-[#D4B679] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
+            <button className="group inline-flex items-center justify-center rounded-full text-sm font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-8 py-4">
+              {/* Gold fill animation */}
+              <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
 
               <span className="relative flex items-center group-hover:text-black transition-colors duration-300">
                 View Offers
@@ -146,15 +146,15 @@ const OfferCard = memo(function OfferCard({
             </div>
           </div>
 
-          {/* Fancy animated button */}
+          {/* Standardized button */}
           <Link href={link}>
-            <button className="group/btn relative overflow-hidden w-full inline-flex items-center justify-center px-6 py-3 bg-transparent border border-[#E6C78B] text-[#E6C78B] text-sm font-medium transition-all duration-300 hover:text-black rounded-md">
-              {/* Button background animation */}
-              <span className="absolute inset-0 rounded-md bg-[#E6C78B] transform -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-300"></span>
+            <button className="group inline-flex items-center justify-center rounded-full text-sm font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-6 py-3 w-full">
+              {/* Gold fill animation */}
+              <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
 
-              <span className="relative flex items-center">
+              <span className="relative flex items-center group-hover:text-black transition-colors duration-300">
                 Redeem Offer
-                <svg className="ml-2 w-5 h-5 transform group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </span>
@@ -388,11 +388,11 @@ const LoyaltyProgramSection = memo(function LoyaltyProgramSection() {
                 </div>
               </div>
 
-              {/* Fancy animated button */}
+              {/* Standardized button */}
               <Link href="/loyalty-program">
-                <button className="group relative overflow-hidden inline-flex items-center px-8 py-4 bg-transparent border-2 border-[#E6C78B] text-white text-sm font-medium transition-all duration-300 rounded-md">
-                  {/* Button background animation */}
-                  <span className="absolute inset-0 rounded-md bg-gradient-to-r from-[#E6C78B] to-[#D4B679] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
+                <button className="group inline-flex items-center justify-center rounded-full text-sm font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-8 py-4">
+                  {/* Gold fill animation */}
+                  <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
 
                   <span className="relative flex items-center group-hover:text-black transition-colors duration-300">
                     Join Now
@@ -435,10 +435,10 @@ const NewsletterSection = memo(function NewsletterSection() {
             <input
               type="email"
               placeholder="Your email address"
-              className="flex-grow px-4 py-3 bg-white/10 border border-white/20 rounded-md text-white"
+              className="flex-grow px-4 py-3 bg-white/10 border border-white/20 rounded-full text-white"
               required
             />
-            <Button className="bg-[#E6C78B] text-black hover:bg-[#D4B679] px-8 py-3 whitespace-nowrap">
+            <Button className="px-8 py-3 whitespace-nowrap">
               {"Subscribe"}
             </Button>
           </form>

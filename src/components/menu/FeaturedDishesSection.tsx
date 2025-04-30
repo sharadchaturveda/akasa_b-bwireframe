@@ -67,27 +67,18 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
 
   return (
     <section className="w-full bg-black py-20 relative overflow-hidden">
-      {/* New background image */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/home/philosophy-bg.jpg"
-          alt="Background"
-          fill
-          sizes="100vw"
-          className="object-cover"
-          quality={40}
-          loading="lazy"
-          style={{
-            objectPosition: "center",
-            opacity: 0.2 // Slightly more visible but still subtle
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black/90"></div>
+      {/* Animated background pattern - Exactly like Menus section */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e6c78b' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundSize: '60px 60px',
+          animation: 'slideBackground 60s linear infinite'
+        }}></div>
       </div>
 
-      {/* Decorative elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#E6C78B]/10 to-transparent rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-[#E6C78B]/10 to-transparent rounded-full blur-3xl"></div>
+      {/* Decorative elements - Exactly like Menus section */}
+      <div className="absolute top-0 left-0 w-64 h-64 bg-gradient-to-br from-[#E6C78B]/20 to-transparent rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-tl from-[#E6C78B]/10 to-transparent rounded-full blur-3xl"></div>
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         {/* Elegant heading with decorative elements */}
@@ -167,15 +158,14 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
 
                   <p className="text-white/70 font-montserrat text-sm mb-6 leading-relaxed">{dish.description}</p>
 
-                  {/* Fancy animated button */}
-                  <button className="group/btn relative overflow-hidden inline-flex items-center text-[#E6C78B] text-sm font-medium transition-all duration-300 hover:text-black">
-                    {/* Button background animation */}
-                    <span className="absolute inset-0 rounded-full bg-[#E6C78B]/10 w-full transform scale-x-0 group-hover/btn:scale-x-100 transition-transform origin-left duration-300"></span>
-                    <span className="absolute inset-0 rounded-full bg-[#E6C78B] w-full transform scale-x-0 group-hover/btn:scale-x-100 transition-transform origin-left duration-300 delay-100"></span>
+                  {/* Standardized button */}
+                  <button className="group inline-flex items-center justify-center rounded-full text-sm font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-4 py-2">
+                    {/* Gold fill animation */}
+                    <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
 
-                    <span className="relative px-4 py-2 flex items-center">
+                    <span className="relative flex items-center group-hover:text-black transition-colors duration-300">
                       <span>Order Now</span>
-                      <svg className="ml-2 w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <svg className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                       </svg>
                     </span>
@@ -187,7 +177,13 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
         </div>
       </div>
 
-      {/* No custom animations needed anymore */}
+      {/* Add custom CSS for animations */}
+      <style jsx>{`
+        @keyframes slideBackground {
+          0% { background-position: 0 0; }
+          100% { background-position: 100% 100%; }
+        }
+      `}</style>
     </section>
   );
 });
