@@ -1,12 +1,37 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import Navigation from "@/components/home/Navigation";
+import Footer from "@/components/home/Footer";
+import Image from "next/image";
+import { memo } from "react";
+
+// Hero Section Component
+const HeroSection = memo(function HeroSection() {
+  return (
+    <section className="h-screen w-full bg-[url('/images/reservations/gallery3.jpg')] bg-cover bg-center flex flex-col items-center justify-center relative">
+      <div className="absolute inset-0 bg-black/60"></div>
+      <div className="container mx-auto px-4 md:px-8 relative z-10 mt-32">
+        <div className="max-w-3xl mx-auto text-center">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-playfair mb-6 text-white">{"Reserve Your Table"}</h1>
+          <p className="text-lg md:text-xl font-montserrat text-white/90 mb-8 leading-relaxed">
+            {"Secure your dining experience at Akasa. We look forward to serving you the finest Indian cuisine in an elegant atmosphere."}
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+});
 
 export default function ReservationsPage() {
   return (
     <main className="min-h-screen bg-black text-white">
+      <Navigation />
+      <HeroSection />
       <div className="container mx-auto px-8 py-24">
         <div className="max-w-2xl mx-auto">
-          <h1 className="text-5xl font-serif mb-12 text-center">{"Make a Reservation"}</h1>
-          
+          <h2 className="text-3xl font-playfair mb-8 text-center">{"Complete Your Reservation"}</h2>
+
           <form className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
@@ -105,6 +130,7 @@ export default function ReservationsPage() {
           </form>
         </div>
       </div>
+      <Footer />
     </main>
   );
-} 
+}

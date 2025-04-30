@@ -1,3 +1,5 @@
+"use client";
+
 import { ButtonHTMLAttributes, forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
@@ -20,7 +22,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        <span className="flex-1 text-center px-6 py-3 font-medium tracking-wide">{children}</span>
+        <span className="flex-1 text-center px-6 py-3 font-medium tracking-wide w-full">{children}</span>
         {showArrow && (
           <span className="absolute right-0 w-12 h-full bg-black/10 flex items-center justify-center group-hover:bg-black/20 transition-colors">
             <svg

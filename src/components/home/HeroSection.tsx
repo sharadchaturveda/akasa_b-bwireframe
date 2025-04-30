@@ -8,17 +8,15 @@ import { memo } from "react";
 // Memoized logo component for better performance
 const Logo = memo(function Logo() {
   return (
-    <div className="will-change-transform" style={{ transform: 'translateZ(0)' }}>
+    <div>
       <Image
-        src="/images/logo.png"
+        src="/images/common/logo.svg"
         alt="Akasa Logo"
         width={450}
         height={450}
         className="w-[250px] sm:w-[350px] md:w-[450px] h-auto"
         priority
-        quality={60}
         loading="eager"
-        fetchPriority="high"
       />
     </div>
   );
@@ -30,10 +28,7 @@ const HeroSection = memo(function HeroSection() {
     <section
       className="h-screen w-full bg-cover bg-center flex flex-col items-center justify-center relative pt-16"
       style={{
-        backgroundImage: "url('/images/hero.jpg?quality=60&width=1200')",
-        willChange: 'transform',
-        backfaceVisibility: 'hidden',
-        WebkitBackfaceVisibility: 'hidden'
+        backgroundImage: "url('/images/home/hero.jpg?quality=60&width=1200')"
       }}
     >
       {/* Dark overlay - placed first so it doesn't cover interactive elements */}
