@@ -7,7 +7,16 @@ export default function BrandPhilosophy() {
   return (
     <section className="min-h-[45vh] w-full grid grid-cols-1 md:grid-cols-[40%_60%]">
       {/* Left Side - Brand Philosophy */}
-      <div className="relative p-6 md:py-8 md:px-12 flex flex-col justify-center" style={{ backgroundImage: "url('/images/home/philosophy-bg.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
+      <div className="relative p-6 md:py-8 md:px-12 flex flex-col justify-center bg-black">
+        {/* Background image with fixed dimensions */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: "url('/images/home/philosophy-bg.jpg?quality=60&width=800')",
+            backgroundSize: "cover",
+            backgroundPosition: "center"
+          }}
+        ></div>
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative max-w-md">
           <h3 className="text-2xl font-montserrat text-white mb-2">{"Not just a meal."}</h3>
@@ -24,7 +33,16 @@ export default function BrandPhilosophy() {
       </div>
 
       {/* Right Side - Location Info */}
-      <div className="relative" style={{ backgroundImage: "url('/images/home/drink.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
+      <div className="relative bg-black">
+        {/* Background image with fixed dimensions */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: "url('/images/home/drink.jpg?quality=60&width=800')",
+            backgroundSize: "cover",
+            backgroundPosition: "center"
+          }}
+        ></div>
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative h-full flex flex-col justify-center p-6 md:py-8 md:px-12">
           <h2 className="text-4xl font-playfair mb-4">{"Singapore"}</h2>

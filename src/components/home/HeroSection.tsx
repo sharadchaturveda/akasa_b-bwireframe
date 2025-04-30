@@ -8,13 +8,13 @@ import { memo } from "react";
 // Memoized logo component for better performance
 const Logo = memo(function Logo() {
   return (
-    <div>
+    <div className="relative w-[250px] sm:w-[350px] md:w-[450px] h-[250px] sm:h-[350px] md:h-[450px]">
       <Image
         src="/images/common/logo.svg"
         alt="Akasa Logo"
-        width={450}
-        height={450}
-        className="w-[250px] sm:w-[350px] md:w-[450px] h-auto"
+        fill
+        sizes="(max-width: 640px) 250px, (max-width: 768px) 350px, 450px"
+        className="object-contain"
         priority
         loading="eager"
       />
@@ -26,12 +26,19 @@ const Logo = memo(function Logo() {
 const HeroSection = memo(function HeroSection() {
   return (
     <section
-      className="h-screen w-full bg-cover bg-center flex flex-col items-center justify-center relative pt-16"
-      style={{
-        backgroundImage: "url('/images/home/hero.jpg?quality=60&width=1200')"
-      }}
+      className="h-screen w-full bg-black flex flex-col items-center justify-center relative pt-16"
     >
-      {/* Dark overlay - placed first so it doesn't cover interactive elements */}
+      {/* Background image with explicit dimensions to prevent layout shifts */}
+      <div
+        className="absolute inset-0 bg-cover bg-center z-0"
+        style={{
+          backgroundImage: "url('/images/home/hero.jpg?quality=60&width=1200')",
+          backgroundSize: "cover",
+          backgroundPosition: "center"
+        }}
+      ></div>
+
+      {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/30 z-10"></div>
 
       {/* Logo */}

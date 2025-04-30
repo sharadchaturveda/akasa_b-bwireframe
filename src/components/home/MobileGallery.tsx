@@ -15,18 +15,25 @@ const GALLERY_IMAGES = [
 // Simple, reliable mobile gallery component
 const MobileGallery = memo(function MobileGallery() {
   return (
-    <div className="block sm:hidden w-full overflow-x-auto">
-      <div className="flex">
+    <div className="block sm:hidden w-full overflow-x-auto scrollbar-hide">
+      <div className="flex snap-x snap-mandatory">
         {GALLERY_IMAGES.map((image, index) => (
-          <div key={index} className="w-[80vw] h-[250px] flex-shrink-0 relative">
+          <div
+            key={index}
+            className="w-[80vw] h-[250px] flex-shrink-0 relative snap-start bg-black"
+            style={{ scrollSnapAlign: 'start' }}
+          >
+            {/* Placeholder to maintain layout before image loads */}
+            <div className="absolute inset-0 bg-black"></div>
+
             <Image
               src={image.src}
               alt={image.alt}
               fill
               sizes="80vw"
               className="object-cover"
-              priority={index < 2}
-              quality={75}
+              loading={index < 2 ? "eager" : "lazy"}
+              quality={60}
             />
           </div>
         ))}

@@ -46,8 +46,35 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Preload critical assets */}
-        <link rel="preload" href="/images/home/hero.jpg?quality=60&width=1200" as="image" />
-        <link rel="preload" href="/images/common/logo.svg" as="image" type="image/svg+xml" />
+        <link rel="preload" href="/images/home/hero.jpg?quality=60&width=1200" as="image" fetchpriority="high" />
+        <link rel="preload" href="/images/common/logo.svg" as="image" type="image/svg+xml" fetchpriority="high" />
+
+        {/* Add preconnect for faster resource loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+        {/* Add viewport-based image dimensions to prevent layout shifts */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          /* Prevent layout shifts during image loading */
+          .image-container {
+            position: relative;
+            background-color: #111;
+            overflow: hidden;
+          }
+
+          /* Ensure images maintain aspect ratio */
+          img {
+            max-width: 100%;
+            height: auto;
+          }
+
+          /* Disable smooth scrolling for better performance */
+          @media (prefers-reduced-motion: reduce) {
+            html {
+              scroll-behavior: auto !important;
+            }
+          }
+        `}} />
 
         {/* Defer non-critical JavaScript */}
         <script dangerouslySetInnerHTML={{ __html: `
@@ -71,11 +98,13 @@ export default function RootLayout({
         `}} />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${lora.variable} ${montserrat.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${lora.variable} ${montserrat.variable} antialiased bg-black`}
         style={{
           WebkitFontSmoothing: 'antialiased',
           MozOsxFontSmoothing: 'grayscale',
-          textRendering: 'optimizeLegibility'
+          textRendering: 'optimizeLegibility',
+          overscrollBehavior: 'none',
+          overflowX: 'hidden'
         }}
       >
         {children}
