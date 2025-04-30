@@ -62,8 +62,6 @@ export default function RootLayout({
         {/* Add preconnect for faster resource loading */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 
         {/* Add preconnect for analytics and other third-party resources */}
         <link rel="preconnect" href="https://www.google-analytics.com" />

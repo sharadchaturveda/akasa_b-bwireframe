@@ -5,6 +5,23 @@ import dynamic from 'next/dynamic';
 import Navigation from "@/components/home/Navigation";
 import ChefSection from "@/components/menu/ChefSection";
 
+// Add TypeScript declaration for requestIdleCallback
+interface RequestIdleCallbackOptions {
+  timeout: number;
+}
+
+interface Window {
+  requestIdleCallback(
+    callback: (deadline: RequestIdleCallbackDeadline) => void,
+    opts?: RequestIdleCallbackOptions
+  ): number;
+}
+
+interface RequestIdleCallbackDeadline {
+  didTimeout: boolean;
+  timeRemaining: () => number;
+}
+
 // Dynamically import below-the-fold components
 const MenusSection = dynamic(() => import("@/components/menu/MenusSection"), {
   loading: () => <div className="h-[50vh] bg-black"></div>
@@ -66,8 +83,16 @@ export default function MenuPageClient() {
     };
 
     // Use requestIdleCallback to preload images during idle time
+    interface WindowWithIdleCallback extends Window {
+      requestIdleCallback: (
+        callback: IdleRequestCallback,
+        options?: { timeout: number }
+      ) => number;
+    }
+
     if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(preloadImages, { timeout: 2000 });
+      const windowWithIdle = window as WindowWithIdleCallback;
+      windowWithIdle.requestIdleCallback(preloadImages, { timeout: 2000 });
     } else {
       setTimeout(preloadImages, 1000);
     }

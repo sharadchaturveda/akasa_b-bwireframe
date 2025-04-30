@@ -7,7 +7,7 @@ const ChefSection = memo(function ChefSection() {
   // Optimize LCP image loading
   useEffect(() => {
     // Mark when the LCP image is loaded
-    const lcpImage = document.getElementById('lcp-image');
+    const lcpImage = document.getElementById('lcp-image') as HTMLImageElement;
     if (lcpImage) {
       if (lcpImage.complete) {
         lcpImage.classList.add('loaded');

@@ -8,12 +8,13 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
   useEffect(() => {
     // Add loaded class to images when they finish loading
     const images = document.querySelectorAll('.dish-card img');
-    images.forEach(img => {
-      if (img.complete) {
-        img.classList.add('loaded');
+    images.forEach((img: Element) => {
+      const imgElement = img as HTMLImageElement;
+      if (imgElement.complete) {
+        imgElement.classList.add('loaded');
       } else {
-        img.onload = () => {
-          img.classList.add('loaded');
+        imgElement.onload = () => {
+          imgElement.classList.add('loaded');
         };
       }
     });
