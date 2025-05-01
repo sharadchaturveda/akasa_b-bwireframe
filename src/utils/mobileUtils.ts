@@ -30,7 +30,10 @@ export const applyMobileOptimizations = (): void => {
   document.documentElement.style.touchAction = 'manipulation';
 
   // Prevent font size inflation
-  document.documentElement.style.textSizeAdjust = '100%';
+  (document.documentElement.style as any)['-webkit-text-size-adjust'] = '100%';
+  (document.documentElement.style as any)['-moz-text-size-adjust'] = '100%';
+  (document.documentElement.style as any)['-ms-text-size-adjust'] = '100%';
+  (document.documentElement.style as any)['text-size-adjust'] = '100%';
 
   // Add smooth scrolling for better mobile experience
   document.documentElement.style.scrollBehavior = 'smooth';

@@ -8,6 +8,9 @@ import { initPerformanceMonitoring } from '@/utils/performanceMonitor';
  * This is a client-side only component that doesn't render anything
  */
 export default function HomePerformanceOptimizer() {
+  // Define optimization functions outside useEffect
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     // Initialize performance monitoring
     initPerformanceMonitoring();
@@ -20,7 +23,6 @@ export default function HomePerformanceOptimizer() {
       // Remove any event listeners or observers if needed
     };
   }, []);
-
   const applyOptimizations = () => {
     // Optimize image loading
     optimizeImageLoading();
