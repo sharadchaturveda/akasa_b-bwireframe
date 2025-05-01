@@ -7,13 +7,15 @@ import { useState, memo } from "react";
 
 const MenusSection = memo(function MenusSection() {
   // State for active menu tab
-  const [activeMenu, setActiveMenu] = useState("dinner");
+  const [activeMenu, setActiveMenu] = useState("a-la-carte");
 
   // Menu types
   const menuTypes = [
-    { id: "dinner", name: "Dinner Menu", description: "Our signature evening dining experience", image: "/images/menu/gallery1.jpg", pdfUrl: "/menus/dinner-menu.pdf" },
-    { id: "lunch", name: "Lunch Menu", description: "Express lunch options for busy professionals", image: "/images/menu/gallery2.jpg", pdfUrl: "/menus/lunch-menu.pdf" },
-    { id: "tasting", name: "Tasting Menu", description: "Chef's curated multi-course journey", image: "/images/menu/gallery3.jpg", pdfUrl: "/menus/tasting-menu.pdf" }
+    { id: "a-la-carte", name: "À La Carte", description: "Our signature dishes available for individual selection", image: "/images/menu/gallery1.jpg", url: "/menu/a-la-carte" },
+    { id: "soul-food", name: "Soul Food Weekends", description: "Special weekend offerings that nourish the soul", image: "/images/menu/gallery2.jpg", url: "/menu/soul-food-weekends" },
+    { id: "drinks", name: "Drinks", description: "Signature cocktails, fine wines, and refreshing beverages", image: "/images/menu/gallery3.jpg", url: "/menu/drinks" },
+    { id: "bar-bites", name: "Bar Bites", description: "Perfect small plates to accompany your drinks", image: "/images/menu/gallery5.jpg", url: "/menu/bar-bites" },
+    { id: "set-lunch", name: "3 Course Set Lunch", description: "A perfect midday dining experience with three exquisite courses", image: "/images/menu/gallery6.jpg", url: "/menu/set-lunch" }
   ];
 
   return (
@@ -55,7 +57,7 @@ const MenusSection = memo(function MenusSection() {
         </div>
 
         {/* Fancy menu cards with 3D hover effects */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-6 mb-20 max-w-[1600px] mx-auto">
           {menuTypes.map((menu) => (
             <div
               key={menu.id}
@@ -66,9 +68,8 @@ const MenusSection = memo(function MenusSection() {
                 activeMenu === menu.id ? 'rotate-y-10' : 'hover:rotate-y-10'
               }`}>
                 {/* Front of card */}
-                <div className="relative overflow-hidden h-[400px] backface-hidden border border-[#E6C78B]/20 shadow-xl shadow-black/30">
-                  {/* Gold accent corner */}
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#E6C78B] to-transparent z-10 opacity-80"></div>
+                <div className="relative overflow-hidden h-[340px] backface-hidden border border-[#E6C78B]/20 shadow-xl shadow-black/30">
+                  {/* No gold accent corner to avoid blocking text */}
 
                   <Image
                     src={menu.image}
@@ -79,42 +80,64 @@ const MenusSection = memo(function MenusSection() {
                     quality={80}
                   />
 
-                  {/* Elegant gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
+                  {/* Semi-transparent overlay for better text readability without black bars */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/10 pointer-events-none"></div>
 
                   {/* Content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-8 transform transition-transform duration-500 group-hover:translate-y-[-10px]">
-                    <div className="flex justify-between items-end mb-3">
-                      <h3 className="text-2xl md:text-3xl font-playfair text-white">
-                        {menu.name}
-                      </h3>
-                      {activeMenu === menu.id && (
-                        <div className="flex items-center">
-                          <span className="w-3 h-3 rounded-full bg-[#E6C78B] mr-2"></span>
-                          <span className="text-[#E6C78B] text-sm font-medium">Selected</span>
+                  <div className="absolute inset-0 flex flex-col justify-between">
+                    {/* Top section with title and selected indicator */}
+                    <div className="p-6 pt-6 flex flex-col">
+                      <div className="relative mb-4">
+                        {/* Title with improved visibility for longer titles */}
+                        <div className="min-h-[60px] flex items-start">
+                          <h3 className="text-xl font-playfair text-white font-semibold pr-8 leading-tight text-shadow-md">
+                            {menu.name}
+                          </h3>
+                          {activeMenu === menu.id && (
+                            <div className="absolute top-0 right-0 flex-shrink-0">
+                              <div className="bg-black/40 rounded-full p-0.5">
+                                <svg className="w-6 h-6 text-[#E6C78B]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                </svg>
+                              </div>
+                            </div>
+                          )}
                         </div>
-                      )}
+                      </div>
+
+                      {/* Description with more space */}
+                      <p className="text-white/90 font-montserrat text-sm mb-4 min-h-[60px]"
+                         style={{
+                           display: '-webkit-box',
+                           WebkitLineClamp: 3,
+                           WebkitBoxOrient: 'vertical',
+                           overflow: 'hidden'
+                         }}>
+                        {menu.description}
+                      </p>
                     </div>
 
-                    <p className="text-white/80 mb-6 font-montserrat">{menu.description}</p>
+                    {/* Bottom section with button only */}
+                    <div className="p-6 pt-0">
+                      <Link href={menu.url} className="block w-full">
+                        <button
+                          className="w-full group inline-flex items-center justify-center rounded-full text-xs font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-4 py-2 h-[36px]"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                          }}
+                        >
+                          {/* Gold fill animation */}
+                          <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
 
-                    <button
-                      className="group inline-flex items-center justify-center rounded-full text-sm font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-6 py-3"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        window.open(menu.pdfUrl, '_blank');
-                      }}
-                    >
-                      {/* Gold fill animation */}
-                      <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
-
-                      <span className="relative flex items-center group-hover:text-black transition-colors duration-300">
-                        <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                        View Menu
-                      </span>
-                    </button>
+                          <span className="relative flex items-center justify-center group-hover:text-black transition-colors duration-300">
+                            <svg className="mr-1 w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span className="whitespace-nowrap">View Menu</span>
+                          </span>
+                        </button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -162,6 +185,10 @@ const MenusSection = memo(function MenusSection() {
 
         .hover\:rotate-y-10:hover {
           transform: rotateY(10deg);
+        }
+
+        .text-shadow-md {
+          text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 0 2px rgba(0,0,0,0.6);
         }
       `}</style>
     </section>
