@@ -43,7 +43,7 @@ export const monitorCLS = () => {
 
   try {
     let clsValue = 0;
-    let clsEntries: PerformanceEntry[] = [];
+    const clsEntries: PerformanceEntry[] = [];
 
     // Use a try-catch block to handle potential browser compatibility issues
     try {
@@ -52,8 +52,15 @@ export const monitorCLS = () => {
 
         entries.forEach(entry => {
           // Only count layout shifts without recent user input
-          if (!(entry as any).hadRecentInput) {
-            clsValue += (entry as any).value;
+          // Define a type for LayoutShift entries
+          interface LayoutShiftEntry extends PerformanceEntry {
+            hadRecentInput: boolean;
+            value: number;
+          }
+
+          const layoutShift = entry as LayoutShiftEntry;
+          if (!layoutShift.hadRecentInput) {
+            clsValue += layoutShift.value;
             clsEntries.push(entry);
           }
         });
@@ -88,10 +95,17 @@ export const monitorInteractions = () => {
         const entries = entryList.getEntries();
 
         entries.forEach(entry => {
-          console.log('Interaction:', (entry as any).name, (entry as any).duration, 'ms');
+          // Define a type for FirstInput entries
+          interface FirstInputEntry extends PerformanceEntry {
+            name: string;
+            duration: number;
+          }
+
+          const firstInput = entry as FirstInputEntry;
+          console.log('Interaction:', firstInput.name, firstInput.duration, 'ms');
 
           // Report to analytics if needed
-          // sendToAnalytics('interaction', entry.duration);
+          // sendToAnalytics('interaction', firstInput.duration);
         });
       });
 
@@ -186,7 +200,20 @@ export const preloadCriticalResources = (resources: { url: string, type: 'image'
     // Use requestIdleCallback for better performance
     if ('requestIdleCallback' in window) {
       try {
-        (window as any).requestIdleCallback(preloadResource, { timeout: 2000 });
+        // Define a type-safe approach to requestIdleCallback
+        interface RequestIdleCallbackOptions {
+          timeout?: number;
+        }
+
+        // Use a properly typed version of requestIdleCallback
+        const requestIdleCallback = (
+          callback: IdleRequestCallback,
+          options?: RequestIdleCallbackOptions
+        ) => {
+          return window.requestIdleCallback(callback, options);
+        };
+
+        requestIdleCallback(preloadResource, { timeout: 2000 });
       } catch (idleCallbackError) {
         // Fallback to setTimeout if requestIdleCallback fails
         setTimeout(preloadResource, 1000);

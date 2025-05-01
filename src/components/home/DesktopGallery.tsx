@@ -100,7 +100,10 @@ const DesktopGallery = memo(function DesktopGallery() {
 
       // Use requestIdleCallback for better performance
       if ('requestIdleCallback' in window) {
-        (window as any).requestIdleCallback(preloadImages, { timeout: 2000 });
+        // Use a type-safe approach to call requestIdleCallback
+        const requestIdleCallback = window.requestIdleCallback ||
+          ((callback: IdleRequestCallback, options?: IdleRequestOptions) => setTimeout(callback, options?.timeout || 1));
+        requestIdleCallback(preloadImages, { timeout: 2000 });
       } else {
         setTimeout(preloadImages, 1000);
       }
