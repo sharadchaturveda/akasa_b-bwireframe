@@ -29,11 +29,17 @@ export const applyMobileOptimizations = (): void => {
   // Ensure proper touch behavior
   document.documentElement.style.touchAction = 'manipulation';
 
-  // Prevent font size inflation
-  (document.documentElement.style as any)['-webkit-text-size-adjust'] = '100%';
-  (document.documentElement.style as any)['-moz-text-size-adjust'] = '100%';
-  (document.documentElement.style as any)['-ms-text-size-adjust'] = '100%';
-  (document.documentElement.style as any)['text-size-adjust'] = '100%';
+  // Prevent font size inflation - using CSS variables approach
+  const styleElement = document.createElement('style');
+  styleElement.textContent = `
+    :root {
+      -webkit-text-size-adjust: 100%;
+      -moz-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+  `;
+  document.head.appendChild(styleElement);
 
   // Add smooth scrolling for better mobile experience
   document.documentElement.style.scrollBehavior = 'smooth';
@@ -104,10 +110,10 @@ export const optimizeImagesForMobile = (): void => {
  * @param wait The time to wait in milliseconds
  * @returns A debounced version of the function
  */
-export const debounce = <T extends (...args: unknown[]) => unknown>(
+export function debounce<T extends (...args: never[]) => void>(
   func: T,
   wait: number
-): ((...args: Parameters<T>) => void) => {
+): (...args: Parameters<T>) => void {
   let timeout: ReturnType<typeof setTimeout> | null = null;
 
   return function(...args: Parameters<T>) {

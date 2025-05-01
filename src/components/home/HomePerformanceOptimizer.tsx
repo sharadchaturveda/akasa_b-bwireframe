@@ -8,22 +8,13 @@ import { initPerformanceMonitoring } from '@/utils/performanceMonitor';
  * This is a client-side only component that doesn't render anything
  */
 export default function HomePerformanceOptimizer() {
-  // Define optimization functions outside useEffect
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // Define optimization functions inside useEffect to avoid dependency issues
   useEffect(() => {
     // Initialize performance monitoring
     initPerformanceMonitoring();
 
-    // Apply additional optimizations
-    applyOptimizations();
-
-    // Clean up on unmount
-    return () => {
-      // Remove any event listeners or observers if needed
-    };
-  }, []);
-  const applyOptimizations = () => {
+    // Define the optimization function inside useEffect
+    const applyOptimizations = () => {
     // Optimize image loading
     optimizeImageLoading();
 
@@ -185,6 +176,15 @@ export default function HomePerformanceOptimizer() {
       console.error('Failed to optimize font loading:', e);
     }
   };
+
+    // Apply optimizations immediately
+    applyOptimizations();
+
+    // Clean up on unmount
+    return () => {
+      // Remove any event listeners or observers if needed
+    };
+  }, []);
 
   // This component doesn't render anything
   return null;
