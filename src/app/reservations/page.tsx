@@ -1,136 +1,91 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { memo, useEffect } from "react";
 import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
-import Image from "next/image";
-import { memo } from "react";
+import HeroSection from "@/components/reservations/HeroSection";
+import ReservationForm from "@/components/reservations/ReservationForm";
+import ReservationInfo from "@/components/reservations/ReservationInfo";
+import ReservationFAQ from "@/components/reservations/ReservationFAQ";
+import { loadPageStyles } from '@/utils/loadPageStyles';
 
-// Hero Section Component
-const HeroSection = memo(function HeroSection() {
-  return (
-    <section className="h-screen w-full bg-[url('/images/reservations/gallery3.jpg')] bg-cover bg-center flex flex-col items-center justify-center relative">
-      <div className="absolute inset-0 bg-black/60"></div>
-      <div className="container mx-auto px-4 md:px-8 relative z-10 mt-32">
-        <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-playfair mb-6 text-white">{"Reserve Your Table"}</h1>
-          <p className="text-lg md:text-xl font-montserrat text-white/90 mb-8 leading-relaxed">
-            {"Secure your dining experience at Akasa. We look forward to serving you the finest Indian cuisine in an elegant atmosphere."}
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-});
+// Optimized Reservations Page
+const ReservationsPage = memo(function ReservationsPage() {
+  // Load page-specific CSS
+  useEffect(() => {
+    loadPageStyles('reservations');
+  }, []);
 
-export default function ReservationsPage() {
   return (
     <main className="min-h-screen bg-black text-white">
       <Navigation />
       <HeroSection />
-      <div className="container mx-auto px-8 py-24">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="text-3xl font-playfair mb-8 text-center">{"Complete Your Reservation"}</h2>
 
-          <form className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <label htmlFor="date" className="block mb-2">{"Date"}</label>
-                <input
-                  type="date"
-                  id="date"
-                  className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded text-white"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="time" className="block mb-2">{"Time"}</label>
-                <input
-                  type="time"
-                  id="time"
-                  className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded text-white"
-                  required
-                />
-              </div>
+      {/* Main content with decorative background */}
+      <div className="relative py-24">
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div
+            className="absolute top-0 left-0 w-full h-full opacity-5"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+              backgroundSize: '60px 60px'
+            }}
+          ></div>
+        </div>
+
+        {/* Content container */}
+        <div className="container mx-auto px-4 md:px-8 relative z-10">
+          {/* Two-column layout for desktop */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+            {/* Reservation form */}
+            <div className="order-2 lg:order-1">
+              <ReservationForm />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <label htmlFor="guests" className="block mb-2">{"Number of Guests"}</label>
-                <select
-                  id="guests"
-                  className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded text-white"
-                  required
-                >
-                  <option value="">{"Select number of guests"}</option>
-                  {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-                    <option key={num} value={num}>{`${num} ${num === 1 ? "guest" : "guests"}`}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label htmlFor="occasion" className="block mb-2">{"Occasion"}</label>
-                <select
-                  id="occasion"
-                  className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded text-white"
-                >
-                  <option value="">{"Select occasion"}</option>
-                  <option value="birthday">{"Birthday"}</option>
-                  <option value="anniversary">{"Anniversary"}</option>
-                  <option value="business">{"Business"}</option>
-                  <option value="other">{"Other"}</option>
-                </select>
-              </div>
+            {/* Restaurant information */}
+            <div className="order-1 lg:order-2">
+              <ReservationInfo />
             </div>
+          </div>
 
-            <div>
-              <label htmlFor="name" className="block mb-2">{"Full Name"}</label>
-              <input
-                type="text"
-                id="name"
-                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded text-white"
-                required
-              />
-            </div>
+          {/* FAQ Section */}
+          <div className="mt-24">
+            <ReservationFAQ />
+          </div>
 
-            <div>
-              <label htmlFor="email" className="block mb-2">{"Email"}</label>
-              <input
-                type="email"
-                id="email"
-                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded text-white"
-                required
-              />
-            </div>
-
-            <div>
-              <label htmlFor="phone" className="block mb-2">{"Phone Number"}</label>
-              <input
-                type="tel"
-                id="phone"
-                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded text-white"
-                required
-              />
-            </div>
-
-            <div>
-              <label htmlFor="notes" className="block mb-2">{"Special Requests"}</label>
-              <textarea
-                id="notes"
-                rows={4}
-                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded text-white"
-              ></textarea>
-            </div>
-
-            <div className="text-center">
-              <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full max-w-xs" showArrow>
-                {"Book Now"}
-              </Button>
-            </div>
-          </form>
+          {/* Decorative separator */}
+          <div className="w-24 h-1 mx-auto my-24 bg-gradient-to-r from-transparent via-[#E6C78B] to-transparent"></div>
         </div>
       </div>
+
       <Footer />
+
+      {/* Add custom CSS for animations */}
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        @keyframes fadeSlideUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes slideBackground {
+          0% { background-position: 0 0; }
+          100% { background-position: 100% 100%; }
+        }
+      `}</style>
     </main>
   );
-}
+});
+
+export default ReservationsPage;

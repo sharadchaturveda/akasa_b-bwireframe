@@ -1,18 +1,24 @@
 "use client";
 
-import { memo } from "react";
+import { memo } from 'react';
+import { COLORS } from './constants';
 
 interface StarRatingProps {
   rating: number;
+  maxRating?: number;
 }
 
-const StarRating = memo(function StarRating({ rating }: StarRatingProps) {
+const StarRating = memo(function StarRating({
+  rating,
+  maxRating = 5
+}: StarRatingProps) {
   return (
-    <div className="flex items-center justify-center mb-4">
-      {[...Array(5)].map((_, i) => (
+    <div className="flex mb-4 transform transition-transform duration-500 group-hover:scale-105">
+      {[...Array(maxRating)].map((_, i) => (
         <svg
           key={i}
-          className={`w-4 h-4 ${i < rating ? 'text-[#E6C78B]' : 'text-gray-400'} mx-0.5`}
+          className="w-5 h-5 mr-1"
+          style={{ color: i < rating ? COLORS.GOLD : '#4B5563' }}
           fill="currentColor"
           viewBox="0 0 20 20"
         >

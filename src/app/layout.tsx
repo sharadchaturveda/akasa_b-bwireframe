@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Playfair_Display, Lora, Montserrat } from "next/font/google";
 import "./globals.css";
 
+// Import the ClientPerformanceWrapper component
+import ClientPerformanceWrapper from '@/components/performance/ClientPerformanceWrapper';
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -118,101 +121,6 @@ export default function RootLayout({
             font-display: swap;
           }
         `}} />
-
-        {/* Performance monitoring script */}
-        <script dangerouslySetInnerHTML={{ __html: `
-          // Simple performance monitoring
-          if (typeof window !== 'undefined' && window.performance && window.performance.mark) {
-            // Mark the start of page load
-            window.performance.mark('page_start');
-
-            // Listen for when the page is fully loaded
-            window.addEventListener('load', function() {
-              window.performance.mark('page_loaded');
-
-              // Measure the time between start and load
-              window.performance.measure('page_load_time', 'page_start', 'page_loaded');
-
-              // Get the measurement
-              const pageLoadMeasure = window.performance.getEntriesByName('page_load_time')[0];
-
-              // Log the measurement (could be sent to analytics in production)
-              console.log('Page load time: ' + pageLoadMeasure.duration.toFixed(2) + 'ms');
-
-              // Measure First Contentful Paint if available
-              const paintEntries = window.performance.getEntriesByType('paint');
-              const fcpEntry = paintEntries.find(entry => entry.name === 'first-contentful-paint');
-
-              if (fcpEntry) {
-                console.log('First Contentful Paint: ' + fcpEntry.startTime.toFixed(2) + 'ms');
-              }
-            });
-          }
-        `}} />
-
-        {/* Defer non-critical JavaScript */}
-        <script dangerouslySetInnerHTML={{ __html: `
-          // Defer non-critical JavaScript
-          if (typeof window !== 'undefined') {
-            // Use requestIdleCallback for better performance
-            const scheduleTask = window.requestIdleCallback || window.setTimeout;
-
-            document.addEventListener('DOMContentLoaded', function() {
-              // Add a small delay to prioritize rendering
-              scheduleTask(function() {
-                // Load non-critical resources after page is interactive
-                var links = document.querySelectorAll('link[data-defer]');
-                for (var i = 0; i < links.length; i++) {
-                  var link = links[i];
-                  if (link.getAttribute('data-href')) {
-                    link.setAttribute('href', link.getAttribute('data-href'));
-                    link.removeAttribute('data-defer');
-                  }
-                }
-
-                // Optimize image loading for visible images
-                if ('IntersectionObserver' in window) {
-                  const lazyImageObserver = new IntersectionObserver((entries) => {
-                    entries.forEach((entry) => {
-                      if (entry.isIntersecting) {
-                        const lazyImage = entry.target;
-                        if (lazyImage.dataset.src) {
-                          lazyImage.src = lazyImage.dataset.src;
-                          lazyImage.removeAttribute('data-src');
-                          lazyImageObserver.unobserve(lazyImage);
-                        }
-                      }
-                    });
-                  });
-
-                  document.querySelectorAll('img[data-src]').forEach((img) => {
-                    lazyImageObserver.observe(img);
-                  });
-                }
-
-                // Optimize background images
-                if ('IntersectionObserver' in window) {
-                  const lazyBackgroundObserver = new IntersectionObserver((entries) => {
-                    entries.forEach((entry) => {
-                      if (entry.isIntersecting) {
-                        const element = entry.target;
-                        if (element.dataset.background) {
-                          element.style.backgroundImage = element.dataset.background;
-                          element.removeAttribute('data-background');
-                          lazyBackgroundObserver.unobserve(element);
-                        }
-                      }
-                    });
-                  });
-
-                  document.querySelectorAll('[data-background]').forEach((el) => {
-                    lazyBackgroundObserver.observe(el);
-                  });
-                }
-              }, { timeout: 1000 });
-            });
-          }
-        `}} />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${lora.variable} ${montserrat.variable} antialiased bg-black`}
@@ -224,6 +132,8 @@ export default function RootLayout({
           overflowX: 'hidden'
         }}
       >
+        {/* Add the ClientPerformanceWrapper component */}
+        <ClientPerformanceWrapper />
         {children}
       </body>
     </html>

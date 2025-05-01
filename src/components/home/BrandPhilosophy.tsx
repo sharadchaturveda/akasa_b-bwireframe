@@ -2,23 +2,58 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { memo, useEffect, useState } from "react";
+import Image from "next/image";
 
-export default function BrandPhilosophy() {
+const BrandPhilosophy = memo(function BrandPhilosophy() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    // Use Intersection Observer to detect when component is in viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); // Only need to trigger once
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const element = document.getElementById('brand-philosophy');
+    if (element) {
+      observer.observe(element);
+    }
+
+    return () => {
+      if (element) {
+        observer.unobserve(element);
+      }
+    };
+  }, []);
   return (
-    <section className="min-h-[45vh] w-full grid grid-cols-1 md:grid-cols-[40%_60%]">
+    <section id="brand-philosophy" className="min-h-[45vh] w-full grid grid-cols-1 md:grid-cols-[40%_60%]">
       {/* Left Side - Brand Philosophy */}
       <div className="relative p-6 md:py-8 md:px-12 flex flex-col justify-center bg-black overflow-hidden">
-        {/* Background image with fixed dimensions */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: "url('/images/home/philosophy-bg.jpg?quality=60&width=800')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            transform: "scale(1.05)",
-            transition: "transform 8s ease-in-out",
-          }}
-        ></div>
+        {/* Background image with Next.js Image component for better optimization */}
+        <div className="absolute inset-0 overflow-hidden">
+          <Image
+            src="/images/home/philosophy-bg.jpg"
+            alt="Philosophy background"
+            fill
+            sizes="(max-width: 768px) 100vw, 40vw"
+            className="object-cover"
+            quality={75}
+            priority={false}
+            loading="lazy"
+            style={{
+              transform: isVisible ? "scale(1.05)" : "scale(1)",
+              transition: "transform 8s ease-in-out",
+              opacity: 0.9,
+              objectPosition: "center",
+            }}
+          />
+        </div>
 
         {/* Elegant overlay with gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/70"></div>
@@ -50,17 +85,25 @@ export default function BrandPhilosophy() {
 
       {/* Right Side - Location Info */}
       <div className="relative bg-black overflow-hidden">
-        {/* Background image with fixed dimensions */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: "url('/images/home/drink.jpg?quality=60&width=800')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            transform: "scale(1.05)",
-            transition: "transform 8s ease-in-out",
-          }}
-        ></div>
+        {/* Background image with Next.js Image component for better optimization */}
+        <div className="absolute inset-0 overflow-hidden">
+          <Image
+            src="/images/home/drink.jpg"
+            alt="Drink background"
+            fill
+            sizes="(max-width: 768px) 100vw, 60vw"
+            className="object-cover"
+            quality={75}
+            priority={false}
+            loading="lazy"
+            style={{
+              transform: isVisible ? "scale(1.05)" : "scale(1)",
+              transition: "transform 8s ease-in-out",
+              opacity: 0.9,
+              objectPosition: "center",
+            }}
+          />
+        </div>
 
         {/* Elegant overlay with gradient */}
         <div className="absolute inset-0 bg-gradient-to-tl from-black/70 via-black/50 to-black/70"></div>
@@ -105,4 +148,6 @@ export default function BrandPhilosophy() {
       </div>
     </section>
   );
-}
+});
+
+export default BrandPhilosophy;

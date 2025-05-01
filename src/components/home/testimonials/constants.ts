@@ -1,0 +1,24 @@
+// Color constants
+export const COLORS = {
+  GOLD: '#E6C78B',
+  GOLD_TRANSPARENT_10: 'rgba(230,199,139,0.1)',
+  GOLD_TRANSPARENT_20: 'rgba(230,199,139,0.2)',
+  GOLD_TRANSPARENT_30: 'rgba(230,199,139,0.3)',
+  BLACK_TRANSPARENT_40: 'rgba(0,0,0,0.4)',
+  BLACK_TRANSPARENT_60: 'rgba(0,0,0,0.6)',
+  WHITE_TRANSPARENT_60: 'rgba(255,255,255,0.6)',
+  WHITE_TRANSPARENT_80: 'rgba(255,255,255,0.8)',
+  WHITE_TRANSPARENT_90: 'rgba(255,255,255,0.9)',
+};
+
+// Animation constants
+export const ANIMATIONS = {
+  CARD_DELAY_MS: 200,
+  PARALLAX_FACTOR: 0.05,
+};
+
+// Layout constants
+export const LAYOUT = {
+  BACKGROUND_HEIGHT_PERCENT: 150,
+  BACKGROUND_TOP_OFFSET_PERCENT: -25,
+};
