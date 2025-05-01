@@ -3,8 +3,7 @@
 import { ButtonHTMLAttributes, forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
-interface MobileSecondaryButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-}
+type MobileSecondaryButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
 /**
  * MobileSecondaryButton Component

@@ -1,6 +1,6 @@
 /**
  * Mobile Utilities Module
- * 
+ *
  * This module contains utilities specifically for mobile optimization.
  * Keeping mobile-specific code separate helps with maintainability and debugging.
  */
@@ -11,8 +11,8 @@
  */
 export const isMobileDevice = (): boolean => {
   if (typeof window === 'undefined') return false;
-  
-  return window.innerWidth < 768 || 
+
+  return window.innerWidth < 768 ||
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 };
 
@@ -21,27 +21,27 @@ export const isMobileDevice = (): boolean => {
  */
 export const applyMobileOptimizations = (): void => {
   if (typeof document === 'undefined') return;
-  
+
   // Fix any content that might be bleeding outside the viewport
   document.documentElement.style.overflowX = 'hidden';
   document.body.style.overflowX = 'hidden';
-  
+
   // Ensure proper touch behavior
   document.documentElement.style.touchAction = 'manipulation';
-  
+
   // Prevent font size inflation
   document.documentElement.style.textSizeAdjust = '100%';
-  
+
   // Add smooth scrolling for better mobile experience
   document.documentElement.style.scrollBehavior = 'smooth';
-  
+
   // Fix any potential z-index issues with fixed elements
   const fixedElements = document.querySelectorAll('.fixed');
   fixedElements.forEach(el => {
     (el as HTMLElement).style.backfaceVisibility = 'hidden';
     (el as HTMLElement).style.WebkitBackfaceVisibility = 'hidden';
   });
-  
+
   // Apply passive event listeners for better scrolling performance
   const supportsPassive = checkPassiveSupport();
   if (supportsPassive) {
@@ -65,10 +65,10 @@ const checkPassiveSupport = (): boolean => {
         return true;
       }
     });
-    window.addEventListener('testPassive', null as any, opts);
-    window.removeEventListener('testPassive', null as any, opts);
+    window.addEventListener('testPassive', () => {}, opts);
+    window.removeEventListener('testPassive', () => {}, opts);
   } catch (e) {}
-  
+
   return supportsPassive;
 };
 
@@ -77,17 +77,17 @@ const checkPassiveSupport = (): boolean => {
  */
 export const optimizeImagesForMobile = (): void => {
   if (typeof document === 'undefined') return;
-  
+
   const images = document.querySelectorAll('img');
   images.forEach((img, index) => {
     // Only set loading=lazy for images that are not in the viewport initially
     if (index > 2) {
       img.loading = 'lazy';
     }
-    
+
     // Set decoding to async for all images
     img.decoding = 'async';
-    
+
     // Add error handling
     img.onerror = () => {
       img.style.display = 'none';
@@ -101,18 +101,18 @@ export const optimizeImagesForMobile = (): void => {
  * @param wait The time to wait in milliseconds
  * @returns A debounced version of the function
  */
-export const debounce = <T extends (...args: any[]) => any>(
-  func: T, 
+export const debounce = <T extends (...args: unknown[]) => unknown>(
+  func: T,
   wait: number
 ): ((...args: Parameters<T>) => void) => {
   let timeout: ReturnType<typeof setTimeout> | null = null;
-  
+
   return function(...args: Parameters<T>) {
     const later = () => {
       timeout = null;
       func(...args);
     };
-    
+
     if (timeout !== null) {
       clearTimeout(timeout);
     }
