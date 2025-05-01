@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Playfair_Display, Lora, Montserrat } from "next/font/google";
 import "./globals.css";
+import "../styles/mobile.css";
 
 // Import the ClientPerformanceWrapper component
 import ClientPerformanceWrapper from '@/components/performance/ClientPerformanceWrapper';
@@ -43,6 +44,10 @@ export const viewport = {
   width: "device-width",
   initialScale: 1.0,
   maximumScale: 5.0,
+  minimumScale: 1.0,
+  userScalable: true,
+  viewportFit: "cover",
+  themeColor: "#000000",
 };
 
 export default function RootLayout({
@@ -119,6 +124,37 @@ export default function RootLayout({
           /* Optimize font display */
           @font-face {
             font-display: swap;
+          }
+
+          /* Mobile-specific optimizations */
+          @media screen and (max-width: 767px) {
+            /* Prevent text size adjustment on orientation change */
+            html {
+              -webkit-text-size-adjust: 100%;
+              text-size-adjust: 100%;
+            }
+
+            /* Improve touch targets */
+            button, a, input, select, textarea {
+              touch-action: manipulation;
+            }
+
+            /* Prevent overflow issues */
+            body {
+              overflow-x: hidden;
+              width: 100%;
+            }
+
+            /* Prevent content from being hidden under fixed headers */
+            main {
+              padding-top: env(safe-area-inset-top, 0);
+              padding-bottom: env(safe-area-inset-bottom, 0);
+            }
+
+            /* Optimize scrolling performance */
+            * {
+              -webkit-overflow-scrolling: touch;
+            }
           }
         `}} />
       </head>

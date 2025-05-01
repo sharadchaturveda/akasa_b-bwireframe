@@ -5,7 +5,10 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
-import { memo } from "react";
+import { memo, useState, useEffect } from "react";
+import { isMobileDevice } from "@/utils/mobileUtils";
+import MobileOptimizer from "@/components/mobile/MobileOptimizer";
+import MobileOffersPage from "@/components/mobile/MobileOffersPage";
 
 // Hero Section Component
 const HeroSection = memo(function HeroSection() {
@@ -61,11 +64,8 @@ const HeroSection = memo(function HeroSection() {
               {/* Gold fill animation */}
               <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
 
-              <span className="relative flex items-center group-hover:text-black transition-colors duration-300">
+              <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
                 View Offers
-                <svg className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
               </span>
             </button>
           </Link>
@@ -152,11 +152,8 @@ const OfferCard = memo(function OfferCard({
               {/* Gold fill animation */}
               <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
 
-              <span className="relative flex items-center group-hover:text-black transition-colors duration-300">
+              <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
                 Redeem Offer
-                <svg className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
               </span>
             </button>
           </Link>
@@ -394,11 +391,8 @@ const LoyaltyProgramSection = memo(function LoyaltyProgramSection() {
                   {/* Gold fill animation */}
                   <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
 
-                  <span className="relative flex items-center group-hover:text-black transition-colors duration-300">
+                  <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
                     Join Now
-                    <svg className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
                   </span>
                 </button>
               </Link>
@@ -453,6 +447,27 @@ const NewsletterSection = memo(function NewsletterSection() {
 });
 
 export default function OffersPage() {
+  // State for device detection
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile device on client side
+  useEffect(() => {
+    setIsMobile(isMobileDevice());
+
+    const handleResize = () => {
+      setIsMobile(isMobileDevice());
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // If on mobile, render the mobile version
+  if (isMobile) {
+    return <MobileOffersPage />;
+  }
+
+  // Otherwise, render the desktop version (unchanged)
   return (
     <main className="min-h-screen bg-black text-white">
       <Navigation />

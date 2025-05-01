@@ -81,28 +81,46 @@ const MobileGallery = memo(function MobileGallery() {
             <div
               key={index}
               data-index={index}
-              className="w-[80vw] h-[250px] flex-shrink-0 relative snap-start bg-black gallery-slide"
-              style={{ scrollSnapAlign: 'start' }}
+              className="w-[85vw] h-[280px] flex-shrink-0 relative snap-start bg-black gallery-slide"
+              style={{
+                scrollSnapAlign: 'center',
+                scrollSnapStop: 'always',
+                marginRight: index === GALLERY_IMAGES.length - 1 ? '0' : '10px'
+              }}
             >
               {/* Placeholder to maintain layout before image loads */}
               <div className="absolute inset-0 bg-black"></div>
 
               {/* Only render nearby images for better performance */}
               {(isPriority || isVisible) && (
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  sizes="80vw"
-                  className="object-cover"
-                  loading={isPriority ? "eager" : "lazy"}
-                  quality={75}
-                  priority={isPriority}
-                  fetchPriority={isPriority ? "high" : "auto"}
-                  style={{
-                    transform: "translateZ(0)", // Hardware acceleration
-                  }}
-                />
+                <>
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    sizes="85vw"
+                    className="object-cover"
+                    loading={isPriority ? "eager" : "lazy"}
+                    quality={75}
+                    priority={isPriority}
+                    fetchPriority={isPriority ? "high" : "auto"}
+                    style={{
+                      transform: "translateZ(0)", // Hardware acceleration
+                    }}
+                  />
+                  {/* Add subtle gradient overlay for better visibility */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/40"></div>
+
+                  {/* Add subtle indicator dots */}
+                  <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5">
+                    {GALLERY_IMAGES.map((_, dotIndex) => (
+                      <div
+                        key={dotIndex}
+                        className={`w-1.5 h-1.5 rounded-full ${dotIndex === index ? 'bg-white' : 'bg-white/40'}`}
+                      ></div>
+                    ))}
+                  </div>
+                </>
               )}
             </div>
           );

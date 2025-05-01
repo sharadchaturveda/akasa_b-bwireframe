@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
 import HeroSection from "@/components/events/HeroSection";
@@ -8,10 +8,31 @@ import CategoriesSection from "@/components/events/CategoriesSection";
 import EventListingsSection from "@/components/events/EventListingsSection";
 import TestimonialsSection from "@/components/events/TestimonialsSection";
 import InquiryFormSection from "@/components/events/InquiryFormSection";
+import { isMobileDevice } from "@/utils/mobileUtils";
+import MobileOptimizer from "@/components/mobile/MobileOptimizer";
+import MobileEventsHeroSection from "@/components/mobile/MobileEventsHeroSection";
+import MobileEventsCategoriesSection from "@/components/mobile/MobileEventsCategoriesSection";
+import MobileEventsListingsSection from "@/components/mobile/MobileEventsListingsSection";
+import MobileEventsTestimonialsSection from "@/components/mobile/MobileEventsTestimonialsSection";
+import MobileEventsInquiryFormSection from "@/components/mobile/MobileEventsInquiryFormSection";
 
 export default function EventsPage() {
   // State for active event category
   const [activeCategory, setActiveCategory] = useState("all");
+  // State for device detection
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile device on client side
+  useEffect(() => {
+    setIsMobile(isMobileDevice());
+
+    const handleResize = () => {
+      setIsMobile(isMobileDevice());
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Event categories
   const eventCategories = [
@@ -68,19 +89,43 @@ export default function EventsPage() {
 
   return (
     <main className="min-h-screen bg-black text-white">
+      <MobileOptimizer />
       <Navigation />
-      <HeroSection />
-      <CategoriesSection
-        activeCategory={activeCategory}
-        setActiveCategory={setActiveCategory}
-        eventCategories={eventCategories}
-      />
-      <EventListingsSection
-        filteredEvents={filteredEvents}
-        eventCategories={eventCategories}
-      />
-      <TestimonialsSection />
-      <InquiryFormSection />
+
+      {isMobile ? (
+        // Mobile version
+        <>
+          <MobileEventsHeroSection />
+          <MobileEventsCategoriesSection
+            activeCategory={activeCategory}
+            setActiveCategory={setActiveCategory}
+            eventCategories={eventCategories}
+          />
+          <MobileEventsListingsSection
+            filteredEvents={filteredEvents}
+            eventCategories={eventCategories}
+          />
+          <MobileEventsTestimonialsSection />
+          <MobileEventsInquiryFormSection />
+        </>
+      ) : (
+        // Desktop version - unchanged
+        <>
+          <HeroSection />
+          <CategoriesSection
+            activeCategory={activeCategory}
+            setActiveCategory={setActiveCategory}
+            eventCategories={eventCategories}
+          />
+          <EventListingsSection
+            filteredEvents={filteredEvents}
+            eventCategories={eventCategories}
+          />
+          <TestimonialsSection />
+          <InquiryFormSection />
+        </>
+      )}
+
       <Footer />
     </main>
   );

@@ -13,7 +13,7 @@ interface TestimonialCardProps {
 const TestimonialCard = memo(function TestimonialCard({ testimonial, index }: TestimonialCardProps) {
   return (
     <div
-      className="relative bg-black/40 backdrop-blur-sm p-8 rounded-lg border border-[#E6C78B]/10 hover:border-[#E6C78B]/30 transition-all duration-500 hover:shadow-[0_0_25px_rgba(230,199,139,0.2)] group hover:-translate-y-2 opacity-0 animate-fadeIn"
+      className="relative bg-black/40 backdrop-blur-sm p-6 sm:p-8 rounded-lg border border-[#E6C78B]/10 hover:border-[#E6C78B]/30 transition-all duration-500 hover:shadow-[0_0_25px_rgba(230,199,139,0.2)] group hover:-translate-y-2 opacity-0 animate-fadeIn touch-manipulation"
       style={{
         animationDelay: `${index * ANIMATIONS.CARD_DELAY_MS}ms`,
         animationFillMode: 'forwards'
@@ -30,7 +30,7 @@ const TestimonialCard = memo(function TestimonialCard({ testimonial, index }: Te
       <div className="relative">
         {/* Quote icon */}
         <div
-          className="text-6xl font-serif leading-none mb-4 transition-all duration-500"
+          className="text-4xl sm:text-5xl md:text-6xl font-serif leading-none mb-3 sm:mb-4 transition-all duration-500"
           style={{
             color: COLORS.GOLD_TRANSPARENT_20,
             transition: 'color 0.5s ease'
@@ -42,16 +42,16 @@ const TestimonialCard = memo(function TestimonialCard({ testimonial, index }: Te
 
         {/* Quote text */}
         <blockquote
-          className="text-base sm:text-lg italic font-lora mb-6 relative z-10 transition-all duration-500 group-hover:text-white"
+          className="text-sm sm:text-base md:text-lg italic font-lora mb-4 sm:mb-6 relative z-10 transition-all duration-500 group-hover:text-white"
           style={{ color: COLORS.WHITE_TRANSPARENT_90 }}
         >
           "{testimonial.quote}"
         </blockquote>
 
         {/* Author info */}
-        <div className="mt-6 transition-transform duration-500 group-hover:translate-x-1">
+        <div className="mt-4 sm:mt-6 transition-transform duration-500 group-hover:translate-x-1">
           <div
-            className="font-medium text-sm transition-all duration-500"
+            className="font-medium text-xs sm:text-sm transition-all duration-500"
             style={{ color: COLORS.GOLD }}
           >{testimonial.author}</div>
           <div

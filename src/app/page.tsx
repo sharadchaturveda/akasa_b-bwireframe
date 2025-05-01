@@ -5,6 +5,7 @@ import Navigation from "@/components/home/Navigation";
 import ScrollBehavior from "@/components/home/ScrollBehavior";
 import HeroSection from "@/components/home/HeroSection";
 import HomePerformanceOptimizer from "@/components/home/HomePerformanceOptimizer";
+import MobileOptimizer from "@/components/mobile/MobileOptimizer";
 
 // Import non-critical components with dynamic imports and optimized loading
 import dynamic from 'next/dynamic';
@@ -94,6 +95,7 @@ export default function HomePage() {
       {/* Performance optimizations */}
       <ScrollBehavior />
       <HomePerformanceOptimizer />
+      <MobileOptimizer />
 
       {/* Navigation */}
       <Navigation />

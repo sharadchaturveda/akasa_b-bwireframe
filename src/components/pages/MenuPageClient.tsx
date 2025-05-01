@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, Suspense } from 'react';
+import { useEffect, Suspense, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Navigation from "@/components/home/Navigation";
 import ChefSection from "@/components/menu/ChefSection";
+import { isMobileDevice } from "@/utils/mobileUtils";
+import MobileMenuPageClient from "@/components/mobile/MobileMenuPageClient";
 
 // Add TypeScript declaration for requestIdleCallback
 interface RequestIdleCallbackOptions {
@@ -37,6 +39,21 @@ const Footer = dynamic(() => import("@/components/home/Footer"), {
 });
 
 export default function MenuPageClient() {
+  // State for device detection
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile device on client side
+  useEffect(() => {
+    setIsMobile(isMobileDevice());
+
+    const handleResize = () => {
+      setIsMobile(isMobileDevice());
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Optimize performance metrics
   useEffect(() => {
     // Monitor LCP
@@ -98,6 +115,12 @@ export default function MenuPageClient() {
     }
   }, []);
 
+  // If on mobile, render the mobile version
+  if (isMobile) {
+    return <MobileMenuPageClient />;
+  }
+
+  // Otherwise, render the desktop version (unchanged)
   return (
     <main className="min-h-screen bg-black text-white menu-page">
       <Navigation />

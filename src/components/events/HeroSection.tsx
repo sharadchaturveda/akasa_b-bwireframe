@@ -82,7 +82,7 @@ const HeroSection = memo(function HeroSection() {
                 {/* Gold fill animation */}
                 <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
 
-                <span className="relative flex items-center justify-center w-full group-hover:text-black transition-colors duration-300">
+                <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
                   Inquire Now
                 </span>
               </button>
@@ -93,7 +93,7 @@ const HeroSection = memo(function HeroSection() {
                 {/* Gold fill animation */}
                 <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
 
-                <span className="relative flex items-center justify-center w-full group-hover:text-black transition-colors duration-300">
+                <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
                   Make a Reservation
                 </span>
               </button>

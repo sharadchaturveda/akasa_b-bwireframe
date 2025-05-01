@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useCallback, memo } from "react";
+import { memo, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { isMobileDevice } from "@/utils/mobileUtils";
+import MobileNavigation from "@/components/mobile/MobileNavigation";
 
 // Navigation items for homepage
 const homeNavItems = [
@@ -47,8 +49,12 @@ const MobileNavLink = memo(function MobileNavLink({
   return (
     <a
       href={path}
-      className="uppercase tracking-wider text-2xl font-montserrat text-white py-4 block text-center"
-      onClick={onClick}
+      className="uppercase tracking-wider text-2xl font-montserrat text-white py-6 block text-center w-full touch-manipulation"
+      onClick={(e) => {
+        e.preventDefault();
+        onClick();
+        window.location.href = path;
+      }}
     >
       {name}
     </a>
@@ -65,24 +71,23 @@ export default function Navigation() {
   // Filter out the current page from navigation items
   navItems = navItems.filter(item => item.path !== pathname);
 
-  // State for mobile menu
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  // State for device detection
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Toggle mobile menu
-  const toggleMobileMenu = useCallback(() => {
-    setMobileMenuOpen(prev => !prev);
-    // Toggle body scroll
-    document.body.style.overflow = !mobileMenuOpen ? 'hidden' : '';
-  }, [mobileMenuOpen]);
+  // Detect mobile device on client side
+  useEffect(() => {
+    setIsMobile(isMobileDevice());
 
-  // Close mobile menu
-  const closeMobileMenu = useCallback(() => {
-    setMobileMenuOpen(false);
-    document.body.style.overflow = '';
+    const handleResize = () => {
+      setIsMobile(isMobileDevice());
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 md:py-6">
+    <header className="absolute top-0 left-0 right-0 z-40 px-4 md:px-8 py-4 md:py-6">
       {/* Desktop Navigation */}
       <div className="hidden md:flex justify-between items-center">
         {navItems.map((item) => (
@@ -94,53 +99,8 @@ export default function Navigation() {
         ))}
       </div>
 
-      {/* Mobile Navigation */}
-      <div className="md:hidden flex justify-between items-center">
-        <Link href="/" className="uppercase tracking-wide text-lg font-montserrat text-white">{"Akasa"}</Link>
-        <button
-          onClick={toggleMobileMenu}
-          className="text-white p-3 rounded-md border border-white/20 flex items-center justify-center"
-          aria-label="Toggle menu"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-
-      {/* Mobile Menu - Ultra Simple Version */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 bg-black z-50 flex flex-col">
-          {/* Header with close button */}
-          <div className="flex justify-between items-center p-4 border-b border-white/10">
-            <span className="uppercase tracking-wide text-lg font-montserrat text-white">{"Akasa"}</span>
-            <button
-              onClick={toggleMobileMenu}
-              className="text-white p-3"
-              aria-label="Close menu"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            </button>
-          </div>
-
-          {/* Menu items */}
-          <div className="flex-1 flex flex-col justify-center items-center gap-6">
-            {navItems.map((item) => (
-              <MobileNavLink
-                key={item.name}
-                name={item.name}
-                path={item.path}
-                onClick={closeMobileMenu}
-              />
-            ))}
-          </div>
-        </div>
-      )}
+      {/* Mobile Navigation - Completely separated component */}
+      <MobileNavigation navItems={navItems} />
     </header>
   );
 }

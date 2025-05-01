@@ -2,8 +2,32 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { isMobileDevice } from "@/utils/mobileUtils";
+import MobileAccoladesSection from "@/components/mobile/MobileAccoladesSection";
 
 export default function AccoladesSection() {
+  // State for device detection
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile device on client side
+  useEffect(() => {
+    setIsMobile(isMobileDevice());
+
+    const handleResize = () => {
+      setIsMobile(isMobileDevice());
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Render mobile-specific component for mobile devices
+  if (isMobile) {
+    return <MobileAccoladesSection />;
+  }
+
+  // Desktop version
   return (
     <section className="min-h-screen sm:h-screen w-full bg-cover bg-center relative py-16 sm:py-0 overflow-hidden" style={{ backgroundImage: "url('/images/awards.jpg')" }}>
       {/* Enhanced overlay with gradient */}
@@ -32,19 +56,18 @@ export default function AccoladesSection() {
 
           <div className="flex flex-col gap-4 w-full">
             <Link href="/order">
-              <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full px-6 py-3 text-center shadow-lg" showArrow>
+              <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full px-6 py-3 text-center shadow-lg">
                 {"Order Online"}
               </Button>
             </Link>
             <Link href="/reservations">
-              <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full px-6 py-3 text-center shadow-lg" showArrow>
+              <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full px-6 py-3 text-center shadow-lg">
                 {"Make a Reservation"}
               </Button>
             </Link>
           </div>
         </div>
       </div>
-
     </section>
   );
 }

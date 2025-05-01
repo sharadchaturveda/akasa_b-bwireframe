@@ -54,11 +54,8 @@ const FlavorExperienceSection = memo(function FlavorExperienceSection() {
                   {/* Button background animation */}
                   <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#E6C78B] to-[#D4B679] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
 
-                  <span className="relative flex items-center group-hover:text-black transition-colors duration-300">
+                  <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
                     Reserve a Table
-                    <svg className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
                   </span>
                 </button>
               </Link>

@@ -15,7 +15,7 @@ export default function SetLunchMenuPage() {
   return (
     <main className="min-h-screen bg-black text-white">
       <Navigation />
-      
+
       {/* Hero Section */}
       <section className="w-full bg-[url('/images/menu/gallery6.jpg')] bg-cover bg-center py-32 relative">
         <div className="absolute inset-0 bg-black/70"></div>
@@ -27,7 +27,7 @@ export default function SetLunchMenuPage() {
           </p>
         </div>
       </section>
-      
+
       {/* Menu Content Section - Will be populated with actual menu items later */}
       <section className="w-full bg-black py-16 relative overflow-hidden">
         {/* Animated background pattern */}
@@ -38,30 +38,25 @@ export default function SetLunchMenuPage() {
             animation: 'slideBackground 60s linear infinite'
           }}></div>
         </div>
-        
+
         <div className="container mx-auto px-4 md:px-8 relative z-10">
           <div className="text-center mb-12">
             <p className="text-lg font-montserrat text-white/80 italic mb-8">
               Menu items will be displayed here. The JSON data for menu items will be provided later.
             </p>
-            
+
             {/* Back to Menus button */}
             <Link href="/menu">
               <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A]">
-                <span className="flex items-center">
-                  <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                  </svg>
-                  Back to All Menus
-                </span>
+                Back to All Menus
               </Button>
             </Link>
           </div>
         </div>
       </section>
-      
+
       <Footer />
-      
+
       {/* Add custom CSS for animations */}
       <style jsx>{`
         @keyframes slideBackground {

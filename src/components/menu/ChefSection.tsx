@@ -139,19 +139,19 @@ const ChefSection = memo(function ChefSection() {
                 <div className="group relative overflow-hidden">
                   <div className="relative px-5 py-3 bg-[#1A2A3A] border border-[#E6C78B]/30 rounded-full flex items-center hover:bg-[#1A2A3A]/80 transition-colors duration-300">
                     <span className="w-2 h-2 rounded-full bg-[#E6C78B] mr-2"></span>
-                    <span className="text-sm text-white/90">Michelin Star Chef</span>
+                    <span className="text-sm text-white/90">Taste Guru</span>
                   </div>
                 </div>
                 <div className="group relative overflow-hidden">
                   <div className="relative px-5 py-3 bg-[#1A2A3A] border border-[#E6C78B]/30 rounded-full flex items-center hover:bg-[#1A2A3A]/80 transition-colors duration-300">
                     <span className="w-2 h-2 rounded-full bg-[#E6C78B] mr-2"></span>
-                    <span className="text-sm text-white/90">Asia's 50 Best</span>
+                    <span className="text-sm text-white/90">Curry Architect</span>
                   </div>
                 </div>
                 <div className="group relative overflow-hidden">
                   <div className="relative px-5 py-3 bg-[#1A2A3A] border border-[#E6C78B]/30 rounded-full flex items-center hover:bg-[#1A2A3A]/80 transition-colors duration-300">
                     <span className="w-2 h-2 rounded-full bg-[#E6C78B] mr-2"></span>
-                    <span className="text-sm text-white/90">James Beard Finalist</span>
+                    <span className="text-sm text-white/90">Culinary Trendsetter</span>
                   </div>
                 </div>
               </div>

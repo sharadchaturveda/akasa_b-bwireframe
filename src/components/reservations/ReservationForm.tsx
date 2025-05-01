@@ -37,12 +37,12 @@ const ReservationForm = memo(function ReservationForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
-      
+
       // Reset form after 3 seconds
       setTimeout(() => {
         setIsSubmitted(false);
@@ -65,7 +65,7 @@ const ReservationForm = memo(function ReservationForm() {
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-20 h-20 border-t border-l border-[#E6C78B]/20 -mt-4 -ml-4 hidden md:block"></div>
       <div className="absolute bottom-0 right-0 w-20 h-20 border-b border-r border-[#E6C78B]/20 -mb-4 -mr-4 hidden md:block"></div>
-      
+
       <div className="bg-black/40 backdrop-blur-sm p-8 md:p-12 border border-white/10 rounded-lg shadow-xl relative overflow-hidden">
         {/* Success message */}
         {isSubmitted && (
@@ -81,9 +81,9 @@ const ReservationForm = memo(function ReservationForm() {
             </div>
           </div>
         )}
-        
+
         {/* Form background with subtle animation */}
-        <div 
+        <div
           className="absolute inset-0 opacity-10"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e6c78b' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
@@ -91,7 +91,7 @@ const ReservationForm = memo(function ReservationForm() {
             animation: 'slideBackground 60s linear infinite'
           }}
         ></div>
-        
+
         <div className="relative z-10">
           <h2 className="text-3xl font-playfair mb-8 text-center text-white">
             <span className="relative">
@@ -99,7 +99,7 @@ const ReservationForm = memo(function ReservationForm() {
               <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[#E6C78B]/80 to-transparent"></span>
             </span>
           </h2>
-          
+
           <form className="space-y-8" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="group">
@@ -212,10 +212,9 @@ const ReservationForm = memo(function ReservationForm() {
             </div>
 
             <div className="text-center pt-4">
-              <Button 
+              <Button
                 type="submit"
-                className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full max-w-xs" 
-                showArrow
+                className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full max-w-xs"
                 disabled={isSubmitting || isSubmitted}
               >
                 {isSubmitting ? "Processing..." : "Book Now"}
@@ -227,7 +226,7 @@ const ReservationForm = memo(function ReservationForm() {
           </form>
         </div>
       </div>
-      
+
       {/* Add custom CSS for animations */}
       <style jsx>{`
         @keyframes slideBackground {

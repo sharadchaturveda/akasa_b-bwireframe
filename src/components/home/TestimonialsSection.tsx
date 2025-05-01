@@ -22,8 +22,8 @@ const TestimonialsSection = memo(function TestimonialsSection() {
         {/* Header component */}
         <TestimonialHeader />
 
-        {/* Testimonials grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Testimonials grid - Optimized for mobile */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
           {TESTIMONIALS.map((testimonial, index) => (
             <TestimonialCard
               key={index}
