@@ -45,11 +45,17 @@ export const applyMobileOptimizations = (): void => {
   document.documentElement.style.scrollBehavior = 'smooth';
 
   // Fix any potential z-index issues with fixed elements
-  const fixedElements = document.querySelectorAll('.fixed');
-  fixedElements.forEach(el => {
-    (el as HTMLElement).style.backfaceVisibility = 'hidden';
-    (el as HTMLElement).style.WebkitBackfaceVisibility = 'hidden';
-  });
+  // Add vendor prefixes using CSS instead of direct style manipulation
+  const fixedStyleElement = document.createElement('style');
+  fixedStyleElement.textContent = `
+    .fixed {
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+  `;
+  document.head.appendChild(fixedStyleElement);
 
   // Apply passive event listeners for better scrolling performance
   const supportsPassive = checkPassiveSupport();
