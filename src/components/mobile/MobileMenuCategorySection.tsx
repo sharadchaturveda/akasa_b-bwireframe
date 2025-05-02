@@ -3,6 +3,7 @@
 import { memo } from 'react';
 import { MenuCategory } from '@/types/menu';
 import MobileMenuItemCard from './MobileMenuItemCard';
+import MobileCategoryNotes from './MobileCategoryNotes';
 
 interface MobileMenuCategorySectionProps {
   category: MenuCategory;
@@ -20,7 +21,10 @@ const MobileMenuCategorySection = memo(function MobileMenuCategorySection({ cate
           <div className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[#E6C78B]/80 to-transparent"></div>
         </h2>
       </div>
-      
+
+      {/* Category notes if available */}
+      {category.category_notes && <MobileCategoryNotes notes={category.category_notes} />}
+
       {/* Menu items stack */}
       <div className="flex flex-col gap-3">
         {category.items.map((item, index) => (
