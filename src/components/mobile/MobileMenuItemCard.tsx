@@ -18,9 +18,9 @@ const MobileMenuItemCard = memo(function MobileMenuItemCard({ item }: MobileMenu
           </span>
           <h3 className="text-lg font-playfair text-white">{item.name}</h3>
         </div>
-        <span className="text-[#E6C78B] font-medium text-base">{item.price}</span>
+        <span className="text-[#E6C78B] font-medium text-base">{item.price as string}</span>
       </div>
-      
+
       <p className="text-white/70 font-montserrat text-xs pl-6 leading-relaxed">{item.description}</p>
     </div>
   );

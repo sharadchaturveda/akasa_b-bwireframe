@@ -1,8 +1,14 @@
+export interface PriceOption {
+  glass?: string;
+  bottle?: string;
+}
+
 export interface MenuItem {
   name: string;
-  price: string;
-  description: string;
-  vegetarian: boolean;
+  price: string | PriceOption;
+  description: string | null;
+  vegetarian?: boolean;
+  is_vegetarian?: boolean;
 }
 
 export interface MenuCategory {
