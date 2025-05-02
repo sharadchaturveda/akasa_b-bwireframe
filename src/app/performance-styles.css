@@ -1,0 +1,79 @@
+/* Prevent layout shifts during image loading */
+.image-container {
+  position: relative;
+  background-color: #111;
+  overflow: hidden;
+}
+
+/* Ensure images maintain aspect ratio */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Disable smooth scrolling for better performance */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Advanced performance optimizations */
+@media screen and (min-width: 1024px) {
+  /* Only apply these optimizations on desktop */
+  img[loading="lazy"] {
+    content-visibility: auto;
+  }
+
+  /* Optimize paint performance for fixed elements */
+  .fixed, .absolute {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
+  /* Optimize paint performance for sections */
+  section {
+    contain: content;
+  }
+}
+
+/* Optimize image decoding */
+img {
+  decoding: async;
+}
+
+/* Optimize font display */
+@font-face {
+  font-display: swap;
+}
+
+/* Mobile-specific optimizations */
+@media screen and (max-width: 767px) {
+  /* Prevent text size adjustment on orientation change */
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  /* Improve touch targets */
+  button, a, input, select, textarea {
+    touch-action: manipulation;
+  }
+
+  /* Prevent overflow issues */
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* Prevent content from being hidden under fixed headers */
+  main {
+    padding-top: env(safe-area-inset-top, 0);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  /* Optimize scrolling performance */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+}

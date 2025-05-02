@@ -3,6 +3,8 @@
  *
  * This module contains utilities specifically for mobile optimization.
  * Keeping mobile-specific code separate helps with maintainability and debugging.
+ *
+ * Note: Most functionality has been moved to MobileClassProvider to avoid hydration errors.
  */
 
 /**
@@ -14,77 +16,6 @@ export const isMobileDevice = (): boolean => {
 
   return window.innerWidth < 768 ||
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-};
-
-/**
- * Applies mobile-specific optimizations to the document
- */
-export const applyMobileOptimizations = (): void => {
-  if (typeof document === 'undefined') return;
-
-  // Fix any content that might be bleeding outside the viewport
-  document.documentElement.style.overflowX = 'hidden';
-  document.body.style.overflowX = 'hidden';
-
-  // Ensure proper touch behavior
-  document.documentElement.style.touchAction = 'manipulation';
-
-  // Prevent font size inflation - using CSS variables approach
-  const styleElement = document.createElement('style');
-  styleElement.textContent = `
-    :root {
-      -webkit-text-size-adjust: 100%;
-      -moz-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
-      text-size-adjust: 100%;
-    }
-  `;
-  document.head.appendChild(styleElement);
-
-  // Add smooth scrolling for better mobile experience
-  document.documentElement.style.scrollBehavior = 'smooth';
-
-  // Fix any potential z-index issues with fixed elements
-  // Add vendor prefixes using CSS instead of direct style manipulation
-  const fixedStyleElement = document.createElement('style');
-  fixedStyleElement.textContent = `
-    .fixed {
-      -webkit-backface-visibility: hidden;
-      -moz-backface-visibility: hidden;
-      -ms-backface-visibility: hidden;
-      backface-visibility: hidden;
-    }
-  `;
-  document.head.appendChild(fixedStyleElement);
-
-  // Apply passive event listeners for better scrolling performance
-  const supportsPassive = checkPassiveSupport();
-  if (supportsPassive) {
-    const wheelOpt = { passive: true } as EventListenerOptions;
-    window.addEventListener('touchstart', () => {}, wheelOpt);
-    window.addEventListener('touchmove', () => {}, wheelOpt);
-    window.addEventListener('wheel', () => {}, wheelOpt);
-  }
-};
-
-/**
- * Checks if the browser supports passive event listeners
- * @returns boolean indicating if passive event listeners are supported
- */
-const checkPassiveSupport = (): boolean => {
-  let supportsPassive = false;
-  try {
-    const opts = Object.defineProperty({}, 'passive', {
-      get: function() {
-        supportsPassive = true;
-        return true;
-      }
-    });
-    window.addEventListener('testPassive', () => {}, opts);
-    window.removeEventListener('testPassive', () => {}, opts);
-  } catch (e) {}
-
-  return supportsPassive;
 };
 
 /**

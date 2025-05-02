@@ -10,7 +10,7 @@ import TestimonialsSection from "@/components/events/TestimonialsSection";
 import InquiryFormSection from "@/components/events/InquiryFormSection";
 import { isMobileDevice } from "@/utils/mobileUtils";
 import MobileOptimizer from "@/components/mobile/MobileOptimizer";
-import MobileEventsHeroSection from "@/components/mobile/MobileEventsHeroSection";
+import MobileEventsHeroSectionFixed from "@/components/mobile/MobileEventsHeroSectionFixed";
 import MobileEventsCategoriesSection from "@/components/mobile/MobileEventsCategoriesSection";
 import MobileEventsListingsSection from "@/components/mobile/MobileEventsListingsSection";
 import MobileEventsTestimonialsSection from "@/components/mobile/MobileEventsTestimonialsSection";
@@ -95,7 +95,7 @@ export default function EventsPage() {
       {isMobile ? (
         // Mobile version
         <>
-          <MobileEventsHeroSection />
+          <MobileEventsHeroSectionFixed />
           <MobileEventsCategoriesSection
             activeCategory={activeCategory}
             setActiveCategory={setActiveCategory}

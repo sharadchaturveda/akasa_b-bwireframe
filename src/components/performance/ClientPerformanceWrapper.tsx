@@ -8,6 +8,17 @@ const ClientPerformanceMonitor = dynamic(
   { ssr: false }
 );
 
+// Dynamically import the PreloadLinks with ssr: false to avoid hydration issues
+const PreloadLinks = dynamic(
+  () => import('./PreloadLinks'),
+  { ssr: false }
+);
+
 export default function ClientPerformanceWrapper() {
-  return <ClientPerformanceMonitor />;
+  return (
+    <>
+      <ClientPerformanceMonitor />
+      <PreloadLinks />
+    </>
+  );
 }

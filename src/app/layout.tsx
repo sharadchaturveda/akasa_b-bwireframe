@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Playfair_Display, Lora, Montserrat } from "next/font/google";
 import "./globals.css";
-import "../styles/mobile.css";
+import "./performance-styles.css";
 
 // Import the ClientPerformanceWrapper component
 import ClientPerformanceWrapper from '@/components/performance/ClientPerformanceWrapper';
+import MobileClassProvider from '@/components/mobile/MobileClassProvider';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -57,107 +58,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        {/* Preload critical assets */}
-        <link rel="preload" href="/images/home/hero.jpg?quality=60&width=1200" as="image" fetchPriority="high" />
-        <link rel="preload" href="/images/common/logo.svg" as="image" type="image/svg+xml" fetchPriority="high" />
-        <link rel="preload" href="/images/home/philosophy-bg.jpg?quality=60&width=800" as="image" fetchPriority="high" />
-        <link rel="preload" href="/images/home/drink.jpg?quality=60&width=800" as="image" fetchPriority="high" />
-
-        {/* Preload critical fonts */}
-        <link rel="preload" href="/_next/static/media/c9a5bc6a7c948fb0-s.p.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-
-        {/* Add preconnect for faster resource loading */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-
-        {/* Add preconnect for analytics and other third-party resources */}
-        <link rel="preconnect" href="https://www.google-analytics.com" />
-        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-
-        {/* Add viewport-based image dimensions to prevent layout shifts */}
-        <style dangerouslySetInnerHTML={{ __html: `
-          /* Prevent layout shifts during image loading */
-          .image-container {
-            position: relative;
-            background-color: #111;
-            overflow: hidden;
-          }
-
-          /* Ensure images maintain aspect ratio */
-          img {
-            max-width: 100%;
-            height: auto;
-          }
-
-          /* Disable smooth scrolling for better performance */
-          @media (prefers-reduced-motion: reduce) {
-            html {
-              scroll-behavior: auto !important;
-            }
-          }
-
-          /* Advanced performance optimizations */
-          @media screen and (min-width: 1024px) {
-            /* Only apply these optimizations on desktop */
-            img[loading="lazy"] {
-              content-visibility: auto;
-            }
-
-            /* Optimize paint performance for fixed elements */
-            .fixed, .absolute {
-              will-change: transform;
-              transform: translateZ(0);
-            }
-
-            /* Optimize paint performance for sections */
-            section {
-              contain: content;
-            }
-          }
-
-          /* Optimize image decoding */
-          img {
-            decoding: async;
-          }
-
-          /* Optimize font display */
-          @font-face {
-            font-display: swap;
-          }
-
-          /* Mobile-specific optimizations */
-          @media screen and (max-width: 767px) {
-            /* Prevent text size adjustment on orientation change */
-            html {
-              -webkit-text-size-adjust: 100%;
-              text-size-adjust: 100%;
-            }
-
-            /* Improve touch targets */
-            button, a, input, select, textarea {
-              touch-action: manipulation;
-            }
-
-            /* Prevent overflow issues */
-            body {
-              overflow-x: hidden;
-              width: 100%;
-            }
-
-            /* Prevent content from being hidden under fixed headers */
-            main {
-              padding-top: env(safe-area-inset-top, 0);
-              padding-bottom: env(safe-area-inset-bottom, 0);
-            }
-
-            /* Optimize scrolling performance */
-            * {
-              -webkit-overflow-scrolling: touch;
-            }
-          }
-        `}} />
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${lora.variable} ${montserrat.variable} antialiased bg-black`}
         style={{
@@ -170,7 +70,10 @@ export default function RootLayout({
       >
         {/* Add the ClientPerformanceWrapper component */}
         <ClientPerformanceWrapper />
-        {children}
+        {/* Wrap children with MobileClassProvider */}
+        <MobileClassProvider>
+          {children}
+        </MobileClassProvider>
       </body>
     </html>
   );
