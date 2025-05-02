@@ -27,22 +27,24 @@ const DrinkMenuItemCard = memo(function DrinkMenuItemCard({ item }: DrinkMenuIte
           <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
           <div className="flex justify-between items-start mb-3">
-            <h3 className="text-xl font-playfair text-white group-hover:text-[#E6C78B] transition-colors duration-300">{item.name}</h3>
+            <h3 className="text-xl font-playfair text-white group-hover:text-[#E6C78B] transition-colors duration-300 pr-2 flex-1">{item.name}</h3>
 
             {/* Price display - handles both simple and complex prices */}
             {!hasComplexPrice ? (
               <span className="text-[#E6C78B] font-medium text-lg">{item.price as string}</span>
             ) : (
-              <div className="flex flex-col items-end">
+              <div className="flex flex-col items-end min-w-[100px] text-right">
                 {priceObj?.glass && (
-                  <span className="text-[#E6C78B] font-medium text-sm">
-                    Glass: {priceObj.glass}
-                  </span>
+                  <div className="flex justify-between items-center gap-2 mb-1">
+                    <span className="text-white/60 text-xs uppercase tracking-wider">Glass</span>
+                    <span className="text-[#E6C78B] font-medium text-sm">{priceObj.glass}</span>
+                  </div>
                 )}
                 {priceObj?.bottle && (
-                  <span className="text-[#E6C78B] font-medium text-sm">
-                    Bottle: {priceObj.bottle}
-                  </span>
+                  <div className="flex justify-between items-center gap-2">
+                    <span className="text-white/60 text-xs uppercase tracking-wider">Bottle</span>
+                    <span className="text-[#E6C78B] font-medium text-sm">{priceObj.bottle}</span>
+                  </div>
                 )}
               </div>
             )}
