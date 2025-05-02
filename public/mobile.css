@@ -17,10 +17,10 @@ html.mobile-device {
 }
 
 /* Improve touch targets */
-html.mobile-device button, 
-html.mobile-device a, 
-html.mobile-device input, 
-html.mobile-device select, 
+html.mobile-device button,
+html.mobile-device a,
+html.mobile-device input,
+html.mobile-device select,
 html.mobile-device textarea {
   touch-action: manipulation;
 }
@@ -98,6 +98,43 @@ html.mobile-device .will-change-opacity {
   /* Disable hover effects that might cause performance issues */
   html.mobile-device .hover\:shadow-lg:hover {
     box-shadow: none !important;
+  }
+
+  /* Disable button hover effects on mobile */
+  html.mobile-device button:hover,
+  html.mobile-device a:hover {
+    background-color: initial !important;
+    color: initial !important;
+  }
+
+  /* Ensure no hover animations on mobile */
+  html.mobile-device .group-hover\:translate-x-0,
+  html.mobile-device .group:hover .transform,
+  html.mobile-device .transform.-translate-x-full {
+    transform: translateX(-100%) !important;
+  }
+
+  /* Prevent color changes on hover for mobile */
+  html.mobile-device .group:hover span,
+  html.mobile-device .group-hover\:text-black {
+    color: inherit !important;
+  }
+
+  /* Completely hide gold fill animation elements on mobile */
+  html.mobile-device .absolute.inset-0.rounded-full.bg-\[\#E6C78B\],
+  html.mobile-device span[class*="bg-[#E6C78B]"] {
+    display: none !important;
+  }
+
+  /* Disable all hover effects on mobile */
+  @media (hover: none) {
+    .group:hover .transform,
+    .group-hover\:translate-x-0,
+    .hover\:bg-\[\#0A1A2A\]:hover,
+    .hover\:bg-white\/10:hover,
+    .hover\:shadow-lg:hover {
+      all: unset !important;
+    }
   }
 
   /* Simplify transitions */

@@ -57,7 +57,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${lora.variable} ${montserrat.variable} antialiased bg-black`}
         style={{
@@ -67,6 +70,7 @@ export default function RootLayout({
           overscrollBehavior: 'none',
           overflowX: 'hidden'
         }}
+        suppressHydrationWarning
       >
         {/* Add the ClientPerformanceWrapper component */}
         <ClientPerformanceWrapper />

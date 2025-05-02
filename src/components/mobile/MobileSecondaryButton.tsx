@@ -16,7 +16,7 @@ const MobileSecondaryButton = forwardRef<HTMLButtonElement, MobileSecondaryButto
     return (
       <button
         className={cn(
-          "group inline-flex items-center justify-center rounded-full text-xs font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md touch-manipulation w-full bg-transparent border border-white text-white hover:bg-white/10",
+          "inline-flex items-center justify-center rounded-full text-xs font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md touch-manipulation w-full bg-transparent border border-white text-white",
           className
         )}
         ref={ref}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { isMobileDevice } from '@/utils/mobileUtils';
 
 /**
@@ -15,30 +15,84 @@ export default function MobileClassProvider({
 }: {
   children: React.ReactNode
 }) {
-  // State to track if component is mounted (client-side only)
-  const [isMounted, setIsMounted] = useState(false);
+  // Use refs to track initialization state to avoid re-renders
+  const initializedRef = useRef(false);
+  const mobileStylesLoadedRef = useRef(false);
 
   // Effect to handle mobile-specific functionality after initial render
   useEffect(() => {
-    // Mark component as mounted
-    setIsMounted(true);
+    // Skip if already initialized to prevent duplicate processing
+    if (initializedRef.current) return;
+    initializedRef.current = true;
 
-    // Check if device is mobile
-    const isMobile = isMobileDevice();
+    // Function to apply mobile optimizations
+    const applyMobileOptimizations = () => {
+      // Skip if already loaded
+      if (mobileStylesLoadedRef.current) return;
+      mobileStylesLoadedRef.current = true;
 
-    if (isMobile) {
-      // Apply mobile-specific classes to html element
-      document.documentElement.classList.add('mobile-device');
+      // Fix any content that might be bleeding outside the viewport
+      document.documentElement.style.overflowX = 'hidden';
+      document.body.style.overflowX = 'hidden';
 
-      // Apply mobile optimizations
-      applyMobileOptimizations();
-    }
+      // Ensure proper touch behavior
+      document.documentElement.style.touchAction = 'manipulation';
 
-    // Handle resize events
-    const handleResize = () => {
-      const isMobileNow = isMobileDevice();
+      // Add smooth scrolling for better mobile experience
+      document.documentElement.style.scrollBehavior = 'smooth';
 
-      if (isMobileNow) {
+      // Load mobile CSS dynamically
+      if (!document.getElementById('mobile-css')) {
+        const link = document.createElement('link');
+        link.id = 'mobile-css';
+        link.rel = 'stylesheet';
+        link.href = '/mobile.css';
+        document.head.appendChild(link);
+      }
+
+      // Disable hover effects specifically
+      disableHoverEffects();
+    };
+
+    // Function to disable hover effects
+    const disableHoverEffects = () => {
+      // Add a style element with rules to disable hover effects
+      const styleEl = document.createElement('style');
+      styleEl.id = 'mobile-hover-disable';
+      styleEl.textContent = `
+        /* Disable button hover effects on mobile */
+        html.mobile-device button:hover,
+        html.mobile-device a:hover {
+          background-color: initial !important;
+          color: initial !important;
+        }
+
+        /* Ensure no hover animations on mobile */
+        html.mobile-device .group-hover\\:translate-x-0,
+        html.mobile-device .group:hover .transform {
+          transform: translateX(-100%) !important;
+        }
+
+        /* Prevent color changes on hover for mobile */
+        html.mobile-device .group:hover span,
+        html.mobile-device .group-hover\\:text-black {
+          color: inherit !important;
+        }
+
+        /* Remove gold fill animation completely */
+        html.mobile-device .absolute.inset-0.rounded-full.bg-\\[\\#E6C78B\\] {
+          display: none !important;
+        }
+      `;
+      document.head.appendChild(styleEl);
+    };
+
+    // Function to check and apply mobile classes
+    const checkAndApplyMobileClasses = () => {
+      const isMobile = isMobileDevice();
+
+      if (isMobile) {
+        // Apply mobile-specific classes to html element
         document.documentElement.classList.add('mobile-device');
         applyMobileOptimizations();
       } else {
@@ -46,36 +100,31 @@ export default function MobileClassProvider({
       }
     };
 
+    // Initial check
+    checkAndApplyMobileClasses();
+
+    // Debounced resize handler to avoid performance issues
+    let resizeTimer: NodeJS.Timeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        checkAndApplyMobileClasses();
+      }, 250);
+    };
+
     // Add event listeners
     window.addEventListener('resize', handleResize);
+
+    // Also check on orientation change for mobile devices
+    window.addEventListener('orientationchange', checkAndApplyMobileClasses);
 
     // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', checkAndApplyMobileClasses);
+      clearTimeout(resizeTimer);
     };
   }, []);
-
-  // Apply mobile optimizations
-  const applyMobileOptimizations = () => {
-    // Fix any content that might be bleeding outside the viewport
-    document.documentElement.style.overflowX = 'hidden';
-    document.body.style.overflowX = 'hidden';
-
-    // Ensure proper touch behavior
-    document.documentElement.style.touchAction = 'manipulation';
-
-    // Add smooth scrolling for better mobile experience
-    document.documentElement.style.scrollBehavior = 'smooth';
-
-    // Load mobile CSS dynamically
-    if (!document.getElementById('mobile-css')) {
-      const link = document.createElement('link');
-      link.id = 'mobile-css';
-      link.rel = 'stylesheet';
-      link.href = '/mobile.css';
-      document.head.appendChild(link);
-    }
-  };
 
   // Simply render children - all mobile-specific logic is in effects
   return <>{children}</>;
