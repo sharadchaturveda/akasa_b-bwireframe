@@ -1,15 +1,46 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { barBitesMenu } from "@/data/barBitesMenu";
+import BarBiteCategorySection from "@/components/menu/BarBiteCategorySection";
+import { isMobileDevice } from "@/utils/mobileUtils";
+import MobileBarBiteCategorySection from "@/components/mobile/MobileBarBiteCategorySection";
 
 export default function BarBitesMenuPage() {
+  // State for device detection
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile device on client side
+  useEffect(() => {
+    setIsMobile(isMobileDevice());
+
+    const handleResize = () => {
+      setIsMobile(isMobileDevice());
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Load page-specific styles
   useEffect(() => {
     // Add any page-specific effects here
+
+    // Add loaded class to images when they finish loading for better performance
+    const images = document.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.complete) {
+        img.classList.add('loaded');
+      } else {
+        img.onload = () => {
+          img.classList.add('loaded');
+        };
+      }
+    });
   }, []);
 
   return (
@@ -28,7 +59,7 @@ export default function BarBitesMenuPage() {
         </div>
       </section>
 
-      {/* Menu Content Section - Will be populated with actual menu items later */}
+      {/* Menu Content Section */}
       <section className="w-full bg-black py-16 relative overflow-hidden">
         {/* Animated background pattern */}
         <div className="absolute inset-0 opacity-10">
@@ -40,12 +71,31 @@ export default function BarBitesMenuPage() {
         </div>
 
         <div className="container mx-auto px-4 md:px-8 relative z-10">
-          <div className="text-center mb-12">
-            <p className="text-lg font-montserrat text-white/80 italic mb-8">
-              Menu items will be displayed here. The JSON data for menu items will be provided later.
-            </p>
+          {/* Menu Legend */}
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center justify-center gap-6 bg-black/40 backdrop-blur-sm px-6 py-3 rounded-lg border border-white/10">
+              <div className="flex items-center">
+                <span className="text-lg mr-2">🟢</span>
+                <span className="text-sm font-montserrat text-white/80">Vegetarian</span>
+              </div>
+              <div className="flex items-center">
+                <span className="text-lg mr-2">🔴</span>
+                <span className="text-sm font-montserrat text-white/80">Non-Vegetarian</span>
+              </div>
+            </div>
+          </div>
 
-            {/* Back to Menus button */}
+          {/* Menu Categories */}
+          {barBitesMenu.categories.map((category, index) => (
+            isMobile ? (
+              <MobileBarBiteCategorySection key={index} category={category} />
+            ) : (
+              <BarBiteCategorySection key={index} category={category} />
+            )
+          ))}
+
+          {/* Back to Menus button */}
+          <div className="text-center mt-16">
             <Link href="/menu">
               <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A]">
                 Back to All Menus
