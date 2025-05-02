@@ -13,6 +13,12 @@ const customJestConfig = {
     // Handle module aliases
     '^@/(.*)$': '<rootDir>/src/$1',
   },
+  // Exclude test files from the build
+  modulePathIgnorePatterns: ['<rootDir>/.next/'],
+  // Transform files
+  transform: {
+    '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
+  },
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
