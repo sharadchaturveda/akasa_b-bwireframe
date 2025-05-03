@@ -54,7 +54,7 @@ const MobileCurrentOffersSection = memo(function MobileCurrentOffersSection() {
   };
 
   return (
-    <section id="current-offers" className="w-full bg-black py-12 relative overflow-hidden">
+    <section id="current-offers" className="w-full bg-black py-12 relative overflow-hidden mobile-container">
       {/* Animated background pattern - simplified for mobile */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
@@ -74,11 +74,11 @@ const MobileCurrentOffersSection = memo(function MobileCurrentOffersSection() {
         {/* Elegant heading with decorative elements - mobile optimized */}
         <div className="text-center mb-8 relative">
           <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 w-16 h-0.5 bg-gradient-to-r from-transparent via-[#E6C78B] to-transparent"></div>
-          <h2 className="text-2xl font-playfair mb-4 relative inline-block">
+          <h2 className="text-mobile-2xl text-2xl font-playfair mb-4 relative inline-block">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E6C78B] to-[#D4B679]">Current Offers</span>
             <div className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[#E6C78B]/80 to-transparent"></div>
           </h2>
-          <p className="text-sm font-montserrat text-white/80 max-w-xs mx-auto leading-relaxed italic">
+          <p className="text-mobile-sm text-sm font-montserrat text-white/80 max-w-xs mx-auto leading-relaxed italic text-container">
             {"Take advantage of these limited-time promotions to experience the best of Akasa at exceptional value."}
           </p>
 
@@ -94,7 +94,7 @@ const MobileCurrentOffersSection = memo(function MobileCurrentOffersSection() {
         </div>
 
         {/* Offers cards - stacked for mobile but with same content as desktop */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 flex-container">
           {offers.map((offer) => {
             const isExpanded = expandedOffers.includes(offer.id);
 
@@ -136,9 +136,9 @@ const MobileCurrentOffersSection = memo(function MobileCurrentOffersSection() {
 
                   {/* Offer details */}
                   <div className="p-4">
-                    <h3 className="text-lg font-playfair text-white mb-2">{offer.title}</h3>
+                    <h3 className="text-mobile-lg text-lg font-playfair text-white mb-2">{offer.title}</h3>
 
-                    <p className="text-sm text-white/80 mb-3">
+                    <p className="text-mobile-sm text-sm text-white/80 mb-3 text-container">
                       {offer.description}
                     </p>
 
@@ -168,7 +168,7 @@ const MobileCurrentOffersSection = memo(function MobileCurrentOffersSection() {
                     {/* Toggle button */}
                     <button
                       onClick={() => toggleExpand(offer.id)}
-                      className="text-xs text-[#E6C78B] mt-3 underline touch-manipulation"
+                      className="text-mobile-sm text-xs text-[#E6C78B] mt-3 underline touch-manipulation min-h-[44px] px-4 py-2 flex items-center"
                     >
                       {isExpanded ? 'Show Less' : 'Show More'}
                     </button>

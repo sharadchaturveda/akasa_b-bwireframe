@@ -6,6 +6,7 @@ import Link from "next/link";
 import { memo } from "react";
 import { useDeviceDetection } from "@/hooks/useDeviceDetection";
 import { MobileHeroButton } from "@/components/mobile/MobileHeroButton";
+import MobileHeroFix from "@/components/mobile/MobileHeroFix";
 
 // Memoized logo component for better performance and CLS
 const Logo = memo(function Logo() {
@@ -38,10 +39,11 @@ const HeroSection = memo(function HeroSection() {
   const { isMobile } = useDeviceDetection();
   return (
     <section
-      className="h-screen w-full bg-black flex flex-col items-center justify-center relative pt-16"
+      className="h-screen w-full bg-black flex flex-col items-center justify-center relative"
+      style={{ height: '100vh', minHeight: '100vh', padding: 0, margin: 0 }}
     >
       {/* LCP Image - Using Image component for better optimization */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute top-0 left-0 right-0 bottom-0 z-0" style={{ marginTop: '-1px' }}>
         <Image
           src="/images/home/hero.jpg"
           alt="Hero background"
@@ -58,8 +60,8 @@ const HeroSection = memo(function HeroSection() {
         />
       </div>
 
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/30 z-10"></div>
+      {/* No dark overlay for mobile */}
+      {!isMobile && <div className="absolute inset-0 bg-black/30 z-10"></div>}
 
       {/* Logo - Optimized for mobile */}
       <div className="absolute inset-0 flex items-start justify-center pt-6 sm:pt-8 md:pt-12 z-20" style={{ top: '-5%', bottom: '50%' }}>
@@ -67,7 +69,7 @@ const HeroSection = memo(function HeroSection() {
       </div>
 
       {/* Content - Optimized for mobile */}
-      <div className="text-center relative z-20 mt-12 sm:mt-16 md:mt-24 animate-fadeIn px-4">
+      <div className="text-center relative z-20 mt-16 sm:mt-16 md:mt-24 animate-fadeIn px-4">
         <div className="mb-6 sm:mb-10">
           <div className="flex flex-col items-center">
             <span className="text-xs sm:text-sm md:text-base text-white/90 font-montserrat tracking-[0.2em] sm:tracking-[0.3em] uppercase mb-1 sm:mb-2 animate-fadeSlideUp" style={{ animationDelay: '0.3s' }}>{"Experience"}</span>
@@ -111,6 +113,9 @@ const HeroSection = memo(function HeroSection() {
         <div className="absolute top-1/2 left-3/4 w-1 h-1 rounded-full bg-white animate-float" style={{ animationDuration: '18s' }}></div>
         <div className="absolute top-3/4 left-1/2 w-1 h-1 rounded-full bg-white animate-float" style={{ animationDuration: '22s' }}></div>
       </div>
+
+      {/* Mobile-specific fix for the black bar issue */}
+      {isMobile && <MobileHeroFix />}
     </section>
   );
 });

@@ -166,7 +166,7 @@ img {
 
   /* Fix spacing for mobile events hero section */
   .events-hero-mobile {
-    padding-top: 80px !important; /* Add extra padding at the top */
+    padding-top: 0 !important; /* Remove padding at the top */
   }
 
   .events-hero-mobile h1 {

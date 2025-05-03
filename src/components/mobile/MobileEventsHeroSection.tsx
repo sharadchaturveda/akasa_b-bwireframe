@@ -10,9 +10,9 @@ import Image from "next/image";
  */
 const MobileEventsHeroSection = memo(function MobileEventsHeroSection() {
   return (
-    <section className="w-full relative overflow-hidden">
+    <section className="w-full h-screen relative overflow-hidden">
       {/* Background image with proper mobile sizing */}
-      <div className="relative w-full h-[65vh]">
+      <div className="absolute inset-0">
         <Image
           src="/images/events/hero.jpg"
           alt="Events at Akasa"

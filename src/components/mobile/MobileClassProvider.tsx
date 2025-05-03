@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { isMobileDevice } from '@/utils/mobileUtils';
+import "@/styles/mobile-fixes.css";
 
 /**
  * MobileClassProvider Component
@@ -50,6 +51,15 @@ export default function MobileClassProvider({
         document.head.appendChild(link);
       }
 
+      // Load the fix for black bar issue
+      if (!document.getElementById('fix-black-bar-css')) {
+        const fixLink = document.createElement('link');
+        fixLink.id = 'fix-black-bar-css';
+        fixLink.rel = 'stylesheet';
+        fixLink.href = '/fix-black-bar.css';
+        document.head.appendChild(fixLink);
+      }
+
       // Disable hover effects specifically
       disableHoverEffects();
     };
@@ -82,6 +92,32 @@ export default function MobileClassProvider({
         /* Remove gold fill animation completely */
         html.mobile-device .absolute.inset-0.rounded-full.bg-\\[\\#E6C78B\\] {
           display: none !important;
+        }
+
+        /* Fix for the black bar at the top */
+        html.mobile-device section.h-screen {
+          height: 100vh !important;
+          min-height: 100vh !important;
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+
+        /* Fix for hero images */
+        html.mobile-device section.h-screen img {
+          object-fit: cover !important;
+        }
+
+        /* Remove all navigation bars and overlays - except for the menu overlay */
+        html.mobile-device .fixed.top-0.left-0.right-0:not(.mobile-menu-overlay) {
+          background: transparent !important;
+          backdrop-filter: none !important;
+          border: none !important;
+          box-shadow: none !important;
+        }
+
+        /* Ensure the mobile menu overlay has proper blur */
+        html.mobile-device .mobile-menu-overlay {
+          backdrop-filter: blur(8px) !important;
         }
       `;
       document.head.appendChild(styleEl);

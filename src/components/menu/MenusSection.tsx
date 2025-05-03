@@ -3,11 +3,50 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { useState, memo } from "react";
+import { useState, memo, useRef } from "react";
 
 const MenusSection = memo(function MenusSection() {
   // State for active menu tab
   const [activeMenu, setActiveMenu] = useState("a-la-carte");
+
+  // Refs for tracking double clicks
+  const clickTimers = useRef<{ [key: string]: number }>({});
+  const clickCounts = useRef<{ [key: string]: number }>({});
+
+  // Handle menu card click with double-click detection
+  const handleMenuCardClick = (menuId: string, url: string, e: React.MouseEvent) => {
+    // Only process if the click is directly on the card and not on a button
+    if (e.target === e.currentTarget || (e.target as HTMLElement).closest('button') === null) {
+      // Set this menu as active
+      setActiveMenu(menuId);
+
+      // Initialize click count if not already set
+      if (!clickCounts.current[menuId]) {
+        clickCounts.current[menuId] = 0;
+      }
+
+      // Increment click count
+      clickCounts.current[menuId]++;
+
+      // Clear any existing timer
+      if (clickTimers.current[menuId]) {
+        window.clearTimeout(clickTimers.current[menuId]);
+      }
+
+      // If this is the second click (double-click)
+      if (clickCounts.current[menuId] === 2) {
+        // Navigate to the menu page
+        window.location.href = url;
+        // Reset click count
+        clickCounts.current[menuId] = 0;
+      } else {
+        // Set a timer to reset the click count after 300ms (standard double-click time)
+        clickTimers.current[menuId] = window.setTimeout(() => {
+          clickCounts.current[menuId] = 0;
+        }, 300);
+      }
+    }
+  };
 
   // Menu types
   const menuTypes = [
@@ -62,14 +101,7 @@ const MenusSection = memo(function MenusSection() {
             <div
               key={menu.id}
               className={`group perspective cursor-pointer`}
-              onClick={(e) => {
-                // Only set active menu if the click is directly on the card
-                // and not on a button
-                if (e.target === e.currentTarget ||
-                    (e.target.closest('button') === null)) {
-                  setActiveMenu(menu.id);
-                }
-              }}
+              onClick={(e) => handleMenuCardClick(menu.id, menu.url, e)}
             >
               <div className={`relative preserve-3d transition-all duration-500 ${
                 activeMenu === menu.id ? 'rotate-y-10' : 'hover:rotate-y-10'
@@ -124,7 +156,7 @@ const MenusSection = memo(function MenusSection() {
                       </p>
                     </div>
 
-                    {/* Bottom section with button only - restored layout with improved clickability */}
+                    {/* Bottom section with button */}
                     <div className="p-6 pt-0 relative z-[100]">
                       <button
                         onClick={(e) => {

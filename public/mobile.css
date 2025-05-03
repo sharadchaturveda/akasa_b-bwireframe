@@ -213,7 +213,7 @@ html.mobile-device * {
 
   /* Fix spacing for mobile events hero section */
   html.mobile-device .events-hero-mobile {
-    padding-top: 80px !important; /* Add extra padding at the top */
+    padding-top: 0 !important; /* Remove padding at the top */
   }
 
   html.mobile-device .events-hero-mobile h1 {

@@ -13,7 +13,7 @@ import { MobilePrimaryButton } from "./MobilePrimaryButton";
  */
 const MobileOffersHeroSection = memo(function MobileOffersHeroSection() {
   return (
-    <section className="w-full relative overflow-hidden min-h-[80vh] flex items-center">
+    <section className="w-full h-screen relative overflow-hidden flex items-center">
       {/* Background image with parallax effect - mobile optimized */}
       <div className="absolute inset-0 z-0">
         <Image

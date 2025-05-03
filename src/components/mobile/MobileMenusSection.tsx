@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useState } from "react";
+import { memo, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MobilePrimaryButton } from "./MobilePrimaryButton";
@@ -15,6 +15,45 @@ const MobileMenusSection = memo(function MobileMenusSection() {
   // State for active menu tab
   const [activeMenu, setActiveMenu] = useState("a-la-carte");
 
+  // Refs for tracking double clicks
+  const clickTimers = useRef<{ [key: string]: number }>({});
+  const clickCounts = useRef<{ [key: string]: number }>({});
+
+  // Handle menu card click with double-click detection
+  const handleMenuCardClick = (menuId: string, url: string, e: React.MouseEvent) => {
+    // Only process if the click is directly on the card and not on a button
+    if (e.target === e.currentTarget || (e.target as HTMLElement).closest('button') === null) {
+      // Set this menu as active
+      setActiveMenu(menuId);
+
+      // Initialize click count if not already set
+      if (!clickCounts.current[menuId]) {
+        clickCounts.current[menuId] = 0;
+      }
+
+      // Increment click count
+      clickCounts.current[menuId]++;
+
+      // Clear any existing timer
+      if (clickTimers.current[menuId]) {
+        window.clearTimeout(clickTimers.current[menuId]);
+      }
+
+      // If this is the second click (double-click)
+      if (clickCounts.current[menuId] === 2) {
+        // Navigate to the menu page
+        window.location.href = url;
+        // Reset click count
+        clickCounts.current[menuId] = 0;
+      } else {
+        // Set a timer to reset the click count after 300ms (standard double-click time)
+        clickTimers.current[menuId] = window.setTimeout(() => {
+          clickCounts.current[menuId] = 0;
+        }, 300);
+      }
+    }
+  };
+
   // Menu types - same as desktop
   const menuTypes = [
     { id: "a-la-carte", name: "À La Carte", description: "Our signature dishes available for individual selection", image: "/images/menu/a-la-carte/hero-a-la-carte.jpg", url: "/menu/a-la-carte" },
@@ -25,7 +64,7 @@ const MobileMenusSection = memo(function MobileMenusSection() {
   ];
 
   return (
-    <section className="w-full bg-black py-12 relative overflow-hidden">
+    <section className="w-full bg-black py-12 relative overflow-hidden mobile-container">
       {/* Animated background pattern - same as desktop */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
@@ -43,11 +82,11 @@ const MobileMenusSection = memo(function MobileMenusSection() {
         {/* Elegant heading with decorative elements - mobile optimized */}
         <div className="text-center mb-10 relative">
           <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 w-16 h-0.5 bg-gradient-to-r from-transparent via-[#E6C78B] to-transparent"></div>
-          <h2 className="text-3xl font-playfair mb-4 relative inline-block">
+          <h2 className="text-mobile-2xl text-2xl font-playfair mb-4 relative inline-block">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E6C78B] to-[#D4B679]">Our Menus</span>
             <div className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[#E6C78B]/80 to-transparent"></div>
           </h2>
-          <p className="text-sm font-montserrat text-white/80 max-w-xs mx-auto leading-relaxed italic">
+          <p className="text-mobile-sm text-sm font-montserrat text-white/80 max-w-xs mx-auto leading-relaxed italic text-container">
             {"Explore our carefully crafted menus, each offering a unique culinary journey through the diverse flavors of India."}
           </p>
 
@@ -68,14 +107,7 @@ const MobileMenusSection = memo(function MobileMenusSection() {
             <div
               key={menu.id}
               className="relative overflow-hidden border border-[#E6C78B]/20 shadow-lg rounded-lg"
-              onClick={(e) => {
-                // Only set active menu if the click is directly on the card
-                // and not on a button
-                if (e.target === e.currentTarget ||
-                    (e.target.closest('button') === null)) {
-                  setActiveMenu(menu.id);
-                }
-              }}
+              onClick={(e) => handleMenuCardClick(menu.id, menu.url, e)}
             >
               {/* Menu image */}
               <div className="relative h-48 w-full">
@@ -96,7 +128,7 @@ const MobileMenusSection = memo(function MobileMenusSection() {
               {/* Content */}
               <div className="p-4">
                 <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-lg font-playfair text-white">{menu.name}</h3>
+                  <h3 className="text-mobile-lg text-lg font-playfair text-white">{menu.name}</h3>
                   {activeMenu === menu.id && (
                     <div className="bg-black/40 rounded-full p-0.5">
                       <svg className="w-5 h-5 text-[#E6C78B]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -106,15 +138,16 @@ const MobileMenusSection = memo(function MobileMenusSection() {
                   )}
                 </div>
 
-                <p className="text-sm text-white/80 mb-4 min-h-[60px]">{menu.description}</p>
+                <p className="text-mobile-sm text-sm text-white/80 mb-4 min-h-[60px] text-container">{menu.description}</p>
 
-                <div className="relative z-[100]">
+
+                <div className="relative z-[100] button-container">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       window.location.href = menu.url;
                     }}
-                    className="group inline-flex items-center justify-center rounded-full text-xs font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-4 py-3 w-full cursor-pointer"
+                    className="mobile-button group inline-flex items-center justify-center rounded-full text-mobile-sm text-xs font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-4 py-3 w-full cursor-pointer min-h-[48px]"
                   >
                     {/* Standard gold fill animation */}
                     <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>

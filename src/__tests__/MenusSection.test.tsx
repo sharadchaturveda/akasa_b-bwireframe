@@ -75,20 +75,15 @@ describe('MenusSection', () => {
     }
   });
 
-  it('has correct links for each menu', () => {
+
+
+  it('has correct reservation link', () => {
     render(<MenusSection />);
 
     // Get all link components
     const links = screen.getAllByTestId('link-component');
 
-    // Check if the links have the correct href attributes
-    expect(links[0]).toHaveAttribute('href', '/menu/a-la-carte');
-    expect(links[1]).toHaveAttribute('href', '/menu/soul-food-weekends');
-    expect(links[2]).toHaveAttribute('href', '/menu/drinks');
-    expect(links[3]).toHaveAttribute('href', '/menu/bar-bites');
-    expect(links[4]).toHaveAttribute('href', '/menu/set-lunch');
-
     // Check if the reservation link has the correct href
-    expect(links[5]).toHaveAttribute('href', '/reservations');
+    expect(links[0]).toHaveAttribute('href', '/reservations');
   });
 });

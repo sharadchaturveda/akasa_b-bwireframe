@@ -19,14 +19,14 @@ const DailySidesSection = memo(function DailySidesSection({ includedSides }: Dai
           <div className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[#E6C78B]/80 to-transparent"></div>
         </h2>
       </div>
-      
+
       {/* Description */}
       <div className="text-center mb-8">
         <p className="text-white/80 font-montserrat text-base italic">{includedSides.description}</p>
       </div>
-      
+
       {/* Daily menu table */}
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto table-container">
         <table className="w-full border-collapse">
           <thead>
             <tr className="border-b border-[#E6C78B]/30">
@@ -70,7 +70,7 @@ const DailySidesSection = memo(function DailySidesSection({ includedSides }: Dai
           </tbody>
         </table>
       </div>
-      
+
       {/* Vegetarian indicator */}
       <div className="mt-4 text-center">
         <span className="inline-flex items-center text-sm text-white/60">

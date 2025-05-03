@@ -10,7 +10,7 @@ interface MobileNavigationProps {
 
 /**
  * MobileNavLink Component
- * A mobile-optimized navigation link component
+ * A mobile-optimized navigation link component with improved accessibility
  */
 const MobileNavLink = memo(function MobileNavLink({
   name,
@@ -24,13 +24,14 @@ const MobileNavLink = memo(function MobileNavLink({
   return (
     <a
       href={path}
-      className="mobile-menu-item uppercase tracking-wider text-xl sm:text-2xl font-montserrat text-white py-4 block text-center w-full touch-manipulation"
+      className="mobile-menu-item uppercase tracking-wider text-xl sm:text-2xl font-montserrat text-white py-4 px-4 block text-center w-full touch-manipulation min-h-[60px] flex items-center justify-center overflow-hidden"
       onClick={(e) => {
         e.preventDefault();
         onClick();
         // Use window.location for more reliable navigation on mobile
         window.location.href = path;
       }}
+      role="menuitem"
     >
       {name}
     </a>
@@ -79,35 +80,42 @@ const MobileNavigation = memo(function MobileNavigation({ navItems }: MobileNavi
 
   return (
     <div className="md:hidden w-full">
-      {/* Mobile Navigation Bar */}
-      <div className="flex justify-between items-center">
-        <MobileNavLogo />
-        <button
-          onClick={toggleMobileMenu}
-          className="text-white p-3 rounded-md border border-white/20 flex items-center justify-center touch-manipulation"
-          aria-label="Toggle menu"
-          style={{ willChange: 'transform' }}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
+      {/* Mobile Navigation Bar - Sticky with completely transparent background */}
+      <div className="fixed top-0 left-0 right-0 z-[100] px-4 py-3">
+        <div className="flex justify-between items-center">
+          <MobileNavLogo />
+          <button
+            onClick={toggleMobileMenu}
+            className="text-white p-3 rounded-full bg-black/30 flex items-center justify-center touch-manipulation min-w-[48px] min-h-[48px]"
+            aria-label="Toggle menu"
+            style={{ willChange: 'transform' }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
       </div>
+
+
 
       {/* Mobile Menu Overlay - Fixed positioning at the top of the screen */}
       {mobileMenuOpen && (
         <div
-          className="mobile-menu-overlay fixed top-0 left-0 right-0 bottom-0 bg-black/95 z-[9999] flex flex-col"
+          className="mobile-menu-overlay fixed top-0 left-0 right-0 bottom-0 bg-black/90 backdrop-blur-lg z-[9999] flex flex-col"
           style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
         >
           {/* Header with close button and logo */}
           <div className="flex justify-between items-center p-4 border-b border-white/10">
             <span className="text-white text-lg font-montserrat">AKASA</span>
             <button
               onClick={toggleMobileMenu}
-              className="text-white p-3 touch-manipulation"
+              className="text-white p-3 rounded-full min-w-[48px] min-h-[48px] flex items-center justify-center touch-manipulation"
               aria-label="Close menu"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -117,12 +125,12 @@ const MobileNavigation = memo(function MobileNavigation({ navItems }: MobileNavi
             </button>
           </div>
 
-          {/* Menu items at the top instead of centered */}
-          <div className="flex flex-col items-center w-full pt-4 overflow-y-auto">
+          {/* Menu items with better spacing and touch targets */}
+          <nav className="flex flex-col items-center w-full pt-6 overflow-y-auto">
             {navItems.map((item, index) => (
               <div
                 key={item.name}
-                className="w-full mobile-menu-item"
+                className="w-full mobile-menu-item py-2"
               >
                 <MobileNavLink
                   name={item.name}
@@ -131,10 +139,10 @@ const MobileNavigation = memo(function MobileNavigation({ navItems }: MobileNavi
                 />
               </div>
             ))}
-          </div>
+          </nav>
 
           {/* Bottom padding to ensure last item is fully visible */}
-          <div className="h-8"></div>
+          <div className="h-16"></div>
         </div>
       )}
     </div>

@@ -1,0 +1,60 @@
+/**
+ * Direct fix for the black bar issue on mobile
+ * This file contains specific fixes to ensure the hero image covers the entire screen
+ */
+
+/* Fix for the black bar at the top of the screen */
+@media (max-width: 767px) {
+  /* Ensure the hero section covers the entire viewport */
+  section.h-screen {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
+
+  /* Ensure the hero image container covers the entire viewport */
+  section.h-screen > div.absolute {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    height: 100vh !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Ensure the hero image itself covers the entire viewport */
+  section.h-screen img {
+    object-fit: cover !important;
+    object-position: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Remove any potential margins or paddings from body and html */
+  body, html {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Ensure the navigation bar is completely transparent - except for the menu overlay */
+  .fixed.top-0.left-0.right-0.z-\\[100\\]:not(.mobile-menu-overlay) {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Ensure the mobile menu overlay has proper blur */
+  .mobile-menu-overlay {
+    backdrop-filter: blur(8px) !important;
+  }
+}
