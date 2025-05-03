@@ -19,7 +19,7 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
       }
     });
   }, []);
-  // Featured signature dishes
+  // Featured signature dishes - vegetarian dishes first
   const featuredDishes = [
     {
       name: "Paronthia Naan",
@@ -29,11 +29,18 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
       category: "Signature"
     },
     {
-      name: "AKASA-E-Dum Biryani",
+      name: "Akasa-E-Dum Biryani",
       description: "Fragrant basmati slow-cooked under a dough-sealed lid, infused with saffron strands and Akasa's secret blend of hand-ground spices—fluffy, rich, and unapologetically indulgent",
       image: "/images/menu/featured-dishes/akasa-e-dum-biryani.jpg",
       price: "$25",
       category: "Chef's Special"
+    },
+    {
+      name: "Dal-E-Akasa",
+      description: "Earthy black lentils, patiently simmered over a full day, melting into a buttery symphony that comforts like a memory—and lingers like legend",
+      image: "/images/menu/featured-dishes/dal-e-akasa.jpg",
+      price: "$22",
+      category: "Vegetarian"
     },
     {
       name: "Akasa-E-Lobster",
@@ -48,13 +55,6 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
       image: "/images/menu/featured-dishes/tandoori-prawns.jpg",
       price: "$32",
       category: "Seafood"
-    },
-    {
-      name: "Dal-E-Akasa",
-      description: "Earthy black lentils, patiently simmered over a full day, melting into a buttery symphony that comforts like a memory—and lingers like legend",
-      image: "/images/menu/featured-dishes/dal-e-akasa.jpg",
-      price: "$22",
-      category: "Vegetarian"
     },
     {
       name: "Tandoori Pomfret Kebab",

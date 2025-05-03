@@ -26,7 +26,7 @@ const MobileFeaturedDishesSection = memo(function MobileFeaturedDishesSection() 
     });
   }, []);
 
-  // Featured signature dishes - same as desktop
+  // Featured signature dishes - vegetarian dishes first, same as desktop
   const featuredDishes = [
     {
       name: "Paronthia Naan",
@@ -43,6 +43,13 @@ const MobileFeaturedDishesSection = memo(function MobileFeaturedDishesSection() 
       category: "Chef's Special"
     },
     {
+      name: "Dal-E-Akasa",
+      description: "Earthy black lentils, patiently simmered over a full day, melting into a buttery symphony that comforts like a memory",
+      image: "/images/menu/featured-dishes/dal-e-akasa.jpg",
+      price: "$22",
+      category: "Vegetarian"
+    },
+    {
       name: "Akasa-E-Lobster",
       description: "Succulent Canadian lobster, bathed in a spiced yogurt marinade, kissed by fire and laced with red chili—plush, fiery, and unforgettable",
       image: "/images/menu/featured-dishes/akasa-e-lobster.jpg",
@@ -55,13 +62,6 @@ const MobileFeaturedDishesSection = memo(function MobileFeaturedDishesSection() 
       image: "/images/menu/featured-dishes/tandoori-prawns.jpg",
       price: "$32",
       category: "Seafood"
-    },
-    {
-      name: "Dal-E-Akasa",
-      description: "Earthy black lentils, patiently simmered over a full day, melting into a buttery symphony that comforts like a memory",
-      image: "/images/menu/featured-dishes/dal-e-akasa.jpg",
-      price: "$22",
-      category: "Vegetarian"
     },
     {
       name: "Tandoori Pomfret Kebab",
