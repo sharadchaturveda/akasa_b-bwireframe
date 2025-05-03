@@ -13,7 +13,7 @@ import { MobilePrimaryButton } from "./MobilePrimaryButton";
  */
 const MobileVisitUsSection = memo(function MobileVisitUsSection() {
   return (
-    <section className="w-full relative overflow-hidden">
+    <section id="visit-us" className="w-full relative overflow-hidden">
       {/* Background image with proper mobile sizing */}
       <div className="relative w-full min-h-[90vh]">
         <Image

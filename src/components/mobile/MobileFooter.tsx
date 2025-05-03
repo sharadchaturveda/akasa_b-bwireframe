@@ -13,9 +13,9 @@ const MobileFooterLogo = memo(function MobileFooterLogo() {
     <Image
       src="/images/common/logo.svg"
       alt="Akasa Logo"
-      width={60}
-      height={60}
-      className="w-[50px] h-auto"
+      width={80}
+      height={80}
+      className="w-[70px] h-auto"
     />
   );
 });

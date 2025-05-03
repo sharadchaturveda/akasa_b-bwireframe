@@ -68,7 +68,14 @@ const MobileMenusSection = memo(function MobileMenusSection() {
             <div
               key={menu.id}
               className="relative overflow-hidden border border-[#E6C78B]/20 shadow-lg rounded-lg"
-              onClick={() => setActiveMenu(menu.id)}
+              onClick={(e) => {
+                // Only set active menu if the click is directly on the card
+                // and not on a button
+                if (e.target === e.currentTarget ||
+                    (e.target.closest('button') === null)) {
+                  setActiveMenu(menu.id);
+                }
+              }}
             >
               {/* Menu image */}
               <div className="relative h-48 w-full">
@@ -101,11 +108,22 @@ const MobileMenusSection = memo(function MobileMenusSection() {
 
                 <p className="text-sm text-white/80 mb-4 min-h-[60px]">{menu.description}</p>
 
-                <Link href={menu.url} className="block w-full">
-                  <MobilePrimaryButton className="w-full" onClick={(e) => e.stopPropagation()}>
-                    View Menu
-                  </MobilePrimaryButton>
-                </Link>
+                <div className="relative z-[100]">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.location.href = menu.url;
+                    }}
+                    className="group inline-flex items-center justify-center rounded-full text-xs font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-4 py-3 w-full cursor-pointer"
+                  >
+                    {/* Standard gold fill animation */}
+                    <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
+
+                    <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
+                      <span className="whitespace-nowrap">View Menu</span>
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
           ))}

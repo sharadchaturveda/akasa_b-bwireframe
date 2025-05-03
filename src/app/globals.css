@@ -265,3 +265,74 @@ img {
   background-color: #111;
   background-image: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.6)) !important;
 }
+
+/* Improve desktop navigation clickability */
+@media (min-width: 768px) {
+  header a {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+}
+
+/* Ensure menu buttons are always clickable */
+.perspective a,
+.perspective button,
+.perspective [role="button"] {
+  position: relative;
+  z-index: 50 !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+  isolation: isolate !important;
+}
+
+/* Make menu buttons fully clickable */
+.perspective a[href^="/menu/"],
+.perspective a[href^="/menu/"] *,
+div[style*="zIndex: 50"] a,
+div[style*="zIndex: 50"] a * {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  position: relative !important;
+  z-index: 100 !important;
+  touch-action: manipulation !important;
+}
+
+/* Fix menu card hover effects */
+.perspective h3 {
+  color: white !important;
+  transition: color 0.3s ease;
+}
+
+/* Individual card hover effects - only affect the hovered card */
+.perspective .group:hover h3 {
+  color: #E6C78B !important;
+}
+
+/* Change menu title to gold when card is active */
+.perspective .group:has(.rotate-y-10) h3 {
+  color: #E6C78B !important;
+}
+
+/* Prevent other cards from being affected */
+.perspective .group:not(:hover) h3 {
+  color: white !important;
+}
+
+/* Menu button styles */
+.perspective button {
+  position: relative !important;
+  z-index: 100 !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure buttons are always clickable */
+.perspective button,
+.perspective button * {
+  pointer-events: auto !important;
+}

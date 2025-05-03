@@ -62,7 +62,14 @@ const MenusSection = memo(function MenusSection() {
             <div
               key={menu.id}
               className={`group perspective cursor-pointer`}
-              onClick={() => setActiveMenu(menu.id)}
+              onClick={(e) => {
+                // Only set active menu if the click is directly on the card
+                // and not on a button
+                if (e.target === e.currentTarget ||
+                    (e.target.closest('button') === null)) {
+                  setActiveMenu(menu.id);
+                }
+              }}
             >
               <div className={`relative preserve-3d transition-all duration-500 ${
                 activeMenu === menu.id ? 'rotate-y-10' : 'hover:rotate-y-10'
@@ -117,23 +124,22 @@ const MenusSection = memo(function MenusSection() {
                       </p>
                     </div>
 
-                    {/* Bottom section with button only */}
-                    <div className="p-6 pt-0">
-                      <Link href={menu.url} className="block w-full">
-                        <button
-                          className="w-full group inline-flex items-center justify-center rounded-full text-xs font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-4 py-2 h-[36px]"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                          }}
-                        >
-                          {/* Gold fill animation */}
-                          <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
+                    {/* Bottom section with button only - restored layout with improved clickability */}
+                    <div className="p-6 pt-0 relative z-[100]">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.location.href = menu.url;
+                        }}
+                        className="group inline-flex items-center justify-center rounded-full text-xs font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-4 py-2 h-[36px] w-full cursor-pointer"
+                      >
+                        {/* Standard gold fill animation */}
+                        <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
 
-                          <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
-                            <span className="whitespace-nowrap">View Menu</span>
-                          </span>
-                        </button>
-                      </Link>
+                        <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
+                          <span className="whitespace-nowrap">View Menu</span>
+                        </span>
+                      </button>
                     </div>
                   </div>
                 </div>

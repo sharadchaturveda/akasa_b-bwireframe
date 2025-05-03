@@ -12,9 +12,9 @@ const FooterLogo = memo(function FooterLogo() {
     <Image
       src="/images/common/logo.svg"
       alt="Akasa Logo"
-      width={80}
-      height={80}
-      className="w-[60px] h-auto"
+      width={100}
+      height={100}
+      className="w-[80px] h-auto"
     />
   );
 });

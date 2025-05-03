@@ -74,7 +74,7 @@ const BrandPhilosophy = memo(function BrandPhilosophy() {
           </p>
 
           <div className="animate-fadeSlideUp flex justify-center md:justify-start" style={{ animationDelay: '0.5s' }}>
-            <Link href="/location">
+            <Link href="#visit-us">
               <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-[200px] sm:w-[240px] px-4 sm:px-6 text-center shadow-lg text-sm sm:text-base">
                 {"Our Location"}
               </Button>

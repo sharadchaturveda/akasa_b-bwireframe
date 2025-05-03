@@ -28,7 +28,7 @@ const DesktopNavLink = memo(function DesktopNavLink({ name, path }: { name: stri
   return (
     <Link
       href={path}
-      className="uppercase tracking-wider text-base font-montserrat text-white hover:text-white/80 transition-colors duration-200 relative group py-2 px-3"
+      className="uppercase tracking-wider text-base font-montserrat text-white hover:text-white/80 transition-colors duration-200 relative group py-4 px-6 cursor-pointer touch-manipulation z-50 block"
     >
       {name}
       <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white group-hover:w-full transition-all duration-300"></span>
@@ -91,11 +91,12 @@ export default function Navigation() {
       {/* Desktop Navigation */}
       <div className="hidden md:flex justify-between items-center">
         {navItems.map((item) => (
-          <DesktopNavLink
-            key={item.name}
-            name={item.name}
-            path={item.path}
-          />
+          <div key={item.name} className="px-2 py-1">
+            <DesktopNavLink
+              name={item.name}
+              path={item.path}
+            />
+          </div>
         ))}
       </div>
 

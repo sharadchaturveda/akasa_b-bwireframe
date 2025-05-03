@@ -217,17 +217,21 @@ html.mobile-device * {
   }
 
   html.mobile-device .events-hero-mobile h1 {
-    margin-top: 2rem !important; /* Add margin to push heading down */
+    margin-top: 3rem !important; /* Add margin to push heading down */
     font-size: 1.5rem !important; /* Slightly reduce font size */
+    margin-bottom: 2rem !important; /* Increase bottom margin to create space for gold bar */
   }
 
   html.mobile-device .events-hero-mobile .gold-bar {
-    margin: 1rem auto 1.5rem !important; /* Increase spacing around gold bar */
+    margin: 1.5rem auto 2rem !important; /* Increase spacing around gold bar */
+    height: 1px !important; /* Ensure the gold bar is visible */
+    background: linear-gradient(to right, rgba(230, 199, 139, 0.8), transparent) !important; /* Reinforce the gradient */
   }
 
   html.mobile-device .events-hero-mobile p {
     max-width: 90% !important; /* Ensure text doesn't overflow */
     margin: 0 auto !important;
+    padding-top: 0.5rem !important; /* Add padding to separate from gold bar */
   }
 
   /* Mobile footer optimizations */

@@ -3,10 +3,13 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Navigation from "@/components/home/Navigation";
+import Footer from "@/components/home/Footer";
 
 export default function ChefPageClient() {
   return (
     <main className="min-h-screen bg-black text-white">
+      <Navigation />
       <div className="container mx-auto px-8 py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div className="relative h-[600px]">
@@ -46,6 +49,7 @@ export default function ChefPageClient() {
           </div>
         </div>
       </div>
+      <Footer />
     </main>
   );
 }

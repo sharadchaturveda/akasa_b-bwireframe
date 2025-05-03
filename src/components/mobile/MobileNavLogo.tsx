@@ -6,18 +6,18 @@ import { memo } from "react";
 
 /**
  * MobileNavLogo Component
- * 
+ *
  * A mobile-optimized navigation logo component that only shows the logo without text.
  */
 const MobileNavLogo = memo(function MobileNavLogo() {
   return (
     <Link href="/" className="flex items-center">
-      <div className="relative w-8 h-8">
+      <div className="relative w-12 h-12">
         <Image
           src="/images/common/logo.svg"
           alt="Akasa Logo"
           fill
-          sizes="32px"
+          sizes="48px"
           className="object-contain"
           priority
           fetchPriority="high"
