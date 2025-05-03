@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { memo, useEffect, useState } from "react";
+import { memo } from "react";
 import { usePathname } from "next/navigation";
-import { isMobileDevice } from "@/utils/mobileUtils";
+import { useDeviceDetection } from "@/hooks/useDeviceDetection";
 import MobileNavigation from "@/components/mobile/MobileNavigation";
+import Loading from "@/components/ui/Loading";
 
 // Navigation items for homepage
 const homeNavItems = [
@@ -71,20 +72,19 @@ export default function Navigation() {
   // Filter out the current page from navigation items
   navItems = navItems.filter(item => item.path !== pathname);
 
-  // State for device detection
-  const [isMobile, setIsMobile] = useState(false);
+  // Use the custom hook for device detection
+  const { isMobile, isDetectionComplete } = useDeviceDetection();
 
-  // Detect mobile device on client side
-  useEffect(() => {
-    setIsMobile(isMobileDevice());
-
-    const handleResize = () => {
-      setIsMobile(isMobileDevice());
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  // Show loading state if device detection is not complete
+  if (!isDetectionComplete) {
+    return (
+      <header className="absolute top-0 left-0 right-0 z-40 px-4 md:px-8 py-4 md:py-6">
+        <div className="flex justify-center items-center h-12">
+          <Loading size="small" text="Loading navigation..." />
+        </div>
+      </header>
+    );
+  }
 
   return (
     <header className="absolute top-0 left-0 right-0 z-40 px-4 md:px-8 py-4 md:py-6">

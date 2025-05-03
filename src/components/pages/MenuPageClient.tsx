@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, Suspense, useState } from 'react';
+import { useEffect, Suspense } from 'react';
 import dynamic from 'next/dynamic';
-import Navigation from "@/components/home/Navigation";
 import ChefSection from "@/components/menu/ChefSection";
-import { isMobileDevice } from "@/utils/mobileUtils";
+import { useDeviceDetection } from "@/hooks/useDeviceDetection";
 import MobileMenuPageClient from "@/components/mobile/MobileMenuPageClient";
 
 // Add TypeScript declaration for requestIdleCallback
@@ -38,21 +37,12 @@ const Footer = dynamic(() => import("@/components/home/Footer"), {
   loading: () => <div className="h-[100px] bg-black"></div>
 });
 
+// Import the PageLayout component
+import PageLayout from "@/components/layout/PageLayout";
+
 export default function MenuPageClient() {
-  // State for device detection
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Detect mobile device on client side
-  useEffect(() => {
-    setIsMobile(isMobileDevice());
-
-    const handleResize = () => {
-      setIsMobile(isMobileDevice());
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  // Use the custom hook for device detection
+  const { isMobile } = useDeviceDetection();
 
   // Optimize performance metrics
   useEffect(() => {
@@ -120,11 +110,9 @@ export default function MenuPageClient() {
     return <MobileMenuPageClient />;
   }
 
-  // Otherwise, render the desktop version (unchanged)
+  // Otherwise, render the desktop version with the PageLayout component
   return (
-    <main className="min-h-screen bg-black text-white menu-page">
-      <Navigation />
-
+    <PageLayout className="menu-page">
       {/* Critical above-the-fold content */}
       <ChefSection />
 
@@ -140,10 +128,6 @@ export default function MenuPageClient() {
       <Suspense fallback={<div className="h-[50vh] bg-black"></div>}>
         <FeaturedDishesSection />
       </Suspense>
-
-      <Suspense fallback={<div className="h-[100px] bg-black"></div>}>
-        <Footer />
-      </Suspense>
-    </main>
+    </PageLayout>
   );
 }

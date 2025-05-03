@@ -3,8 +3,8 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { memo, useEffect, useState } from "react";
-import { isMobileDevice } from "@/utils/mobileUtils";
+import { memo } from "react";
+import { useDeviceDetection } from "@/hooks/useDeviceDetection";
 import { MobileHeroButton } from "@/components/mobile/MobileHeroButton";
 
 // Memoized logo component for better performance and CLS
@@ -34,20 +34,8 @@ const Logo = memo(function Logo() {
 
 // Memoized hero section for better performance
 const HeroSection = memo(function HeroSection() {
-  // State for device detection
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Detect mobile device on client side
-  useEffect(() => {
-    setIsMobile(isMobileDevice());
-
-    const handleResize = () => {
-      setIsMobile(isMobileDevice());
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  // Use the custom hook for device detection
+  const { isMobile } = useDeviceDetection();
   return (
     <section
       className="h-screen w-full bg-black flex flex-col items-center justify-center relative pt-16"
