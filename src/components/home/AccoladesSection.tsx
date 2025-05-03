@@ -29,7 +29,7 @@ export default function AccoladesSection() {
 
   // Desktop version
   return (
-    <section className="min-h-screen sm:h-screen w-full bg-cover bg-center relative py-16 sm:py-0 overflow-hidden" style={{ backgroundImage: "url('/images/awards.jpg')" }}>
+    <section className="min-h-screen sm:h-screen w-full bg-cover bg-center relative py-16 sm:py-0 overflow-hidden" style={{ backgroundImage: "url('/images/home/awards.jpg')" }}>
       {/* Enhanced overlay with gradient */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30"></div>
 

@@ -22,7 +22,7 @@ const TestimonialBackground = memo(function TestimonialBackground({
           <div
             className="absolute inset-0 w-full h-full"
             style={{
-              backgroundImage: "url('/images/testimonial-bg.jpg')",
+              backgroundImage: "url('/images/testimonials/testimonial-bg.jpg')",
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",

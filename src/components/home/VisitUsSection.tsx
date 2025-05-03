@@ -29,7 +29,7 @@ export default function VisitUsSection() {
 
   // Desktop version
   return (
-    <section id="visit-us" className="min-h-[80vh] w-full bg-cover bg-center flex items-center justify-center text-center px-8 py-16 relative overflow-hidden" style={{ backgroundImage: "url('/images/location.jpg?quality=75&width=1200')" }}>
+    <section id="visit-us" className="min-h-[80vh] w-full bg-cover bg-center flex items-center justify-center text-center px-8 py-16 relative overflow-hidden" style={{ backgroundImage: "url('/images/home/location.jpg?quality=75&width=1200')" }}>
       {/* Enhanced overlay with gradient */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/40"></div>
 
