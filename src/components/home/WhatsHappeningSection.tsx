@@ -54,7 +54,7 @@ const WhatsHappeningSection = memo(function WhatsHappeningSection() {
           {/* Use Next.js Image for better performance */}
           <div className="absolute inset-0 overflow-hidden">
             <Image
-              src="/images/whats-happening.jpg"
+              src="/images/home/whats-happening.jpg"
               alt="What's happening"
               fill
               sizes="(max-width: 768px) 100vw, 60vw"
@@ -81,7 +81,7 @@ const WhatsHappeningSection = memo(function WhatsHappeningSection() {
           {/* Use Next.js Image for better performance */}
           <div className="absolute inset-0 overflow-hidden">
             <Image
-              src="/images/whats-happening-bg.jpg"
+              src="/images/home/whats-happening-bg.jpg"
               alt="What's happening background"
               fill
               sizes="(max-width: 768px) 100vw, 40vw"
