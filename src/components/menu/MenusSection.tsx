@@ -11,11 +11,11 @@ const MenusSection = memo(function MenusSection() {
 
   // Menu types
   const menuTypes = [
-    { id: "a-la-carte", name: "À La Carte", description: "Our signature dishes available for individual selection", image: "/images/menu/gallery1.jpg", url: "/menu/a-la-carte" },
-    { id: "soul-food", name: "Soul Food Weekends", description: "Special weekend offerings that nourish the soul", image: "/images/menu/gallery2.jpg", url: "/menu/soul-food-weekends" },
-    { id: "drinks", name: "Drinks", description: "Signature cocktails, fine wines, and refreshing beverages", image: "/images/menu/gallery3.jpg", url: "/menu/drinks" },
-    { id: "bar-bites", name: "Bar Bites", description: "Perfect small plates to accompany your drinks", image: "/images/menu/gallery5.jpg", url: "/menu/bar-bites" },
-    { id: "set-lunch", name: "3 Course Set Lunch", description: "A perfect midday dining experience with three exquisite courses", image: "/images/menu/gallery6.jpg", url: "/menu/set-lunch" }
+    { id: "a-la-carte", name: "À La Carte", description: "Our signature dishes available for individual selection", image: "/images/menu/a-la-carte/hero-a-la-carte.jpg", url: "/menu/a-la-carte" },
+    { id: "soul-food", name: "Soul Food Weekends", description: "Special weekend offerings that nourish the soul", image: "/images/menu/soul-food-weekends/hero-soul-food-weekends.jpg", url: "/menu/soul-food-weekends" },
+    { id: "drinks", name: "Drinks", description: "Signature cocktails, fine wines, and refreshing beverages", image: "/images/menu/drinks/hero-drinks.jpg", url: "/menu/drinks" },
+    { id: "bar-bites", name: "Bar Bites", description: "Perfect small plates to accompany your drinks", image: "/images/menu/bar-bites/hero-bar-bites.jpg", url: "/menu/bar-bites" },
+    { id: "set-lunch", name: "3 Course Set Lunch", description: "A perfect midday dining experience with three exquisite courses", image: "/images/menu/set-lunch/hero-set-lunch.jpg", url: "/menu/set-lunch" }
   ];
 
   return (

@@ -9,7 +9,16 @@ public/images/
 ├── common/           # Common images like logos, backgrounds
 ├── home/             # Homepage-specific images
 ├── menu/             # Menu-related images
-│   └── items/        # Menu item images
+│   ├── a-la-carte/   # À La Carte menu images
+│   │   └── items/    # À La Carte menu item images
+│   ├── bar-bites/    # Bar Bites menu images
+│   │   └── items/    # Bar Bites menu item images
+│   ├── drinks/       # Drinks menu images
+│   │   └── items/    # Drinks menu item images
+│   ├── set-lunch/    # Set Lunch menu images
+│   │   └── items/    # Set Lunch menu item images
+│   └── soul-food-weekends/ # Soul Food Weekends menu images
+│       └── items/    # Soul Food Weekends menu item images
 ├── events/           # Events-related images
 ├── offers/           # Offers-related images
 ├── reservations/     # Reservations-related images

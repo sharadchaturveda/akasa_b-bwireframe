@@ -90,7 +90,7 @@ const ChefSection = memo(function ChefSection() {
               <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-[#E6C78B] opacity-70"></div>
 
               <Image
-                src="/images/menu/chef.jpg"
+                src="/images/menu/chef-portrait.jpg"
                 alt="Chef Akhilesh Pathak"
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"
