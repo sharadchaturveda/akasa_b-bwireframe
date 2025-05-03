@@ -22,7 +22,7 @@ const GallerySection = memo(function GallerySection() {
           {/* Use Next.js Image for better performance */}
           <div className="absolute inset-0">
             <Image
-              src="/images/event3.jpg"
+              src="/images/unused/event3.jpg"
               alt="Private dining"
               fill
               sizes="100vw"

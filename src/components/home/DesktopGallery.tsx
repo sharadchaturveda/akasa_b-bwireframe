@@ -6,11 +6,11 @@ import NextImage from "next/image";
 
 // Gallery images array with optimized paths
 const GALLERY_IMAGES = [
-  { src: "/images/gallery1.jpg", alt: "Elegant dining setup with traditional Indian decor" },
-  { src: "/images/gallery2.jpg", alt: "Chef preparing authentic Indian cuisine" },
-  { src: "/images/gallery3.jpg", alt: "Signature cocktail with exotic spices" },
-  { src: "/images/gallery5.jpg", alt: "Beautifully plated Indian dish with garnish" },
-  { src: "/images/gallery6.jpg", alt: "Restaurant interior with ambient lighting" },
+  { src: "/images/unused/gallery1.jpg", alt: "Elegant dining setup with traditional Indian decor" },
+  { src: "/images/unused/gallery2.jpg", alt: "Chef preparing authentic Indian cuisine" },
+  { src: "/images/unused/gallery3.jpg", alt: "Signature cocktail with exotic spices" },
+  { src: "/images/unused/gallery5.jpg", alt: "Beautifully plated Indian dish with garnish" },
+  { src: "/images/unused/gallery6.jpg", alt: "Restaurant interior with ambient lighting" },
 ];
 
 // Optimized gallery image component with performance enhancements
