@@ -60,6 +60,22 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <link rel="stylesheet" href="/fix-black-bar.css" />
+        <link rel="stylesheet" href="/mobile-logo-fix.css" />
+        <link rel="stylesheet" href="/fix-mobile-logo.css" />
+        <link rel="stylesheet" href="/remove-overlays.css" />
+        <link rel="stylesheet" href="/fix-testimonials.css" />
+        <link rel="stylesheet" href="/force-hero-position.css" />
+        <script src="/fix-mobile-logo.js" defer></script>
+        <script src="/force-hero-position.js" defer></script>
+        <link rel="preload" as="fetch" href="/hero-fix.html" />
+        <script dangerouslySetInnerHTML={{ __html: `
+          fetch('/hero-fix.html')
+            .then(response => response.text())
+            .then(html => {
+              document.head.insertAdjacentHTML('beforeend', html);
+            });
+        `}} />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${lora.variable} ${montserrat.variable} antialiased bg-black`}

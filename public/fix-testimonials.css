@@ -1,0 +1,44 @@
+/**
+ * Fix for testimonial section background on mobile
+ */
+
+@media (max-width: 767px) {
+  /* Ensure the testimonial section background is visible */
+  section.w-full.relative.py-16.overflow-hidden.bg-black.mobile-container {
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  /* Fix the background image */
+  section.w-full.relative.py-16.overflow-hidden.bg-black.mobile-container .absolute.inset-0.w-full.h-full {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 150% !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 1 !important;
+  }
+
+  /* Ensure the content is above the background */
+  section.w-full.relative.py-16.overflow-hidden.bg-black.mobile-container .relative.z-10 {
+    position: relative !important;
+    z-index: 10 !important;
+  }
+
+  /* Add a semi-transparent overlay for better text readability */
+  section.w-full.relative.py-16.overflow-hidden.bg-black.mobile-container::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    z-index: 2 !important;
+  }
+}

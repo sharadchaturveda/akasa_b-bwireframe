@@ -19,15 +19,21 @@ export default function MobileHeroFix() {
       const heroSection = document.querySelector('section.h-screen');
       if (!heroSection) return;
 
-      // Apply direct styles to ensure it covers the entire screen
-      heroSection.setAttribute('style', 'height: 100vh !important; min-height: 100vh !important; padding: 0 !important; margin: 0 !important; position: relative !important;');
+      // Apply direct styles to ensure it covers the entire screen and merges with the section below
+      // Don't override any existing styles that might be needed for logo positioning
+      heroSection.style.height = '100vh';
+      heroSection.style.minHeight = '100vh';
+      heroSection.style.padding = '0';
+      heroSection.style.margin = '0';
+      heroSection.style.marginBottom = '-1px';
+      heroSection.style.position = 'relative';
 
       // Get the hero image container
       const heroImageContainer = heroSection.querySelector('.absolute');
       if (!heroImageContainer) return;
 
       // Apply direct styles to ensure it covers the entire screen
-      heroImageContainer.setAttribute('style', 'position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; margin: 0 !important; padding: 0 !important;');
+      heroImageContainer.setAttribute('style', 'position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; margin: 0 !important; padding: 0 !important; background: transparent !important;');
 
       // Get the hero image
       const heroImage = heroImageContainer.querySelector('img');
@@ -47,6 +53,29 @@ export default function MobileHeroFix() {
       if (mobileMenuOverlay) {
         const currentStyle = mobileMenuOverlay.getAttribute('style') || '';
         mobileMenuOverlay.setAttribute('style', currentStyle + '; backdrop-filter: blur(8px) !important;');
+      }
+
+      // Remove any gradient overlays
+      const gradientOverlays = document.querySelectorAll('.bg-gradient-to-b, .bg-gradient-to-t');
+      gradientOverlays.forEach(overlay => {
+        overlay.style.opacity = '0.3';
+        overlay.style.display = 'block';
+      });
+
+      // Force the hero content to the bottom of the hero section
+      const heroContent = document.querySelector('.mobile-hero-content');
+      if (heroContent) {
+        heroContent.style.position = 'absolute';
+        heroContent.style.top = 'auto';
+        heroContent.style.bottom = '10%';
+        heroContent.style.left = '0';
+        heroContent.style.right = '0';
+        heroContent.style.transform = 'none';
+        heroContent.style.marginTop = '0';
+        heroContent.style.marginBottom = '0';
+        heroContent.style.paddingTop = '0';
+        heroContent.style.paddingBottom = '0';
+        heroContent.style.zIndex = '20';
       }
     };
 

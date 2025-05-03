@@ -103,6 +103,7 @@
     height: 100vh !important;
     padding-top: 0 !important;
     margin-top: 0 !important;
+    margin-bottom: -1px !important; /* Ensure it merges with the section below */
     position: relative !important;
   }
 
@@ -119,12 +120,49 @@
   section.h-screen img {
     object-fit: cover !important;
     margin-top: 0 !important;
+    height: 101vh !important; /* Slightly taller to ensure no gap */
+  }
+
+  /* Fix for the brand philosophy section to ensure it connects with hero */
+  section.h-screen + div {
+    margin-top: -1px !important;
   }
 
   /* Fix for the black bar at the top */
   body {
     margin-top: 0 !important;
     padding-top: 0 !important;
+  }
+
+  /* Fix for the logo on mobile */
+  /* Position the logo higher on the screen */
+  .absolute.top-\[10\%\].left-0.right-0.flex.items-center.justify-center.z-\[101\],
+  .mobile-home-logo-container {
+    position: absolute !important;
+    top: 1rem !important; /* Position higher on the screen */
+    padding-top: 0 !important; /* Remove padding */
+    z-index: 101 !important;
+    height: auto !important;
+  }
+
+  /* Ensure the logo image is properly sized */
+  .relative.w-\[140px\].h-\[140px\] {
+    width: 140px !important;
+    height: 140px !important;
+    max-width: 140px !important;
+    max-height: 140px !important;
+  }
+
+  /* Position the hero content very low on the screen */
+  .mobile-hero-content {
+    margin-top: 0 !important; /* Remove margin */
+    position: absolute !important;
+    top: 75% !important; /* Position at 75% from the top - very low */
+    transform: none !important; /* Remove the transform */
+    left: 0 !important;
+    right: 0 !important;
+    padding-top: 0 !important; /* Remove padding */
+    z-index: 20 !important;
   }
 
   html {

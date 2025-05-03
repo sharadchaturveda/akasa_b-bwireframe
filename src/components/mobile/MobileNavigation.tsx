@@ -83,7 +83,7 @@ const MobileNavigation = memo(function MobileNavigation({ navItems }: MobileNavi
       {/* Mobile Navigation Bar - Sticky with completely transparent background */}
       <div className="fixed top-0 left-0 right-0 z-[100] px-4 py-3">
         <div className="flex justify-between items-center">
-          <MobileNavLogo />
+          <MobileNavLogo hideOnHomepage={true} />
           <button
             onClick={toggleMobileMenu}
             className="text-white p-3 rounded-full bg-black/30 flex items-center justify-center touch-manipulation min-w-[48px] min-h-[48px]"

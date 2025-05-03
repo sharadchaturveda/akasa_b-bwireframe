@@ -1,0 +1,61 @@
+/**
+ * Emergency fix for mobile logo positioning
+ * This file contains the most aggressive fixes to ensure the logo doesn't overlap with hero text
+ */
+
+/* Target all mobile devices */
+@media (max-width: 767px) {
+  /* Position the logo even higher on the screen */
+  .mobile-home-logo-container {
+    position: absolute !important;
+    top: 0.5rem !important; /* Reduced from 1rem to 0.5rem */
+    left: 0 !important;
+    right: 0 !important;
+    height: auto !important;
+    padding-top: 0 !important;
+    z-index: 999 !important;
+    background: transparent !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  /* Make the logo smaller */
+  .relative.w-\[140px\].h-\[140px\] {
+    width: 100px !important;
+    height: 100px !important;
+    max-width: 100px !important;
+    max-height: 100px !important;
+  }
+
+  /* Position the hero content very low on the screen */
+  .mobile-hero-content {
+    position: absolute !important;
+    top: 75% !important; /* Position at 75% from the top - very low */
+    transform: none !important; /* Remove the transform */
+    left: 0 !important;
+    right: 0 !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    z-index: 20 !important;
+  }
+
+  /* Ensure the hero section is tall enough */
+  section.h-screen {
+    min-height: 100vh !important;
+    height: auto !important;
+    padding-bottom: 2rem !important;
+  }
+
+  /* Restore the overlay gradient with reduced intensity */
+  .absolute.inset-0.bg-gradient-to-b.from-black\/30.via-transparent.to-black\/60.z-5.opacity-70 {
+    opacity: 0.3 !important; /* Reduced from 0.7 to 0.3 */
+    display: block !important;
+  }
+
+  /* Restore the bottom gradient with reduced intensity */
+  .absolute.left-0.right-0.bottom-0.h-\[50px\].bg-gradient-to-t.from-black.to-transparent.z-5 {
+    opacity: 0.3 !important; /* Reduced intensity */
+    display: block !important;
+  }
+}

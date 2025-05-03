@@ -12,6 +12,7 @@
     max-height: none !important;
     padding: 0 !important;
     margin: 0 !important;
+    margin-bottom: -1px !important; /* Ensure it merges with the section below */
     position: relative !important;
     top: 0 !important;
     left: 0 !important;
@@ -36,6 +37,12 @@
     object-position: center !important;
     margin: 0 !important;
     padding: 0 !important;
+    height: 101vh !important; /* Slightly taller to ensure no gap */
+  }
+
+  /* Fix for the brand philosophy section to ensure it connects with hero */
+  section.h-screen + div {
+    margin-top: -1px !important;
   }
 
   /* Remove any potential margins or paddings from body and html */

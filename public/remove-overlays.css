@@ -1,0 +1,55 @@
+/**
+ * Emergency fix to remove all overlays from the mobile hero section
+ */
+
+@media (max-width: 767px) {
+  /* Restore gradient overlays with reduced intensity */
+  .bg-gradient-to-b,
+  .bg-gradient-to-t,
+  .from-black,
+  .to-black,
+  .to-transparent,
+  .via-transparent,
+  .from-black\/30,
+  .to-black\/60,
+  .from-black\/70,
+  .via-black\/60,
+  .to-black\/80 {
+    opacity: 0.3 !important; /* Reduced intensity */
+    display: block !important;
+  }
+
+  /* Ensure the hero section has no background color */
+  section.h-screen {
+    background-color: transparent !important;
+  }
+
+  /* Ensure the hero image is visible */
+  section.h-screen img {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Fix for testimonial section background */
+  section.mobile-container .absolute.inset-0.w-full.h-full {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Ensure the logo container has no background and is positioned higher */
+  .mobile-home-logo-container {
+    background: transparent !important;
+    position: absolute !important;
+    top: 1rem !important;
+    padding-top: 0 !important;
+  }
+
+  /* Position the hero content very low on the screen */
+  .mobile-hero-content {
+    position: absolute !important;
+    top: 75% !important; /* Position at 75% from the top - very low */
+    transform: none !important; /* Remove the transform */
+    padding-top: 0 !important;
+  }
+}

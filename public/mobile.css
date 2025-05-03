@@ -182,6 +182,27 @@ html.mobile-device * {
 
 /* Fix for mobile menu positioning */
 @media (max-width: 767px) {
+  /* Position the logo higher on the screen */
+  html.mobile-device .mobile-home-logo-container {
+    position: absolute !important;
+    top: 1rem !important; /* Position higher on the screen */
+    padding-top: 0 !important; /* Remove padding */
+    z-index: 101 !important;
+    height: auto !important;
+  }
+
+  /* Position the hero content very low on the screen */
+  html.mobile-device .mobile-hero-content {
+    margin-top: 0 !important; /* Remove margin */
+    position: absolute !important;
+    top: 75% !important; /* Position at 75% from the top - very low */
+    transform: none !important; /* Remove the transform */
+    left: 0 !important;
+    right: 0 !important;
+    padding-top: 0 !important; /* Remove padding */
+    z-index: 20 !important;
+  }
+
   /* Ensure mobile menu is always at the top of the screen */
   html.mobile-device .mobile-menu-overlay {
     position: fixed !important;

@@ -7,6 +7,7 @@ import { memo } from "react";
 import { useDeviceDetection } from "@/hooks/useDeviceDetection";
 import { MobileHeroButton } from "@/components/mobile/MobileHeroButton";
 import MobileHeroFix from "@/components/mobile/MobileHeroFix";
+import MobileHomeLogo from "@/components/mobile/MobileHomeLogo";
 
 // Memoized logo component for better performance and CLS
 const Logo = memo(function Logo() {
@@ -40,7 +41,13 @@ const HeroSection = memo(function HeroSection() {
   return (
     <section
       className="h-screen w-full bg-black flex flex-col items-center justify-center relative"
-      style={{ height: '100vh', minHeight: '100vh', padding: 0, margin: 0 }}
+      style={{
+        height: '100vh',
+        minHeight: '100vh',
+        padding: 0,
+        margin: 0,
+        marginBottom: isMobile ? '-1px' : '0' // Fix for mobile to ensure it merges with the section below
+      }}
     >
       {/* LCP Image - Using Image component for better optimization */}
       <div className="absolute top-0 left-0 right-0 bottom-0 z-0" style={{ marginTop: '-1px' }}>
@@ -63,13 +70,22 @@ const HeroSection = memo(function HeroSection() {
       {/* No dark overlay for mobile */}
       {!isMobile && <div className="absolute inset-0 bg-black/30 z-10"></div>}
 
-      {/* Logo - Optimized for mobile */}
-      <div className="absolute inset-0 flex items-start justify-center pt-6 sm:pt-8 md:pt-12 z-20" style={{ top: '-5%', bottom: '50%' }}>
-        <Logo />
-      </div>
+      {/* Logo - Different versions for mobile and desktop */}
+      {isMobile ? (
+        <div className="absolute top-[10%] left-0 right-0 flex items-center justify-center z-[101] mobile-home-logo-container">
+          <MobileHomeLogo />
+        </div>
+      ) : (
+        <div className="absolute inset-0 flex items-start justify-center pt-6 sm:pt-8 md:pt-12 z-20" style={{ top: '-5%', bottom: '50%' }}>
+          <Logo />
+        </div>
+      )}
 
-      {/* Content - Optimized for mobile */}
-      <div className="text-center relative z-20 mt-16 sm:mt-16 md:mt-24 animate-fadeIn px-4">
+      {/* Content - Optimized for mobile with forced bottom positioning */}
+      <div
+        className={`text-center relative z-20 ${isMobile ? 'mt-48 mobile-hero-content' : 'mt-16 sm:mt-16 md:mt-24'} animate-fadeIn px-4`}
+        style={isMobile ? { position: 'absolute', top: 'auto', bottom: '10%', left: 0, right: 0, zIndex: 20 } : {}}
+      >
         <div className="mb-6 sm:mb-10">
           <div className="flex flex-col items-center">
             <span className="text-xs sm:text-sm md:text-base text-white/90 font-montserrat tracking-[0.2em] sm:tracking-[0.3em] uppercase mb-1 sm:mb-2 animate-fadeSlideUp" style={{ animationDelay: '0.3s' }}>{"Experience"}</span>
@@ -104,6 +120,11 @@ const HeroSection = memo(function HeroSection() {
 
       {/* Add subtle animated gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60 z-5 opacity-70"></div>
+
+      {/* Add a stronger gradient at the bottom for mobile to ensure smooth transition */}
+      {isMobile && (
+        <div className="absolute left-0 right-0 bottom-0 h-[50px] bg-gradient-to-t from-black to-transparent z-5"></div>
+      )}
 
       {/* Add subtle animated particles */}
       <div className="absolute inset-0 z-5 opacity-30 pointer-events-none">
