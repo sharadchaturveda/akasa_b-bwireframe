@@ -19,49 +19,49 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
       }
     });
   }, []);
-  // Featured dishes with properly named images
+  // Featured signature dishes
   const featuredDishes = [
     {
-      name: "Butter Chicken",
-      description: "Tender chicken in a rich, aromatic tomato and butter sauce",
-      image: "/images/menu/featured-dishes/butter-chicken.jpg",
-      price: "$28",
+      name: "Paronthia Naan",
+      description: "Flaky, golden naan folded six times over with whispers of saffron and crushed nuts—each bite a soft, buttery echo of ancient feasts",
+      image: "/images/menu/featured-dishes/paronthia-naan.jpg",
+      price: "$8",
       category: "Signature"
     },
     {
-      name: "Lamb Rogan Josh",
-      description: "Slow-cooked lamb in a fragrant Kashmiri spice blend",
-      image: "/images/menu/featured-dishes/lamb-rogan-josh.jpg",
-      price: "$32",
+      name: "AKASA-E-Dum Biryani",
+      description: "Fragrant basmati slow-cooked under a dough-sealed lid, infused with saffron strands and Akasa's secret blend of hand-ground spices—fluffy, rich, and unapologetically indulgent",
+      image: "/images/menu/featured-dishes/akasa-e-dum-biryani.jpg",
+      price: "$25",
       category: "Chef's Special"
     },
     {
-      name: "Tandoori Prawns",
-      description: "Jumbo prawns marinated in yogurt and spices, cooked in the tandoor",
-      image: "/images/menu/featured-dishes/tandoori-prawns.jpg",
-      price: "$36",
+      name: "Akasa-E-Lobster",
+      description: "Succulent Canadian lobster, bathed in a spiced yogurt marinade, kissed by fire and laced with red chili—plush, fiery, and unforgettable",
+      image: "/images/menu/featured-dishes/akasa-e-lobster.jpg",
+      price: "$72",
       category: "Seafood"
     },
     {
-      name: "Vegetable Biryani",
-      description: "Fragrant basmati rice with seasonal vegetables and aromatic spices",
-      image: "/images/menu/featured-dishes/vegetable-biryani.jpg",
-      price: "$24",
+      name: "Tandoori Prawns",
+      description: "Tiger prawns, charred to smoky perfection, boldly seasoned with ground masalas and the elusive Sankeshwari chilli—fiery, tender, and primal",
+      image: "/images/menu/featured-dishes/tandoori-prawns.jpg",
+      price: "$32",
+      category: "Seafood"
+    },
+    {
+      name: "Dal-E-Akasa",
+      description: "Earthy black lentils, patiently simmered over a full day, melting into a buttery symphony that comforts like a memory—and lingers like legend",
+      image: "/images/menu/featured-dishes/dal-e-akasa.jpg",
+      price: "$22",
       category: "Vegetarian"
     },
     {
-      name: "Mango Kulfi",
-      description: "Traditional Indian ice cream with alphonso mango and cardamom",
-      image: "/images/menu/featured-dishes/mango-kulfi.jpg",
-      price: "$14",
-      category: "Dessert"
-    },
-    {
-      name: "Masala Dosa",
-      description: "Crispy rice crepe filled with spiced potatoes, served with sambar and chutneys",
-      image: "/images/menu/featured-dishes/masala-dosa.jpg",
-      price: "$18",
-      category: "Breakfast"
+      name: "Tandoori Pomfret Kebab",
+      description: "Whole white pomfret marinated in a tangy methiyani chilli paste and creamy yogurt, grilled till it crackles—smoky, juicy, and deeply coastal",
+      image: "/images/menu/featured-dishes/tandoori-pomfret-kebab.jpg",
+      price: "$34",
+      category: "Seafood"
     }
   ];
 
