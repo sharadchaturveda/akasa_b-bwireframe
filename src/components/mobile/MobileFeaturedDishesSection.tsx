@@ -26,26 +26,26 @@ const MobileFeaturedDishesSection = memo(function MobileFeaturedDishesSection() 
     });
   }, []);
 
-  // Featured dishes for the gallery - same as desktop
+  // Featured dishes with properly named images - same as desktop
   const featuredDishes = [
     {
       name: "Butter Chicken",
       description: "Tender chicken in a rich, aromatic tomato and butter sauce",
-      image: "/images/menu/gallery1.jpg",
+      image: "/images/menu/featured-dishes/butter-chicken.jpg",
       price: "$28",
       category: "Signature"
     },
     {
       name: "Lamb Rogan Josh",
       description: "Slow-cooked lamb in a fragrant Kashmiri spice blend",
-      image: "/images/menu/gallery2.jpg",
+      image: "/images/menu/featured-dishes/lamb-rogan-josh.jpg",
       price: "$32",
       category: "Chef's Special"
     },
     {
       name: "Tandoori Prawns",
       description: "Jumbo prawns marinated in yogurt and spices, cooked in the tandoor",
-      image: "/images/menu/gallery3.jpg",
+      image: "/images/menu/featured-dishes/tandoori-prawns.jpg",
       price: "$36",
       category: "Seafood"
     }

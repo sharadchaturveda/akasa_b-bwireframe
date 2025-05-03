@@ -19,47 +19,47 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
       }
     });
   }, []);
-  // Featured dishes for the gallery
+  // Featured dishes with properly named images
   const featuredDishes = [
     {
       name: "Butter Chicken",
       description: "Tender chicken in a rich, aromatic tomato and butter sauce",
-      image: "/images/menu/gallery1.jpg",
+      image: "/images/menu/featured-dishes/butter-chicken.jpg",
       price: "$28",
       category: "Signature"
     },
     {
       name: "Lamb Rogan Josh",
       description: "Slow-cooked lamb in a fragrant Kashmiri spice blend",
-      image: "/images/menu/gallery2.jpg",
+      image: "/images/menu/featured-dishes/lamb-rogan-josh.jpg",
       price: "$32",
       category: "Chef's Special"
     },
     {
       name: "Tandoori Prawns",
       description: "Jumbo prawns marinated in yogurt and spices, cooked in the tandoor",
-      image: "/images/menu/gallery3.jpg",
+      image: "/images/menu/featured-dishes/tandoori-prawns.jpg",
       price: "$36",
       category: "Seafood"
     },
     {
       name: "Vegetable Biryani",
       description: "Fragrant basmati rice with seasonal vegetables and aromatic spices",
-      image: "/images/menu/gallery5.jpg",
+      image: "/images/menu/featured-dishes/vegetable-biryani.jpg",
       price: "$24",
       category: "Vegetarian"
     },
     {
       name: "Mango Kulfi",
       description: "Traditional Indian ice cream with alphonso mango and cardamom",
-      image: "/images/menu/gallery6.jpg",
+      image: "/images/menu/featured-dishes/mango-kulfi.jpg",
       price: "$14",
       category: "Dessert"
     },
     {
       name: "Masala Dosa",
       description: "Crispy rice crepe filled with spiced potatoes, served with sambar and chutneys",
-      image: "/images/events/event3.jpg",
+      image: "/images/menu/featured-dishes/masala-dosa.jpg",
       price: "$18",
       category: "Breakfast"
     }

@@ -15,6 +15,7 @@ public/images/
 │   │   └── items/    # Bar Bites menu item images
 │   ├── drinks/       # Drinks menu images
 │   │   └── items/    # Drinks menu item images
+│   ├── featured-dishes/ # Featured dishes images
 │   ├── set-lunch/    # Set Lunch menu images
 │   │   └── items/    # Set Lunch menu item images
 │   └── soul-food-weekends/ # Soul Food Weekends menu images
