@@ -18,7 +18,7 @@ const MobileLoyaltyProgramSection = memo(function MobileLoyaltyProgramSection() 
       {/* Background with parallax effect - mobile optimized */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/home/drink.jpg"
+          src="/images/home/philosophy/drink.jpg"
           alt="Loyalty Program background"
           fill
           sizes="100vw"
@@ -47,7 +47,7 @@ const MobileLoyaltyProgramSection = memo(function MobileLoyaltyProgramSection() 
             <div className="absolute bottom-0 right-0 w-10 h-10 border-b-2 border-r-2 border-[#E6C78B] opacity-70 z-10"></div>
 
             <Image
-              src="/images/offers/gallery5.jpg"
+              src="/images/offers/hero/hero.jpg"
               alt="Akasa Loyalty Program"
               fill
               sizes="100vw"
@@ -147,3 +147,4 @@ const MobileLoyaltyProgramSection = memo(function MobileLoyaltyProgramSection() 
 });
 
 export default MobileLoyaltyProgramSection;
+

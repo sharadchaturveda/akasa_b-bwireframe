@@ -10,7 +10,7 @@ const InquiryFormSection = memo(function InquiryFormSection() {
       <div
         className="absolute inset-0 bg-cover bg-center z-0 opacity-20"
         style={{
-          backgroundImage: "url('/images/menu/gallery6.jpg')",
+          backgroundImage: "url('/images/menu/hero/gallery-6.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center"
         }}
@@ -118,3 +118,4 @@ const InquiryFormSection = memo(function InquiryFormSection() {
 });
 
 export default InquiryFormSection;
+

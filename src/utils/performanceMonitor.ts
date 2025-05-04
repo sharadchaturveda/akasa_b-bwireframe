@@ -235,9 +235,10 @@ export const initPerformanceMonitoring = () => {
 
   // Preload critical resources for other pages
   preloadCriticalResources([
-    { url: '/images/menu/chef.jpg', type: 'image' },
+    { url: '/images/menu/chef/background.jpg', type: 'image' },
     { url: '/images/events/event1.jpg', type: 'image' },
     { url: '/styles/menu.css', type: 'style' },
     { url: '/styles/events.css', type: 'style' }
   ]);
 };
+

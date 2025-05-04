@@ -19,10 +19,9 @@ export default function PreloadLinks() {
     };
 
     // Preload critical assets
-    createPreloadLink('/images/home/hero.jpg?quality=60&width=1200', 'image', undefined, 'high');
-    createPreloadLink('/images/common/logo.svg', 'image', 'image/svg+xml', 'high');
-    createPreloadLink('/images/home/philosophy-bg.jpg?quality=60&width=800', 'image', undefined, 'high');
-    createPreloadLink('/images/home/drink.jpg?quality=60&width=800', 'image', undefined, 'high');
+    createPreloadLink('/images/home/hero/hero-home.jpg?quality=60&width=1200', 'image', undefined, 'high');
+    createPreloadLink('/images/home/philosophy/background.jpg?quality=60&width=800', 'image', undefined, 'high');
+    createPreloadLink('/images/home/philosophy/drink.jpg?quality=60&width=800', 'image', undefined, 'high');
 
     // Preload critical fonts
     createPreloadLink('/_next/static/media/c9a5bc6a7c948fb0-s.p.woff2', 'font', 'font/woff2');
@@ -55,3 +54,4 @@ export default function PreloadLinks() {
 
   return null;
 }
+

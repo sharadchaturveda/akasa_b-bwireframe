@@ -79,8 +79,8 @@ export default function MenuPageClient() {
     // Preload images that will be needed soon
     const preloadImages = () => {
       const imagesToPreload = [
-        '/images/menu/gallery1.jpg',
-        '/images/menu/gallery2.jpg'
+        '/images/menu/hero/gallery-1.jpg',
+        '/images/menu/hero/gallery-2.jpg'
       ];
 
       imagesToPreload.forEach(src => {
@@ -131,3 +131,4 @@ export default function MenuPageClient() {
     </PageLayout>
   );
 }
+

@@ -47,13 +47,20 @@ jest.mock('@/utils/mobileUtils', () => ({
   isMobileDevice: jest.fn().mockReturnValue(false),
 }));
 
+// Mock the Logo component
+jest.mock('@/components/brand/Logo', () => {
+  return function MockLogo() {
+    return <div data-testid="logo-component">Logo Component</div>;
+  };
+});
+
 describe('HeroSection', () => {
-  it('renders the hero section with logo and content', () => {
+  it('renders the hero section with content and logo', () => {
     render(<HeroSection />);
 
     // Check if the logo is rendered
-    const logoImage = screen.getByAltText('Akasa Logo');
-    expect(logoImage).toBeInTheDocument();
+    const logo = screen.getByTestId('logo-component');
+    expect(logo).toBeInTheDocument();
 
     // Check if the hero background is rendered
     const heroBackground = screen.getByAltText('Hero background');

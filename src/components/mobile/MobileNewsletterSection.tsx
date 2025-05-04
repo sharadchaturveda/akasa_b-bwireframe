@@ -39,7 +39,7 @@ const MobileNewsletterSection = memo(function MobileNewsletterSection() {
       <div
         className="absolute inset-0 bg-cover bg-center z-0"
         style={{
-          backgroundImage: "url('/images/home/hero.jpg?quality=60&width=800')",
+          backgroundImage: "url('/images/home/hero/hero-home.jpg?quality=60&width=800')",
           backgroundSize: "cover",
           backgroundPosition: "center"
         }}
@@ -97,3 +97,4 @@ const MobileNewsletterSection = memo(function MobileNewsletterSection() {
 });
 
 export default MobileNewsletterSection;
+

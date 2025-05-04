@@ -12,12 +12,7 @@ afterAll(() => {
   window.scrollTo = originalScrollTo;
 });
 
-// Mock the MobileNavLogo component
-jest.mock('@/components/mobile/MobileNavLogo', () => {
-  return function MockMobileNavLogo() {
-    return <div data-testid="mobile-nav-logo">Mobile Nav Logo</div>;
-  };
-});
+
 
 // Sample navigation items
 const navItems = [
@@ -29,11 +24,8 @@ const navItems = [
 ];
 
 describe('MobileNavigation', () => {
-  it('renders the mobile navigation with logo and hamburger button', () => {
+  it('renders the mobile navigation with hamburger button', () => {
     render(<MobileNavigation navItems={navItems} />);
-
-    // Check if the logo is rendered
-    expect(screen.getByTestId('mobile-nav-logo')).toBeInTheDocument();
 
     // Check if the hamburger button is rendered
     const hamburgerButton = screen.getByLabelText('Toggle menu');

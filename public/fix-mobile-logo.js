@@ -1,40 +1,14 @@
 /**
- * Emergency JavaScript fix for mobile logo positioning
- * This script runs on the client side to ensure the logo doesn't overlap with hero text
+ * Mobile layout fixes
+ * This script runs on the client side to ensure proper mobile layout
  */
 
 // Run when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
   // Only run on mobile devices
   if (window.innerWidth <= 767) {
-    // Function to fix the logo positioning
-    function fixMobileLogo() {
-      // Get the logo container
-      const logoContainer = document.querySelector('.mobile-home-logo-container');
-      if (logoContainer) {
-        // Position the logo even higher on the screen
-        logoContainer.style.position = 'absolute';
-        logoContainer.style.top = '0.5rem'; // Reduced from 1rem to 0.5rem
-        logoContainer.style.left = '0';
-        logoContainer.style.right = '0';
-        logoContainer.style.height = 'auto';
-        logoContainer.style.paddingTop = '0';
-        logoContainer.style.zIndex = '999';
-        logoContainer.style.background = 'transparent';
-        logoContainer.style.display = 'flex';
-        logoContainer.style.justifyContent = 'center';
-        logoContainer.style.alignItems = 'center';
-      }
-
-      // Get the logo itself
-      const logo = document.querySelector('.relative.w-\\[140px\\].h-\\[140px\\]');
-      if (logo) {
-        // Make the logo smaller
-        logo.style.width = '100px';
-        logo.style.height = '100px';
-        logo.style.maxWidth = '100px';
-        logo.style.maxHeight = '100px';
-      }
+    // Function to fix mobile layout issues
+    function fixMobileLayout() {
 
       // Get the hero content
       const heroContent = document.querySelector('.mobile-hero-content');
@@ -64,6 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
         bottomGradient.style.display = 'block';
       }
 
+
+
       // Fix testimonial section background
       const testimonialSection = document.querySelector('section.w-full.relative.py-16.overflow-hidden.bg-black.mobile-container');
       if (testimonialSection) {
@@ -90,10 +66,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Run the fix immediately
-    fixMobileLogo();
+    fixMobileLayout();
 
     // Also run on resize and orientation change
-    window.addEventListener('resize', fixMobileLogo);
-    window.addEventListener('orientationchange', fixMobileLogo);
+    window.addEventListener('resize', fixMobileLayout);
+    window.addEventListener('orientationchange', fixMobileLayout);
   }
 });

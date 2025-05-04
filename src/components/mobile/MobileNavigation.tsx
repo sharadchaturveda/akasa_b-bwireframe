@@ -2,7 +2,6 @@
 
 import { useState, useCallback, memo } from "react";
 import Link from "next/link";
-import MobileNavLogo from "./MobileNavLogo";
 
 interface MobileNavigationProps {
   navItems: Array<{ name: string; path: string }>;
@@ -82,8 +81,7 @@ const MobileNavigation = memo(function MobileNavigation({ navItems }: MobileNavi
     <div className="md:hidden w-full">
       {/* Mobile Navigation Bar - Sticky with completely transparent background */}
       <div className="fixed top-0 left-0 right-0 z-[100] px-4 py-3">
-        <div className="flex justify-between items-center">
-          <MobileNavLogo hideOnHomepage={true} />
+        <div className="flex justify-end items-center">
           <button
             onClick={toggleMobileMenu}
             className="text-white p-3 rounded-full bg-black/30 flex items-center justify-center touch-manipulation min-w-[48px] min-h-[48px]"

@@ -15,7 +15,7 @@ const HeroSection = memo(function HeroSection() {
       {/* Background image with parallax effect */}
       <div className="absolute inset-0">
         <Image
-          src="/images/reservations/gallery3.jpg"
+          src="/images/reservations/hero/hero.jpg"
           alt="Elegant dining table setting"
           fill
           priority
@@ -73,3 +73,4 @@ const HeroSection = memo(function HeroSection() {
 });
 
 export default HeroSection;
+

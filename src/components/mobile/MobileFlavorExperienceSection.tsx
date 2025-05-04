@@ -28,7 +28,7 @@ const MobileFlavorExperienceSection = memo(function MobileFlavorExperienceSectio
           {/* Background image with parallax effect */}
           <div className="relative h-48 w-full mb-4 overflow-hidden rounded-lg">
             <Image
-              src="/images/home/philosophy-bg.jpg"
+              src="/images/home/philosophy/background.jpg"
               alt="Culinary journey"
               fill
               sizes="100vw"
@@ -128,3 +128,4 @@ const MobileFlavorExperienceSection = memo(function MobileFlavorExperienceSectio
 });
 
 export default MobileFlavorExperienceSection;
+

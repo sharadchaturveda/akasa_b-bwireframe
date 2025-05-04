@@ -7,32 +7,7 @@ import { memo } from "react";
 import { useDeviceDetection } from "@/hooks/useDeviceDetection";
 import { MobileHeroButton } from "@/components/mobile/MobileHeroButton";
 import MobileHeroFix from "@/components/mobile/MobileHeroFix";
-import MobileHomeLogo from "@/components/mobile/MobileHomeLogo";
-
-// Memoized logo component for better performance and CLS
-const Logo = memo(function Logo() {
-  return (
-    <div
-      className="relative w-[180px] xs:w-[220px] sm:w-[280px] md:w-[350px] lg:w-[450px] h-[180px] xs:h-[220px] sm:h-[280px] md:h-[350px] lg:h-[450px]"
-      style={{
-        // Fixed dimensions to prevent CLS
-        aspectRatio: '1/1',
-        contain: 'layout'
-      }}
-    >
-      <Image
-        src="/images/common/logo.svg"
-        alt="Akasa Logo"
-        fill
-        sizes="(max-width: 640px) 250px, (max-width: 768px) 350px, 450px"
-        className="object-contain"
-        priority
-        loading="eager"
-        fetchPriority="high"
-      />
-    </div>
-  );
-});
+import Logo from "@/components/brand/Logo";
 
 // Memoized hero section for better performance
 const HeroSection = memo(function HeroSection() {
@@ -52,7 +27,7 @@ const HeroSection = memo(function HeroSection() {
       {/* LCP Image - Using Image component for better optimization */}
       <div className="absolute top-0 left-0 right-0 bottom-0 z-0" style={{ marginTop: '-1px' }}>
         <Image
-          src="/images/home/hero.jpg"
+          src="/images/home/hero/hero-home.jpg"
           alt="Hero background"
           fill
           priority={true}
@@ -70,16 +45,10 @@ const HeroSection = memo(function HeroSection() {
       {/* No dark overlay for mobile */}
       {!isMobile && <div className="absolute inset-0 bg-black/30 z-10"></div>}
 
-      {/* Logo - Different versions for mobile and desktop */}
-      {isMobile ? (
-        <div className="absolute top-[10%] left-0 right-0 flex items-center justify-center z-[101] mobile-home-logo-container">
-          <MobileHomeLogo />
-        </div>
-      ) : (
-        <div className="absolute inset-0 flex items-start justify-center pt-6 sm:pt-8 md:pt-12 z-20" style={{ top: '-5%', bottom: '50%' }}>
-          <Logo />
-        </div>
-      )}
+      {/* Logo - Centered above hero text */}
+      <div className="hero-logo-container w-full flex justify-center">
+        <Logo size="desktop" />
+      </div>
 
       {/* Content - Optimized for mobile with forced bottom positioning */}
       <div

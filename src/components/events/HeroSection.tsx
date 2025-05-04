@@ -14,7 +14,7 @@ const HeroSection = memo(function HeroSection() {
         zIndex: -1
       }}>
         <Image
-          src="/images/events/event3.jpg"
+          src="/images/events/hero/hero.jpg"
           alt="Events background"
           fill
           sizes="100vw"
@@ -116,3 +116,4 @@ const HeroSection = memo(function HeroSection() {
 });
 
 export default HeroSection;
+

@@ -28,7 +28,7 @@ const FAQSection = memo(function FAQSection() {
       <div
         className="absolute inset-0 bg-cover bg-center z-0 opacity-30"
         style={{
-          backgroundImage: "url('/images/menu/gallery1.jpg')",
+          backgroundImage: "url('/images/menu/hero/gallery-1.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center"
         }}
@@ -58,3 +58,4 @@ const FAQSection = memo(function FAQSection() {
 });
 
 export default FAQSection;
+

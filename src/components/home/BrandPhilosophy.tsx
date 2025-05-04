@@ -38,7 +38,7 @@ const BrandPhilosophy = memo(function BrandPhilosophy() {
         {/* Background image with Next.js Image component for better optimization */}
         <div className="absolute inset-0 overflow-hidden">
           <Image
-            src="/images/home/philosophy-bg.jpg"
+            src="/images/home/philosophy/background.jpg"
             alt="Philosophy background"
             fill
             sizes="(max-width: 768px) 100vw, 40vw"
@@ -88,7 +88,7 @@ const BrandPhilosophy = memo(function BrandPhilosophy() {
         {/* Background image with Next.js Image component for better optimization */}
         <div className="absolute inset-0 overflow-hidden">
           <Image
-            src="/images/home/drink.jpg"
+            src="/images/home/philosophy/drink.jpg"
             alt="Drink background"
             fill
             sizes="(max-width: 768px) 100vw, 60vw"
@@ -153,3 +153,4 @@ const BrandPhilosophy = memo(function BrandPhilosophy() {
 });
 
 export default BrandPhilosophy;
+

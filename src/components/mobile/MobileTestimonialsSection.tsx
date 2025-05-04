@@ -17,7 +17,7 @@ const MobileTestimonialsSection = memo(function MobileTestimonialsSection() {
       <div
         className="absolute inset-0 w-full h-full"
         style={{
-          backgroundImage: "url('/images/testimonials/testimonial-bg.jpg')",
+          backgroundImage: "url('/images/home/testimonials/background-alt.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -55,3 +55,4 @@ const MobileTestimonialsSection = memo(function MobileTestimonialsSection() {
 });
 
 export default MobileTestimonialsSection;
+

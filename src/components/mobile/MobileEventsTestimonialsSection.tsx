@@ -16,21 +16,21 @@ const MobileEventsTestimonialsSection = memo(function MobileEventsTestimonialsSe
       quote: "Our corporate event at Akasa was flawlessly executed. The team went above and beyond to accommodate our requests.",
       author: "Sarah Chen",
       position: "Marketing Director, TechVision",
-      image: "/images/testimonial1.jpg"
+      image: "/images/home/testimonials/avatar-1.jpg"
     },
     {
       id: 2,
       quote: "We celebrated our anniversary at Akasa and it was magical. The private dining room was intimate and the food was exceptional.",
       author: "James & Emily Wilson",
       position: "Private Dining Guests",
-      image: "/images/testimonial2.jpg"
+      image: "/images/home/testimonials/avatar-2.jpg"
     },
     {
       id: 3,
       quote: "The attention to detail for our product launch was impressive. Our clients were thoroughly impressed with the venue and service.",
       author: "Michael Rodriguez",
       position: "CEO, Innovate Solutions",
-      image: "/images/testimonial3.jpg"
+      image: "/images/home/testimonials/avatar-3.jpg"
     }
   ];
 

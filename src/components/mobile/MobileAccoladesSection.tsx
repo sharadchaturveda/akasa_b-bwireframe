@@ -17,7 +17,7 @@ const MobileAccoladesSection = memo(function MobileAccoladesSection() {
       {/* Background image with proper mobile sizing */}
       <div className="relative w-full h-[100vh]">
         <Image
-          src="/images/home/awards.jpg"
+          src="/images/home/gallery/awards.jpg"
           alt="Awards background"
           fill
           sizes="100vw"
@@ -71,3 +71,4 @@ const MobileAccoladesSection = memo(function MobileAccoladesSection() {
 });
 
 export default MobileAccoladesSection;
+

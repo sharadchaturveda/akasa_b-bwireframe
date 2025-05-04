@@ -56,13 +56,13 @@ class MyDocument extends Document {
           {/* Preload LCP images for different pages */}
           <link
             rel="preload"
-            href="/images/home/hero.jpg?quality=60&width=1200"
+            href="/images/home/hero/hero-home.jpg?quality=60&width=1200"
             as="image"
             fetchPriority="high"
           />
           <link
             rel="preload"
-            href="/images/menu/chef.jpg?quality=60&width=800"
+            href="/images/menu/chef/background.jpg?quality=60&width=800"
             as="image"
             fetchPriority="high"
           />
@@ -165,3 +165,4 @@ class MyDocument extends Document {
 }
 
 export default MyDocument;
+

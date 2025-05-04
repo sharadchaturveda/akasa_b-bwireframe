@@ -17,7 +17,7 @@ const MobileVisitUsSection = memo(function MobileVisitUsSection() {
       {/* Background image with proper mobile sizing */}
       <div className="relative w-full min-h-[90vh]">
         <Image
-          src="/images/home/location.jpg"
+          src="/images/home/gallery/location.jpg"
           alt="Location background"
           fill
           sizes="100vw"
@@ -77,3 +77,4 @@ const MobileVisitUsSection = memo(function MobileVisitUsSection() {
 });
 
 export default MobileVisitUsSection;
+

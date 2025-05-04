@@ -4,21 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { memo } from "react";
 
-/**
- * MobileFooterLogo Component
- * A mobile-optimized footer logo component
- */
-const MobileFooterLogo = memo(function MobileFooterLogo() {
-  return (
-    <Image
-      src="/images/common/logo.svg"
-      alt="Akasa Logo"
-      width={80}
-      height={80}
-      className="w-[70px] h-auto"
-    />
-  );
-});
+
 
 /**
  * MobileSocialIcon Component
@@ -54,17 +40,14 @@ const MobileFooter = memo(function MobileFooter() {
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-white/20 z-10"></div>
 
       {/* Background image with blur effect */}
-      <div className="absolute inset-0 bg-cover bg-center blur-[2px]" style={{ backgroundImage: "url('/images/common/footer-bg.jpg?quality=75&width=800')" }}></div>
+      <div className="absolute inset-0 bg-cover bg-center blur-[2px]" style={{ backgroundImage: "url('/images/common/footer-background.jpg?quality=75&width=800')" }}></div>
 
       {/* Dark overlay for better text visibility */}
       <div className="absolute inset-0 bg-black/80"></div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Logo and copyright - centered on mobile */}
+        {/* Copyright - centered on mobile */}
         <div className="flex flex-col items-center mb-6">
-          <div className="mb-3">
-            <MobileFooterLogo />
-          </div>
           <p className="text-xs text-white/60 font-montserrat text-center">
             © 2025 Akasa
           </p>
@@ -115,3 +98,4 @@ const MobileFooter = memo(function MobileFooter() {
 });
 
 export default MobileFooter;
+

@@ -30,7 +30,7 @@ const MobileMenuChefSection = memo(function MobileMenuChefSection() {
       {/* Background with mobile optimization */}
       <div className="absolute inset-0 z-0" style={{ zIndex: -1 }}>
         <Image
-          src="/images/home/drink.jpg"
+          src="/images/home/philosophy/drink.jpg"
           alt="Chef background"
           fill
           sizes="100vw"
@@ -60,7 +60,7 @@ const MobileMenuChefSection = memo(function MobileMenuChefSection() {
             <div className="absolute bottom-0 right-0 w-10 h-10 border-b-2 border-r-2 border-[#E6C78B] opacity-70"></div>
 
             <Image
-              src="/images/menu/chef-portrait.jpg"
+              src="/images/menu/chef/portrait.jpg"
               alt="Chef Akhilesh Pathak"
               fill
               sizes="100vw"
@@ -134,3 +134,4 @@ const MobileMenuChefSection = memo(function MobileMenuChefSection() {
 });
 
 export default MobileMenuChefSection;
+

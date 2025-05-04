@@ -1,0 +1,122 @@
+/**
+ * Logo sizing CSS
+ * This file handles logo sizing using CSS media queries to avoid hydration issues
+ */
+
+/* Base logo styles */
+.logo-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 30;
+}
+
+/* Logo size classes */
+.logo-size-small {
+  width: 250px !important;
+  height: 100px !important;
+}
+
+.logo-size-medium {
+  width: 350px !important;
+  height: 140px !important;
+}
+
+.logo-size-large {
+  width: 450px !important;
+  height: 180px !important;
+}
+
+.logo-size-desktop {
+  width: 500px !important;
+  height: 200px !important;
+}
+
+.logo-size-mobile {
+  width: 300px !important;
+  height: 120px !important;
+}
+
+/* Mobile adjustments using media queries */
+@media (max-width: 767px) {
+  /* Default mobile sizing */
+  .logo-container {
+    width: 300px !important;
+    height: 120px !important;
+  }
+  
+  /* Size-specific overrides for mobile */
+  .logo-size-small {
+    width: 200px !important;
+    height: 80px !important;
+  }
+  
+  .logo-size-medium {
+    width: 250px !important;
+    height: 100px !important;
+  }
+  
+  .logo-size-large {
+    width: 300px !important;
+    height: 120px !important;
+  }
+  
+  .logo-size-desktop {
+    width: 300px !important;
+    height: 120px !important;
+  }
+  
+  .logo-size-mobile {
+    width: 250px !important;
+    height: 100px !important;
+  }
+  
+  /* Non-homepage pages - logo in upper left */
+  body:not(.homepage) .logo-container {
+    width: 150px !important;
+    height: 60px !important;
+    margin: 0 !important;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 375px) {
+  .logo-container {
+    width: 250px !important;
+    height: 100px !important;
+  }
+  
+  /* Size-specific overrides for small mobile */
+  .logo-size-small {
+    width: 180px !important;
+    height: 72px !important;
+  }
+  
+  .logo-size-medium {
+    width: 200px !important;
+    height: 80px !important;
+  }
+  
+  .logo-size-large {
+    width: 250px !important;
+    height: 100px !important;
+  }
+  
+  .logo-size-desktop {
+    width: 250px !important;
+    height: 100px !important;
+  }
+  
+  .logo-size-mobile {
+    width: 200px !important;
+    height: 80px !important;
+  }
+  
+  /* Non-homepage pages - logo in upper left */
+  body:not(.homepage) .logo-container {
+    width: 120px !important;
+    height: 48px !important;
+    margin: 0 !important;
+  }
+}

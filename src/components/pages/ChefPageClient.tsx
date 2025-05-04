@@ -14,7 +14,7 @@ export default function ChefPageClient() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div className="relative h-[600px]">
             <Image
-              src="/images/chef.jpg"
+              src="/images/chef/hero/hero.jpg"
               alt="Chef Profile"
               fill
               className="object-cover"

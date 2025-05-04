@@ -21,7 +21,7 @@ const HeroSection = memo(function HeroSection() {
         zIndex: -1
       }}>
         <Image
-          src="/images/offers/gallery5.jpg"
+          src="/images/offers/hero/hero.jpg"
           alt="Offers background"
           fill
           sizes="100vw"
@@ -169,7 +169,7 @@ const CurrentOffersSection = memo(function CurrentOffersSection() {
     {
       title: "Weekday Lunch Special",
       description: "Enjoy 20% off on all lunch menu items Monday through Thursday. Perfect for business lunches or midday treats.",
-      image: "/images/offers/gallery1.jpg",
+      image: "/images/offers/promotions/weekday-lunch.jpg",
       validUntil: "December 31, 2025",
       code: "LUNCH20",
       link: "/reservations"
@@ -177,7 +177,7 @@ const CurrentOffersSection = memo(function CurrentOffersSection() {
     {
       title: "Anniversary Celebration",
       description: "Celebrating our 5th anniversary! Book a table for dinner and receive a complimentary bottle of premium wine.",
-      image: "/images/menu/gallery2.jpg",
+      image: "/images/menu/hero/gallery-2.jpg",
       validUntil: "November 30, 2025",
       code: "AKASA5YR",
       link: "/reservations"
@@ -185,7 +185,7 @@ const CurrentOffersSection = memo(function CurrentOffersSection() {
     {
       title: "Weekend Family Feast",
       description: "Family-style dining package for groups of 4 or more. Includes appetizers, main courses, and desserts at a special price.",
-      image: "/images/menu/gallery3.jpg",
+      image: "/images/menu/hero/gallery-3.jpg",
       validUntil: "January 15, 2026",
       code: "FAMILY4+",
       link: "/reservations"
@@ -269,7 +269,7 @@ const LoyaltyProgramSection = memo(function LoyaltyProgramSection() {
         zIndex: -1
       }}>
         <Image
-          src="/images/home/drink.jpg"
+          src="/images/home/philosophy/drink.jpg"
           alt="Loyalty Program background"
           fill
           sizes="100vw"
@@ -302,7 +302,7 @@ const LoyaltyProgramSection = memo(function LoyaltyProgramSection() {
               <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-[#E6C78B] opacity-70 z-10"></div>
 
               <Image
-                src="/images/offers/gallery5.jpg"
+                src="/images/offers/hero/hero.jpg"
                 alt="Akasa Loyalty Program"
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"
@@ -412,7 +412,7 @@ const NewsletterSection = memo(function NewsletterSection() {
       <div
         className="absolute inset-0 bg-cover bg-center z-0"
         style={{
-          backgroundImage: "url('/images/home/hero.jpg?quality=60&width=1200')",
+          backgroundImage: "url('/images/home/hero/hero-home.jpg?quality=60&width=1200')",
           backgroundSize: "cover",
           backgroundPosition: "center"
         }}
@@ -479,3 +479,4 @@ export default function OffersPage() {
     </main>
   );
 }
+

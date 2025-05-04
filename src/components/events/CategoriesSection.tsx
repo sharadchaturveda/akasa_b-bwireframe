@@ -19,7 +19,7 @@ const CategoriesSection = memo(function CategoriesSection({
       {/* Enhanced subtle background image */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <Image
-          src="/images/menu/gallery2.jpg"
+          src="/images/menu/hero/gallery-2.jpg"
           alt="Background"
           fill
           sizes="100vw"
@@ -84,3 +84,4 @@ const CategoriesSection = memo(function CategoriesSection({
 });
 
 export default CategoriesSection;
+

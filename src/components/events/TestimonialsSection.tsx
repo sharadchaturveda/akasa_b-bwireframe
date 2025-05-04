@@ -27,7 +27,7 @@ const TestimonialsSection = memo(function TestimonialsSection() {
       <div
         className="absolute inset-0 bg-cover bg-center z-0 opacity-30"
         style={{
-          backgroundImage: "url('/images/menu/gallery3.jpg')",
+          backgroundImage: "url('/images/menu/hero/gallery-3.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center"
         }}
@@ -61,3 +61,4 @@ const TestimonialsSection = memo(function TestimonialsSection() {
 });
 
 export default TestimonialsSection;
+

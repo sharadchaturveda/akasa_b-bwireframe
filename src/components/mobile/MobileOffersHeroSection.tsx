@@ -17,7 +17,7 @@ const MobileOffersHeroSection = memo(function MobileOffersHeroSection() {
       {/* Background image with parallax effect - mobile optimized */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/offers/gallery5.jpg"
+          src="/images/offers/hero/hero.jpg"
           alt="Offers background"
           fill
           sizes="100vw"
@@ -77,3 +77,4 @@ const MobileOffersHeroSection = memo(function MobileOffersHeroSection() {
 });
 
 export default MobileOffersHeroSection;
+

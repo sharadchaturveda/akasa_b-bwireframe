@@ -1,53 +1,10 @@
 /**
- * Direct fix for the mobile logo positioning
+ * Mobile hero content positioning
  */
 
 @media (max-width: 767px) {
-  /* Force the logo to be at the very top of the screen */
-  .mobile-home-logo-container {
-    position: absolute !important;
-    top: 0 !important; /* Position at the very top */
-    padding-top: 2rem !important; /* Add some padding from the top edge */
-    z-index: 101 !important;
-    height: auto !important;
-  }
 
-  /* Make the logo smaller to prevent overlap */
-  .relative.w-\[140px\].h-\[140px\] {
-    width: 120px !important;
-    height: 120px !important;
-    max-width: 120px !important;
-    max-height: 120px !important;
-  }
-
-  /* Smaller screens */
-  @media (max-width: 375px) {
-    .relative.w-\[140px\].h-\[140px\] {
-      width: 100px !important;
-      height: 100px !important;
-      max-width: 100px !important;
-      max-height: 100px !important;
-    }
-  }
-
-  /* Extra small screens */
-  @media (max-width: 320px) {
-    .relative.w-\[140px\].h-\[140px\] {
-      width: 80px !important;
-      height: 80px !important;
-      max-width: 80px !important;
-      max-height: 80px !important;
-    }
-  }
-
-  /* Ensure the logo image is properly displayed */
-  .relative.w-\[140px\].h-\[140px\] img {
-    object-fit: contain !important;
-    width: 100% !important;
-    height: 100% !important;
-  }
-
-  /* Force the hero content to be positioned far below the logo */
+  /* Position the hero content appropriately */
   .mobile-hero-content {
     margin-top: 10rem !important; /* Fixed position from the top */
     position: absolute !important;

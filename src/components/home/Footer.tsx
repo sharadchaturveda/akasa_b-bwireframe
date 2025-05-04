@@ -6,18 +6,7 @@ import { memo, useEffect, useState } from "react";
 import { isMobileDevice } from "@/utils/mobileUtils";
 import MobileFooter from "@/components/mobile/MobileFooter";
 
-// Memoized footer logo component
-const FooterLogo = memo(function FooterLogo() {
-  return (
-    <Image
-      src="/images/common/logo.svg"
-      alt="Akasa Logo"
-      width={100}
-      height={100}
-      className="w-[80px] h-auto"
-    />
-  );
-});
+
 
 // Memoized social icon component
 const SocialIcon = memo(function SocialIcon({
@@ -67,18 +56,15 @@ const Footer = memo(function Footer() {
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-white/20 z-10"></div>
 
       {/* Background image with blur effect */}
-      <div className="absolute inset-0 bg-cover bg-center blur-[2px]" style={{ backgroundImage: "url('/images/common/footer-bg.jpg?quality=75&width=1200')" }}></div>
+      <div className="absolute inset-0 bg-cover bg-center blur-[2px]" style={{ backgroundImage: "url('/images/common/footer-background.jpg?quality=75&width=1200')" }}></div>
 
       {/* Dark overlay for better text visibility */}
       <div className="absolute inset-0 bg-black/80"></div>
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between">
-          {/* Logo and copyright */}
+          {/* Copyright */}
           <div className="flex items-center mb-6 md:mb-0">
-            <div className="mr-3 sm:mr-4">
-              <FooterLogo />
-            </div>
             <p className="text-xs sm:text-sm text-white/60 font-montserrat">
               {"© 2025 Akasa"}
             </p>

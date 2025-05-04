@@ -16,7 +16,7 @@ const MobileCurrentOffersSection = memo(function MobileCurrentOffersSection() {
       id: "weekday-lunch",
       title: "Weekday Lunch Special",
       description: "Enjoy 20% off on all lunch menu items Monday through Thursday. Perfect for business lunches or midday treats.",
-      image: "/images/offers/gallery1.jpg",
+      image: "/images/offers/promotions/weekday-lunch.jpg",
       validUntil: "December 31, 2025",
       discount: "20% off",
       code: "LUNCH20"
@@ -25,7 +25,7 @@ const MobileCurrentOffersSection = memo(function MobileCurrentOffersSection() {
       id: "anniversary",
       title: "Anniversary Celebration",
       description: "Celebrating our 5th anniversary! Book a table for dinner and receive a complimentary bottle of premium wine.",
-      image: "/images/menu/gallery2.jpg",
+      image: "/images/menu/hero/gallery-2.jpg",
       validUntil: "November 30, 2025",
       discount: "Complimentary wine",
       code: "AKASA5YR"
@@ -34,7 +34,7 @@ const MobileCurrentOffersSection = memo(function MobileCurrentOffersSection() {
       id: "family-feast",
       title: "Weekend Family Feast",
       description: "Family-style dining package for groups of 4 or more. Includes appetizers, main courses, and desserts at a special price.",
-      image: "/images/menu/gallery3.jpg",
+      image: "/images/menu/hero/gallery-3.jpg",
       validUntil: "January 15, 2026",
       discount: "Special package",
       code: "FAMILY4+"
@@ -198,3 +198,4 @@ const MobileCurrentOffersSection = memo(function MobileCurrentOffersSection() {
 });
 
 export default MobileCurrentOffersSection;
+

@@ -62,8 +62,8 @@ describe('FlavorExperienceSection', () => {
     expect(images).toHaveLength(2);
     
     // Check if the images have the correct src attributes
-    expect(images[0]).toHaveAttribute('src', '/images/home/philosophy-bg.jpg');
-    expect(images[1]).toHaveAttribute('src', '/images/home/drink.jpg');
+    expect(images[0]).toHaveAttribute('src', '/images/home/philosophy/background.jpg');
+    expect(images[1]).toHaveAttribute('src', '/images/home/philosophy/drink.jpg');
   });
   
   it('has the correct layout structure', () => {
@@ -79,3 +79,4 @@ describe('FlavorExperienceSection', () => {
     expect(container.firstChild).toHaveClass('overflow-hidden');
   });
 });
+

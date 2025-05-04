@@ -16,7 +16,7 @@ const MobileEventsHeroSectionFixed = memo(function MobileEventsHeroSectionFixed(
       {/* Background image with proper mobile sizing */}
       <div className="absolute inset-0">
         <Image
-          src="/images/events/event3.jpg"
+          src="/images/events/hero/hero.jpg"
           alt="Events at Akasa"
           fill
           sizes="100vw"
@@ -53,3 +53,4 @@ const MobileEventsHeroSectionFixed = memo(function MobileEventsHeroSectionFixed(
 });
 
 export default MobileEventsHeroSectionFixed;
+

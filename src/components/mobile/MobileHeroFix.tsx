@@ -19,8 +19,9 @@ export default function MobileHeroFix() {
       const heroSection = document.querySelector('section.h-screen');
       if (!heroSection) return;
 
+
+
       // Apply direct styles to ensure it covers the entire screen and merges with the section below
-      // Don't override any existing styles that might be needed for logo positioning
       heroSection.style.height = '100vh';
       heroSection.style.minHeight = '100vh';
       heroSection.style.padding = '0';

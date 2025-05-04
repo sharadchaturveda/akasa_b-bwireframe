@@ -19,7 +19,7 @@ const FlavorExperienceSection = memo(function FlavorExperienceSection() {
           {/* Background image with parallax effect */}
           <div className="absolute inset-0 transform scale-110 transition-transform duration-10000 group-hover:scale-105">
             <Image
-              src="/images/home/philosophy-bg.jpg"
+              src="/images/home/philosophy/background.jpg"
               alt="Culinary journey"
               fill
               sizes="(max-width: 768px) 100vw, 40vw"
@@ -68,7 +68,7 @@ const FlavorExperienceSection = memo(function FlavorExperienceSection() {
           {/* Background image with parallax effect */}
           <div className="absolute inset-0 transform scale-110 transition-transform duration-10000 group-hover:scale-105">
             <Image
-              src="/images/home/drink.jpg"
+              src="/images/home/philosophy/drink.jpg"
               alt="Culinary philosophy"
               fill
               sizes="(max-width: 768px) 100vw, 60vw"
@@ -160,3 +160,4 @@ const FlavorExperienceSection = memo(function FlavorExperienceSection() {
 });
 
 export default FlavorExperienceSection;
+

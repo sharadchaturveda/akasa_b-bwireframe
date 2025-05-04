@@ -134,24 +134,7 @@
     padding-top: 0 !important;
   }
 
-  /* Fix for the logo on mobile */
-  /* Position the logo higher on the screen */
-  .absolute.top-\[10\%\].left-0.right-0.flex.items-center.justify-center.z-\[101\],
-  .mobile-home-logo-container {
-    position: absolute !important;
-    top: 1rem !important; /* Position higher on the screen */
-    padding-top: 0 !important; /* Remove padding */
-    z-index: 101 !important;
-    height: auto !important;
-  }
 
-  /* Ensure the logo image is properly sized */
-  .relative.w-\[140px\].h-\[140px\] {
-    width: 140px !important;
-    height: 140px !important;
-    max-width: 140px !important;
-    max-height: 140px !important;
-  }
 
   /* Position the hero content very low on the screen */
   .mobile-hero-content {

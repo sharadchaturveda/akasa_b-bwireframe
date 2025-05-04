@@ -62,7 +62,7 @@ describe('ChefSection', () => {
     // Check if the chef image is rendered with correct props
     const chefImage = screen.getByTestId('lcp-image');
     expect(chefImage).toBeInTheDocument();
-    expect(chefImage).toHaveAttribute('src', '/images/menu/chef.jpg');
+    expect(chefImage).toHaveAttribute('src', '/images/menu/chef/background.jpg');
     expect(chefImage).toHaveAttribute('alt', 'Chef Akhilesh Pathak');
 
     // Check if the section title is rendered
@@ -95,3 +95,4 @@ describe('ChefSection', () => {
     expect(mockGetEntriesByName).toHaveBeenCalledWith('time-to-lcp');
   });
 });
+

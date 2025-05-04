@@ -22,7 +22,7 @@ const TestimonialBackground = memo(function TestimonialBackground({
           <div
             className="absolute inset-0 w-full h-full"
             style={{
-              backgroundImage: "url('/images/testimonials/testimonial-bg.jpg')",
+              backgroundImage: "url('/images/home/testimonials/background-alt.jpg')",
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
@@ -49,3 +49,4 @@ const TestimonialBackground = memo(function TestimonialBackground({
 });
 
 export default TestimonialBackground;
+

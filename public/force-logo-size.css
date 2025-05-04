@@ -1,0 +1,50 @@
+/**
+ * Force logo size to be much larger
+ * This is a direct override to ensure the logo is properly sized
+ */
+
+/* Base logo size - very large */
+.logo-container {
+  width: 500px !important;
+  height: 200px !important;
+  min-width: 500px !important;
+  min-height: 200px !important;
+}
+
+/* Mobile-specific sizes */
+@media (max-width: 767px) {
+  .logo-container {
+    width: 300px !important;
+    height: 120px !important;
+    max-width: 300px !important;
+    max-height: 120px !important;
+  }
+  
+  /* Adjust hero content to make room for larger logo */
+  .mobile-hero-content {
+    top: auto !important;
+    bottom: 5% !important;
+  }
+}
+
+/* Small mobile screens */
+@media (max-width: 375px) {
+  .logo-container {
+    width: 250px !important;
+    height: 100px !important;
+    max-width: 250px !important;
+    max-height: 100px !important;
+  }
+}
+
+/* Ensure the logo image is properly sized */
+.logo-container img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+
+/* Adjust hero section spacing for larger logo */
+.hero-logo-container {
+  margin-bottom: 2rem !important;
+}
