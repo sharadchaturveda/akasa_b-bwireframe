@@ -67,7 +67,9 @@ export default function RootLayout({
         <link rel="stylesheet" href="/logo-styles.css" />
         <link rel="stylesheet" href="/logo-sizing.css" />
         <link rel="stylesheet" href="/mobile-logo-position.css" />
-        <script src="/detect-homepage.js" defer></script>
+        <link rel="stylesheet" href="/force-mobile-logo-position.css" />
+        <script src="/detect-homepage.js"></script>
+        <script src="/force-mobile-logo-position.js"></script>
         <script src="/force-logo-size.js" defer></script>
         <script src="/force-hero-position.js" defer></script>
         <script src="/fix-logo-size.js" defer></script>

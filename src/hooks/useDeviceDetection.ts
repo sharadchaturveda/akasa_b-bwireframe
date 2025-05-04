@@ -44,7 +44,10 @@ export function useDeviceDetection(): DeviceDetectionResult {
       setIsMobile(detected);
       setIsDetectionComplete(true);
     } catch (error) {
-      console.error("Error detecting device:", error);
+      // Silent error in production
+      if (process.env.NODE_ENV !== 'production') {
+        console.error("Error detecting device:", error);
+      }
       // Default to desktop view if detection fails
       setIsMobile(false);
       setIsDetectionComplete(true);
@@ -66,22 +69,14 @@ export function useDeviceDetection(): DeviceDetectionResult {
     // Set initial state
     detectDevice();
 
-    // Add event listeners with error handling
-    try {
-      window.addEventListener('resize', debouncedDetectDevice);
-      window.addEventListener('orientationchange', handleOrientationChange);
-    } catch (error) {
-      console.error("Error adding event listeners:", error);
-    }
+    // Add event listeners
+    window.addEventListener('resize', debouncedDetectDevice);
+    window.addEventListener('orientationchange', handleOrientationChange);
 
     // Cleanup
     return () => {
-      try {
-        window.removeEventListener('resize', debouncedDetectDevice);
-        window.removeEventListener('orientationchange', handleOrientationChange);
-      } catch (error) {
-        console.error("Error removing event listeners:", error);
-      }
+      window.removeEventListener('resize', debouncedDetectDevice);
+      window.removeEventListener('orientationchange', handleOrientationChange);
     };
   }, [detectDevice, debouncedDetectDevice, handleOrientationChange]);
 

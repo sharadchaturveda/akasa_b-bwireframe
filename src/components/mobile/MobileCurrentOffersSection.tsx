@@ -14,7 +14,7 @@ const MobileCurrentOffersSection = memo(function MobileCurrentOffersSection() {
   const offers = [
     {
       id: "weekday-lunch",
-      title: "Weekday Lunch Special",
+      title: { text: "Weekday Lunch Special", emphasize: "" },
       description: "Enjoy 20% off on all lunch menu items Monday through Thursday. Perfect for business lunches or midday treats.",
       image: "/images/offers/promotions/weekday-lunch.jpg",
       validUntil: "December 31, 2025",
@@ -22,17 +22,17 @@ const MobileCurrentOffersSection = memo(function MobileCurrentOffersSection() {
       code: "LUNCH20"
     },
     {
-      id: "anniversary",
-      title: "Anniversary Celebration",
-      description: "Celebrating our 5th anniversary! Book a table for dinner and receive a complimentary bottle of premium wine.",
-      image: "/images/menu/hero/gallery-2.jpg",
-      validUntil: "November 30, 2025",
-      discount: "Complimentary wine",
-      code: "AKASA5YR"
+      id: "akasa-turns-1",
+      title: { text: "Akasa Turns 1", emphasize: "1" },
+      description: "10% Discount applicable on Happy Hour, Drinks and A La Carte Menu. Exclusively for Capitasky tenants.",
+      image: "/images/offers/promotions/akasa-turns-1.jpg",
+      validUntil: "15th May to 30th June 2025",
+      discount: "10% Discount",
+      code: "AKASA1YR"
     },
     {
       id: "family-feast",
-      title: "Weekend Family Feast",
+      title: { text: "Weekend Family Feast", emphasize: "" },
       description: "Family-style dining package for groups of 4 or more. Includes appetizers, main courses, and desserts at a special price.",
       image: "/images/menu/hero/gallery-3.jpg",
       validUntil: "January 15, 2026",
@@ -108,7 +108,7 @@ const MobileCurrentOffersSection = memo(function MobileCurrentOffersSection() {
 
                 <div className="relative">
                   {/* Offer image */}
-                  <div className="relative h-48 w-full overflow-hidden">
+                  <div className="relative h-64 w-full overflow-hidden">
                     {/* Decorative corner accent */}
                     <div className="absolute top-0 left-0 w-8 h-8 border-t border-l border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
                     <div className="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
@@ -136,7 +136,17 @@ const MobileCurrentOffersSection = memo(function MobileCurrentOffersSection() {
 
                   {/* Offer details */}
                   <div className="p-4">
-                    <h3 className="text-mobile-lg text-lg font-playfair text-white mb-2">{offer.title}</h3>
+                    <h3 className="text-mobile-lg text-lg font-playfair text-white mb-2">
+                      {offer.title.emphasize ? (
+                        <>
+                          {offer.title.text.split(offer.title.emphasize)[0]}
+                          <span className="text-4xl font-bold text-[#E6C78B]">{offer.title.emphasize}</span>
+                          {offer.title.text.split(offer.title.emphasize)[1]}
+                        </>
+                      ) : (
+                        offer.title.text
+                      )}
+                    </h3>
 
                     <p className="text-mobile-sm text-sm text-white/80 mb-3 text-container">
                       {offer.description}

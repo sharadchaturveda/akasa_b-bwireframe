@@ -16,14 +16,52 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.add('not-homepage');
   }
 
-  // Also handle mobile logo positioning for non-homepage pages
-  if (!isHomepage && window.innerWidth <= 767) {
+  // More aggressive handling of logo positioning
+  if (window.innerWidth <= 767) {
     // Find all logo containers
     const logoContainers = document.querySelectorAll('.hero-logo-container');
 
     logoContainers.forEach(function(container) {
-      // Add a class for non-homepage logo containers
-      container.classList.add('non-homepage-logo-container');
+      if (!isHomepage) {
+        // Position the logo in the upper left for non-homepage pages
+        container.style.position = 'fixed';
+        container.style.top = '10px';
+        container.style.left = '10px';
+        container.style.right = 'auto';
+        container.style.zIndex = '999';
+        container.style.textAlign = 'left';
+        container.style.justifyContent = 'flex-start';
+        container.style.width = 'auto';
+
+        // Adjust the logo size
+        const logoElement = container.querySelector('.logo-container');
+        if (logoElement) {
+          if (window.innerWidth <= 375) {
+            logoElement.style.width = '120px';
+            logoElement.style.height = '48px';
+            logoElement.style.maxWidth = '120px';
+            logoElement.style.maxHeight = '48px';
+          } else {
+            logoElement.style.width = '150px';
+            logoElement.style.height = '60px';
+            logoElement.style.maxWidth = '150px';
+            logoElement.style.maxHeight = '60px';
+          }
+          logoElement.style.margin = '0';
+        }
+      }
     });
   }
+
+  // Run again after a short delay to ensure it applies after any other scripts
+  setTimeout(function() {
+    if (!isHomepage && window.innerWidth <= 767) {
+      const logoContainers = document.querySelectorAll('.hero-logo-container');
+      logoContainers.forEach(function(container) {
+        container.style.position = 'fixed';
+        container.style.top = '10px';
+        container.style.left = '10px';
+      });
+    }
+  }, 500);
 });

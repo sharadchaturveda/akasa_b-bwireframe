@@ -11,7 +11,11 @@ export default function Error({
 }) {
   useEffect(() => {
     // Log the error to an error reporting service
-    console.error(error)
+    if (process.env.NODE_ENV !== 'production') {
+      console.error(error);
+    }
+    // In production, you would send this to a proper error tracking service
+    // Example: errorTrackingService.captureException(error);
   }, [error])
 
   return (

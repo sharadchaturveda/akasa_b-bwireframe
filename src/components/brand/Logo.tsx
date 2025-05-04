@@ -41,8 +41,8 @@ const Logo = memo(function Logo({ className = "", size = "medium", width, height
     <div
       className={`relative logo-container logo-fade-in ${className} logo-size-${size}`}
       style={{
-        width: dimensions.width,
-        height: dimensions.height,
+        width: `${dimensions.width}px`,
+        height: `${dimensions.height}px`,
         margin: "0 auto", // Center horizontally
       }}
     >

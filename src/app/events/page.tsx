@@ -37,48 +37,59 @@ export default function EventsPage() {
   // Event categories
   const eventCategories = [
     { id: "all", name: "All Events" },
-    { id: "private", name: "Private Dining" },
-    { id: "corporate", name: "Corporate Events" },
-    { id: "celebrations", name: "Celebrations" }
+    { id: "birthday", name: "Birthday" },
+    { id: "anniversary", name: "Anniversary" },
+    { id: "office-lunch", name: "Office Lunch" },
+    { id: "office-parties", name: "Office Parties" },
+    { id: "networking", name: "Networking Events" }
   ];
 
   // Event data
   const events = [
     {
       id: 1,
-      title: "Private Dining Experience",
-      description: "An intimate dining experience in our exclusive private room, perfect for special occasions and gatherings of up to 20 guests.",
-      image: "/images/event3.jpg",
-      category: "private",
+      title: "Birthday",
+      description: "Celebrate your special day in style! Explore the best birthday restaurants where unforgettable memories are made. From cozy gatherings to grand celebrations.",
+      image: "/images/events/listings/birthday.jpg",
+      category: "birthday",
       features: ["Customized menu", "Dedicated service staff", "Elegant table settings", "Capacity: 8-20 guests"],
       price: "Starting at $1,200"
     },
     {
       id: 2,
-      title: "Corporate Luncheons",
-      description: "Impress your clients and colleagues with our sophisticated corporate lunch packages, featuring a selection of our signature dishes.",
-      image: "/images/gallery1.jpg",
-      category: "corporate",
-      features: ["Express service option", "Presentation equipment available", "Customizable menu packages", "Capacity: up to 50 guests"],
-      price: "Starting at $45 per person"
+      title: "Anniversary",
+      description: "Make your anniversary unforgettable! Discover the finest restaurants for a romantic celebration in Singapore. Whether it's an elegant dinner or an intimate evening.",
+      image: "/images/events/listings/anniversary.jpg",
+      category: "anniversary",
+      features: ["Elegant dining setup", "Romantic ambiance", "Special anniversary menu", "Complimentary champagne toast"],
+      price: "Starting at $180 per couple"
     },
     {
       id: 3,
-      title: "Wedding Receptions",
-      description: "Celebrate your special day with an unforgettable culinary experience. Our wedding packages include customized menus and dedicated event planning.",
-      image: "/images/gallery2.jpg",
-      category: "celebrations",
-      features: ["Full venue rental option", "Custom cocktail creation", "Wedding cake service", "Capacity: up to 100 guests"],
-      price: "Starting at $8,000"
+      title: "Office Lunch",
+      description: "Elevate your office lunch experience! Discover the best dining options and catering services to make your team meals enjoyable and stress-free.",
+      image: "/images/events/listings/office-lunch.jpg",
+      category: "office-lunch",
+      features: ["Express service option", "Customizable menu packages", "Private dining area", "Capacity: up to 50 guests"],
+      price: "Starting at $45 per person"
     },
     {
       id: 4,
-      title: "Chef's Table Experience",
-      description: "An exclusive dining experience at our Chef's Table, where Chef Akhilesh will personally prepare and present a special tasting menu for your group.",
-      image: "/images/gallery3.jpg",
-      category: "private",
-      features: ["7-course tasting menu", "Wine pairing option", "Direct interaction with the chef", "Capacity: 6-8 guests"],
-      price: "Starting at $180 per person"
+      title: "Office Parties",
+      description: "Make your office parties unforgettable! Whether it's a team celebration, holiday gathering, or milestone event, find the perfect venue or catering services.",
+      image: "/images/events/listings/office-parties.jpg",
+      category: "office-parties",
+      features: ["Full venue rental option", "Custom cocktail creation", "Entertainment options", "Capacity: up to 100 guests"],
+      price: "Starting at $2,500"
+    },
+    {
+      id: 5,
+      title: "Networking Events",
+      description: "Host networking events that leave a lasting impression! Discover the perfect venues and services to create a professional yet inviting atmosphere for meaningful connections.",
+      image: "/images/events/listings/networking-events.jpg",
+      category: "networking",
+      features: ["Professional setup", "Audio-visual equipment", "Networking-friendly layout", "Catering options available"],
+      price: "Starting at $1,800"
     }
   ];
 

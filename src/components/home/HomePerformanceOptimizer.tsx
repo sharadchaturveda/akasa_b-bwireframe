@@ -4,186 +4,130 @@ import { useEffect } from 'react';
 import { initPerformanceMonitoring } from '@/utils/performanceMonitor';
 
 /**
- * Component that applies performance optimizations for the homepage
- * This is a client-side only component that doesn't render anything
+ * HomePerformanceOptimizer Component
+ *
+ * Applies performance optimizations for the homepage.
+ * This is a client-side only component that doesn't render anything.
+ *
+ * @returns {null} This component doesn't render anything
  */
 export default function HomePerformanceOptimizer() {
-  // Define optimization functions inside useEffect to avoid dependency issues
   useEffect(() => {
     // Initialize performance monitoring
     initPerformanceMonitoring();
 
     // Define the optimization function inside useEffect
     const applyOptimizations = () => {
-    // Optimize image loading
-    optimizeImageLoading();
+      optimizeImageLoading();
+      optimizeAnimations();
+      optimizeScrolling();
+      optimizeFontLoading();
+    };
 
-    // Optimize animations
-    optimizeAnimations();
-
-    // Optimize scroll performance
-    optimizeScrolling();
-
-    // Optimize font loading
-    optimizeFontLoading();
-  };
-
-  const optimizeImageLoading = () => {
-    try {
+    const optimizeImageLoading = () => {
       // Add loading="lazy" to images below the fold
-      try {
-        document.querySelectorAll('img:not([loading])').forEach((img) => {
-          try {
-            const rect = img.getBoundingClientRect();
-            if (rect.top > window.innerHeight) {
-              img.setAttribute('loading', 'lazy');
-            }
-          } catch (imgError) {
-            console.warn('Error optimizing image loading:', imgError);
-          }
-        });
-      } catch (queryError) {
-        console.warn('Error querying images for lazy loading:', queryError);
-      }
+      document.querySelectorAll('img:not([loading])').forEach((img) => {
+        const rect = img.getBoundingClientRect();
+        if (rect.top > window.innerHeight) {
+          img.setAttribute('loading', 'lazy');
+        }
+      });
 
       // Add fetchpriority="low" to non-critical images
-      try {
-        document.querySelectorAll('img:not([fetchpriority])').forEach((img) => {
-          try {
-            const rect = img.getBoundingClientRect();
-            if (rect.top > window.innerHeight * 2) {
-              img.setAttribute('fetchpriority', 'low');
-            }
-          } catch (imgError) {
-            console.warn('Error setting fetchpriority:', imgError);
-          }
-        });
-      } catch (queryError) {
-        console.warn('Error querying images for fetchpriority:', queryError);
-      }
-    } catch (e) {
-      console.error('Failed to optimize image loading:', e);
-    }
-  };
+      document.querySelectorAll('img:not([fetchpriority])').forEach((img) => {
+        const rect = img.getBoundingClientRect();
+        if (rect.top > window.innerHeight * 2) {
+          img.setAttribute('fetchpriority', 'low');
+        }
+      });
+    };
 
-  const optimizeAnimations = () => {
-    try {
+    const optimizeAnimations = () => {
       // Disable animations for users who prefer reduced motion
       if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.documentElement.classList.add('reduce-motion');
 
         // Add a style element to reduce animations
-        try {
-          const style = document.createElement('style');
-          style.textContent = `
-            .reduce-motion * {
-              animation-duration: 0.001ms !important;
-              transition-duration: 0.001ms !important;
-            }
-          `;
-          document.head.appendChild(style);
-        } catch (styleError) {
-          console.warn('Could not add reduced motion styles:', styleError);
-        }
-      }
-
-      // Pause animations that are not in viewport
-      try {
-        const animatedElements = document.querySelectorAll('.animate-fadeIn, .animate-fadeSlideUp, .animate-float');
-
-        if ('IntersectionObserver' in window) {
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              try {
-                if (entry.isIntersecting) {
-                  entry.target.classList.add('animate-running');
-                } else {
-                  entry.target.classList.remove('animate-running');
-                }
-              } catch (classError) {
-                console.warn('Error toggling animation class:', classError);
-              }
-            });
-          });
-
-          animatedElements.forEach(el => observer.observe(el));
-        }
-      } catch (animationError) {
-        console.warn('Error optimizing animations:', animationError);
-      }
-    } catch (e) {
-      console.error('Failed to optimize animations:', e);
-    }
-  };
-
-  const optimizeScrolling = () => {
-    // Use passive event listeners for scroll events
-    let supportsPassive = false;
-    try {
-      const opts = Object.defineProperty({}, 'passive', {
-        get: function() {
-          supportsPassive = true;
-          return true;
-        }
-      });
-      window.addEventListener('test', () => {}, opts as EventListenerOptions);
-      window.removeEventListener('test', () => {}, opts as EventListenerOptions);
-    } catch (e) {}
-
-    // Apply passive listeners to all scroll events
-    if (supportsPassive) {
-      const wheelOpts = { passive: true } as EventListenerOptions;
-      window.addEventListener('wheel', () => {}, wheelOpts);
-      window.addEventListener('touchstart', () => {}, wheelOpts);
-    }
-
-    // Optimize scroll performance
-    document.documentElement.style.scrollBehavior = 'auto';
-  };
-
-  const optimizeFontLoading = () => {
-    try {
-      // Add font-display: swap to all font faces
-      try {
         const style = document.createElement('style');
         style.textContent = `
-          @font-face {
-            font-display: swap !important;
+          .reduce-motion * {
+            animation-duration: 0.001ms !important;
+            transition-duration: 0.001ms !important;
           }
         `;
         document.head.appendChild(style);
-      } catch (styleError) {
-        console.warn('Error adding font-display style:', styleError);
       }
+
+      // Pause animations that are not in viewport
+      const animatedElements = document.querySelectorAll('.animate-fadeIn, .animate-fadeSlideUp, .animate-float');
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animate-running');
+            } else {
+              entry.target.classList.remove('animate-running');
+            }
+          });
+        });
+
+        animatedElements.forEach(el => observer.observe(el));
+      }
+    };
+
+    const optimizeScrolling = () => {
+      // Use passive event listeners for scroll events
+      let supportsPassive = false;
+      try {
+        const opts = Object.defineProperty({}, 'passive', {
+          get: function() {
+            supportsPassive = true;
+            return true;
+          }
+        });
+        window.addEventListener('test', () => {}, opts as EventListenerOptions);
+        window.removeEventListener('test', () => {}, opts as EventListenerOptions);
+      } catch (e) {
+        // Silent catch - just means passive isn't supported
+      }
+
+      // Apply passive listeners to all scroll events
+      if (supportsPassive) {
+        const wheelOpts = { passive: true } as EventListenerOptions;
+        window.addEventListener('wheel', () => {}, wheelOpts);
+        window.addEventListener('touchstart', () => {}, wheelOpts);
+      }
+
+      // Optimize scroll performance
+      document.documentElement.style.scrollBehavior = 'auto';
+    };
+
+    const optimizeFontLoading = () => {
+      // Add font-display: swap to all font faces
+      const style = document.createElement('style');
+      style.textContent = `
+        @font-face {
+          font-display: swap !important;
+        }
+      `;
+      document.head.appendChild(style);
 
       // Mark fonts as loaded when they are available
       if ('fonts' in document && document.fonts && document.fonts.ready) {
-        try {
-          document.fonts.ready.then(() => {
-            try {
-              document.documentElement.classList.add('fonts-loaded');
-            } catch (classError) {
-              console.warn('Error adding fonts-loaded class:', classError);
-            }
-          }).catch(fontError => {
-            console.warn('Error waiting for fonts to load:', fontError);
-          });
-        } catch (fontsError) {
-          console.warn('Error setting up font loading:', fontsError);
-        }
+        document.fonts.ready.then(() => {
+          document.documentElement.classList.add('fonts-loaded');
+        }).catch(() => {
+          // Silent catch - just means fonts couldn't be loaded
+        });
       }
-    } catch (e) {
-      console.error('Failed to optimize font loading:', e);
-    }
-  };
+    };
 
     // Apply optimizations immediately
     applyOptimizations();
 
-    // Clean up on unmount
-    return () => {
-      // Remove any event listeners or observers if needed
-    };
+    // Clean up on unmount - nothing to clean up in this case
+    return () => {};
   }, []);
 
   // This component doesn't render anything

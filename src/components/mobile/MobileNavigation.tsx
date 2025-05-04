@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useCallback, memo } from "react";
-import Link from "next/link";
 
 interface MobileNavigationProps {
   navItems: Array<{ name: string; path: string }>;
@@ -9,7 +8,15 @@ interface MobileNavigationProps {
 
 /**
  * MobileNavLink Component
- * A mobile-optimized navigation link component with improved accessibility
+ * 
+ * A mobile-optimized navigation link component with improved accessibility.
+ * Optimized for touch interactions and performance.
+ * 
+ * @param {Object} props - Component props
+ * @param {string} props.name - The name of the navigation item
+ * @param {string} props.path - The path to navigate to
+ * @param {Function} props.onClick - The function to call when clicked
+ * @returns {JSX.Element} The rendered component
  */
 const MobileNavLink = memo(function MobileNavLink({
   name,
@@ -27,7 +34,6 @@ const MobileNavLink = memo(function MobileNavLink({
       onClick={(e) => {
         e.preventDefault();
         onClick();
-        // Use window.location for more reliable navigation on mobile
         window.location.href = path;
       }}
       role="menuitem"
@@ -39,47 +45,49 @@ const MobileNavLink = memo(function MobileNavLink({
 
 /**
  * MobileNavigation Component
- * A dedicated mobile navigation component
+ * 
+ * A dedicated mobile navigation component optimized for mobile devices.
+ * Handles menu toggling and body scroll locking.
+ * 
+ * @param {MobileNavigationProps} props - Component props
+ * @returns {JSX.Element} The rendered component
  */
 const MobileNavigation = memo(function MobileNavigation({ navItems }: MobileNavigationProps) {
   // State for mobile menu
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Toggle mobile menu with performance optimizations
-  const toggleMobileMenu = useCallback(() => {
-    setMobileMenuOpen(prev => !prev);
-    // Toggle body scroll with will-change for better performance
-    if (!mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-      document.body.style.willChange = 'transform';
-
+  // Handle menu state and body scroll
+  const handleMenuState = useCallback((isOpen: boolean) => {
+    // Update body styles based on menu state
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    document.body.style.willChange = isOpen ? 'transform' : 'auto';
+    
+    // Toggle body class
+    if (isOpen) {
+      document.body.classList.add('mobile-menu-open');
       // Force the menu to be at the top of the screen
       window.scrollTo(0, 0);
-
-      // Add a class to the body to prevent scrolling
-      document.body.classList.add('mobile-menu-open');
     } else {
-      document.body.style.overflow = '';
-      document.body.style.willChange = 'auto';
-
-      // Remove the class from the body
       document.body.classList.remove('mobile-menu-open');
     }
-  }, [mobileMenuOpen]);
+  }, []);
 
-  // Close mobile menu with performance optimizations
+  // Toggle mobile menu
+  const toggleMobileMenu = useCallback(() => {
+    const newState = !mobileMenuOpen;
+    setMobileMenuOpen(newState);
+    handleMenuState(newState);
+  }, [mobileMenuOpen, handleMenuState]);
+
+  // Close mobile menu
   const closeMobileMenu = useCallback(() => {
     setMobileMenuOpen(false);
-    document.body.style.overflow = '';
-    document.body.style.willChange = 'auto';
-
-    // Remove the class from the body
-    document.body.classList.remove('mobile-menu-open');
-  }, []);
+    handleMenuState(false);
+  }, [handleMenuState]);
 
   return (
     <div className="md:hidden w-full">
-      {/* Mobile Navigation Bar - Sticky with completely transparent background */}
+      {/* Mobile Navigation Bar */}
       <div className="fixed top-0 left-0 right-0 z-[100] px-4 py-3">
         <div className="flex justify-end items-center">
           <button
@@ -97,13 +105,10 @@ const MobileNavigation = memo(function MobileNavigation({ navItems }: MobileNavi
         </div>
       </div>
 
-
-
-      {/* Mobile Menu Overlay - Fixed positioning at the top of the screen */}
+      {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
         <div
           className="mobile-menu-overlay fixed top-0 left-0 right-0 bottom-0 bg-black/90 backdrop-blur-lg z-[9999] flex flex-col"
-          style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
           role="dialog"
           aria-modal="true"
           aria-label="Navigation menu"
@@ -123,9 +128,9 @@ const MobileNavigation = memo(function MobileNavigation({ navItems }: MobileNavi
             </button>
           </div>
 
-          {/* Menu items with better spacing and touch targets */}
+          {/* Menu items */}
           <nav className="flex flex-col items-center w-full pt-6 overflow-y-auto">
-            {navItems.map((item, index) => (
+            {navItems.map((item) => (
               <div
                 key={item.name}
                 className="w-full mobile-menu-item py-2"
@@ -139,7 +144,7 @@ const MobileNavigation = memo(function MobileNavigation({ navItems }: MobileNavi
             ))}
           </nav>
 
-          {/* Bottom padding to ensure last item is fully visible */}
+          {/* Bottom padding */}
           <div className="h-16"></div>
         </div>
       )}

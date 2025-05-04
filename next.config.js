@@ -22,15 +22,15 @@ const nextConfig = {
   experimental: {
     // Enable CSS optimization for production
     optimizeCss: process.env.NODE_ENV === 'production',
-    // Optimize for First Input Delay (FID)
-    optimizeServerReact: true,
     // Optimize for Largest Contentful Paint (LCP)
     largePageDataBytes: 128 * 1000,
   },
   // Optimize for code splitting and minimal JS/CSS
   compiler: {
     // Remove console logs in production
-    removeConsole: process.env.NODE_ENV === 'production',
+    removeConsole: {
+      exclude: ['error'],
+    },
   },
   // Optimize for Cumulative Layout Shift (CLS)
   poweredByHeader: false,
@@ -46,15 +46,6 @@ const nextConfig = {
             emitFile: !isServer,
             name: '[path][name].[ext]',
             publicPath: '/_next/',
-            fallback: {
-              loader: 'url-loader',
-              options: {
-                limit: 1,
-                fallback: require.resolve('responsive-loader'),
-                name: '[path][name].[ext]',
-                emitFile: !isServer,
-              },
-            },
           },
         },
       ],

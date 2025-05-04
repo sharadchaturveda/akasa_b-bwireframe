@@ -13,42 +13,22 @@ import { useEffect, Suspense } from 'react';
 import { loadPageStyles, preloadPageStyles } from '@/utils/loadPageStyles';
 
 // Dynamically import components that are below the fold with optimized loading
-const BrandPhilosophy = dynamic(() => import("@/components/home/BrandPhilosophy"), {
-  loading: () => <div className="min-h-[45vh] w-full bg-black"></div>,
-  ssr: false
-});
+const BrandPhilosophy = dynamic(() => import("@/components/home/BrandPhilosophy"));
+const AccoladesSection = dynamic(() => import("@/components/home/AccoladesSection"));
+const GallerySection = dynamic(() => import("@/components/home/GallerySection"));
+const WhatsHappeningSection = dynamic(() => import("@/components/home/WhatsHappeningSection"));
+const TestimonialsSection = dynamic(() => import("@/components/home/TestimonialsSection"));
+const VisitUsSection = dynamic(() => import("@/components/home/VisitUsSection"));
+const Footer = dynamic(() => import("@/components/home/Footer"));
 
-const AccoladesSection = dynamic(() => import("@/components/home/AccoladesSection"), {
-  loading: () => <div className="min-h-[30vh] w-full bg-black"></div>,
-  ssr: false
-});
-
-const GallerySection = dynamic(() => import("@/components/home/GallerySection"), {
-  loading: () => <div className="min-h-[40vh] w-full bg-black"></div>,
-  ssr: false
-});
-
-const WhatsHappeningSection = dynamic(() => import("@/components/home/WhatsHappeningSection"), {
-  loading: () => <div className="min-h-[50vh] w-full bg-black"></div>,
-  ssr: false
-});
-
-const TestimonialsSection = dynamic(() => import("@/components/home/TestimonialsSection"), {
-  loading: () => <div className="min-h-[40vh] w-full bg-black"></div>,
-  ssr: false
-});
-
-const VisitUsSection = dynamic(() => import("@/components/home/VisitUsSection"), {
-  loading: () => <div className="min-h-[30vh] w-full bg-black"></div>,
-  ssr: false
-});
-
-const Footer = dynamic(() => import("@/components/home/Footer"), {
-  loading: () => <div className="min-h-[20vh] w-full bg-black"></div>,
-  ssr: false
-});
-
-// Optimized homepage component with code splitting and CSS optimization
+/**
+ * HomePage Component
+ *
+ * The main homepage component with optimized loading and performance.
+ * Uses code splitting and dynamic imports for better performance.
+ *
+ * @returns {JSX.Element} The rendered homepage
+ */
 export default function HomePage() {
   // Load page-specific CSS
   useEffect(() => {
@@ -57,37 +37,6 @@ export default function HomePage() {
 
     // Preload styles for pages that might be visited next
     preloadPageStyles(['menu', 'events', 'offers', 'reservations']);
-
-    // Mark the start of page load for performance measurement
-    if (typeof window !== 'undefined' && window.performance && window.performance.mark) {
-      window.performance.mark('homepage_start');
-
-      // Measure when the page is fully loaded
-      window.addEventListener('load', () => {
-        window.performance.mark('homepage_loaded');
-        window.performance.measure('homepage_load_time', 'homepage_start', 'homepage_loaded');
-
-        const measure = window.performance.getEntriesByName('homepage_load_time')[0];
-        console.log('Homepage load time:', measure.duration, 'ms');
-      });
-    }
-
-    // Report LCP for monitoring
-    if (typeof window !== 'undefined' && 'PerformanceObserver' in window) {
-      const lcpObserver = new PerformanceObserver((entryList) => {
-        const entries = entryList.getEntries();
-        const lcpEntry = entries[entries.length - 1];
-        console.log('LCP:', lcpEntry.startTime);
-
-        // You could send this to your analytics
-      });
-
-      lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
-
-      return () => {
-        lcpObserver.disconnect();
-      };
-    }
   }, []);
 
   return (

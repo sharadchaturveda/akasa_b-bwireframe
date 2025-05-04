@@ -6,11 +6,10 @@ import { optimizeImagesForMobile, debounce } from '@/utils/mobileUtils';
 /**
  * MobileOptimizer Component
  *
- * This component applies mobile-specific optimizations without rendering anything.
- * It's designed to be included once at the top level of the application.
+ * Applies mobile-specific optimizations without rendering anything.
+ * Handles image optimization for mobile devices.
  *
- * Note: Most mobile-specific functionality has been moved to MobileClassProvider
- * to avoid hydration errors. This component now only handles image optimization.
+ * @returns {null} This component doesn't render anything
  */
 export default function MobileOptimizer() {
   useEffect(() => {
@@ -25,18 +24,19 @@ export default function MobileOptimizer() {
       optimizeImagesForMobile();
     }, 200);
 
-    // Add event listener for resize
-    window.addEventListener('resize', handleResize);
-
-    // Add event listener for orientation change
-    window.addEventListener('orientationchange', () => {
+    // Create a handler for orientation change
+    const handleOrientationChange = () => {
       optimizeImagesForMobile();
-    });
+    };
+
+    // Add event listeners
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleOrientationChange);
 
     // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize);
-      window.removeEventListener('orientationchange', handleResize);
+      window.removeEventListener('orientationchange', handleOrientationChange);
     };
   }, []);
 

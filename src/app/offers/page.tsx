@@ -94,7 +94,7 @@ const OfferCard = memo(function OfferCard({
   code,
   link
 }: {
-  title: string;
+  title: { text: string; emphasize: string };
   description: string;
   image: string;
   validUntil: string;
@@ -107,7 +107,7 @@ const OfferCard = memo(function OfferCard({
       <div className="absolute -inset-0.5 bg-gradient-to-r from-[#E6C78B]/0 via-[#E6C78B]/30 to-[#E6C78B]/0 rounded-lg blur opacity-0 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
 
       <div className="relative bg-black/80 backdrop-blur-sm border border-white/5 rounded-lg overflow-hidden transition-all duration-500 group-hover:shadow-[0_0_25px_rgba(230,199,139,0.2)]">
-        <div className="relative h-[280px] overflow-hidden">
+        <div className="relative h-[350px] overflow-hidden">
           {/* Decorative corner accent */}
           <div className="absolute top-0 left-0 w-12 h-12 border-t border-l border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
           <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
@@ -134,7 +134,17 @@ const OfferCard = memo(function OfferCard({
         </div>
 
         <div className="p-8 relative">
-          <h3 className="text-2xl font-playfair mb-4 group-hover:text-[#E6C78B] transition-colors duration-300">{title}</h3>
+          <h3 className="text-2xl font-playfair mb-4 group-hover:text-[#E6C78B] transition-colors duration-300">
+            {title.emphasize ? (
+              <>
+                {title.text.split(title.emphasize)[0]}
+                <span className="text-5xl font-bold text-[#E6C78B]">{title.emphasize}</span>
+                {title.text.split(title.emphasize)[1]}
+              </>
+            ) : (
+              title.text
+            )}
+          </h3>
           <p className="text-white/70 text-sm mb-6 leading-relaxed">{description}</p>
 
           {/* Fancy promo code display */}
@@ -167,25 +177,25 @@ const OfferCard = memo(function OfferCard({
 const CurrentOffersSection = memo(function CurrentOffersSection() {
   const offers = [
     {
-      title: "Weekday Lunch Special",
-      description: "Enjoy 20% off on all lunch menu items Monday through Thursday. Perfect for business lunches or midday treats.",
+      title: { text: "Weekday Lunch Special", emphasize: "" },
+      description: "Enjoy discounted lunch menu items Monday through Thursday. Perfect for business lunches or midday treats.",
       image: "/images/offers/promotions/weekday-lunch.jpg",
       validUntil: "December 31, 2025",
       code: "LUNCH20",
       link: "/reservations"
     },
     {
-      title: "Anniversary Celebration",
-      description: "Celebrating our 5th anniversary! Book a table for dinner and receive a complimentary bottle of premium wine.",
-      image: "/images/menu/hero/gallery-2.jpg",
-      validUntil: "November 30, 2025",
-      code: "AKASA5YR",
+      title: { text: "Akasa Turns 1", emphasize: "1" },
+      description: "10% Discount applicable on Happy Hour, Drinks and A La Carte Menu. Exclusively for Capitasky tenants.",
+      image: "/images/offers/promotions/akasa-turns-1.jpg",
+      validUntil: "15th May to 30th June 2025",
+      code: "AKASA1YR",
       link: "/reservations"
     },
     {
-      title: "Weekend Family Feast",
+      title: { text: "Weekend Family Feast", emphasize: "" },
       description: "Family-style dining package for groups of 4 or more. Includes appetizers, main courses, and desserts at a special price.",
-      image: "/images/menu/hero/gallery-3.jpg",
+      image: "/images/offers/promotions/weekend-family-feast.jpg",
       validUntil: "January 15, 2026",
       code: "FAMILY4+",
       link: "/reservations"
@@ -269,7 +279,7 @@ const LoyaltyProgramSection = memo(function LoyaltyProgramSection() {
         zIndex: -1
       }}>
         <Image
-          src="/images/home/philosophy/drink.jpg"
+          src="/images/offers/loyalty_program/loyalty.jpg"
           alt="Loyalty Program background"
           fill
           sizes="100vw"
@@ -302,7 +312,7 @@ const LoyaltyProgramSection = memo(function LoyaltyProgramSection() {
               <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-[#E6C78B] opacity-70 z-10"></div>
 
               <Image
-                src="/images/offers/hero/hero.jpg"
+                src="/images/offers/loyalty_program/loyalty.jpg"
                 alt="Akasa Loyalty Program"
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"

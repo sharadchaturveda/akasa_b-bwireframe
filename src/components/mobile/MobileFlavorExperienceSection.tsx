@@ -40,7 +40,7 @@ const MobileFlavorExperienceSection = memo(function MobileFlavorExperienceSectio
 
             {/* Content overlay */}
             <div className="absolute inset-0 flex flex-col justify-center p-4">
-              <h3 className="text-lg font-montserrat text-[#E6C78B] mb-2 tracking-wider uppercase">A culinary journey</h3>
+              <h3 className="text-lg font-montserrat text-[#E6C78B] mb-2 tracking-wider uppercase">Savor the Story</h3>
               <h2 className="text-2xl font-playfair text-white mb-3 relative">
                 Experience the Flavors of India
                 <div className="absolute -bottom-2 left-0 w-16 h-0.5 bg-gradient-to-r from-[#E6C78B] to-transparent"></div>

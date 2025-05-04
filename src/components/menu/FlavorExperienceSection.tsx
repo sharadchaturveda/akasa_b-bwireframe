@@ -19,7 +19,7 @@ const FlavorExperienceSection = memo(function FlavorExperienceSection() {
           {/* Background image with parallax effect */}
           <div className="absolute inset-0 transform scale-110 transition-transform duration-10000 group-hover:scale-105">
             <Image
-              src="/images/home/philosophy/background.jpg"
+              src="/images/menu/culinary_philosophy/philosophy.jpg"
               alt="Culinary journey"
               fill
               sizes="(max-width: 768px) 100vw, 40vw"
@@ -37,7 +37,7 @@ const FlavorExperienceSection = memo(function FlavorExperienceSection() {
             <div className="absolute bottom-8 right-8 w-16 h-16 border-b-2 border-r-2 border-[#E6C78B]/50"></div>
 
             <div className="max-w-md">
-              <h3 className="text-xl md:text-2xl font-montserrat text-[#E6C78B] mb-2 tracking-wider uppercase">A culinary journey</h3>
+              <h3 className="text-xl md:text-2xl font-montserrat text-[#E6C78B] mb-2 tracking-wider uppercase">A Symphony of Flavors</h3>
 
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-playfair text-white mb-6 relative">
                 Experience the Flavors of India
@@ -68,7 +68,7 @@ const FlavorExperienceSection = memo(function FlavorExperienceSection() {
           {/* Background image with parallax effect */}
           <div className="absolute inset-0 transform scale-110 transition-transform duration-10000 group-hover:scale-105">
             <Image
-              src="/images/home/philosophy/drink.jpg"
+              src="/images/menu/culinary_philosophy/drink.jpg"
               alt="Culinary philosophy"
               fill
               sizes="(max-width: 768px) 100vw, 60vw"

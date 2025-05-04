@@ -2,6 +2,14 @@
 
 import { useEffect, useState } from "react";
 
+/**
+ * ScrollBehavior Component
+ *
+ * Applies minimal scroll optimizations to improve performance.
+ * This component doesn't render anything visible.
+ *
+ * @returns {null} This component doesn't render anything
+ */
 export default function ScrollBehavior() {
   // Use state to track client-side mounting to avoid hydration mismatch
   const [isMounted, setIsMounted] = useState(false);
@@ -15,8 +23,8 @@ export default function ScrollBehavior() {
     // Only run after component is mounted on the client
     if (!isMounted) return;
 
-    // Minimal scroll optimizations
-    const applyMinimalOptimizations = () => {
+    // Apply minimal scroll optimizations
+    const applyScrollOptimizations = () => {
       // Basic overscroll behavior
       document.body.style.overscrollBehavior = 'none';
 
@@ -25,12 +33,12 @@ export default function ScrollBehavior() {
         const style = document.createElement('style');
         style.id = 'minimal-scroll-styles';
         style.textContent = `
-          /* Only essential optimizations */
+          /* Prevent horizontal scrolling */
           html, body {
             overflow-x: hidden;
           }
 
-          /* Optimize critical images only */
+          /* Optimize critical images */
           .hero-image img {
             content-visibility: auto;
           }
@@ -44,8 +52,8 @@ export default function ScrollBehavior() {
       }
     };
 
-    // Apply minimal optimizations with requestAnimationFrame to ensure it runs after paint
-    const animationFrameId = requestAnimationFrame(applyMinimalOptimizations);
+    // Apply optimizations with requestAnimationFrame
+    const animationFrameId = requestAnimationFrame(applyScrollOptimizations);
 
     // Cleanup
     return () => {
@@ -53,7 +61,7 @@ export default function ScrollBehavior() {
       const styles = document.getElementById('minimal-scroll-styles');
       if (styles) styles.remove();
     };
-  }, [isMounted]); // Only run when isMounted changes to true
+  }, [isMounted]);
 
   return null;
 }

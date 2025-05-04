@@ -6,11 +6,11 @@ import NextImage from "next/image";
 
 // Gallery images array with optimized paths
 const GALLERY_IMAGES = [
-  { src: "/images/events/listings/event-2.jpg", alt: "Elegant dining setup with traditional Indian decor" },
+  { src: "/images/events/listings/birthday.jpg", alt: "Elegant dining setup with traditional Indian decor" },
   { src: "/images/unused/gallery2.jpg", alt: "Chef preparing authentic Indian cuisine" },
-  { src: "/images/events/listings/event-3.jpg", alt: "Signature cocktail with exotic spices" },
+  { src: "/images/events/listings/anniversary.jpg", alt: "Signature cocktail with exotic spices" },
   { src: "/images/unused/gallery5.jpg", alt: "Beautifully plated Indian dish with garnish" },
-  { src: "/images/unused/gallery6.jpg", alt: "Restaurant interior with ambient lighting" },
+  { src: "/images/events/listings/office-lunch.jpg", alt: "Restaurant interior with ambient lighting" },
 ];
 
 // Optimized gallery image component with performance enhancements
@@ -38,7 +38,7 @@ const GalleryImage = memo(function GalleryImage({
         fill
         className={`object-cover transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
         sizes="400px"
-        loading={priority ? "eager" : "lazy"}
+        loading="eager" // Always use eager to avoid hydration mismatch
         quality={75}
         priority={priority}
         onLoad={() => setIsLoaded(true)}
