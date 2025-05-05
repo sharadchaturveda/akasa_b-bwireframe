@@ -159,14 +159,16 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
                   <p className="text-white/70 font-montserrat text-sm mb-6 leading-relaxed">{dish.description}</p>
 
                   {/* Standardized button */}
-                  <button className="group inline-flex items-center justify-center rounded-full text-sm font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-4 py-2">
-                    {/* Gold fill animation */}
-                    <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
+                  <a href="https://akasa.oddle.me/en_SG/" target="_blank" rel="noopener noreferrer">
+                    <button className="group inline-flex items-center justify-center rounded-full text-sm font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-4 py-2">
+                      {/* Gold fill animation */}
+                      <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
 
-                    <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
-                      Order Now
-                    </span>
-                  </button>
+                      <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
+                        Order Now
+                      </span>
+                    </button>
+                  </a>
                 </div>
               </div>
             </div>

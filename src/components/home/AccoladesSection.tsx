@@ -55,7 +55,7 @@ export default function AccoladesSection() {
           <p className="text-base italic font-montserrat mb-8 text-white/90">{"Where spice meets soul – Indian cuisine, reimagined with passion and precision."}</p>
 
           <div className="flex flex-col gap-4 w-full">
-            <Link href="/order">
+            <Link href="https://akasa.oddle.me/en_SG/" target="_blank" rel="noopener noreferrer">
               <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full px-6 py-3 text-center shadow-lg">
                 {"Order Online"}
               </Button>

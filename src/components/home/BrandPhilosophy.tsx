@@ -134,7 +134,7 @@ const BrandPhilosophy = memo(function BrandPhilosophy() {
             </div>
 
             <div className="mt-6 sm:mt-8 flex flex-col items-center md:items-start gap-3 animate-fadeSlideUp" style={{ animationDelay: '0.5s' }}>
-              <Link href="/order" className="w-full sm:w-auto">
+              <Link href="https://akasa.oddle.me/en_SG/" className="w-full sm:w-auto" target="_blank" rel="noopener noreferrer">
                 <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full sm:w-[240px] px-4 sm:px-6 py-2 sm:py-3 text-center shadow-lg text-sm sm:text-base">
                   {"Order Online"}
                 </Button>

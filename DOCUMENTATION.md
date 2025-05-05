@@ -7,29 +7,39 @@
 3. [Technology Stack](#technology-stack)
 4. [Getting Started](#getting-started)
 5. [Architecture](#architecture)
-6. [Components](#components)
-7. [Hooks](#hooks)
-8. [Utilities](#utilities)
-9. [Performance Optimization](#performance-optimization)
-10. [Mobile Optimization](#mobile-optimization)
-11. [Testing](#testing)
-12. [Deployment](#deployment)
-13. [Best Practices](#best-practices)
-14. [Troubleshooting](#troubleshooting)
-15. [Contributing](#contributing)
+6. [Menu Structure and Signature Dishes](#menu-structure-and-signature-dishes)
+7. [Components](#components)
+8. [Hooks](#hooks)
+9. [Utilities](#utilities)
+10. [Performance Optimization](#performance-optimization)
+11. [Mobile Optimization](#mobile-optimization)
+12. [Testing](#testing)
+13. [Deployment](#deployment)
+14. [Best Practices](#best-practices)
+15. [Troubleshooting](#troubleshooting)
+16. [Contributing](#contributing)
 
 ## Introduction
 
-The Akasa Restaurant Website is a Next.js application that showcases the restaurant's offerings, including menus, events, and reservation capabilities. The website is designed to be fast, responsive, and provide an excellent user experience on both desktop and mobile devices.
+The Akasa Restaurant Website is a Next.js application that showcases Akasa, an upscale Indian restaurant in Singapore. The website features the restaurant's offerings, including menus, events, and reservation capabilities. The website is designed to be fast, responsive, and provide an excellent user experience on both desktop and mobile devices.
 
 ### Key Features
 
 - Responsive design for desktop and mobile
 - Performance-optimized for fast loading
-- Menu browsing with different categories
-- Events and offers sections
+- Menu browsing with 5 different categories (À La Carte, Soul Food Weekends, Drinks, Bar Bites, 3 Course Set Lunch)
+- Events section with 5 categories (Birthday, Anniversary, Office Lunch, Office Parties, Networking)
+- Offers section with current promotions
 - Reservation system
 - Mobile-specific optimizations
+
+### Restaurant Information
+
+- **Location**: 79 Robinson Road, Singapore
+- **Opening Hours**: Monday to Saturday, 11:30am to 10:00pm
+- **Phone**: +65 6123 4567
+- **Email**: info@akasa.sg
+- **Website**: https://akasa.sg
 
 ## Project Structure
 
@@ -148,6 +158,58 @@ The application follows a component-based architecture with a clear separation b
 4. **Error Handling**: The application uses error boundaries to catch and handle errors gracefully.
 
 5. **TypeScript**: The application uses TypeScript for type safety and better developer experience.
+
+## Menu Structure and Signature Dishes
+
+The website features 5 distinct menu sections, each with its own page:
+
+### Menu Categories
+
+1. **À La Carte Menu**
+   - Comprehensive menu with all regular offerings
+   - Organized by categories: Soup and Appetizer, Main Course, Bread, Rice, etc.
+
+2. **Soul Food Weekends Menu**
+   - Special weekend offerings
+   - Features unlimited Chaat (Fri & Sat, 12 PM - 3 PM)
+
+3. **Drinks Menu**
+   - Signature cocktails
+   - Fine wines
+   - Non-alcoholic beverages
+
+4. **Bar Bites Menu**
+   - Small plates and appetizers
+   - Perfect for pairing with drinks
+
+5. **3 Course Set Lunch Menu**
+   - Fixed price lunch offering
+   - Includes starter, main course, and dessert
+   - Daily sides rotation
+
+### Signature Dishes
+
+Akasa's signature dishes that should be highlighted throughout the website:
+
+1. **Paronthia Naan** ($8)
+   - Traditional Indian bread with a modern twist
+
+2. **AKASA-E-Dum Biryani** ($25)
+   - Fragrant rice dish with choice of protein
+
+3. **Akasa-E-Lobster** ($72)
+   - Premium lobster preparation
+
+4. **Tandoori Prawns** ($32)
+   - Char-grilled prawns with special spice blend
+
+5. **Dal-E-Akasa** ($22)
+   - House special lentil preparation
+
+6. **Tandoori Pomfret Kebab** ($34)
+   - Whole fish marinated and cooked in tandoor
+
+Note: The restaurant doesn't have a children's menu but accommodates children.
 
 ## Components
 
@@ -427,6 +489,9 @@ The application follows these best practices:
 - Use ESLint for code linting.
 - Use Prettier for code formatting.
 - Use JSDoc comments for documentation.
+- Avoid using 'any' type (strict TypeScript linting).
+- Use PascalCase for component names and interfaces.
+- Use camelCase for variables, functions, and file names.
 
 ### Component Design
 
@@ -434,6 +499,9 @@ The application follows these best practices:
 - Use memo for performance optimization.
 - Use proper prop types.
 - Use error boundaries for error handling.
+- Separate mobile-specific code completely from desktop code.
+- Use clean, modular architecture with proper imports/exports.
+- Minimize complexity and avoid code bloat.
 
 ### Performance
 
@@ -441,6 +509,11 @@ The application follows these best practices:
 - Use code splitting for faster loading.
 - Monitor performance metrics.
 - Optimize for mobile devices.
+- Use next/image for optimized images.
+- Use dynamic imports for heavy components.
+- Implement route prefetching.
+- Use clean Tailwind classes with @apply for reuse.
+- Optimize bundle size through tree-shaking.
 
 ### Accessibility
 
@@ -448,6 +521,7 @@ The application follows these best practices:
 - Use ARIA attributes when necessary.
 - Test for accessibility violations.
 - Ensure keyboard navigation works.
+- Provide proper vegetarian indicators (🔴 non-veg, 🟢 veg).
 
 ### Mobile
 
@@ -455,6 +529,20 @@ The application follows these best practices:
 - Optimize for touch interactions.
 - Disable hover effects on mobile.
 - Test on real mobile devices.
+- Ensure proper sizing of tap targets.
+- Prevent horizontal scrolling issues.
+- Scale typography appropriately down to 320px screens.
+
+### Design Preferences
+
+- Use consistent button styling with rounded buttons throughout the website.
+- Use blue buttons with bright gold fill animations on hover (no right arrows).
+- Maintain a consistent no-gap design philosophy between elements.
+- Use asymmetric layouts (Brand Philosophy: 40/60 split, What's Happening: 60/40 split).
+- Position the logo in the center on homepage mobile view, upper left on other pages.
+- Display vegetarian dishes before non-vegetarian dishes in featured sections.
+- Use subtle filter effects on the homepage.
+- Use larger card images in offer displays.
 
 ## Troubleshooting
 

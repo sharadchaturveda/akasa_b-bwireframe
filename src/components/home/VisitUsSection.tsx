@@ -64,7 +64,7 @@ export default function VisitUsSection() {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-          <Link href="/order" className="w-full">
+          <Link href="https://akasa.oddle.me/en_SG/" className="w-full" target="_blank" rel="noopener noreferrer">
             <Button className="uppercase bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full text-center shadow-lg text-xs sm:text-sm">{"Order Online"}</Button>
           </Link>
           <Link href="/reservations" className="w-full">

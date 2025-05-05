@@ -58,7 +58,7 @@ const MobileVisitUsSection = memo(function MobileVisitUsSection() {
             </div>
 
             <div className="flex flex-col gap-3 justify-center">
-              <Link href="/order" className="w-full">
+              <Link href="https://akasa.oddle.me/en_SG/" className="w-full" target="_blank" rel="noopener noreferrer">
                 <MobilePrimaryButton className="uppercase text-center shadow-lg">
                   Order Online
                 </MobilePrimaryButton>

@@ -52,7 +52,7 @@ const MobileAccoladesSection = memo(function MobileAccoladesSection() {
             <p className="text-sm italic font-montserrat mb-4 text-white/90 break-words">{"Where spice meets soul – Indian cuisine, reimagined with passion and precision."}</p>
 
             <div className="flex flex-col gap-3 w-full">
-              <Link href="/order" className="w-full">
+              <Link href="https://akasa.oddle.me/en_SG/" className="w-full" target="_blank" rel="noopener noreferrer">
                 <MobilePrimaryButton className="text-center shadow-lg">
                   Order Online
                 </MobilePrimaryButton>

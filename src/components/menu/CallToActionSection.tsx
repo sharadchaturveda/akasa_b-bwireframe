@@ -19,7 +19,7 @@ const CallToActionSection = memo(function CallToActionSection() {
               {"Reserve a Table"}
             </Button>
           </Link>
-          <Link href="/order">
+          <Link href="https://akasa.oddle.me/en_SG/" target="_blank" rel="noopener noreferrer">
             <Button className="w-[180px]">
               {"Order Online"}
             </Button>

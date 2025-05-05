@@ -165,9 +165,11 @@ const MobileFeaturedDishesSection = memo(function MobileFeaturedDishesSection() 
             <p className="text-sm text-white/80 mb-3">{featuredDishes[currentIndex].description}</p>
 
             {/* Order button */}
-            <button className="w-full py-2 px-4 bg-[#1A2A3A] text-white text-sm rounded-full relative overflow-hidden">
-              <span className="relative z-10">Order Now</span>
-            </button>
+            <a href="https://akasa.oddle.me/en_SG/" target="_blank" rel="noopener noreferrer" className="block w-full">
+              <button className="w-full py-2 px-4 bg-[#1A2A3A] text-white text-sm rounded-full relative overflow-hidden">
+                <span className="relative z-10">Order Now</span>
+              </button>
+            </a>
           </div>
 
           {/* Dots indicator */}

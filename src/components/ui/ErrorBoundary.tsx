@@ -1,37 +1,74 @@
 "use client";
 
-import React, { Component, ErrorInfo, ReactNode } from "react";
+import { Component, ErrorInfo, ReactNode } from "react";
 import { WithChildrenProps } from "@/types/common";
+import Button from "./button";
+import { COLORS } from "@/constants";
 
-interface ErrorBoundaryProps extends WithChildrenProps {
+/**
+ * Props for the ErrorBoundary component
+ */
+export interface ErrorBoundaryProps extends WithChildrenProps {
   /**
-   * Fallback component to render when an error occurs
+   * Custom fallback component to render when an error occurs
    */
   fallback?: ReactNode;
+
   /**
    * Whether to log errors to the console
+   * @default true
    */
   logErrors?: boolean;
+
   /**
-   * Custom error handler
+   * Function to call when an error occurs
    */
   onError?: (error: Error, errorInfo: ErrorInfo) => void;
 }
 
+/**
+ * State for the ErrorBoundary component
+ */
 interface ErrorBoundaryState {
+  /**
+   * Whether an error has occurred
+   */
   hasError: boolean;
+
+  /**
+   * The error that occurred
+   */
   error: Error | null;
+
+  /**
+   * Information about the error
+   */
+  errorInfo: ErrorInfo | null;
 }
 
 /**
  * ErrorBoundary Component
- * 
- * A component that catches JavaScript errors anywhere in its child component tree,
- * logs those errors, and displays a fallback UI instead of the component tree that crashed.
- * 
+ *
+ * A component that catches JavaScript errors in its child component tree,
+ * logs those errors, and displays a fallback UI instead of the component
+ * tree that crashed.
+ *
  * @example
  * ```tsx
- * <ErrorBoundary fallback={<p>Something went wrong</p>}>
+ * <ErrorBoundary>
+ *   <ComponentThatMightError />
+ * </ErrorBoundary>
+ * ```
+ *
+ * @example
+ * ```tsx
+ * <ErrorBoundary
+ *   fallback={<CustomErrorComponent />}
+ *   onError={(error, errorInfo) => {
+ *     // Log error to an error reporting service
+ *     reportError(error, errorInfo);
+ *   }}
+ * >
  *   <ComponentThatMightError />
  * </ErrorBoundary>
  * ```
@@ -39,12 +76,20 @@ interface ErrorBoundaryState {
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
-    this.state = { hasError: false, error: null };
+    this.state = {
+      hasError: false,
+      error: null,
+      errorInfo: null
+    };
   }
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     // Update state so the next render will show the fallback UI
-    return { hasError: true, error };
+    return {
+      hasError: true,
+      error,
+      errorInfo: null
+    };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
@@ -53,26 +98,53 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       console.error("Error caught by ErrorBoundary:", error, errorInfo);
     }
 
-    // Call the custom error handler if provided
+    // Update state with error info
+    this.setState({
+      errorInfo
+    });
+
+    // Call the onError callback if provided
     if (this.props.onError) {
       this.props.onError(error, errorInfo);
     }
   }
 
+  handleReset = (): void => {
+    this.setState({
+      hasError: false,
+      error: null,
+      errorInfo: null
+    });
+  };
+
   render(): ReactNode {
     if (this.state.hasError) {
-      // Render the fallback UI if provided, otherwise render a default error message
-      return this.props.fallback || (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-md">
-          <h2 className="text-lg font-medium text-red-800">Something went wrong</h2>
-          <p className="mt-2 text-sm text-red-700">
-            {this.state.error?.message || "An unexpected error occurred"}
+      // Render the fallback UI if provided
+      if (this.props.fallback) {
+        return this.props.fallback;
+      }
+
+      // Otherwise, render the default fallback UI
+      return (
+        <div className="flex flex-col items-center justify-center min-h-[300px] p-6 bg-black/90 rounded-lg text-white">
+          <h2 className="text-xl font-bold mb-4">Something went wrong</h2>
+          <p className="mb-6 text-center text-white/80">
+            An error occurred while rendering this component.
           </p>
+          <div className="mb-6 max-w-full overflow-auto p-4 bg-black/50 rounded text-sm">
+            <p className="font-bold text-red-400">{this.state.error?.toString()}</p>
+            {this.state.errorInfo && (
+              <pre className="mt-2 text-white/70 whitespace-pre-wrap">
+                {this.state.errorInfo.componentStack}
+              </pre>
+            )}
+          </div>
+          <Button onClick={this.handleReset}>Try Again</Button>
         </div>
       );
     }
 
-    // If there's no error, render the children
+    // Render children if there's no error
     return this.props.children;
   }
 }
