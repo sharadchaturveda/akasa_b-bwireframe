@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useMemo } from 'react';
 import { isMobileDevice } from '@/utils/mobileUtils';
 import { debounce } from '@/utils/functionUtils';
 import "@/styles/mobile-fixes.css";
@@ -21,11 +21,9 @@ export default function MobileClassProvider({
   const initializedRef = useRef(false);
   const mobileStylesLoadedRef = useRef(false);
 
-  // Effect to handle mobile-specific functionality after initial render
-  useEffect(() => {
-    // Skip if already initialized to prevent duplicate processing
-    if (initializedRef.current) return;
-    initializedRef.current = true;
+  // Create a memoized function to check and apply mobile classes
+  const checkAndApplyMobileClasses = useCallback(() => {
+    const isMobile = isMobileDevice();
 
     // Function to apply mobile optimizations
     const applyMobileOptimizations = () => {
@@ -62,11 +60,6 @@ export default function MobileClassProvider({
       }
 
       // Disable hover effects specifically
-      disableHoverEffects();
-    };
-
-    // Function to disable hover effects
-    const disableHoverEffects = () => {
       // Add a style element with rules to disable hover effects
       const styleEl = document.createElement('style');
       styleEl.id = 'mobile-hover-disable';
@@ -124,27 +117,29 @@ export default function MobileClassProvider({
       document.head.appendChild(styleEl);
     };
 
-    // Function to check and apply mobile classes
-    const checkAndApplyMobileClasses = () => {
-      const isMobile = isMobileDevice();
+    if (isMobile) {
+      // Apply mobile-specific classes to html element
+      document.documentElement.classList.add('mobile-device');
+      applyMobileOptimizations();
+    } else {
+      document.documentElement.classList.remove('mobile-device');
+    }
+  }, []);
 
-      if (isMobile) {
-        // Apply mobile-specific classes to html element
-        document.documentElement.classList.add('mobile-device');
-        applyMobileOptimizations();
-      } else {
-        document.documentElement.classList.remove('mobile-device');
-      }
-    };
+  // Create a debounced version of the check function
+  const debouncedCheck = useMemo(() =>
+    debounce(checkAndApplyMobileClasses, 250),
+    [checkAndApplyMobileClasses]
+  );
+
+  // Effect to handle mobile-specific functionality after initial render
+  useEffect(() => {
+    // Skip if already initialized to prevent duplicate processing
+    if (initializedRef.current) return;
+    initializedRef.current = true;
 
     // Initial check
     checkAndApplyMobileClasses();
-
-    // Create a debounced version of the check function
-    const debouncedCheck = useCallback(
-      debounce(checkAndApplyMobileClasses, 250),
-      [checkAndApplyMobileClasses]
-    );
 
     // Add event listeners
     window.addEventListener('resize', debouncedCheck);
@@ -155,7 +150,7 @@ export default function MobileClassProvider({
       window.removeEventListener('resize', debouncedCheck);
       window.removeEventListener('orientationchange', checkAndApplyMobileClasses);
     };
-  }, []);
+  }, [checkAndApplyMobileClasses, debouncedCheck]);
 
   // Simply render children - all mobile-specific logic is in effects
   return <>{children}</>;

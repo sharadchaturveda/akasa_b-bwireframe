@@ -43,13 +43,14 @@ const MobileEventsTestimonialsSection = memo(function MobileEventsTestimonialsSe
 
   // Auto-rotate testimonials effect
   useEffect(() => {
+    const testimonialsCount = testimonials.length;
     const interval = setInterval(() => {
-      setCurrentIndex(prev => (prev + 1) % testimonials.length);
+      setCurrentIndex(prev => (prev + 1) % testimonialsCount);
     }, 5000);
 
     // Cleanup function to clear the interval when component unmounts
     return () => clearInterval(interval);
-  }, [testimonials.length]); // Only re-run if testimonials array length changes
+  }, []); // No dependencies needed as testimonials is defined outside the component
 
   return (
     <section className="w-full bg-black py-12 relative overflow-hidden mobile-container">
