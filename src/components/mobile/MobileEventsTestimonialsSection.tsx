@@ -5,16 +5,6 @@ import Image from "next/image";
 
 /**
  * Testimonials data for the Events page mobile view
- *
- * Defined outside the component to prevent re-creation on each render
- * This improves performance by avoiding unnecessary object allocations
- *
- * Each testimonial includes:
- * - id: Unique identifier
- * - quote: The testimonial text
- * - author: Name of the person giving the testimonial
- * - position: Role or company of the testimonial author
- * - image: Path to the author's avatar image
  */
 const testimonials = [
   {
@@ -45,31 +35,13 @@ const testimonials = [
  *
  * A mobile-optimized version of the Events page testimonials section that
  * displays testimonials in a carousel format with auto-rotation.
- *
- * Features:
- * - Auto-rotating testimonial carousel with 5-second interval
- * - Touch-friendly navigation dots
- * - Optimized background image loading
- * - Decorative animated particles for visual interest
- * - Proper z-index layering for all elements
- *
- * @returns {JSX.Element} A mobile-optimized testimonials carousel section
  */
 const MobileEventsTestimonialsSection = memo(function MobileEventsTestimonialsSection() {
 
   // State to track which testimonial is currently displayed in the carousel
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  /**
-   * Auto-rotate testimonials effect
-   *
-   * Sets up an interval to automatically advance to the next testimonial
-   * every 5 seconds (5000ms). The modulo operator ensures we loop back
-   * to the first testimonial after reaching the end.
-   *
-   * The cleanup function clears the interval when the component unmounts
-   * to prevent memory leaks.
-   */
+  // Auto-rotate testimonials effect
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex(prev => (prev + 1) % testimonials.length);
@@ -81,35 +53,31 @@ const MobileEventsTestimonialsSection = memo(function MobileEventsTestimonialsSe
 
   return (
     <section className="w-full bg-black py-12 relative overflow-hidden mobile-container">
-      {/* Background image - Using next/image for better performance and optimization */}
+      {/* Background image */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/events/testimonials/background.jpg"
           alt="Testimonials background"
           fill
-          sizes="100vw" // Full viewport width since this is a background
+          sizes="100vw"
           className="object-cover"
-          quality={60} // Lower quality is acceptable for a dimmed background
-          loading="lazy" // This component is below the fold
+          quality={60}
+          loading="lazy"
           priority={false}
         />
       </div>
 
-      {/* Dark gradient overlay to improve text readability over the background image */}
+      {/* Dark gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black z-[1]"></div>
 
-      {/*
-        Subtle animated particles for visual interest
-        These small dots float slowly around the background for a subtle elegant effect
-        The z-index ensures they appear above the background but below the content
-      */}
+      {/* Animated particles */}
       <div className="absolute inset-0 opacity-20 pointer-events-none z-[2]">
         <div className="absolute top-1/4 left-1/4 w-1 h-1 rounded-full bg-[#E6C78B] animate-float" style={{ animationDuration: '15s' }}></div>
         <div className="absolute top-1/3 left-2/3 w-1 h-1 rounded-full bg-[#E6C78B] animate-float" style={{ animationDuration: '20s' }}></div>
         <div className="absolute top-2/3 left-1/3 w-1 h-1 rounded-full bg-[#E6C78B] animate-float" style={{ animationDuration: '25s' }}></div>
       </div>
 
-      {/* Main content container with highest z-index to appear above all background elements */}
+      {/* Main content container */}
       <div className="container mx-auto px-4 relative z-[3]">
         {/* Section heading with mobile-specific text sizes */}
         <div className="text-center mb-8">
@@ -117,12 +85,8 @@ const MobileEventsTestimonialsSection = memo(function MobileEventsTestimonialsSe
           <div className="w-16 h-[1px] bg-gradient-to-r from-[#E6C78B]/80 to-transparent mx-auto"></div>
         </div>
 
-        {/*
-          Testimonial carousel - simplified for mobile devices
-          Only one testimonial is visible at a time, with others hidden
-        */}
+        {/* Testimonial carousel */}
         <div className="max-w-sm mx-auto">
-          {/* Map through testimonials and show only the current one */}
           {testimonials.map((testimonial, index) => (
             <div
               key={testimonial.id}
@@ -131,33 +95,26 @@ const MobileEventsTestimonialsSection = memo(function MobileEventsTestimonialsSe
               }`}
             >
               <div className="bg-black/40 border border-white/10 rounded-lg p-5 text-center">
-                {/* Author avatar image */}
                 <div className="w-16 h-16 mx-auto mb-4 relative rounded-full overflow-hidden border-2 border-[#E6C78B]/30">
                   <Image
                     src={testimonial.image}
                     alt={testimonial.author}
                     fill
-                    sizes="64px" // Small avatar image
+                    sizes="64px"
                     className="object-cover"
-                    quality={75} // Higher quality for faces
+                    quality={75}
                   />
                 </div>
 
-                {/* Testimonial quote text */}
                 <p className="text-mobile-sm text-sm italic text-white/90 mb-4 text-container">"{testimonial.quote}"</p>
 
-                {/* Author name and position */}
                 <p className="text-mobile-sm text-sm font-medium text-white">{testimonial.author}</p>
                 <p className="text-mobile-xs text-xs text-white/60">{testimonial.position}</p>
               </div>
             </div>
           ))}
 
-          {/*
-            Carousel navigation dots - enhanced for touch devices
-            Each dot has a larger touch target (min-w-[24px] min-h-[24px])
-            while maintaining a small visual appearance
-          */}
+          {/* Carousel navigation dots */}
           <div className="flex justify-center gap-3 mt-4">
             {testimonials.map((_, index) => (
               <button

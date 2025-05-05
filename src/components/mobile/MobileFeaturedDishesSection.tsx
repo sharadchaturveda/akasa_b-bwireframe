@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useState, useEffect } from "react";
+import { memo, useState } from "react";
 import Image from "next/image";
 
 /**
@@ -10,21 +10,6 @@ import Image from "next/image";
  * Using the same content as the desktop version
  */
 const MobileFeaturedDishesSection = memo(function MobileFeaturedDishesSection() {
-  // Add image loading optimization
-  useEffect(() => {
-    // Add loaded class to images when they finish loading
-    const images = document.querySelectorAll('.mobile-dish-card img');
-    images.forEach((img: Element) => {
-      const imgElement = img as HTMLImageElement;
-      if (imgElement.complete) {
-        imgElement.classList.add('loaded');
-      } else {
-        imgElement.onload = () => {
-          imgElement.classList.add('loaded');
-        };
-      }
-    });
-  }, []);
 
   // Featured signature dishes - vegetarian dishes first, same as desktop
   const featuredDishes = [

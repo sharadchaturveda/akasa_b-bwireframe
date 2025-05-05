@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { isMobileDevice } from '@/utils/mobileUtils';
+import { debounce } from '@/utils/functionUtils';
 import "@/styles/mobile-fixes.css";
 
 /**
@@ -139,26 +140,20 @@ export default function MobileClassProvider({
     // Initial check
     checkAndApplyMobileClasses();
 
-    // Debounced resize handler to avoid performance issues
-    let resizeTimer: NodeJS.Timeout;
-    const handleResize = () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        checkAndApplyMobileClasses();
-      }, 250);
-    };
+    // Create a debounced version of the check function
+    const debouncedCheck = useCallback(
+      debounce(checkAndApplyMobileClasses, 250),
+      [checkAndApplyMobileClasses]
+    );
 
     // Add event listeners
-    window.addEventListener('resize', handleResize);
-
-    // Also check on orientation change for mobile devices
+    window.addEventListener('resize', debouncedCheck);
     window.addEventListener('orientationchange', checkAndApplyMobileClasses);
 
     // Cleanup
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', debouncedCheck);
       window.removeEventListener('orientationchange', checkAndApplyMobileClasses);
-      clearTimeout(resizeTimer);
     };
   }, []);
 

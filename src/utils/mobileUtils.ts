@@ -5,6 +5,11 @@
  * Keeping mobile-specific code separate helps with maintainability and debugging.
  */
 
+import { debounce } from './functionUtils';
+
+// Re-export debounce from functionUtils for backward compatibility
+export { debounce };
+
 /**
  * Detects if the current device is a mobile device
  *
@@ -41,31 +46,4 @@ export const optimizeImagesForMobile = (): void => {
       img.style.display = 'none';
     };
   });
-};
-
-/**
- * Debounce function to limit the rate at which a function can fire
- *
- * @template T - Function type
- * @param {T} func - The function to debounce
- * @param {number} wait - The time to wait in milliseconds
- * @returns {(...args: Parameters<T>) => void} A debounced version of the function
- */
-export function debounce<T extends (...args: never[]) => void>(
-  func: T,
-  wait: number
-): (...args: Parameters<T>) => void {
-  let timeout: ReturnType<typeof setTimeout> | null = null;
-
-  return function(...args: Parameters<T>) {
-    const later = () => {
-      timeout = null;
-      func(...args);
-    };
-
-    if (timeout !== null) {
-      clearTimeout(timeout);
-    }
-    timeout = setTimeout(later, wait);
-  };
 };

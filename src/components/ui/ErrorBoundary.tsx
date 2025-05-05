@@ -3,7 +3,6 @@
 import { Component, ErrorInfo, ReactNode } from "react";
 import { WithChildrenProps } from "@/types/common";
 import Button from "./button";
-import { COLORS } from "@/constants";
 
 /**
  * Props for the ErrorBoundary component

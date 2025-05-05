@@ -2,25 +2,12 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { isMobileDevice } from "@/utils/mobileUtils";
+import { useDeviceDetection } from "@/hooks/useDeviceDetection";
 import MobileAccoladesSection from "@/components/mobile/MobileAccoladesSection";
 
 export default function AccoladesSection() {
-  // State for device detection
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Detect mobile device on client side
-  useEffect(() => {
-    setIsMobile(isMobileDevice());
-
-    const handleResize = () => {
-      setIsMobile(isMobileDevice());
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  // Use the device detection hook
+  const { isMobile } = useDeviceDetection();
 
   // Render mobile-specific component for mobile devices
   if (isMobile) {
