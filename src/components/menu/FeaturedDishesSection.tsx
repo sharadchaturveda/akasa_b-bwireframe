@@ -94,18 +94,18 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
           </div>
         </div>
 
-        {/* Fancy dish cards with hover effects */}
+        {/* Fancy dish cards with hover effects - Fixed equal height */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {featuredDishes.map((dish, index) => (
             <div
               key={index}
-              className="group relative dish-card"
+              className="group relative dish-card h-full flex flex-col"
             >
               {/* Card background with subtle glow effect */}
               <div className="absolute -inset-0.5 bg-gradient-to-r from-[#E6C78B]/0 via-[#E6C78B]/30 to-[#E6C78B]/0 rounded-lg blur opacity-0 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
 
-              <div className="relative bg-black/80 backdrop-blur-sm border border-white/5 rounded-lg overflow-hidden transition-all duration-500 group-hover:shadow-[0_0_25px_rgba(230,199,139,0.2)]">
-                {/* Dish image with fancy overlay effects */}
+              <div className="relative bg-black/80 backdrop-blur-sm border border-white/5 rounded-lg overflow-hidden transition-all duration-500 group-hover:shadow-[0_0_25px_rgba(230,199,139,0.2)] flex flex-col h-full">
+                {/* Dish image with fancy overlay effects - Fixed height */}
                 <div className="relative h-[280px] overflow-hidden">
                   <Image
                     src={`${dish.image}?quality=75&width=800`}
@@ -131,8 +131,8 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
                   <div className="absolute top-0 left-0 w-12 h-12 border-t border-l border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
 
-                {/* Dish content with elegant styling */}
-                <div className="p-8 relative">
+                {/* Dish content with elegant styling - Fixed height content area */}
+                <div className="p-8 relative flex flex-col flex-grow">
                   {/* Decorative corner accent */}
                   <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
@@ -141,19 +141,24 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
                     <span className="text-[#E6C78B] font-medium text-lg">{dish.price}</span>
                   </div>
 
-                  <p className="text-white/70 font-montserrat text-sm mb-6 leading-relaxed">{dish.description}</p>
+                  {/* Fixed height description container */}
+                  <div className="h-[120px] overflow-hidden mb-6">
+                    <p className="text-white/70 font-montserrat text-sm leading-relaxed">{dish.description}</p>
+                  </div>
 
-                  {/* Standardized button */}
-                  <a href="https://akasa.oddle.me/en_SG/" target="_blank" rel="noopener noreferrer">
-                    <button className="group inline-flex items-center justify-center rounded-full text-sm font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-4 py-2">
-                      {/* Gold fill animation */}
-                      <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
+                  {/* Standardized button - positioned at the bottom */}
+                  <div className="mt-auto">
+                    <a href="https://akasa.oddle.me/en_SG/" target="_blank" rel="noopener noreferrer">
+                      <button className="group inline-flex items-center justify-center rounded-full text-sm font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-4 py-2">
+                        {/* Gold fill animation */}
+                        <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
 
-                      <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
-                        Order Now
-                      </span>
-                    </button>
-                  </a>
+                        <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
+                          Order Now
+                        </span>
+                      </button>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
