@@ -99,11 +99,11 @@ const OfferCard = memo(function OfferCard({
   link: string;
 }) {
   return (
-    <div className="group relative">
+    <div className="group relative h-full">
       {/* Card background with subtle glow effect */}
       <div className="absolute -inset-0.5 bg-gradient-to-r from-[#E6C78B]/0 via-[#E6C78B]/30 to-[#E6C78B]/0 rounded-lg blur opacity-0 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
 
-      <div className="relative bg-black/80 backdrop-blur-sm border border-white/5 rounded-lg overflow-hidden transition-all duration-500 group-hover:shadow-[0_0_25px_rgba(230,199,139,0.2)]">
+      <div className="relative bg-black/80 backdrop-blur-sm border border-white/5 rounded-lg overflow-hidden transition-all duration-500 group-hover:shadow-[0_0_25px_rgba(230,199,139,0.2)] h-full flex flex-col">
         <div className="relative h-[350px] overflow-hidden">
           {/* Decorative corner accent */}
           <div className="absolute top-0 left-0 w-12 h-12 border-t border-l border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
@@ -130,8 +130,8 @@ const OfferCard = memo(function OfferCard({
           </div>
         </div>
 
-        <div className="p-8 relative">
-          <h3 className="text-2xl font-playfair mb-4 group-hover:text-[#E6C78B] transition-colors duration-300">
+        <div className="p-8 relative flex-1 flex flex-col">
+          <h3 className="text-2xl font-playfair mb-4 group-hover:text-[#E6C78B] transition-colors duration-300 min-h-[4rem]">
             {title.emphasize ? (
               <>
                 {title.text.split(title.emphasize)[0]}
@@ -142,28 +142,30 @@ const OfferCard = memo(function OfferCard({
               title.text
             )}
           </h3>
-          <p className="text-white/70 text-sm mb-6 leading-relaxed">{description}</p>
+          <p className="text-white/70 text-sm mb-6 leading-relaxed min-h-[4.5rem]">{description}</p>
 
-          {/* Fancy promo code display */}
-          <div className="bg-[#1A2A3A] p-4 rounded-lg mb-6 border border-[#E6C78B]/20 relative overflow-hidden group-hover:border-[#E6C78B]/40 transition-colors duration-300">
-            <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-[#E6C78B]/0 via-[#E6C78B]/30 to-[#E6C78B]/0"></div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-white/80">Promo Code:</span>
-              <span className="font-medium text-[#E6C78B] text-lg tracking-wider">{code}</span>
+          <div className="mt-auto">
+            {/* Fancy promo code display */}
+            <div className="bg-[#1A2A3A] p-4 rounded-lg mb-6 border border-[#E6C78B]/20 relative overflow-hidden group-hover:border-[#E6C78B]/40 transition-colors duration-300">
+              <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-[#E6C78B]/0 via-[#E6C78B]/30 to-[#E6C78B]/0"></div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-white/80">Promo Code:</span>
+                <span className="font-medium text-[#E6C78B] text-lg tracking-wider">{code}</span>
+              </div>
             </div>
+
+            {/* Standardized button */}
+            <Link href={link}>
+              <button className="group inline-flex items-center justify-center rounded-full text-sm font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-6 py-3 w-full">
+                {/* Gold fill animation */}
+                <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
+
+                <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
+                  Redeem Offer
+                </span>
+              </button>
+            </Link>
           </div>
-
-          {/* Standardized button */}
-          <Link href={link}>
-            <button className="group inline-flex items-center justify-center rounded-full text-sm font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-6 py-3 w-full">
-              {/* Gold fill animation */}
-              <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
-
-              <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
-                Redeem Offer
-              </span>
-            </button>
-          </Link>
         </div>
       </div>
     </div>
@@ -239,7 +241,7 @@ const CurrentOffersSection = memo(function CurrentOffersSection() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 auto-rows-fr">
           {offers.map((offer, index) => (
             <OfferCard
               key={index}
