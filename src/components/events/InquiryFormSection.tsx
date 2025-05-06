@@ -141,7 +141,7 @@ const InquiryFormSection = memo(function InquiryFormSection() {
 
             {/* Submit button - full width on mobile, auto width on desktop */}
             <div className="text-center mt-4">
-              <Button className="bg-[#E6C78B] text-black hover:bg-[#D4B679] px-8 py-3 w-full md:w-auto">
+              <Button className="bg-[#1A2A3A] text-white px-8 py-3 w-full md:w-auto">
                 Submit Inquiry
               </Button>
             </div>

@@ -54,14 +54,14 @@ const EventListingsSection = memo(function EventListingsSection({
         (el as HTMLElement).style.opacity = '0.1';
       });
     };
-    
+
     // Run immediately and then every second for 5 seconds to ensure visibility
     forcePatternVisibility();
     const interval = setInterval(forcePatternVisibility, 1000);
-    
+
     // Clean up after 5 seconds
     setTimeout(() => clearInterval(interval), 5000);
-    
+
     return () => clearInterval(interval);
   }, []);
 
@@ -87,7 +87,7 @@ const EventListingsSection = memo(function EventListingsSection({
         {filteredEvents.map((event, index) => {
           // Use standard flex-row for all, but control order for specific categories
           const isSpecialCategory = event.category === 'anniversary' || event.category === 'office-parties';
-          
+
           return (
             <div
               key={event.id}
@@ -106,7 +106,7 @@ const EventListingsSection = memo(function EventListingsSection({
                   className="object-cover transition-transform duration-1000 group-hover:scale-110 filter group-hover:brightness-110"
                   quality={85}
                 />
-                
+
                 {/* Gradient overlay */}
                 <div
                   className="absolute inset-0 bg-gradient-to-r transition-opacity duration-700"
@@ -128,21 +128,21 @@ const EventListingsSection = memo(function EventListingsSection({
 
                 {/* Shine effect */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-20 transition-opacity duration-700"></div>
-                
+
                 {/* Decorative corner accents */}
                 <div className="absolute top-6 left-6 w-20 h-20 border-t-2 border-l-2 border-[#E6C78B]/0 group-hover:border-[#E6C78B]/60 transition-all duration-700 z-10 group-hover:w-24 group-hover:h-24"></div>
                 <div className="absolute bottom-6 right-6 w-20 h-20 border-b-2 border-r-2 border-[#E6C78B]/0 group-hover:border-[#E6C78B]/60 transition-all duration-700 z-10 group-hover:w-24 group-hover:h-24"></div>
               </div>
 
               {/* Event Description Container */}
-              <div 
+              <div
                 className={`p-6 md:p-16 bg-black w-full md:w-3/5 flex flex-col justify-center relative group/desc ${
                   isSpecialCategory ? 'md:order-1' : index % 2 === 0 ? 'md:order-2' : 'md:order-1'
                 }`}
               >
                 {/* Custom background pattern based on event category with fallback */}
-                <div 
-                  className="absolute inset-0 opacity-15 pointer-events-none z-0" 
+                <div
+                  className="absolute inset-0 opacity-15 pointer-events-none z-0"
                   style={{
                     backgroundImage: `url('/images/events/backgrounds/${event.category}-pattern.png'), url('/images/events/backgrounds/default-pattern.png')`,
                     backgroundSize: 'cover',
@@ -193,10 +193,13 @@ const EventListingsSection = memo(function EventListingsSection({
                     <span className="text-xs md:text-sm uppercase tracking-wider">Starting at</span>
                     <div className="text-xl md:text-2xl font-medium">${event.price}</div>
                   </div>
-                  
-                  {/* Inquiry button with proper mobile spacing */}
+
+                  {/* Inquiry button with proper mobile spacing and gold fill animation */}
                   <Link href="#inquiry" prefetch={true}>
                     <button className="group inline-flex items-center justify-center rounded-full text-xs md:text-sm font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-4 md:px-6 py-2 md:py-3 min-w-[120px] md:min-w-[160px]">
+                      {/* Gold fill animation */}
+                      <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
+
                       {/* Button text that changes color on hover */}
                       <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
                         Inquire Now
