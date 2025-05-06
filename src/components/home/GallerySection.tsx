@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import DesktopGallery from "./DesktopGallery";
-import MobileGallery from "./MobileGallery";
+
 
 const GallerySection = memo(function GallerySection() {
   return (
@@ -14,7 +14,7 @@ const GallerySection = memo(function GallerySection() {
       <DesktopGallery />
 
       {/* Mobile gallery component */}
-      <MobileGallery />
+      <></>
 
       {/* Private Dining Promotion */}
       <div className="h-[40vh] w-full bg-[#1e1e1e] text-white">

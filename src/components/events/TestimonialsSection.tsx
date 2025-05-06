@@ -12,7 +12,7 @@ import Image from "next/image";
 const testimonials = [
   {
     quote: "The private dining experience at Akasa exceeded all our expectations. The attention to detail was impeccable.",
-    author: "Sarah Johnson",
+    author: "Sarah Lawrence",
     event: "Anniversary Dinner"
   },
   {
@@ -21,9 +21,9 @@ const testimonials = [
     event: "Annual Company Dinner"
   },
   {
-    quote: "Chef Akhilesh created a custom menu for our wedding that perfectly reflected our tastes. Our guests are still talking about it!",
+    quote: "Chef Akhilesh made our office party unforgettable. Every dish was a knockout, and our team hasn’t stopped talking about the food since.",
     author: "Priya Patel",
-    event: "Wedding Reception"
+    event: "Office Party"
   }
 ];
 
@@ -37,7 +37,7 @@ const testimonials = [
  */
 const TestimonialsSection = memo(function TestimonialsSection() {
   return (
-    <section className="w-full bg-black py-16 relative">
+    <section className="w-full bg-black pb-16 relative">
       {/* Background image - Using next/image for better performance and optimization */}
       <div className="absolute inset-0 z-0 opacity-30">
         <Image
@@ -58,7 +58,7 @@ const TestimonialsSection = memo(function TestimonialsSection() {
       {/* Main content container with higher z-index to appear above background */}
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         {/* Section heading */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 pt-16"> {/* Added pt-16 for top padding */}
           <h2 className="text-3xl md:text-4xl font-playfair mb-4">What Our Clients Say</h2>
           <p className="text-lg font-montserrat text-white/70 max-w-2xl mx-auto">
             Hear from those who have hosted their special events with us.

@@ -1,28 +1,55 @@
 /**
- * Emergency fix to force the hero text position on mobile
- * This file uses extremely specific selectors and !important rules
- * to override any other styles
+ * Responsive hero position fixes
+ * This file ensures the hero text is positioned correctly on all devices
  */
 
+/* Common styles for all devices */
+.hero-text-container {
+  position: relative;
+  z-index: 10;
+}
+
+/* Mobile-specific adjustments */
 @media (max-width: 767px) {
-  /* Force the hero content to be positioned at the bottom of the hero section */
-  .mobile-hero-content,
-  div[class*="mobile-hero-content"],
-  div.mobile-hero-content,
-  .text-center.relative.z-20.mobile-hero-content,
-  html.mobile-device .mobile-hero-content,
-  section.h-screen .mobile-hero-content,
-  body .mobile-hero-content {
-    position: absolute !important;
-    top: auto !important;
-    bottom: 10% !important;
-    left: 0 !important;
-    right: 0 !important;
-    transform: none !important;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    z-index: 20 !important;
+  .hero-text-container {
+    padding: 0 1rem;
+  }
+
+  .hero-title {
+    font-size: 2.5rem !important;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem !important;
+  }
+}
+
+/* Tablet-specific adjustments */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-text-container {
+    padding: 0 2rem;
+  }
+
+  .hero-title {
+    font-size: 3.5rem !important;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem !important;
+  }
+}
+
+/* Desktop-specific adjustments */
+@media (min-width: 1024px) {
+  .hero-text-container {
+    padding: 0 4rem;
+  }
+
+  .hero-title {
+    font-size: 4.5rem !important;
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem !important;
   }
 }

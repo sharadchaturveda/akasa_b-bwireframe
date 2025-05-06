@@ -5,10 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
-import { memo, useState, useEffect } from "react";
-import { isMobileDevice } from "@/utils/mobileUtils";
-import MobileOptimizer from "@/components/mobile/MobileOptimizer";
-import MobileOffersPage from "@/components/mobile/MobileOffersPage";
+import { memo } from "react";
 
 // Hero Section Component
 const HeroSection = memo(function HeroSection() {
@@ -114,7 +111,7 @@ const OfferCard = memo(function OfferCard({
 
           <Image
             src={image}
-            alt={title}
+            alt={title.text}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -457,27 +454,6 @@ const NewsletterSection = memo(function NewsletterSection() {
 });
 
 export default function OffersPage() {
-  // State for device detection
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Detect mobile device on client side
-  useEffect(() => {
-    setIsMobile(isMobileDevice());
-
-    const handleResize = () => {
-      setIsMobile(isMobileDevice());
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  // If on mobile, render the mobile version
-  if (isMobile) {
-    return <MobileOffersPage />;
-  }
-
-  // Otherwise, render the desktop version (unchanged)
   return (
     <main className="min-h-screen bg-black text-white">
       <Navigation />

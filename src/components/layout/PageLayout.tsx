@@ -3,8 +3,6 @@
 import { memo } from "react";
 import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
-import { useDeviceDetection } from "@/hooks/useDeviceDetection";
-import MobileOptimizer from "@/components/mobile/MobileOptimizer";
 import ErrorBoundary from "@/components/ui/ErrorBoundary";
 import { LayoutProps } from "@/types/common";
 
@@ -19,15 +17,11 @@ import { LayoutProps } from "@/types/common";
  */
 const PageLayout = memo(function PageLayout({
   children,
-  className = "",
-  withMobileOptimizer = true
+  className = ""
 }: LayoutProps) {
-  const { isMobile } = useDeviceDetection();
-
   return (
     <ErrorBoundary>
       <main className={`min-h-screen bg-black text-white ${className}`}>
-        {withMobileOptimizer && isMobile && <MobileOptimizer />}
         <Navigation />
         <ErrorBoundary>
           {children}

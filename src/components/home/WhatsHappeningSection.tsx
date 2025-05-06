@@ -4,24 +4,11 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { memo, useEffect, useState } from "react";
 import Image from "next/image";
-import { isMobileDevice } from "@/utils/mobileUtils";
-import MobileWhatsHappeningButton from "@/components/mobile/MobileWhatsHappeningButton";
+
+
 
 const WhatsHappeningSection = memo(function WhatsHappeningSection() {
   const [isVisible, setIsVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Detect mobile device on client side
-  useEffect(() => {
-    setIsMobile(isMobileDevice());
-
-    const handleResize = () => {
-      setIsMobile(isMobileDevice());
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   useEffect(() => {
     // Use Intersection Observer to detect when component is in viewport
@@ -71,9 +58,7 @@ const WhatsHappeningSection = memo(function WhatsHappeningSection() {
           </div>
 
           {/* Subtle overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent md:block hidden"></div>
-          {/* Mobile-specific overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70 md:hidden block"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent"></div>
         </div>
 
         {/* Right side content - Optimized for mobile */}
@@ -112,15 +97,11 @@ const WhatsHappeningSection = memo(function WhatsHappeningSection() {
             </p>
 
             <div className="animate-fadeSlideUp flex justify-center md:justify-start" style={{ animationDelay: '0.5s' }}>
-              {isMobile ? (
-                <MobileWhatsHappeningButton href="/events" text="Find Out More" />
-              ) : (
-                <Link href="/events" className="w-full sm:w-auto">
-                  <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full sm:w-[200px] md:w-[240px] text-center shadow-lg text-sm sm:text-base">
-                    <span className="whitespace-nowrap">Find Out More</span>
-                  </Button>
-                </Link>
-              )}
+              <Link href="/events" className="w-full sm:w-auto">
+                <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full sm:w-[200px] md:w-[240px] text-center shadow-lg text-sm sm:text-base">
+                  <span className="whitespace-nowrap">Find Out More</span>
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

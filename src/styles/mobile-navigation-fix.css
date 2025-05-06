@@ -1,0 +1,38 @@
+/* Mobile navigation fixes */
+@media (max-width: 767px) {
+  /* Remove padding from the top of the page */
+  body {
+    padding-top: 0;
+  }
+  
+  /* Ensure the mobile navigation is always visible on mobile */
+  .mobile-nav-header {
+    display: flex !important;
+  }
+}
+
+/* Desktop-specific styles */
+@media (min-width: 768px) {
+  /* Ensure mobile navigation is hidden on desktop */
+  .mobile-nav-header,
+  .mobile-menu-overlay {
+    display: none !important;
+  }
+}
+
+/* Fix z-index issues */
+.z-50 {
+  z-index: 50;
+}
+
+.z-40 {
+  z-index: 40;
+}
+
+/* Force hiding with !important */
+.hidden-important {
+  display: none !important;
+}
+
+
+

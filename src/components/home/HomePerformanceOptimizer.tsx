@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { initPerformanceMonitoring } from '@/utils/performanceMonitor';
+import { isInExcludedTree } from '@/utils/optimizationExclusions';
 
 /**
  * HomePerformanceOptimizer Component
@@ -13,7 +14,22 @@ import { initPerformanceMonitoring } from '@/utils/performanceMonitor';
  */
 export default function HomePerformanceOptimizer() {
   useEffect(() => {
-    // Initialize performance monitoring
+    // Only run in browser environment
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return;
+    }
+
+    // Check if we're on the reservations page or if the dining-info-container is present
+    const isReservationsPage = window.location.pathname.includes('/reservations');
+    const hasDiningInfo = document.querySelector('.dining-info-container') !== null;
+
+    // If we're on the reservations page or have the dining info component, don't apply any optimizations
+    if (isReservationsPage || hasDiningInfo) {
+      console.log('HomePerformanceOptimizer: Reservations page or dining info detected, skipping optimizations');
+      return;
+    }
+
+    // Initialize performance monitoring only if no ReservationInfo component
     initPerformanceMonitoring();
 
     // Define the optimization function inside useEffect
@@ -25,8 +41,22 @@ export default function HomePerformanceOptimizer() {
     };
 
     const optimizeImageLoading = () => {
+      // Only run in browser environment
+      if (typeof window === 'undefined' || typeof document === 'undefined') {
+        return;
+      }
+
+      // Double-check for dining info component before applying optimizations
+      if (document.querySelector('.dining-info-container') !== null) {
+        console.log('HomePerformanceOptimizer: Dining info component detected, skipping image optimizations');
+        return;
+      }
+
       // Add loading="lazy" to images below the fold
       document.querySelectorAll('img:not([loading])').forEach((img) => {
+        // Skip elements that should be excluded from optimization
+        if (isInExcludedTree(img)) return;
+
         const rect = img.getBoundingClientRect();
         if (rect.top > window.innerHeight) {
           img.setAttribute('loading', 'lazy');
@@ -35,6 +65,9 @@ export default function HomePerformanceOptimizer() {
 
       // Add fetchpriority="low" to non-critical images
       document.querySelectorAll('img:not([fetchpriority])').forEach((img) => {
+        // Skip elements that should be excluded from optimization
+        if (isInExcludedTree(img)) return;
+
         const rect = img.getBoundingClientRect();
         if (rect.top > window.innerHeight * 2) {
           img.setAttribute('fetchpriority', 'low');
@@ -43,16 +76,33 @@ export default function HomePerformanceOptimizer() {
     };
 
     const optimizeAnimations = () => {
+      // Only run in browser environment
+      if (typeof window === 'undefined' || typeof document === 'undefined') {
+        return;
+      }
+
+      // Double-check for dining info component before applying optimizations
+      if (document.querySelector('.dining-info-container') !== null) {
+        console.log('HomePerformanceOptimizer: Dining info component detected, skipping animation optimizations');
+        return;
+      }
+
       // Disable animations for users who prefer reduced motion
       if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.documentElement.classList.add('reduce-motion');
 
-        // Add a style element to reduce animations
+        // Add a style element to reduce animations, but exclude ReservationInfo
         const style = document.createElement('style');
         style.textContent = `
-          .reduce-motion * {
+          .reduce-motion *:not([data-exclude-optimization="true"]) {
             animation-duration: 0.001ms !important;
             transition-duration: 0.001ms !important;
+          }
+
+          /* Explicitly preserve animations in ReservationInfo */
+          .reduce-motion [data-exclude-optimization="true"] * {
+            animation-duration: initial !important;
+            transition-duration: initial !important;
           }
         `;
         document.head.appendChild(style);
@@ -64,6 +114,15 @@ export default function HomePerformanceOptimizer() {
       if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
+            // Skip elements that should be excluded from optimization
+            if (isInExcludedTree(entry.target)) return;
+
+            // Double-check if this element is part of ReservationInfo
+            if (entry.target.closest('.bg-black\\/40.backdrop-blur-sm') ||
+                entry.target.closest('[data-exclude-optimization="true"]')) {
+              return;
+            }
+
             if (entry.isIntersecting) {
               entry.target.classList.add('animate-running');
             } else {
@@ -72,7 +131,14 @@ export default function HomePerformanceOptimizer() {
           });
         });
 
-        animatedElements.forEach(el => observer.observe(el));
+        // Only observe elements that aren't excluded from optimization
+        animatedElements.forEach(el => {
+          if (!isInExcludedTree(el) &&
+              !el.closest('.bg-black\\/40.backdrop-blur-sm') &&
+              !el.closest('[data-exclude-optimization="true"]')) {
+            observer.observe(el);
+          }
+        });
       }
     };
 

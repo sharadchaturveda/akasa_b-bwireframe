@@ -18,6 +18,12 @@ export const loadPageStyles = (pageName: string): void => {
   const id = `page-styles-${pageName}`;
   if (document.getElementById(id)) return;
 
+  // Special case for reservations page - don't load any optimization styles
+  if (pageName === 'reservations') {
+    console.log('Skipping optimization styles for reservations page');
+    return;
+  }
+
   // Create a new link element
   const link = document.createElement('link');
   link.rel = 'stylesheet';

@@ -5,7 +5,8 @@ import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
 import HeroSection from "@/components/reservations/HeroSection";
 import ReservationForm from "@/components/reservations/ReservationForm";
-import ReservationInfo from "@/components/reservations/ReservationInfo";
+// Import our clean component instead of the old one
+import ReservationInfo from "@/components/reservations/ReservationInfoClean";
 import ReservationFAQ from "@/components/reservations/ReservationFAQ";
 import { loadPageStyles } from '@/utils/loadPageStyles';
 

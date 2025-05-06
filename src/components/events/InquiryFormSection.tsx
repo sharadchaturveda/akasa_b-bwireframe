@@ -23,7 +23,7 @@ import Image from "next/image";
  */
 const InquiryFormSection = memo(function InquiryFormSection() {
   return (
-    <section id="inquiry" className="w-full bg-black py-16 relative">
+    <section id="inquiry" className="w-full bg-black pb-16 relative">
       {/* Background image - Using next/image for better performance and optimization */}
       <div className="absolute inset-0 z-0 opacity-20">
         <Image
@@ -45,10 +45,10 @@ const InquiryFormSection = memo(function InquiryFormSection() {
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="max-w-3xl mx-auto">
           {/* Section heading */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 pt-16"> {/* Added pt-16 for top padding */}
             <h2 className="text-3xl md:text-4xl font-playfair mb-4">Inquire About Your Event</h2>
-            <p className="text-lg font-montserrat text-white/70">
-              Fill out the form below and our events team will get back to you within 24 hours.
+            <p className="text-lg font-montserrat text-white/70 max-w-2xl mx-auto">
+              Let us know what you're planning, and our events team will get back to you shortly.
             </p>
           </div>
 

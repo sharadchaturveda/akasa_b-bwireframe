@@ -23,23 +23,23 @@ export const createPerformanceObserver = (
   if (typeof window === 'undefined' || !('PerformanceObserver' in window)) {
     return null;
   }
-  
+
   try {
     // Create a performance observer
     const observer = new PerformanceObserver((entryList) => {
       callback(entryList.getEntries());
     });
-    
+
     // Start observing the specified entry type
     observer.observe({ type: entryType, buffered: true });
-    
+
     return observer;
   } catch (error) {
     // Log error in development
     if (process.env.NODE_ENV !== 'production') {
       console.error(`Error creating performance observer for ${entryType}:`, error);
     }
-    
+
     return null;
   }
 };
@@ -56,12 +56,12 @@ export const monitorLCP = (
   return createPerformanceObserver('largest-contentful-paint', (entries) => {
     const lastEntry = entries[entries.length - 1];
     const lcp = lastEntry.startTime;
-    
+
     // Call the callback if provided
     if (callback) {
       callback(lcp);
     }
-    
+
     // Log in development
     if (process.env.NODE_ENV !== 'production') {
       console.log('LCP:', lcp);
@@ -79,8 +79,8 @@ export const monitorCLS = (
   callback?: (value: number) => void
 ): PerformanceObserver | null => {
   let clsValue = 0;
-  let clsEntries: PerformanceEntry[] = [];
-  
+  const clsEntries: PerformanceEntry[] = [];
+
   return createPerformanceObserver('layout-shift', (entries) => {
     for (const entry of entries) {
       // Only count layout shifts without recent user input
@@ -89,12 +89,12 @@ export const monitorCLS = (
         clsEntries.push(entry);
       }
     }
-    
+
     // Call the callback if provided
     if (callback) {
       callback(clsValue);
     }
-    
+
     // Log in development
     if (process.env.NODE_ENV !== 'production') {
       console.log('CLS:', clsValue);
@@ -112,14 +112,14 @@ export const monitorFID = (
   callback?: (value: number) => void
 ): PerformanceObserver | null => {
   return createPerformanceObserver('first-input', (entries) => {
-    const firstEntry = entries[0];
+    const firstEntry = entries[0] as any;
     const fid = firstEntry.processingStart - firstEntry.startTime;
-    
+
     // Call the callback if provided
     if (callback) {
       callback(fid);
     }
-    
+
     // Log in development
     if (process.env.NODE_ENV !== 'production') {
       console.log('FID:', fid);
@@ -144,7 +144,7 @@ export const monitorLongTasks = (
         if (callback) {
           callback(entry.duration);
         }
-        
+
         // Log in development
         if (process.env.NODE_ENV !== 'production') {
           console.log('Long task:', entry.duration, 'ms');
@@ -166,12 +166,12 @@ export const monitorInteractions = (
   return createPerformanceObserver('event', (entries) => {
     entries.forEach(entry => {
       const interaction = entry as any;
-      
+
       // Call the callback if provided
       if (callback) {
         callback(interaction.duration, interaction.name);
       }
-      
+
       // Log in development
       if (process.env.NODE_ENV !== 'production') {
         console.log(`Interaction (${interaction.name}):`, interaction.duration, 'ms');
@@ -191,7 +191,7 @@ export const preloadCriticalResources = (
 ): void => {
   // Return if running on the server
   if (typeof window === 'undefined' || !document || !document.head) return;
-  
+
   // Function to preload resources
   const preloadResource = () => {
     resources.forEach(resource => {
@@ -199,12 +199,12 @@ export const preloadCriticalResources = (
       if (document.querySelector(`link[rel="preload"][href="${resource.url}"]`)) {
         return;
       }
-      
+
       // Create preload link
       const link = document.createElement('link');
       link.rel = 'preload';
       link.href = resource.url;
-      
+
       // Set as attribute based on resource type
       switch (resource.type) {
         case 'image':
@@ -221,12 +221,12 @@ export const preloadCriticalResources = (
           link.crossOrigin = 'anonymous';
           break;
       }
-      
+
       // Add to document head
       document.head.appendChild(link);
     });
   };
-  
+
   // Use requestIdleCallback for better performance
   if ('requestIdleCallback' in window) {
     try {
@@ -250,7 +250,7 @@ export const initPerformanceMonitoring = (): void => {
   monitorFID();
   monitorLongTasks();
   monitorInteractions();
-  
+
   // Optimize images
   optimizeImages();
 };
@@ -263,22 +263,22 @@ export const initPerformanceMonitoring = (): void => {
 export const applyPerformanceOptimizations = (): void => {
   // Return if running on the server
   if (typeof window === 'undefined') return;
-  
+
   // Initialize performance monitoring
   initPerformanceMonitoring();
-  
+
   // Optimize images
   optimizeImages();
-  
+
   // Create a throttled scroll handler
   const handleScroll = throttle(() => {
     // Re-optimize images that might have been added dynamically
     optimizeImages();
   }, 1000);
-  
+
   // Add scroll event listener
   window.addEventListener('scroll', handleScroll);
-  
+
   // Optimize font loading
   optimizeFontLoading();
 };
@@ -291,7 +291,7 @@ export const applyPerformanceOptimizations = (): void => {
 const optimizeFontLoading = (): void => {
   // Return if running on the server
   if (typeof window === 'undefined' || !document || !document.fonts) return;
-  
+
   // Use the Font Loading API if available
   if ('fonts' in document) {
     document.fonts.ready.then(() => {

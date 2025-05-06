@@ -1,30 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { barBitesMenu } from "@/data/barBitesMenu";
 import BarBiteCategorySection from "@/components/menu/BarBiteCategorySection";
-import { isMobileDevice } from "@/utils/mobileUtils";
-import MobileBarBiteCategorySection from "@/components/mobile/MobileBarBiteCategorySection";
+
+
 
 export default function BarBitesMenuPage() {
-  // State for device detection
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Detect mobile device on client side
-  useEffect(() => {
-    setIsMobile(isMobileDevice());
-
-    const handleResize = () => {
-      setIsMobile(isMobileDevice());
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   // Load page-specific styles
   useEffect(() => {
@@ -87,11 +73,7 @@ export default function BarBitesMenuPage() {
 
           {/* Menu Categories */}
           {barBitesMenu.categories.map((category, index) => (
-            isMobile ? (
-              <MobileBarBiteCategorySection key={index} category={category} />
-            ) : (
-              <BarBiteCategorySection key={index} category={category} />
-            )
+            <BarBiteCategorySection key={index} category={category} />
           ))}
 
           {/* Back to Menus button */}

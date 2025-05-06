@@ -1,7 +1,7 @@
 "use client";
 
 import { ButtonHTMLAttributes, forwardRef, memo } from "react";
-import { useDeviceDetection } from "@/hooks/useDeviceDetection";
+
 import { cn } from "@/lib/utils";
 import { COLORS } from "@/constants";
 
@@ -63,7 +63,7 @@ const Button = memo(forwardRef<HTMLButtonElement, ButtonProps>(
     ...props
   }, ref) => {
     // Use the device detection hook to determine if we're on mobile
-    const { isMobile } = useDeviceDetection();
+
 
     // Size classes
     const sizeClasses = {
@@ -90,8 +90,8 @@ const Button = memo(forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        {/* Gold fill animation - only shown on desktop and when enabled */}
-        {!isMobile && showHoverAnimation && variant === "default" && (
+        {/* Gold fill animation - only shown when enabled */}
+        {showHoverAnimation && variant === "default" && (
           <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
         )}
 

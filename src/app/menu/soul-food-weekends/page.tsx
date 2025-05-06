@@ -1,30 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { soulFoodMenu } from "@/data/soulFoodMenu";
 import MenuCategorySection from "@/components/menu/MenuCategorySection";
-import { isMobileDevice } from "@/utils/mobileUtils";
-import MobileMenuCategorySection from "@/components/mobile/MobileMenuCategorySection";
+
+
 
 export default function SoulFoodWeekendsMenuPage() {
-  // State for device detection
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Detect mobile device on client side
-  useEffect(() => {
-    setIsMobile(isMobileDevice());
-
-    const handleResize = () => {
-      setIsMobile(isMobileDevice());
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   // Load page-specific styles
   useEffect(() => {
@@ -87,11 +73,7 @@ export default function SoulFoodWeekendsMenuPage() {
 
           {/* Menu Categories */}
           {soulFoodMenu.categories.map((category, index) => (
-            isMobile ? (
-              <MobileMenuCategorySection key={index} category={category} />
-            ) : (
-              <MenuCategorySection key={index} category={category} />
-            )
+            <MenuCategorySection key={index} category={category} />
           ))}
 
           {/* Back to Menus button */}

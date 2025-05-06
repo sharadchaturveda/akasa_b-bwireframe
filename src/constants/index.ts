@@ -1,6 +1,6 @@
 /**
  * Application Constants
- * 
+ *
  * This file contains constants used throughout the application.
  * Centralizing these values makes the codebase more maintainable.
  */
@@ -25,7 +25,7 @@ export const COLORS = {
   GOLD: '#E6C78B',
   DEEP_BLUE: '#1A2A3A',
   LIGHT_BLUE: '#0A1A2A',
-  
+
   // Transparent variants
   GOLD_TRANSPARENT_10: 'rgba(230,199,139,0.1)',
   GOLD_TRANSPARENT_20: 'rgba(230,199,139,0.2)',
@@ -110,18 +110,18 @@ export const PERFORMANCE = {
  */
 export const NAVIGATION = {
   HOME_NAV_ITEMS: [
-    { name: "MENUS", path: "/menu" },
-    { name: "EVENTS", path: "/events" },
-    { name: "OFFERS", path: "/offers" },
-    { name: "RESERVATIONS", path: "/reservations" }
+    { name: 'MENUS', path: '/menu' },
+    { name: 'EVENTS', path: '/events' },
+    { name: 'OFFERS', path: '/offers' },
+    { name: 'RESERVATIONS', path: '/reservations' }
   ],
   OTHER_NAV_ITEMS: [
-    { name: "HOME", path: "/" },
-    { name: "MENUS", path: "/menu" },
-    { name: "EVENTS", path: "/events" },
-    { name: "OFFERS", path: "/offers" },
-    { name: "RESERVATIONS", path: "/reservations" }
-  ],
+    { name: 'HOME', path: '/' },
+    { name: 'MENUS', path: '/menu' },
+    { name: 'EVENTS', path: '/events' },
+    { name: 'OFFERS', path: '/offers' },
+    { name: 'RESERVATIONS', path: '/reservations' }
+  ]
 };
 
 /**

@@ -2,12 +2,7 @@
  * Fix for testimonial section background on mobile
  */
 
-@media (max-width: 767px) {
-  /* Ensure the testimonial section background is visible */
-  section.w-full.relative.py-16.overflow-hidden.bg-black.mobile-container {
-    position: relative !important;
-    overflow: hidden !important;
-  }
+
 
   /* Fix the background image */
   section.w-full.relative.py-16.overflow-hidden.bg-black.mobile-container .absolute.inset-0.w-full.h-full {
@@ -40,5 +35,27 @@
     bottom: 0 !important;
     background-color: rgba(0, 0, 0, 0.6) !important;
     z-index: 2 !important;
+  }
+}
+
+/* Responsive testimonial styles */
+@media (max-width: 767px) {
+  /* Mobile-specific adjustments */
+  section.w-full.relative.py-16.overflow-hidden.bg-black .grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Tablet-specific adjustments */
+  section.w-full.relative.py-16.overflow-hidden.bg-black .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Desktop-specific adjustments */
+  section.w-full.relative.py-16.overflow-hidden.bg-black .grid {
+    grid-template-columns: repeat(3, 1fr) !important;
   }
 }

@@ -89,7 +89,9 @@ describe('MenuPageClient', () => {
       constructor() {
         this.src = '';
         setTimeout(() => {
-          this.onload && this.onload();
+          if (this.onload) {
+            this.onload();
+          }
         });
       }
     };

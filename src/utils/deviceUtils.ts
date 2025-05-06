@@ -16,13 +16,13 @@ export interface DeviceDetectionOptions {
    * @default false
    */
   detectTablets?: boolean;
-  
+
   /**
    * Maximum width in pixels to consider a device as mobile
    * @default 767
    */
   mobileMaxWidth?: number;
-  
+
   /**
    * Maximum width in pixels to consider a device as tablet
    * Only used if detectTablets is true
@@ -43,25 +43,25 @@ export interface DeviceDetectionOptions {
 export const isMobileDevice = (options: DeviceDetectionOptions = {}): boolean => {
   // Return false if running on the server
   if (typeof window === 'undefined') return false;
-  
+
   // Set default options
   const {
     mobileMaxWidth = BREAKPOINTS.MOBILE,
   } = options;
-  
+
   // Check for touch support
-  const hasTouchSupport = 
-    'ontouchstart' in window || 
+  const hasTouchSupport =
+    'ontouchstart' in window ||
     navigator.maxTouchPoints > 0 ||
     (navigator as any).msMaxTouchPoints > 0;
-  
+
   // Check screen size
   const isSmallScreen = window.innerWidth <= mobileMaxWidth;
-  
+
   // Check user agent for mobile devices
   const userAgent = navigator.userAgent.toLowerCase();
   const isMobileUserAgent = /android|webos|iphone|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
-  
+
   // Consider it a mobile device if it has a small screen or a mobile user agent
   // We don't require touch support as some desktop devices have touch screens
   return isSmallScreen || isMobileUserAgent;
@@ -76,26 +76,26 @@ export const isMobileDevice = (options: DeviceDetectionOptions = {}): boolean =>
 export const isTabletDevice = (options: DeviceDetectionOptions = {}): boolean => {
   // Return false if running on the server
   if (typeof window === 'undefined') return false;
-  
+
   // Set default options
   const {
     mobileMaxWidth = BREAKPOINTS.MOBILE,
     tabletMaxWidth = BREAKPOINTS.TABLET,
   } = options;
-  
+
   // Check for touch support
-  const hasTouchSupport = 
-    'ontouchstart' in window || 
+  const hasTouchSupport =
+    'ontouchstart' in window ||
     navigator.maxTouchPoints > 0 ||
     (navigator as any).msMaxTouchPoints > 0;
-  
+
   // Check screen size (larger than mobile but smaller than desktop)
   const isTabletScreen = window.innerWidth > mobileMaxWidth && window.innerWidth <= tabletMaxWidth;
-  
+
   // Check user agent for tablet devices
   const userAgent = navigator.userAgent.toLowerCase();
   const isTabletUserAgent = /ipad|android(?!.*mobile)/i.test(userAgent);
-  
+
   // Consider it a tablet device if it has a tablet-sized screen or a tablet user agent
   return isTabletScreen || isTabletUserAgent;
 };
@@ -109,7 +109,7 @@ export const isTabletDevice = (options: DeviceDetectionOptions = {}): boolean =>
 export const isDesktopDevice = (options: DeviceDetectionOptions = {}): boolean => {
   // Return true if running on the server (default to desktop view)
   if (typeof window === 'undefined') return true;
-  
+
   // Not mobile and not tablet
   return !isMobileDevice(options) && !isTabletDevice(options);
 };
@@ -122,7 +122,7 @@ export const isDesktopDevice = (options: DeviceDetectionOptions = {}): boolean =
 export const getViewportDimensions = (): { width: number, height: number } => {
   // Return default dimensions if running on the server
   if (typeof window === 'undefined') return { width: 1200, height: 800 };
-  
+
   return {
     width: window.innerWidth,
     height: window.innerHeight,
@@ -135,23 +135,24 @@ export const getViewportDimensions = (): { width: number, height: number } => {
 export const applyMobileOptimizations = (): void => {
   // Return if running on the server
   if (typeof window === 'undefined' || !document) return;
-  
+
   // Add mobile class to html element
   document.documentElement.classList.add('mobile-device');
-  
+
   // Fix any content that might be bleeding outside the viewport
   document.documentElement.style.overflowX = 'hidden';
   document.body.style.overflowX = 'hidden';
-  
+
   // Ensure proper touch behavior
   document.documentElement.style.touchAction = 'manipulation';
-  
+
   // Add smooth scrolling for better mobile experience
   document.documentElement.style.scrollBehavior = 'smooth';
-  
+
   // Optimize scrolling performance
-  document.documentElement.style.webkitOverflowScrolling = 'touch';
-  
+  // Use type assertion to handle vendor prefixed property
+  (document.documentElement.style as any)['-webkit-overflow-scrolling'] = 'touch';
+
   // Load mobile CSS dynamically
   if (!document.getElementById('mobile-css')) {
     const link = document.createElement('link');
@@ -168,23 +169,24 @@ export const applyMobileOptimizations = (): void => {
 export const removeMobileOptimizations = (): void => {
   // Return if running on the server
   if (typeof window === 'undefined' || !document) return;
-  
+
   // Remove mobile class from html element
   document.documentElement.classList.remove('mobile-device');
-  
+
   // Reset overflow
   document.documentElement.style.overflowX = '';
   document.body.style.overflowX = '';
-  
+
   // Reset touch behavior
   document.documentElement.style.touchAction = '';
-  
+
   // Reset scroll behavior
   document.documentElement.style.scrollBehavior = '';
-  
+
   // Reset scrolling performance
-  document.documentElement.style.webkitOverflowScrolling = '';
-  
+  // Use type assertion to handle vendor prefixed property
+  (document.documentElement.style as any)['-webkit-overflow-scrolling'] = '';
+
   // Remove mobile CSS
   const mobileCSS = document.getElementById('mobile-css');
   if (mobileCSS) {

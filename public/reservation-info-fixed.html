@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservation Info - Fixed Version</title>
+  
+  <!-- Load our nuclear fix script before anything else -->
+  <script src="/nuclear-fix.js"></script>
+  
+  <!-- Critical CSS for the reservation info component -->
+  <style>
+    /* Base styles */
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #0A0A0A;
+      color: white;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    /* Reservation info styles */
+    .reservation-info {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background-color: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(4px);
+      padding: 1.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    /* Flex container styles */
+    .flex {
+      display: flex;
+    }
+    
+    .flex-col {
+      flex-direction: column;
+    }
+    
+    .items-start {
+      align-items: flex-start;
+    }
+    
+    .gap-4 {
+      gap: 1rem;
+    }
+    
+    /* Icon container styles */
+    .icon-container {
+      flex-shrink: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 9999px;
+      background-color: #1A2A3A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Content container styles */
+    .content-container {
+      flex-grow: 1;
+      min-width: 0;
+    }
+    
+    /* Typography */
+    h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .space-y-6 > * + * {
+      margin-top: 1.5rem;
+    }
+    
+    .space-y-3 > * + * {
+      margin-top: 0.75rem;
+    }
+    
+    /* Media queries */
+    @media (min-width: 640px) {
+      .sm\:p-8 {
+        padding: 2rem;
+      }
+      
+      .sm\:text-xl {
+        font-size: 1.25rem;
+      }
+      
+      .sm\:mb-4 {
+        margin-bottom: 1rem;
+      }
+      
+      .sm\:mr-3 {
+        margin-right: 0.75rem;
+      }
+      
+      .sm\:text-base {
+        font-size: 1rem;
+      }
+      
+      .sm\:w-12 {
+        width: 3rem;
+      }
+      
+      .sm\:h-12 {
+        height: 3rem;
+      }
+      
+      .sm\:w-6 {
+        width: 1.5rem;
+      }
+      
+      .sm\:h-6 {
+        height: 1.5rem;
+      }
+      
+      .sm\:gap-6 {
+        gap: 1.5rem;
+      }
+      
+      .sm\:space-y-8 > * + * {
+        margin-top: 2rem;
+      }
+    }
+    
+    @media (min-width: 768px) {
+      .md\:flex-row {
+        flex-direction: row;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="reservation-info backdrop-blur-sm bg-black/40">
+    <div class="space-y-6 sm:space-y-8">
+      <!-- Reservation Policies Section -->
+      <div class="flex flex-col md:flex-row gap-4 sm:gap-6 items-start">
+        <div class="icon-container">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#E6C78B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <div class="content-container">
+          <h3 class="text-lg sm:text-xl font-playfair text-white mb-2 sm:mb-4">Reservation Policies</h3>
+          <div class="space-y-3 text-white/80">
+            <div class="flex items-start">
+              <span class="text-[#E6C78B] mr-2 sm:mr-3 flex-shrink-0">•</span>
+              <span class="text-sm sm:text-base">Reservations are held for 15 minutes past the reserved time.</span>
+            </div>
+            <div class="flex items-start">
+              <span class="text-[#E6C78B] mr-2 sm:mr-3 flex-shrink-0">•</span>
+              <span class="text-sm sm:text-base">For parties of 6 or more, a credit card is required to secure your reservation.</span>
+            </div>
+            <div class="flex items-start">
+              <span class="text-[#E6C78B] mr-2 sm:mr-3 flex-shrink-0">•</span>
+              <span class="text-sm sm:text-base">Cancellations must be made at least 24 hours in advance to avoid a $25 per person fee.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dress Code Section -->
+      <div class="flex flex-col md:flex-row gap-4 sm:gap-6 items-start">
+        <div class="icon-container">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#E6C78B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg>
+        </div>
+        <div class="content-container">
+          <h3 class="text-lg sm:text-xl font-playfair text-white mb-2 sm:mb-4">Dress Code</h3>
+          <div class="space-y-3 text-white/80">
+            <div class="flex items-start">
+              <span class="text-[#E6C78B] mr-2 sm:mr-3 flex-shrink-0">•</span>
+              <span class="text-sm sm:text-base">Business casual attire is required.</span>
+            </div>
+            <div class="flex items-start">
+              <span class="text-[#E6C78B] mr-2 sm:mr-3 flex-shrink-0">•</span>
+              <span class="text-sm sm:text-base">No athletic wear, shorts, or flip-flops.</span>
+            </div>
+            <div class="flex items-start">
+              <span class="text-[#E6C78B] mr-2 sm:mr-3 flex-shrink-0">•</span>
+              <span class="text-sm sm:text-base">Jackets for gentlemen are preferred but not required.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+   

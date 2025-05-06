@@ -1,35 +1,38 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Exclude test files from the build
+  // Enable ESLint during builds
   eslint: {
-    ignoreDuringBuilds: true,
+    // Set to false to enable ESLint checking during builds
+    ignoreDuringBuilds: false,
+    // Directories to include in ESLint checking
+    dirs: ['src'],
   },
   typescript: {
-    // Ignore type errors during build (we'll handle them separately)
-    ignoreBuildErrors: true,
+    // Set to false to enable TypeScript checking during builds
+    ignoreBuildErrors: false,
   },
   reactStrictMode: true,
-  // Optimize images for better LCP
+  // Responsive image optimization for all device sizes
   images: {
     formats: ['image/avif', 'image/webp'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    deviceSizes: [320, 420, 640, 768, 1024, 1280, 1536, 1920, 2048, 3840], // All device sizes from mobile to 4K
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 512, 1024, 2048], // Various image sizes for responsive design
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     minimumCacheTTL: 60,
   },
-  // Enable optimizations for Web Vitals
+  // Disable CSS optimization for now to prevent interference
   experimental: {
-    // Enable CSS optimization for production
-    optimizeCss: process.env.NODE_ENV === 'production',
+    // Disable CSS optimization until we fix the interference issue
+    optimizeCss: false,
     // Optimize for Largest Contentful Paint (LCP)
     largePageDataBytes: 128 * 1000,
   },
   // Optimize for code splitting and minimal JS/CSS
   compiler: {
-    // Remove console logs in production
+    // Remove console logs in production, but keep our tracer logs
     removeConsole: {
-      exclude: ['error'],
+      exclude: ['error', 'warn', 'log'],
     },
   },
   // Optimize for Cumulative Layout Shift (CLS)

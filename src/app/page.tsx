@@ -1,85 +1,57 @@
 "use client";
 
-// Import critical components directly
+import { useEffect } from 'react';
 import Navigation from "@/components/home/Navigation";
-import ScrollBehavior from "@/components/home/ScrollBehavior";
-import HeroSection from "@/components/home/HeroSection";
-import HomePerformanceOptimizer from "@/components/home/HomePerformanceOptimizer";
-import MobileOptimizer from "@/components/mobile/MobileOptimizer";
+import Footer from "@/components/home/Footer";
+import CleanHeroSection from "@/components/home/CleanHeroSection";
+import BrandPhilosophy from "@/components/home/BrandPhilosophy";
+import AccoladesSection from "@/components/home/AccoladesSection";
+import GallerySection from "@/components/home/GallerySection";
+import WhatsHappeningSection from "@/components/home/WhatsHappeningSection";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
+import VisitUsSection from "@/components/home/VisitUsSection";
 
-// Import non-critical components with dynamic imports and optimized loading
-import dynamic from 'next/dynamic';
-import { useEffect, Suspense } from 'react';
-import { loadPageStyles, preloadPageStyles } from '@/utils/loadPageStyles';
-
-// Dynamically import components that are below the fold with optimized loading
-const BrandPhilosophy = dynamic(() => import("@/components/home/BrandPhilosophy"));
-const AccoladesSection = dynamic(() => import("@/components/home/AccoladesSection"));
-const GallerySection = dynamic(() => import("@/components/home/GallerySection"));
-const WhatsHappeningSection = dynamic(() => import("@/components/home/WhatsHappeningSection"));
-const TestimonialsSection = dynamic(() => import("@/components/home/TestimonialsSection"));
-const VisitUsSection = dynamic(() => import("@/components/home/VisitUsSection"));
-const Footer = dynamic(() => import("@/components/home/Footer"));
-
-/**
- * HomePage Component
- *
- * The main homepage component with optimized loading and performance.
- * Uses code splitting and dynamic imports for better performance.
- *
- * @returns {JSX.Element} The rendered homepage
- */
 export default function HomePage() {
-  // Load page-specific CSS
   useEffect(() => {
-    // Load home page styles
-    loadPageStyles('home');
-
-    // Preload styles for pages that might be visited next
-    preloadPageStyles(['menu', 'events', 'offers', 'reservations']);
+    // Add loaded class to images when they finish loading for better performance
+    const images = document.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.complete) {
+        img.classList.add('loaded');
+      } else {
+        img.onload = () => {
+          img.classList.add('loaded');
+        };
+      }
+    });
   }, []);
 
   return (
-    <main className="w-full min-h-screen bg-black text-white">
-      {/* Performance optimizations */}
-      <ScrollBehavior />
-      <HomePerformanceOptimizer />
-      <MobileOptimizer />
-
-      {/* Navigation */}
+    <main className="min-h-screen bg-black text-white">
       <Navigation />
 
-      {/* Critical above-the-fold content */}
-      <HeroSection />
+      {/* Hero Section */}
+      <CleanHeroSection />
 
-      {/* Non-critical below-the-fold content with Suspense boundaries */}
-      <Suspense fallback={<div className="min-h-[45vh] w-full bg-black"></div>}>
-        <BrandPhilosophy />
-      </Suspense>
+      {/* Brand Philosophy Section */}
+      <BrandPhilosophy />
 
-      <Suspense fallback={<div className="min-h-[30vh] w-full bg-black"></div>}>
-        <AccoladesSection />
-      </Suspense>
+      {/* Accolades Section */}
+      <AccoladesSection />
 
-      <Suspense fallback={<div className="min-h-[40vh] w-full bg-black"></div>}>
-        <GallerySection />
-      </Suspense>
+      {/* Gallery Section */}
+      <GallerySection />
 
-      <Suspense fallback={<div className="min-h-[50vh] w-full bg-black"></div>}>
-        <WhatsHappeningSection />
-      </Suspense>
+      {/* What's Happening Section */}
+      <WhatsHappeningSection />
 
-      <Suspense fallback={<div className="min-h-[40vh] w-full bg-black"></div>}>
-        <TestimonialsSection />
-      </Suspense>
+      {/* Testimonials Section */}
+      <TestimonialsSection />
 
-      <Suspense fallback={<div className="min-h-[30vh] w-full bg-black"></div>}>
-        <VisitUsSection />
-      </Suspense>
+      {/* Visit Us Section */}
+      <VisitUsSection />
 
-      <Suspense fallback={<div className="min-h-[20vh] w-full bg-black"></div>}>
-        <Footer />
-      </Suspense>
+      <Footer />
     </main>
   );
 }

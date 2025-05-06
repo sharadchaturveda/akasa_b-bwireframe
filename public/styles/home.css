@@ -25,10 +25,7 @@
   margin-top: 4rem;
 }
 
-@media (min-width: 768px) {
-  .hero-content {
-    margin-top: 6rem;
-  }
+
 }
 
 /* Brand Philosophy section styles */
@@ -37,10 +34,7 @@
   grid-template-columns: 1fr;
 }
 
-@media (min-width: 768px) {
-  .brand-philosophy {
-    grid-template-columns: 40% 60%;
-  }
+
 }
 
 /* Gallery section styles */
@@ -58,8 +52,53 @@
   grid-template-columns: 1fr;
 }
 
+
+}
+
+/* Mobile-first responsive styles */
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Base grid layout - single column on mobile */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+/* Base flex layout - column on mobile */
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-col-reverse {
+  flex-direction: column-reverse;
+}
+
+/* Responsive grid layouts */
+@media (min-width: 640px) {
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (min-width: 768px) {
-  .whats-happening {
-    grid-template-columns: 60% 40%;
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:flex-row {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:flex-row {
+    flex-direction: row;
   }
 }

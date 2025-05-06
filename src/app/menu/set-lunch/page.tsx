@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
 import Link from "next/link";
@@ -8,25 +8,11 @@ import { Button } from "@/components/ui/button";
 import { setLunchMenu } from "@/data/setLunchMenu";
 import SetLunchCourseSection from "@/components/menu/SetLunchCourseSection";
 import DailySidesSection from "@/components/menu/DailySidesSection";
-import { isMobileDevice } from "@/utils/mobileUtils";
-import MobileSetLunchCourseSection from "@/components/mobile/MobileSetLunchCourseSection";
-import MobileDailySidesSection from "@/components/mobile/MobileDailySidesSection";
+
+
+
 
 export default function SetLunchMenuPage() {
-  // State for device detection
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Detect mobile device on client side
-  useEffect(() => {
-    setIsMobile(isMobileDevice());
-
-    const handleResize = () => {
-      setIsMobile(isMobileDevice());
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   // Load page-specific styles
   useEffect(() => {
@@ -98,19 +84,11 @@ export default function SetLunchMenuPage() {
 
           {/* Menu Courses */}
           {setLunchMenu.courses.map((course, index) => (
-            isMobile ? (
-              <MobileSetLunchCourseSection key={index} course={course} />
-            ) : (
-              <SetLunchCourseSection key={index} course={course} />
-            )
+            <SetLunchCourseSection key={index} course={course} />
           ))}
 
           {/* Daily Sides Section */}
-          {isMobile ? (
-            <MobileDailySidesSection includedSides={setLunchMenu.included_sides} />
-          ) : (
-            <DailySidesSection includedSides={setLunchMenu.included_sides} />
-          )}
+          <DailySidesSection includedSides={setLunchMenu.included_sides} />
 
           {/* Back to Menus button */}
           <div className="text-center mt-16">

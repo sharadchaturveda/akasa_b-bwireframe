@@ -17,8 +17,9 @@ const PreloadLinks = dynamic(
 export default function ClientPerformanceWrapper() {
   return (
     <>
-      <ClientPerformanceMonitor />
-      <PreloadLinks />
+      {/* Temporarily disabled for debugging */}
+      {/* <ClientPerformanceMonitor /> */}
+      {/* <PreloadLinks /> */}
     </>
   );
 }

@@ -10,6 +10,8 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          {/* All optimization scripts and emergency fixes have been removed */}
+
           {/* Preload critical fonts */}
           <link
             rel="preload"
@@ -109,14 +111,9 @@ class MyDocument extends Document {
           <Main />
           <NextScript />
 
-          {/* Add performance optimization script */}
-          <script
-            src="/js/performance-optimizations.js"
-            async
-            defer
-          />
+          {/* Performance optimization script removed to fix ReservationInfo component */}
 
-          {/* Preload critical resources */}
+          {/* Modified preload script that respects ReservationInfo component */}
           <script dangerouslySetInnerHTML={{ __html: `
             // Immediately start loading critical resources
             (function() {
@@ -125,37 +122,37 @@ class MyDocument extends Document {
                 window.performance.mark('app_start');
               }
 
-              // Optimize FID by breaking up long tasks
-              const originalSetTimeout = window.setTimeout;
-              const timeouts = [];
+              // Create a safe version that doesn't interfere with ReservationInfo
+              window.safePerformanceOptimizations = {
+                // Store original methods
+                originalSetTimeout: window.setTimeout,
 
-              // Override setTimeout to break up long tasks
-              window.setTimeout = function(fn, delay, ...args) {
-                if (typeof fn !== 'function') return originalSetTimeout(fn, delay, ...args);
+                // Check if an element should be excluded from optimizations
+                shouldExcludeFromOptimization: function(element) {
+                  if (!element) return false;
 
-                // For tasks that would block the main thread for too long
-                if (delay === 0 || delay < 4) {
-                  // Split into smaller chunks with minimal delays
-                  const id = originalSetTimeout(() => {
-                    const start = performance.now();
-                    fn(...args);
-                    const duration = performance.now() - start;
+                  // Check if the element has the data-exclude-optimization attribute
+                  if (element.hasAttribute && element.hasAttribute('data-exclude-optimization')) {
+                    return true;
+                  }
 
-                    // Log long tasks for debugging
-                    if (duration > 50) {
-                      console.log('Long task in setTimeout:', duration, 'ms');
-                    }
-                  }, 4); // Minimum 4ms delay to allow browser to handle other tasks
+                  // Check if the element has the backdrop-blur-sm class
+                  if (element.classList && element.classList.contains('backdrop-blur-sm')) {
+                    return true;
+                  }
 
-                  timeouts.push(id);
-                  return id;
+                  // Check parent elements
+                  if (element.parentElement) {
+                    return this.shouldExcludeFromOptimization(element.parentElement);
+                  }
+
+                  return false;
                 }
-
-                // Normal setTimeout behavior for longer delays
-                const id = originalSetTimeout(fn, delay, ...args);
-                timeouts.push(id);
-                return id;
               };
+
+              // We won't override setTimeout anymore as it was causing issues
+              // with the ReservationInfo component
+              console.log('Performance optimizations initialized with ReservationInfo protection');
             })();
           `}} />
         </body>

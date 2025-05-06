@@ -31,18 +31,10 @@
   padding: 2rem 1rem;
 }
 
-@media (min-width: 768px) {
-  .events-categories {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 2rem;
-  }
+
 }
 
-@media (min-width: 1024px) {
-  .events-categories {
-    grid-template-columns: repeat(3, 1fr);
-    padding: 4rem;
-  }
+
 }
 
 /* Event card */
@@ -64,4 +56,52 @@
 
 .event-card-content {
   padding: 1.5rem;
+}
+
+/* Mobile-first responsive styles */
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Base grid layout - single column on mobile */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+/* Base flex layout - column on mobile */
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-col-reverse {
+  flex-direction: column-reverse;
+}
+
+/* Responsive grid layouts */
+@media (min-width: 640px) {
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:flex-row {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:flex-row {
+    flex-direction: row;
+  }
 }

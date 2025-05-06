@@ -2,17 +2,15 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useDeviceDetection } from "@/hooks/useDeviceDetection";
-import MobileVisitUsSection from "@/components/mobile/MobileVisitUsSection";
+
+
 
 export default function VisitUsSection() {
   // Use the device detection hook
-  const { isMobile } = useDeviceDetection();
+  
 
   // Render mobile-specific component for mobile devices
-  if (isMobile) {
-    return <MobileVisitUsSection />;
-  }
+  
 
   // Desktop version
   return (

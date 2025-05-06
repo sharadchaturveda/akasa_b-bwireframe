@@ -3,8 +3,7 @@
 import { useEffect, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import ChefSection from "@/components/menu/ChefSection";
-import { useDeviceDetection } from "@/hooks/useDeviceDetection";
-import MobileMenuPageClient from "@/components/mobile/MobileMenuPageClient";
+
 
 // Add TypeScript declaration for requestIdleCallback
 interface RequestIdleCallbackOptions {
@@ -41,9 +40,6 @@ const Footer = dynamic(() => import("@/components/home/Footer"), {
 import PageLayout from "@/components/layout/PageLayout";
 
 export default function MenuPageClient() {
-  // Use the custom hook for device detection
-  const { isMobile } = useDeviceDetection();
-
   // Optimize performance metrics
   useEffect(() => {
     // Monitor LCP
@@ -105,12 +101,7 @@ export default function MenuPageClient() {
     }
   }, []);
 
-  // If on mobile, render the mobile version
-  if (isMobile) {
-    return <MobileMenuPageClient />;
-  }
-
-  // Otherwise, render the desktop version with the PageLayout component
+  // Render the desktop version with the PageLayout component
   return (
     <PageLayout className="menu-page">
       {/* Critical above-the-fold content */}

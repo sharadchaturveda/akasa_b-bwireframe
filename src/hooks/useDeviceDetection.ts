@@ -47,14 +47,14 @@ export interface DeviceDetectionResult {
  *
  * @example
  * ```tsx
- * const { isMobile, isTablet, isDesktop, isDetectionComplete } = useDeviceDetection();
+ *
  *
  * if (!isDetectionComplete) {
  *   return <Loading />;
  * }
  *
  * if (isMobile) {
- *   return <MobileComponent />;
+ *   return <></>;
  * } else if (isTablet) {
  *   return <TabletComponent />;
  * } else {

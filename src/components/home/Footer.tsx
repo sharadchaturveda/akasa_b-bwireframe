@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { memo, useEffect, useState } from "react";
-import { isMobileDevice } from "@/utils/mobileUtils";
-import MobileFooter from "@/components/mobile/MobileFooter";
+import { memo } from "react";
+
+
 
 
 
@@ -30,25 +30,6 @@ const SocialIcon = memo(function SocialIcon({
 
 // Memoized footer component
 const Footer = memo(function Footer() {
-  // State for device detection
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Detect mobile device on client side
-  useEffect(() => {
-    setIsMobile(isMobileDevice());
-
-    const handleResize = () => {
-      setIsMobile(isMobileDevice());
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-  // Render mobile-specific component for mobile devices
-  if (isMobile) {
-    return <MobileFooter />;
-  }
-
   // Desktop version
   return (
     <footer className="w-full relative py-8">

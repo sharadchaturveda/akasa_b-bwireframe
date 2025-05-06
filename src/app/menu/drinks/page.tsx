@@ -1,30 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { drinksMenu } from "@/data/drinksMenu";
 import DrinkCategorySection from "@/components/menu/DrinkCategorySection";
-import { isMobileDevice } from "@/utils/mobileUtils";
-import MobileDrinkCategorySection from "@/components/mobile/MobileDrinkCategorySection";
+
+
 
 export default function DrinksMenuPage() {
-  // State for device detection
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Detect mobile device on client side
-  useEffect(() => {
-    setIsMobile(isMobileDevice());
-
-    const handleResize = () => {
-      setIsMobile(isMobileDevice());
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   // Load page-specific styles
   useEffect(() => {
@@ -73,11 +59,7 @@ export default function DrinksMenuPage() {
         <div className="container mx-auto px-4 md:px-8 relative z-10">
           {/* Menu Categories */}
           {drinksMenu.categories.map((category, index) => (
-            isMobile ? (
-              <MobileDrinkCategorySection key={index} category={category} />
-            ) : (
-              <DrinkCategorySection key={index} category={category} />
-            )
+            <DrinkCategorySection key={index} category={category} />
           ))}
 
           {/* Back to Menus button */}

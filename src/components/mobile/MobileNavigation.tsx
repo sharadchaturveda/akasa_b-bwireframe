@@ -1,155 +1,184 @@
-"use client";
-
-import { useState, useCallback, memo } from "react";
+import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { NAVIGATION } from '@/constants';
 
 interface MobileNavigationProps {
-  navItems: Array<{ name: string; path: string }>;
+  navItems?: Array<{ name: string; path: string }>;
 }
 
-/**
- * MobileNavLink Component
- * 
- * A mobile-optimized navigation link component with improved accessibility.
- * Optimized for touch interactions and performance.
- * 
- * @param {Object} props - Component props
- * @param {string} props.name - The name of the navigation item
- * @param {string} props.path - The path to navigate to
- * @param {Function} props.onClick - The function to call when clicked
- * @returns {JSX.Element} The rendered component
- */
-const MobileNavLink = memo(function MobileNavLink({
-  name,
-  path,
-  onClick,
-}: {
-  name: string;
-  path: string;
-  onClick: () => void;
-}) {
-  return (
-    <a
-      href={path}
-      className="mobile-menu-item uppercase tracking-wider text-xl sm:text-2xl font-montserrat text-white py-4 px-4 block text-center w-full touch-manipulation min-h-[60px] flex items-center justify-center overflow-hidden"
-      onClick={(e) => {
-        e.preventDefault();
-        onClick();
-        window.location.href = path;
-      }}
-      role="menuitem"
-    >
-      {name}
-    </a>
+export default function MobileNavigation({ navItems }: MobileNavigationProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname() || '/';
+
+  // Determine navigation items based on current page if not provided
+  const items = navItems || (
+    pathname === '/'
+      ? NAVIGATION.HOME_NAV_ITEMS
+      : NAVIGATION.OTHER_NAV_ITEMS.filter(item => item.path !== pathname)
   );
-});
 
-/**
- * MobileNavigation Component
- * 
- * A dedicated mobile navigation component optimized for mobile devices.
- * Handles menu toggling and body scroll locking.
- * 
- * @param {MobileNavigationProps} props - Component props
- * @returns {JSX.Element} The rendered component
- */
-const MobileNavigation = memo(function MobileNavigation({ navItems }: MobileNavigationProps) {
-  // State for mobile menu
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  // Close menu when route changes
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
-  // Handle menu state and body scroll
-  const handleMenuState = useCallback((isOpen: boolean) => {
-    // Update body styles based on menu state
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-    document.body.style.willChange = isOpen ? 'transform' : 'auto';
-    
-    // Toggle body class
-    if (isOpen) {
-      document.body.classList.add('mobile-menu-open');
-      // Force the menu to be at the top of the screen
-      window.scrollTo(0, 0);
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.classList.remove('mobile-menu-open');
+      document.body.style.overflow = '';
     }
-  }, []);
-
-  // Toggle mobile menu
-  const toggleMobileMenu = useCallback(() => {
-    const newState = !mobileMenuOpen;
-    setMobileMenuOpen(newState);
-    handleMenuState(newState);
-  }, [mobileMenuOpen, handleMenuState]);
-
-  // Close mobile menu
-  const closeMobileMenu = useCallback(() => {
-    setMobileMenuOpen(false);
-    handleMenuState(false);
-  }, [handleMenuState]);
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
 
   return (
-    <div className="md:hidden w-full">
-      {/* Mobile Navigation Bar */}
-      <div className="fixed top-0 left-0 right-0 z-[100] px-4 py-3">
-        <div className="flex justify-end items-center">
-          <button
-            onClick={toggleMobileMenu}
-            className="text-white p-3 rounded-full bg-black/30 flex items-center justify-center touch-manipulation min-w-[48px] min-h-[48px]"
-            aria-label="Toggle menu"
-            style={{ willChange: 'transform' }}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="3" y1="12" x2="21" y2="12"></line>
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-          </button>
-        </div>
+    <>
+      {/* Absolute positioned header - only visible on mobile */}
+      <div 
+        className="md:hidden absolute top-0 left-0 w-full z-50"
+        style={{
+          position: 'absolute', // Keep as absolute to stay with hero section
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '80px',
+          zIndex: 100,
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '0 20px',
+          backgroundColor: 'transparent'
+        }}
+      >
+        {/* Logo */}
+        <Link href="/">
+          <img 
+            src="/images/brand/logo-white.png" 
+            alt="Logo" 
+            style={{ 
+              height: '100px',  // Increased from 80px to 100px
+              width: 'auto',
+              maxWidth: '70vw', // Ensure it doesn't overflow on very small screens
+              objectFit: 'contain'
+            }}
+          />
+        </Link>
+
+        {/* Hamburger Button */}
+        <button
+          aria-label="Menu"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          style={{
+            background: 'transparent',
+            border: 'none',
+            cursor: 'pointer',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            width: '40px',
+            height: '35px',
+            position: 'relative',
+            zIndex: 101
+          }}
+        >
+          <div 
+            style={{
+              width: '100%',
+              height: '5px',
+              backgroundColor: 'white',
+              borderRadius: '2px',
+              transition: 'transform 0.3s, opacity 0.3s',
+              transform: isMenuOpen ? 'translateY(15px) rotate(45deg)' : 'none'
+            }}
+          />
+          <div 
+            style={{
+              width: '100%',
+              height: '5px',
+              backgroundColor: 'white',
+              borderRadius: '2px',
+              transition: 'opacity 0.3s',
+              opacity: isMenuOpen ? 0 : 1
+            }}
+          />
+          <div 
+            style={{
+              width: '100%',
+              height: '5px',
+              backgroundColor: 'white',
+              borderRadius: '2px',
+              transition: 'transform 0.3s, opacity 0.3s',
+              transform: isMenuOpen ? 'translateY(-15px) rotate(-45deg)' : 'none'
+            }}
+          />
+        </button>
       </div>
 
       {/* Mobile Menu Overlay */}
-      {mobileMenuOpen && (
-        <div
-          className="mobile-menu-overlay fixed top-0 left-0 right-0 bottom-0 bg-black/90 backdrop-blur-lg z-[9999] flex flex-col"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Navigation menu"
+      {isMenuOpen && (
+        <div 
+          className="md:hidden" 
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0,0,0,0.95)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            zIndex: 99,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px'
+          }}
         >
-          {/* Header with close button and logo */}
-          <div className="flex justify-between items-center p-4 border-b border-white/10">
-            <span className="text-white text-lg font-montserrat">AKASA</span>
-            <button
-              onClick={toggleMobileMenu}
-              className="text-white p-3 rounded-full min-w-[48px] min-h-[48px] flex items-center justify-center touch-manipulation"
-              aria-label="Close menu"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            </button>
-          </div>
-
-          {/* Menu items */}
-          <nav className="flex flex-col items-center w-full pt-6 overflow-y-auto">
-            {navItems.map((item) => (
-              <div
+          <nav style={{
+            width: '100%',
+            maxWidth: '400px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '30px'
+          }}>
+            {items.map((item) => (
+              <Link
                 key={item.name}
-                className="w-full mobile-menu-item py-2"
+                href={item.path}
+                style={{
+                  color: 'white',
+                  fontSize: '24px',
+                  fontWeight: 'bold',
+                  textTransform: 'uppercase',
+                  letterSpacing: '2px',
+                  padding: '10px',
+                  width: '100%',
+                  textAlign: 'center'
+                }}
+                onClick={() => setIsMenuOpen(false)}
               >
-                <MobileNavLink
-                  name={item.name}
-                  path={item.path}
-                  onClick={closeMobileMenu}
-                />
-              </div>
+                {item.name}
+              </Link>
             ))}
           </nav>
-
-          {/* Bottom padding */}
-          <div className="h-16"></div>
         </div>
       )}
-    </div>
+    </>
   );
-});
+}
 
-export default MobileNavigation;
+
+
+
+
+
+
+
+
+
