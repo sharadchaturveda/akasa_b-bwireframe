@@ -92,7 +92,7 @@ const Button = memo(forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {/* Gold fill animation - only shown when enabled */}
         {showHoverAnimation && variant === "default" && (
-          <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
+          <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-[105%] group-hover:translate-x-0 transition-transform duration-500"></span>
         )}
 
         <span className={cn(

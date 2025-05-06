@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 /**
  * ReservationInfo Component
- * 
+ *
  * A clean, mobile-first component for displaying dining information.
  * No optimization scripts, no interference, just clean code.
  */
@@ -30,7 +30,7 @@ const ReservationInfo = memo(function ReservationInfo() {
       if (typeof window === 'undefined' || typeof document === 'undefined') {
         return;
       }
-      
+
       // Remove the CSS when the component unmounts
       const cssLink = document.getElementById('dining-info-clean-css');
       if (cssLink) {
@@ -175,16 +175,9 @@ const ReservationInfo = memo(function ReservationInfo() {
         {/* CTA */}
         <div className="dining-info-cta">
           <Link href="/menu" className="inline-block w-full sm:w-auto">
-            {isMobile ? (
-              <Button className="dining-info-button">
-                View Our Menus
-              </Button>
-            ) : (
-              <Button className="dining-info-button dining-info-button-desktop">
-                <span className="dining-info-button-hover"></span>
-                <span className="dining-info-button-text">View Our Menus</span>
-              </Button>
-            )}
+            <Button>
+              View Our Menus
+            </Button>
           </Link>
         </div>
       </div>

@@ -1,6 +1,6 @@
 /**
  * Clean Dining Information Styles
- * 
+ *
  * This CSS file contains clean, mobile-first styles for the Dining Information section.
  * No optimization, no interference, just clean styles.
  */
@@ -190,19 +190,10 @@
   }
 }
 
-/* CTA button */
+/* CTA button - minimal styling to avoid conflicts with Button component */
 .dining-info-button {
-  background-color: #1A2A3A;
-  color: white;
+  /* The Button component handles most styling */
   width: 100%;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.25rem;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
-}
-
-.dining-info-button:hover {
-  background-color: #0A1A2A;
 }
 
 @media (min-width: 640px) {
@@ -211,34 +202,4 @@
   }
 }
 
-/* Hover effect for desktop */
-@media (min-width: 768px) {
-  .dining-info-button-desktop {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .dining-info-button-hover {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #E6C78B;
-    transform: translateX(-100%);
-    transition: transform 0.5s ease;
-  }
-  
-  .dining-info-button-desktop:hover .dining-info-button-hover {
-    transform: translateX(0);
-  }
-  
-  .dining-info-button-text {
-    position: relative;
-    z-index: 10;
-    transition: color 0.3s ease;
-  }
-  
-  .dining-info-button-desktop:hover .dining-info-button-text {
-    color: black;
-  }
-}
+/* Button styling is now handled by the Button component */
