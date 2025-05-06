@@ -80,26 +80,34 @@ export default function MobileNavigation() {
       <header
         className="mobile-nav-header fixed top-0 left-0 w-full z-50 transition-all duration-300 md:hidden"
         style={{
-          height: '80px',
+          height: '100px', /* Further increased height to accommodate larger logo */
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          padding: '0 20px',
-          backgroundColor: isScrolled ? 'rgba(0,0,0,0.7)' : 'transparent',
-          backdropFilter: isScrolled ? 'blur(8px)' : 'none',
+          padding: '0 20px 0 16px', /* Added more left padding to prevent logo from hugging the edge */
+          backgroundColor: isScrolled ? 'rgba(0,0,0,0.85)' : 'transparent', /* Transparent until scrolled */
+          backdropFilter: isScrolled ? 'blur(8px)' : 'none', /* No blur until scrolled */
         }}
       >
-        {/* Logo */}
-        <Link href="/" className="relative h-[100px] w-[200px]">
-          <Image
-            src="/images/brand/logo-white.png"
-            alt="Logo"
-            fill
-            priority
-            sizes="200px"
-            className="object-contain"
-            style={{ maxWidth: '70vw' }}
-          />
+        {/* Logo - adjusted position and size for mobile with increased opacity */}
+        <Link href="/" className="relative h-[130px] w-[240px] ml-3 z-10">
+          <div className="absolute inset-0 flex items-center" style={{ transform: 'translateX(0px)' }}>
+            {/* No background for the logo */}
+
+            <Image
+              src="/images/brand/logo-white.png"
+              alt="Logo"
+              fill
+              priority
+              sizes="240px"
+              className="object-contain object-left"
+              style={{
+                maxWidth: '75vw',
+                transform: 'scale(1.25)',
+                opacity: 1 /* Ensure full opacity */
+              }}
+            />
+          </div>
         </Link>
 
         {/* Hamburger Button */}
@@ -115,6 +123,7 @@ export default function MobileNavigation() {
             justifyContent: 'space-between',
             width: '30px',
             height: '24px',
+            marginTop: '5px', /* Adjust vertical alignment with larger logo */
           }}
         >
           <span
