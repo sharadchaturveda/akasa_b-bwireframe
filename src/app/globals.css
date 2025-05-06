@@ -28,15 +28,15 @@ body {
 @layer utilities {
   .animate-scroll {
     animation: scroll 120s linear infinite;
-    animation-play-state: paused;
-    will-change: auto;
+    animation-play-state: running;
+    will-change: transform;
   }
 
   /* Mobile-specific animation for infinite scrolling */
   .animate-scroll-mobile {
     animation: scroll 120s linear infinite;
-    animation-play-state: paused;
-    will-change: auto;
+    animation-play-state: running;
+    will-change: transform;
   }
 
   /* Only enable animations for users who don't prefer reduced motion */

@@ -6,11 +6,11 @@ import NextImage from "next/image";
 
 // Gallery images array with optimized paths
 const GALLERY_IMAGES = [
-  { src: "/images/events/listings/birthday.jpg", alt: "Elegant dining setup with traditional Indian decor" },
-  { src: "/images/unused/gallery2.jpg", alt: "Chef preparing authentic Indian cuisine" },
-  { src: "/images/events/listings/anniversary.jpg", alt: "Signature cocktail with exotic spices" },
-  { src: "/images/unused/gallery5.jpg", alt: "Beautifully plated Indian dish with garnish" },
-  { src: "/images/events/listings/office-lunch.jpg", alt: "Restaurant interior with ambient lighting" },
+  { src: "/images/home/gallery/gallery1.jpg", alt: "Gallery image 1" },
+  { src: "/images/home/gallery/gallery2.jpg", alt: "Gallery image 2" },
+  { src: "/images/home/gallery/gallery3.jpg", alt: "Gallery image 3" },
+  { src: "/images/home/gallery/gallery4.jpg", alt: "Gallery image 4" },
+  { src: "/images/home/gallery/gallery5.jpg", alt: "Gallery image 5" },
 ];
 
 // Optimized gallery image component with performance enhancements
@@ -54,61 +54,21 @@ const GalleryImage = memo(function GalleryImage({
 // Desktop gallery component with optimized scrolling and performance
 const DesktopGallery = memo(function DesktopGallery() {
   const [isVisible, setIsVisible] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // Only enable animation when component is in viewport
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        setIsVisible(true);
+    // Set gallery to visible immediately
+    setIsVisible(true);
 
-        // Start animation after a short delay to ensure smooth performance
-        setTimeout(() => {
-          setIsLoaded(true);
-        }, 100);
-      } else {
-        setIsVisible(false);
-      }
-    }, {
-      threshold: 0.1,
-      rootMargin: '100px' // Start observing before the element is in view
-    });
-
-    const galleryElement = document.getElementById('desktop-gallery');
-    if (galleryElement) {
-      observer.observe(galleryElement);
-    }
-
-    return () => {
-      if (galleryElement) {
-        observer.unobserve(galleryElement);
-      }
+    // Preload images for better performance
+    const preloadImages = () => {
+      GALLERY_IMAGES.forEach((image) => {
+        const img = new Image();
+        img.src = image.src;
+      });
     };
+
+    preloadImages();
   }, []);
-
-  // Preload images for smoother experience
-  useEffect(() => {
-    if (isVisible && typeof window !== 'undefined') {
-      // Preload the next set of images when gallery becomes visible
-      const preloadImages = () => {
-        GALLERY_IMAGES.forEach((image) => {
-          // Use the native browser Image constructor, not the Next.js Image component
-          const img = new window.Image();
-          img.src = image.src;
-        });
-      };
-
-      // Use requestIdleCallback for better performance
-      if ('requestIdleCallback' in window) {
-        // Use a type-safe approach to call requestIdleCallback
-        const requestIdleCallback = window.requestIdleCallback ||
-          ((callback: IdleRequestCallback, options?: IdleRequestOptions) => setTimeout(callback, options?.timeout || 1));
-        requestIdleCallback(preloadImages, { timeout: 2000 });
-      } else {
-        setTimeout(preloadImages, 1000);
-      }
-    }
-  }, [isVisible]);
 
   return (
     <div
@@ -120,10 +80,10 @@ const DesktopGallery = memo(function DesktopGallery() {
       }}
     >
       <div
-        className={`flex ${isLoaded ? 'animate-scroll' : ''}`}
+        className="flex animate-scroll"
         style={{
           transform: 'translateZ(0)', // Hardware acceleration
-          willChange: isLoaded ? 'transform' : 'auto',
+          willChange: 'transform',
           transition: 'opacity 0.5s ease-in-out',
           opacity: isVisible ? 1 : 0
         }}
