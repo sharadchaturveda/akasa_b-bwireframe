@@ -75,7 +75,7 @@ const BrandPhilosophy = memo(function BrandPhilosophy() {
 
           <div className="animate-fadeSlideUp flex justify-center md:justify-start" style={{ animationDelay: '0.5s' }}>
             <Link href="#visit-us">
-              <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-[200px] sm:w-[240px] px-4 sm:px-6 text-center shadow-lg text-sm sm:text-base">
+              <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-[200px] sm:w-[240px] px-4 sm:px-6 py-2 sm:py-3 text-center shadow-lg text-sm sm:text-base">
                 {"Our Location"}
               </Button>
             </Link>
@@ -135,13 +135,13 @@ const BrandPhilosophy = memo(function BrandPhilosophy() {
 
             <div className="mt-6 sm:mt-8 flex flex-col items-center md:items-start gap-3 animate-fadeSlideUp" style={{ animationDelay: '0.5s' }}>
               <Link href="https://akasa.oddle.me/en_SG/" className="w-full sm:w-auto" target="_blank" rel="noopener noreferrer">
-                <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full sm:w-[240px] px-4 sm:px-6 py-2 sm:py-3 text-center shadow-lg text-sm sm:text-base">
+                <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-[200px] sm:w-[240px] px-4 sm:px-6 py-2 sm:py-3 text-center shadow-lg text-sm sm:text-base">
                   {"Order Online"}
                 </Button>
               </Link>
               <Link href="/reservations" className="w-full sm:w-auto">
-                <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full sm:w-[240px] px-4 sm:px-6 py-2 sm:py-3 text-center shadow-lg text-sm sm:text-base">
-                  {"Make a Reservation"}
+                <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-[200px] sm:w-[240px] px-4 sm:px-6 py-2 sm:py-3 text-center shadow-lg text-sm sm:text-base">
+                  {"Reserve Table"}
                 </Button>
               </Link>
             </div>
