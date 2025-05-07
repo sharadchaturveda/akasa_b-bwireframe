@@ -5,52 +5,30 @@ A modern, performance-optimized website for Akasa, a fine dining Indian restaura
 ## Table of Contents
 
 - [Overview](#overview)
-- [Features](#features)
 - [Technology Stack](#technology-stack)
 - [Getting Started](#getting-started)
 - [Project Structure](#project-structure)
-- [Page and Component Structure](#page-and-component-structure)
-- [Mobile-First Design Strategy](#mobile-first-design-strategy)
-- [Documentation](#documentation)
+- [Routing and Pages](#routing-and-pages)
+- [Components](#components)
+- [Mobile-First Design](#mobile-first-design)
+- [Styling](#styling)
 - [Performance Optimization](#performance-optimization)
-- [Mobile Optimization](#mobile-optimization)
-- [Testing](#testing)
 - [Deployment](#deployment)
-- [Known Limitations and TODOs](#known-limitations-and-todos)
-- [Contributing](#contributing)
+- [Known Issues and Future Work](#known-issues-and-future-work)
 
 ## Overview
 
 The Akasa Restaurant Website is a Next.js application that showcases Akasa, an upscale Indian restaurant located at 79 Robinson Road, Singapore. The website features the restaurant's culinary offerings, special events, promotional offers, and reservation capabilities. Built with modern web technologies and following a mobile-first approach, the website is designed to be fast, responsive, and provide an excellent user experience on both desktop and mobile devices.
 
-The primary purpose of this website is to:
-- Showcase the restaurant's unique culinary experience and brand philosophy
-- Provide detailed information about various menu offerings
-- Highlight special events and promotional offers
-- Enable online reservations
-- Present the restaurant's story, ambiance, and signature dishes
+### Key Features
 
-## Features
-
-- **Responsive Design**: Fully optimized for both desktop and mobile devices with device-specific components
-- **Performance Optimized**: Fast loading times (LCP < 2.5s) and smooth interactions with minimal JavaScript
-- **Menu System**:
-  - 5 distinct menu categories (À La Carte, Soul Food Weekends, Drinks, Bar Bites, 3 Course Set Lunch)
-  - Detailed dish information with vegetarian indicators (🔴 non-veg, 🟢 veg)
-  - Featured signature dishes section
-- **Events Section**:
-  - 5 event categories (Birthday, Anniversary, Office Lunch, Office Parties, Networking)
-  - Detailed event information with pricing and features
-  - Event inquiry form
-- **Offers Section**: Current promotions and special offers with visually appealing cards
+- **Responsive Design**: Fully optimized for both desktop and mobile devices
+- **Menu System**: 5 distinct menu categories with detailed dish information
+- **Events Section**: 5 event categories with detailed information and inquiry form
+- **Offers Section**: Current promotions and special offers
 - **Reservation System**: User-friendly online reservation form
 - **Brand Philosophy**: Dedicated section showcasing the restaurant's story and values
 - **Testimonials**: Customer reviews and ratings
-- **Mobile-Specific Optimizations**:
-  - Tailored experience for mobile users with optimized navigation
-  - Touch-friendly interface with properly sized tap targets
-  - Disabled hover effects on mobile
-  - Performance optimizations for mobile networks
 
 ## Technology Stack
 
@@ -109,26 +87,8 @@ The project follows a modular structure with clear separation of concerns:
 akasa_b-bwireframe/
 ├── public/                 # Static assets
 │   ├── images/             # Image assets organized by page and section
-│   │   ├── brand/          # Brand assets like logos
-│   │   ├── home/           # Homepage-specific images
-│   │   │   ├── hero/       # Hero section images
-│   │   │   ├── philosophy/ # Brand philosophy section images
-│   │   │   ├── gallery/    # Gallery section images
-│   │   │   ├── whats-happening/ # What's happening section images
-│   │   │   └── testimonials/ # Testimonials section images
-│   │   ├── menu/           # Menu page images
-│   │   │   ├── hero/       # Menu page hero images
-│   │   │   ├── chef/       # Chef section images
-│   │   │   ├── a-la-carte/ # À La Carte menu images
-│   │   │   ├── bar-bites/  # Bar Bites menu images
-│   │   │   ├── drinks/     # Drinks menu images
-│   │   │   ├── set-lunch/  # Set Lunch menu images
-│   │   │   ├── soul-food-weekends/ # Soul Food Weekends menu images
-│   │   │   └── featured-dishes/ # Featured dishes images
-│   │   ├── events/         # Events page images
-│   │   └── offers/         # Offers page images
-│   ├── styles/             # Page-specific CSS
-│   └── *.css, *.js         # Global static assets
+│   ├── menus/              # Menu-related static assets
+│   └── styles/             # Page-specific CSS
 ├── src/                    # Source code
 │   ├── app/                # Next.js App Router pages
 │   │   ├── page.tsx        # Home page
@@ -136,86 +96,42 @@ akasa_b-bwireframe/
 │   │   ├── offers/         # Offers page
 │   │   ├── reservations/   # Reservations page
 │   │   └── menu/           # Menu pages and subpages
-│   │       ├── page.tsx    # Main menu page
-│   │       ├── a-la-carte/ # À La Carte menu page
-│   │       ├── bar-bites/  # Bar Bites menu page
-│   │       ├── drinks/     # Drinks menu page
-│   │       ├── set-lunch/  # Set Lunch menu page
-│   │       └── soul-food-weekends/ # Soul Food Weekends menu page
 │   ├── components/         # React components
 │   │   ├── events/         # Event page components
 │   │   ├── home/           # Homepage components
 │   │   ├── layout/         # Layout components
 │   │   ├── menu/           # Menu page components
 │   │   ├── mobile/         # Mobile-specific components
+│   │   ├── navigation/     # Navigation components
 │   │   ├── pages/          # Page-specific client components
 │   │   ├── performance/    # Performance optimization components
 │   │   ├── reservations/   # Reservation page components
 │   │   └── ui/             # Reusable UI components
 │   ├── data/               # Static data files
-│   │   ├── aLaCarteMenu.ts # À La Carte menu data
-│   │   ├── barBitesMenu.ts # Bar Bites menu data
-│   │   ├── drinksMenu.ts   # Drinks menu data
-│   │   ├── setLunchMenu.ts # Set Lunch menu data
-│   │   ├── soulFoodMenu.ts # Soul Food Weekends menu data
-│   │   ├── events.ts       # Events data
-│   │   └── testimonials.ts # Testimonials data
 │   ├── hooks/              # Custom React hooks
-│   │   ├── useDeviceDetection.ts # Hook for detecting mobile devices
-│   │   └── README.md       # Documentation for hooks
 │   ├── styles/             # Global styles
-│   │   ├── globals.css     # Global CSS
-│   │   └── mobile.css      # Mobile-specific CSS
 │   ├── types/              # TypeScript type definitions
-│   │   ├── menu.ts         # Menu types
-│   │   ├── events.ts       # Event types
-│   │   └── README.md       # Documentation for types
 │   ├── utils/              # Utility functions
-│   │   ├── mobileUtils.ts  # Mobile utility functions
-│   │   ├── performanceMonitor.ts # Performance monitoring utilities
-│   │   └── README.md       # Documentation for utilities
 │   └── __tests__/          # Test files
-├── DOCUMENTATION.md        # Comprehensive documentation
 ├── next.config.js          # Next.js configuration
 ├── tailwind.config.js      # Tailwind CSS configuration
-├── tsconfig.json           # TypeScript configuration
-├── jest.config.js          # Jest configuration
-├── eslint.config.mjs       # ESLint configuration
-└── package.json            # NPM package configuration
+└── tsconfig.json           # TypeScript configuration
 ```
 
-### Folder Hierarchy and Conventions
+## Routing and Pages
 
-- **PascalCase**: Used for React components and TypeScript interfaces
-- **camelCase**: Used for variables, functions, and file names
-- **kebab-case**: Used for CSS class names and static asset files
-
-#### Key Conventions:
-
-1. **Component Organization**: Components are organized by feature/page
-2. **Mobile Separation**: Mobile-specific code is completely separated from desktop code
-3. **Type Safety**: TypeScript is used throughout the project for type safety
-4. **Documentation**: Each directory contains a README.md file with specific documentation
-5. **Image Organization**: Images are organized by page and section with descriptive names
-6. **Data Structure**: Data files export typed constants with clear interfaces
-7. **CSS Modules**: Component-specific styles use CSS modules
-8. **Tailwind Utilities**: Common styles use Tailwind utility classes
-
-## Page and Component Structure
-
-The website consists of the following main pages and components:
+The website uses Next.js App Router for routing and consists of the following main pages:
 
 ### Main Pages
 
 1. **Home Page** (`src/app/page.tsx`)
    - Hero section with restaurant introduction
-   - Brand philosophy section (40/60 split)
-   - What's happening section (60/40 split)
+   - Brand philosophy section
+   - What's happening section
    - Featured dishes section
    - Testimonials section
 
 2. **Menu Page** (`src/app/menu/page.tsx`)
-   - Chef section
    - Menu types section with links to subpages
    - Flavor experience section
    - Featured dishes section
@@ -244,38 +160,26 @@ The website consists of the following main pages and components:
 4. **Bar Bites** (`src/app/menu/bar-bites/page.tsx`)
 5. **3 Course Set Lunch** (`src/app/menu/set-lunch/page.tsx`)
 
-### Key Components
+## Components
 
-#### Layout Components
+The application uses a variety of components, organized by their purpose:
 
-- **PageLayout** (`src/components/layout/PageLayout.tsx`): Shared layout with navigation and footer
-  - Props: `children`, `className`, `withMobileOptimizer`
-  - Usage: Wraps page content with common elements
+### Layout Components
 
-- **Navigation** (`src/components/home/Navigation.tsx`): Main navigation menu
-  - Features: Different navigation items for homepage vs. other pages
-  - Mobile: Uses `MobileNavigation` component on mobile devices
+- **PageLayout**: Shared layout with navigation and footer
 
-- **Footer** (`src/components/home/Footer.tsx`): Site footer
-  - Sections: Contact information, opening hours, social media links
+### UI Components
 
-#### UI Components
+- **Button**: Reusable button component with various styles
+- **Loading**: Loading indicator component
 
-- **Button** (`src/components/ui/button.tsx`): Reusable button component
-  - Props: `children`, `className`, `onClick`, `disabled`, etc.
-  - Variants: Primary, secondary, outline
+### Mobile Components
 
-- **Loading** (`src/components/ui/Loading.tsx`): Loading indicator
-  - Props: `size`, `text`
-  - Variants: Small, medium, large
+- **MobileOptimizer**: Mobile-specific optimizations
+- **MobileNavigation**: Mobile navigation menu
+- **MobileClassProvider**: Provides mobile-specific classes
 
-#### Mobile Components
-
-- **MobileOptimizer** (`src/components/mobile/MobileOptimizer.tsx`): Mobile-specific optimizations
-- **MobileNavigation** (`src/components/mobile/MobileNavigation.tsx`): Mobile navigation menu
-- **MobileClassProvider** (`src/components/mobile/MobileClassProvider.tsx`): Provides mobile-specific classes
-
-## Mobile-First Design Strategy
+## Mobile-First Design
 
 The website follows a mobile-first design approach, with specific considerations for mobile users:
 
@@ -283,71 +187,37 @@ The website follows a mobile-first design approach, with specific considerations
 
 1. **Separate Mobile Components**: Mobile-specific components are completely separated from desktop components for easier debugging and maintenance.
 
-2. **Device Detection**: The `useDeviceDetection` hook is used to detect mobile devices and render appropriate components:
+2. **Device Detection**: The `useDeviceDetection` hook is used to detect mobile devices and render appropriate components.
 
-   ```typescript
-   const { isMobile, isDetectionComplete } = useDeviceDetection();
+3. **Touch Optimization**: Touch interactions are optimized for mobile devices.
 
-   if (!isDetectionComplete) {
-     return <Loading />;
-   }
-
-   return isMobile ? <MobileComponent /> : <DesktopComponent />;
-   ```
-
-3. **Touch Optimization**: Touch interactions are optimized for mobile devices:
-
-   ```css
-   html.mobile-device button,
-   html.mobile-device a,
-   html.mobile-device input {
-     touch-action: manipulation;
-   }
-   ```
-
-4. **Disabled Hover Effects**: Hover effects are disabled on mobile devices:
-
-   ```css
-   html.mobile-device button:hover,
-   html.mobile-device a:hover {
-     background-color: initial !important;
-     color: initial !important;
-   }
-   ```
+4. **Disabled Hover Effects**: Hover effects are disabled on mobile devices.
 
 5. **Responsive Typography**: Font sizes are responsive and scale appropriately down to 320px screens.
 
 6. **Optimized Images**: Images are optimized for mobile devices with appropriate sizes and loading strategies.
 
-7. **Performance Considerations**: Mobile-specific performance optimizations include:
-   - Reduced animation complexity
-   - Smaller asset sizes
-   - Deferred loading of non-critical resources
-   - Touch event optimization
-
-8. **Layout Adaptations**:
+7. **Layout Adaptations**:
    - Logo positioning is centered on homepage mobile view, upper left on other pages
    - Navigation uses a hamburger menu on mobile
    - Sections stack vertically on mobile with appropriate spacing
    - Hero image spans full width on mobile
 
-## Documentation
+## Styling
 
-For detailed documentation, see the [DOCUMENTATION.md](DOCUMENTATION.md) file. This includes:
+The website uses a combination of Tailwind CSS and custom CSS for styling:
 
-- Comprehensive architecture overview
-- Component documentation
-- Hook documentation
-- Utility documentation
-- Performance optimization details
-- Mobile optimization details
-- Testing strategy
-- Deployment process
-- Best practices
-- Menu structure and signature dishes
-- Design preferences and guidelines
+### Tailwind CSS
 
-Each directory also contains its own README.md file with specific documentation for that directory.
+Tailwind CSS is used for utility-first styling, with custom configuration in `tailwind.config.js`.
+
+### Custom CSS
+
+Custom CSS is used for specific components and pages, with files organized in the `src/styles` directory.
+
+### Mobile-Specific CSS
+
+Mobile-specific CSS is loaded conditionally based on device detection.
 
 ## Performance Optimization
 
@@ -359,24 +229,6 @@ The website is optimized for performance using various techniques:
 - **Lazy Loading**: Components and images are loaded only when needed
 - **Performance Monitoring**: Real-time monitoring of performance metrics
 
-## Mobile Optimization
-
-The website is optimized for mobile devices:
-
-- **Responsive Design**: Adapts to different screen sizes
-- **Touch Optimization**: Optimized for touch interactions
-- **Mobile-Specific Components**: Components designed specifically for mobile
-- **Reduced Motion**: Respects user preferences for reduced motion
-- **Optimized Images**: Smaller images for mobile devices
-
-## Testing
-
-The website is tested using Jest:
-
-- **Unit Tests**: Test individual components
-- **Integration Tests**: Test component interactions
-- **Accessibility Tests**: Test for accessibility compliance
-
 ## Deployment
 
 The website is deployed to Vercel:
@@ -385,138 +237,22 @@ The website is deployed to Vercel:
 2. Vercel automatically builds and deploys the application
 3. The application is available at the Vercel URL
 
-## Known Limitations and TODOs
+## Known Issues and Future Work
 
 ### Current Limitations
 
-1. **No Server-Side Data Fetching**: The website currently uses static data files instead of fetching data from an API.
-
+1. **Static Data**: The website currently uses static data files instead of fetching data from an API.
 2. **Limited Form Validation**: The reservation and inquiry forms have basic validation but could be enhanced.
-
 3. **No Authentication**: There is no user authentication or admin panel for content management.
-
 4. **No Internationalization**: The website is currently only available in English.
-
-5. **No Analytics Integration**: There is no analytics tracking implemented yet.
-
-6. **Limited Accessibility Testing**: While basic accessibility features are implemented, comprehensive testing is needed.
 
 ### Future Improvements
 
 1. **API Integration**: Implement server-side data fetching for menus and events.
-   ```typescript
-   // TODO: Replace static data with API calls
-   export async function getServerSideProps() {
-     const menuData = await fetch('https://api.akasa.sg/menu').then(res => res.json());
-     return { props: { menuData } };
-   }
-   ```
-
 2. **Form Validation and Submission**: Enhance form validation and implement form submission handling.
-   ```typescript
-   // TODO: Implement form validation and submission
-   const validateForm = (data) => {
-     // Validation logic
-   };
-   ```
-
 3. **Accessibility Enhancements**: Improve accessibility for screen readers and keyboard navigation.
-   ```typescript
-   // TODO: Add ARIA attributes and keyboard navigation
-   <button aria-label="Close menu" tabIndex={0}>Close</button>
-   ```
-
 4. **Internationalization**: Add support for multiple languages.
-   ```typescript
-   // TODO: Implement i18n
-   import { useTranslation } from 'next-i18next';
-   ```
-
 5. **Analytics Integration**: Implement analytics tracking.
-   ```typescript
-   // TODO: Add analytics tracking
-   import { trackEvent } from '@/utils/analytics';
-   ```
-
 6. **Content Management System**: Add a CMS for content management.
-   ```typescript
-   // TODO: Integrate with a headless CMS
-   import { getContent } from '@/lib/cms';
-   ```
-
 7. **Performance Optimization**: Further optimize performance for faster loading times.
-   ```typescript
-   // TODO: Implement advanced performance optimizations
-   import { optimizeImages } from '@/utils/imageOptimizer';
-   ```
-
 8. **Enhanced Mobile Experience**: Further improve the mobile experience.
-   ```typescript
-   // TODO: Implement advanced mobile optimizations
-   import { optimizeMobileExperience } from '@/utils/mobileOptimizer';
-   ```
-
-## Contributing
-
-1. Create a new branch for your feature or bug fix
-2. Make your changes
-3. Write tests for your changes
-4. Run the tests to make sure they pass
-5. Submit a pull request
-
-### Code Documentation Standards
-
-When contributing to this project, please follow these documentation standards:
-
-1. **Component Documentation**: Add JSDoc comments to all components explaining their purpose and usage.
-   ```typescript
-   /**
-    * Button Component
-    *
-    * A reusable button component with various styles and states.
-    *
-    * @param {ButtonProps} props - The component props
-    * @returns {JSX.Element} The rendered component
-    */
-   ```
-
-2. **Prop Documentation**: Document all props with their types and descriptions.
-   ```typescript
-   interface ButtonProps {
-     /**
-      * The button content
-      */
-     children: React.ReactNode;
-
-     /**
-      * Additional CSS classes
-      */
-     className?: string;
-
-     /**
-      * Whether the button is disabled
-      * @default false
-      */
-     disabled?: boolean;
-   }
-   ```
-
-3. **Function Documentation**: Document all functions with their purpose, parameters, and return values.
-   ```typescript
-   /**
-    * Formats a price string
-    *
-    * @param {string|number} price - The price to format
-    * @returns {string} The formatted price
-    */
-   ```
-
-4. **File Headers**: Add a header comment to each file explaining its purpose.
-   ```typescript
-   /**
-    * Button Component
-    *
-    * This file contains the Button component and its related types.
-    * The Button component is used throughout the application for user interactions.
-    */
-   ```
