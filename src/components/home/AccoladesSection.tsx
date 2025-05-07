@@ -7,10 +7,10 @@ import Link from "next/link";
 
 export default function AccoladesSection() {
   // Use the device detection hook
-  
+
 
   // Render mobile-specific component for mobile devices
-  
+
 
   // Desktop version
   return (
@@ -40,14 +40,14 @@ export default function AccoladesSection() {
           <p className="text-base italic font-montserrat mb-8 text-white/90">{"Where spice meets soul – Indian cuisine, reimagined with passion and precision."}</p>
 
           <div className="flex flex-col gap-4 w-full">
-            <Link href="https://akasa.oddle.me/en_SG/" target="_blank" rel="noopener noreferrer">
-              <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full px-6 py-3 text-center shadow-lg">
+            <Link href="https://akasa.oddle.me/en_SG/" target="_blank" rel="noopener noreferrer" className="w-full flex justify-center">
+              <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-[200px] sm:w-[240px] px-4 sm:px-6 py-2 sm:py-3 text-center shadow-lg text-sm sm:text-base">
                 {"Order Online"}
               </Button>
             </Link>
-            <Link href="/reservations">
-              <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full px-6 py-3 text-center shadow-lg">
-                {"Make a Reservation"}
+            <Link href="/reservations" className="w-full flex justify-center">
+              <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-[200px] sm:w-[240px] px-4 sm:px-6 py-2 sm:py-3 text-center shadow-lg text-sm sm:text-base">
+                {"Reserve Table"}
               </Button>
             </Link>
           </div>
