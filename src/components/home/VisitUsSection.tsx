@@ -1,44 +1,12 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { applyMobileOptimizations } from "@/utils/deviceUtils";
+import { useDeviceDetection } from "@/hooks/useDeviceDetection";
 
 export default function VisitUsSection() {
-  // Use state to track if the device is mobile
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Memoized function to check if device is mobile
-  const checkMobile = useCallback(() => {
-    if (typeof window === 'undefined') return;
-
-    const userAgent = navigator.userAgent.toLowerCase();
-    const isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    const isSmallScreen = window.innerWidth < 768;
-
-    setIsMobile(isMobileDevice || (isTouchDevice && isSmallScreen));
-
-    // Apply mobile-specific optimizations if on mobile
-    if (isMobileDevice || (isTouchDevice && isSmallScreen)) {
-      applyMobileOptimizations();
-    }
-  }, []);
-
-  // Detect mobile device on client side
-  useEffect(() => {
-    // Initial check
-    checkMobile();
-
-    // Add event listener for window resize
-    window.addEventListener('resize', checkMobile);
-
-    // Clean up event listener
-    return () => {
-      window.removeEventListener('resize', checkMobile);
-    };
-  }, [checkMobile]);
+  // Use the device detection hook instead of implementing our own logic
+  const { isMobile, isDetectionComplete } = useDeviceDetection();
 
 
   return (

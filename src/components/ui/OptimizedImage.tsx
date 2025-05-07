@@ -82,13 +82,13 @@ const OptimizedImage = memo(function OptimizedImage({
   const imagePriority = priority || isCritical;
   const imageQuality = quality || (isCritical ? IMAGES.HIGH_QUALITY : IMAGES.DEFAULT_QUALITY);
 
-  // Handle image load (memoized to avoid dependency cycle)
-  const handleLoad = useCallback(() => {
+  // Handle image load
+  const handleLoad = () => {
     setIsLoaded(true);
     if (onImageLoad) {
       onImageLoad();
     }
-  }, [onImageLoad]);
+  };
 
   // Set hardware acceleration styles
   const hardwareAccelerationStyle = useHardwareAcceleration
@@ -104,7 +104,7 @@ const OptimizedImage = memo(function OptimizedImage({
     if (img.complete) {
       handleLoad();
     }
-  }, [src, handleLoad]);
+  }, [src]);
 
   return (
     <div className={cn(

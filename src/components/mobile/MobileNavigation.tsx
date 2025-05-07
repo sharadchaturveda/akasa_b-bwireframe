@@ -62,6 +62,8 @@ export default function MobileNavigation({ navItems }: MobileNavigationProps) {
             alt="Logo"
             width={200}
             height={100}
+            priority={true}
+            quality={80}
             style={{
               height: '100px',  // Increased from 80px to 100px
               width: 'auto',
