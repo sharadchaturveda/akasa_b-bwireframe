@@ -26,8 +26,8 @@ export default function AccoladesSection() {
       </div>
 
       {/* Content container */}
-      <div className="relative h-full w-full flex items-end justify-start p-17 z-10">
-        <div className="max-w-sm ml-8 mb-24 bg-black/70 p-8 rounded-lg border border-[#E6C78B]/20 shadow-2xl backdrop-blur-sm animate-fadeSlideUp">
+      <div className="relative h-full w-full flex items-end justify-center sm:justify-start p-17 z-10">
+        <div className="max-w-sm sm:ml-8 mb-24 bg-black/70 p-8 rounded-lg border border-[#E6C78B]/20 shadow-2xl backdrop-blur-sm animate-fadeSlideUp">
           {/* Decorative corner accents */}
           <div className="absolute top-0 left-0 w-12 h-12 border-t border-l border-[#E6C78B]/30"></div>
           <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-[#E6C78B]/30"></div>
