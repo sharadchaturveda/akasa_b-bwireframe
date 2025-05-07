@@ -23,7 +23,7 @@ const ReservationsPage = memo(function ReservationsPage() {
       <HeroSection />
 
       {/* Main content with decorative background */}
-      <div className="relative pt-24 pb-24 md:pb-12">
+      <div className="relative pt-24 pb-8 md:pb-12">
         {/* Decorative background elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div
@@ -56,7 +56,7 @@ const ReservationsPage = memo(function ReservationsPage() {
           </div>
 
           {/* Decorative separator */}
-          <div className="w-24 h-1 mx-auto mt-24 mb-12 md:mb-8 bg-gradient-to-r from-transparent via-[#E6C78B] to-transparent"></div>
+          <div className="w-24 h-1 mx-auto mt-24 mb-4 md:mb-8 bg-gradient-to-r from-transparent via-[#E6C78B] to-transparent"></div>
         </div>
       </div>
 
