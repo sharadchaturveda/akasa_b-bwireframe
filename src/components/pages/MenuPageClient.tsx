@@ -48,7 +48,7 @@ export default function MenuPageClient() {
       const lcpObserver = new PerformanceObserver((entryList) => {
         const entries = entryList.getEntries();
         const lcpEntry = entries[entries.length - 1];
-        console.log('LCP:', lcpEntry.startTime);
+        // Performance measurement: LCP time recorded
       });
 
       lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
@@ -59,7 +59,7 @@ export default function MenuPageClient() {
         entries.forEach(entry => {
           // Log long tasks (over 50ms)
           if (entry.duration > 50) {
-            console.log('Long task:', entry.duration, 'ms');
+            // Performance measurement: Long task duration recorded
           }
         });
       });

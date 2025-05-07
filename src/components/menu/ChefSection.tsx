@@ -29,7 +29,7 @@ const ChefSection = memo(function ChefSection() {
         window.performance.measure('time-to-lcp', 'navigationStart', 'lcp-loaded');
 
         const lcpMeasure = window.performance.getEntriesByName('time-to-lcp')[0];
-        console.log('Time to LCP:', lcpMeasure.duration, 'ms');
+        // Performance measurement: Time to LCP recorded
       }
     }
   }, []);

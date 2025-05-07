@@ -14,7 +14,7 @@
  */
 export function disableDiningInfoDebug(): void {
   // This function is now deprecated
-  console.log('disableDiningInfoDebug is deprecated - using clean component instead');
+  // REVIEW: disableDiningInfoDebug is deprecated - using clean component instead
   return;
 
   // Only manipulate intervals if window is defined

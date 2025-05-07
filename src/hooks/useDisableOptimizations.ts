@@ -15,7 +15,7 @@ export function useDisableOptimizations(options: {
   disableAnimations?: boolean;
   disableLayoutOptimizations?: boolean;
 } = {}) {
-  console.log('useDisableOptimizations is deprecated - using clean component instead');
+  // REVIEW: useDisableOptimizations is deprecated - using clean component instead
 
   const {
     disableMutationObservers = true,

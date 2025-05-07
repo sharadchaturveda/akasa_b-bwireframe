@@ -35,7 +35,7 @@ const ReservationInfo = memo(function ReservationInfo() {
     startTracing();
 
     // Log that we're using the new protection system
-    console.log('[ReservationInfo] Component mounted with new protection system');
+    // ReservationInfo component mounted with protection system
 
     return () => {
       // Only run in browser environment
@@ -136,7 +136,7 @@ const ReservationInfo = memo(function ReservationInfo() {
       );
 
       if (hasStyleChanges) {
-        console.log('[ReservationInfo] Style changes detected, reapplying styles');
+        // Style changes detected, reapplying styles
         applyStyles();
       }
     });

@@ -20,7 +20,7 @@ export const loadPageStyles = (pageName: string): void => {
 
   // Special case for reservations page - don't load any optimization styles
   if (pageName === 'reservations') {
-    console.log('Skipping optimization styles for reservations page');
+    // Skip optimization styles for reservations page
     return;
   }
 

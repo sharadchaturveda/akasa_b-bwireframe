@@ -25,7 +25,7 @@ export default function HomePerformanceOptimizer() {
 
     // If we're on the reservations page or have the dining info component, don't apply any optimizations
     if (isReservationsPage || hasDiningInfo) {
-      console.log('HomePerformanceOptimizer: Reservations page or dining info detected, skipping optimizations');
+      // Skip optimizations for reservations page or dining info
       return;
     }
 
@@ -48,7 +48,7 @@ export default function HomePerformanceOptimizer() {
 
       // Double-check for dining info component before applying optimizations
       if (document.querySelector('.dining-info-container') !== null) {
-        console.log('HomePerformanceOptimizer: Dining info component detected, skipping image optimizations');
+        // Skip image optimizations for dining info component
         return;
       }
 
@@ -83,7 +83,7 @@ export default function HomePerformanceOptimizer() {
 
       // Double-check for dining info component before applying optimizations
       if (document.querySelector('.dining-info-container') !== null) {
-        console.log('HomePerformanceOptimizer: Dining info component detected, skipping animation optimizations');
+        // Skip animation optimizations for dining info component
         return;
       }
 
