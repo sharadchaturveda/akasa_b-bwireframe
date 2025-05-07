@@ -32,9 +32,10 @@ const FlavorExperienceSection = dynamic(() => import("@/components/menu/FlavorEx
 const FeaturedDishesSection = dynamic(() => import("@/components/menu/FeaturedDishesSection"), {
   loading: () => <div className="h-[50vh] bg-black"></div>
 });
-const Footer = dynamic(() => import("@/components/home/Footer"), {
-  loading: () => <div className="h-[100px] bg-black"></div>
-});
+// Footer component is not used in this page but kept for reference
+// const Footer = dynamic(() => import("@/components/home/Footer"), {
+//   loading: () => <div className="h-[100px] bg-black"></div>
+// });
 
 // Import the PageLayout component
 import PageLayout from "@/components/layout/PageLayout";
@@ -45,10 +46,11 @@ export default function MenuPageClient() {
     // Monitor LCP
     if (typeof window !== 'undefined' && 'PerformanceObserver' in window) {
       // Create a performance observer for LCP
-      const lcpObserver = new PerformanceObserver((entryList) => {
-        const entries = entryList.getEntries();
-        const lcpEntry = entries[entries.length - 1];
+      const lcpObserver = new PerformanceObserver(() => {
         // Performance measurement: LCP time recorded
+        // Commented out to avoid unused variable warnings
+        // const entries = entryList.getEntries();
+        // const lcpEntry = entries[entries.length - 1];
       });
 
       lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });

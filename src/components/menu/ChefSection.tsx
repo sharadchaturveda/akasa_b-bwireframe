@@ -28,8 +28,8 @@ const ChefSection = memo(function ChefSection() {
         // Measure time from navigation to LCP
         window.performance.measure('time-to-lcp', 'navigationStart', 'lcp-loaded');
 
-        const lcpMeasure = window.performance.getEntriesByName('time-to-lcp')[0];
         // Performance measurement: Time to LCP recorded
+        // const lcpMeasure = window.performance.getEntriesByName('time-to-lcp')[0];
       }
     }
   }, []);
