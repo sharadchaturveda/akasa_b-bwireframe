@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useState, useEffect } from 'react';
+import { memo, useState, useEffect, useCallback } from 'react';
 import Image, { ImageProps } from 'next/image';
 import { cn } from '@/lib/utils';
 import { IMAGES } from '@/constants';
@@ -14,30 +14,30 @@ export interface OptimizedImageProps extends Omit<ImageProps, 'onLoad'> {
    * @default false
    */
   isCritical?: boolean;
-  
+
   /**
    * Whether to show a placeholder while the image is loading
    * @default true
    */
   showPlaceholder?: boolean;
-  
+
   /**
    * The color of the placeholder
    * @default "#111"
    */
   placeholderColor?: string;
-  
+
   /**
    * Whether to use hardware acceleration
    * @default true
    */
   useHardwareAcceleration?: boolean;
-  
+
   /**
    * Callback when the image is loaded
    */
   onImageLoad?: () => void;
-  
+
   /**
    * Additional CSS classes for the container
    */
@@ -76,36 +76,36 @@ const OptimizedImage = memo(function OptimizedImage({
 }: OptimizedImageProps) {
   // State for tracking if the image is loaded
   const [isLoaded, setIsLoaded] = useState(false);
-  
+
   // Determine image loading attributes based on criticality
   const imageLoading = loading || (isCritical ? undefined : "lazy");
   const imagePriority = priority || isCritical;
   const imageQuality = quality || (isCritical ? IMAGES.HIGH_QUALITY : IMAGES.DEFAULT_QUALITY);
-  
-  // Handle image load
-  const handleLoad = () => {
+
+  // Handle image load (memoized to avoid dependency cycle)
+  const handleLoad = useCallback(() => {
     setIsLoaded(true);
     if (onImageLoad) {
       onImageLoad();
     }
-  };
-  
+  }, [onImageLoad]);
+
   // Set hardware acceleration styles
   const hardwareAccelerationStyle = useHardwareAcceleration
     ? { transform: "translateZ(0)" }
     : {};
-  
+
   // Effect to handle the case where the image is already cached
   useEffect(() => {
     // Check if the image is already in the browser cache
     const img = new window.Image();
     img.src = typeof src === 'string' ? src : '';
-    
+
     if (img.complete) {
       handleLoad();
     }
-  }, [src]);
-  
+  }, [src, handleLoad]);
+
   return (
     <div className={cn(
       "relative overflow-hidden",
@@ -121,7 +121,7 @@ const OptimizedImage = memo(function OptimizedImage({
           style={{ backgroundColor: placeholderColor }}
         />
       )}
-      
+
       {/* Image */}
       <Image
         src={src}

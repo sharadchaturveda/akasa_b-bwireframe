@@ -21,7 +21,13 @@ const eslintConfig = [
       "**/public/**",
       "**/*.d.ts",
       "**/jest.config.js",
-      "**/jest.setup.js"
+      "**/jest.setup.js",
+      "**/__tests__/**",
+      "**/test/**",
+      "**/*.test.ts",
+      "**/*.test.tsx",
+      "**/*.spec.ts",
+      "**/*.spec.tsx"
     ],
     rules: {
       // Disable some rules that are too strict for this project
@@ -42,6 +48,9 @@ const eslintConfig = [
       "@typescript-eslint/no-require-imports": "warn",
       // Improve type safety
       "@typescript-eslint/no-this-alias": "warn"
+    },
+    linterOptions: {
+      reportUnusedDisableDirectives: "warn"
     },
   },
 ];

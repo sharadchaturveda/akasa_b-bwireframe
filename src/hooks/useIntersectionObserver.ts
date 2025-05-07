@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, RefObject } from 'react';
+import { useState, useEffect, useRef, useCallback, RefObject } from 'react';
 
 /**
  * Options for the useIntersectionObserver hook
@@ -124,8 +124,8 @@ export function useIntersectionObserver(
     }
   };
 
-  // Function to stop observing
-  const stopObserving = () => {
+  // Function to stop observing (defined first to avoid circular dependencies)
+  const stopObserving = useCallback(() => {
     isObservingRef.current = false;
 
     // Disconnect the observer if it exists
@@ -133,10 +133,10 @@ export function useIntersectionObserver(
       observerRef.current.disconnect();
       observerRef.current = null;
     }
-  };
+  }, []);
 
-  // Function to set up the observer
-  const setupObserver = () => {
+  // Function to set up the observer (memoized to avoid dependency cycle)
+  const setupObserver = useCallback(() => {
     // Disconnect any existing observer
     if (observerRef.current) {
       observerRef.current.disconnect();
@@ -164,7 +164,7 @@ export function useIntersectionObserver(
     if (ref.current && isObservingRef.current) {
       observerRef.current.observe(ref.current);
     }
-  };
+  }, [root, rootMargin, threshold, disconnectOnIntersect, stopObserving]);
 
   // Set up the observer when the component mounts or when the options change
   useEffect(() => {
@@ -184,7 +184,7 @@ export function useIntersectionObserver(
         observerRef.current.disconnect();
       }
     };
-  }, [root, rootMargin, threshold, disconnectOnIntersect]);
+  }, [root, rootMargin, threshold, disconnectOnIntersect, setupObserver]);
 
   return {
     isIntersecting,

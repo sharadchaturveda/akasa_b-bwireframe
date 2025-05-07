@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { NAVIGATION } from '@/constants';
 
 interface MobileNavigationProps {
@@ -38,7 +39,7 @@ export default function MobileNavigation({ navItems }: MobileNavigationProps) {
   return (
     <>
       {/* Absolute positioned header - only visible on mobile */}
-      <div 
+      <div
         className="md:hidden absolute top-0 left-0 w-full z-50"
         style={{
           position: 'absolute', // Keep as absolute to stay with hero section
@@ -56,10 +57,12 @@ export default function MobileNavigation({ navItems }: MobileNavigationProps) {
       >
         {/* Logo */}
         <Link href="/">
-          <img 
-            src="/images/brand/logo-white.png" 
-            alt="Logo" 
-            style={{ 
+          <Image
+            src="/images/brand/logo-white.png"
+            alt="Logo"
+            width={200}
+            height={100}
+            style={{
               height: '100px',  // Increased from 80px to 100px
               width: 'auto',
               maxWidth: '70vw', // Ensure it doesn't overflow on very small screens
@@ -85,7 +88,7 @@ export default function MobileNavigation({ navItems }: MobileNavigationProps) {
             zIndex: 101
           }}
         >
-          <div 
+          <div
             style={{
               width: '100%',
               height: '5px',
@@ -95,7 +98,7 @@ export default function MobileNavigation({ navItems }: MobileNavigationProps) {
               transform: isMenuOpen ? 'translateY(15px) rotate(45deg)' : 'none'
             }}
           />
-          <div 
+          <div
             style={{
               width: '100%',
               height: '5px',
@@ -105,7 +108,7 @@ export default function MobileNavigation({ navItems }: MobileNavigationProps) {
               opacity: isMenuOpen ? 0 : 1
             }}
           />
-          <div 
+          <div
             style={{
               width: '100%',
               height: '5px',
@@ -120,8 +123,8 @@ export default function MobileNavigation({ navItems }: MobileNavigationProps) {
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div 
-          className="md:hidden" 
+        <div
+          className="md:hidden"
           style={{
             position: 'fixed',
             top: 0,
@@ -172,13 +175,3 @@ export default function MobileNavigation({ navItems }: MobileNavigationProps) {
     </>
   );
 }
-
-
-
-
-
-
-
-
-
-

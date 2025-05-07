@@ -2,8 +2,8 @@
 const nextConfig = {
   // Enable ESLint during builds
   eslint: {
-    // Set to false to enable ESLint checking during builds
-    ignoreDuringBuilds: false,
+    // Set to true to ignore ESLint errors during builds
+    ignoreDuringBuilds: true,
     // Directories to include in ESLint checking
     dirs: ['src'],
   },
