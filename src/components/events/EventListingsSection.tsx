@@ -197,8 +197,8 @@ const EventListingsSection = memo(function EventListingsSection({
                   {/* Inquiry button with proper mobile spacing and gold fill animation */}
                   <Link href="#inquiry" prefetch={true}>
                     <button className="group inline-flex items-center justify-center rounded-full text-xs md:text-sm font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-4 md:px-6 py-2 md:py-3 min-w-[120px] md:min-w-[160px]">
-                      {/* Gold fill animation */}
-                      <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
+                      {/* Gold fill animation - hidden on mobile, visible on desktop */}
+                      <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 hidden md:block"></span>
 
                       {/* Button text that changes color on hover */}
                       <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
