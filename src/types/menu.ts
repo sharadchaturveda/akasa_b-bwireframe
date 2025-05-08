@@ -22,3 +22,11 @@ export interface Menu {
   source_url?: string;
   categories: MenuCategory[];
 }
+
+export interface MenuType {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  url: string;
+}

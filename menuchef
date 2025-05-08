@@ -1,0 +1,66 @@
+[33mcommit ae5544114e800b1895ae249fec78162214c6af78[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: sha <sharadchaturveda@gmail.com>
+Date:   Thu May 8 19:48:09 2025 +0530
+
+    refactor: remove bloat across codebase while preserving layouts
+
+[33mcommit ec07b5e698b64a4da287635ed4c0eab052e16e26[m
+Author: sha <sharadchaturveda@gmail.com>
+Date:   Thu May 8 19:31:49 2025 +0530
+
+    chore: commit before bloat removal pass
+
+[33mcommit 6a6ea77af5ad534644df5345740298a5af340022[m
+Author: sha <sharadchaturveda@gmail.com>
+Date:   Wed May 7 12:26:39 2025 +0530
+
+    fix: resolve ESLint warnings in performance monitoring code
+
+[33mcommit 363a28a30b019e961cb90a274effe7ad124b0a45[m
+Author: sha <sharadchaturveda@gmail.com>
+Date:   Wed May 7 12:17:51 2025 +0530
+
+    refactor: replace console.log statements with comments
+
+[33mcommit 91479c1188fa6d5cbd58ca0af99b358240ae8588[m[33m ([m[1;35mrefs/stash[m[33m)[m
+Merge: 89ca04f 703b0fb
+Author: sha <sharadchaturveda@gmail.com>
+Date:   Wed May 7 12:03:58 2025 +0530
+
+    On bloat-removal: Uncommitted changes from bloat-removal branch
+
+[33mcommit bdcb95195350141c11918de1a8fa9dc48dc63f64[m
+Author: sha <sharadchaturveda@gmail.com>
+Date:   Sun May 4 11:10:35 2025 +0530
+
+    Fix hydration issues and organize images
+
+[33mcommit 34f870b36af2bc095e74d21176744ac6b392c853[m
+Author: sha <sharadchaturveda@gmail.com>
+Date:   Sat May 3 16:06:10 2025 +0530
+
+    Reorganize menu images with separate folders for each menu type
+
+[33mcommit f6ab1b751eb452c7b754587bb8bfa75fa3e1107e[m
+Author: sha <sharadchaturveda@gmail.com>
+Date:   Thu May 1 21:45:13 2025 +0530
+
+    01-05,21:45
+
+[33mcommit da988d374458d67fe97adcefbb8af5d66fae78f7[m
+Author: sha <sharadchaturveda@gmail.com>
+Date:   Wed Apr 30 15:10:04 2025 +0530
+
+    30-04 15:09pm
+
+[33mcommit cbc763198ac94c8867daaa45cc199cb87e693da0[m
+Author: sha <sharadchaturveda@gmail.com>
+Date:   Wed Apr 30 14:36:09 2025 +0530
+
+    30-04 14:36pm
+
+[33mcommit 37cd0a1afe0c5a75bce2f7b27d85521b8a5c6d34[m
+Author: sha <sharadchaturveda@gmail.com>
+Date:   Wed Apr 30 10:18:35 2025 +0530
+
+    30-04 10:18am

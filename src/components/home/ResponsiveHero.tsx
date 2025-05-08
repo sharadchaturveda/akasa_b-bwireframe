@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { memo, useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import { useDeviceDetection } from '@/hooks/useDeviceDetection';
 
 // Dynamically import components with no SSR and with loading condition
 const MobileHero = dynamic(
@@ -29,10 +30,14 @@ const DesktopHero = dynamic(
 );
 
 /**
- * Responsive hero section that renders the appropriate hero based on screen size
- * This ensures the mobile video is never loaded on desktop and vice versa
+ * ResponsiveHero Component
+ *
+ * Responsive hero section that renders the appropriate hero based on screen size.
+ * This ensures the mobile video is never loaded on desktop and vice versa.
+ *
+ * @returns {JSX.Element} The rendered component
  */
-const ResponsiveHero = () => {
+const ResponsiveHero = memo(function ResponsiveHero() {
   // State to track if we're on mobile
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
@@ -77,6 +82,6 @@ const ResponsiveHero = () => {
       {isMobile ? <MobileHero /> : <DesktopHero />}
     </section>
   );
-};
+});
 
 export default ResponsiveHero;

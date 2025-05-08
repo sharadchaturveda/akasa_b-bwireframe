@@ -21,7 +21,7 @@ jest.mock('@/utils/mobileUtils', () => ({
 }));
 
 // Mock the MobileNavigation component
-jest.mock('@/components/mobile/MobileNavigation', () => {
+jest.mock('@/components/navigation/MobileNavigation', () => {
   return function MockMobileNavigation({ navItems }: { navItems: Array<{ name: string; path: string }> }) {
     return (
       <div data-testid="mobile-navigation">
@@ -39,57 +39,57 @@ describe('Navigation', () => {
   it('renders the navigation with correct links on homepage', () => {
     // Mock the usePathname hook to return '/' (homepage)
     require('next/navigation').usePathname.mockReturnValue('/');
-    
+
     render(<Navigation />);
-    
+
     // Check if the navigation links are rendered
     const menuLink = screen.getByText('MENUS');
     expect(menuLink).toBeInTheDocument();
     expect(menuLink).toHaveAttribute('href', '/menu');
-    
+
     const eventsLink = screen.getByText('EVENTS');
     expect(eventsLink).toBeInTheDocument();
     expect(eventsLink).toHaveAttribute('href', '/events');
-    
+
     const offersLink = screen.getByText('OFFERS');
     expect(offersLink).toBeInTheDocument();
     expect(offersLink).toHaveAttribute('href', '/offers');
-    
+
     const reservationsLink = screen.getByText('RESERVATIONS');
     expect(reservationsLink).toBeInTheDocument();
     expect(reservationsLink).toHaveAttribute('href', '/reservations');
-    
+
     // Check that HOME link is not rendered on homepage
     const homeLink = screen.queryByText('HOME');
     expect(homeLink).not.toBeInTheDocument();
-    
+
     // Check if the mobile navigation is rendered
     const mobileNavigation = screen.getByTestId('mobile-navigation');
     expect(mobileNavigation).toBeInTheDocument();
   });
-  
+
   it('renders the navigation with HOME link on other pages', () => {
     // Mock the usePathname hook to return '/menu' (not homepage)
     require('next/navigation').usePathname.mockReturnValue('/menu');
-    
+
     render(<Navigation />);
-    
+
     // Check if the HOME link is rendered
     const homeLink = screen.getByText('HOME');
     expect(homeLink).toBeInTheDocument();
     expect(homeLink).toHaveAttribute('href', '/');
-    
+
     // Check that MENUS link is not rendered on menu page
     const menuLink = screen.queryByText('MENUS');
     expect(menuLink).not.toBeInTheDocument();
-    
+
     // Check if other links are rendered
     const eventsLink = screen.getByText('EVENTS');
     expect(eventsLink).toBeInTheDocument();
-    
+
     const offersLink = screen.getByText('OFFERS');
     expect(offersLink).toBeInTheDocument();
-    
+
     const reservationsLink = screen.getByText('RESERVATIONS');
     expect(reservationsLink).toBeInTheDocument();
   });

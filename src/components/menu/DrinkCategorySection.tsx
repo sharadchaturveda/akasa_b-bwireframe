@@ -1,37 +1,34 @@
 "use client";
 
 import { memo } from 'react';
-import { MenuCategory } from '@/types/menu';
+import { MenuCategory, MenuItem } from '@/types/menu';
 import DrinkMenuItemCard from './DrinkMenuItemCard';
-import CategoryNotes from './CategoryNotes';
+import BaseMenuCategorySection from './BaseMenuCategorySection';
 
 interface DrinkCategorySectionProps {
   category: MenuCategory;
 }
 
+/**
+ * DrinkCategorySection Component
+ *
+ * A component for displaying drink menu categories.
+ * Uses the BaseMenuCategorySection component with drink menu item cards.
+ *
+ * @param {DrinkCategorySectionProps} props - The component props
+ * @returns {JSX.Element} The rendered component
+ */
 const DrinkCategorySection = memo(function DrinkCategorySection({ category }: DrinkCategorySectionProps) {
+  // Render function for menu items
+  const renderMenuItem = (item: MenuItem, index: number, categoryName: string) => (
+    <DrinkMenuItemCard key={`${categoryName}-${index}`} item={item} />
+  );
+
   return (
-    <div className="mb-16">
-      {/* Category heading with decorative elements */}
-      <div className="text-center mb-8 relative">
-        <h2 className="text-2xl md:text-3xl font-playfair mb-4 relative inline-block">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E6C78B] to-[#D4B679]">
-            {category.category_name}
-          </span>
-          <div className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[#E6C78B]/80 to-transparent"></div>
-        </h2>
-      </div>
-      
-      {/* Category notes if available */}
-      {category.category_notes && <CategoryNotes notes={category.category_notes} />}
-      
-      {/* Menu items grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {category.items.map((item, index) => (
-          <DrinkMenuItemCard key={`${category.category_name}-${index}`} item={item} />
-        ))}
-      </div>
-    </div>
+    <BaseMenuCategorySection
+      category={category}
+      renderMenuItem={renderMenuItem}
+    />
   );
 });
 

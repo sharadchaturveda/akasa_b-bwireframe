@@ -22,6 +22,9 @@ interface RequestIdleCallbackDeadline {
 }
 
 // Dynamically import below-the-fold components
+const ChefSection = dynamic(() => import("@/components/menu/ChefSection"), {
+  loading: () => <div className="h-[50vh] bg-black"></div>
+});
 const MenusSection = dynamic(() => import("@/components/menu/MenusSection"), {
   loading: () => <div className="h-[50vh] bg-black"></div>
 });
@@ -96,6 +99,10 @@ export default function MenuPageClient() {
       {/* Below-the-fold content with Suspense */}
       <Suspense fallback={<div className="h-[50vh] bg-black"></div>}>
         <MenusSection />
+      </Suspense>
+
+      <Suspense fallback={<div className="h-[50vh] bg-black"></div>}>
+        <ChefSection />
       </Suspense>
 
       <Suspense fallback={<div className="h-[50vh] bg-black"></div>}>
