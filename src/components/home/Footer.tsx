@@ -58,6 +58,7 @@ const Footer = memo(function Footer() {
             <Link href="/events" className="text-white/80 hover:text-[#E6C78B] transition-colors text-xs sm:text-sm font-montserrat py-1 px-2 touch-manipulation">Events</Link>
             <Link href="/offers" className="text-white/80 hover:text-[#E6C78B] transition-colors text-xs sm:text-sm font-montserrat py-1 px-2 touch-manipulation">Offers</Link>
             <Link href="/reservations" className="text-white/80 hover:text-[#E6C78B] transition-colors text-xs sm:text-sm font-montserrat py-1 px-2 touch-manipulation">Reservations</Link>
+            <a href="https://akasa.sg/blog" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-[#E6C78B] transition-colors text-xs sm:text-sm font-montserrat py-1 px-2 touch-manipulation">Blogs</a>
           </div>
 
           {/* Social icons */}

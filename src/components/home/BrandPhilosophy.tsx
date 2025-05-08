@@ -27,9 +27,12 @@ const BrandPhilosophy = memo(function BrandPhilosophy() {
     <section
       ref={ref as React.RefObject<HTMLElement>}
       id="brand-philosophy"
-      className="w-full grid grid-cols-1 md:grid-cols-[40%_60%]">
+      className="w-full grid grid-cols-1 md:grid-cols-[40%_60%] bg-black -mt-2 sm:mt-0"
+      style={{ marginTop: '-2px', position: 'relative', zIndex: 5 }}>
+      {/* Top gradient overlay for smoother transition on mobile */}
+      <div className="absolute top-0 left-0 right-0 h-[20px] bg-gradient-to-b from-black to-transparent z-[1] sm:hidden"></div>
       {/* Left Side - Brand Philosophy - Optimized for mobile */}
-      <div className="relative py-16 px-6 md:py-8 md:px-12 flex flex-col justify-center bg-black overflow-hidden min-h-[500px]">
+      <div className="relative pt-8 pb-12 sm:py-16 px-6 md:py-8 md:px-12 flex flex-col justify-center bg-black overflow-hidden min-h-[500px]">
         {/* Background image with animation */}
         <AnimatedBackground
           src="/images/home/philosophy/background.jpg"
@@ -54,7 +57,7 @@ const BrandPhilosophy = memo(function BrandPhilosophy() {
           position="all"
         />
 
-        <div className="relative max-w-md mx-auto md:mx-0">
+        <div className="relative max-w-md mx-auto md:mx-0 z-[2]">
           <SectionHeading
             label="Our Philosophy"
             subtitle="Not just a meal."
@@ -116,8 +119,8 @@ const BrandPhilosophy = memo(function BrandPhilosophy() {
           opacity={0.2}
         />
 
-        <div className="relative h-full flex flex-col justify-center py-16 px-6 md:py-8 md:px-12">
-          <div className="max-w-md mx-auto md:mx-0">
+        <div className="relative h-full flex flex-col justify-center pt-8 pb-12 sm:py-16 px-6 md:py-8 md:px-12">
+          <div className="max-w-md mx-auto md:mx-0 z-[2]">
             <SectionHeading
               label="Visit Us"
               title="Singapore"

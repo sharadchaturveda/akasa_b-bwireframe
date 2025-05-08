@@ -1,0 +1,68 @@
+/* Mobile hero section fixes */
+
+/* Hide hero content on mobile immediately during page load */
+@media (max-width: 767px) {
+  /* Special class for mobile hero with no content */
+  .mobile-hero-no-content h1,
+  .mobile-hero-no-content p,
+  .mobile-hero-no-content button,
+  .mobile-hero-no-content svg,
+  .mobile-hero-no-content a,
+  .mobile-hero-no-content .logo,
+  .mobile-hero-no-content [alt="Akasa Logo"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /* Hide all text and buttons in hero section */
+  .hero-section h1,
+  .hero-section p,
+  .hero-section button,
+  .hero-section svg,
+  .hero-section a {
+    display: none !important;
+  }
+
+  /* Hide logo on mobile */
+  .hero-section .logo,
+  .hero-section [alt="Akasa Logo"] {
+    display: none !important;
+  }
+
+  /* Ensure content container is hidden */
+  .hero-section > div > div:not([class*="video"]) {
+    display: none !important;
+  }
+}
+
+/* Ensure fallback image is visible during page load */
+.fallback-image {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Add a default background image for the hero section during page load */
+@media (max-width: 767px) {
+  .hero-section {
+    background-image: url('/images/home/hero/hero-home.jpg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+
+  /* Ensure video is visible and not hidden by other CSS */
+  .mobile-hero-video {
+    display: block !important;
+    z-index: 2 !important;
+  }
+
+  /* Ensure video container is visible */
+  .hero-section > div > video,
+  .hero-section video,
+  video.mobile-hero-video {
+    display: block !important;
+    visibility: visible !important;
+  }
+}

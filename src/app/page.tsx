@@ -30,11 +30,11 @@ export default function HomePage() {
     <main className="min-h-screen bg-black text-white">
       <Navigation />
 
-      {/* Hero Section */}
-      <CarouselHeroSection />
-
-      {/* Brand Philosophy Section */}
-      <BrandPhilosophy />
+      {/* Hero and Brand Philosophy Sections - Wrapped to eliminate gap on mobile */}
+      <div className="flex flex-col section-wrapper" style={{ marginBottom: '-2px' }}>
+        <CarouselHeroSection />
+        <BrandPhilosophy />
+      </div>
 
       {/* Spices Section */}
       <SpicesSection />

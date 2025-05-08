@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { memo, useState, useEffect, useCallback } from "react";
 import { LOGO } from "@/constants";
+import { useDeviceDetection } from "@/hooks/useDeviceDetection";
+import BasicVideoBackground from "./BasicVideoBackground";
 
 // Hero carousel images for desktop
 const HERO_IMAGES = [
@@ -26,16 +28,19 @@ const HERO_IMAGES = [
   }
 ];
 
-// A hero section with autoflipping carousel for desktop and static image for mobile
+// A hero section with autoflipping carousel for desktop and video background for mobile
 const CarouselHeroSection = memo(function CarouselHeroSection() {
   // State to track current image index
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  // State to track if we're on mobile
-  const [isMobile, setIsMobile] = useState(false);
+  // State to track if we're on mobile - using both manual check and hook
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const { isMobile } = useDeviceDetection();
 
   // Function to handle window resize and check if we're on mobile
   const handleResize = useCallback(() => {
-    setIsMobile(window.innerWidth < 768);
+    if (typeof window !== 'undefined') {
+      setIsSmallScreen(window.innerWidth < 768);
+    }
   }, []);
 
   // Set up resize listener and initial check
@@ -52,38 +57,65 @@ const CarouselHeroSection = memo(function CarouselHeroSection() {
     };
   }, [handleResize]);
 
-  // Set up autoflipping carousel
+  // Set up autoflipping carousel for desktop
   useEffect(() => {
     // Only run carousel on desktop
-    if (isMobile) return;
+    if (isMobile || isSmallScreen) {
+      // Log for debugging
+      if (process.env.NODE_ENV !== 'production') {
+        console.log('Carousel disabled: Mobile view detected');
+      }
+      return;
+    }
 
-    // Set up interval to change image every 1.5 seconds
+    // Log for debugging
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('Carousel enabled: Desktop view detected');
+    }
+
+    // Set up interval to change image every 2 seconds
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex === HERO_IMAGES.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 1500);
+      setCurrentImageIndex((prevIndex) => {
+        const newIndex = prevIndex === HERO_IMAGES.length - 1 ? 0 : prevIndex + 1;
+
+        // Log for debugging
+        if (process.env.NODE_ENV !== 'production') {
+          console.log(`Carousel image changed: ${prevIndex} -> ${newIndex}`);
+        }
+
+        return newIndex;
+      });
+    }, 2000);
 
     // Clean up interval
     return () => clearInterval(interval);
-  }, [isMobile]);
+  }, [isMobile, isSmallScreen]);
 
   return (
-    <section className="relative w-full h-screen bg-black overflow-hidden">
-      {/* Background Image - Mobile (static) */}
-      <div className="md:hidden absolute inset-0">
-        <Image
-          src="/images/home/hero/hero-home.jpg"
-          alt="Hero background"
-          fill
-          priority={true}
-          sizes="100vw"
-          className="object-cover opacity-60"
-        />
-      </div>
+    <section className={`relative w-full ${isSmallScreen ? 'h-[100dvh] mobile-height-fix hero-section mobile-hero-no-content' : 'h-screen'} bg-black overflow-hidden m-0 p-0`} style={{ margin: 0, padding: 0 }}>
+      {/* Mobile Video Background - Basic implementation with no fancy features */}
+      {isSmallScreen && (
+        <>
+          <BasicVideoBackground
+            fallbackImageSrc="/images/home/hero/hero-home.jpg"
+          />
+
+          {/* Hidden link to direct video page - for testing */}
+          <div className="absolute bottom-4 right-4 z-50 opacity-20">
+            <a
+              href="/mobile-video.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white text-xs"
+            >
+              Test Video
+            </a>
+          </div>
+        </>
+      )}
 
       {/* Background Image Carousel - Desktop only */}
-      <div className="hidden md:block absolute inset-0">
+      <div className={`${isSmallScreen && 'hidden'} absolute inset-0`}>
         {HERO_IMAGES.map((image, index) => (
           <div
             key={index}
@@ -103,10 +135,12 @@ const CarouselHeroSection = memo(function CarouselHeroSection() {
             />
           </div>
         ))}
+        {/* Bottom gradient for smooth transition on desktop */}
+        <div className="absolute left-0 right-0 bottom-0 h-[120px] bg-gradient-to-t from-black via-black/90 to-transparent z-[2]"></div>
       </div>
 
-      {/* Logo - Only visible on desktop */}
-      <div className="absolute top-0 left-0 w-full z-10 hidden md:flex justify-center pt-16 md:pt-24">
+      {/* Logo - Desktop only - Hidden by default on small screens */}
+      <div className="absolute top-0 left-0 w-full z-40 hidden md:flex justify-center pt-24">
         <div className="relative h-[120px] w-[240px]">
           <Image
             src="/images/brand/logo-white.png"
@@ -114,13 +148,13 @@ const CarouselHeroSection = memo(function CarouselHeroSection() {
             width={LOGO.SIZES.LARGE.width}
             height={LOGO.SIZES.LARGE.height}
             priority
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain opacity-100"
           />
         </div>
       </div>
 
-      {/* Content Container */}
-      <div className="absolute inset-0 flex items-center justify-center z-20">
+      {/* Content Container - Desktop only - Hidden by default on small screens */}
+      <div className="absolute inset-0 flex items-center justify-center z-30 hidden md:flex">
         {/* Text Content */}
         <div className="flex flex-col items-center justify-center px-4 text-center md:mt-16">
           <p className="text-white/90 uppercase tracking-widest text-sm md:text-base mb-4">

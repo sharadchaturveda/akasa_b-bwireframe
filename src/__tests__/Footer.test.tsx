@@ -47,6 +47,7 @@ describe('Footer', () => {
     expect(screen.getByText('Events')).toBeInTheDocument();
     expect(screen.getByText('Offers')).toBeInTheDocument();
     expect(screen.getByText('Reservations')).toBeInTheDocument();
+    expect(screen.getByText('Blogs')).toBeInTheDocument();
 
     // Check if the social icons are rendered
     const socialLinks = screen.getAllByRole('link', { name: '' });

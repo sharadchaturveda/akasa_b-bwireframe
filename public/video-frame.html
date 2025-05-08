@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Background</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #000;
+    }
+    
+    video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    
+    .fallback {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('/images/home/hero/hero-home.jpg');
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Fallback image -->
+  <div class="fallback"></div>
+  
+  <!-- Video element -->
+  <video autoplay playsinline muted loop>
+    <source src="/images/home/hero/mobile-video/heromobilevid.mp4" type="video/mp4">
+  </video>
+  
+  <script>
+    // Force video to play
+    document.addEventListener('DOMContentLoaded', function() {
+      const video = document.querySelector('video');
+      
+      // Add unique timestamp to prevent caching
+      const timestamp = Date.now();
+      const videoSrc = `/images/home/hero/mobile-video/heromobilevid.mp4?nocache=${timestamp}`;
+      
+      // Set source with cache-busting
+      video.querySelector('source').src = videoSrc;
+      video.load();
+      
+      // Try to play the video
+      video.play().catch(function(error) {
+        console.log('Video play failed:', error);
+      });
+    });
+  </script>
+</body>
+</html>
