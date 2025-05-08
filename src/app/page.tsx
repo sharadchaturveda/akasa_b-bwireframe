@@ -5,7 +5,7 @@ import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
 import CarouselHeroSection from "@/components/home/CarouselHeroSection";
 import BrandPhilosophy from "@/components/home/BrandPhilosophy";
-import AccoladesSection from "@/components/home/AccoladesSection";
+import SpicesSection from "@/components/home/SpicesSection";
 import GallerySection from "@/components/home/GallerySection";
 import WhatsHappeningSection from "@/components/home/WhatsHappeningSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
@@ -36,8 +36,8 @@ export default function HomePage() {
       {/* Brand Philosophy Section */}
       <BrandPhilosophy />
 
-      {/* Accolades Section */}
-      <AccoladesSection />
+      {/* Spices Section */}
+      <SpicesSection />
 
       {/* Gallery Section */}
       <GallerySection />

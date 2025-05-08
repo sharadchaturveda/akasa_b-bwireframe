@@ -13,7 +13,7 @@ import { loadPageStyles, preloadPageStyles } from '@/utils/loadPageStyles';
 
 // Dynamically import components that are below the fold with optimized loading
 const BrandPhilosophy = dynamic(() => import("@/components/home/BrandPhilosophy"));
-const AccoladesSection = dynamic(() => import("@/components/home/AccoladesSection"));
+const SpicesSection = dynamic(() => import("@/components/home/SpicesSection"));
 const GallerySection = dynamic(() => import("@/components/home/GallerySection"));
 const WhatsHappeningSection = dynamic(() => import("@/components/home/WhatsHappeningSection"));
 const TestimonialsSection = dynamic(() => import("@/components/home/TestimonialsSection"));
@@ -56,7 +56,7 @@ export default function HomePage() {
       </Suspense>
 
       <Suspense fallback={<div className="min-h-[30vh] w-full bg-black"></div>}>
-        <AccoladesSection />
+        <SpicesSection />
       </Suspense>
 
       <Suspense fallback={<div className="min-h-[40vh] w-full bg-black"></div>}>
