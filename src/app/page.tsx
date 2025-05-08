@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
-import CarouselHeroSection from "@/components/home/CarouselHeroSection";
+import SimpleHeroSection from "@/components/home/SimpleHeroSection";
 import BrandPhilosophy from "@/components/home/BrandPhilosophy";
 import SpicesSection from "@/components/home/SpicesSection";
 import GallerySection from "@/components/home/GallerySection";
@@ -32,7 +32,7 @@ export default function HomePage() {
 
       {/* Hero and Brand Philosophy Sections - Wrapped to eliminate gap on mobile */}
       <div className="flex flex-col section-wrapper" style={{ marginBottom: '-2px' }}>
-        <CarouselHeroSection />
+        <SimpleHeroSection />
         <BrandPhilosophy />
       </div>
 

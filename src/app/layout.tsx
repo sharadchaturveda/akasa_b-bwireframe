@@ -70,26 +70,45 @@ export default function RootLayout({
         {/* Critical CSS for immediate loading - prevents flash of content on mobile */}
         <style dangerouslySetInnerHTML={{ __html: `
           @media (max-width: 767px) {
-            /* Hide text and buttons, but not video */
-            .hero-section h1, .hero-section p, .hero-section button, .hero-section svg, .hero-section a,
-            .hero-section .logo, .hero-section [alt="Akasa Logo"] {
+            /* Hide desktop content */
+            .hero-section > div.hidden {
               display: none !important;
             }
-            /* Background image as fallback */
+
+            /* Hide logo on mobile */
+            .hero-section .logo,
+            .hero-section [alt="Akasa Logo"] {
+              display: none !important;
+            }
+
+            /* Background image */
             .hero-section {
+              background-color: #000 !important;
               background-image: url('/images/home/hero/hero-home.jpg') !important;
               background-size: cover !important;
               background-position: center !important;
+              background-repeat: no-repeat !important;
             }
-            /* Ensure video is visible */
-            .hero-section video, video {
-              display: block !important;
-              visibility: visible !important;
-              z-index: 2 !important;
-              opacity: 1 !important;
+
+            /* Style text in mobile hero */
+            .hero-section h1 {
+              font-size: 2rem !important;
+              line-height: 1.2 !important;
+              margin-bottom: 1rem !important;
+              text-shadow: 0 2px 4px rgba(0,0,0,0.5) !important;
             }
+
+            /* No video styling */
           }
         ` }} />
+
+        {/* Preload the video file */}
+        <link
+          rel="preload"
+          href="/images/home/hero/mobile-video/heromobilevid.webm"
+          as="video"
+          type="video/webm"
+        />
 
         {/* Inline script to ensure video plays */}
         <script dangerouslySetInnerHTML={{ __html: `
@@ -103,7 +122,14 @@ export default function RootLayout({
             video.playsInline = true;
             video.autoplay = true;
             video.loop = true;
-            video.src = '/images/home/hero/mobile-video/heromobilevid.mp4?nocache=' + Date.now();
+            video.preload = 'auto';
+
+            // Use WebM format first
+            const source = document.createElement('source');
+            source.src = '/images/home/hero/mobile-video/heromobilevid.webm?nocache=' + Date.now();
+            source.type = 'video/webm';
+            video.appendChild(source);
+
             video.style.position = 'absolute';
             video.style.top = '0';
             video.style.left = '0';
@@ -111,14 +137,24 @@ export default function RootLayout({
             video.style.height = '100%';
             video.style.objectFit = 'cover';
             video.style.zIndex = '10';
+            video.style.opacity = '0'; // Hide it
 
             // Add to body temporarily to trigger autoplay
             document.body.appendChild(video);
 
+            // Function to play video with retry
+            function playVideo() {
+              const playPromise = video.play();
+              if (playPromise !== undefined) {
+                playPromise.catch(function() {
+                  // If autoplay fails, try again after a short delay
+                  setTimeout(playVideo, 100);
+                });
+              }
+            }
+
             // Try to play
-            video.play().catch(function() {
-              console.log('Video play failed in preload');
-            });
+            playVideo();
 
             // Remove after 1 second
             setTimeout(function() {

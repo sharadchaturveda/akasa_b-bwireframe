@@ -1,27 +1,9 @@
 /* Mobile hero section fixes */
 
-/* Hide hero content on mobile immediately during page load */
+/* Hide original hero content on mobile immediately during page load */
 @media (max-width: 767px) {
-  /* Special class for mobile hero with no content */
-  .mobile-hero-no-content h1,
-  .mobile-hero-no-content p,
-  .mobile-hero-no-content button,
-  .mobile-hero-no-content svg,
-  .mobile-hero-no-content a,
-  .mobile-hero-no-content .logo,
-  .mobile-hero-no-content [alt="Akasa Logo"] {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-  }
-
-  /* Hide all text and buttons in hero section */
-  .hero-section h1,
-  .hero-section p,
-  .hero-section button,
-  .hero-section svg,
-  .hero-section a {
+  /* Hide desktop content in the hero section */
+  .hero-section > div.hidden {
     display: none !important;
   }
 
@@ -31,9 +13,42 @@
     display: none !important;
   }
 
-  /* Ensure content container is hidden */
-  .hero-section > div > div:not([class*="video"]) {
+  /* Hide buttons on mobile */
+  .hero-section button {
     display: none !important;
+  }
+
+  /* Style the text content on mobile */
+  .hero-section h1 {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 1rem !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5) !important;
+  }
+
+  .hero-section p {
+    font-size: 0.875rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 1rem !important;
+  }
+
+  /* Helper classes for visibility */
+  .mobile-only {
+    display: none !important;
+  }
+
+  .desktop-only {
+    display: block !important;
+  }
+
+  @media (max-width: 767px) {
+    .mobile-only {
+      display: block !important;
+    }
+
+    .desktop-only {
+      display: none !important;
+    }
   }
 }
 
@@ -44,12 +59,14 @@
   opacity: 1 !important;
 }
 
-/* Add a default background image for the hero section during page load */
+/* Set a black background for the hero section during page load */
 @media (max-width: 767px) {
   .hero-section {
+    background-color: #000 !important;
     background-image: url('/images/home/hero/hero-home.jpg') !important;
     background-size: cover !important;
     background-position: center !important;
+    background-repeat: no-repeat !important;
   }
 
   /* Ensure video is visible and not hidden by other CSS */
@@ -64,5 +81,17 @@
   video.mobile-hero-video {
     display: block !important;
     visibility: visible !important;
+    object-fit: cover !important;
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    max-width: none !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    z-index: 2 !important;
   }
 }

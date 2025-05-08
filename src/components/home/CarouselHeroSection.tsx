@@ -3,10 +3,9 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { memo, useState, useEffect, useCallback } from "react";
+import { memo, useState, useEffect, useCallback, useRef } from "react";
 import { LOGO } from "@/constants";
 import { useDeviceDetection } from "@/hooks/useDeviceDetection";
-import BasicVideoBackground from "./BasicVideoBackground";
 
 // Hero carousel images for desktop
 const HERO_IMAGES = [
@@ -35,6 +34,9 @@ const CarouselHeroSection = memo(function CarouselHeroSection() {
   // State to track if we're on mobile - using both manual check and hook
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const { isMobile } = useDeviceDetection();
+
+  // Reference to video element
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   // Function to handle window resize and check if we're on mobile
   const handleResize = useCallback(() => {
@@ -91,27 +93,73 @@ const CarouselHeroSection = memo(function CarouselHeroSection() {
     return () => clearInterval(interval);
   }, [isMobile, isSmallScreen]);
 
+  // Minimal effect for video playback
+  useEffect(() => {
+    if (!isSmallScreen || !videoRef.current) return;
+
+    const video = videoRef.current;
+
+    // Just try to play the video
+    video.play().catch(error => {
+      console.log('Video autoplay failed:', error);
+    });
+
+    // Clean up
+    return () => {
+      video.pause();
+    };
+  }, [isSmallScreen]);
+
+
+
+
+
   return (
     <section className={`relative w-full ${isSmallScreen ? 'h-[100dvh] mobile-height-fix hero-section mobile-hero-no-content' : 'h-screen'} bg-black overflow-hidden m-0 p-0`} style={{ margin: 0, padding: 0 }}>
-      {/* Mobile Video Background - Basic implementation with no fancy features */}
+      {/* Mobile Hero Section - Video only */}
       {isSmallScreen && (
-        <>
-          <BasicVideoBackground
-            fallbackImageSrc="/images/home/hero/hero-home.jpg"
-          />
+        <div className="absolute inset-0 w-full h-full overflow-hidden bg-black">
+          {/* Absolutely minimal video element */}
+          <video
+            ref={videoRef}
+            className="absolute inset-0 w-full h-full"
+            playsInline
+            muted
+            loop
+            autoPlay
+          >
+            <source src="/images/home/hero/mobile-video/heromobilevid.webm" type="video/webm" />
+          </video>
 
-          {/* Hidden link to direct video page - for testing */}
-          <div className="absolute bottom-4 right-4 z-50 opacity-20">
-            <a
-              href="/mobile-video.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white text-xs"
-            >
-              Test Video
-            </a>
+          {/* Text content */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="flex flex-col items-center justify-center px-4 text-center">
+              <p className="text-white/90 uppercase tracking-widest text-sm md:text-base mb-4">
+                Experience
+              </p>
+
+              <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-playfair italic mb-6"
+                  style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
+                Exquisite Indian Cuisine
+              </h1>
+
+              <div className="flex items-center w-full max-w-xs md:max-w-md justify-center mb-6">
+                <div className="h-px bg-white/50 flex-1"></div>
+                <div className="mx-4">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="1" />
+                    <path d="M12 6V12L16 14" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+                  </svg>
+                </div>
+                <div className="h-px bg-white/50 flex-1"></div>
+              </div>
+
+              <p className="text-white/80 mb-8 text-sm md:text-base">
+                Fine Dining at the Heart of Singapore
+              </p>
+            </div>
           </div>
-        </>
+        </div>
       )}
 
       {/* Background Image Carousel - Desktop only */}
