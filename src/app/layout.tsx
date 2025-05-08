@@ -102,13 +102,44 @@ export default function RootLayout({
           }
         ` }} />
 
-        {/* Preload the video file */}
-        <link
-          rel="preload"
-          href="/images/home/hero/mobile-video/heromobilevid.webm"
-          as="video"
-          type="video/webm"
-        />
+        {/* Script to prevent mobile video loading on desktop */}
+        <script dangerouslySetInnerHTML={{ __html: `
+          // Check if we're on desktop
+          if (window.innerWidth >= 768) {
+            // Create a style element to hide mobile elements
+            var style = document.createElement('style');
+            style.innerHTML = '.mobile-only { display: none !important; }';
+            document.head.appendChild(style);
+
+            // Block requests for mobile video files
+            var originalFetch = window.fetch;
+            window.fetch = function(url, options) {
+              if (typeof url === 'string' && url.includes('heromobilevid')) {
+                console.log('Blocked fetch request for mobile video:', url);
+                return Promise.reject(new Error('Mobile video blocked on desktop'));
+              }
+              return originalFetch(url, options);
+            };
+
+            // Block video element loading
+            var originalCreateElement = document.createElement;
+            document.createElement = function(tagName) {
+              var element = originalCreateElement.call(document, tagName);
+              if (tagName.toLowerCase() === 'video') {
+                // Override the load method
+                var originalLoad = element.load;
+                element.load = function() {
+                  if (window.innerWidth >= 768) {
+                    console.log('Blocked video loading on desktop');
+                    return;
+                  }
+                  return originalLoad.apply(this, arguments);
+                };
+              }
+              return element;
+            };
+          }
+        ` }} />
 
         {/* Inline script to ensure video plays */}
         <script dangerouslySetInnerHTML={{ __html: `
