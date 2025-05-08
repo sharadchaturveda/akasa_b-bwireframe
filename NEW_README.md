@@ -134,7 +134,7 @@ The website follows a strict mobile-first design approach:
 2. **Device Detection**: The `useDeviceDetection` hook is used to detect mobile devices and render appropriate components:
    ```tsx
    const { isMobile, isDetectionComplete } = useDeviceDetection();
-
+   
    if (isMobile) {
      return <MobileComponent />;
    } else {

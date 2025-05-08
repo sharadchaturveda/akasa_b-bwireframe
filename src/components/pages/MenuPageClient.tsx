@@ -2,6 +2,7 @@
 
 import { useEffect, Suspense } from 'react';
 import dynamic from 'next/dynamic';
+// REVIEW: ChefSection is deprecated as the chef page has been removed
 import ChefSection from "@/components/menu/ChefSection";
 
 
@@ -107,6 +108,7 @@ export default function MenuPageClient() {
   return (
     <PageLayout className="menu-page">
       {/* Critical above-the-fold content */}
+      {/* REVIEW: ChefSection should be replaced with a menu-specific component */}
       <ChefSection />
 
       {/* Below-the-fold content with Suspense */}

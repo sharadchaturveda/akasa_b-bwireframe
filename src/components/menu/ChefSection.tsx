@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { memo, useEffect } from "react";
 
+// REVIEW: This component is deprecated as the chef page has been removed.
+// The chef should only be highlighted in the menus page now.
 const ChefSection = memo(function ChefSection() {
   // Optimize LCP image loading
   useEffect(() => {

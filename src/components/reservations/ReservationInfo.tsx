@@ -3,10 +3,12 @@
 import { memo, useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+// REVIEW: The following imports are deprecated and should be replaced with clean implementations
 import { useDisableOptimizations } from "@/hooks/useDisableOptimizations";
 import { disableDiningInfoDebug } from "@/utils/disableDebugScripts";
 import { startTracing } from "@/utils/reservationInfoTracer";
 
+// REVIEW: This component uses deprecated utilities and should be refactored to use clean implementations
 const ReservationInfo = memo(function ReservationInfo() {
   const [isMobile, setIsMobile] = useState(false);
   // Use our custom hook to disable performance optimizations for this component

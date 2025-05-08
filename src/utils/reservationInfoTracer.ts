@@ -39,6 +39,7 @@ const originalMethods = isBrowser ? {
  */
 export function startTracing(): void {
   // This function is now deprecated
+  // REVIEW: startTracing is deprecated - using clean component instead
   console.log('[ReservationInfo Tracer] Tracing is deprecated - using clean component instead');
   return;
 
