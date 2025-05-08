@@ -1,9 +1,31 @@
 "use client";
 
 import Image from "next/image";
-import { memo } from "react";
+import { memo, useState, useEffect } from "react";
 
 const FeaturedDishesSection = memo(function FeaturedDishesSection() {
+  // State to track if the device is mobile
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile device on client side
+  useEffect(() => {
+    const checkMobile = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isSmallScreen = window.innerWidth < 768;
+
+      setIsMobile(isMobileDevice || (isTouchDevice && isSmallScreen));
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
   // Featured signature dishes - vegetarian dishes first
   const featuredDishes = [
     {
@@ -132,31 +154,41 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
                 </div>
 
                 {/* Dish content with elegant styling - Fixed height content area */}
-                <div className="p-8 relative flex flex-col flex-grow">
+                <div className={`${isMobile ? 'p-6' : 'p-8'} relative flex flex-col flex-grow`}>
                   {/* Decorative corner accent */}
                   <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-2xl font-playfair text-white group-hover:text-[#E6C78B] transition-colors duration-300">{dish.name}</h3>
-                    <span className="text-[#E6C78B] font-medium text-lg">{dish.price}</span>
+                  <div className="flex justify-between items-start mb-4 gap-2">
+                    <h3 className={`${isMobile ? 'text-xl' : 'text-2xl'} font-playfair text-white group-hover:text-[#E6C78B] transition-colors duration-300 flex-1`}>{dish.name}</h3>
+                    <span className={`text-[#E6C78B] font-medium ${isMobile ? 'text-base' : 'text-lg'} min-w-[45px] text-right whitespace-nowrap`}>{dish.price}</span>
                   </div>
 
-                  {/* Fixed height description container */}
-                  <div className="h-[120px] overflow-hidden mb-6">
+                  {/* Fixed height description container - adjusted for mobile */}
+                  <div className={`${isMobile ? 'h-[140px]' : 'h-[120px]'} overflow-hidden mb-6`}>
                     <p className="text-white/70 font-montserrat text-sm leading-relaxed">{dish.description}</p>
                   </div>
 
                   {/* Standardized button - positioned at the bottom */}
                   <div className="mt-auto">
                     <a href="https://akasa.oddle.me/en_SG/" target="_blank" rel="noopener noreferrer">
-                      <button className="group inline-flex items-center justify-center rounded-full text-sm font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-4 py-2">
-                        {/* Gold fill animation */}
-                        <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
+                      {isMobile ? (
+                        // Mobile button - completely static with no hover effects or animations
+                        <button className="w-full inline-flex items-center justify-center rounded-full text-sm font-montserrat font-medium tracking-wider bg-[#1A2A3A] text-white px-4 py-2 shadow-md">
+                          <span className="text-center font-medium tracking-wide w-full">
+                            Order Now
+                          </span>
+                        </button>
+                      ) : (
+                        // Desktop button - with hover effects and animations
+                        <button className="group inline-flex items-center justify-center rounded-full text-sm font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-4 py-2">
+                          {/* Gold fill animation - only on desktop */}
+                          <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
 
-                        <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
-                          Order Now
-                        </span>
-                      </button>
+                          <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
+                            Order Now
+                          </span>
+                        </button>
+                      )}
                     </a>
                   </div>
                 </div>
