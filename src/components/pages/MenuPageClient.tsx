@@ -2,8 +2,6 @@
 
 import { useEffect, Suspense } from 'react';
 import dynamic from 'next/dynamic';
-// REVIEW: ChefSection is deprecated as the chef page has been removed
-import ChefSection from "@/components/menu/ChefSection";
 
 
 // Add TypeScript declaration for requestIdleCallback
@@ -33,10 +31,7 @@ const FlavorExperienceSection = dynamic(() => import("@/components/menu/FlavorEx
 const FeaturedDishesSection = dynamic(() => import("@/components/menu/FeaturedDishesSection"), {
   loading: () => <div className="h-[50vh] bg-black"></div>
 });
-// Footer component is not used in this page but kept for reference
-// const Footer = dynamic(() => import("@/components/home/Footer"), {
-//   loading: () => <div className="h-[100px] bg-black"></div>
-// });
+
 
 // Import the PageLayout component
 import PageLayout from "@/components/layout/PageLayout";
@@ -49,22 +44,13 @@ export default function MenuPageClient() {
       // Create a performance observer for LCP
       const lcpObserver = new PerformanceObserver(() => {
         // Performance measurement: LCP time recorded
-        // Commented out to avoid unused variable warnings
-        // const entries = entryList.getEntries();
-        // const lcpEntry = entries[entries.length - 1];
       });
 
       lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
 
       // Create a performance observer for long tasks
-      const longTaskObserver = new PerformanceObserver((entryList) => {
-        const entries = entryList.getEntries();
-        entries.forEach(entry => {
-          // Log long tasks (over 50ms)
-          if (entry.duration > 50) {
-            // Performance measurement: Long task duration recorded
-          }
-        });
+      const longTaskObserver = new PerformanceObserver(() => {
+        // Performance measurement: Long task duration recorded
       });
 
       longTaskObserver.observe({ type: 'longtask', buffered: true });
@@ -107,10 +93,6 @@ export default function MenuPageClient() {
   // Render the desktop version with the PageLayout component
   return (
     <PageLayout className="menu-page">
-      {/* Critical above-the-fold content */}
-      {/* REVIEW: ChefSection should be replaced with a menu-specific component */}
-      <ChefSection />
-
       {/* Below-the-fold content with Suspense */}
       <Suspense fallback={<div className="h-[50vh] bg-black"></div>}>
         <MenusSection />

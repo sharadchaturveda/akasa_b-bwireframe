@@ -50,13 +50,8 @@ const createPerformanceObserver = (
 // Track Largest Contentful Paint (LCP)
 export const monitorLCP = () => {
   return createPerformanceObserver('largest-contentful-paint', (entries) => {
-    if (entries.length > 0) {
-      const lcpEntry = entries[entries.length - 1];
-      // In production, we would send this to analytics instead of logging
-      if (process.env.NODE_ENV !== 'production') {
-        console.log('LCP:', lcpEntry.startTime, 'ms');
-      }
-    }
+    // We don't need to do anything with the entries in production
+    // In a real app, we would send this to analytics
   });
 };
 
@@ -71,37 +66,21 @@ export const monitorCLS = () => {
         clsValue += layoutShift.value;
       }
     });
-
-    // In production, we would send this to analytics instead of logging
-    if (process.env.NODE_ENV !== 'production') {
-      console.log('Current CLS:', clsValue);
-    }
+    // We would send this to analytics in a real app
   });
 };
 
 // Track First Input Delay (FID) / Interaction to Next Paint (INP)
 export const monitorInteractions = () => {
   return createPerformanceObserver('first-input', (entries) => {
-    entries.forEach(entry => {
-      const firstInput = entry as FirstInputEntry;
-
-      // In production, we would send this to analytics instead of logging
-      if (process.env.NODE_ENV !== 'production') {
-        console.log('Interaction:', firstInput.name, firstInput.duration, 'ms');
-      }
-    });
+    // We would send this to analytics in a real app
   });
 };
 
 // Track long tasks that might cause jank
 export const monitorLongTasks = () => {
   return createPerformanceObserver('longtask', (entries) => {
-    entries.forEach(entry => {
-      // Only log tasks longer than 50ms
-      if (entry.duration > 50 && process.env.NODE_ENV !== 'production') {
-        console.log('Long task:', entry.duration, 'ms');
-      }
-    });
+    // We would send this to analytics in a real app
   });
 };
 
@@ -160,7 +139,6 @@ export const initPerformanceMonitoring = () => {
 
   // Preload critical resources for other pages
   preloadCriticalResources([
-    { url: '/images/menu/chef/background.jpg', type: 'image' },
     { url: '/images/events/event1.jpg', type: 'image' },
     { url: '/styles/menu.css', type: 'style' },
     { url: '/styles/events.css', type: 'style' }

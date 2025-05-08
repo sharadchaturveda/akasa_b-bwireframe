@@ -25,11 +25,10 @@ export default function HomePerformanceOptimizer() {
 
     // If we're on the reservations page or have the dining info component, don't apply any optimizations
     if (isReservationsPage || hasDiningInfo) {
-      // Skip optimizations for reservations page or dining info
       return;
     }
 
-    // Initialize performance monitoring only if no ReservationInfo component
+    // Initialize performance monitoring
     initPerformanceMonitoring();
 
     // Define the optimization function inside useEffect
@@ -41,16 +40,6 @@ export default function HomePerformanceOptimizer() {
     };
 
     const optimizeImageLoading = () => {
-      // Only run in browser environment
-      if (typeof window === 'undefined' || typeof document === 'undefined') {
-        return;
-      }
-
-      // Double-check for dining info component before applying optimizations
-      if (document.querySelector('.dining-info-container') !== null) {
-        // Skip image optimizations for dining info component
-        return;
-      }
 
       // Add loading="lazy" to images below the fold
       document.querySelectorAll('img:not([loading])').forEach((img) => {
@@ -76,16 +65,6 @@ export default function HomePerformanceOptimizer() {
     };
 
     const optimizeAnimations = () => {
-      // Only run in browser environment
-      if (typeof window === 'undefined' || typeof document === 'undefined') {
-        return;
-      }
-
-      // Double-check for dining info component before applying optimizations
-      if (document.querySelector('.dining-info-container') !== null) {
-        // Skip animation optimizations for dining info component
-        return;
-      }
 
       // Disable animations for users who prefer reduced motion
       if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
