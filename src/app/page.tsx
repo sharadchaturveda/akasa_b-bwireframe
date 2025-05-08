@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
-import CleanHeroSection from "@/components/home/CleanHeroSection";
+import CarouselHeroSection from "@/components/home/CarouselHeroSection";
 import BrandPhilosophy from "@/components/home/BrandPhilosophy";
 import AccoladesSection from "@/components/home/AccoladesSection";
 import GallerySection from "@/components/home/GallerySection";
@@ -31,7 +31,7 @@ export default function HomePage() {
       <Navigation />
 
       {/* Hero Section */}
-      <CleanHeroSection />
+      <CarouselHeroSection />
 
       {/* Brand Philosophy Section */}
       <BrandPhilosophy />
