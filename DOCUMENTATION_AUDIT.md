@@ -26,9 +26,7 @@
 
 ## Documentation to Rewrite
 
-1. **Chef Page References**
-   - All references to the chef page should be removed as it has been removed from the website
-   - The chef should only be highlighted in the menus page
+
 
 2. **Deployment Section**
    - The deployment section is too generic and could be more specific to the project
@@ -54,7 +52,6 @@
 
 2. **Outdated Component Documentation**
    - Documentation for deprecated components or utilities should be removed or marked with // REVIEW:
-   - References to removed features (like the chef page) should be removed
 
 3. **Redundant Inline Comments**
    - Comments that simply restate what the code does without adding context

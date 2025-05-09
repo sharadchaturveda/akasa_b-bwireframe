@@ -32,8 +32,6 @@ This document summarizes the changes made during the documentation cleanup proce
    - Added more detailed information about styling and performance optimizations
 
 2. **Component References**
-   - Removed references to the chef page, which has been removed from the website
-   - Updated to reflect that the chef should only be highlighted in the menus page
    - Added `// REVIEW:` comments to mark code that needs to be updated
 
 3. **Deprecated Utilities**
@@ -42,18 +40,13 @@ This document summarizes the changes made during the documentation cleanup proce
 
 ### Documentation Marked with // REVIEW:
 
-1. **ChefSection Component**
-   - Added `// REVIEW:` comment to indicate that the component is deprecated
-   - Added `// REVIEW:` comment to the import in MenuPageClient.tsx
-   - Added `// REVIEW:` comment to the usage in the return statement
+
 
 2. **ReservationInfo Component**
    - Added `// REVIEW:` comments to indicate that the component uses deprecated utilities
    - Marked imports of deprecated utilities with `// REVIEW:` comments
 
-3. **Document.tsx**
-   - Added `// REVIEW:` comments to chef-related preload links
-   - Added `// REVIEW:` comments to chef-related CSS
+
 
 ## Changes Made to README.md
 

@@ -73,7 +73,6 @@ class MyDocument extends Document {
           {/* Add critical CSS for menu page */}
           <style id="critical-css-menu" dangerouslySetInnerHTML={{ __html: `
             /* Only load this CSS when on the menu page */
-            /* REVIEW: Chef-related CSS should be updated as chef page has been removed */
             .menu-page .chef-image {
               position: relative;
               height: 400px;

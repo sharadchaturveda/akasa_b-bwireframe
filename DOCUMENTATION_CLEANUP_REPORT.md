@@ -48,9 +48,7 @@ Created a new README.md file with:
 
 ### Removed Outdated Information
 
-1. **Chef Page References**
-   - Removed all references to the chef page, which has been removed from the website
-   - The chef is now only highlighted in the menus page
+
 
 2. **Deprecated Utilities**
    - Marked deprecated utilities with appropriate comments
