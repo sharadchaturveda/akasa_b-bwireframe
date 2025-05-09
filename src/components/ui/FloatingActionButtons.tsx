@@ -1,6 +1,6 @@
 "use client";
 
-import { memo } from "react";
+import { memo, useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -12,18 +12,20 @@ import { useDeviceDetection } from "@/hooks/useDeviceDetection";
  * Displays floating CTA buttons (Book Now and WhatsApp) that are fixed on the screen
  * and visible across all pages. WhatsApp button is positioned on the left side,
  * while Book Now button is on the right side.
+ *
+ * The buttons automatically adjust their position to stop at the footer's top edge
+ * to prevent overlapping with footer links and content.
  */
 const FloatingActionButtons = memo(function FloatingActionButtons() {
   const { isMobile } = useDeviceDetection();
+  const [buttonsPosition, setButtonsPosition] = useState({ bottom: isMobile ? 16 : 24 }); // Default bottom position in pixels
 
   // WhatsApp message and phone number
   const whatsappNumber = "6561234567"; // Singapore number format with country code
   const whatsappMessage = "Hello, I'd like to make a reservation at Akasa. Could you please assist me?";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
-  // Adjust position and size based on device
-  const rightPosition = isMobile ? "bottom-4 right-4" : "bottom-6 right-6";
-  const leftPosition = isMobile ? "bottom-4 left-4" : "bottom-6 left-6";
+  // Adjust size based on device
   const buttonSize = isMobile ? "w-10 h-10" : "w-12 h-12";
   const iconSize = isMobile ? "20" : "24";
 
@@ -31,10 +33,60 @@ const FloatingActionButtons = memo(function FloatingActionButtons() {
   const useCustomWhatsAppImage = true; // Using the custom image
   const whatsAppImagePath = "/images/whatsapp-button.jpg";
 
+  // Function to update button positions based on footer location
+  const updateButtonPosition = () => {
+    // Find the footer element
+    const footer = document.querySelector('footer');
+    if (!footer) return;
+
+    // Get viewport height and footer position
+    const viewportHeight = window.innerHeight;
+    const footerRect = footer.getBoundingClientRect();
+    const footerTop = footerRect.top;
+
+    // Calculate the distance from the bottom of the viewport to the top of the footer
+    const distanceToFooter = viewportHeight - footerTop;
+
+    // Default bottom position (in pixels)
+    const defaultBottom = isMobile ? 16 : 24;
+
+    // Add a small buffer margin to ensure buttons don't touch the footer
+    const bufferMargin = 10; // 10px buffer
+
+    // If footer is in view, position buttons just above the footer
+    if (footerTop < viewportHeight) {
+      setButtonsPosition({ bottom: distanceToFooter + bufferMargin });
+    } else {
+      // Otherwise, use the default position
+      setButtonsPosition({ bottom: defaultBottom });
+    }
+  };
+
+  // Set up scroll listener to update button position
+  useEffect(() => {
+    // Initial position update
+    updateButtonPosition();
+
+    // Add scroll event listener
+    window.addEventListener('scroll', updateButtonPosition);
+    window.addEventListener('resize', updateButtonPosition);
+
+    // Clean up
+    return () => {
+      window.removeEventListener('scroll', updateButtonPosition);
+      window.removeEventListener('resize', updateButtonPosition);
+    };
+  }, [isMobile]);
+
   return (
     <>
       {/* WhatsApp Button - Left Side */}
-      <div className={`fixed ${leftPosition} z-50`}>
+      <div
+        className="fixed left-4 md:left-6 z-50 transition-all duration-300"
+        style={{
+          bottom: `${buttonsPosition.bottom}px`,
+        }}
+      >
         <a
           href={whatsappUrl}
           target="_blank"
@@ -64,7 +116,12 @@ const FloatingActionButtons = memo(function FloatingActionButtons() {
       </div>
 
       {/* Book Now Button - Right Side */}
-      <div className={`fixed ${rightPosition} z-50`}>
+      <div
+        className="fixed right-4 md:right-6 z-50 transition-all duration-300"
+        style={{
+          bottom: `${buttonsPosition.bottom}px`,
+        }}
+      >
         <Link href="/reservations">
           <Button
             variant="default"
