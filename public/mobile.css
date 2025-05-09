@@ -1,0 +1,77 @@
+/**
+ * Mobile-specific CSS
+ * This file is loaded dynamically only on mobile devices
+ */
+
+/* Mobile-specific optimizations */
+html.mobile-device {
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Improve touch targets */
+html.mobile-device button,
+html.mobile-device a,
+html.mobile-device input,
+html.mobile-device select,
+html.mobile-device textarea {
+  touch-action: manipulation;
+}
+
+/* Optimize scrolling */
+html.mobile-device {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Prevent content from overflowing viewport */
+html.mobile-device body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Optimize images for mobile */
+html.mobile-device img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Optimize video elements */
+html.mobile-device video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Improve form elements on mobile */
+html.mobile-device input,
+html.mobile-device select,
+html.mobile-device textarea {
+  font-size: 16px; /* Prevents iOS zoom on focus */
+}
+
+/* Optimize mobile hero section */
+html.mobile-device .hero-section video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Ensure proper spacing on mobile */
+html.mobile-device .section-wrapper {
+  overflow: hidden;
+}
+
+/* Optimize mobile navigation */
+html.mobile-device .mobile-nav-header {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Optimize mobile performance */
+html.mobile-device * {
+  -webkit-tap-highlight-color: transparent;
+}
