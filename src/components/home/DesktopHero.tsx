@@ -1,6 +1,7 @@
 "use client";
 
-import Image from "next/image";
+import Image from "next/image"
+;
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useRef, useEffect } from "react";
@@ -36,25 +37,25 @@ const DesktopHero = () => {
   const currentImageIndexRef = useRef(0);
   const carouselIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const carouselElementsRef = useRef<HTMLDivElement[]>([]);
-  
+
   // Set up carousel on mount
   useEffect(() => {
     // Only run on desktop
     if (typeof window !== 'undefined' && window.innerWidth < 768) {
       return;
     }
-    
+
     // Function to start carousel
     const startCarousel = () => {
       if (carouselIntervalRef.current) {
         clearInterval(carouselIntervalRef.current);
       }
-      
+
       // Update carousel images
       const updateCarousel = () => {
         const prevIndex = currentImageIndexRef.current;
         currentImageIndexRef.current = (prevIndex + 1) % HERO_IMAGES.length;
-        
+
         // Update visibility
         carouselElementsRef.current.forEach((el, index) => {
           if (index === currentImageIndexRef.current) {
@@ -66,14 +67,14 @@ const DesktopHero = () => {
           }
         });
       };
-      
+
       // Set interval
       carouselIntervalRef.current = setInterval(updateCarousel, 2000);
     };
-    
+
     // Start carousel
     startCarousel();
-    
+
     // Clean up
     return () => {
       if (carouselIntervalRef.current) {
@@ -81,14 +82,14 @@ const DesktopHero = () => {
       }
     };
   }, []);
-  
+
   // Store carousel elements ref
   const storeCarouselRef = (el: HTMLDivElement | null, index: number) => {
     if (el) {
       carouselElementsRef.current[index] = el;
     }
   };
-  
+
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden bg-black">
       {/* Background Image Carousel */}
@@ -103,8 +104,7 @@ const DesktopHero = () => {
               zIndex: index === 0 ? 1 : 0
             }}
           >
-            <Image
-              src={image.src}
+            <Image src={image.src}
               alt={image.alt}
               fill
               priority={index === 0}
@@ -117,11 +117,13 @@ const DesktopHero = () => {
         <div className="absolute left-0 right-0 bottom-0 h-[120px] bg-gradient-to-t from-black via-black/90 to-transparent z-[2]"></div>
       </div>
 
-      {/* Logo */}
-      <div className="absolute top-0 left-0 w-full z-40 flex justify-center pt-24">
+      {/* Structural container to enforce vertical layout */}
+      <div className="absolute inset-0 flex flex-col items-stretch z-10">
+
+      {/* Logo - Fixed at top with height constraint */}
+      <div className="hero-logo-container">
         <div className="relative h-[120px] w-[240px]">
-          <Image
-            src="/images/brand/logo-white.png"
+          <Image src="/images/brand/logo-white.png"
             alt="Akasa Logo"
             width={LOGO.SIZES.LARGE.width}
             height={LOGO.SIZES.LARGE.height}
@@ -131,10 +133,10 @@ const DesktopHero = () => {
         </div>
       </div>
 
-      {/* Content Container */}
-      <div className="absolute inset-0 flex items-center justify-center z-30">
-        {/* Text Content */}
-        <div className="flex flex-col items-center justify-center px-4 text-center mt-16">
+      {/* Content Container - Part of the flex column layout */}
+      <div className="flex-grow flex items-center justify-center z-30">
+        {/* Text Content - Using hero-text-container class for consistent positioning */}
+        <div className="hero-text-container">
           <p className="text-white/90 uppercase tracking-widest text-sm md:text-base mb-4">
             Experience
           </p>
@@ -166,8 +168,11 @@ const DesktopHero = () => {
           </Link>
         </div>
       </div>
+      </div> {/* End of structural container */}
     </div>
   );
 };
 
 export default DesktopHero;
+
+

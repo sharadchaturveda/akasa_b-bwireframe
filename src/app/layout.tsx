@@ -6,6 +6,7 @@ import "./performance-styles.css";
 import '@/styles/mobile-navigation-fix.css';
 import '@/styles/mobile-section-fix.css';
 import '@/styles/mobile-hero-fix.css';
+import '../styles/hero-position-fix.css';
 
 // Import components
 import MobileNavigation from '@/components/navigation/MobileNavigation';
@@ -67,6 +68,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Safari-specific viewport fix */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
         {/* Critical CSS for immediate loading - prevents flash of content on mobile */}
         <style dangerouslySetInnerHTML={{ __html: `
           @media (max-width: 767px) {
@@ -99,6 +103,31 @@ export default function RootLayout({
             }
 
             /* No video styling */
+          }
+
+          /* Critical hero positioning - ensures logo and text are properly positioned */
+          .hero-logo-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 40;
+            display: flex;
+            justify-content: center;
+            padding-top: 6rem;
+            height: 180px;
+            min-height: 180px;
+            overflow: visible;
+          }
+
+          .hero-text-container {
+            margin-top: 8rem;
+            padding-top: 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
           }
         ` }} />
 
