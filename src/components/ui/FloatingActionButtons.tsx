@@ -21,9 +21,11 @@ const FloatingActionButtons = memo(function FloatingActionButtons() {
   const [buttonsPosition, setButtonsPosition] = useState({ bottom: isMobile ? 16 : 24 }); // Default bottom position in pixels
 
   // WhatsApp message and phone number
-  const whatsappNumber = "6561234567"; // Singapore number format with country code
+  const whatsappNumber = "+6580121181"; // Singapore number format with country code
   const whatsappMessage = "Hello, I'd like to make a reservation at Akasa. Could you please assist me?";
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+  // WhatsApp API requires the number without the plus sign
+  const whatsappUrlNumber = whatsappNumber.replace('+', '');
+  const whatsappUrl = `https://wa.me/${whatsappUrlNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
   // Adjust size based on device
   const buttonSize = isMobile ? "w-10 h-10" : "w-12 h-12";
