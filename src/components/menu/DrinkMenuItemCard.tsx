@@ -41,9 +41,27 @@ const DrinkMenuItemCard = memo(function DrinkMenuItemCard({ item }: DrinkMenuIte
                   </div>
                 )}
                 {priceObj?.bottle && (
-                  <div className="flex justify-between items-center gap-2">
+                  <div className="flex justify-between items-center gap-2 mb-1">
                     <span className="text-white/60 text-xs uppercase tracking-wider">Bottle</span>
                     <span className="text-[#E6C78B] font-medium text-sm">{priceObj.bottle}</span>
+                  </div>
+                )}
+                {priceObj?.pour_30ml && (
+                  <div className="flex justify-between items-center gap-2 mb-1">
+                    <span className="text-white/60 text-xs uppercase tracking-wider">30ml</span>
+                    <span className="text-[#E6C78B] font-medium text-sm">{priceObj.pour_30ml}</span>
+                  </div>
+                )}
+                {priceObj?.bottle_larger && (
+                  <div className="flex justify-between items-center gap-2 mb-1">
+                    <span className="text-white/60 text-xs uppercase tracking-wider">Bottle</span>
+                    <span className="text-[#E6C78B] font-medium text-sm">{priceObj.bottle_larger}</span>
+                  </div>
+                )}
+                {priceObj?.bottle_500ml && (
+                  <div className="flex justify-between items-center gap-2">
+                    <span className="text-white/60 text-xs uppercase tracking-wider">500ml</span>
+                    <span className="text-[#E6C78B] font-medium text-sm">{priceObj.bottle_500ml}</span>
                   </div>
                 )}
               </div>
@@ -52,6 +70,20 @@ const DrinkMenuItemCard = memo(function DrinkMenuItemCard({ item }: DrinkMenuIte
 
           {item.description && (
             <p className="text-white/70 font-montserrat text-sm mb-2 leading-relaxed">{item.description}</p>
+          )}
+
+          {/* Variants if available */}
+          {item.variants && item.variants.length > 0 && (
+            <div className="mt-2 border-t border-white/10 pt-2">
+              {item.variants.map((variant, index) => (
+                <div key={index} className="flex justify-between items-center text-sm">
+                  <span className="text-white/60 font-montserrat">{variant.type}</span>
+                  <span className="text-[#E6C78B] font-medium">
+                    {typeof variant.price === 'number' ? `$${variant.price}` : variant.price}
+                  </span>
+                </div>
+              ))}
+            </div>
           )}
         </div>
       </div>

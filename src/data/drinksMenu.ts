@@ -4,66 +4,118 @@ export const drinksMenu: Menu = {
   "menu_name": "Drinks Menu",
   "categories": [
     {
-      "category_name": "GIFEL FINE TEA",
+      "category_name": "TEA",
       "items": [
         {
-          "name": "Chamomile Dream",
+          "name": "HOME MADE MASALA CHAI",
+          "description": "Please allow 6 mins preparation time",
           "price": "$5",
+          "is_vegetarian": true
+        },
+        {
+          "name": "GIFEL TEA - non caffeine blends",
+          "description": "Chamomile Dream | Organic Yoga Chai | Akasa Blend (Hibiscus & Apple)",
+          "price": "$5",
+          "is_vegetarian": true
+        },
+        {
+          "name": "GIFEL TEA - green/white tea blends",
+          "description": "Oriental Sencha | White Ginger Pear",
+          "price": "$5",
+          "is_vegetarian": true
+        },
+        {
+          "name": "GIFEL TEA - black tea blends",
+          "description": "Melon Oolong | Black Tea Cocoa | Singapore Dream | Supreme Earl Grey",
+          "price": "$5",
+          "is_vegetarian": true
+        }
+      ]
+    },
+    {
+      "category_name": "BEER",
+      "items": [
+        {
+          "name": "ASAHI LAGER ON TAP",
+          "price": "$13",
           "description": null,
           "is_vegetarian": true
         },
         {
-          "name": "White Ginger Pear",
-          "price": "$5",
+          "name": "PERONI LAGER ON TAP",
+          "price": "$13",
           "description": null,
           "is_vegetarian": true
         },
         {
-          "name": "Akasa Blend",
-          "price": "$5",
+          "name": "GUINNESS MICRODRAUGHT",
+          "price": "$16",
           "description": null,
+          "is_vegetarian": true
+        }
+      ]
+    },
+    {
+      "category_name": "HOUSE COCKTAIL",
+      "items": [
+        {
+          "name": "MOJITO",
+          "description": "Dark Rum | Mint | Lime | Soda",
+          "price": "$15",
           "is_vegetarian": true
         },
         {
-          "name": "Organic Moroccan Mint (GREEN TEA BLEND)",
-          "price": "$5",
-          "description": null,
+          "name": "MIMOSA",
+          "description": "Orange Juice | Prosecco",
+          "price": "$16",
           "is_vegetarian": true
         },
         {
-          "name": "Oriental Sencha (GREEN TEA BLEND)",
-          "price": "$5",
-          "description": null,
+          "name": "SINGAPORE SLING",
+          "description": "Gin | Benedictine | Cherry Liquer Cointreau | Pineapple & lime Juice",
+          "price": "$22",
           "is_vegetarian": true
         },
         {
-          "name": "Organic Yoga Chai (BLACK TEA BLEND)",
-          "price": "$5",
-          "description": null,
+          "name": "ESPRESSO MARTINI",
+          "description": "Espresso | Vodka | Kahlua",
+          "price": "$18",
           "is_vegetarian": true
         },
         {
-          "name": "Melon Oolong (BLACK TEA BLEND)",
-          "price": "$5",
-          "description": null,
+          "name": "GIN-GER COCO",
+          "description": "Ford's London gin | ginger | lemongrass | Coconut water | Lime",
+          "price": "$18",
           "is_vegetarian": true
         },
         {
-          "name": "Black Tea Cocoa (BLACK TEA BLEND)",
-          "price": "$5",
-          "description": null,
+          "name": "CLASSIC MARGARITA",
+          "description": "Tequila | Lime",
+          "price": "$18",
           "is_vegetarian": true
         },
         {
-          "name": "Singapore Dream (BLACK TEA BLEND)",
-          "price": "$5",
-          "description": null,
+          "name": "AKASA LYCHEE-TINI",
+          "description": "Bacardi rum | lychee | Lime | Coconut water",
+          "price": "$18",
           "is_vegetarian": true
         },
         {
-          "name": "Supreme Earl Grey (BLACK TEA BLEND)",
-          "price": "$5",
-          "description": null,
+          "name": "AKASA ICED TEA",
+          "description": "vodka | rum | gin | tequila | triple sec | lime | cola | lemon",
+          "price": "$18",
+          "is_vegetarian": true
+        },
+        {
+          "name": "NEGRONI",
+          "description": "Ford's London gin | campari | sweet vermouth",
+          "price": "$20",
+          "is_vegetarian": true
+        },
+        {
+          "name": "OLD FASHIONED",
+          "description": "Woodford reserve bourbon | bitters",
+          "price": "$22",
           "is_vegetarian": true
         }
       ]
@@ -72,34 +124,34 @@ export const drinksMenu: Menu = {
       "category_name": "ALLPRESS ESPRESSO",
       "items": [
         {
-          "name": "Espresso",
-          "price": "$4",
+          "name": "ESPRESSO",
+          "price": "$3",
           "description": null,
           "is_vegetarian": true
         },
         {
-          "name": "Americano / Long Black",
-          "price": "$4",
+          "name": "AMERICANO / LONG BLACK",
+          "price": "$5",
           "description": null,
-          "is_vegetarian": true
+          "is_vegetarian": true,
+          "variants": [
+            {
+              "type": "Iced",
+              "price": "$6"
+            }
+          ]
         },
         {
-          "name": "Cappuccino / Latte / Flat White",
+          "name": "CAPPUCCINO / LATTE / FLAT WHITE",
           "price": "$6",
           "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "Soy Milk, Oat Milk options",
-          "price": "+$1",
-          "description": "Add-on for coffee drinks",
-          "is_vegetarian": true
-        },
-        {
-          "name": "Iced",
-          "price": "+$1",
-          "description": "Add-on to make drink iced",
-          "is_vegetarian": true
+          "is_vegetarian": true,
+          "variants": [
+            {
+              "type": "Iced",
+              "price": "$7"
+            }
+          ]
         }
       ]
     },
@@ -107,65 +159,145 @@ export const drinksMenu: Menu = {
       "category_name": "NON ALCOHOLIC",
       "items": [
         {
-          "name": "Gifel Fine Tea Cold Brew",
+          "name": "GIFEL TEA - COLD BREW",
+          "description": "pick from our wide range under TEA section",
           "price": "$6",
-          "description": "(Pick from our selections of Gifel Fine Tea)",
           "is_vegetarian": true
         },
         {
-          "name": "Coke / Coke Zero / Sprite",
+          "name": "COKE / COKE ZERO / SPRITE",
           "price": "$6",
           "description": null,
           "is_vegetarian": true
         },
         {
-          "name": "Voss Mineral Water 0.8L",
-          "price": "$6",
+          "name": "EVIAN STILL / SPARKLING WATER 800 ml",
+          "price": "$7",
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "LIME - SODA / WATER",
+          "price": "$7",
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "LASSI - SWEET / SALT",
+          "price": "$8",
+          "description": null,
+          "is_vegetarian": true,
+          "variants": [
+            {
+              "type": "Mango",
+              "price": "$10"
+            }
+          ]
+        },
+        {
+          "name": "MOCKTAIL OF THE DAY",
+          "price": "$12",
           "description": null,
           "is_vegetarian": true
         }
       ]
     },
     {
-      "category_name": "PREMIUM BEER ON TAP",
+      "category_name": "RED WINE",
       "items": [
         {
-          "name": "Crossroads Lager",
-          "price": "$12",
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "Crossroads Golden Ale",
-          "price": "$12",
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "Guinness Microdraught",
-          "price": "$16",
-          "description": null,
-          "is_vegetarian": true
-        }
-      ]
-    },
-    {
-      "category_name": "BUBBLES",
-      "items": [
-        {
-          "name": "Lanson Le Black Label Brut",
+          "name": "CANTINA TREVIGIANA 2021",
+          "description": "Italy, Veneto, Merlot",
           "price": {
-            "glass": "$28",
-            "bottle": "$138"
+            "glass": "$15",
+            "bottle": "$68"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "GOLD TREES 2021",
+          "description": "Australia, Cabernet Sauvignon",
+          "price": {
+            "glass": "$16",
+            "bottle": "$78"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "SALENTEIN PORTILO 2021",
+          "description": "Argentina, UCO Valley, Malbec",
+          "price": {
+            "glass": "$16",
+            "bottle": "$78"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "GUILLAUME GONNET \"LE REVEUR\" 2021",
+          "description": "France, Rhone, Shiraz / Grenache",
+          "price": {
+            "bottle": "$78"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "BERONIA RESERVA 2018",
+          "description": "Spain, Rioja, Tempranillo",
+          "price": {
+            "bottle": "$88"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "DOMAINE ST PATRICE COTES DU RHONE 2019",
+          "description": "France, Grenache / Syrah / Mourvèdre",
+          "price": {
+            "bottle": "$118"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "ALTANZA GRAN RESERVA 2011",
+          "description": "Spain, Rioja, Tempranillo",
+          "price": {
+            "bottle": "$128"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "LA CROIX BONIS 2015",
+          "description": "France, Saint-Estephe, Petit Verdot",
+          "price": {
+            "bottle": "$128"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "CHATEAU GIGOGNAN CHATEAUNEUF DU PAPE 2017",
+          "description": "France, Grenache / Syrah / Mourvèdre",
+          "price": {
+            "bottle": "$148"
+          },
+          "is_vegetarian": true
+        }
+      ]
+    },
+    {
+      "category_name": "SPARKLING WINE",
+      "items": [
+        {
+          "name": "TERESA RIZZI PROSECCO DOC",
+          "price": {
+            "glass": "$14",
+            "bottle": "$62"
           },
           "description": null,
           "is_vegetarian": true
         },
         {
-          "name": "Zonin Special Cuvee Prosecco",
+          "name": "VEUVE CLICQUOT YELLOW LABEL BRUT CHAMPAGNE",
           "price": {
-            "glass": "$14",
-            "bottle": "$62"
+            "bottle": "$168"
           },
           "description": null,
           "is_vegetarian": true
@@ -176,327 +308,102 @@ export const drinksMenu: Menu = {
       "category_name": "WHITE WINE",
       "items": [
         {
-          "name": "McGuigan Chardonnay 2022",
+          "name": "CANTINA DELLE VENEZIE 2021",
+          "description": "Italy, Veneto, Pinot Grigio",
           "price": {
             "glass": "$14",
-            "bottle": "$62"
+            "bottle": "$58"
           },
-          "description": "(Australia, NSW)",
           "is_vegetarian": true
         },
         {
-          "name": "Tempus Two Sauvignon Blanc 2021",
-          "price": {
-            "glass": "$18",
-            "bottle": "$82"
-          },
-          "description": "(Australia, Hunter Valley)",
-          "is_vegetarian": true
-        },
-        {
-          "name": "Zonin Pinot Grigio 2020",
+          "name": "GOLD TREES 2022",
+          "description": "South Australia, Chardonnay",
           "price": {
             "glass": "$16",
-            "bottle": "$78"
-          },
-          "description": "(Italy, Friuli)",
-          "is_vegetarian": true
-        },
-        {
-          "name": "Principi di Butera Chardonnay 2021",
-          "price": {
-            "glass": "$16",
-            "bottle": "$78"
-          },
-          "description": "(Italy, Sicily)",
-          "is_vegetarian": true
-        },
-        {
-          "name": "Guillaume Gonnet Le Rêveur 2021",
-          "price": {
-            "glass": "$15",
             "bottle": "$68"
           },
-          "description": "(Viognier / Grenache / Roussanne | France, Rhone)",
           "is_vegetarian": true
         },
         {
-          "name": "Bodega Contador Predicador 2018",
+          "name": "GUILLAUME GONNET \"LE REVEUR\" 2022",
+          "description": "France, Rhone, Viognier / Roussane / Grenache",
           "price": {
-            "glass": "$22",
+            "bottle": "$72"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "LAURENZ V FORBIDDEN",
+          "description": "Austria, Niederösterreich, Grüner Veltliner",
+          "price": {
+            "bottle": "$72"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "BODEGA CONTADOR PREDICADOR 2018",
+          "description": "Spain, Rioja, Macabeo",
+          "price": {
             "bottle": "$98"
           },
-          "description": "(Macebo | Spain, Rioja)",
           "is_vegetarian": true
         },
         {
-          "name": "Chateau de Pommard Bourgogne 2019",
+          "name": "CHATEAU DE POMMARD BOURGOGNE 2019",
+          "description": "France, Burgundy, Chardonnay",
           "price": {
-            "bottle": "$88"
-          },
-          "description": "(Chardonnay | France, Burgundy)",
-          "is_vegetarian": true
-        }
-      ]
-    },
-    {
-      "category_name": "RED WINE",
-      "items": [
-        {
-          "name": "McGuigan Cabernet Sauvignon 2022",
-          "price": {
-            "glass": "$14",
-            "bottle": "$62"
-          },
-          "description": "(Australia, NSW)",
-          "is_vegetarian": true
-        },
-        {
-          "name": "Tempus Two Silver Shiraz 2021",
-          "price": {
-            "glass": "$18",
-            "bottle": "$82"
-          },
-          "description": "(Australia, Hunter Valley)",
-          "is_vegetarian": true
-        },
-        {
-          "name": "Principi di Butera Nero d'Avola 2021",
-          "price": {
-            "glass": "$16",
-            "bottle": "$78"
-          },
-          "description": "(Italy, Sicily)",
-          "is_vegetarian": true
-        },
-        {
-          "name": "Guillaume Gonnet Le Rêveur 2021",
-          "price": {
-            "glass": "$15",
-            "bottle": "$68"
-          },
-          "description": "(Shiraz / Grenache | France, Rhone)",
-          "is_vegetarian": true
-        },
-        {
-          "name": "Maison Castel Grande Reserva Pinot Noir 2022",
-          "price": {
-            "glass": "$16",
-            "bottle": "$78"
-          },
-          "description": "(France, Languedoc-Roussillon)",
-          "is_vegetarian": true
-        },
-        {
-          "name": "Chateau Malbec Malbec 2019",
-          "price": {
-            "glass": "$16",
-            "bottle": "$78"
-          },
-          "description": "(France, Bordeaux)",
-          "is_vegetarian": true
-        },
-        {
-          "name": "Beronia Reserva Tempranillo 2018",
-          "price": {
-            "glass": "$18",
-            "bottle": "$82"
-          },
-          "description": "(Spain, Rioja)",
-          "is_vegetarian": true
-        },
-        {
-          "name": "Maison Castel Cotes du Rhone 2022",
-          "price": {
-            "glass": "$16",
-            "bottle": "$78"
-          },
-          "description": "(Shiraz / Grenache | France, Rhone)",
-          "is_vegetarian": true
-        },
-        {
-          "name": "Chateau Gigognan 2017",
-          "price": {
-            "glass": "$42",
-            "bottle": "$188"
-          },
-          "description": "(Chateauneuf du Pape | France, Rhone)",
-          "is_vegetarian": true
-        },
-        {
-          "name": "Chateau Corbin Merlot 2016",
-          "price": {
-            "glass": "$62",
-            "bottle": "$328"
-          },
-          "description": "(France, Bordeaux)",
-          "is_vegetarian": true
-        }
-      ]
-    },
-    {
-      "category_name": "SPIRITS MENU (VODKA / GIN)",
-      "items": [
-        {
-          "name": "Absolut Blue",
-          "price": {
-            "glass": "$13",
-            "bottle": "$118"
-          },
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "Ketel One Original",
-          "price": {
-            "glass": "$15",
-            "bottle": "$148"
-          },
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "Gin Mare",
-          "price": {
-            "glass": "$16",
-            "bottle": "$168"
-          },
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "Hendrick's Gin",
-          "price": {
-            "glass": "$18",
-            "bottle": "$178"
-          },
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "Sakai XV Japanese Craft Gin 500ml",
-          "price": {
-            "glass": "$30",
-            "bottle": "$218"
-          },
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "The London No. 1 Sherry Gin",
-          "price": {
-            "glass": "$26",
-            "bottle": "$248"
-          },
-          "description": null,
-          "is_vegetarian": true
-        }
-      ]
-    },
-    {
-      "category_name": "SPIRITS MENU (RUM / TEQUILA)",
-      "items": [
-        {
-          "name": "Bacardi White Rum",
-          "price": {
-            "glass": "$13",
-            "bottle": "$118"
-          },
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "Diplomatico Reserva Exclusiva",
-          "price": {
-            "glass": "$18",
-            "bottle": "$178"
-          },
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "Don Julio Blanco",
-          "price": {
-            "glass": "$18",
-            "bottle": "$178"
-          },
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "Don Julio Anejo",
-          "price": {
-            "glass": "$20",
-            "bottle": "$198"
-          },
-          "description": null,
-          "is_vegetarian": true
-        }
-      ]
-    },
-    {
-      "category_name": "SPIRITS MENU (AMERICAN WHISKEY)",
-      "items": [
-        {
-          "name": "Jack Daniel's Old No. 7",
-          "price": {
-            "glass": "$13",
-            "bottle": "$118"
-          },
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "Jack Daniel's Tennessee Rye",
-          "price": {
-            "glass": "$16",
-            "bottle": "$168"
-          },
-          "description": null,
-          "is_vegetarian": true
-        }
-      ]
-    },
-    {
-      "category_name": "SPIRITS MENU (AUSTRALIAN WHISKY)",
-      "items": [
-        {
-          "name": "Starward Nova Single Malt",
-          "price": {
-            "glass": "$22",
-            "bottle": "$208"
-          },
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "Starward Dolce Single Malt",
-          "price": {
-            "glass": "$24",
-            "bottle": "$238"
-          },
-          "description": null,
-          "is_vegetarian": true
-        }
-      ]
-    },
-    {
-      "category_name": "SPIRITS MENU (SCOTCH WHISKY - BLENDED)",
-      "items": [
-        {
-          "name": "Chivas Regal 12 YRS",
-          "price": {
-            "glass": "$14",
             "bottle": "$138"
           },
+          "is_vegetarian": true
+        }
+      ]
+    },
+    {
+      "category_name": "RUM & TEQUILA",
+      "pourNote": "Prices by the glass based on our standard pour of 30 ml",
+      "items": [
+        {
+          "name": "BACARDI WHITE RUM",
+          "price": {
+            "pour_30ml": "$12",
+            "bottle_larger": "$118"
+          },
           "description": null,
           "is_vegetarian": true
         },
         {
-          "name": "Chivas Regal 18 YRS",
+          "name": "DIPLOMATICO RESERVA EXCLUSIVA",
           "price": {
-            "glass": "$26",
-            "bottle": "$248"
+            "pour_30ml": "$15",
+            "bottle_larger": "$158"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "DON JULIO BLANCO",
+          "price": {
+            "pour_30ml": "$18",
+            "bottle_larger": "$178"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "DON JULIO ANEJO",
+          "price": {
+            "pour_30ml": "$20",
+            "bottle_larger": "$188"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "KAH ANEJO TEQUILA",
+          "price": {
+            "pour_30ml": "$28",
+            "bottle_larger": "$258"
           },
           "description": null,
           "is_vegetarian": true
@@ -504,22 +411,86 @@ export const drinksMenu: Menu = {
       ]
     },
     {
-      "category_name": "SPIRITS MENU (INDIAN WHISKY)",
+      "category_name": "VODKA & GIN",
+      "pourNote": "Prices by the glass based on our standard pour of 30 ml",
       "items": [
         {
-          "name": "Rampur Double Cask",
+          "name": "ABSOLUT BLUE",
           "price": {
-            "glass": "$24",
-            "bottle": "$238"
+            "pour_30ml": "$12",
+            "bottle_larger": "$128"
           },
           "description": null,
           "is_vegetarian": true
         },
         {
-          "name": "Rampur Select",
+          "name": "BELVEDERE PURE",
           "price": {
-            "glass": "$32",
-            "bottle": "$238"
+            "pour_30ml": "$14",
+            "bottle_larger": "$148"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "GREY GOOSE ORIGINAL",
+          "price": {
+            "pour_30ml": "$16",
+            "bottle_larger": "$158"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "FORD'S GIN",
+          "price": {
+            "pour_30ml": "$14",
+            "bottle_larger": "$128"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "HENDRICK'S GIN",
+          "price": {
+            "pour_30ml": "$18",
+            "bottle_larger": "$168"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "JAISALMER GOLD GIN (500ML)",
+          "price": {
+            "pour_30ml": "$18",
+            "bottle_500ml": "$178"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "GIN MARE",
+          "price": {
+            "pour_30ml": "$20",
+            "bottle_larger": "$188"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "THE LONDON NO. 1 SHERRY GIN",
+          "price": {
+            "pour_30ml": "$24",
+            "bottle_larger": "$238"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "SASAKI XV JAPANESE CRAFT GIN (500 ML)",
+          "price": {
+            "pour_30ml": "$26",
+            "bottle_500ml": "$198"
           },
           "description": null,
           "is_vegetarian": true
@@ -527,22 +498,29 @@ export const drinksMenu: Menu = {
       ]
     },
     {
-      "category_name": "SPIRITS MENU (JAPANESE WHISKY)",
+      "category_name": "COGNAC",
+      "pourNote": "Prices by the glass based on our standard pour of 30 ml",
       "items": [
         {
-          "name": "Umiki Blended",
+          "name": "REMY MARTIN VSOP",
           "price": {
-            "glass": "$24",
-            "bottle": "$238"
+            "pour_30ml": "$18"
           },
           "description": null,
           "is_vegetarian": true
         },
         {
-          "name": "Kamiki Intense Malt",
+          "name": "ABK6 VSOP",
           "price": {
-            "glass": "$24",
-            "bottle": "$238"
+            "pour_30ml": "$20"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "MARTELL VSOP",
+          "price": {
+            "pour_30ml": "$22"
           },
           "description": null,
           "is_vegetarian": true
@@ -550,103 +528,23 @@ export const drinksMenu: Menu = {
       ]
     },
     {
-      "category_name": "SPIRITS MENU (SCOTCH WHISKY - SINGLE MALT)",
+      "category_name": "INDIAN WHISKY",
+      "pourNote": "Prices by the glass based on our standard pour of 30 ml",
       "items": [
         {
-          "name": "Singleton Dufftown 12 YRS",
+          "name": "RAMPUR DOUBLE CASK",
           "price": {
-            "glass": "$16",
-            "bottle": "$168"
+            "pour_30ml": "$25",
+            "bottle_larger": "$240"
           },
           "description": null,
           "is_vegetarian": true
         },
         {
-          "name": "Cardhu 12 YRS",
+          "name": "RAMPUR SELECT",
           "price": {
-            "glass": "$18",
-            "bottle": "$178"
-          },
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "Talisker 10 YRS",
-          "price": {
-            "glass": "$24",
-            "bottle": "$238"
-          },
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "Glenfiddich 12 YRS",
-          "price": {
-            "glass": "$18",
-            "bottle": "$178"
-          },
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "Glenfiddich 15 YRS",
-          "price": {
-            "glass": "$28",
-            "bottle": "$268"
-          },
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "Glendronach Portwood",
-          "price": {
-            "glass": "$26",
-            "bottle": "$248"
-          },
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "Glenglassaugh Portsoy",
-          "price": {
-            "glass": "$20",
-            "bottle": "$198"
-          },
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "Glenlivet 12 YRS",
-          "price": {
-            "glass": "$20",
-            "bottle": "$198"
-          },
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "Glenlivet 15 YRS",
-          "price": {
-            "glass": "$30",
-            "bottle": "$318"
-          },
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "Balvenie Double Wood 12 YRS",
-          "price": {
-            "glass": "$24",
-            "bottle": "$238"
-          },
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "Lagavulin 16 YRS",
-          "price": {
-            "glass": "$32",
-            "bottle": "$328"
+            "pour_30ml": "$32",
+            "bottle_larger": "$320"
           },
           "description": null,
           "is_vegetarian": true
@@ -654,18 +552,202 @@ export const drinksMenu: Menu = {
       ]
     },
     {
-      "category_name": "COCKTAILS",
+      "category_name": "AMERICAN WHISKY",
+      "pourNote": "Prices by the glass based on our standard pour of 30 ml",
       "items": [
         {
-          "name": "Classic Cocktails",
-          "price": "$22",
+          "name": "JACK DANIEL'S OLD NO. 7",
+          "price": {
+            "pour_30ml": "$12"
+          },
           "description": null,
           "is_vegetarian": true
         },
         {
-          "name": "Bespoked Cocktails",
-          "price": "$28",
-          "description": "(Using premium spirits to suit your mood)",
+          "name": "JACK DANIEL'S TENESSEE RYE",
+          "price": {
+            "pour_30ml": "$17"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "WOODFORD RESERVE AMERICAN BOURBON",
+          "price": {
+            "pour_30ml": "$18"
+          },
+          "description": null,
+          "is_vegetarian": true
+        }
+      ]
+    },
+    {
+      "category_name": "AUSTRALIAN WHISKY",
+      "pourNote": "Prices by the glass based on our standard pour of 30 ml",
+      "items": [
+        {
+          "name": "STARWARD NOVA SINGLE MALT",
+          "price": {
+            "pour_30ml": "$16"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "STARWARD DOLCE SINGLE MALT",
+          "price": {
+            "pour_30ml": "$18"
+          },
+          "description": null,
+          "is_vegetarian": true
+        }
+      ]
+    },
+    {
+      "category_name": "JAPANESE WHISKY",
+      "pourNote": "Prices by the glass based on our standard pour of 30 ml",
+      "items": [
+        {
+          "name": "UMIKI BLENDED",
+          "price": {
+            "pour_30ml": "$18"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "KAMIKI INTENSE MALT",
+          "price": {
+            "pour_30ml": "$18"
+          },
+          "description": null,
+          "is_vegetarian": true
+        }
+      ]
+    },
+    {
+      "category_name": "BLENDED WHISKY",
+      "pourNote": "Prices by the glass based on our standard pour of 30 ml",
+      "items": [
+        {
+          "name": "MONKEY SHOULDER",
+          "price": {
+            "pour_30ml": "$18",
+            "bottle_larger": "$188"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "CHIVAS REGAL 12 YEARS",
+          "price": {
+            "pour_30ml": "$14",
+            "bottle_larger": "$138"
+          },
+          "description": null,
+          "is_vegetarian": true
+        }
+      ]
+    },
+    {
+      "category_name": "SCOTCH WHISKY",
+      "pourNote": "Prices by the glass based on our standard pour of 30 ml",
+      "items": [
+        {
+          "name": "DEWARS'S WHITE LABEL",
+          "price": {
+            "pour_30ml": "$14"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "TALISKER 10 YRS",
+          "price": {
+            "pour_30ml": "$18",
+            "bottle_larger": "$208"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "GLENFIDDICH 12 YRS",
+          "price": {
+            "pour_30ml": "$18",
+            "bottle_larger": "$198"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "GLENFIDDICH 15 YRS",
+          "price": {
+            "pour_30ml": "$26",
+            "bottle_larger": "$308"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "GLENFIDDICH 18 YRS",
+          "price": {
+            "pour_30ml": "$32"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "GLENLIVET 12 YRS",
+          "price": {
+            "pour_30ml": "$18",
+            "bottle_larger": "$198"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "GLENLIVET 15 YRS",
+          "price": {
+            "pour_30ml": "$28",
+            "bottle_larger": "$328"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "BALVENIE DBL WOOD 12 YRS",
+          "price": {
+            "pour_30ml": "$20",
+            "bottle_larger": "$258"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "GLENGLASSAUGH PORTSOY",
+          "price": {
+            "pour_30ml": "$20",
+            "bottle_larger": "$238"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "GLENGLASSAUGH PORTWOOD",
+          "price": {
+            "pour_30ml": "$20",
+            "bottle_larger": "$238"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "LAGAVULIN 16 YRS",
+          "price": {
+            "pour_30ml": "$24",
+            "bottle_larger": "$298"
+          },
+          "description": null,
           "is_vegetarian": true
         }
       ]
