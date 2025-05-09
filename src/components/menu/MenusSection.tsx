@@ -1,23 +1,41 @@
 "use client";
 
-import { useState, useRef, memo } from "react";
-import { MenuType } from '@/types/menu';
-import { useDeviceDetection } from '@/hooks/useDeviceDetection';
-import MenuCard from './MenuCard';
+import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
-/**
- * MenusSection Component
- *
- * A section component for displaying menu types.
- *
- * @returns {JSX.Element} The rendered component
- */
-const MenusSection = memo(function MenusSection() {
+interface MenuType {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  url: string;
+}
+
+export default function MenusSection() {
   // State for active menu tab
   const [activeMenu, setActiveMenu] = useState("a-la-carte");
+  // State to track if device is mobile
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Use the device detection hook
-  const { isMobile } = useDeviceDetection();
+  // Detect mobile device on client side
+  useEffect(() => {
+    const checkMobile = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isSmallScreen = window.innerWidth < 768;
+      
+      setIsMobile(isMobileDevice || (isTouchDevice && isSmallScreen));
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
 
   // Refs for tracking double clicks
   const clickTimers = useRef<{ [key: string]: number }>({});
@@ -67,6 +85,30 @@ const MenusSection = memo(function MenusSection() {
     { id: "set-lunch", name: "3 Course Set Lunch", description: "A perfect midday dining experience with three exquisite courses", image: "/images/menu/set-lunch/hero/hero.jpg", url: "/menu/set-lunch" }
   ];
 
+  // Render different button styles based on device type
+  const renderButton = (url: string) => {
+    if (isMobile) {
+      // Mobile button - completely static with no hover effects or animations
+      return (
+        <button className="w-full rounded-full font-montserrat font-medium tracking-wider bg-[#1A2A3A] text-white px-4 py-2 text-sm shadow-md">
+          <span className="text-center font-medium tracking-wide w-full">
+            View Menu
+          </span>
+        </button>
+      );
+    } else {
+      // Desktop button - with hover effects and animations
+      return (
+        <button className="w-full group items-center justify-center rounded-full font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-4 py-2 text-sm hover:bg-[#1A2A3A]">
+          <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
+          <span className="relative flex-1 text-center font-medium tracking-wide w-full group-hover:text-black transition-colors duration-300">
+            View Menu
+          </span>
+        </button>
+      );
+    }
+  };
+
   return (
     <section className="w-full bg-black py-20 relative overflow-hidden">
       {/* Animated background pattern */}
@@ -106,13 +148,75 @@ const MenusSection = memo(function MenusSection() {
         {/* Menu cards in a flex layout with fixed width to ensure 5 in a row */}
         <div className="flex flex-wrap justify-center">
           {menuTypes.map((menu) => (
-            <MenuCard
+            <div
               key={menu.id}
-              menu={menu}
-              isActive={activeMenu === menu.id}
-              isMobile={isMobile}
+              className="group relative dish-card flex flex-col w-full sm:w-1/2 lg:w-1/3 xl:w-1/5 px-3 mb-6"
               onClick={(e) => handleMenuCardClick(menu.id, menu.url, e)}
-            />
+            >
+              {/* Card background with subtle glow effect - only on desktop */}
+              {!isMobile && (
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-[#E6C78B]/0 via-[#E6C78B]/30 to-[#E6C78B]/0 rounded-lg blur opacity-0 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+              )}
+
+              <div className={`relative bg-black/80 backdrop-blur-sm border border-white/5 rounded-lg overflow-hidden ${!isMobile ? 'transition-all duration-500 group-hover:shadow-[0_0_25px_rgba(230,199,139,0.2)]' : ''} flex flex-col h-full`}>
+                {/* Menu image with overlay effects */}
+                <div className="relative h-[180px] overflow-hidden">
+                  <Image
+                    src={`${menu.image}?quality=75&width=800`}
+                    alt={menu.name}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className={`object-cover ${!isMobile ? 'transition-transform duration-700 group-hover:scale-110' : ''}`}
+                    loading="lazy"
+                    quality={75}
+                    data-testid="image-component"
+                  />
+                  
+                  {/* Gradient overlay */}
+                  <div className={`absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 ${!isMobile ? 'group-hover:opacity-40 transition-opacity duration-500' : ''}`}></div>
+                  
+                  {/* Active indicator */}
+                  {activeMenu === menu.id && (
+                    <div className="absolute top-4 right-4 z-10">
+                      <div className="bg-[#E6C78B]/20 backdrop-blur-sm rounded-full p-2 border border-[#E6C78B]/50">
+                        <svg className="w-5 h-5 text-[#E6C78B]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Decorative corner accent - only on desktop */}
+                  {!isMobile && (
+                    <div className="absolute top-0 left-0 w-12 h-12 border-t border-l border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  )}
+                </div>
+
+                {/* Menu content */}
+                <div className="p-4 relative flex flex-col flex-grow">
+                  {/* Decorative corner accent - only on desktop */}
+                  {!isMobile && (
+                    <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  )}
+
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className={`text-lg font-playfair text-white ${!isMobile ? 'group-hover:text-[#E6C78B] transition-colors duration-300' : ''}`}>{menu.name}</h3>
+                  </div>
+
+                  {/* Description container */}
+                  <div className="mb-3 flex-grow">
+                    <p className="text-white/70 font-montserrat text-xs leading-relaxed">{menu.description}</p>
+                  </div>
+
+                  {/* Button with hover effect - using standard site button styling */}
+                  <div className="mt-auto">
+                    <a href={menu.url} className="block w-full" onClick={(e) => e.stopPropagation()}>
+                      {renderButton(menu.url)}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -126,6 +230,4 @@ const MenusSection = memo(function MenusSection() {
       `}</style>
     </section>
   );
-});
-
-export default MenusSection;
+}

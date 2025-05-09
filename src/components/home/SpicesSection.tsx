@@ -1,44 +1,9 @@
 "use client";
 
-import { memo } from 'react';
-import SpiceCard from './SpiceCard';
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-/**
- * SpicesSection Component
- *
- * A section component for displaying spice information.
- *
- * @returns {JSX.Element} The rendered component
- */
-const SpicesSection = memo(function SpicesSection() {
-  // Spice card data
-  const spiceCards = [
-    {
-      title: "Rooted in Purity",
-      subtitle: "The Origin of Flavor",
-      description: "We handpick ingredients from trusted farms, ethical suppliers, and ancient markets. From sun-dried turmeric to wild-foraged pepper, every flavor begins with care.",
-      animationDelay: "0.1s",
-      linkUrl: "/menu",
-      buttonText: "Explore Our Menus"
-    },
-    {
-      title: "Regions of Spice",
-      subtitle: "Flavors That Travel",
-      description: "India is a mosaic of spice cultures. Our dishes carry notes from Rajasthan's red chili heat, Punjab's rich warmth, and Kashmir's fragrant saffron. Every plate is a journey.",
-      animationDelay: "0.3s",
-      linkUrl: "/menu",
-      buttonText: "Explore Our Menus"
-    },
-    {
-      title: "Crafted With Fire",
-      subtitle: "The Akasa Method",
-      description: "We roast, grind, toast, and temper spices in-house. No shortcuts. Just ancient techniques and instinct-driven craft. It's not just food—it's a ritual.",
-      animationDelay: "0.5s",
-      linkUrl: "/menu",
-      buttonText: "Explore Our Menus"
-    }
-  ];
-
+export default function SpicesSection() {
   return (
     <section className="min-h-screen sm:h-screen w-full bg-cover bg-center relative py-16 sm:py-0 overflow-hidden" style={{ backgroundImage: "url('/images/home/gallery/awards.jpg')" }}>
       {/* Enhanced overlay with gradient */}
@@ -56,22 +21,77 @@ const SpicesSection = memo(function SpicesSection() {
         <div className="container mx-auto px-4 md:px-8">
           {/* Grid for the three cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {spiceCards.map((card, index) => (
-              <SpiceCard
-                key={index}
-                title={card.title}
-                subtitle={card.subtitle}
-                description={card.description}
-                animationDelay={card.animationDelay}
-                linkUrl={card.linkUrl}
-                buttonText={card.buttonText}
-              />
-            ))}
+            {/* Card 1: Rooted in Purity */}
+            <div className="bg-black/70 p-8 rounded-lg border border-[#E6C78B]/20 shadow-2xl backdrop-blur-sm animate-fadeSlideUp relative flex flex-col h-full" style={{ animationDelay: '0.1s' }}>
+              {/* Decorative corner accents */}
+              <div className="absolute top-0 left-0 w-12 h-12 border-t border-l border-[#E6C78B]/30"></div>
+              <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-[#E6C78B]/30"></div>
+
+              <span className="text-[#E6C78B] text-sm tracking-widest uppercase mb-2 block font-montserrat">Spices</span>
+              <h2 className="text-3xl font-playfair mb-2 text-white" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>{"Rooted in Purity"}</h2>
+
+              <div className="w-16 h-[1px] bg-gradient-to-r from-[#E6C78B]/80 to-transparent mb-4"></div>
+
+              <h3 className="text-xl font-playfair mb-2 text-white/90">{"The Origin of Flavor"}</h3>
+              <p className="text-base font-montserrat mb-8 text-white/90">{"We handpick ingredients from trusted farms, ethical suppliers, and ancient markets. From sun-dried turmeric to wild-foraged pepper, every flavor begins with care."}</p>
+
+              <div className="flex flex-col gap-4 w-full mt-auto">
+                <Link href="/menu" className="w-full flex justify-center">
+                  <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full px-4 sm:px-6 py-2 sm:py-3 text-center shadow-lg text-sm sm:text-base">
+                    {"Explore Our Menus"}
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            {/* Card 2: Regions of Spice */}
+            <div className="bg-black/70 p-8 rounded-lg border border-[#E6C78B]/20 shadow-2xl backdrop-blur-sm animate-fadeSlideUp relative flex flex-col h-full" style={{ animationDelay: '0.3s' }}>
+              {/* Decorative corner accents */}
+              <div className="absolute top-0 left-0 w-12 h-12 border-t border-l border-[#E6C78B]/30"></div>
+              <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-[#E6C78B]/30"></div>
+
+              <span className="text-[#E6C78B] text-sm tracking-widest uppercase mb-2 block font-montserrat">Spices</span>
+              <h2 className="text-3xl font-playfair mb-2 text-white" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>{"Regions of Spice"}</h2>
+
+              <div className="w-16 h-[1px] bg-gradient-to-r from-[#E6C78B]/80 to-transparent mb-4"></div>
+
+              <h3 className="text-xl font-playfair mb-2 text-white/90">{"Flavors That Travel"}</h3>
+              <p className="text-base font-montserrat mb-8 text-white/90">{"India is a mosaic of spice cultures. Our dishes carry notes from Rajasthan's red chili heat, Punjab's rich warmth, and Kashmir's fragrant saffron. Every plate is a journey."}</p>
+
+              <div className="flex flex-col gap-4 w-full mt-auto">
+                <Link href="/menu" className="w-full flex justify-center">
+                  <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full px-4 sm:px-6 py-2 sm:py-3 text-center shadow-lg text-sm sm:text-base">
+                    {"Explore Our Menus"}
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            {/* Card 3: Crafted With Fire */}
+            <div className="bg-black/70 p-8 rounded-lg border border-[#E6C78B]/20 shadow-2xl backdrop-blur-sm animate-fadeSlideUp relative flex flex-col h-full" style={{ animationDelay: '0.5s' }}>
+              {/* Decorative corner accents */}
+              <div className="absolute top-0 left-0 w-12 h-12 border-t border-l border-[#E6C78B]/30"></div>
+              <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-[#E6C78B]/30"></div>
+
+              <span className="text-[#E6C78B] text-sm tracking-widest uppercase mb-2 block font-montserrat">Spices</span>
+              <h2 className="text-3xl font-playfair mb-2 text-white" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>{"Crafted With Fire"}</h2>
+
+              <div className="w-16 h-[1px] bg-gradient-to-r from-[#E6C78B]/80 to-transparent mb-4"></div>
+
+              <h3 className="text-xl font-playfair mb-2 text-white/90">{"The Akasa Method"}</h3>
+              <p className="text-base font-montserrat mb-8 text-white/90">{"We roast, grind, toast, and temper spices in-house. No shortcuts. Just ancient techniques and instinct-driven craft. It's not just food—it's a ritual."}</p>
+
+              <div className="flex flex-col gap-4 w-full mt-auto">
+                <Link href="/menu" className="w-full flex justify-center">
+                  <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-full px-4 sm:px-6 py-2 sm:py-3 text-center shadow-lg text-sm sm:text-base">
+                    {"Explore Our Menus"}
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
-});
-
-export default SpicesSection;
+}
