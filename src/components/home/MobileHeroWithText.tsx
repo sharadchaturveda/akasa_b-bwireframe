@@ -1,6 +1,7 @@
 "use client";
 
-import Image from 'next/image';
+import Image from 'next/image'
+;
 import { useEffect, useRef, useState } from 'react';
 
 interface MobileHeroWithTextProps {
@@ -13,14 +14,14 @@ interface MobileHeroWithTextProps {
 const MobileHeroWithText = ({ fallbackImageSrc }: MobileHeroWithTextProps) => {
   // Reference to video element
   const videoRef = useRef<HTMLVideoElement>(null);
-  
+
   // State to track if video is actually playing
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  
+
   useEffect(() => {
     const videoElement = videoRef.current;
     if (!videoElement) return;
-    
+
     // Function to check if video is actually playing
     const checkVideoPlaying = () => {
       // Only consider video playing if it has advanced beyond the first frame
@@ -30,20 +31,20 @@ const MobileHeroWithText = ({ fallbackImageSrc }: MobileHeroWithTextProps) => {
         setIsVideoPlaying(false);
       }
     };
-    
+
     // Set up event listeners
     videoElement.addEventListener('playing', checkVideoPlaying);
     videoElement.addEventListener('pause', () => setIsVideoPlaying(false));
     videoElement.addEventListener('ended', () => setIsVideoPlaying(false));
     videoElement.addEventListener('timeupdate', checkVideoPlaying);
-    
+
     // Check every second if video is still playing
     const interval = setInterval(() => {
       if (videoElement.paused || videoElement.ended || videoElement.currentTime < 0.5) {
         setIsVideoPlaying(false);
       }
     }, 1000);
-    
+
     // Clean up
     return () => {
       videoElement.removeEventListener('playing', checkVideoPlaying);
@@ -53,37 +54,36 @@ const MobileHeroWithText = ({ fallbackImageSrc }: MobileHeroWithTextProps) => {
       clearInterval(interval);
     };
   }, []);
-  
+
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden">
       {/* Fallback image - always visible until video plays */}
       {!isVideoPlaying && (
         <div className="absolute inset-0 z-[1]">
           {/* Background image */}
-          <Image
-            src={fallbackImageSrc}
+          <Image src={fallbackImageSrc}
             alt="Background"
             fill
             priority
             sizes="100vw"
             className="object-cover opacity-60"
           />
-          
+
           {/* Dark overlay for better text readability */}
           <div className="absolute inset-0 bg-black/30 z-[1]"></div>
-          
+
           {/* Text content - exact copy from desktop */}
           <div className="absolute inset-0 flex items-center justify-center z-[3]">
             <div className="flex flex-col items-center justify-center px-4 text-center">
               <p className="text-white/90 uppercase tracking-widest text-sm md:text-base mb-4">
                 Experience
               </p>
-              
+
               <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-playfair italic mb-6"
                   style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
                 Exquisite Indian Cuisine
               </h1>
-              
+
               <div className="flex items-center w-full max-w-xs md:max-w-md justify-center mb-6">
                 <div className="h-px bg-white/50 flex-1"></div>
                 <div className="mx-4">
@@ -94,7 +94,7 @@ const MobileHeroWithText = ({ fallbackImageSrc }: MobileHeroWithTextProps) => {
                 </div>
                 <div className="h-px bg-white/50 flex-1"></div>
               </div>
-              
+
               <p className="text-white/80 mb-8 text-sm md:text-base">
                 Fine Dining at the Heart of Singapore
               </p>
@@ -102,7 +102,7 @@ const MobileHeroWithText = ({ fallbackImageSrc }: MobileHeroWithTextProps) => {
           </div>
         </div>
       )}
-      
+
       {/* Video element */}
       <video
         ref={videoRef}
@@ -116,6 +116,7 @@ const MobileHeroWithText = ({ fallbackImageSrc }: MobileHeroWithTextProps) => {
           opacity: isVideoPlaying ? 1 : 0
         }}
       >
+        <source src="/images/home/hero/mobile-video/heromobilevid.webm" type="video/webm" />
         <source src="/images/home/hero/mobile-video/heromobilevid.mp4" type="video/mp4" />
       </video>
     </div>
@@ -123,3 +124,5 @@ const MobileHeroWithText = ({ fallbackImageSrc }: MobileHeroWithTextProps) => {
 };
 
 export default MobileHeroWithText;
+
+

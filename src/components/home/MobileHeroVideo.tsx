@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
+import Image from 'next/image'
+;
 import { createUniqueVideoUrl, optimizeVideoForMobile, playVideoWithRetry } from '@/utils/videoLoader';
 
 interface MobileHeroVideoProps {
@@ -29,19 +30,31 @@ const MobileHeroVideo = ({ videoSrc, fallbackImageSrc, className = '' }: MobileH
 
   // Preload video when component mounts
   useEffect(() => {
-    // Create a link element for preloading
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.href = videoSrc;
-    link.as = 'video';
-    link.type = 'video/mp4';
+    // Create link elements for preloading both formats
+    const linkWebm = document.createElement('link');
+    linkWebm.rel = 'preload';
+    linkWebm.href = videoSrc.replace('.mp4', '.webm');
+    linkWebm.as = 'video';
+    linkWebm.type = 'video/webm';
+
+    const linkMp4 = document.createElement('link');
+    linkMp4.rel = 'preload';
+    linkMp4.href = videoSrc;
+    linkMp4.as = 'video';
+    linkMp4.type = 'video/mp4';
 
     // Add to document head
-    document.head.appendChild(link);
+    document.head.appendChild(linkWebm);
+    document.head.appendChild(linkMp4);
 
     // Clean up
     return () => {
-      document.head.removeChild(link);
+      if (document.head.contains(linkWebm)) {
+        document.head.removeChild(linkWebm);
+      }
+      if (document.head.contains(linkMp4)) {
+        document.head.removeChild(linkMp4);
+      }
     };
   }, [videoSrc]);
 
@@ -167,8 +180,7 @@ const MobileHeroVideo = ({ videoSrc, fallbackImageSrc, className = '' }: MobileH
     <div className={`relative w-full h-full overflow-hidden ${className}`} style={{ display: 'block', overflow: 'hidden' }}>
       {/* Fallback image - visible during loading and when video has error */}
       <div className="absolute inset-0 z-[1]" style={{ display: (isLoading || videoError) ? 'block' : 'none' }}>
-        <Image
-          src={fallbackImageSrc}
+        <Image src={fallbackImageSrc}
           alt="Background fallback"
           fill
           priority={true}
@@ -211,7 +223,8 @@ const MobileHeroVideo = ({ videoSrc, fallbackImageSrc, className = '' }: MobileH
             setIsLoading(false); // Video can play now
           }}
         >
-          {/* Multiple sources with different cache-busting parameters */}
+          {/* Multiple sources with different formats and cache-busting parameters */}
+          <source src={createUniqueVideoUrl(videoSrc.replace('.mp4', '.webm'))} type="video/webm" />
           <source src={uniqueVideoSrc} type="video/mp4" />
           <source src={createUniqueVideoUrl(videoSrc)} type="video/mp4" />
           <source src={`${videoSrc}?v=${Date.now()}`} type="video/mp4" />
@@ -223,3 +236,5 @@ const MobileHeroVideo = ({ videoSrc, fallbackImageSrc, className = '' }: MobileH
 };
 
 export default MobileHeroVideo;
+
+

@@ -1,6 +1,7 @@
 "use client";
 
-import Image from 'next/image';
+import Image from 'next/image'
+;
 import { useState, useEffect, useRef } from 'react';
 
 interface BasicVideoBackgroundProps {
@@ -99,8 +100,7 @@ const BasicVideoBackground = ({ fallbackImageSrc }: BasicVideoBackgroundProps) =
           transition: 'opacity 0.5s ease-in-out'
         }}
       >
-        <Image
-          src={fallbackImageSrc}
+        <Image src={fallbackImageSrc}
           alt="Background"
           fill
           priority
@@ -159,6 +159,7 @@ const BasicVideoBackground = ({ fallbackImageSrc }: BasicVideoBackgroundProps) =
           transition: 'opacity 0.5s ease-in-out'
         }}
       >
+        <source src="/images/home/hero/mobile-video/heromobilevid.webm" type="video/webm" />
         <source src="/images/home/hero/mobile-video/heromobilevid.mp4" type="video/mp4" />
       </video>
     </div>
@@ -166,3 +167,5 @@ const BasicVideoBackground = ({ fallbackImageSrc }: BasicVideoBackgroundProps) =
 };
 
 export default BasicVideoBackground;
+
+

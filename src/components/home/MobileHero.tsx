@@ -1,6 +1,8 @@
 "use client";
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
+import { preloadVideoSources } from '@/utils/videoPreload';
+import MobileHeroFallback from './MobileHeroFallback';
 
 /**
  * Mobile-only hero section with video background
@@ -11,6 +13,19 @@ const MobileHero = () => {
   // Reference to video element
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // State to track video loading status
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(true); // Start with error state to show fallback first
+
+  // Preload video sources
+  useEffect(() => {
+    // Preload both video formats
+    preloadVideoSources([
+      { src: '/images/home/hero/mobile-video/heromobilevid.webm', type: 'video/webm' },
+      { src: '/images/home/hero/mobile-video/heromobilevid.mp4', type: 'video/mp4' }
+    ]);
+  }, []);
+
   // Set up video playback on mount
   useEffect(() => {
     // Double-check we're on mobile - if not, don't do anything
@@ -19,70 +34,90 @@ const MobileHero = () => {
       return;
     }
 
-    const video = videoRef.current;
-    if (!video) return;
-
-    // Add a small delay before playing to ensure everything is ready
+    // Try to play the video after a short delay
     const timer = setTimeout(() => {
-      // Play video
-      video.play().catch(error => {
-        console.log('Video autoplay failed:', error);
+      const video = videoRef.current;
+      if (!video) {
+        console.log('Video element not found');
+        return;
+      }
+
+      // Configure video for mobile playback
+      video.muted = true;
+      video.playsInline = true;
+      video.autoplay = true;
+      video.loop = true;
+      video.controls = false;
+      video.preload = 'auto';
+
+      // Set attributes for iOS
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
+
+      // Try to play the video
+      video.play().then(() => {
+        console.log('Video playing successfully');
+        setVideoLoaded(true);
+        setVideoError(false);
+      }).catch(error => {
+        console.log('Video play failed, using fallback image:', error);
+        setVideoError(true);
       });
-    }, 100);
+    }, 500);
 
     // Clean up
     return () => {
       clearTimeout(timer);
-      if (video) {
-        video.pause();
-        video.src = '';
-        video.load();
-      }
     };
   }, []);
 
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden bg-black">
-      {/* Absolutely minimal video element */}
-      <video
-        ref={videoRef}
-        className="absolute inset-0 w-full h-full"
-        playsInline
-        muted
-        loop
-        autoPlay
-      >
-        <source src="/images/home/hero/mobile-video/heromobilevid.webm" type="video/webm" />
-      </video>
+      {/* Show fallback if video fails to load */}
+      {videoError && <MobileHeroFallback />}
 
-      {/* Text content */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="flex flex-col items-center justify-center px-4 text-center">
-          <p className="text-white/90 uppercase tracking-widest text-sm mb-4">
-            Experience
-          </p>
+      {/* Video element */}
+      {/* Only render video if we're not showing the fallback */}
+      {!videoError && (
+        <video
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full"
+          playsInline
+          muted
+          loop
+          autoPlay
+          style={{
+            objectFit: 'cover',
+            objectPosition: 'center',
+            width: '100%',
+            height: '100%',
+            maxWidth: 'none',
+            minWidth: '100%',
+            minHeight: '100%',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: videoLoaded ? 5 : 0,
+            opacity: videoLoaded ? 1 : 0
+          }}
+          onError={() => {
+            console.log('Video error event triggered');
+            setVideoError(true);
+          }}
+          onCanPlay={() => {
+            console.log('Video can play event triggered');
+            setVideoLoaded(true);
+            setVideoError(false);
+          }}
+        >
+          <source src="/images/home/hero/mobile-video/heromobilevid.webm" type="video/webm" />
+          <source src="/images/home/hero/mobile-video/heromobilevid.mp4" type="video/mp4" />
+        </video>
+      )}
 
-          <h1 className="text-white text-4xl font-playfair italic mb-6"
-              style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
-            Exquisite Indian Cuisine
-          </h1>
-
-          <div className="flex items-center w-full max-w-xs justify-center mb-6">
-            <div className="h-px bg-white/50 flex-1"></div>
-            <div className="mx-4">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
-                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="1" />
-                <path d="M12 6V12L16 14" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-              </svg>
-            </div>
-            <div className="h-px bg-white/50 flex-1"></div>
-          </div>
-
-          <p className="text-white/80 mb-8 text-sm">
-            Fine Dining at the Heart of Singapore
-          </p>
-        </div>
-      </div>
+      {/* No text overlay on mobile as per client request */}
     </div>
   );
 };

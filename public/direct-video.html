@@ -13,7 +13,7 @@
       overflow: hidden;
       background-color: #000;
     }
-    
+
     .video-container {
       position: absolute;
       top: 0;
@@ -22,7 +22,7 @@
       height: 100%;
       overflow: hidden;
     }
-    
+
     video {
       position: absolute;
       top: 0;
@@ -36,19 +36,26 @@
 <body>
   <div class="video-container">
     <video autoplay playsinline muted loop>
+      <source src="/images/home/hero/mobile-video/heromobilevid.webm" type="video/webm">
       <source src="/images/home/hero/mobile-video/heromobilevid.mp4" type="video/mp4">
     </video>
   </div>
-  
+
   <script>
     // Force video to play
     window.onload = function() {
       const video = document.querySelector('video');
-      
+
       // Add timestamp to prevent caching
       const timestamp = new Date().getTime();
-      video.src = `/images/home/hero/mobile-video/heromobilevid.mp4?t=${timestamp}`;
-      
+
+      // Update both sources with cache-busting
+      const sources = video.querySelectorAll('source');
+      sources.forEach(source => {
+        const originalSrc = source.src.split('?')[0];
+        source.src = `${originalSrc}?t=${timestamp}`;
+      });
+
       // Load and play
       video.load();
       video.play();

@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from 'react';
-import Image from 'next/image';
+import Image from 'next/image'
+;
 
 interface SimpleVideoBackgroundProps {
   videoSrc: string;
@@ -74,6 +75,7 @@ const SimpleVideoBackground = ({ videoSrc, fallbackImageSrc }: SimpleVideoBackgr
 
     // Define video sources to try
     const sources = [
+      `/images/home/hero/mobile-video/heromobilevid.webm?v=${Date.now()}`,
       `/images/home/hero/mobile-video/heromobilevid-small.mp4?v=${Date.now()}`,
       `/images/home/hero/mobile-video/heromobilevid-compressed.mp4?v=${Date.now()}`,
       `/images/home/hero/mobile-video/heromobilevid.mp4?v=${Date.now()}`
@@ -114,8 +116,7 @@ const SimpleVideoBackground = ({ videoSrc, fallbackImageSrc }: SimpleVideoBackgr
     <div className="absolute inset-0 w-full h-full overflow-hidden">
       {/* Fallback image - always visible underneath */}
       <div className="absolute inset-0 z-[1]">
-        <Image
-          src={fallbackImageSrc}
+        <Image src={fallbackImageSrc}
           alt="Background"
           fill
           priority
@@ -141,6 +142,7 @@ const SimpleVideoBackground = ({ videoSrc, fallbackImageSrc }: SimpleVideoBackgr
         }}
       >
         {/* Try multiple sources with different formats and sizes */}
+        <source src="/images/home/hero/mobile-video/heromobilevid.webm" type="video/webm" />
         <source src={`${videoSrc}?v=${Date.now()}`} type="video/mp4" />
         <source src="/images/home/hero/mobile-video/heromobilevid-small.mp4" type="video/mp4" />
         <source src="/images/home/hero/mobile-video/heromobilevid-compressed.mp4" type="video/mp4" />
@@ -150,3 +152,5 @@ const SimpleVideoBackground = ({ videoSrc, fallbackImageSrc }: SimpleVideoBackgr
 };
 
 export default SimpleVideoBackground;
+
+

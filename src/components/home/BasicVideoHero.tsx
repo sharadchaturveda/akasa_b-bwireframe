@@ -63,13 +63,15 @@ const BasicVideoHero = () => {
         loop
         autoPlay
         preload="auto"
-        src="/images/home/hero/mobile-video/heromobilevid.mp4"
         style={{
           objectFit: 'cover',
           width: '100%',
           height: '100%'
         }}
-      ></video>
+      >
+        <source src="/images/home/hero/mobile-video/heromobilevid.webm" type="video/webm" />
+        <source src="/images/home/hero/mobile-video/heromobilevid.mp4" type="video/mp4" />
+      </video>
 
       {/* No text overlay on mobile as per client request */}
     </div>

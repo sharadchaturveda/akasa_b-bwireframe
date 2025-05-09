@@ -13,7 +13,7 @@
       overflow: hidden;
       background-color: #000;
     }
-    
+
     video {
       position: absolute;
       top: 0;
@@ -23,7 +23,7 @@
       object-fit: cover;
       z-index: 1;
     }
-    
+
     .fallback {
       position: absolute;
       top: 0;
@@ -40,25 +40,29 @@
 <body>
   <!-- Fallback image -->
   <div class="fallback"></div>
-  
+
   <!-- Video element -->
   <video autoplay playsinline muted loop>
+    <source src="/images/home/hero/mobile-video/heromobilevid.webm" type="video/webm">
     <source src="/images/home/hero/mobile-video/heromobilevid.mp4" type="video/mp4">
   </video>
-  
+
   <script>
     // Force video to play
     document.addEventListener('DOMContentLoaded', function() {
       const video = document.querySelector('video');
-      
+
       // Add unique timestamp to prevent caching
       const timestamp = Date.now();
-      const videoSrc = `/images/home/hero/mobile-video/heromobilevid.mp4?nocache=${timestamp}`;
-      
-      // Set source with cache-busting
-      video.querySelector('source').src = videoSrc;
+
+      // Update both sources with cache-busting
+      const sources = video.querySelectorAll('source');
+      sources.forEach(source => {
+        const originalSrc = source.src.split('?')[0];
+        source.src = `${originalSrc}?nocache=${timestamp}`;
+      });
       video.load();
-      
+
       // Try to play the video
       video.play().catch(function(error) {
         console.log('Video play failed:', error);
