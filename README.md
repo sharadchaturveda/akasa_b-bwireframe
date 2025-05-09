@@ -51,7 +51,11 @@ akasa_b-bwireframe/
 │   │   ├── menu/           # Menu page images
 │   │   ├── events/         # Events page images
 │   │   └── offers/         # Offers page images
+│   ├── mobile.css          # Mobile-specific CSS (dynamically loaded)
 │   └── styles/             # Page-specific CSS
+├── docs/                   # Documentation files
+│   ├── image-optimization.md # Image optimization guide
+│   └── mobile-optimization.md # Mobile optimization guide
 ├── src/                    # Source code
 │   ├── app/                # Next.js App Router pages
 │   │   ├── page.tsx        # Home page
@@ -191,20 +195,35 @@ Tailwind CSS is used for utility-first styling, with custom configuration in `ta
 
 ### Mobile-Specific CSS
 
-Mobile-specific CSS is loaded conditionally based on device detection:
+Mobile-specific CSS is loaded dynamically based on device detection:
 
-```tsx
-{isMobile && (
-  <link rel="stylesheet" href="/styles/mobile.css" />
-)}
+```typescript
+// In deviceUtils.ts
+export const applyMobileOptimizations = (): void => {
+  // Add mobile class to html element
+  document.documentElement.classList.add('mobile-device');
+
+  // Load mobile CSS dynamically
+  if (!document.getElementById('mobile-css')) {
+    const link = document.createElement('link');
+    link.id = 'mobile-css';
+    link.rel = 'stylesheet';
+    link.href = '/mobile.css';
+    document.head.appendChild(link);
+  }
+};
 ```
+
+The mobile.css file contains optimizations specifically for mobile devices and is only loaded when needed.
 
 ### Performance Optimizations
 
 - CSS is minimized and critical CSS is inlined for faster loading
 - Unused CSS is purged during the build process
+- Mobile-specific CSS is loaded dynamically only on mobile devices
 - Responsive images are used to reduce bandwidth usage on mobile devices
 - WebM format is used for video files to optimize performance
+- Video elements use appropriate fallback images when videos fail to load
 
 ## Deployment
 
@@ -261,6 +280,15 @@ npm run build
 ```bash
 npm test
 ```
+
+## Documentation
+
+The project includes comprehensive documentation:
+
+1. **README.md**: This file, providing an overview of the project.
+2. **DOCUMENTATION.md**: Detailed documentation of the project.
+3. **docs/image-optimization.md**: Guide for image optimization.
+4. **docs/mobile-optimization.md**: Guide for mobile optimization.
 
 ## Future Work / Known Issues
 

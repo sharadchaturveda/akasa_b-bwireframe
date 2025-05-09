@@ -19,6 +19,11 @@
 15. [Troubleshooting](#troubleshooting)
 16. [Contributing](#contributing)
 
+## Additional Documentation
+
+- [Image Optimization Guide](./docs/image-optimization.md)
+- [Mobile Optimization Guide](./docs/mobile-optimization.md)
+
 ## Introduction
 
 The Akasa Restaurant Website is a Next.js application that showcases Akasa, an upscale Indian restaurant in Singapore. The website features the restaurant's offerings, including menus, events, and reservation capabilities. The website is designed to be fast, responsive, and provide an excellent user experience on both desktop and mobile devices.
@@ -49,7 +54,7 @@ The project follows a modular structure with clear separation of concerns:
 akasa_b-bwireframe/
 ├── public/               # Static assets
 │   ├── images/           # Image assets
-│   ├── mobile.css        # Mobile-specific CSS
+│   ├── mobile.css        # Mobile-specific CSS (dynamically loaded)
 │   └── styles/           # Page-specific CSS
 ├── src/                  # Source code
 │   ├── app/              # Next.js App Router pages
@@ -378,6 +383,29 @@ The application uses the `useDeviceDetection` hook to detect mobile devices:
 const { isMobile, isDetectionComplete } = useDeviceDetection();
 ```
 
+This hook uses the `isMobileDevice` function from `deviceUtils.ts` which checks screen size and user agent:
+
+```typescript
+export const isMobileDevice = (options: DeviceDetectionOptions = {}): boolean => {
+  // Return false if running on the server
+  if (typeof window === 'undefined') return false;
+
+  // Set default options
+  const {
+    mobileMaxWidth = BREAKPOINTS.MOBILE,
+  } = options;
+
+  // Check screen size
+  const isSmallScreen = window.innerWidth <= mobileMaxWidth;
+
+  // Check user agent for mobile devices
+  const userAgent = navigator.userAgent.toLowerCase();
+  const isMobileUserAgent = /android|webos|iphone|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+
+  return isSmallScreen || isMobileUserAgent;
+};
+```
+
 ### Mobile-Specific Components
 
 The application uses mobile-specific components:
@@ -388,10 +416,43 @@ The application uses mobile-specific components:
 
 ### Mobile CSS
 
-The application loads mobile-specific CSS:
+The application dynamically loads mobile-specific CSS using the `applyMobileOptimizations` function:
 
-```tsx
-<link rel="stylesheet" href="/mobile.css" />
+```typescript
+export const applyMobileOptimizations = (): void => {
+  // Return if running on the server
+  if (typeof window === 'undefined' || !document) return;
+
+  // Add mobile class to html element
+  document.documentElement.classList.add('mobile-device');
+
+  // Load mobile CSS dynamically
+  if (!document.getElementById('mobile-css')) {
+    const link = document.createElement('link');
+    link.id = 'mobile-css';
+    link.rel = 'stylesheet';
+    link.href = '/mobile.css';
+    document.head.appendChild(link);
+  }
+};
+```
+
+The `mobile.css` file contains mobile-specific styles that are only loaded on mobile devices:
+
+```css
+/* Mobile-specific optimizations */
+html.mobile-device {
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Improve touch targets */
+html.mobile-device button,
+html.mobile-device a,
+html.mobile-device input {
+  touch-action: manipulation;
+}
 ```
 
 ### Touch Optimization
@@ -400,22 +461,34 @@ The application optimizes for touch interactions:
 
 ```css
 html.mobile-device button,
-html.mobile-device a {
+html.mobile-device a,
+html.mobile-device input,
+html.mobile-device select,
+html.mobile-device textarea {
   touch-action: manipulation;
 }
 ```
 
-### Disabling Hover Effects
+### Mobile Hero Video
 
-The application disables hover effects on mobile devices:
+The mobile hero section uses a video background with a fallback image:
 
-```css
-html.mobile-device button:hover,
-html.mobile-device a:hover {
-  background-color: initial !important;
-  color: initial !important;
-}
+```tsx
+<video
+  ref={videoRef}
+  autoPlay
+  muted
+  loop
+  playsInline
+  className="absolute inset-0 h-full w-full object-cover"
+  poster="/images/home/hero/mobile-video/placeholder.jpg"
+>
+  <source src="/videos/heromobilevid.webm" type="video/webm" />
+  <source src="/videos/heromobilevid.mp4" type="video/mp4" />
+</video>
 ```
+
+For more details on mobile optimization, see [Mobile Optimization Guide](./mobile-optimization.md).
 
 ## Testing
 
