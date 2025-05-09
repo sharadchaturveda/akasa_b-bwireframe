@@ -13,7 +13,7 @@
       overflow: hidden;
       background-color: #000;
     }
-    
+
     .video-container {
       position: absolute;
       top: 0;
@@ -22,7 +22,7 @@
       height: 100%;
       overflow: hidden;
     }
-    
+
     video {
       position: absolute;
       top: 0;
@@ -31,19 +31,19 @@
       height: 100%;
       object-fit: cover;
     }
-    
+
     .fallback {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('/images/home/hero/hero-home.jpg');
+      background-image: url('/images/home/hero/mobile-poster.jpg');
       background-size: cover;
       background-position: center;
       z-index: 0;
     }
-    
+
     .controls {
       position: fixed;
       bottom: 20px;
@@ -52,7 +52,7 @@
       display: flex;
       gap: 10px;
     }
-    
+
     button {
       background: rgba(0, 0, 0, 0.5);
       color: white;
@@ -66,45 +66,45 @@
 <body>
   <!-- Fallback image -->
   <div class="fallback"></div>
-  
+
   <!-- Video container -->
   <div class="video-container">
     <video id="heroVideo" playsinline muted loop>
       <source src="/images/home/hero/mobile-video/heromobilevid.mp4" type="video/mp4">
     </video>
   </div>
-  
+
   <!-- Controls for testing -->
   <div class="controls">
     <button id="playBtn">Play</button>
     <button id="pauseBtn">Pause</button>
     <button id="reloadBtn">Reload</button>
   </div>
-  
+
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const video = document.getElementById('heroVideo');
       const playBtn = document.getElementById('playBtn');
       const pauseBtn = document.getElementById('pauseBtn');
       const reloadBtn = document.getElementById('reloadBtn');
-      
+
       // Add timestamp to prevent caching
       const timestamp = new Date().getTime();
       video.querySelector('source').src = `/images/home/hero/mobile-video/heromobilevid.mp4?t=${timestamp}`;
-      
+
       // Load and play
       video.load();
-      
+
       // Play button
       playBtn.addEventListener('click', function() {
         video.play();
       });
-      
+
       // Pause button
       pauseBtn.addEventListener('click', function() {
         video.pause();
       });
-      
+
       // Reload button
       reloadBtn.addEventListener('click', function() {
         video.pause();
@@ -112,7 +112,7 @@
         video.load();
         video.play();
       });
-      
+
       // Auto-play when possible
       video.play().catch(function(error) {
         console.log('Auto-play failed:', error);
