@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from 'react';
+import Image from "next/image";
 import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
 import ResponsiveHero from "@/components/home/ResponsiveHero";
@@ -32,7 +33,44 @@ export default function HomePage() {
 
       {/* Hero and Brand Philosophy Sections - Wrapped to eliminate gap on mobile */}
       <div className="flex flex-col section-wrapper" style={{ marginBottom: '-2px' }}>
-        <ResponsiveHero />
+        {/* Direct video element for mobile */}
+        <div className="md:hidden relative w-full h-screen overflow-hidden bg-black">
+          {/* Fallback image */}
+          <div className="absolute inset-0">
+            <Image
+              src="/images/home/hero/mobile-video/placeholder.jpg"
+              alt="Akasa restaurant ambiance"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
+
+          {/* Direct video element */}
+          <video
+            className="absolute inset-0 w-full h-full z-10"
+            muted
+            playsInline
+            loop
+            autoPlay
+            preload="auto"
+            src="/images/home/hero/mobile-video/heromobilevid.mp4"
+            style={{
+              objectFit: 'cover',
+              width: '100%',
+              height: '100%'
+            }}
+          ></video>
+
+          {/* No text overlay on mobile as per client request */}
+        </div>
+
+        {/* Desktop hero */}
+        <div className="hidden md:block">
+          <ResponsiveHero />
+        </div>
+
         <BrandPhilosophy />
       </div>
 

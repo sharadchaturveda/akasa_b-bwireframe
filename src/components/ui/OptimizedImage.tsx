@@ -1,9 +1,11 @@
 "use client";
 
-import { memo, useState, useEffect, useCallback } from 'react';
-import Image, { ImageProps } from 'next/image';
+import { memo, useState, useEffect } from 'react';
+import Image, { ImageProps, StaticImageData } from 'next/image';
+import type { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import { cn } from '@/lib/utils';
 import { IMAGES } from '@/constants';
+import { getOptimizedImageProps } from '@/utils/imageOptimization';
 
 /**
  * Props for the OptimizedImage component
@@ -80,7 +82,14 @@ const OptimizedImage = memo(function OptimizedImage({
   // Determine image loading attributes based on criticality
   const imageLoading = loading || (isCritical ? undefined : "lazy");
   const imagePriority = priority || isCritical;
-  const imageQuality = quality || (isCritical ? IMAGES.HIGH_QUALITY : IMAGES.DEFAULT_QUALITY);
+  const imageQuality = quality || (isCritical ? Number(IMAGES.HIGH_QUALITY) : Number(IMAGES.DEFAULT_QUALITY));
+
+  // Get optimized image props
+  const optimizedProps = getOptimizedImageProps({
+    src,
+    quality: imageQuality,
+    priority: imagePriority,
+  });
 
   // Handle image load
   const handleLoad = () => {
@@ -97,9 +106,17 @@ const OptimizedImage = memo(function OptimizedImage({
 
   // Effect to handle the case where the image is already cached
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     // Check if the image is already in the browser cache
     const img = new window.Image();
-    img.src = typeof src === 'string' ? src : '';
+
+    // Handle different src types
+    if (typeof src === 'string') {
+      img.src = src;
+    } else if (src && typeof src === 'object' && 'src' in src) {
+      img.src = (src as StaticImageData).src;
+    }
 
     if (img.complete) {
       handleLoad();
@@ -122,9 +139,9 @@ const OptimizedImage = memo(function OptimizedImage({
         />
       )}
 
-      {/* Image */}
+      {/* Image - Using optimized props for AVIF format */}
       <Image
-        src={src}
+        src={optimizedProps.src}
         alt={alt}
         width={width}
         height={height}

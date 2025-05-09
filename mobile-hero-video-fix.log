@@ -1,0 +1,68 @@
+# Mobile Hero Video Fix
+
+## Issue
+The mobile hero section's video wasn't playing after performance optimizations were made.
+
+## Root Causes
+1. **WebM Format Compatibility**: Some mobile browsers don't support WebM format
+2. **Video Loading Strategy**: Lack of proper fallback mechanism when video fails to load
+3. **Video Preloading**: No preloading strategy for the video
+4. **Error Handling**: No proper error handling for video playback failures
+
+## Changes Made
+
+### 1. Added MP4 Fallback Format
+- Added MP4 source as a fallback for browsers that don't support WebM
+- Browsers will now try WebM first, then fall back to MP4 if needed
+
+### 2. Improved Video Loading Strategy
+- Added state tracking for video loading status (`videoLoaded` and `videoError`)
+- Implemented proper visibility toggling based on loading state
+- Created a dedicated fallback component that shows when video fails to load
+
+### 3. Added Video Preloading
+- Created a new utility (`videoPreload.ts`) for preloading videos
+- Implemented link preloading for both WebM and MP4 formats
+- Added early preloading in the ResponsiveHero component
+
+### 4. Enhanced Error Handling
+- Added retry logic with multiple attempts to play the video
+- Added proper error state management
+- Implemented graceful fallback to static image when video fails
+
+### 5. Improved Video Element Configuration
+- Added explicit styling to ensure proper video display
+- Added all necessary attributes for mobile playback (playsinline, etc.)
+- Forced video visibility through inline styles
+
+## Files Modified
+1. `src/components/home/MobileHero.tsx`
+   - Added MP4 fallback source
+   - Implemented loading state management
+   - Added error handling and retry logic
+   - Added fallback component integration
+
+2. `src/components/home/ResponsiveHero.tsx`
+   - Added video preloading on initial load
+   - Improved device detection logic
+
+## Files Created
+1. `src/utils/videoPreload.ts`
+   - Added utilities for preloading videos
+   - Implemented multiple preloading strategies
+
+2. `src/components/home/MobileHeroFallback.tsx`
+   - Created fallback component with static image
+   - Maintained the same text content as the video version
+
+## Testing
+The solution was tested on:
+- Mobile Safari (iOS)
+- Chrome for Android
+- Mobile Edge
+
+## Future Improvements
+1. Consider converting the video to more efficient formats (AV1)
+2. Implement adaptive bitrate streaming for different network conditions
+3. Add analytics to track video loading success/failure rates
+4. Consider using the Picture-in-Picture API for better video handling

@@ -1,0 +1,63 @@
+# Mobile Hero Text Removal
+
+## Issue
+The client requested that no text should be displayed on the mobile hero section, only the video.
+
+## Changes Made
+
+### 1. Removed Text from Direct Implementation in page.tsx
+- Removed the text overlay from the direct video implementation in page.tsx
+- Replaced it with a comment indicating the client's request
+
+### 2. Updated All Mobile Hero Components
+- Removed text from BasicVideoHero.tsx
+- Removed text from SimpleMobileHero.tsx
+- Removed text from MobileHero.tsx
+- Removed text from MobileHeroFallback.tsx
+
+### 3. Maintained Fallback Images
+- Kept the fallback images in place for when video fails to load
+- Maintained the overlay for better contrast
+
+## Files Modified
+1. `src/app/page.tsx`
+   - Removed text overlay from the direct video implementation
+
+2. `src/components/home/BasicVideoHero.tsx`
+   - Removed text overlay
+
+3. `src/components/home/SimpleMobileHero.tsx`
+   - Removed text overlay
+
+4. `src/components/home/MobileHero.tsx`
+   - Removed text overlay
+
+5. `src/components/home/MobileHeroFallback.tsx`
+   - Removed text overlay
+
+## Key Changes
+Replaced text overlay sections like:
+```jsx
+<div className="absolute inset-0 flex items-center justify-center z-20">
+  <div className="flex flex-col items-center justify-center px-4 text-center">
+    <p className="text-white/90 uppercase tracking-widest text-sm mb-4">
+      Experience
+    </p>
+    
+    <h1 className="text-white text-4xl font-playfair italic mb-6"
+        style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
+      Exquisite Indian Cuisine
+    </h1>
+    
+    <!-- More text content -->
+  </div>
+</div>
+```
+
+With:
+```jsx
+{/* No text overlay on mobile as per client request */}
+```
+
+## Result
+The mobile hero section now shows only the video (or fallback image) without any text overlay, as requested by the client.

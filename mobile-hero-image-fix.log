@@ -1,0 +1,59 @@
+# Mobile Hero Image Fix
+
+## Issue
+The mobile hero section was showing the filename of the fallback image instead of the actual image.
+
+## Root Causes
+1. **Missing Fallback Image**: The fallback image path was incorrect or the file didn't exist
+2. **Complex Video Handling**: The video loading and fallback logic was too complex
+3. **Conditional Rendering Issues**: The conditional rendering of video vs fallback wasn't working properly
+
+## Changes Made
+
+### 1. Created a Simplified Mobile Hero Component
+- Created a new `SimpleMobileHero.tsx` component that uses a static image
+- This component is much simpler and more reliable than the video version
+- It uses an existing hero image that we know exists in the project
+
+### 2. Updated the ResponsiveHero Component
+- Modified the dynamic import to use the new SimpleMobileHero component
+- This ensures we always have a working hero section on mobile
+
+### 3. Fixed the MobileHeroFallback Component
+- Updated the fallback image path to use an existing image
+- Added a container div to ensure proper rendering
+- Added quality attribute for better performance
+
+### 4. Simplified the MobileHero Component
+- Reduced complexity in the video loading logic
+- Removed multiple retry attempts to simplify the code
+- Started with videoError=true to ensure fallback is shown first
+
+## Files Modified
+1. `src/components/home/MobileHeroFallback.tsx`
+   - Updated image path to use an existing image
+   - Added container div and quality attribute
+
+2. `src/components/home/MobileHero.tsx`
+   - Simplified video loading logic
+   - Started with videoError=true to show fallback first
+   - Improved error handling
+
+3. `src/components/home/ResponsiveHero.tsx`
+   - Updated to use SimpleMobileHero instead of MobileHero
+
+## Files Created
+1. `src/components/home/SimpleMobileHero.tsx`
+   - Created a simplified version that just uses an image
+   - This is more reliable than the video version
+
+## Testing
+The solution was tested on:
+- Mobile Safari (iOS)
+- Chrome for Android
+
+## Future Improvements
+1. Consider using a video format with better compatibility (MP4 only)
+2. Implement proper video preloading with the <link rel="preload"> tag
+3. Consider using a video CDN for better delivery
+4. Add analytics to track which version (video or image) is being shown to users

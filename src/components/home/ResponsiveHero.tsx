@@ -2,19 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import { addVideoPreloadHints } from '@/utils/videoPreload';
 
-// Dynamically import components with no SSR and with loading condition
-const MobileHero = dynamic(
-  () => {
-    // Only import the mobile hero if we're on a mobile device
-    if (typeof window !== 'undefined' && window.innerWidth < 768) {
-      return import('./MobileHero');
-    }
-    // Return an empty component if we're not on mobile
-    return Promise.resolve(() => null);
-  },
-  { ssr: false, loading: () => null }
-);
+// Import the basic video hero component directly
+import BasicVideoHero from './BasicVideoHero';
+
+// Dynamically import desktop hero with no SSR
+const MobileHero = BasicVideoHero;
 
 const DesktopHero = dynamic(
   () => {
@@ -34,47 +28,40 @@ const DesktopHero = dynamic(
  */
 const ResponsiveHero = () => {
   // State to track if we're on mobile
-  const [isMobile, setIsMobile] = useState<boolean | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   // Set up screen size detection on mount
   useEffect(() => {
+    // Check if we're in the browser
+    if (typeof window === 'undefined') return;
+
     // Set initial screen size
-    setIsMobile(window.innerWidth < 768);
-
-    // Function to handle resize
-    const handleResize = () => {
-      const newIsMobile = window.innerWidth < 768;
-      if (newIsMobile !== isMobile) {
-        // Only update state if the value changed to avoid re-renders
-        setIsMobile(newIsMobile);
-
-        // Force reload the page on breakpoint change to ensure clean loading
-        window.location.reload();
-      }
+    const checkScreenSize = () => {
+      const width = window.innerWidth;
+      setIsMobile(width < 768);
+      setIsDesktop(width >= 768);
     };
 
+    // Initial check
+    checkScreenSize();
+
     // Set up resize listener
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', checkScreenSize);
 
     // Clean up
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', checkScreenSize);
     };
-  }, [isMobile]);
-
-  // Don't render anything until we know what device we're on
-  if (isMobile === null) {
-    return (
-      <section className="relative w-full h-screen bg-black overflow-hidden m-0 p-0 hero-section">
-        {/* Loading placeholder */}
-      </section>
-    );
-  }
+  }, []);
 
   return (
     <section className="relative w-full h-screen bg-black overflow-hidden m-0 p-0 hero-section">
-      {/* Only render the component for the current device */}
-      {isMobile ? <MobileHero /> : <DesktopHero />}
+      {/* Mobile hero - only shown on mobile */}
+      {isMobile && <MobileHero />}
+
+      {/* Desktop hero - only shown on desktop */}
+      {isDesktop && <DesktopHero />}
     </section>
   );
 };

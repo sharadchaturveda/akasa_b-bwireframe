@@ -1,0 +1,69 @@
+# Direct Video Implementation
+
+## Issue
+The mobile hero video wasn't playing despite multiple attempts to fix it through component-based approaches.
+
+## Root Causes
+1. **Component Complexity**: The previous implementations had too many layers of abstraction
+2. **Dynamic Imports**: The dynamic imports might have interfered with video initialization
+3. **Conditional Rendering**: Complex conditional rendering might have prevented proper video loading
+
+## Solution
+Implemented a direct, inline video element in the page.tsx file with minimal abstraction:
+
+1. **Direct HTML Video Element**: Added a video element directly in the page component
+2. **Simplified Attributes**: Used only essential video attributes (muted, playsInline, loop, autoPlay)
+3. **Direct Source**: Used the src attribute instead of source elements
+4. **Fallback Image**: Maintained a fallback image that's always visible behind the video
+5. **Mobile-Only**: Used responsive classes to only show this on mobile devices
+
+## Files Modified
+1. `src/app/page.tsx`
+   - Added direct video element with minimal abstraction
+   - Added responsive classes to show different heroes on mobile vs desktop
+   - Added Image import for the fallback image
+
+2. `src/components/home/BasicVideoHero.tsx`
+   - Created a simplified video hero component
+   - Used direct src attribute instead of source elements
+   - Added explicit styling for video element
+
+3. `src/components/home/ResponsiveHero.tsx`
+   - Simplified the responsive logic
+   - Removed page reload on resize
+   - Used direct import for BasicVideoHero
+
+## Key Changes
+1. **Simplified Video Element**:
+   ```jsx
+   <video
+     className="absolute inset-0 w-full h-full z-10"
+     muted
+     playsInline
+     loop
+     autoPlay
+     preload="auto"
+     src="/images/home/hero/mobile-video/heromobilevid.mp4"
+     style={{
+       objectFit: 'cover',
+       width: '100%',
+       height: '100%'
+     }}
+   ></video>
+   ```
+
+2. **Direct Implementation in Page**:
+   - Added the video element directly in page.tsx
+   - Used responsive classes to control visibility
+   - Maintained the existing component for desktop
+
+## Testing
+The solution was tested on:
+- Mobile Safari (iOS)
+- Chrome for Android
+
+## Future Improvements
+1. Consider using a more efficient video format
+2. Implement proper video preloading
+3. Add analytics to track video playback success
+4. Consider using a video CDN for better delivery
