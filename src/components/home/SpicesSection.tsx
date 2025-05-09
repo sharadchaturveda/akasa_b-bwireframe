@@ -27,13 +27,12 @@ export default function SpicesSection() {
               <div className="absolute top-0 left-0 w-12 h-12 border-t border-l border-[#E6C78B]/30"></div>
               <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-[#E6C78B]/30"></div>
 
-              <span className="text-[#E6C78B] text-sm tracking-widest uppercase mb-2 block font-montserrat">Spices</span>
-              <h2 className="text-3xl font-playfair mb-2 text-white" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>{"Rooted in Purity"}</h2>
+              <h2 className="text-[#E6C78B] text-sm tracking-widest uppercase mb-2 block font-montserrat">{"Rooted in Purity"}</h2>
 
               <div className="w-16 h-[1px] bg-gradient-to-r from-[#E6C78B]/80 to-transparent mb-4"></div>
 
               <h3 className="text-xl font-playfair mb-2 text-white/90">{"The Origin of Flavor"}</h3>
-              <p className="text-base font-montserrat mb-8 text-white/90">{"We handpick ingredients from trusted farms, ethical suppliers, and ancient markets. From sun-dried turmeric to wild-foraged pepper, every flavor begins with care."}</p>
+              <p className="text-base font-montserrat mb-8 text-white/90">{"We handpick ingredients from trusted ethical suppliers, sustainable sources, and time-honored markets. From sun-dried turmeric to wild-foraged pepper, every flavor begins with care."}</p>
 
               <div className="flex flex-col gap-4 w-full mt-auto">
                 <Link href="/menu" className="w-full flex justify-center">
@@ -50,13 +49,12 @@ export default function SpicesSection() {
               <div className="absolute top-0 left-0 w-12 h-12 border-t border-l border-[#E6C78B]/30"></div>
               <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-[#E6C78B]/30"></div>
 
-              <span className="text-[#E6C78B] text-sm tracking-widest uppercase mb-2 block font-montserrat">Spices</span>
-              <h2 className="text-3xl font-playfair mb-2 text-white" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>{"Regions of Spice"}</h2>
+              <h2 className="text-[#E6C78B] text-sm tracking-widest uppercase mb-2 block font-montserrat">{"Regions of Spice"}</h2>
 
               <div className="w-16 h-[1px] bg-gradient-to-r from-[#E6C78B]/80 to-transparent mb-4"></div>
 
               <h3 className="text-xl font-playfair mb-2 text-white/90">{"Flavors That Travel"}</h3>
-              <p className="text-base font-montserrat mb-8 text-white/90">{"India is a mosaic of spice cultures. Our dishes carry notes from Rajasthan's red chili heat, Punjab's rich warmth, and Kashmir's fragrant saffron. Every plate is a journey."}</p>
+              <p className="text-base font-montserrat mb-8 text-white/90">{"India is a mosaic of spice cultures. Our dishes carry notes from Rajasthan's red chili heat, Punjab's rich warmth, and Kashmir's fragrant saffron."}<br />{"Every plate is a journey."}</p>
 
               <div className="flex flex-col gap-4 w-full mt-auto">
                 <Link href="/menu" className="w-full flex justify-center">
@@ -73,13 +71,14 @@ export default function SpicesSection() {
               <div className="absolute top-0 left-0 w-12 h-12 border-t border-l border-[#E6C78B]/30"></div>
               <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-[#E6C78B]/30"></div>
 
-              <span className="text-[#E6C78B] text-sm tracking-widest uppercase mb-2 block font-montserrat">Spices</span>
-              <h2 className="text-3xl font-playfair mb-2 text-white" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>{"Crafted With Fire"}</h2>
+              <h2 className="text-[#E6C78B] text-sm tracking-widest uppercase mb-2 block font-montserrat">{"Crafted With Fire"}</h2>
 
               <div className="w-16 h-[1px] bg-gradient-to-r from-[#E6C78B]/80 to-transparent mb-4"></div>
 
               <h3 className="text-xl font-playfair mb-2 text-white/90">{"The Akasa Method"}</h3>
-              <p className="text-base font-montserrat mb-8 text-white/90">{"We roast, grind, toast, and temper spices in-house. No shortcuts. Just ancient techniques and instinct-driven craft. It's not just food—it's a ritual."}</p>
+              <p className="text-base font-montserrat mb-8 text-white/90">{"We roast, grind, toast, and temper spices in-house. No shortcuts."} 
+              <br /> 
+              {"Just ancient techniques along with our instinct-driven craft."}<br />{"It's not just food—it's a ritual."}</p>
 
               <div className="flex flex-col gap-4 w-full mt-auto">
                 <Link href="/menu" className="w-full flex justify-center">
