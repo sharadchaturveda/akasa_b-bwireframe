@@ -7,9 +7,9 @@ import '@/styles/mobile-navigation-fix.css';
 import '@/styles/mobile-section-fix.css';
 import '@/styles/mobile-hero-fix.css';
 
-// Import the ClientPerformanceWrapper component
-import ClientPerformanceWrapper from '@/components/performance/ClientPerformanceWrapper';
+// Import components
 import MobileNavigation from '@/components/navigation/MobileNavigation';
+import FloatingActionButtons from '@/components/ui/FloatingActionButtons';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -215,6 +215,9 @@ export default function RootLayout({
       >
         {/* Mobile Navigation - Fixed at the top of every page */}
         <MobileNavigation />
+
+        {/* Floating Action Buttons - Fixed on all pages */}
+        <FloatingActionButtons />
 
         {children}
       </body>
