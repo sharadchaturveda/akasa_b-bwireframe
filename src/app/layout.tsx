@@ -84,7 +84,7 @@ export default function RootLayout({
             /* Background image */
             .hero-section {
               background-color: #000 !important;
-              background-image: url('/images/home/hero/mobile-poster.jpg') !important;
+              background-image: url('/images/home/hero/hero-home.jpg') !important;
               background-size: cover !important;
               background-position: center !important;
               background-repeat: no-repeat !important;
@@ -141,65 +141,65 @@ export default function RootLayout({
           }
         ` }} />
 
-        {/* Direct script to force video playback */}
+        {/* Inline script to ensure video plays */}
         <script dangerouslySetInnerHTML={{ __html: `
-          // Function to force video playback on mobile
-          function forceVideoPlayback() {
+          // Function to ensure video plays on mobile
+          function ensureMobileVideoPlays() {
             if (window.innerWidth >= 768) return; // Only run on mobile
 
-            // Create a direct video element and append it to the hero section
-            setTimeout(function() {
-              // Find the hero section
-              const heroSection = document.querySelector('.hero-section');
-              if (!heroSection) return;
+            // Create a video element
+            const video = document.createElement('video');
+            video.muted = true;
+            video.playsInline = true;
+            video.autoplay = true;
+            video.loop = true;
+            video.preload = 'auto';
 
-              // Create a new video element
-              const video = document.createElement('video');
+            // Use WebM format first
+            const source = document.createElement('source');
+            source.src = '/images/home/hero/mobile-video/heromobilevid.webm?nocache=' + Date.now();
+            source.type = 'video/webm';
+            video.appendChild(source);
 
-              // Set all attributes for maximum compatibility
-              video.autoplay = true;
-              video.muted = true;
-              video.loop = true;
-              video.playsInline = true;
-              video.setAttribute('playsinline', '');
-              video.setAttribute('webkit-playsinline', '');
-              video.poster = '/images/home/hero/mobile-poster.jpg';
+            video.style.position = 'absolute';
+            video.style.top = '0';
+            video.style.left = '0';
+            video.style.width = '100%';
+            video.style.height = '100%';
+            video.style.objectFit = 'cover';
+            video.style.zIndex = '10';
+            video.style.opacity = '0'; // Hide it
 
-              // Style the video
-              video.style.position = 'absolute';
-              video.style.top = '0';
-              video.style.left = '0';
-              video.style.width = '100%';
-              video.style.height = '100%';
-              video.style.objectFit = 'cover';
-              video.style.zIndex = '100';
+            // Add to body temporarily to trigger autoplay
+            document.body.appendChild(video);
 
-              // Add the source
-              const source = document.createElement('source');
-              source.src = '/images/home/hero/mobile-video/heromobilevid.mp4';
-              source.type = 'video/mp4';
-              video.appendChild(source);
-
-              // Try to play immediately
-              video.load();
-
-              // Add to the hero section
-              heroSection.appendChild(video);
-
-              // Force play after a short delay
-              setTimeout(function() {
-                video.play().catch(function(e) {
-                  console.log('Video play failed:', e);
+            // Function to play video with retry
+            function playVideo() {
+              const playPromise = video.play();
+              if (playPromise !== undefined) {
+                playPromise.catch(function() {
+                  // If autoplay fails, try again after a short delay
+                  setTimeout(playVideo, 100);
                 });
-              }, 100);
-            }, 500);
+              }
+            }
+
+            // Try to play
+            playVideo();
+
+            // Remove after 1 second
+            setTimeout(function() {
+              if (document.body.contains(video)) {
+                document.body.removeChild(video);
+              }
+            }, 1000);
           }
 
           // Run on page load
           if (document.readyState === 'complete') {
-            forceVideoPlayback();
+            ensureMobileVideoPlays();
           } else {
-            window.addEventListener('load', forceVideoPlayback);
+            window.addEventListener('load', ensureMobileVideoPlays);
           }
         ` }} />
       </head>

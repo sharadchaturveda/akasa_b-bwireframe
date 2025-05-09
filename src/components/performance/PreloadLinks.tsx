@@ -19,7 +19,7 @@ export default function PreloadLinks() {
     };
 
     // Preload critical assets
-    createPreloadLink('/images/home/hero/mobile-poster.jpg?quality=60&width=1200', 'image', undefined, 'high');
+    createPreloadLink('/images/home/hero/hero-home.jpg?quality=60&width=1200', 'image', undefined, 'high');
     createPreloadLink('/images/home/philosophy/background.jpg?quality=60&width=800', 'image', undefined, 'high');
     createPreloadLink('/images/home/philosophy/drink.jpg?quality=60&width=800', 'image', undefined, 'high');
 
