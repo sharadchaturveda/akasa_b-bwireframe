@@ -62,11 +62,29 @@ class MyDocument extends Document {
             as="image"
             fetchPriority="high"
           />
+          <link
+            rel="preload"
+            href="/images/menu/chef/background.jpg?quality=60&width=800"
+            as="image"
+            fetchPriority="high"
+          />
 
 
           {/* Add critical CSS for menu page */}
           <style id="critical-css-menu" dangerouslySetInnerHTML={{ __html: `
             /* Only load this CSS when on the menu page */
+            /* REVIEW: Chef-related CSS should be updated as chef page has been removed */
+            .menu-page .chef-image {
+              position: relative;
+              height: 400px;
+              overflow: hidden;
+              border-radius: 0.5rem;
+            }
+
+            .menu-page .chef-image img {
+              object-fit: cover;
+              object-position: center;
+            }
 
             .menu-page .dish-card {
               background-color: rgba(0, 0, 0, 0.8);

@@ -2,6 +2,7 @@
 
 import { useEffect, Suspense } from 'react';
 import dynamic from 'next/dynamic';
+import ChefSection from "@/components/menu/ChefSection";
 
 
 // Add TypeScript declaration for requestIdleCallback
@@ -93,6 +94,9 @@ export default function MenuPageClient() {
   // Render the desktop version with the PageLayout component
   return (
     <PageLayout className="menu-page">
+      {/* Critical above-the-fold content */}
+      <ChefSection />
+
       {/* Below-the-fold content with Suspense */}
       <Suspense fallback={<div className="h-[50vh] bg-black"></div>}>
         <MenusSection />
