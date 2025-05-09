@@ -51,10 +51,9 @@ describe('Footer', () => {
 
     // Check if the social icons are rendered
     const socialLinks = screen.getAllByRole('link', { name: '' });
-    expect(socialLinks.length).toBe(3);
-    expect(socialLinks[0]).toHaveAttribute('href', 'https://instagram.com');
-    expect(socialLinks[1]).toHaveAttribute('href', 'https://facebook.com');
-    expect(socialLinks[2]).toHaveAttribute('href', 'https://twitter.com');
+    expect(socialLinks.length).toBe(2);
+    expect(socialLinks[0]).toHaveAttribute('href', 'https://www.instagram.com/akasa.singapore/');
+    expect(socialLinks[1]).toHaveAttribute('href', 'https://www.facebook.com/akasa.singapore');
 
     // Check that the mobile footer is not rendered
     expect(screen.queryByTestId('mobile-footer')).not.toBeInTheDocument();
