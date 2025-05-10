@@ -2,7 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import { memo } from "react";
-import Image from "next/image";
+import Image from "next/image"
+;
 
 /**
  * InquiryFormSection Component
@@ -26,8 +27,7 @@ const InquiryFormSection = memo(function InquiryFormSection() {
     <section id="inquiry" className="w-full bg-black pb-16 relative">
       {/* Background image - Using next/image for better performance and optimization */}
       <div className="absolute inset-0 z-0 opacity-20">
-        <Image
-          src="/images/menu/hero/gallery-6.jpg"
+        <Image src="/images/menu/hero/gallery-6.jpg"
           alt="Inquiry form background"
           fill
           sizes="100vw" // Full viewport width since this is a background
@@ -153,4 +153,6 @@ const InquiryFormSection = memo(function InquiryFormSection() {
 });
 
 export default InquiryFormSection;
+
+
 

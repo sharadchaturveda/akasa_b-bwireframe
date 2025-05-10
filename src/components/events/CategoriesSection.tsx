@@ -1,6 +1,7 @@
 "use client";
 
-import Image from "next/image";
+import Image from "next/image"
+;
 import { memo } from "react";
 
 interface CategoriesSectionProps {
@@ -18,8 +19,7 @@ const CategoriesSection = memo(function CategoriesSection({
     <section className="w-full bg-black sticky top-0 z-30 py-6 backdrop-blur-md border-b border-[#E6C78B]/10 shadow-lg">
       {/* Enhanced subtle background image */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <Image
-          src="/images/menu/hero/gallery-2.jpg"
+        <Image src="/images/menu/hero/gallery-2.jpg"
           alt="Background"
           fill
           sizes="100vw"
@@ -84,4 +84,6 @@ const CategoriesSection = memo(function CategoriesSection({
 });
 
 export default CategoriesSection;
+
+
 

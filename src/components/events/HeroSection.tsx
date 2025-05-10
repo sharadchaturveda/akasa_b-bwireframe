@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/image"
+;
 import { memo } from "react";
 
 /**
@@ -39,13 +40,12 @@ const HeroSection = memo(function HeroSection() {
           - priority and loading="eager" ensure this critical image loads first
           - quality set to 80 for good balance between quality and performance
         */}
-        <Image
-          src="/images/events/hero/hero.jpg"
+        <Image src="/images/events/hero/hero.jpg"
           alt="Events background"
           fill
           sizes="100vw" // Full viewport width
           className="object-cover"
-          quality={80} // High quality for hero image
+          quality={80} // Balanced for performance and quality
           priority // Load this image with highest priority
           loading="eager" // Start loading immediately
           style={{
@@ -91,7 +91,7 @@ const HeroSection = memo(function HeroSection() {
           <p className="text-xl md:text-2xl font-montserrat text-white/80 max-w-2xl mx-auto">
             Create unforgettable memories in our elegant spaces
           </p>
-          
+
           {/* Call-to-action buttons */}
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             {/* Buttons here */}
@@ -103,4 +103,6 @@ const HeroSection = memo(function HeroSection() {
 });
 
 export default HeroSection;
+
+
 

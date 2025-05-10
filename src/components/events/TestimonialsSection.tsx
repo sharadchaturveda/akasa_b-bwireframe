@@ -1,7 +1,8 @@
 "use client";
 
 import { memo } from "react";
-import Image from "next/image";
+import Image from "next/image"
+;
 
 /**
  * Testimonials data for the Events page
@@ -40,8 +41,7 @@ const TestimonialsSection = memo(function TestimonialsSection() {
     <section className="w-full bg-black pb-16 relative">
       {/* Background image - Using next/image for better performance and optimization */}
       <div className="absolute inset-0 z-0 opacity-30">
-        <Image
-          src="/images/menu/hero/gallery-3.jpg"
+        <Image src="/images/menu/hero/gallery-3.jpg"
           alt="Testimonials background"
           fill
           sizes="100vw" // Full viewport width since this is a background
@@ -98,3 +98,5 @@ const TestimonialsSection = memo(function TestimonialsSection() {
 });
 
 export default TestimonialsSection;
+
+

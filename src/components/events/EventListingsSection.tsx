@@ -1,6 +1,7 @@
 "use client";
 
-import Image from "next/image";
+import Image from "next/image"
+;
 import Link from "next/link";
 import { memo, useEffect } from "react";
 
@@ -98,8 +99,7 @@ const EventListingsSection = memo(function EventListingsSection({
                 isSpecialCategory ? 'md:order-2' : index % 2 === 0 ? 'md:order-1' : 'md:order-2'
               }`}>
                 {/* Image content */}
-                <Image
-                  src={event.image}
+                <Image src={event.image}
                   alt={event.title}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -229,3 +229,5 @@ const EventListingsSection = memo(function EventListingsSection({
 });
 
 export default EventListingsSection;
+
+
