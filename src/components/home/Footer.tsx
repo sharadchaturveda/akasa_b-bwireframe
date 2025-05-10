@@ -1,12 +1,8 @@
 "use client";
 
-import Image from "next/image"
-;
+// REVIEW: Image import is unused
 import Link from "next/link";
 import { memo } from "react";
-
-
-
 
 
 // Memoized social icon component
@@ -84,5 +80,3 @@ const Footer = memo(function Footer() {
 });
 
 export default Footer;
-
-
