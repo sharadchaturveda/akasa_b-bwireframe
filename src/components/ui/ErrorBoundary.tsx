@@ -92,8 +92,9 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    // Log the error to the console
+    // Log the error to the console - keep this for debugging purposes
     if (this.props.logErrors !== false) {
+      // We intentionally keep this console.error for debugging critical errors
       console.error("Error caught by ErrorBoundary:", error, errorInfo);
     }
 

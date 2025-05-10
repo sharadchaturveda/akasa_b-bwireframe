@@ -11,8 +11,6 @@ img {
   height: auto;
 }
 
-/* Disable smooth scrolling for better performance */
-
 /* Advanced performance optimizations */
 @media screen and (min-width: 1024px) {
   /* Only apply these optimizations on desktop */
@@ -66,5 +64,3 @@ html, body {
   width: 100%;
   overflow-x: hidden;
 }
-
-/* Responsive styles are now handled by Tailwind CSS */

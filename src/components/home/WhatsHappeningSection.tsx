@@ -3,8 +3,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { memo } from "react";
-import Image from "next/image"
-;
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import AnimatedBackground from "@/components/ui/AnimatedBackground";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -115,6 +113,4 @@ const WhatsHappeningSection = memo(function WhatsHappeningSection() {
 });
 
 export default WhatsHappeningSection;
-
-
 

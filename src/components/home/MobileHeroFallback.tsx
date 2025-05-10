@@ -17,11 +17,7 @@ const MobileHeroFallback = () => {
           priority
           sizes="100vw"
           quality={80}
-          className="object-cover"
-          style={{
-            objectFit: 'cover',
-            objectPosition: 'center',
-          }}
+          className="object-cover object-center"
         />
       </div>
 

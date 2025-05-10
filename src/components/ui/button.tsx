@@ -1,9 +1,7 @@
 "use client";
 
 import { ButtonHTMLAttributes, forwardRef, memo } from "react";
-
 import { cn } from "@/lib/utils";
-import { COLORS } from "@/constants";
 
 /**
  * Button variants
@@ -62,9 +60,6 @@ const Button = memo(forwardRef<HTMLButtonElement, ButtonProps>(
     children,
     ...props
   }, ref) => {
-    // Use the device detection hook to determine if we're on mobile
-
-
     // Size classes
     const sizeClasses = {
       small: "px-4 py-2 text-xs",

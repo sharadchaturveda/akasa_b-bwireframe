@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from 'react';
-import Image from 'next/image'
-;
+import Image from 'next/image';
 
 interface SimpleVideoBackgroundProps {
   videoSrc: string;
@@ -24,8 +23,8 @@ const SimpleVideoBackground = ({ videoSrc, fallbackImageSrc }: SimpleVideoBackgr
     const handlePlayback = () => {
       if (videoElement.paused) {
         // Try to play the video
-        videoElement.play().catch(error => {
-          console.error('Video play error:', error);
+        videoElement.play().catch(() => {
+          // Silent catch - fallback image will be shown
         });
       }
     };
@@ -38,13 +37,10 @@ const SimpleVideoBackground = ({ videoSrc, fallbackImageSrc }: SimpleVideoBackgr
       // If video has been playing for more than 0.5 seconds and hasn't advanced
       // in the last 2 seconds, reset it
       if (currentTime > 0.5 && currentTime === lastTime) {
-        console.log('Video appears frozen, resetting...');
-
         // Try to use a different source
         if (currentSourceIndex < sources.length - 1) {
           currentSourceIndex++;
           const newSource = sources[currentSourceIndex];
-          console.log(`Switching to source ${currentSourceIndex}: ${newSource}`);
 
           // Update the video source
           videoElement.src = newSource;
@@ -128,18 +124,12 @@ const SimpleVideoBackground = ({ videoSrc, fallbackImageSrc }: SimpleVideoBackgr
       {/* Video element - simple implementation */}
       <video
         ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover z-[2]"
+        className="absolute inset-0 w-full h-full object-cover z-[2] block"
         playsInline
         muted
         loop
         autoPlay
         poster={fallbackImageSrc}
-        style={{
-          objectFit: 'cover',
-          width: '100%',
-          height: '100%',
-          display: 'block'
-        }}
       >
         {/* Try multiple sources with different formats and sizes */}
         <source src="/images/home/hero/mobile-video/heromobilevid.webm" type="video/webm" />

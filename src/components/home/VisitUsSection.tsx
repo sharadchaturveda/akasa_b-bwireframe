@@ -6,8 +6,7 @@ import { useDeviceDetection } from "@/hooks/useDeviceDetection";
 
 export default function VisitUsSection() {
   // Use the device detection hook instead of implementing our own logic
-  const { isMobile, isDetectionComplete } = useDeviceDetection();
-
+  const { isMobile } = useDeviceDetection();
 
   return (
     <section
@@ -86,24 +85,16 @@ export default function VisitUsSection() {
         <div className={`flex ${isMobile ? 'flex-col' : 'flex-col sm:flex-row'} gap-3 sm:gap-4 justify-center`}>
           <Link href="https://akasa.oddle.me/en_SG/" className="w-full flex justify-center" target="_blank" rel="noopener noreferrer">
             <Button
-              className={`uppercase bg-[#1A2A3A] text-white ${!isMobile && 'hover:bg-[#0A1A2A]'} w-full sm:w-[200px] md:w-[240px] px-3 sm:px-6 py-2 sm:py-3 text-center shadow-lg text-xs sm:text-sm`}
-              style={{
-                minHeight: isMobile ? '44px' : 'auto',
-                touchAction: isMobile ? 'manipulation' : 'auto'
-              }}
+              className={`uppercase bg-[#1A2A3A] text-white ${!isMobile && 'hover:bg-[#0A1A2A]'} w-full sm:w-[200px] md:w-[240px] px-3 sm:px-6 py-2 sm:py-3 text-center shadow-lg text-xs sm:text-sm ${isMobile ? 'min-h-[44px] touch-manipulation' : ''}`}
             >
-              {"Order Online"}
+              Order Online
             </Button>
           </Link>
           <Link href="/reservations" className="w-full flex justify-center">
             <Button
-              className={`uppercase bg-[#1A2A3A] text-white ${!isMobile && 'hover:bg-[#0A1A2A]'} w-full sm:w-[200px] md:w-[240px] px-3 sm:px-6 py-2 sm:py-3 text-center shadow-lg text-xs sm:text-sm`}
-              style={{
-                minHeight: isMobile ? '44px' : 'auto',
-                touchAction: isMobile ? 'manipulation' : 'auto'
-              }}
+              className={`uppercase bg-[#1A2A3A] text-white ${!isMobile && 'hover:bg-[#0A1A2A]'} w-full sm:w-[200px] md:w-[240px] px-3 sm:px-6 py-2 sm:py-3 text-center shadow-lg text-xs sm:text-sm ${isMobile ? 'min-h-[44px] touch-manipulation' : ''}`}
             >
-              {"Reserve Table"}
+              Reserve Table
             </Button>
           </Link>
         </div>
@@ -111,4 +102,3 @@ export default function VisitUsSection() {
     </section>
   );
 }
-

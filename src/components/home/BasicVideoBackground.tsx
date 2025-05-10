@@ -1,7 +1,6 @@
 "use client";
 
-import Image from 'next/image'
-;
+import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 
 interface BasicVideoBackgroundProps {
@@ -152,9 +151,6 @@ const BasicVideoBackground = ({ fallbackImageSrc }: BasicVideoBackgroundProps) =
         loop
         autoPlay
         style={{
-          objectFit: 'cover',
-          width: '100%',
-          height: '100%',
           opacity: videoPlaying ? 1 : 0,
           transition: 'opacity 0.5s ease-in-out'
         }}
@@ -167,5 +163,4 @@ const BasicVideoBackground = ({ fallbackImageSrc }: BasicVideoBackgroundProps) =
 };
 
 export default BasicVideoBackground;
-
 
