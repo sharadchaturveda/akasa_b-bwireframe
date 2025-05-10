@@ -1,6 +1,6 @@
-# Video Compression Scripts
+# Performance Optimization Scripts
 
-This directory contains scripts to help with video compression and optimization.
+This directory contains scripts to help with performance optimization, including video compression, image optimization, and more.
 
 ## Compress Video Script
 
@@ -70,3 +70,73 @@ If the video still freezes after compression:
    ```bash
    ffmpeg -i heromobilevid.mp4 -an -c:v libx264 -crf 28 -preset medium heromobilevid-noaudio.mp4
    ```
+
+## Image Optimization
+
+### Convert to AVIF
+
+The `convert-to-avif.js` script converts large JPG and PNG images to AVIF format for better performance.
+
+#### Prerequisites
+
+Install the required dependencies:
+
+```bash
+npm install sharp
+```
+
+#### Usage
+
+```bash
+node scripts/convert-to-avif.js
+```
+
+This script:
+- Finds all JPG and PNG images in the specified directories
+- Converts images larger than 300KB to AVIF format
+- Preserves the original files
+- Creates optimized versions with .avif extension
+
+### Update Image References
+
+The `update-image-references.js` script updates image references in the codebase to use AVIF format when available.
+
+#### Usage
+
+```bash
+node scripts/update-image-references.js
+```
+
+This script:
+- Finds all AVIF images in the public directory
+- Scans the source code for image references
+- Updates references to use AVIF format when available
+
+## Performance Best Practices
+
+### Images
+
+- Use the Next.js Image component for all images
+- Set proper width and height attributes
+- Use priority={true} for above-the-fold images
+- Use loading="lazy" for below-the-fold images
+- Use AVIF or WebP format for better compression
+
+### JavaScript
+
+- Use dynamic imports for non-critical components
+- Use throttling for scroll and resize event handlers
+- Use requestAnimationFrame for animations
+- Avoid using transition-all in favor of specific transitions
+
+### CSS
+
+- Avoid using backdrop-blur-sm for better performance
+- Use will-change-transform for elements that will be animated
+- Use content-visibility: auto for below-the-fold content
+
+### Fonts
+
+- Only load the font weights you actually use
+- Use display: swap for better font loading
+- Preload critical fonts
