@@ -47,7 +47,7 @@ export default function HomePage() {
             />
           </div>
 
-          {/* Direct video element */}
+          {/* Direct video element - optimized for performance */}
           <video
             className="absolute inset-0 w-full h-full z-10"
             muted
@@ -58,10 +58,13 @@ export default function HomePage() {
             style={{
               objectFit: 'cover',
               width: '100%',
-              height: '100%'
+              height: '100%',
+              transform: 'translateZ(0)' // Hardware acceleration
             }}
           >
+            {/* WebM format first for better performance */}
             <source src="/images/home/hero/mobile-video/heromobilevid.webm" type="video/webm" />
+            {/* MP4 as fallback */}
             <source src="/images/home/hero/mobile-video/heromobilevid.mp4" type="video/mp4" />
           </video>
 
