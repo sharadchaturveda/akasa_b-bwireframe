@@ -41,9 +41,16 @@ class MockPerformanceObserver {
   takeRecords = jest.fn();
 }
 
+// Add static property to the class
 MockPerformanceObserver.supportedEntryTypes = ['largest-contentful-paint', 'layout-shift', 'first-input', 'paint'];
+
+// Create a proper mock that includes the required static property
+const PerformanceObserverMock = function(callback) {
+  return new MockPerformanceObserver(callback);
+};
+PerformanceObserverMock.supportedEntryTypes = MockPerformanceObserver.supportedEntryTypes;
 
 Object.defineProperty(window, 'PerformanceObserver', {
   writable: true,
-  value: MockPerformanceObserver,
+  value: PerformanceObserverMock,
 });

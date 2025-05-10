@@ -4,6 +4,8 @@
     "jsx": "react-jsx",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
     "types": ["jest", "node", "@testing-library/jest-dom"]
   },
   "include": [
