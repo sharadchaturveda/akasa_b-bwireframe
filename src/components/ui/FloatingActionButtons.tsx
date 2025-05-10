@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useDeviceDetection } from "@/hooks/useDeviceDetection";
+import { throttle } from "@/utils/functionUtils";
 
 /**
  * FloatingActionButtons Component
@@ -19,6 +20,10 @@ import { useDeviceDetection } from "@/hooks/useDeviceDetection";
 const FloatingActionButtons = memo(function FloatingActionButtons() {
   const { isMobile } = useDeviceDetection();
   const [buttonsPosition, setButtonsPosition] = useState({ bottom: isMobile ? 16 : 24 }); // Default bottom position in pixels
+  const footerRef = useRef<HTMLElement | null>(null);
+  const ticking = useRef(false);
+  const defaultBottom = useRef(isMobile ? 16 : 24);
+  const bufferMargin = 10; // 10px buffer
 
   // WhatsApp message and phone number
   const whatsappNumber = "+6580121181"; // Singapore number format with country code
@@ -34,48 +39,61 @@ const FloatingActionButtons = memo(function FloatingActionButtons() {
   // Use the high-resolution SVG WhatsApp icon
   const whatsAppIconPath = "/images/whatsapp-icon.svg";
 
-  // Function to update button positions based on footer location
+  // Function to update button positions based on footer location - optimized for performance
   const updateButtonPosition = () => {
-    // Find the footer element
-    const footer = document.querySelector('footer');
-    if (!footer) return;
+    // Skip if already processing a frame or footer ref not set
+    if (ticking.current || !footerRef.current) return;
 
-    // Get viewport height and footer position
-    const viewportHeight = window.innerHeight;
-    const footerRect = footer.getBoundingClientRect();
-    const footerTop = footerRect.top;
+    ticking.current = true;
 
-    // Calculate the distance from the bottom of the viewport to the top of the footer
-    const distanceToFooter = viewportHeight - footerTop;
+    // Use requestAnimationFrame for better performance
+    requestAnimationFrame(() => {
+      const footer = footerRef.current;
+      if (!footer) {
+        ticking.current = false;
+        return;
+      }
 
-    // Default bottom position (in pixels)
-    const defaultBottom = isMobile ? 16 : 24;
+      // Get viewport height and footer position
+      const viewportHeight = window.innerHeight;
+      const footerRect = footer.getBoundingClientRect();
+      const footerTop = footerRect.top;
 
-    // Add a small buffer margin to ensure buttons don't touch the footer
-    const bufferMargin = 10; // 10px buffer
+      // Calculate the distance from the bottom of the viewport to the top of the footer
+      const distanceToFooter = viewportHeight - footerTop;
 
-    // If footer is in view, position buttons just above the footer
-    if (footerTop < viewportHeight) {
-      setButtonsPosition({ bottom: distanceToFooter + bufferMargin });
-    } else {
-      // Otherwise, use the default position
-      setButtonsPosition({ bottom: defaultBottom });
-    }
+      // If footer is in view, position buttons just above the footer
+      if (footerTop < viewportHeight) {
+        setButtonsPosition({ bottom: distanceToFooter + bufferMargin });
+      } else {
+        // Otherwise, use the default position
+        setButtonsPosition({ bottom: defaultBottom.current });
+      }
+
+      ticking.current = false;
+    });
   };
 
   // Set up scroll listener to update button position
   useEffect(() => {
+    // Cache the footer element reference to avoid repeated DOM queries
+    footerRef.current = document.querySelector('footer');
+    defaultBottom.current = isMobile ? 16 : 24;
+
     // Initial position update
     updateButtonPosition();
 
-    // Add scroll event listener
-    window.addEventListener('scroll', updateButtonPosition);
-    window.addEventListener('resize', updateButtonPosition);
+    // Create throttled versions of the update function for better performance
+    const throttledUpdatePosition = throttle(updateButtonPosition, 200);
+
+    // Add scroll event listener with throttling and passive option for better performance
+    window.addEventListener('scroll', throttledUpdatePosition, { passive: true });
+    window.addEventListener('resize', throttledUpdatePosition, { passive: true });
 
     // Clean up
     return () => {
-      window.removeEventListener('scroll', updateButtonPosition);
-      window.removeEventListener('resize', updateButtonPosition);
+      window.removeEventListener('scroll', throttledUpdatePosition);
+      window.removeEventListener('resize', throttledUpdatePosition);
     };
   }, [isMobile]);
 

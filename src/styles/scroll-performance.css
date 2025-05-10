@@ -1,0 +1,135 @@
+/* 
+ * Scroll Performance Optimizations
+ * This file contains CSS optimizations specifically for improving scroll performance
+ * without altering the existing layout or design.
+ */
+
+/* Optimize fixed elements during scroll */
+.fixed, 
+.sticky,
+.mobile-nav-header,
+[class*="fixed"] {
+  /* Only use will-change when absolutely necessary */
+  will-change: transform;
+  /* Apply hardware acceleration */
+  transform: translateZ(0);
+  /* Ensure proper z-index stacking */
+  z-index: var(--z-index, auto);
+  /* Create a new stacking context */
+  isolation: isolate;
+}
+
+/* Prevent unnecessary repaints for elements with box-shadow */
+.shadow-lg,
+.shadow-xl,
+.shadow-2xl,
+[class*="shadow"] {
+  /* Reduce paint area to the element itself */
+  contain: paint;
+}
+
+/* Optimize backdrop-filter usage */
+[style*="backdrop-filter"],
+[class*="backdrop-blur"] {
+  /* Only apply hardware acceleration when backdrop-filter is used */
+  transform: translateZ(0);
+  /* Reduce paint area */
+  contain: paint;
+}
+
+/* Optimize elements with border animations */
+@media (prefers-reduced-motion: no-preference) {
+  [class*="animate-border"],
+  [class*="borderGlow"] {
+    /* Isolate animations to their own layer */
+    transform: translateZ(0);
+    /* Reduce paint area */
+    contain: paint;
+  }
+}
+
+/* Optimize scrolling containers */
+.overflow-auto,
+.overflow-y-auto,
+.overflow-x-auto,
+.overflow-scroll,
+.overflow-y-scroll,
+.overflow-x-scroll,
+[class*="scrollbar"] {
+  /* Enable smooth scrolling only for non-touch devices */
+  @media (hover: hover) and (pointer: fine) {
+    scroll-behavior: smooth;
+  }
+  
+  /* Use momentum-based scrolling on touch devices */
+  -webkit-overflow-scrolling: touch;
+  
+  /* Prevent content from causing layout shifts */
+  overscroll-behavior: contain;
+  
+  /* Optimize rendering */
+  will-change: scroll-position;
+}
+
+/* Optimize horizontal scroll containers */
+.overflow-x-auto,
+.overflow-x-scroll,
+.snap-x,
+[class*="horizontal-scroll"] {
+  /* Prevent vertical scrolling */
+  overflow-y: hidden;
+  
+  /* Enable touch-based panning */
+  touch-action: pan-x;
+  
+  /* Optimize rendering */
+  will-change: scroll-position;
+}
+
+/* Prevent layout shifts during scroll */
+html, body {
+  /* Prevent overscroll effects */
+  overscroll-behavior: none;
+  
+  /* Prevent horizontal overflow */
+  overflow-x: hidden;
+  
+  /* Ensure proper width */
+  width: 100%;
+}
+
+/* Optimize for touch devices */
+@media (pointer: coarse) {
+  /* Improve touch targets */
+  button, a, input, select, textarea {
+    touch-action: manipulation;
+  }
+  
+  /* Disable hover effects that might cause jank */
+  [class*="hover:"] {
+    transition: none !important;
+  }
+}
+
+/* Optimize animations during scroll */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-running {
+    animation-play-state: running;
+  }
+  
+  .animate-paused {
+    animation-play-state: paused;
+  }
+}
+
+/* Optimize image rendering during scroll */
+img {
+  /* Use async decoding for images */
+  decoding: async;
+  
+  /* Prevent layout shifts */
+  content-visibility: auto;
+  
+  /* Set explicit width/height to prevent CLS */
+  aspect-ratio: attr(width) / attr(height);
+}

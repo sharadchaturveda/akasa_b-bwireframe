@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useDeviceDetection } from "@/hooks/useDeviceDetection";
 
 /**
  * ScrollBehavior Component
  *
- * Applies minimal scroll optimizations to improve performance.
+ * Applies scroll optimizations to improve performance.
  * This component doesn't render anything visible.
  *
  * @returns {null} This component doesn't render anything
@@ -13,6 +14,8 @@ import { useEffect, useState } from "react";
 export default function ScrollBehavior() {
   // Use state to track client-side mounting to avoid hydration mismatch
   const [isMounted, setIsMounted] = useState(false);
+  const { isMobile } = useDeviceDetection();
+  const styleRef = useRef<HTMLStyleElement | null>(null);
 
   useEffect(() => {
     // Set mounted state to true after hydration
@@ -23,33 +26,64 @@ export default function ScrollBehavior() {
     // Only run after component is mounted on the client
     if (!isMounted) return;
 
-    // Apply minimal scroll optimizations
+    // Apply scroll optimizations
     const applyScrollOptimizations = () => {
       // Basic overscroll behavior
       document.body.style.overscrollBehavior = 'none';
 
-      // Add minimal styles for performance
-      if (!document.getElementById('minimal-scroll-styles')) {
+      // Create or update the style element
+      if (!styleRef.current) {
         const style = document.createElement('style');
-        style.id = 'minimal-scroll-styles';
-        style.textContent = `
-          /* Prevent horizontal scrolling */
-          html, body {
-            overflow-x: hidden;
-          }
-
-          /* Optimize critical images */
-          .hero-image img {
-            content-visibility: auto;
-          }
-
-          /* Disable smooth scrolling for better performance */
-          html {
-            scroll-behavior: auto !important;
-          }
-        `;
+        style.id = 'scroll-performance-styles';
+        styleRef.current = style;
         document.head.appendChild(style);
       }
+
+      // Set the style content based on device type
+      styleRef.current.textContent = `
+        /* Prevent horizontal scrolling */
+        html, body {
+          overflow-x: hidden;
+          width: 100%;
+        }
+
+        /* Optimize critical images */
+        .hero-image img {
+          content-visibility: auto;
+        }
+
+        /* Optimize scroll behavior based on device type */
+        html {
+          ${isMobile
+            ? 'scroll-behavior: smooth; -webkit-overflow-scrolling: touch;'
+            : 'scroll-behavior: auto;'
+          }
+        }
+
+        /* Optimize fixed elements */
+        .fixed, .sticky, [class*="fixed"] {
+          will-change: transform;
+          transform: translateZ(0);
+        }
+
+        /* Optimize animations during scroll */
+        @media (prefers-reduced-motion: no-preference) {
+          .animate-running {
+            animation-play-state: running;
+          }
+
+          .animate-paused {
+            animation-play-state: paused;
+          }
+        }
+
+        /* Optimize touch targets on mobile */
+        ${isMobile ? `
+          button, a, input, select, textarea {
+            touch-action: manipulation;
+          }
+        ` : ''}
+      `;
     };
 
     // Apply optimizations with requestAnimationFrame
@@ -58,10 +92,12 @@ export default function ScrollBehavior() {
     // Cleanup
     return () => {
       cancelAnimationFrame(animationFrameId);
-      const styles = document.getElementById('minimal-scroll-styles');
-      if (styles) styles.remove();
+      if (styleRef.current) {
+        styleRef.current.remove();
+        styleRef.current = null;
+      }
     };
-  }, [isMounted]);
+  }, [isMounted, isMobile]);
 
   return null;
 }

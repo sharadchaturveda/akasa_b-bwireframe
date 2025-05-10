@@ -1,0 +1,116 @@
+# Scroll Performance Optimizations
+
+## Summary
+Implemented scroll performance optimizations across the Akasa website to improve smoothness and responsiveness without altering the existing layout or design.
+
+## Optimizations Implemented
+
+### 1. Scroll Event Handling
+- **Throttled scroll events**: Implemented proper throttling in all scroll event handlers
+- **Passive event listeners**: Added `{ passive: true }` to all scroll event listeners
+- **Reduced unnecessary state updates**: Only update state when scroll position changes significantly
+- **Batched DOM operations**: Used requestAnimationFrame for DOM updates during scroll
+
+### 2. Fixed Layout Thrashing
+- **Cached DOM measurements**: Stored element references and measurements to avoid repeated DOM queries
+- **Batched reads and writes**: Separated DOM reads from DOM writes to prevent layout thrashing
+- **Optimized FloatingActionButtons**: Improved the button position calculation during scroll
+
+### 3. CSS Effects Optimization
+- **Selective hardware acceleration**: Applied transform: translateZ(0) only to elements that need it
+- **Optimized box-shadow rendering**: Added contain: paint to elements with shadows
+- **Reduced backdrop-filter impact**: Optimized elements using backdrop-filter
+- **Improved will-change usage**: Only used will-change property where absolutely necessary
+
+### 4. Standardized Scroll Behavior
+- **Consistent scroll settings**: Ensured consistent scroll-behavior settings across the site
+- **Device-specific scrolling**: Applied smooth scrolling only on mobile devices
+- **Prevented overscroll effects**: Added overscroll-behavior: none to prevent unwanted bounce effects
+
+### 5. Optimized Lazy Loading
+- **Improved IntersectionObserver usage**: Consolidated multiple observers into a single observer
+- **Optimized image loading strategy**: Better prioritization of image loading based on viewport position
+- **Animation pausing**: Paused animations for elements outside the viewport
+
+## Files Modified
+
+### Core Hooks
+- **src/hooks/useScrollPosition.ts**: Optimized scroll position tracking with threshold-based updates
+- **src/hooks/useNavigationState.ts**: Improved scroll detection for navigation state changes
+
+### Components
+- **src/components/ui/FloatingActionButtons.tsx**: Fixed layout thrashing in button position calculation
+- **src/components/home/ScrollBehavior.tsx**: Updated to apply device-specific scroll optimizations
+- **src/components/home/HomePerformanceOptimizer.tsx**: Consolidated IntersectionObserver usage
+
+### Styles
+- **src/styles/scroll-performance.css**: Added new CSS file with scroll-specific optimizations
+- **src/app/layout.tsx**: Included the new scroll-performance.css file
+
+## Technical Details
+
+### Throttling Implementation
+```javascript
+// Before
+window.addEventListener('scroll', handleScroll);
+
+// After
+const throttledHandler = throttle(handleScroll, 200);
+window.addEventListener('scroll', throttledHandler, { passive: true });
+```
+
+### Layout Thrashing Fix
+```javascript
+// Before
+const updatePosition = () => {
+  const element = document.querySelector('.target');
+  const rect = element.getBoundingClientRect();
+  element.style.transform = `translateY(${rect.top}px)`;
+};
+
+// After
+const updatePosition = () => {
+  if (ticking) return;
+  ticking = true;
+  
+  requestAnimationFrame(() => {
+    const element = elementRef.current;
+    if (!element) return;
+    
+    const rect = element.getBoundingClientRect();
+    element.style.transform = `translateY(${rect.top}px)`;
+    ticking = false;
+  });
+};
+```
+
+### IntersectionObserver Optimization
+```javascript
+// Before: Multiple observers
+const animationObserver = new IntersectionObserver(handleAnimations);
+const imageObserver = new IntersectionObserver(handleImages);
+
+// After: Single consolidated observer
+const scrollObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const target = entry.target;
+    
+    if (target.classList.contains('animate')) {
+      handleAnimation(entry);
+    } else if (target.tagName === 'IMG') {
+      handleImage(entry);
+    }
+  });
+});
+```
+
+## Performance Impact
+- Reduced layout thrashing during scroll
+- Smoother animations and transitions
+- Better resource utilization
+- Improved responsiveness on mobile devices
+
+## Next Steps
+- Monitor Core Web Vitals to measure impact
+- Consider implementing virtualization for long scrollable lists
+- Further optimize image loading strategy

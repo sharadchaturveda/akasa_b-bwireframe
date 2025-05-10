@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Playfair_Display, Lora, Montserrat } from "next/font/google";
+import { Geist, Geist_Mono, Playfair_Display, Lora, Montserrat } from "next/font/google";
 import "./globals.css";
 import "./performance-styles.css";
 import '@/styles/mobile-navigation-fix.css';
 import '@/styles/mobile-section-fix.css';
 import '@/styles/mobile-hero-fix.css';
 import '../styles/hero-position-fix.css';
+import '@/styles/scroll-performance.css';
 
 // Import components
 import MobileNavigation from '@/components/navigation/MobileNavigation';
@@ -27,21 +27,22 @@ const geistMono = Geist_Mono({
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "700"], // Reduced weights for better performance
   display: 'swap',
+  preload: true,
 });
 
 const lora = Lora({
   variable: "--font-lora",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "700"], // Reduced weights for better performance
   display: 'swap',
 });
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "700"], // Reduced weights for better performance
   display: 'swap',
 });
 
@@ -70,6 +71,32 @@ export default function RootLayout({
       <head>
         {/* Safari-specific viewport fix */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+        {/* Preload critical fonts */}
+        <link
+          rel="preload"
+          href="/_next/static/media/c9a5bc6a7c948fb0-s.p.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+
+        {/* Preload critical images */}
+        <link
+          rel="preload"
+          href="/images/brand/logo-white.png"
+          as="image"
+          type="image/png"
+        />
+
+        {/* Preload WebM video for mobile */}
+        <link
+          rel="preload"
+          href="/images/home/hero/mobile-video/heromobilevid.webm"
+          as="video"
+          type="video/webm"
+          media="(max-width: 767px)"
+        />
 
         {/* Critical CSS for immediate loading - prevents flash of content on mobile */}
         <style dangerouslySetInnerHTML={{ __html: `
@@ -131,106 +158,8 @@ export default function RootLayout({
           }
         ` }} />
 
-        {/* Script to prevent mobile video loading on desktop */}
-        <script dangerouslySetInnerHTML={{ __html: `
-          // Check if we're on desktop
-          if (window.innerWidth >= 768) {
-            // Create a style element to hide mobile elements
-            var style = document.createElement('style');
-            style.innerHTML = '.mobile-only { display: none !important; }';
-            document.head.appendChild(style);
-
-            // Block requests for mobile video files
-            var originalFetch = window.fetch;
-            window.fetch = function(url, options) {
-              if (typeof url === 'string' && url.includes('heromobilevid')) {
-                console.log('Blocked fetch request for mobile video:', url);
-                return Promise.reject(new Error('Mobile video blocked on desktop'));
-              }
-              return originalFetch(url, options);
-            };
-
-            // Block video element loading
-            var originalCreateElement = document.createElement;
-            document.createElement = function(tagName) {
-              var element = originalCreateElement.call(document, tagName);
-              if (tagName.toLowerCase() === 'video') {
-                // Override the load method
-                var originalLoad = element.load;
-                element.load = function() {
-                  if (window.innerWidth >= 768) {
-                    console.log('Blocked video loading on desktop');
-                    return;
-                  }
-                  return originalLoad.apply(this, arguments);
-                };
-              }
-              return element;
-            };
-          }
-        ` }} />
-
-        {/* Inline script to ensure video plays */}
-        <script dangerouslySetInnerHTML={{ __html: `
-          // Function to ensure video plays on mobile
-          function ensureMobileVideoPlays() {
-            if (window.innerWidth >= 768) return; // Only run on mobile
-
-            // Create a video element
-            const video = document.createElement('video');
-            video.muted = true;
-            video.playsInline = true;
-            video.autoplay = true;
-            video.loop = true;
-            video.preload = 'auto';
-
-            // Use WebM format first
-            const source = document.createElement('source');
-            source.src = '/images/home/hero/mobile-video/heromobilevid.webm?nocache=' + Date.now();
-            source.type = 'video/webm';
-            video.appendChild(source);
-
-            video.style.position = 'absolute';
-            video.style.top = '0';
-            video.style.left = '0';
-            video.style.width = '100%';
-            video.style.height = '100%';
-            video.style.objectFit = 'cover';
-            video.style.zIndex = '10';
-            video.style.opacity = '0'; // Hide it
-
-            // Add to body temporarily to trigger autoplay
-            document.body.appendChild(video);
-
-            // Function to play video with retry
-            function playVideo() {
-              const playPromise = video.play();
-              if (playPromise !== undefined) {
-                playPromise.catch(function() {
-                  // If autoplay fails, try again after a short delay
-                  setTimeout(playVideo, 100);
-                });
-              }
-            }
-
-            // Try to play
-            playVideo();
-
-            // Remove after 1 second
-            setTimeout(function() {
-              if (document.body.contains(video)) {
-                document.body.removeChild(video);
-              }
-            }, 1000);
-          }
-
-          // Run on page load
-          if (document.readyState === 'complete') {
-            ensureMobileVideoPlays();
-          } else {
-            window.addEventListener('load', ensureMobileVideoPlays);
-          }
-        ` }} />
+        {/* External script for mobile video optimization - moved from inline for better performance */}
+        <script src="/scripts/mobileVideoOptimization.js" async></script>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${lora.variable} ${montserrat.variable} antialiased bg-black`}

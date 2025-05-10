@@ -65,7 +65,6 @@ export default function HomePerformanceOptimizer() {
     };
 
     const optimizeAnimations = () => {
-
       // Disable animations for users who prefer reduced motion
       if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.documentElement.classList.add('reduce-motion');
@@ -87,38 +86,8 @@ export default function HomePerformanceOptimizer() {
         document.head.appendChild(style);
       }
 
-      // Pause animations that are not in viewport
-      const animatedElements = document.querySelectorAll('.animate-fadeIn, .animate-fadeSlideUp, .animate-float');
-
-      if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            // Skip elements that should be excluded from optimization
-            if (isInExcludedTree(entry.target)) return;
-
-            // Double-check if this element is part of ReservationInfo
-            if (entry.target.closest('.bg-black\\/40.backdrop-blur-sm') ||
-                entry.target.closest('[data-exclude-optimization="true"]')) {
-              return;
-            }
-
-            if (entry.isIntersecting) {
-              entry.target.classList.add('animate-running');
-            } else {
-              entry.target.classList.remove('animate-running');
-            }
-          });
-        });
-
-        // Only observe elements that aren't excluded from optimization
-        animatedElements.forEach(el => {
-          if (!isInExcludedTree(el) &&
-              !el.closest('.bg-black\\/40.backdrop-blur-sm') &&
-              !el.closest('[data-exclude-optimization="true"]')) {
-            observer.observe(el);
-          }
-        });
-      }
+      // Note: Animation pausing is now handled in the optimizeScrolling function
+      // using a single IntersectionObserver for better performance
     };
 
     const optimizeScrolling = () => {
@@ -144,8 +113,52 @@ export default function HomePerformanceOptimizer() {
         window.addEventListener('touchstart', () => {}, wheelOpts);
       }
 
-      // Optimize scroll performance
-      document.documentElement.style.scrollBehavior = 'auto';
+      // Optimize scroll performance with IntersectionObserver for animations
+      if ('IntersectionObserver' in window) {
+        // Create a single observer for all elements that should be optimized during scroll
+        const scrollObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach(entry => {
+              const target = entry.target;
+
+              // Skip elements that should be excluded from optimization
+              if (isInExcludedTree(target)) return;
+
+              // Apply different optimizations based on element type
+              if (target.classList.contains('animate-fadeIn') ||
+                  target.classList.contains('animate-fadeSlideUp') ||
+                  target.classList.contains('animate-float')) {
+                // Toggle animation state based on visibility
+                if (entry.isIntersecting) {
+                  target.classList.add('animate-running');
+                  target.classList.remove('animate-paused');
+                } else {
+                  target.classList.add('animate-paused');
+                  target.classList.remove('animate-running');
+                }
+              } else if (target.tagName === 'IMG') {
+                // Optimize image loading
+                if (entry.isIntersecting && target.getAttribute('data-src')) {
+                  target.setAttribute('src', target.getAttribute('data-src') || '');
+                  target.removeAttribute('data-src');
+                }
+              }
+            });
+          },
+          {
+            rootMargin: '100px', // Load elements slightly before they come into view
+            threshold: 0.01 // Trigger when just 1% of the element is visible
+          }
+        );
+
+        // Observe animated elements
+        document.querySelectorAll('.animate-fadeIn, .animate-fadeSlideUp, .animate-float, img[data-src]')
+          .forEach(el => {
+            if (!isInExcludedTree(el)) {
+              scrollObserver.observe(el);
+            }
+          });
+      }
     };
 
     const optimizeFontLoading = () => {
