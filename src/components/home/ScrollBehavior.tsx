@@ -60,10 +60,25 @@ export default function ScrollBehavior() {
           }
         }
 
-        /* Optimize fixed elements */
-        .fixed, .sticky, [class*="fixed"] {
+        /* Optimize fixed elements - excluding mobile navigation */
+        .fixed:not(.mobile-nav-header),
+        .sticky:not(.mobile-nav-header),
+        [class*="fixed"]:not(.mobile-nav-header) {
           will-change: transform;
           transform: translateZ(0);
+        }
+
+        /* Ensure mobile navigation is visible and functional */
+        .mobile-nav-header {
+          display: flex !important;
+          z-index: 50 !important;
+          pointer-events: auto !important;
+        }
+
+        /* Ensure mobile menu overlay is visible and interactive */
+        .mobile-menu-overlay {
+          z-index: 40 !important;
+          pointer-events: auto !important;
         }
 
         /* Optimize animations during scroll */

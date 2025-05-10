@@ -1,13 +1,12 @@
-/* 
+/*
  * Scroll Performance Optimizations
  * This file contains CSS optimizations specifically for improving scroll performance
  * without altering the existing layout or design.
  */
 
 /* Optimize fixed elements during scroll */
-.fixed, 
+.fixed,
 .sticky,
-.mobile-nav-header,
 [class*="fixed"] {
   /* Only use will-change when absolutely necessary */
   will-change: transform;
@@ -17,6 +16,30 @@
   z-index: var(--z-index, auto);
   /* Create a new stacking context */
   isolation: isolate;
+}
+
+/* Special handling for mobile navigation to ensure it's always visible and functional */
+.mobile-nav-header {
+  /* Apply hardware acceleration */
+  transform: translateZ(0);
+  /* Ensure proper z-index */
+  z-index: 50 !important;
+  /* Make sure it's visible on mobile */
+  display: flex !important;
+  /* Create a new stacking context */
+  isolation: isolate;
+  /* Ensure pointer events work */
+  pointer-events: auto !important;
+}
+
+/* Ensure mobile menu overlay is visible and interactive */
+.mobile-menu-overlay {
+  /* Ensure proper z-index */
+  z-index: 40 !important;
+  /* Apply hardware acceleration */
+  transform: translateZ(0);
+  /* Ensure pointer events work */
+  pointer-events: auto !important;
 }
 
 /* Prevent unnecessary repaints for elements with box-shadow */
@@ -60,13 +83,13 @@
   @media (hover: hover) and (pointer: fine) {
     scroll-behavior: smooth;
   }
-  
+
   /* Use momentum-based scrolling on touch devices */
   -webkit-overflow-scrolling: touch;
-  
+
   /* Prevent content from causing layout shifts */
   overscroll-behavior: contain;
-  
+
   /* Optimize rendering */
   will-change: scroll-position;
 }
@@ -78,10 +101,10 @@
 [class*="horizontal-scroll"] {
   /* Prevent vertical scrolling */
   overflow-y: hidden;
-  
+
   /* Enable touch-based panning */
   touch-action: pan-x;
-  
+
   /* Optimize rendering */
   will-change: scroll-position;
 }
@@ -90,10 +113,10 @@
 html, body {
   /* Prevent overscroll effects */
   overscroll-behavior: none;
-  
+
   /* Prevent horizontal overflow */
   overflow-x: hidden;
-  
+
   /* Ensure proper width */
   width: 100%;
 }
@@ -104,7 +127,7 @@ html, body {
   button, a, input, select, textarea {
     touch-action: manipulation;
   }
-  
+
   /* Disable hover effects that might cause jank */
   [class*="hover:"] {
     transition: none !important;
@@ -116,7 +139,7 @@ html, body {
   .animate-running {
     animation-play-state: running;
   }
-  
+
   .animate-paused {
     animation-play-state: paused;
   }
@@ -126,10 +149,10 @@ html, body {
 img {
   /* Use async decoding for images */
   decoding: async;
-  
+
   /* Prevent layout shifts */
   content-visibility: auto;
-  
+
   /* Set explicit width/height to prevent CLS */
   aspect-ratio: attr(width) / attr(height);
 }

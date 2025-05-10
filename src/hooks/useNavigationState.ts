@@ -131,13 +131,31 @@ export function useNavigationState(
     if (!preventBodyScroll) return;
 
     if (isMenuOpen) {
+      // Force body to have hidden overflow when menu is open
       document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.style.top = `-${window.scrollY}px`;
     } else {
+      // Restore normal scrolling when menu is closed
+      const scrollY = document.body.style.top;
       document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
+
+      // Restore scroll position
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
     }
 
     return () => {
+      // Clean up
       document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
     };
   }, [isMenuOpen, preventBodyScroll]);
 
