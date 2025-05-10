@@ -68,18 +68,20 @@ export default function ScrollBehavior() {
           transform: translateZ(0);
         }
 
-        /* Ensure mobile navigation is visible and functional */
-        .mobile-nav-header {
-          display: flex !important;
-          z-index: 50 !important;
-          pointer-events: auto !important;
-        }
+        /* Ensure mobile navigation is visible and functional only on mobile */
+        ${isMobile ? `
+          .mobile-nav-header {
+            display: flex !important;
+            z-index: 50 !important;
+            pointer-events: auto !important;
+          }
 
-        /* Ensure mobile menu overlay is visible and interactive */
-        .mobile-menu-overlay {
-          z-index: 40 !important;
-          pointer-events: auto !important;
-        }
+          /* Ensure mobile menu overlay is visible and interactive */
+          .mobile-menu-overlay {
+            z-index: 40 !important;
+            pointer-events: auto !important;
+          }
+        ` : ''}
 
         /* Optimize animations during scroll */
         @media (prefers-reduced-motion: no-preference) {
