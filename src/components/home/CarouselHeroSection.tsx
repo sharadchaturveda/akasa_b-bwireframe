@@ -64,28 +64,13 @@ const CarouselHeroSection = memo(function CarouselHeroSection() {
   useEffect(() => {
     // Only run carousel on desktop
     if (isMobile || isSmallScreen) {
-      // Log for debugging
-      if (process.env.NODE_ENV !== 'production') {
-        console.log('Carousel disabled: Mobile view detected');
-      }
       return;
-    }
-
-    // Log for debugging
-    if (process.env.NODE_ENV !== 'production') {
-      console.log('Carousel enabled: Desktop view detected');
     }
 
     // Set up interval to change image every 2 seconds
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => {
         const newIndex = prevIndex === HERO_IMAGES.length - 1 ? 0 : prevIndex + 1;
-
-        // Log for debugging
-        if (process.env.NODE_ENV !== 'production') {
-          console.log(`Carousel image changed: ${prevIndex} -> ${newIndex}`);
-        }
-
         return newIndex;
       });
     }, 2000);
@@ -102,7 +87,7 @@ const CarouselHeroSection = memo(function CarouselHeroSection() {
 
     // Just try to play the video
     video.play().catch(error => {
-      console.log('Video autoplay failed:', error);
+      // Video autoplay failed, fallback image will be shown
     });
 
     // Clean up
@@ -110,10 +95,6 @@ const CarouselHeroSection = memo(function CarouselHeroSection() {
       video.pause();
     };
   }, [isSmallScreen]);
-
-
-
-
 
   return (
     <section className={`relative w-full ${isSmallScreen ? 'h-[100dvh] mobile-height-fix hero-section mobile-hero-no-content' : 'h-screen'} bg-black overflow-hidden m-0 p-0`} style={{ margin: 0, padding: 0 }}>
@@ -242,5 +223,3 @@ const CarouselHeroSection = memo(function CarouselHeroSection() {
 });
 
 export default CarouselHeroSection;
-
-

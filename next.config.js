@@ -32,9 +32,9 @@ const nextConfig = {
   },
   // Optimize for code splitting and minimal JS/CSS
   compiler: {
-    // Remove console logs in production, but keep our tracer logs
+    // Remove console logs in production, but keep error and warn logs
     removeConsole: {
-      exclude: ['error', 'warn', 'log'],
+      exclude: ['error', 'warn'],
     },
   },
   // Optimize for Cumulative Layout Shift (CLS)

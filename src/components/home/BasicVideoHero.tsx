@@ -25,7 +25,7 @@ const BasicVideoHero = () => {
     const playVideo = async () => {
       try {
         await video.play();
-        console.log('Video playing successfully');
+        // Video playing successfully
       } catch (error) {
         console.error('Video play failed:', error);
       }
