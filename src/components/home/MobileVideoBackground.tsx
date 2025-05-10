@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
+import Image from 'next/image'
+;
 
 interface MobileVideoBackgroundProps {
   videoUrl: string;
@@ -94,8 +95,7 @@ const MobileVideoBackground = ({ videoUrl, fallbackImageUrl }: MobileVideoBackgr
         className="absolute inset-0 z-[1]"
         style={{ display: videoLoaded && !videoFailed ? 'none' : 'block' }}
       >
-        <Image
-          src={fallbackImageUrl}
+        <Image src={fallbackImageUrl}
           alt="Background"
           fill
           priority
@@ -126,3 +126,5 @@ const MobileVideoBackground = ({ videoUrl, fallbackImageUrl }: MobileVideoBackgr
 };
 
 export default MobileVideoBackground;
+
+
