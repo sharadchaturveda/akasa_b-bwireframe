@@ -71,14 +71,23 @@ export const LAYOUT = {
  * Image quality and sizes
  */
 export const IMAGES = {
-  DEFAULT_QUALITY: 75,
-  HIGH_QUALITY: 90,
-  LOW_QUALITY: 60,
+  DEFAULT_QUALITY: 75, // Balanced for performance and quality
+  HIGH_QUALITY: 85, // Reduced from 90 to 85 for better performance
+  LOW_QUALITY: 60, // Optimized for background images
+  AVIF_QUALITY: 75, // AVIF has better quality at lower settings
+  WEBP_QUALITY: 75, // WebP is efficient at this quality level
+  JPEG_QUALITY: 80, // Higher quality for fallback format
   SIZES: {
     SMALL: 16,
     MEDIUM: 32,
     LARGE: 64,
     XLARGE: 128,
+  },
+  FORMATS: {
+    AVIF: 'image/avif',
+    WEBP: 'image/webp',
+    JPEG: 'image/jpeg',
+    PNG: 'image/png',
   },
 };
 
