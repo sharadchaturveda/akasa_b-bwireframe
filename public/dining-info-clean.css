@@ -44,9 +44,9 @@
 
 /* Section container */
 .dining-info-section {
-  margin-bottom: 0;
-  padding-bottom: 0;
+  position: relative;
   padding-top: 0.5rem;
+  margin-bottom: 0;
 }
 
 /* Section with icon and content */
@@ -271,11 +271,6 @@
   .dining-info-button {
     width: auto;
   }
-}
-
-/* Section borders and spacing */
-.dining-info-section {
-  position: relative;
 }
 
 /* Button styling is now handled by the Button component */
