@@ -1,33 +1,33 @@
 "use client";
 
 import { memo, useEffect, useState } from "react";
-import Image from "next/image";
+import Image from "next/image"
+;
 
 const HeroSection = memo(function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
-  
+
   useEffect(() => {
     setIsVisible(true);
   }, []);
-  
+
   return (
     <section className="h-[80vh] w-full relative overflow-hidden">
       {/* Background image with parallax effect */}
       <div className="absolute inset-0">
-        <Image
-          src="/images/reservations/hero/hero.jpg"
+        <Image src="/images/reservations/hero/hero.jpg"
           alt="Elegant dining table setting"
           fill
           priority
           className="object-cover"
           sizes="100vw"
-          quality={90}
+          quality={80} /* Balanced for performance and quality */
         />
       </div>
-      
+
       {/* Overlay with gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80"></div>
-      
+
       {/* Content */}
       <div className="container mx-auto px-4 md:px-8 relative z-10 h-full flex flex-col items-center justify-center">
         <div className="max-w-3xl mx-auto text-center">
@@ -43,29 +43,29 @@ const HeroSection = memo(function HeroSection() {
               <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#E6C78B]/80"></div>
             </div>
           </div>
-          
-          <h1 
+
+          <h1
             className={`text-4xl md:text-6xl lg:text-7xl font-playfair mb-6 text-white opacity-0 ${isVisible ? 'animate-fadeSlideUp' : ''}`}
             style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}
           >
             Reserve Your Table
           </h1>
-          
-          <p 
+
+          <p
             className={`text-lg md:text-xl font-montserrat text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto opacity-0 ${isVisible ? 'animate-fadeSlideUp' : ''}`}
             style={{ animationDelay: '0.7s', animationFillMode: 'forwards' }}
           >
             Secure your dining experience at Akasa. We look forward to serving you the finest Indian cuisine in an elegant atmosphere.
           </p>
-          
+
           {/* Decorative separator */}
-          <div 
+          <div
             className={`w-24 h-1 mx-auto bg-gradient-to-r from-transparent via-[#E6C78B] to-transparent opacity-0 ${isVisible ? 'animate-fadeIn' : ''}`}
             style={{ animationDelay: '0.9s', animationFillMode: 'forwards' }}
           ></div>
         </div>
       </div>
-      
+
       {/* Decorative bottom fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent"></div>
     </section>
@@ -73,4 +73,6 @@ const HeroSection = memo(function HeroSection() {
 });
 
 export default HeroSection;
+
+
 

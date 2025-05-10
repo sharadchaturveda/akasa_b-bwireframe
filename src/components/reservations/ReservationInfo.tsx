@@ -185,7 +185,7 @@ const ReservationInfo = memo(function ReservationInfo() {
           (optimizationDisabledRef as any).current = el;
         }
       }}
-      className="bg-black/40 backdrop-blur-sm p-6 sm:p-8 md:p-12 border border-white/10 rounded-lg shadow-xl relative overflow-hidden"
+      className="bg-black/60 p-6 sm:p-8 md:p-12 border border-white/10 rounded-lg shadow-lg relative overflow-hidden"
       data-exclude-optimization="true">
       {/* Background pattern */}
       <div
@@ -206,6 +206,7 @@ const ReservationInfo = memo(function ReservationInfo() {
 
         <div className="space-y-6 sm:space-y-8">
           {/* Hours */}
+          {/* REVIEW: Redundant style={{display: 'flex'}} with flex class, but keeping for compatibility */}
           <div className="flex flex-col md:flex-row gap-4 sm:gap-6 items-start" style={{display: 'flex'}}>
             <div className="icon-container flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#1A2A3A] flex items-center justify-center" style={{flexShrink: 0}}>
               <svg className="w-5 h-5 sm:w-6 sm:h-6 text-[#E6C78B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -228,6 +229,7 @@ const ReservationInfo = memo(function ReservationInfo() {
           </div>
 
           {/* Location */}
+          {/* REVIEW: Redundant style={{display: 'flex'}} with flex class, but keeping for compatibility */}
           <div className="flex flex-col md:flex-row gap-4 sm:gap-6 items-start" style={{display: 'flex'}}>
             <div className="icon-container flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#1A2A3A] flex items-center justify-center" style={{flexShrink: 0}}>
               <svg className="w-5 h-5 sm:w-6 sm:h-6 text-[#E6C78B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -248,6 +250,7 @@ const ReservationInfo = memo(function ReservationInfo() {
           </div>
 
           {/* Policies */}
+          {/* REVIEW: Redundant style={{display: 'flex'}} with flex class, but keeping for compatibility */}
           <div className="flex flex-col md:flex-row gap-4 sm:gap-6 items-start" style={{display: 'flex'}}>
             <div className="icon-container flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#1A2A3A] flex items-center justify-center" style={{flexShrink: 0}}>
               <svg className="w-5 h-5 sm:w-6 sm:h-6 text-[#E6C78B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -278,6 +281,7 @@ const ReservationInfo = memo(function ReservationInfo() {
           </div>
 
           {/* Contact */}
+          {/* REVIEW: Redundant style={{display: 'flex'}} with flex class, but keeping for compatibility */}
           <div className="flex flex-col md:flex-row gap-4 sm:gap-6 items-start" style={{display: 'flex'}}>
             <div className="icon-container flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#1A2A3A] flex items-center justify-center" style={{flexShrink: 0}}>
               <svg className="w-5 h-5 sm:w-6 sm:h-6 text-[#E6C78B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

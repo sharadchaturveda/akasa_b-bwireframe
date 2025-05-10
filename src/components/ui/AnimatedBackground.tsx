@@ -1,7 +1,8 @@
 "use client";
 
 import { memo } from 'react';
-import Image from 'next/image';
+import Image from 'next/image'
+;
 import { cn } from '@/lib/utils';
 
 /**
@@ -155,8 +156,7 @@ const AnimatedBackground = memo(function AnimatedBackground({
   return (
     <div className={cn("absolute inset-0 overflow-hidden", className)}>
       {/* Background image */}
-      <Image
-        src={src}
+      <Image src={src}
         alt={alt}
         fill
         sizes={sizes}
@@ -189,3 +189,5 @@ const AnimatedBackground = memo(function AnimatedBackground({
 });
 
 export default AnimatedBackground;
+
+

@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/image'
+;
 import { NAVIGATION } from '@/constants';
 
 interface MobileNavigationProps {
@@ -57,8 +58,7 @@ export default function MobileNavigation({ navItems }: MobileNavigationProps) {
       >
         {/* Logo */}
         <Link href="/">
-          <Image
-            src="/images/brand/logo-white.png"
+          <Image src="/images/brand/logo-white.png"
             alt="Logo"
             width={200}
             height={100}
@@ -177,3 +177,4 @@ export default function MobileNavigation({ navItems }: MobileNavigationProps) {
     </>
   );
 }
+

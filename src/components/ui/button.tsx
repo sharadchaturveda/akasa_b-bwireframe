@@ -78,7 +78,7 @@ const Button = memo(forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         className={cn(
-          "group items-center justify-center rounded-full font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg",
+          "group items-center justify-center rounded-full font-montserrat font-medium tracking-wider transition-colors transition-shadow duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg",
           widthClass,
           sizeClasses[size],
           variant === "default" && "bg-[#1A2A3A] text-white",
@@ -92,7 +92,7 @@ const Button = memo(forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {/* Gold fill animation - only shown when enabled */}
         {showHoverAnimation && variant === "default" && (
-          <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-[105%] group-hover:translate-x-0 transition-transform duration-500"></span>
+          <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-[105%] group-hover:translate-x-0 transition-transform duration-500 will-change-transform"></span>
         )}
 
         <span className={cn(
