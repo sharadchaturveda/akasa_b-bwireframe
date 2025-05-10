@@ -1,7 +1,8 @@
 "use client";
 
 import { memo } from 'react';
-import Image from 'next/image';
+import Image from 'next/image'
+;
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
@@ -19,46 +20,46 @@ export interface LogoProps {
    * @default "medium"
    */
   size?: LogoSize;
-  
+
   /**
    * Custom width for the logo (only used when size is "custom")
    */
   width?: number;
-  
+
   /**
    * Custom height for the logo (only used when size is "custom")
    */
   height?: number;
-  
+
   /**
    * Whether to link to the homepage
    * @default true
    */
   withLink?: boolean;
-  
+
   /**
    * Whether to use priority loading
    * @default true
    */
   priority?: boolean;
-  
+
   /**
    * The opacity of the logo
    * @default 1
    */
   opacity?: number;
-  
+
   /**
    * The scale of the logo
    * @default 1
    */
   scale?: number;
-  
+
   /**
    * Additional CSS classes for the container
    */
   className?: string;
-  
+
   /**
    * Additional CSS classes for the image
    */
@@ -67,9 +68,9 @@ export interface LogoProps {
 
 /**
  * Logo Component
- * 
+ *
  * A component for displaying the brand logo.
- * 
+ *
  * @param {LogoProps} props - The component props
  * @returns {JSX.Element} The rendered component
  */
@@ -103,19 +104,19 @@ const Logo = memo(function Logo({
       height: height || 90
     }
   };
-  
+
   const { width: logoWidth, height: logoHeight } = sizeConfig[size];
-  
+
   // Logo content
   const logoContent = (
     <div className="relative h-full w-full">
       <div className="absolute inset-0 flex items-center">
-        <Image
-          src="/images/brand/logo-white.png"
+        <Image src="/images/brand/logo-white.png"
           alt="Logo"
           fill
           priority={priority}
           sizes={`${logoWidth}px`}
+          quality={85} /* High quality for logo, balanced for performance */
           className={cn("object-contain object-left", imageClassName)}
           style={{
             maxWidth: '100%',
@@ -126,18 +127,18 @@ const Logo = memo(function Logo({
       </div>
     </div>
   );
-  
+
   // Container classes
   const containerClasses = cn(
     "relative",
     className
   );
-  
+
   // Return with or without link
   if (withLink) {
     return (
-      <Link 
-        href="/" 
+      <Link
+        href="/"
         className={containerClasses}
         style={{ height: `${logoHeight}px`, width: `${logoWidth}px` }}
       >
@@ -145,9 +146,9 @@ const Logo = memo(function Logo({
       </Link>
     );
   }
-  
+
   return (
-    <div 
+    <div
       className={containerClasses}
       style={{ height: `${logoHeight}px`, width: `${logoWidth}px` }}
     >
@@ -157,3 +158,5 @@ const Logo = memo(function Logo({
 });
 
 export default Logo;
+
+
