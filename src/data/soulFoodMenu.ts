@@ -6,7 +6,7 @@ export const soulFoodMenu: Menu = {
     {
       "category_name": "Chaat",
       "category_notes": [
-        "Unlimited Chaat available Fri & Sat, 12 PM - 3 PM, until 30th April 2025 - $32++"
+        "Unlimited Chaat available Fri & Sat, 12 PM - 3 PM - $32++"
       ],
       "items": [
         {
