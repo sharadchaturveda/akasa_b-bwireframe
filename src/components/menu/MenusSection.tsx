@@ -1,10 +1,14 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import Image from "next/image"
-;
-import { Button } from "@/components/ui/button";
-import GrabAndGoSection from "@/components/menu/GrabAndGoSection";
+import { useState, useRef, useEffect, Suspense } from "react";
+import Image from "next/image";
+import dynamic from "next/dynamic";
+
+// Dynamically import the GrabAndGoSection component
+const GrabAndGoSection = dynamic(() => import("@/components/menu/GrabAndGoSection"), {
+  loading: () => <div className="h-[50vh] bg-black"></div>,
+  ssr: true
+});
 
 interface MenuType {
   id: string;
@@ -27,13 +31,13 @@ export default function MenusSection() {
       const isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
       const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
       const isSmallScreen = window.innerWidth < 768;
-      
+
       setIsMobile(isMobileDevice || (isTouchDevice && isSmallScreen));
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    
+
     return () => {
       window.removeEventListener('resize', checkMobile);
     };
@@ -88,7 +92,7 @@ export default function MenusSection() {
   ];
 
   // Render different button styles based on device type
-  const renderButton = (url: string) => {
+  const renderButton = () => {
     if (isMobile) {
       // Mobile button - completely static with no hover effects or animations
       return (
@@ -173,10 +177,10 @@ export default function MenusSection() {
                       quality={75}
                       data-testid="image-component"
                     />
-                    
+
                     {/* Gradient overlay */}
                     <div className={`absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 ${!isMobile ? 'group-hover:opacity-40 transition-opacity duration-500' : ''}`}></div>
-                    
+
                     {/* Active indicator */}
                     {activeMenu === menu.id && (
                       <div className="absolute top-4 right-4 z-10">
@@ -213,7 +217,7 @@ export default function MenusSection() {
                     {/* Button with hover effect - using standard site button styling */}
                     <div className="mt-auto">
                       <a href={menu.url} className="block w-full" onClick={(e) => e.stopPropagation()}>
-                        {renderButton(menu.url)}
+                        {renderButton()}
                       </a>
                     </div>
                   </div>
@@ -231,9 +235,11 @@ export default function MenusSection() {
           }
         `}</style>
       </section>
-      
+
       {/* Add the Grab & Go section */}
-      <GrabAndGoSection />
+      <Suspense fallback={<div className="h-[50vh] bg-black"></div>}>
+        <GrabAndGoSection />
+      </Suspense>
     </>
   );
 }

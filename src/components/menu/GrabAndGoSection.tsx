@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import Image from "next/image";
 
-export default function GrabAndGoSection() {
+const GrabAndGoSection = memo(function GrabAndGoSection() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -46,25 +46,26 @@ export default function GrabAndGoSection() {
               {/* Gold accent corners */}
               <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-[#E6C78B]/40 z-10 transition-all duration-500 group-hover:w-20 group-hover:h-20"></div>
               <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-[#E6C78B]/40 z-10 transition-all duration-500 group-hover:w-20 group-hover:h-20"></div>
-              
+
               {/* Subtle glow effect on hover */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" 
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                    style={{boxShadow: "inset 0 0 30px rgba(230, 199, 139, 0.1)"}}>
               </div>
-              
+
               {/* Image with responsive dimensions */}
               <div className="absolute inset-0">
-                <Image 
+                <Image
                   src="/images/menu/grab-and-go/grab-and-go-main.jpg"
                   alt="Akasa Grab & Go meals"
                   fill
                   sizes="(max-width: 768px) 100vw, 495px"
                   className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${isMobile ? 'object-contain' : 'object-cover'}`}
                   loading="lazy"
-                  quality={85}
+                  quality={75}
+                  priority={false}
                 />
               </div>
-              
+
               {/* Subtle gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/20 opacity-50"></div>
             </div>
@@ -89,7 +90,7 @@ export default function GrabAndGoSection() {
                   </div>
                 </div>
               </div>
-              
+
               {/* Feature 2 */}
               <div className="bg-black/40 backdrop-blur-sm rounded-lg p-6 border-l-2 border-[#E6C78B] transform transition-all duration-300 hover:translate-y-[-4px] hover:shadow-lg hover:shadow-[#E6C78B]/5">
                 <div className="flex items-start">
@@ -107,7 +108,7 @@ export default function GrabAndGoSection() {
                   </div>
                 </div>
               </div>
-              
+
               {/* Feature 3 */}
               <div className="bg-black/40 backdrop-blur-sm rounded-lg p-6 border-l-2 border-[#E6C78B] transform transition-all duration-300 hover:translate-y-[-4px] hover:shadow-lg hover:shadow-[#E6C78B]/5">
                 <div className="flex items-start">
@@ -128,9 +129,19 @@ export default function GrabAndGoSection() {
           </div>
         </div>
       </div>
+
+      {/* Add custom CSS for animations */}
+      <style jsx>{`
+        @keyframes slideBackground {
+          0% { background-position: 0 0; }
+          100% { background-position: 100% 100%; }
+        }
+      `}</style>
     </section>
   );
-}
+});
+
+export default GrabAndGoSection;
 
 
 
