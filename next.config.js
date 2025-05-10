@@ -14,17 +14,17 @@ const nextConfig = {
   reactStrictMode: true,
   // Responsive image optimization for all device sizes
   images: {
-    formats: ['image/avif', 'image/webp'],
+    formats: ['image/avif', 'image/webp'], // Prioritize AVIF format for better compression
     deviceSizes: [320, 420, 640, 768, 1024, 1280, 1536, 1920, 2048, 3840], // All device sizes from mobile to 4K
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 512, 1024, 2048], // Various image sizes for responsive design
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     minimumCacheTTL: 60,
   },
-  // Disable CSS optimization for now to prevent interference
+  // Enable CSS optimization for better performance
   experimental: {
-    // Disable CSS optimization until we fix the interference issue
-    optimizeCss: false,
+    // Enable CSS optimization for better performance
+    optimizeCss: true,
     // Optimize for Largest Contentful Paint (LCP)
     largePageDataBytes: 128 * 1000,
   },
@@ -115,6 +115,11 @@ const nextConfig = {
           }
         });
       }
+    }
+
+    // Disable webpack cache in development to prevent corruption
+    if (dev) {
+      config.cache = false;
     }
 
     return config;

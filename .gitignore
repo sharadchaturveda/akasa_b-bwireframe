@@ -23,6 +23,21 @@
 # misc
 .DS_Store
 *.pem
+*.log
+avif-optimization.log
+cleanup.log
+image-performance-optimization.log
+image-quality-upgrade.log
+optimize-images.log
+revert-optimization.log
+high-impact-images.txt
+internal-project-summary.md
+
+# scripts
+convert-to-avif.ps1
+optimize-images.ps1
+revert-image-changes.ps1
+update-to-avif-images.ps1
 
 # debug
 npm-debug.log*
