@@ -10,7 +10,8 @@
 
 import React, { useEffect, useState, Suspense } from 'react';
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
+import Image from 'next/image'
+;
 
 import PageLayout from '@/components/layout/PageLayout';
 import Loading from '@/components/ui/Loading';
@@ -98,8 +99,7 @@ export default function DocumentedPage(): React.ReactElement {
       <section className="relative w-full min-h-screen bg-black">
         {/* Hero Background Image */}
         <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/examples/hero-background.jpg"
+          <Image src="/images/examples/hero-background.jpg"
             alt="Akasa restaurant interior"
             fill
             priority={true}
@@ -135,8 +135,7 @@ export default function DocumentedPage(): React.ReactElement {
             {!isMobile && (
               <div className="md:col-span-6 flex justify-center">
                 <div className="relative w-full max-w-lg aspect-square">
-                  <Image
-                    src="/images/examples/hero-feature.jpg"
+                  <Image src="/images/examples/hero-feature.jpg"
                     alt="Signature dish presentation"
                     fill
                     priority={true}
@@ -165,3 +164,5 @@ export default function DocumentedPage(): React.ReactElement {
     </PageLayout>
   );
 }
+
+

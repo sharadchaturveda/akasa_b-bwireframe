@@ -1,6 +1,7 @@
 "use client";
 
-import Image from "next/image";
+import Image from "next/image"
+;
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/home/Navigation";
@@ -17,8 +18,7 @@ const HeroSection = memo(function HeroSection() {
         transform: 'translateZ(-1px) scale(2)',
         zIndex: -1
       }}>
-        <Image
-          src="/images/offers/hero/hero.jpg"
+        <Image src="/images/offers/hero/hero.jpg"
           alt="Offers background"
           fill
           sizes="100vw"
@@ -109,8 +109,7 @@ const OfferCard = memo(function OfferCard({
           <div className="absolute top-0 left-0 w-12 h-12 border-t border-l border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
           <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
 
-          <Image
-            src={image}
+          <Image src={image}
             alt={title.text}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -277,8 +276,7 @@ const LoyaltyProgramSection = memo(function LoyaltyProgramSection() {
         transform: 'translateZ(-1px) scale(1.5)',
         zIndex: -1
       }}>
-        <Image
-          src="/images/offers/loyalty_program/loyalty.jpg"
+        <Image src="/images/offers/loyalty_program/loyalty.jpg"
           alt="Loyalty Program background"
           fill
           sizes="100vw"
@@ -310,8 +308,7 @@ const LoyaltyProgramSection = memo(function LoyaltyProgramSection() {
               <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-[#E6C78B] opacity-70 z-10"></div>
               <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-[#E6C78B] opacity-70 z-10"></div>
 
-              <Image
-                src="/images/offers/loyalty_program/loyalty.jpg"
+              <Image src="/images/offers/loyalty_program/loyalty.jpg"
                 alt="Akasa Loyalty Program"
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"
@@ -467,4 +464,6 @@ export default function OffersPage() {
     </main>
   );
 }
+
+
 

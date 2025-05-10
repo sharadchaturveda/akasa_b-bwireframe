@@ -40,7 +40,13 @@ export default function SoulFoodWeekendsMenuPage() {
           <h1 className="text-4xl md:text-6xl font-playfair mb-6 text-white">Soul Food Weekends</h1>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#E6C78B] to-transparent mx-auto mb-6"></div>
           <p className="text-lg md:text-xl font-montserrat text-white/80 max-w-3xl mx-auto">
-            Special weekend offerings that nourish the soul
+            Treat your taste buds to a nostalgic culinary journey with Soul Food Weekends. We bring you heart-warming flavors of North India's most beloved dishes like Pindi Chole with Kulcha, Keema Pav, Dal Bhati Choorma, Saroson ka Saag & Gosht Bhuna Bheeja & more.
+          </p>
+          <p className="text-lg md:text-xl font-montserrat text-white/80 max-w-3xl mx-auto mt-4">
+            We are offering Unlimited Chaat for just 32++ per person
+          </p>
+          <p className="text-lg md:text-xl font-montserrat text-white/80 max-w-3xl mx-auto mt-2">
+            Available all Weekends
           </p>
         </div>
       </section>

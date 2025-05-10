@@ -103,7 +103,7 @@ export default function EventsPage() {
       description: "Make your office parties unforgettable! Whether it's a team celebration, holiday gathering, or milestone event, find the perfect venue or catering services.",
       image: "/images/events/listings/office-parties.jpg",
       category: "office-parties",
-      features: ["Full venue rental option", "Custom cocktail creation", "Entertainment options", "Capacity: up to 100 guests"],
+      features: ["Full venue rental option", "Custom cocktail creation", "Entertainment options", "Capacity: up to 60 guests"],
       price: "Starting at $2,500"
     },
     {
