@@ -9,7 +9,8 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+import Image from "next/image"
+;
 
 export interface FeaturedDish {
   id: string;
@@ -107,8 +108,7 @@ export default function FeaturedDishesSection({ title, subtitle, dishes }: Featu
             <div className="bg-[#0A0A0A] rounded-lg overflow-hidden shadow-lg w-full max-w-md">
               {/* Dish Image */}
               <div className="relative w-full aspect-square">
-                <Image
-                  src={selectedDish.imagePath}
+                <Image src={selectedDish.imagePath}
                   alt={selectedDish.imageAlt}
                   fill
                   sizes="100vw"
@@ -156,8 +156,7 @@ function DishCard({ dish, onClick }: { dish: FeaturedDish; onClick: () => void }
     >
       {/* Dish Image */}
       <div className="relative w-full aspect-square">
-        <Image
-          src={dish.imagePath}
+        <Image src={dish.imagePath}
           alt={dish.imageAlt}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -198,3 +197,5 @@ function DishCard({ dish, onClick }: { dish: FeaturedDish; onClick: () => void }
     </div>
   );
 }
+
+
