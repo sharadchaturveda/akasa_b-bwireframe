@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
+import Image from "next/image"
+;
 import { Button } from "@/components/ui/button";
 
 interface MenuType {
@@ -161,8 +162,7 @@ export default function MenusSection() {
               <div className={`relative bg-black/80 backdrop-blur-sm border border-white/5 rounded-lg overflow-hidden ${!isMobile ? 'transition-all duration-500 group-hover:shadow-[0_0_25px_rgba(230,199,139,0.2)]' : ''} flex flex-col h-full`}>
                 {/* Menu image with overlay effects */}
                 <div className="relative h-[180px] overflow-hidden">
-                  <Image
-                    src={`${menu.image}?quality=75&width=800`}
+                  <Image src={`${menu.image}?quality=75&width=800`}
                     alt={menu.name}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -231,3 +231,5 @@ export default function MenusSection() {
     </section>
   );
 }
+
+

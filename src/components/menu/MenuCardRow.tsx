@@ -1,6 +1,7 @@
 "use client";
 
-import Image from "next/image";
+import Image from "next/image"
+;
 import { useState, useRef } from "react";
 
 interface MenuType {
@@ -79,8 +80,7 @@ export default function MenuCardRow() {
               } hover:scale-105`}>
                 {/* Front of card */}
                 <div className="relative overflow-hidden h-[450px] border border-[#E6C78B]/30 rounded-lg shadow-xl shadow-black/50">
-                  <Image
-                    src={menu.image}
+                  <Image src={menu.image}
                     alt={menu.name}
                     fill
                     sizes="800px"
@@ -162,6 +162,8 @@ export default function MenuCardRow() {
     </div>
   );
 }
+
+
 
 
 

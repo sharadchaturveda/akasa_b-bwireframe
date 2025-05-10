@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/image"
+;
 import { memo } from "react";
 
 const FlavorExperienceSection = memo(function FlavorExperienceSection() {
@@ -18,8 +19,7 @@ const FlavorExperienceSection = memo(function FlavorExperienceSection() {
         <div className="relative overflow-hidden group">
           {/* Background image with parallax effect */}
           <div className="absolute inset-0 transform scale-110 transition-transform duration-10000 group-hover:scale-105">
-            <Image
-              src="/images/menu/culinary_philosophy/philosophy.jpg"
+            <Image src="/images/menu/culinary_philosophy/philosophy.jpg"
               alt="Culinary journey"
               fill
               sizes="(max-width: 768px) 100vw, 40vw"
@@ -67,8 +67,7 @@ const FlavorExperienceSection = memo(function FlavorExperienceSection() {
         <div className="relative overflow-hidden group">
           {/* Background image with parallax effect */}
           <div className="absolute inset-0 transform scale-110 transition-transform duration-10000 group-hover:scale-105">
-            <Image
-              src="/images/menu/culinary_philosophy/drink.jpg"
+            <Image src="/images/menu/culinary_philosophy/drink.jpg"
               alt="Culinary philosophy"
               fill
               sizes="(max-width: 768px) 100vw, 60vw"
@@ -160,4 +159,6 @@ const FlavorExperienceSection = memo(function FlavorExperienceSection() {
 });
 
 export default FlavorExperienceSection;
+
+
 

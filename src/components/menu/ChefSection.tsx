@@ -1,6 +1,7 @@
 "use client";
 
-import Image from "next/image";
+import Image from "next/image"
+;
 import { memo, useEffect } from "react";
 
 const ChefSection = memo(function ChefSection() {
@@ -41,13 +42,12 @@ const ChefSection = memo(function ChefSection() {
         transform: 'translateZ(-1px) scale(2)',
         zIndex: -1
       }}>
-        <Image
-          src="/images/menu/chef/background.jpg"
+        <Image src="/images/menu/chef/background.jpg"
           alt="Chef background"
           fill
           sizes="100vw"
           className="object-cover"
-          quality={60}
+          quality={60} /* Optimized for background images */
           priority
           loading="eager"
           style={{
@@ -89,15 +89,14 @@ const ChefSection = memo(function ChefSection() {
               <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-[#E6C78B] opacity-70"></div>
               <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-[#E6C78B] opacity-70"></div>
 
-              <Image
-                src="/images/menu/chef/portrait.jpg"
+              <Image src="/images/menu/chef/portrait.jpg"
                 alt="Chef Akhilesh Pathak"
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"
                 className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                 priority
                 fetchPriority="high"
-                quality={80}
+                quality={85} /* High quality for chef portrait, balanced for performance */
                 id="lcp-image"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
@@ -169,3 +168,5 @@ const ChefSection = memo(function ChefSection() {
 });
 
 export default ChefSection;
+
+

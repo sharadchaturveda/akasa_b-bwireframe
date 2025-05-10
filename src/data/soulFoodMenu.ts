@@ -6,13 +6,37 @@ export const soulFoodMenu: Menu = {
     {
       "category_name": "Chaat",
       "category_notes": [
-        "Unlimited Chaat available Fri & Sat, 12 PM - 3 PM - $32++"
+        "Unlimited Chaat available Fri & Sat - $32++"
       ],
       "items": [
         {
-          "name": "PAPADI CHAAT",
+          "name": "PAAN CHAAT",
+          "price": "$14",
+          "description": "Beetle Leaf | Pomegranate Seeds | Yoghurt | Tamrind Chutney",
+          "vegetarian": true
+        },
+        {
+          "name": "CHOOLE ALOO TIKKI CHAAT",
+          "price": "$14",
+          "description": "Potato | Chick Peas | Yoghurt | Mint Chutney",
+          "vegetarian": true
+        },
+        {
+          "name": "SAMOSA CHAAT",
+          "price": "$10",
+          "description": "Potato | Tamarind | Mint",
+          "vegetarian": true
+        },
+        {
+          "name": "KANDHA BHAJIA",
           "price": "$12",
-          "description": "Puri | Potato | Onion | Yoghurt | Mint Chutney | Tamarind Chutney | Homemade Indian Spices",
+          "description": "Onion | Chick Pea Flour| Home made Indian Spices",
+          "vegetarian": true
+        },
+        {
+          "name": "ALOO CHOP",
+          "price": "$12",
+          "description": "Potato | Chick Pea Flour | Asafetida | Home made Indian Spices",
           "vegetarian": true
         },
         {
@@ -24,48 +48,66 @@ export const soulFoodMenu: Menu = {
         {
           "name": "MUMBAI VADA PAV",
           "price": "$12",
-          "description": "Potato Patty | Bread Bun | Garlic Chutney | Mint Chutney",
+          "description": "Deep Fried Potato Dumpling | Indian Pav Bread",
           "vegetarian": true
         }
       ]
     },
     {
-      "category_name": "Appetizer",
+      "category_name": "Weekend Favorites",
       "items": [
         {
-          "name": "PANEER KOLI WADA",
-          "price": "$22",
-          "description": "Crispy Fried Cottage Cheese | Spicy Red Chilli Sauce",
-          "vegetarian": true
-        },
-        {
-          "name": "ACHARI ALOO TIKKA",
-          "price": "$20",
-          "description": "Potato Tikki | Pickled Spices",
-          "vegetarian": true
-        },
-        {
-          "name": "CHICKEN PAKORA",
+          "name": "SARSON KA SAAG WITH MAKKI ROTI",
           "price": "$24",
-          "description": "Crispy Fried Chicken | Homemade Spices",
-          "vegetarian": false
+          "description": "Organic Mustard Leaves | Garlic | Ginger | Corn Bread",
+          "vegetarian": true
         },
         {
-          "name": "CHICKEN KALI MIRCHI",
+          "name": "PINDI CHOOLE WITH AMRITSARI KULCHA",
           "price": "$26",
-          "description": "Chicken | Black Pepper | Yoghurt | Indian Spices",
-          "vegetarian": false
+          "description": "Chick Peas | Pindi Masala | Stuffed Bread | Home made Indian Spices",
+          "vegetarian": true
         },
         {
-          "name": "CHAPLI KEBAB",
-          "price": "$28",
-          "description": "Minced Mutton | Homemade Indian Spices",
-          "vegetarian": false
+          "name": "DAL BHATTI CHOORMA",
+          "price": "$20",
+          "description": "Roasted Wheat Flour Balls | Mixed Lentil | Cardamom | Nuts | Sugar",
+          "vegetarian": true
         },
         {
-          "name": "MUTTON SEEKH KEBAB NANZA",
+          "name": "MUTTON KEEMA PAV",
           "price": "$32",
-          "description": "Minced Mutton | Stuffed in White Flour Naan",
+          "description": "Minced Australian Mutton | Green Peas | Home made Indian Spices | Indian Pav Bread",
+          "vegetarian": false
+        },
+        {
+          "name": "KALEJI MASALA WITH KHAMIRI NAAN",
+          "price": "$24",
+          "description": "Chicken Liver | Home made Indian Spices | Leavened Bread",
+          "vegetarian": false
+        },
+        {
+          "name": "DHABA MUTTON HANDI WITH NAAN",
+          "price": "$34",
+          "description": "Australian Mutton | Coriander | Onion | Tomato",
+          "vegetarian": false
+        },
+        {
+          "name": "ANDA BHURJI PAV",
+          "price": "$12",
+          "description": "Eggs | Onion | Tomato | Indian Pav Bread",
+          "vegetarian": false
+        },
+        {
+          "name": "GOSHT BUNA BHEEJA",
+          "price": "$34",
+          "description": "Australian Mutton Brain | Onion | Tomato | Home made Indian Spices",
+          "vegetarian": false
+        },
+        {
+          "name": "MAAZ KEEMA NAAN WITH RAITA",
+          "price": "$12",
+          "description": "Minced Australian Mutton | Stuffed in White Flour Naan",
           "vegetarian": false
         },
         {

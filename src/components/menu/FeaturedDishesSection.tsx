@@ -1,6 +1,7 @@
 "use client";
 
-import Image from "next/image";
+import Image from "next/image"
+;
 import { memo, useState, useEffect } from "react";
 
 const FeaturedDishesSection = memo(function FeaturedDishesSection() {
@@ -129,14 +130,13 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
               <div className="relative bg-black/80 backdrop-blur-sm border border-white/5 rounded-lg overflow-hidden transition-all duration-500 group-hover:shadow-[0_0_25px_rgba(230,199,139,0.2)] flex flex-col h-full">
                 {/* Dish image with fancy overlay effects - Fixed height */}
                 <div className="relative h-[280px] overflow-hidden">
-                  <Image
-                    src={`${dish.image}?quality=75&width=800`}
+                  <Image src={`${dish.image}?quality=75&width=800`}
                     alt={dish.name}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"
-                    quality={75}
+                    quality={80} /* Balanced for performance and quality */
                   />
 
                   {/* Elegant gradient overlay */}
@@ -210,3 +210,5 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
 });
 
 export default FeaturedDishesSection;
+
+
