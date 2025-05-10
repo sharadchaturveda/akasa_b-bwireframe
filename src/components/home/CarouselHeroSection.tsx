@@ -1,6 +1,7 @@
 "use client";
 
-import Image from "next/image";
+import Image from "next/image"
+;
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { memo, useState, useEffect, useCallback, useRef } from "react";
@@ -173,12 +174,12 @@ const CarouselHeroSection = memo(function CarouselHeroSection() {
               zIndex: currentImageIndex === index ? 1 : 0
             }}
           >
-            <Image
-              src={image.src}
+            <Image src={image.src}
               alt={image.alt}
               fill
               priority={index === 0}
               sizes="100vw"
+              quality={80} /* Balanced for performance and quality */
               className="object-cover opacity-60"
             />
           </div>
@@ -190,12 +191,12 @@ const CarouselHeroSection = memo(function CarouselHeroSection() {
       {/* Logo - Desktop only - Hidden by default on small screens */}
       <div className="absolute top-0 left-0 w-full z-40 hidden md:flex justify-center pt-24">
         <div className="relative h-[120px] w-[240px]">
-          <Image
-            src="/images/brand/logo-white.png"
+          <Image src="/images/brand/logo-white.png"
             alt="Akasa Logo"
             width={LOGO.SIZES.LARGE.width}
             height={LOGO.SIZES.LARGE.height}
             priority
+            quality={85} /* High quality for logo, balanced for performance */
             className="w-full h-full object-contain opacity-100"
           />
         </div>
@@ -241,3 +242,5 @@ const CarouselHeroSection = memo(function CarouselHeroSection() {
 });
 
 export default CarouselHeroSection;
+
+

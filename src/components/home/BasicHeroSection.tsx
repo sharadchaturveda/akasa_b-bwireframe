@@ -1,13 +1,13 @@
 import React from 'react';
-import Image from 'next/image';
+import Image from 'next/image'
+;
 
 export default function BasicHeroSection() {
   return (
     <section className="relative w-full h-screen bg-black">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/home/hero/hero-home.jpg"
+        <Image src="/images/home/hero/hero-home.jpg"
           alt="Hero background"
           fill
           priority
@@ -24,8 +24,7 @@ export default function BasicHeroSection() {
         <div className="w-full flex justify-center pt-16 md:pt-24">
           {/* Using Next.js Image component for better optimization */}
           <div className="relative w-auto h-16 md:h-20">
-            <Image
-              src="/images/brand/logo-white.png"
+            <Image src="/images/brand/logo-white.png"
               alt="Akasa Logo"
               width={160}
               height={80}
@@ -50,4 +49,6 @@ export default function BasicHeroSection() {
     </section>
   );
 }
+
+
 

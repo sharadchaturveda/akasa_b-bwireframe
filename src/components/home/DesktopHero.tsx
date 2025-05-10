@@ -35,8 +35,10 @@ const HERO_IMAGES = [
 const DesktopHero = () => {
   // Refs to avoid state changes
   const currentImageIndexRef = useRef(0);
-  const carouselIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const lastUpdateTimeRef = useRef(0);
+  const animationFrameRef = useRef<number | null>(null);
   const carouselElementsRef = useRef<HTMLDivElement[]>([]);
+  const CAROUSEL_INTERVAL_MS = 2000; // 2 seconds between slides
 
   // Set up carousel on mount
   useEffect(() => {
@@ -45,40 +47,49 @@ const DesktopHero = () => {
       return;
     }
 
-    // Function to start carousel
-    const startCarousel = () => {
-      if (carouselIntervalRef.current) {
-        clearInterval(carouselIntervalRef.current);
+    // Function to animate the carousel using requestAnimationFrame
+    const animateCarousel = (timestamp: number) => {
+      // Initialize lastUpdateTime on first run
+      if (lastUpdateTimeRef.current === 0) {
+        lastUpdateTimeRef.current = timestamp;
       }
 
-      // Update carousel images
-      const updateCarousel = () => {
+      // Calculate time elapsed since last update
+      const elapsed = timestamp - lastUpdateTimeRef.current;
+
+      // If enough time has passed, update the carousel
+      if (elapsed >= CAROUSEL_INTERVAL_MS) {
+        // Update the carousel
         const prevIndex = currentImageIndexRef.current;
         currentImageIndexRef.current = (prevIndex + 1) % HERO_IMAGES.length;
 
-        // Update visibility
+        // Update visibility with hardware-accelerated properties
         carouselElementsRef.current.forEach((el, index) => {
           if (index === currentImageIndexRef.current) {
             el.style.opacity = '1';
+            el.style.transform = 'translateZ(0)'; // Hardware acceleration
             el.style.zIndex = '1';
           } else {
             el.style.opacity = '0';
             el.style.zIndex = '0';
           }
         });
-      };
 
-      // Set interval
-      carouselIntervalRef.current = setInterval(updateCarousel, 2000);
+        // Reset the timer
+        lastUpdateTimeRef.current = timestamp;
+      }
+
+      // Continue the animation loop
+      animationFrameRef.current = requestAnimationFrame(animateCarousel);
     };
 
-    // Start carousel
-    startCarousel();
+    // Start the animation
+    animationFrameRef.current = requestAnimationFrame(animateCarousel);
 
     // Clean up
     return () => {
-      if (carouselIntervalRef.current) {
-        clearInterval(carouselIntervalRef.current);
+      if (animationFrameRef.current !== null) {
+        cancelAnimationFrame(animationFrameRef.current);
       }
     };
   }, []);

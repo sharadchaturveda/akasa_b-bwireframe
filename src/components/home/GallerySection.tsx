@@ -3,7 +3,8 @@
 import { memo } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/image"
+;
 import DesktopGallery from "./DesktopGallery";
 
 
@@ -21,8 +22,7 @@ const GallerySection = memo(function GallerySection() {
         <div className="h-full w-full relative flex items-center justify-center p-8 overflow-hidden">
           {/* Use Next.js Image for better performance */}
           <div className="absolute inset-0">
-            <Image
-              src="/images/unused/event3.jpg"
+            <Image src="/images/unused/event3.jpg"
               alt="Private dining"
               fill
               sizes="100vw"
@@ -51,3 +51,5 @@ const GallerySection = memo(function GallerySection() {
 });
 
 export default GallerySection;
+
+

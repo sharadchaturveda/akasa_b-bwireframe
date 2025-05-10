@@ -1,6 +1,7 @@
 "use client";
 
-import Image from "next/image";
+import Image from "next/image"
+;
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { memo, useRef, useEffect } from "react";
@@ -175,8 +176,7 @@ const SimpleHeroSection = memo(function SimpleHeroSection() {
               zIndex: index === 0 ? 1 : 0
             }}
           >
-            <Image
-              src={image.src}
+            <Image src={image.src}
               alt={image.alt}
               fill
               priority={index === 0}
@@ -192,8 +192,7 @@ const SimpleHeroSection = memo(function SimpleHeroSection() {
       {/* Logo - Desktop only */}
       <div className="absolute top-0 left-0 w-full z-40 desktop-only flex justify-center pt-24">
         <div className="relative h-[120px] w-[240px]">
-          <Image
-            src="/images/brand/logo-white.png"
+          <Image src="/images/brand/logo-white.png"
             alt="Akasa Logo"
             width={LOGO.SIZES.LARGE.width}
             height={LOGO.SIZES.LARGE.height}
@@ -243,3 +242,5 @@ const SimpleHeroSection = memo(function SimpleHeroSection() {
 });
 
 export default SimpleHeroSection;
+
+

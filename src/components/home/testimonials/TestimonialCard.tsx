@@ -1,6 +1,7 @@
 "use client";
 
 import { memo } from 'react';
+import Image from 'next/image';
 import { Testimonial } from '@/data/testimonials';
 import StarRating from './StarRating';
 import { ANIMATIONS, COLORS } from './constants';

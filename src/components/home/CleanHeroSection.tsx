@@ -1,6 +1,7 @@
 "use client";
 
-import Image from "next/image";
+import Image from "next/image"
+;
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { memo } from "react";
@@ -11,24 +12,24 @@ const HeroSection = memo(function HeroSection() {
   return (
     <section className="relative w-full h-screen bg-black overflow-hidden">
       {/* Background Image */}
-      <Image
-        src="/images/home/hero/hero-home.jpg"
+      <Image src="/images/home/hero/hero-home.jpg"
         alt="Hero background"
         fill
         priority={true}
         sizes="100vw"
+        quality={80} /* Balanced for performance and quality */
         className="object-cover opacity-60"
       />
 
       {/* Logo - Only visible on desktop */}
       <div className="absolute top-0 left-0 w-full z-10 hidden md:flex justify-center pt-16 md:pt-24">
         <div className="relative h-[120px] w-[240px]">
-          <Image
-            src="/images/brand/logo-white.png"
+          <Image src="/images/brand/logo-white.png"
             alt="Akasa Logo"
             width={LOGO.SIZES.LARGE.width}
             height={LOGO.SIZES.LARGE.height}
             priority
+            quality={85} /* High quality for logo, balanced for performance */
             className="w-full h-full object-contain"
           />
         </div>
@@ -75,3 +76,5 @@ const HeroSection = memo(function HeroSection() {
 });
 
 export default HeroSection;
+
+

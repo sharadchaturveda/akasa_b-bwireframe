@@ -72,7 +72,8 @@ const BrandPhilosophy = memo(function BrandPhilosophy() {
             delay={0.4}
             className="font-montserrat text-sm sm:text-base text-white/90 mb-6 leading-relaxed"
           >
-            We work closely with local farmers to bring you the freshest seasonal ingredients. Inspired by India's rich culinary heritage, we use heirloom grains, vibrant spices, and pasture-raised meats to craft soulful dishes. Enjoy them the traditional way—family style. Whether you order à la carte or try our chef's selection, everything is served to share.
+            We prioritize organic, sustainable sourcing to bring you the freshest seasonal ingredients, carefully selected to nourish both body and soul. Inspired by India's rich culinary heritage, we use heirloom grains, vibrant spices, and pasture-raised meats to craft soulful dishes. Enjoy them the traditional way—family style. <br />
+              Whether you order à la carte or try our chef's selection, everything is served to share.
           </AnimatedText>
 
           <AnimatedText
