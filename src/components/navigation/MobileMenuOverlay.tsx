@@ -12,17 +12,17 @@ export interface MobileMenuOverlayProps {
    * Whether the menu is open
    */
   isOpen: boolean;
-  
+
   /**
    * Navigation items to display
    */
   navItems: Array<{ name: string; path: string }>;
-  
+
   /**
    * Function to call when a link is clicked
    */
   onLinkClick?: () => void;
-  
+
   /**
    * Additional CSS classes
    */
@@ -31,9 +31,9 @@ export interface MobileMenuOverlayProps {
 
 /**
  * MobileMenuOverlay Component
- * 
+ *
  * An overlay component for mobile navigation.
- * 
+ *
  * @param {MobileMenuOverlayProps} props - The component props
  * @returns {JSX.Element | null} The rendered component or null if not open
  */
@@ -44,11 +44,11 @@ const MobileMenuOverlay = memo(function MobileMenuOverlay({
   className
 }: MobileMenuOverlayProps) {
   if (!isOpen) return null;
-  
+
   return (
     <div
       className={cn(
-        "fixed inset-0 bg-black/95 backdrop-blur-md z-40 flex flex-col items-center justify-center md:hidden",
+        "fixed inset-0 bg-black/95 z-40 flex flex-col items-center justify-center md:hidden",
         className
       )}
     >

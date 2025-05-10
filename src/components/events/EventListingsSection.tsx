@@ -48,7 +48,7 @@ const EventListingsSection = memo(function EventListingsSection({
   eventCategories
 }: EventListingsSectionProps) {
   useEffect(() => {
-    // Force pattern visibility after component mounts
+    // Force pattern visibility after component mounts - once is enough
     const forcePatternVisibility = () => {
       document.querySelectorAll('[data-exclude-optimization="true"]').forEach(el => {
         // Force the element to be visible
@@ -58,26 +58,17 @@ const EventListingsSection = memo(function EventListingsSection({
       });
     };
 
-    // Run immediately and then every second for 5 seconds to ensure visibility
+    // Run once after component mounts
     forcePatternVisibility();
-    const interval = setInterval(forcePatternVisibility, 1000);
-
-    // Clean up after 5 seconds
-    setTimeout(() => clearInterval(interval), 5000);
-
-    return () => clearInterval(interval);
   }, []);
 
   return (
     <section className="w-full py-0 pt-0 bg-black relative overflow-hidden">
-      {/*
-        Subtle animated particles that float around
-        These add a touch of elegance and movement to the background
-      */}
+      {/* Static decorative elements instead of animated particles for better performance */}
       <div className="absolute inset-0 opacity-20 pointer-events-none z-0">
-        <div className="absolute top-1/4 right-1/4 w-1 h-1 rounded-full bg-[#E6C78B] animate-float" style={{ animationDuration: '15s' }}></div>
-        <div className="absolute top-3/4 right-1/3 w-1 h-1 rounded-full bg-[#E6C78B] animate-float" style={{ animationDuration: '20s' }}></div>
-        <div className="absolute top-1/3 left-1/4 w-1 h-1 rounded-full bg-[#E6C78B] animate-float" style={{ animationDuration: '25s' }}></div>
+        <div className="absolute top-1/4 right-1/4 w-1 h-1 rounded-full bg-[#E6C78B]"></div>
+        <div className="absolute top-3/4 right-1/3 w-1 h-1 rounded-full bg-[#E6C78B]"></div>
+        <div className="absolute top-1/3 left-1/4 w-1 h-1 rounded-full bg-[#E6C78B]"></div>
       </div>
 
       {/* Event listings container */}
@@ -98,32 +89,31 @@ const EventListingsSection = memo(function EventListingsSection({
             >
               {/* Event Image Container */}
               <div
-                className={`relative h-[350px] md:h-auto w-full md:w-2/5 group overflow-hidden bg-cover bg-center transition-transform duration-1000 hover:scale-110 filter hover:brightness-110 ${
+                className={`relative h-[350px] md:h-auto w-full md:w-2/5 group overflow-hidden ${
                   isSpecialCategory ? 'md:order-2' : index % 2 === 0 ? 'md:order-1' : 'md:order-2'
                 }`}
-                style={{
-                  backgroundImage: `url(${event.image})`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover'
-                }}
                 role="img"
                 aria-label={event.title}
               >
-                {/* Add a hidden img for SEO purposes */}
-                <img
-                  src={event.image}
-                  alt={event.title}
-                  className="hidden"
-                  onError={(e) => {
-                    console.error(`Failed to load image: ${event.image}`);
-                    if (e.currentTarget.parentElement) {
-                      e.currentTarget.parentElement.style.backgroundImage = `url(/images/placeholder.jpg)`;
-                    }
-                  }}
-                />
+                {/* Use Next.js Image component for better performance */}
+                <div className="absolute inset-0 transform transition-transform duration-700 group-hover:scale-110 filter group-hover:brightness-110">
+                  <Image
+                    src={event.image}
+                    alt={event.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 40vw"
+                    className="object-cover"
+                    priority={index === 0}
+                    loading={index === 0 ? undefined : "lazy"}
+                    quality={80}
+                    onError={() => {
+                      console.error(`Failed to load image: ${event.image}`);
+                    }}
+                  />
+                </div>
                 {/* Gradient overlay */}
                 <div
-                  className="absolute inset-0 bg-gradient-to-r transition-opacity duration-700"
+                  className="absolute inset-0 bg-gradient-to-r transition-opacity duration-700 z-10"
                   style={{
                     background: isSpecialCategory
                       ? 'linear-gradient(to left, rgba(0,0,0,0.8), rgba(0,0,0,0.4), transparent)'
@@ -141,11 +131,11 @@ const EventListingsSection = memo(function EventListingsSection({
                 </div>
 
                 {/* Shine effect */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-20 transition-opacity duration-700"></div>
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
 
                 {/* Decorative corner accents */}
-                <div className="absolute top-6 left-6 w-20 h-20 border-t-2 border-l-2 border-[#E6C78B]/0 group-hover:border-[#E6C78B]/60 transition-all duration-700 z-10 group-hover:w-24 group-hover:h-24"></div>
-                <div className="absolute bottom-6 right-6 w-20 h-20 border-b-2 border-r-2 border-[#E6C78B]/0 group-hover:border-[#E6C78B]/60 transition-all duration-700 z-10 group-hover:w-24 group-hover:h-24"></div>
+                <div className="absolute top-6 left-6 w-20 h-20 border-t-2 border-l-2 border-[#E6C78B]/0 group-hover:border-[#E6C78B]/60 transition-colors duration-500 z-10"></div>
+                <div className="absolute bottom-6 right-6 w-20 h-20 border-b-2 border-r-2 border-[#E6C78B]/0 group-hover:border-[#E6C78B]/60 transition-colors duration-500 z-10"></div>
               </div>
 
               {/* Event Description Container */}
@@ -171,8 +161,8 @@ const EventListingsSection = memo(function EventListingsSection({
 
                 {/* Event title with decorative underline */}
                 <h2 className="text-2xl md:text-4xl font-playfair relative inline-block mt-4 md:mt-8 mb-4 md:mb-8">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/80" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)' }}>{event.title}</span>
-                  <div className="absolute -bottom-2 md:-bottom-3 left-0 w-16 md:w-24 h-0.5 bg-gradient-to-r from-[#E6C78B] to-transparent transition-all duration-700 group-hover/desc:w-24 md:group-hover/desc:w-32"></div>
+                  <span className="text-white">{event.title}</span>
+                  <div className="absolute -bottom-2 md:-bottom-3 left-0 w-16 md:w-24 h-0.5 bg-gradient-to-r from-[#E6C78B] to-transparent transition-width duration-500 group-hover/desc:w-24 md:group-hover/desc:w-32"></div>
                 </h2>
 
                 {/* Event description paragraph */}
@@ -200,7 +190,7 @@ const EventListingsSection = memo(function EventListingsSection({
                   </ul>
                 </div>
 
-                {/* Footer section with price and CTA button */}
+                {/* Footer section with price and CTA buttons */}
                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between mt-2 md:mt-8">
                   {/* Price display */}
                   <div className="text-white/90 font-montserrat mb-4 md:mb-0">
@@ -215,23 +205,34 @@ const EventListingsSection = memo(function EventListingsSection({
                     </div>
                   </div>
 
-                  {/* Inquiry button with proper mobile spacing and gold fill animation */}
-                  <Link
-                    href={event.category === "networking" ? "/menus/networking-events.pdf" : "#inquiry"}
-                    prefetch={true}
-                    target={event.category === "networking" ? "_blank" : "_self"}
-                    rel={event.category === "networking" ? "noopener noreferrer" : ""}
-                  >
-                    <button className="group inline-flex items-center justify-center rounded-full text-xs md:text-sm font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-4 md:px-6 py-2 md:py-3 min-w-[120px] md:min-w-[160px]">
-                      {/* Gold fill animation - hidden on mobile, visible on desktop */}
-                      <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 hidden md:block"></span>
+                  {/* Buttons container - flex row for desktop, column for mobile */}
+                  <div className="flex flex-col md:flex-row gap-3 md:gap-4">
+                    {/* Inquire Now button */}
+                    <Link
+                      href="#inquiry"
+                      prefetch={true}
+                    >
+                      <button className="group inline-flex items-center justify-center rounded-full text-xs md:text-sm font-montserrat font-medium tracking-wider transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden bg-[#1A2A3A] hover:bg-[#E6C78B] text-white hover:text-black px-4 md:px-6 py-2 md:py-3 min-w-[120px] md:min-w-[160px]">
+                        <span className="relative flex-1 text-center">
+                          Inquire Now
+                        </span>
+                      </button>
+                    </Link>
 
-                      {/* Button text that changes color on hover */}
-                      <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
-                        {event.category === "networking" ? "View Event Menu" : "Inquire Now"}
-                      </span>
-                    </button>
-                  </Link>
+                    {/* Event Menu button */}
+                    <Link
+                      href="/menus/event-menu.pdf"
+                      prefetch={true}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <button className="group inline-flex items-center justify-center rounded-full text-xs md:text-sm font-montserrat font-medium tracking-wider transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden bg-[#1A2A3A] hover:bg-[#E6C78B] text-white hover:text-black px-4 md:px-6 py-2 md:py-3 min-w-[120px] md:min-w-[160px]">
+                        <span className="relative flex-1 text-center">
+                          View Event Menu
+                        </span>
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

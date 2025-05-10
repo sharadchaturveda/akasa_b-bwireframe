@@ -25,8 +25,8 @@ import Image from "next/image"
 const InquiryFormSection = memo(function InquiryFormSection() {
   return (
     <section id="inquiry" className="w-full bg-black pb-16 relative">
-      {/* Background image - Using CSS background for reliability */}
-      <div 
+      {/* Background image with optimized opacity */}
+      <div
         className="absolute inset-0 z-0 opacity-20 bg-cover bg-center"
         style={{
           backgroundImage: "url('/images/menu/hero/gallery-6.jpg')"
@@ -35,7 +35,7 @@ const InquiryFormSection = memo(function InquiryFormSection() {
       ></div>
 
       {/* Dark overlay to improve text readability over the background image */}
-      <div className="absolute inset-0 bg-black/80"></div>
+      <div className="absolute inset-0 bg-black/85"></div>
 
       {/* Main content container with higher z-index to appear above background */}
       <div className="container mx-auto px-4 md:px-8 relative z-10">
@@ -48,8 +48,8 @@ const InquiryFormSection = memo(function InquiryFormSection() {
             </p>
           </div>
 
-          {/* Inquiry form with semi-transparent background and blur effect */}
-          <form className="bg-black/70 p-8 backdrop-blur-sm border border-[#1A2A3A]">
+          {/* Inquiry form with semi-transparent background */}
+          <form className="bg-black/90 p-8 border border-[#1A2A3A]">
             {/* First row: Name and Email - 2 columns on desktop, 1 on mobile */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div>

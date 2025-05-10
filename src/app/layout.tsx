@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display, Lora, Montserrat } from "next/font/google";
+// Import only the fonts we need
+import { Playfair_Display, Montserrat } from "next/font/google";
 import "./globals.css";
 import "./performance-styles.css";
 import '@/styles/mobile-navigation-fix.css';
@@ -12,37 +13,19 @@ import '@/styles/scroll-performance.css';
 import MobileNavigation from '@/components/navigation/MobileNavigation';
 import FloatingActionButtons from '@/components/ui/FloatingActionButtons';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  display: 'swap', // Add display swap for better font loading
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: 'swap',
-});
-
+// Limit to only the fonts we actually need
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
-  weight: ["400", "700"], // Reduced weights for better performance
+  weight: ["400", "700"], // Only the weights we need
   display: 'swap',
   preload: true,
-});
-
-const lora = Lora({
-  variable: "--font-lora",
-  subsets: ["latin"],
-  weight: ["400", "700"], // Reduced weights for better performance
-  display: 'swap',
 });
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
-  weight: ["400", "500", "700"], // Reduced weights for better performance
+  weight: ["400", "500"], // Only the weights we need
   display: 'swap',
 });
 
@@ -72,21 +55,13 @@ export default function RootLayout({
         {/* Safari-specific viewport fix */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-        {/* Preload critical fonts */}
-        <link
-          rel="preload"
-          href="/_next/static/media/c9a5bc6a7c948fb0-s.p.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-
         {/* Preload critical images */}
         <link
           rel="preload"
           href="/images/brand/logo-white.png"
           as="image"
           type="image/png"
+          fetchPriority="high"
         />
 
         {/* Preload WebM video for mobile */}
@@ -96,6 +71,7 @@ export default function RootLayout({
           as="video"
           type="video/webm"
           media="(max-width: 767px)"
+          fetchPriority="high"
         />
 
         {/* Critical CSS for immediate loading - prevents flash of content on mobile */}
@@ -162,7 +138,7 @@ export default function RootLayout({
         <script src="/scripts/mobileVideoOptimization.js" async></script>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${lora.variable} ${montserrat.variable} antialiased bg-black`}
+        className={`${playfair.variable} ${montserrat.variable} antialiased bg-black`}
         style={{
           WebkitFontSmoothing: 'antialiased',
           MozOsxFontSmoothing: 'grayscale',

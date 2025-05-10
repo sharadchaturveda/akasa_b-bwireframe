@@ -49,7 +49,7 @@ export default function ScrollBehavior() {
 
         /* Optimize critical images */
         .hero-image img {
-          content-visibility: auto;
+          /* Removed content-visibility which can cause layout issues */
         }
 
         /* Optimize scroll behavior based on device type */
@@ -60,11 +60,9 @@ export default function ScrollBehavior() {
           }
         }
 
-        /* Optimize fixed elements - excluding mobile navigation */
-        .fixed:not(.mobile-nav-header),
-        .sticky:not(.mobile-nav-header),
-        [class*="fixed"]:not(.mobile-nav-header) {
-          will-change: transform;
+        /* Optimize only critical fixed elements */
+        .mobile-nav-header,
+        .floating-action-buttons {
           transform: translateZ(0);
         }
 

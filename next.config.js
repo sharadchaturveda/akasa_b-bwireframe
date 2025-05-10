@@ -21,7 +21,7 @@ const nextConfig = {
     contentDispositionType: 'attachment',
     minimumCacheTTL: 60,
     domains: ['localhost', 'akasa-restaurant.vercel.app'], // Add your domain here
-    unoptimized: true, // Try setting this to true if optimization is causing issues
+    unoptimized: false, // Enable Next.js image optimization
   },
   // Enable CSS optimization for better performance
   experimental: {

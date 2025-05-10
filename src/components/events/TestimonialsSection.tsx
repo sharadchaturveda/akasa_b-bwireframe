@@ -39,9 +39,9 @@ const testimonials = [
 const TestimonialsSection = memo(function TestimonialsSection() {
   return (
     <section className="w-full bg-black pb-16 relative">
-      {/* Background image - Using CSS background for reliability */}
-      <div 
-        className="absolute inset-0 z-0 opacity-30 bg-cover bg-center"
+      {/* Background image with optimized opacity */}
+      <div
+        className="absolute inset-0 z-0 opacity-20 bg-cover bg-center"
         style={{
           backgroundImage: "url('/images/menu/hero/gallery-3.jpg')"
         }}
@@ -49,7 +49,7 @@ const TestimonialsSection = memo(function TestimonialsSection() {
       ></div>
 
       {/* Dark overlay to improve text readability over the background image */}
-      <div className="absolute inset-0 bg-black/70"></div>
+      <div className="absolute inset-0 bg-black/80"></div>
 
       {/* Main content container with higher z-index to appear above background */}
       <div className="container mx-auto px-4 md:px-8 relative z-10">
@@ -65,7 +65,7 @@ const TestimonialsSection = memo(function TestimonialsSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
           {/* Map through testimonials array to create individual cards */}
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="bg-black/80 backdrop-blur-sm p-6 border border-[#1A2A3A]">
+            <div key={index} className="bg-black/90 p-6 border border-[#1A2A3A]">
               {/* Quotation mark icon */}
               <svg
                 className="w-10 h-10 text-[#E6C78B] mb-4 opacity-50"

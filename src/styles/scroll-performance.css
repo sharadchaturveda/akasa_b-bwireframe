@@ -4,12 +4,9 @@
  * without altering the existing layout or design.
  */
 
-/* Optimize fixed elements during scroll */
-.fixed,
-.sticky,
-[class*="fixed"] {
-  /* Only use will-change when absolutely necessary */
-  will-change: transform;
+/* Optimize fixed elements during scroll - only apply to critical elements */
+.mobile-nav-header,
+.floating-action-buttons {
   /* Apply hardware acceleration */
   transform: translateZ(0);
   /* Ensure proper z-index stacking */
@@ -53,19 +50,12 @@
   contain: paint;
 }
 
-/* Optimize backdrop-filter usage */
-[style*="backdrop-filter"],
-[class*="backdrop-blur"] {
-  /* Only apply hardware acceleration when backdrop-filter is used */
-  transform: translateZ(0);
-  /* Reduce paint area */
-  contain: paint;
-}
+/* Remove backdrop-filter optimization to improve performance */
 
-/* Optimize elements with border animations */
+/* Optimize elements with border animations - only for users who don't prefer reduced motion */
 @media (prefers-reduced-motion: no-preference) {
-  [class*="animate-border"],
-  [class*="borderGlow"] {
+  /* Specific optimization for critical animations only */
+  .animate-critical {
     /* Isolate animations to their own layer */
     transform: translateZ(0);
     /* Reduce paint area */
@@ -79,36 +69,23 @@
 .overflow-x-auto,
 .overflow-scroll,
 .overflow-y-scroll,
-.overflow-x-scroll,
-[class*="scrollbar"] {
-  /* Enable smooth scrolling only for non-touch devices */
-  @media (hover: hover) and (pointer: fine) {
-    scroll-behavior: smooth;
-  }
-
+.overflow-x-scroll {
   /* Use momentum-based scrolling on touch devices */
   -webkit-overflow-scrolling: touch;
 
   /* Prevent content from causing layout shifts */
   overscroll-behavior: contain;
-
-  /* Optimize rendering */
-  will-change: scroll-position;
 }
 
 /* Optimize horizontal scroll containers */
 .overflow-x-auto,
 .overflow-x-scroll,
-.snap-x,
-[class*="horizontal-scroll"] {
+.snap-x {
   /* Prevent vertical scrolling */
   overflow-y: hidden;
 
   /* Enable touch-based panning */
   touch-action: pan-x;
-
-  /* Optimize rendering */
-  will-change: scroll-position;
 }
 
 /* Prevent layout shifts during scroll */
@@ -151,10 +128,4 @@ html, body {
 img {
   /* Use async decoding for images */
   decoding: async;
-
-  /* Prevent layout shifts */
-  content-visibility: auto;
-
-  /* Set explicit width/height to prevent CLS */
-  aspect-ratio: attr(width) / attr(height);
 }

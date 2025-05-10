@@ -76,17 +76,14 @@ const MobileNavigation = memo(function MobileNavigation({
       {/* Fixed Mobile Header - Only visible on mobile */}
       <header
         className={cn(
-          "mobile-nav-header fixed top-0 left-0 w-full z-50 transition-all duration-300 md:hidden",
+          "mobile-nav-header fixed top-0 left-0 w-full z-50 md:hidden flex justify-between items-center",
+          isScrolled ? "bg-black/85" : "bg-transparent",
           className
         )}
         style={{
           height: '100px', /* Height to accommodate larger logo */
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
           padding: '0 20px 0 16px', /* Left padding to prevent logo from hugging the edge */
-          backgroundColor: isScrolled ? 'rgba(0,0,0,0.85)' : 'transparent', /* Transparent until scrolled */
-          backdropFilter: isScrolled ? 'blur(8px)' : 'none', /* No blur until scrolled */
+          transition: 'background-color 0.3s ease',
         }}
       >
         {/* Logo - adjusted position and size for mobile with increased opacity */}

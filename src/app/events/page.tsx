@@ -1,26 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
 import HeroSection from "@/components/events/HeroSection";
 import CategoriesSection from "@/components/events/CategoriesSection";
 import EventListingsSection from "@/components/events/EventListingsSection";
-import dynamic from "next/dynamic";
+
 
 /**
- * Dynamically import below-the-fold components for better performance
- *
- * Using dynamic imports for components that are not immediately visible
- * reduces the initial bundle size and improves page load time.
- * The loading placeholder maintains layout stability during loading.
+ * Import components directly for now to ensure they appear
+ * We'll optimize with dynamic imports after fixing the layout issues
  */
-const TestimonialsSection = dynamic(() => import("@/components/events/TestimonialsSection"), {
-  loading: () => <div className="h-[50vh] bg-black"></div> // Placeholder with same height
-});
-const InquiryFormSection = dynamic(() => import("@/components/events/InquiryFormSection"), {
-  loading: () => <div className="h-[50vh] bg-black"></div> // Placeholder with same height
-});
+import TestimonialsSection from "@/components/events/TestimonialsSection";
+import InquiryFormSection from "@/components/events/InquiryFormSection";
 
 /**
  * EventsPage Component
@@ -40,6 +33,33 @@ export default function EventsPage() {
    */
   // Track the currently selected event category filter
   const [activeCategory, setActiveCategory] = useState("all");
+
+  // We've removed the visibility tracking for now to ensure components appear
+
+  // Preload event images for better performance
+  useEffect(() => {
+    // Preload critical event images
+    const preloadImages = () => {
+      // Get the first few event images to preload
+      const imagesToPreload = events.slice(0, 3).map(event => event.image);
+
+      // Preload each image
+      imagesToPreload.forEach(src => {
+        const img = new Image();
+        img.src = src;
+      });
+    };
+
+    // Use requestIdleCallback for better performance if available
+    if ('requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(preloadImages, { timeout: 2000 });
+    } else {
+      // Fallback to setTimeout
+      setTimeout(preloadImages, 1000);
+    }
+  }, []);
+
+  // We've removed the visibility tracking useEffect
 
   /**
    * Event Categories Data
@@ -115,7 +135,7 @@ export default function EventsPage() {
       category: "networking",
       features: ["Professional setup", "Audio-visual equipment", "Networking-friendly layout", "Catering options available"],
       price: "Contact for pricing",
-      pdfMenu: "/menus/networking-events.pdf" 
+      pdfMenu: "/menus/event-menu.pdf"
     }
   ];
 
@@ -152,11 +172,10 @@ export default function EventsPage() {
         eventCategories={eventCategories}
       />
 
-      {/*
-        Dynamically imported components for below-the-fold content
-        These will only load when needed, improving initial page load time
-      */}
+      {/* Testimonials section */}
       <TestimonialsSection />
+
+      {/* Inquiry form section */}
       <InquiryFormSection />
 
       {/* Footer */}

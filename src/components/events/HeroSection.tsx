@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image"
-;
+import Image from "next/image";
 import { memo } from "react";
 
 /**
@@ -29,22 +28,26 @@ const HeroSection = memo(function HeroSection() {
         The parallax effect is created using CSS transforms and z-index positioning
         This creates a sense of depth as the user scrolls
       */}
-      <div className="absolute inset-0 z-0 transform scale-110" style={{
-        willChange: 'transform', // Performance optimization hint for browsers
-        transform: 'translateZ(-1px) scale(2)', // 3D transform for parallax effect
+      <div className="absolute inset-0 z-0" style={{
         zIndex: -1 // Behind all other content
       }}>
-        {/* Switch from next/image to a background image for reliability */}
-        <div 
-          className="absolute inset-0 w-full h-full bg-cover bg-center"
-          style={{
-            backgroundImage: "url('/images/events/hero/hero.jpg')",
-            opacity: 0.7,
-            filter: "contrast(1.1) brightness(0.9)"
-          }}
-          aria-hidden="true"
-        ></div>
-        
+        {/* Use Next.js Image component for better performance */}
+        <div className="absolute inset-0 w-full h-full">
+          <Image
+            src="/images/events/hero/hero.jpg"
+            alt="Events at Akasa"
+            fill
+            priority={true}
+            sizes="100vw"
+            quality={90}
+            className="object-cover"
+            style={{
+              opacity: 0.7,
+              objectPosition: "center"
+            }}
+          />
+        </div>
+
         {/* Gradient overlay to improve text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/60 to-black/80"></div>
       </div>
@@ -53,24 +56,9 @@ const HeroSection = memo(function HeroSection() {
       <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-black to-transparent"></div>
       <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black to-transparent"></div>
 
-      {/*
-        Animated glow orbs that slowly pulse for visual interest
-        These create subtle movement and depth in the background
-      */}
-      <div className="absolute top-20 right-10 w-60 h-60 rounded-full bg-[#E6C78B]/10 blur-3xl animate-pulse-slow" style={{ animationDuration: '8s' }}></div>
-      <div className="absolute bottom-20 left-10 w-80 h-80 rounded-full bg-[#E6C78B]/5 blur-3xl animate-pulse-slow" style={{ animationDuration: '12s' }}></div>
-      <div className="absolute top-1/3 left-1/4 w-40 h-40 rounded-full bg-[#E6C78B]/5 blur-3xl animate-pulse-slow" style={{ animationDuration: '10s' }}></div>
-
-      {/*
-        Subtle animated particles that float around
-        These add a touch of elegance and movement to the background
-        Different animation durations create more natural, varied movement
-      */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-1 h-1 rounded-full bg-[#E6C78B] animate-float" style={{ animationDuration: '15s' }}></div>
-        <div className="absolute top-1/3 left-2/3 w-1 h-1 rounded-full bg-[#E6C78B] animate-float" style={{ animationDuration: '20s' }}></div>
-        <div className="absolute top-2/3 left-1/3 w-1 h-1 rounded-full bg-[#E6C78B] animate-float" style={{ animationDuration: '25s' }}></div>
-      </div>
+      {/* Static glow elements for better performance */}
+      <div className="absolute top-20 right-10 w-60 h-60 rounded-full bg-[#E6C78B]/10 blur-3xl"></div>
+      <div className="absolute bottom-20 left-10 w-80 h-80 rounded-full bg-[#E6C78B]/5 blur-3xl"></div>
 
       {/* Main content container with higher z-index to appear above background */}
       <div className="container mx-auto px-4 md:px-8 relative z-10 pt-16 md:pt-0">
