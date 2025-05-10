@@ -73,10 +73,10 @@ export default function EventsPage() {
     {
       id: 1,
       title: "Birthday",
-      description: "Celebrate your special day in style! Explore the best birthday restaurants where unforgettable memories are made. From cozy gatherings to grand celebrations.",
-      image: "/images/events/listings/birthday.jpg", // Image named after event type for better organization
+      description: "Make your birthday celebration truly special! Discover the finest restaurants for a birthday celebration in Singapore. Whether it's an elegant dinner or an intimate evening.",
+      image: "/images/events/listings/birthday.jpg", // Verify this path exists in your public folder
       category: "birthday",
-      features: ["Customized menu", "Dedicated service staff", "Elegant table settings", "Capacity: 8-20 guests"],
+      features: ["Customized menu", "Dedicated service staff", "Elegant table settings", "Capacity: 8-50 guests"],
       price: "Starting at $1,200"
     },
     {
@@ -85,8 +85,9 @@ export default function EventsPage() {
       description: "Make your anniversary unforgettable! Discover the finest restaurants for a romantic celebration in Singapore. Whether it's an elegant dinner or an intimate evening.",
       image: "/images/events/listings/anniversary.jpg",
       category: "anniversary",
-      features: ["Elegant dining setup", "Romantic ambiance", "Special anniversary menu", "Complimentary champagne toast"],
-      price: "Starting at $180 per couple"
+      features: ["Elegant dining setup", "Romantic ambiance", "Special anniversary menu", "Complimentary glass of prosecco for the couple"],
+      price: "Starting at $180 per couple",
+      termsApply: true
     },
     {
       id: 3,
@@ -95,7 +96,7 @@ export default function EventsPage() {
       image: "/images/events/listings/office-lunch.jpg",
       category: "office-lunch",
       features: ["Express service option", "Customizable menu packages", "Private dining area", "Capacity: up to 50 guests"],
-      price: "Starting at $45 per person"
+      price: "Contact for pricing"
     },
     {
       id: 4,
@@ -113,7 +114,8 @@ export default function EventsPage() {
       image: "/images/events/listings/networking-events.jpg",
       category: "networking",
       features: ["Professional setup", "Audio-visual equipment", "Networking-friendly layout", "Catering options available"],
-      price: "Starting at $1,800"
+      price: "Contact for pricing",
+      pdfMenu: "/menus/networking-events.pdf" 
     }
   ];
 

@@ -39,18 +39,14 @@ const testimonials = [
 const TestimonialsSection = memo(function TestimonialsSection() {
   return (
     <section className="w-full bg-black pb-16 relative">
-      {/* Background image - Using next/image for better performance and optimization */}
-      <div className="absolute inset-0 z-0 opacity-30">
-        <Image src="/images/menu/hero/gallery-3.jpg"
-          alt="Testimonials background"
-          fill
-          sizes="100vw" // Full viewport width since this is a background
-          className="object-cover"
-          quality={60} // Lower quality is acceptable for a dimmed background
-          loading="lazy" // This component is below the fold
-          priority={false}
-        />
-      </div>
+      {/* Background image - Using CSS background for reliability */}
+      <div 
+        className="absolute inset-0 z-0 opacity-30 bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/images/menu/hero/gallery-3.jpg')"
+        }}
+        aria-hidden="true"
+      ></div>
 
       {/* Dark overlay to improve text readability over the background image */}
       <div className="absolute inset-0 bg-black/70"></div>

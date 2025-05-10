@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image"
-;
+import Image from "next/image";
+import { OptimizedImage } from "@/components/ui/OptimizedImage";
 import Link from "next/link";
 import { memo, useEffect } from "react";
 
@@ -20,6 +20,8 @@ interface EventListingsSectionProps {
     category: string;
     features: string[];
     price: string;
+    termsApply?: boolean;
+    pdfMenu?: string;
   }>;
   eventCategories: Array<{ id: string; name: string }>;
 }
@@ -95,18 +97,30 @@ const EventListingsSection = memo(function EventListingsSection({
               className="w-full flex flex-col md:flex-row md:flex-nowrap md:items-stretch"
             >
               {/* Event Image Container */}
-              <div className={`relative h-[350px] md:h-auto w-full md:w-2/5 group overflow-hidden ${
-                isSpecialCategory ? 'md:order-2' : index % 2 === 0 ? 'md:order-1' : 'md:order-2'
-              }`}>
-                {/* Image content */}
-                <Image src={event.image}
+              <div
+                className={`relative h-[350px] md:h-auto w-full md:w-2/5 group overflow-hidden bg-cover bg-center transition-transform duration-1000 hover:scale-110 filter hover:brightness-110 ${
+                  isSpecialCategory ? 'md:order-2' : index % 2 === 0 ? 'md:order-1' : 'md:order-2'
+                }`}
+                style={{
+                  backgroundImage: `url(${event.image})`,
+                  backgroundPosition: 'center',
+                  backgroundSize: 'cover'
+                }}
+                role="img"
+                aria-label={event.title}
+              >
+                {/* Add a hidden img for SEO purposes */}
+                <img
+                  src={event.image}
                   alt={event.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-1000 group-hover:scale-110 filter group-hover:brightness-110"
-                  quality={85}
+                  className="hidden"
+                  onError={(e) => {
+                    console.error(`Failed to load image: ${event.image}`);
+                    if (e.currentTarget.parentElement) {
+                      e.currentTarget.parentElement.style.backgroundImage = `url(/images/placeholder.jpg)`;
+                    }
+                  }}
                 />
-
                 {/* Gradient overlay */}
                 <div
                   className="absolute inset-0 bg-gradient-to-r transition-opacity duration-700"
@@ -190,19 +204,31 @@ const EventListingsSection = memo(function EventListingsSection({
                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between mt-2 md:mt-8">
                   {/* Price display */}
                   <div className="text-white/90 font-montserrat mb-4 md:mb-0">
-                    <span className="text-xs md:text-sm uppercase tracking-wider">Starting at</span>
-                    <div className="text-xl md:text-2xl font-medium">${event.price}</div>
+                    <span className="text-xs md:text-sm uppercase tracking-wider">
+                      {event.price.includes('$') ? 'Starting at' : ''}
+                    </span>
+                    <div className="text-xl md:text-2xl font-medium">
+                      {event.price}
+                      {event.termsApply && (
+                        <span className="text-xs text-[#E6C78B] ml-2 italic">T&C apply</span>
+                      )}
+                    </div>
                   </div>
 
                   {/* Inquiry button with proper mobile spacing and gold fill animation */}
-                  <Link href="#inquiry" prefetch={true}>
+                  <Link
+                    href={event.category === "networking" ? "/menus/networking-events.pdf" : "#inquiry"}
+                    prefetch={true}
+                    target={event.category === "networking" ? "_blank" : "_self"}
+                    rel={event.category === "networking" ? "noopener noreferrer" : ""}
+                  >
                     <button className="group inline-flex items-center justify-center rounded-full text-xs md:text-sm font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-4 md:px-6 py-2 md:py-3 min-w-[120px] md:min-w-[160px]">
                       {/* Gold fill animation - hidden on mobile, visible on desktop */}
                       <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 hidden md:block"></span>
 
                       {/* Button text that changes color on hover */}
                       <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
-                        Inquire Now
+                        {event.category === "networking" ? "View Event Menu" : "Inquire Now"}
                       </span>
                     </button>
                   </Link>

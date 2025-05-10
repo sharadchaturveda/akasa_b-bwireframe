@@ -34,26 +34,17 @@ const HeroSection = memo(function HeroSection() {
         transform: 'translateZ(-1px) scale(2)', // 3D transform for parallax effect
         zIndex: -1 // Behind all other content
       }}>
-        {/*
-          Hero background image using next/image for optimization
-          - fill prop makes the image fill its container
-          - priority and loading="eager" ensure this critical image loads first
-          - quality set to 80 for good balance between quality and performance
-        */}
-        <Image src="/images/events/hero/hero.jpg"
-          alt="Events background"
-          fill
-          sizes="100vw" // Full viewport width
-          className="object-cover"
-          quality={80} // Balanced for performance and quality
-          priority // Load this image with highest priority
-          loading="eager" // Start loading immediately
+        {/* Switch from next/image to a background image for reliability */}
+        <div 
+          className="absolute inset-0 w-full h-full bg-cover bg-center"
           style={{
-            objectPosition: "center",
-            opacity: 0.7, // Slightly dimmed for better text contrast
-            filter: "contrast(1.1) brightness(0.9)" // Enhanced visual appearance
+            backgroundImage: "url('/images/events/hero/hero.jpg')",
+            opacity: 0.7,
+            filter: "contrast(1.1) brightness(0.9)"
           }}
-        />
+          aria-hidden="true"
+        ></div>
+        
         {/* Gradient overlay to improve text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/60 to-black/80"></div>
       </div>

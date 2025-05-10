@@ -86,6 +86,8 @@ const HeroSection = memo(function HeroSection() {
 const OfferCard = memo(function OfferCard({
   title,
   description,
+  details,
+  footnote,
   image,
   validUntil,
   code,
@@ -93,6 +95,8 @@ const OfferCard = memo(function OfferCard({
 }: {
   title: { text: string; emphasize: string };
   description: string;
+  details?: string[];
+  footnote?: string;
   image: string;
   validUntil: string;
   code: string;
@@ -103,8 +107,10 @@ const OfferCard = memo(function OfferCard({
       {/* Card background with subtle glow effect */}
       <div className="absolute -inset-0.5 bg-gradient-to-r from-[#E6C78B]/0 via-[#E6C78B]/30 to-[#E6C78B]/0 rounded-lg blur opacity-0 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
 
-      <div className="relative bg-black/80 backdrop-blur-sm border border-white/5 rounded-lg overflow-hidden transition-all duration-500 group-hover:shadow-[0_0_25px_rgba(230,199,139,0.2)] h-full flex flex-col">
-        <div className="relative h-[350px] overflow-hidden">
+      {/* Card content */}
+      <div className="relative h-full flex flex-col bg-black/80 backdrop-blur-sm rounded-lg overflow-hidden border border-[#E6C78B]/10">
+        {/* Card image */}
+        <div className="relative w-full h-48 md:h-56 overflow-hidden">
           {/* Decorative corner accent */}
           <div className="absolute top-0 left-0 w-12 h-12 border-t border-l border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
           <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
@@ -129,23 +135,40 @@ const OfferCard = memo(function OfferCard({
           </div>
         </div>
 
-        <div className="p-8 relative flex-1 flex flex-col">
-          <h3 className="text-2xl font-playfair mb-4 group-hover:text-[#E6C78B] transition-colors duration-300 min-h-[4rem]">
-            {title.emphasize ? (
-              <>
-                {title.text.split(title.emphasize)[0]}
-                <span className="text-5xl font-bold text-[#E6C78B]">{title.emphasize}</span>
-                {title.text.split(title.emphasize)[1]}
-              </>
-            ) : (
-              title.text
+        {/* Card text content */}
+        <div className="flex-1 p-5 flex flex-col">
+          {/* Title with emphasis */}
+          <h3 className="text-xl md:text-2xl font-playfair font-medium mb-3 whitespace-pre-line">
+            {title.text}
+            {title.emphasize && (
+              <span className="text-[#E6C78B]">{title.emphasize}</span>
             )}
           </h3>
-          <p className="text-white/70 text-sm mb-6 leading-relaxed min-h-[4.5rem]">{description}</p>
+
+          {/* Description */}
+          <p className="text-sm md:text-base font-montserrat text-white/80 mb-4 whitespace-pre-line">
+            {description}
+          </p>
+
+          {/* Details (bullet points) */}
+          {details && details.length > 0 && (
+            <ul className="list-disc list-outside text-sm font-montserrat text-white/80 mb-4 pl-5 space-y-1.5">
+              {details.map((detail, index) => (
+                <li key={index} className="leading-tight">{detail}</li>
+              ))}
+            </ul>
+          )}
+
+          {/* Footnote */}
+          {footnote && (
+            <p className="text-xs italic font-montserrat text-white/60 mb-4">
+              {footnote}
+            </p>
+          )}
 
           <div className="mt-auto">
             {/* Fancy promo code display */}
-            <div className="bg-[#1A2A3A] p-4 rounded-lg mb-6 border border-[#E6C78B]/20 relative overflow-hidden group-hover:border-[#E6C78B]/40 transition-colors duration-300">
+            <div className="bg-black p-4 rounded-lg mb-6 border border-[#E6C78B]/20 relative overflow-hidden group-hover:border-[#E6C78B]/40 transition-colors duration-300">
               <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-[#E6C78B]/0 via-[#E6C78B]/30 to-[#E6C78B]/0"></div>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-white/80">Promo Code:</span>
@@ -155,7 +178,7 @@ const OfferCard = memo(function OfferCard({
 
             {/* Standardized button */}
             <Link href={link}>
-              <button className="group inline-flex items-center justify-center rounded-full text-sm font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-6 py-3 w-full">
+              <button className="group inline-flex items-center justify-center rounded-full text-sm font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-black text-white px-6 py-3 w-full">
                 {/* Gold fill animation */}
                 <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
 
@@ -175,16 +198,19 @@ const OfferCard = memo(function OfferCard({
 const CurrentOffersSection = memo(function CurrentOffersSection() {
   const offers = [
     {
-      title: { text: "Weekday Lunch Special", emphasize: "" },
-      description: "Enjoy discounted lunch menu items Monday through Thursday. Perfect for business lunches or midday treats.",
-      image: "/images/offers/promotions/weekday-lunch.jpg",
-      validUntil: "December 31, 2025",
-      code: "LUNCH20",
-      link: "/reservations"
+      title: { text: "Akasa Happy Hour Specials!", emphasize: "" },
+      description: "Unwind in style with our fantastic Happy Hour deals,\navailable Monday to Friday, 4 PM – 7 PM.\n\nSip, relax, and enjoy amazing prices and 1-for-1 specials on your favorite drinks.\n\nHere's the lineup:\n🟤 Monday: $8 Cocktails & $8 Beers\n🟤 Tuesday: 1-for-1 on Wines\n🟤 Wednesday: 1-for-1 on Draught Beer\n🟤 Thursday: 1-for-1 on Draught Beer, House Wines & Spirits\n🟤 Friday: 1-for-1 on Cocktails\n\n📍 Only at Akasa.\n🧾 T&Cs apply.",
+      details: [],
+      footnote: "Terms and conditions apply. GST & service charges are additional.",
+      image: "/images/offers/promotions/happy-hours.jpg",
+      validUntil: "Every Mon-Fri, 4PM-7PM",
+      code: "CHEERSAKASA",
+      link: "/menu/drinks"
     },
     {
-      title: { text: "Akasa Turns 1", emphasize: "1" },
-      description: "10% Discount applicable on Happy Hour, Drinks and A La Carte Menu. Exclusively for Capitasky tenants.",
+      title: { text: "Akasa Turns ", emphasize: "1" },
+      description: "We're turning one, and you're invited to the party.\nThis isn't just any celebration—it's a toast to flavor, friends, and unforgettable moments.\n\nEnjoy an exclusive 10% discount on:\n\n🍸 Happy Hour cocktails\n\n🍽️ A La Carte delights\n\n🍷 Curated drink selections\n\nJust show up hungry—we've got the rest.\nOffer valid only for Capitasky tenants.\n\n📅 Limited-time offer.",
+      details: [],
       image: "/images/offers/promotions/akasa-turns-1.jpg",
       validUntil: "15th May to 30th June 2025",
       code: "AKASA1YR",
@@ -192,7 +218,8 @@ const CurrentOffersSection = memo(function CurrentOffersSection() {
     },
     {
       title: { text: "Weekend Family Feast", emphasize: "" },
-      description: "Family-style dining package for groups of 4 or more. Includes appetizers, main courses, and desserts at a special price.",
+      description: "Because good food tastes better when it's shared.\n\nGather your tribe—friends, family, neighbors, even your work fam.\nWhen you dine in with a group of 4 or more, you'll enjoy a full spread:\n\n🥟 Shared appetizers to kick things off\n\n🍛 Hearty mains for every taste\n\n🍰 Sweet finales to round out the meal\n\nAll at 10% off the regular price.\nPerfect for birthdays, reunions, or just because.",
+      details: [],
       image: "/images/offers/promotions/weekend-family-feast.jpg",
       validUntil: "January 15, 2026",
       code: "FAMILY4+",
@@ -240,12 +267,14 @@ const CurrentOffersSection = memo(function CurrentOffersSection() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 auto-rows-fr">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 auto-rows-fr min-h-[600px]">
           {offers.map((offer, index) => (
             <OfferCard
               key={index}
               title={offer.title}
               description={offer.description}
+              details={offer.details}
+              footnote={offer.footnote}
               image={offer.image}
               validUntil={offer.validUntil}
               code={offer.code}
@@ -270,42 +299,35 @@ const CurrentOffersSection = memo(function CurrentOffersSection() {
 const LoyaltyProgramSection = memo(function LoyaltyProgramSection() {
   return (
     <section className="w-full bg-black py-20 relative overflow-hidden">
-      {/* Background with parallax effect */}
-      <div className="absolute inset-0 z-0 transform scale-110" style={{
-        willChange: 'transform',
-        transform: 'translateZ(-1px) scale(1.5)',
-        zIndex: -1
-      }}>
-        <Image src="/images/offers/loyalty_program/loyalty.jpg"
-          alt="Loyalty Program background"
-          fill
-          sizes="100vw"
-          className="object-cover"
-          quality={60}
-          loading="lazy"
-          style={{
-            objectPosition: "center",
-            opacity: 0.4
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/90"></div>
+      {/* Animated background pattern - same as CurrentOffersSection */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e6c78b' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundSize: '60px 60px',
+          animation: 'slideBackground 60s linear infinite'
+        }}></div>
       </div>
 
-      {/* Decorative elements */}
-      <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-black to-transparent z-10"></div>
-      <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-black to-transparent z-10"></div>
-      <div className="absolute top-40 left-0 w-80 h-80 rounded-full bg-[#E6C78B]/5 blur-3xl"></div>
-      <div className="absolute bottom-40 right-0 w-80 h-80 rounded-full bg-[#E6C78B]/5 blur-3xl"></div>
-
       <div className="container mx-auto px-4 md:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-[40%_60%] gap-12 items-center">
-          {/* Loyalty Program image with fancy border and effects */}
-          <div className="relative group">
-            {/* Decorative frame */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-[#E6C78B] to-[#D4B679] rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-            <div className="relative h-[400px] md:h-[500px] overflow-hidden rounded-lg border border-[#E6C78B]/20">
-              {/* Corner accents */}
+        {/* Coming Soon Banner */}
+        <div className="w-full max-w-3xl mx-auto mb-10 bg-gradient-to-r from-[#1A2A3A] via-[#1A2A3A] to-[#1A2A3A] rounded-lg overflow-hidden shadow-lg">
+          <div className="h-1 w-full bg-gradient-to-r from-[#E6C78B] via-[#E6C78B] to-transparent"></div>
+          <div className="flex items-center justify-center py-3 px-6">
+            <div className="w-2 h-2 rounded-full bg-[#E6C78B] mr-3 animate-pulse"></div>
+            <p className="text-white font-montserrat text-sm md:text-base tracking-wider">
+              <span className="text-[#E6C78B] font-medium">Coming Soon:</span> Our Loyalty Program is being crafted for your enjoyment
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-col lg:flex-row gap-12 items-center">
+          {/* Loyalty Program image with elegant frame */}
+          <div className="w-full lg:w-1/2 relative">
+            <div className="relative aspect-[4/3] overflow-hidden group">
+              {/* Decorative frame */}
               <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-[#E6C78B] opacity-70 z-10"></div>
+              <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-[#E6C78B] opacity-70 z-10"></div>
+              <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-[#E6C78B] opacity-70 z-10"></div>
               <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-[#E6C78B] opacity-70 z-10"></div>
 
               <Image src="/images/offers/loyalty_program/loyalty.jpg"
@@ -328,7 +350,7 @@ const LoyaltyProgramSection = memo(function LoyaltyProgramSection() {
           </div>
 
           {/* Loyalty Program description with elegant styling */}
-          <div className="relative">
+          <div className="w-full lg:w-1/2 relative">
             {/* Decorative elements */}
             <div className="absolute -top-6 left-0 w-20 h-1 bg-gradient-to-r from-[#E6C78B] to-transparent"></div>
             <div className="absolute -bottom-6 right-0 w-20 h-1 bg-gradient-to-l from-[#E6C78B] to-transparent"></div>
@@ -340,54 +362,23 @@ const LoyaltyProgramSection = memo(function LoyaltyProgramSection() {
               </h2>
 
               <p className="text-base md:text-lg font-montserrat mb-8 text-white/90 leading-relaxed first-letter:text-4xl first-letter:font-playfair first-letter:text-[#E6C78B] first-letter:mr-1 first-letter:float-left">
-                {"Join our exclusive loyalty program and earn points with every visit. Redeem your points for complimentary dishes, special experiences, and unique perks available only to our loyal guests."}
+                Join our exclusive loyalty program and earn points with every visit. Redeem your points for complimentary dishes, special experiences, and unique perks available only to our loyal guests.
               </p>
 
-              {/* Fancy tier cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-                {/* Silver tier */}
-                <div className="group/tier relative overflow-hidden">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-[#E6C78B]/0 via-[#E6C78B]/30 to-[#E6C78B]/0 rounded-lg blur opacity-0 group-hover/tier:opacity-100 transition duration-1000"></div>
-                  <div className="relative bg-[#1A2A3A] p-6 rounded-lg text-center border border-white/5 transition-all duration-300 group-hover/tier:border-[#E6C78B]/20">
-                    <div className="w-12 h-12 rounded-full bg-[#E6C78B]/10 flex items-center justify-center mx-auto mb-4">
-                      <svg className="w-6 h-6 text-[#E6C78B]" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12,15.39L8.24,17.66L9.23,13.38L5.91,10.5L10.29,10.13L12,6.09L13.71,10.13L18.09,10.5L14.77,13.38L15.76,17.66M22,9.24L14.81,8.63L12,2L9.19,8.63L2,9.24L7.45,13.97L5.82,21L12,17.27L18.18,21L16.54,13.97L22,9.24Z" />
-                      </svg>
-                    </div>
-                    <h3 className="text-[#E6C78B] font-medium text-xl mb-2">Silver Tier</h3>
-                    <p className="text-sm text-white/70">After 5 visits</p>
-                    <div className="w-0 h-0.5 bg-[#E6C78B]/50 mx-auto mt-4 group-hover/tier:w-16 transition-all duration-500"></div>
-                  </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div className="bg-black/30 p-4 rounded-lg border border-white/5 hover:border-[#E6C78B]/20 transition-colors duration-300">
+                  <h3 className="text-lg font-playfair mb-2 text-[#E6C78B]">Earn Points</h3>
+                  <p className="text-sm text-white/80">Accumulate points with every dollar spent at Akasa.</p>
                 </div>
 
-                {/* Gold tier */}
-                <div className="group/tier relative overflow-hidden">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-[#E6C78B]/0 via-[#E6C78B]/30 to-[#E6C78B]/0 rounded-lg blur opacity-0 group-hover/tier:opacity-100 transition duration-1000"></div>
-                  <div className="relative bg-[#1A2A3A] p-6 rounded-lg text-center border border-white/5 transition-all duration-300 group-hover/tier:border-[#E6C78B]/20">
-                    <div className="w-12 h-12 rounded-full bg-[#E6C78B]/10 flex items-center justify-center mx-auto mb-4">
-                      <svg className="w-6 h-6 text-[#E6C78B]" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12,15.4L8.24,17.67L9.24,13.39L5.92,10.51L10.3,10.13L12,6.1L13.71,10.14L18.09,10.52L14.77,13.4L15.77,17.68L12,15.4M20,8.04L14.81,7.64L12,2.5L9.19,7.64L4,8.04L8.46,11.97L7.17,17.13L12,14.33L16.83,17.13L15.54,11.97L20,8.04Z" />
-                      </svg>
-                    </div>
-                    <h3 className="text-[#E6C78B] font-medium text-xl mb-2">Gold Tier</h3>
-                    <p className="text-sm text-white/70">After 10 visits</p>
-                    <div className="w-0 h-0.5 bg-[#E6C78B]/50 mx-auto mt-4 group-hover/tier:w-16 transition-all duration-500"></div>
-                  </div>
+                <div className="bg-black/30 p-4 rounded-lg border border-white/5 hover:border-[#E6C78B]/20 transition-colors duration-300">
+                  <h3 className="text-lg font-playfair mb-2 text-[#E6C78B]">Exclusive Access</h3>
+                  <p className="text-sm text-white/80">Get priority reservations and invitations to special events.</p>
                 </div>
 
-                {/* Platinum tier */}
-                <div className="group/tier relative overflow-hidden">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-[#E6C78B]/0 via-[#E6C78B]/30 to-[#E6C78B]/0 rounded-lg blur opacity-0 group-hover/tier:opacity-100 transition duration-1000"></div>
-                  <div className="relative bg-[#1A2A3A] p-6 rounded-lg text-center border border-white/5 transition-all duration-300 group-hover/tier:border-[#E6C78B]/20">
-                    <div className="w-12 h-12 rounded-full bg-[#E6C78B]/10 flex items-center justify-center mx-auto mb-4">
-                      <svg className="w-6 h-6 text-[#E6C78B]" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" />
-                      </svg>
-                    </div>
-                    <h3 className="text-[#E6C78B] font-medium text-xl mb-2">Platinum Tier</h3>
-                    <p className="text-sm text-white/70">After 20 visits</p>
-                    <div className="w-0 h-0.5 bg-[#E6C78B]/50 mx-auto mt-4 group-hover/tier:w-16 transition-all duration-500"></div>
-                  </div>
+                <div className="bg-black/30 p-4 rounded-lg border border-white/5 hover:border-[#E6C78B]/20 transition-colors duration-300">
+                  <h3 className="text-lg font-playfair mb-2 text-[#E6C78B]">Redeem Rewards</h3>
+                  <p className="text-sm text-white/80">Exchange points for complimentary dishes, drinks, and experiences.</p>
                 </div>
               </div>
 
@@ -398,7 +389,7 @@ const LoyaltyProgramSection = memo(function LoyaltyProgramSection() {
                   <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
 
                   <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
-                    Join Now
+                    Learn More
                   </span>
                 </button>
               </Link>
