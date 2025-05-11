@@ -21,6 +21,11 @@ module.exports = {
         'fadeSlideUp': 'fadeSlideUp 0.8s ease-out forwards',
         'float': 'float 6s ease-in-out infinite',
       },
+      textShadow: {
+        DEFAULT: '0 2px 4px rgba(0,0,0,0.3)',
+        'sm': '0 1px 2px rgba(0,0,0,0.3)',
+        'lg': '0 4px 8px rgba(0,0,0,0.3)',
+      },
       keyframes: {
         fadeIn: {
           '0%': { opacity: 0 },
@@ -37,5 +42,17 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities, theme }) {
+      const textShadows = theme('textShadow', {});
+      const utilities = Object.entries(textShadows).map(([key, value]) => {
+        return {
+          [`.text-shadow${key === 'DEFAULT' ? '' : `-${key}`}`]: {
+            textShadow: value,
+          },
+        };
+      });
+      addUtilities(utilities);
+    },
+  ],
 }
