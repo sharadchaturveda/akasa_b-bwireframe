@@ -133,11 +133,11 @@ const DesktopHero = () => {
 
       {/* Logo - Fixed at top with height constraint */}
       <div className="hero-logo-container">
-        <div className="relative h-[120px] w-[240px]">
+        <div className="relative h-[180px] w-[360px]">
           <Image src="/images/brand/logo-white.png"
             alt="Akasa Logo"
-            width={LOGO.SIZES.LARGE.width}
-            height={LOGO.SIZES.LARGE.height}
+            width={600} /* Increased from LOGO.SIZES.DESKTOP.width (500) */
+            height={240} /* Increased from LOGO.SIZES.DESKTOP.height (200) */
             priority
             className="w-full h-full object-contain opacity-100"
           />

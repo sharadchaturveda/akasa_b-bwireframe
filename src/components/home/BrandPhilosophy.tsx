@@ -5,7 +5,7 @@ import Link from "next/link";
 import { memo } from "react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import AnimatedBackground from "@/components/ui/AnimatedBackground";
-import SectionHeading from "@/components/ui/SectionHeading";
+import SectionHeading from "@/components/ui/section-heading";
 import AnimatedText from "@/components/ui/AnimatedText";
 import DecorativeCorners from "@/components/ui/DecorativeCorners";
 import AnimatedParticles from "@/components/ui/AnimatedParticles";
@@ -59,11 +59,11 @@ const BrandPhilosophy = memo(function BrandPhilosophy() {
 
         <div className="relative max-w-md mx-auto md:mx-0 z-[2]">
           <SectionHeading
-            label="Our Philosophy"
-            subtitle="Not just a meal."
+            subtitle="Our Philosophy"
             title="An experience."
-            withAnimation={true}
-            withDivider={true}
+            description="Not just a meal."
+            showDivider={true}
+            centered={false}
           />
 
           <AnimatedText
@@ -80,7 +80,7 @@ const BrandPhilosophy = memo(function BrandPhilosophy() {
             as="div"
             animation="fadeSlideUp"
             delay={0.5}
-            className="flex justify-center md:justify-start"
+            className="mt-6 sm:mt-8 flex justify-center md:justify-start"
           >
             <Link href="#visit-us">
               <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-[200px] sm:w-[240px] px-4 sm:px-6 py-2 sm:py-3 text-center shadow-lg text-sm sm:text-base">
@@ -121,19 +121,19 @@ const BrandPhilosophy = memo(function BrandPhilosophy() {
         />
 
         <div className="relative h-full flex flex-col justify-center pt-8 pb-12 sm:py-16 px-6 md:py-8 md:px-12">
-          <div className="max-w-md mx-auto md:mx-0 z-[2]">
+          <div className="max-w-md mx-auto md:mx-0 z-[2] md:pt-0">
             <SectionHeading
-              label="Visit Us"
+              subtitle="Visit Us"
               title="Singapore"
-              withAnimation={true}
-              withDivider={true}
+              showDivider={true}
+              centered={false}
             />
 
             <AnimatedText
               as="div"
               animation="fadeSlideUp"
               delay={0.4}
-              className="space-y-3 sm:space-y-4"
+              className="space-y-2 sm:space-y-3 md:space-y-2"
             >
               <div>
                 <p className="text-[#E6C78B]/80 text-xs sm:text-sm font-montserrat">address:</p>
@@ -150,7 +150,7 @@ const BrandPhilosophy = memo(function BrandPhilosophy() {
               as="div"
               animation="fadeSlideUp"
               delay={0.5}
-              className="mt-6 sm:mt-8 flex flex-col items-center md:items-start gap-3"
+              className="mt-6 sm:mt-8 md:mt-[88px] flex flex-col items-center md:items-start gap-3"
             >
               <Link href="https://akasa.oddle.me/en_SG/" className="w-full sm:w-auto" target="_blank" rel="noopener noreferrer">
                 <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-[200px] sm:w-[240px] px-4 sm:px-6 py-2 sm:py-3 text-center shadow-lg text-sm sm:text-base">

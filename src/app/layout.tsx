@@ -12,6 +12,7 @@ import '@/styles/scroll-performance.css';
 // Import components
 import MobileNavigation from '@/components/navigation/MobileNavigation';
 import FloatingActionButtons from '@/components/ui/FloatingActionButtons';
+import ScrollBehavior from '@/components/home/ScrollBehavior';
 
 // Limit to only the fonts we actually need
 const playfair = Playfair_Display({
@@ -136,6 +137,9 @@ export default function RootLayout({
 
         {/* External script for mobile video optimization - moved from inline for better performance */}
         <script src="/scripts/mobileVideoOptimization.js" async></script>
+
+        {/* Script for scroll optimization */}
+        <script src="/scripts/scrollOptimization.js"></script>
       </head>
       <body
         className={`${playfair.variable} ${montserrat.variable} antialiased bg-black`}
@@ -152,6 +156,9 @@ export default function RootLayout({
 
         {/* Floating Action Buttons - Fixed on all pages */}
         <FloatingActionButtons />
+
+        {/* Apply scroll behavior optimizations */}
+        <ScrollBehavior />
 
         {children}
       </body>

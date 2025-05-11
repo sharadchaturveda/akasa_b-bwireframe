@@ -22,7 +22,7 @@ html.mobile-device textarea {
 /* Optimize scrolling */
 html.mobile-device {
   -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
+  /* Removed smooth scrolling for better performance */
 }
 
 /* Prevent content from overflowing viewport */
@@ -69,6 +69,7 @@ html.mobile-device .section-wrapper {
 html.mobile-device .mobile-nav-header {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  height: 70px !important; /* Ensure consistent height */
 }
 
 /* Optimize mobile performance */

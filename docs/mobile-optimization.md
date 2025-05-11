@@ -147,7 +147,7 @@ const MobileHero = () => {
     if (video) {
       video.addEventListener('loadeddata', () => setVideoLoaded(true));
       video.addEventListener('error', () => setVideoLoaded(false));
-      
+
       // Attempt to play the video
       const playPromise = video.play();
       if (playPromise !== undefined) {
@@ -157,7 +157,7 @@ const MobileHero = () => {
         });
       }
     }
-    
+
     return () => {
       if (video) {
         video.removeEventListener('loadeddata', () => setVideoLoaded(true));
@@ -170,7 +170,7 @@ const MobileHero = () => {
     <div className="relative h-screen w-full">
       {!videoLoaded && (
         <Image
-          src="/images/home/hero/mobile-video/placeholder.jpg"
+          src="/images/home/hero/mobile-poster.jpg"
           alt="Hero background"
           fill
           priority
@@ -187,7 +187,7 @@ const MobileHero = () => {
         className={`absolute inset-0 h-full w-full object-cover ${
           videoLoaded ? 'opacity-100' : 'opacity-0'
         }`}
-        poster="/images/home/hero/mobile-video/placeholder.jpg"
+        poster="/images/home/hero/mobile-poster.jpg"
       >
         <source src="/videos/heromobilevid.webm" type="video/webm" />
         <source src="/videos/heromobilevid.mp4" type="video/mp4" />

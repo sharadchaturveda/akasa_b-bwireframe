@@ -2,23 +2,18 @@
 
 import { memo } from 'react';
 import Link from 'next/link';
-import { useNavigation } from './NavigationBase';
+import { useNavigation, NavItem } from './NavigationBase';
 import { cn } from '@/lib/utils';
 
 /**
- * Props for the DesktopNavLink component
+ * Props for the NavLink component
  */
-interface DesktopNavLinkProps {
+interface NavLinkProps {
   /**
-   * The name of the link
+   * The navigation item
    */
-  name: string;
-  
-  /**
-   * The path of the link
-   */
-  path: string;
-  
+  item: NavItem;
+
   /**
    * Additional CSS classes
    */
@@ -26,27 +21,26 @@ interface DesktopNavLinkProps {
 }
 
 /**
- * DesktopNavLink Component
- * 
- * A navigation link component for desktop navigation.
- * 
- * @param {DesktopNavLinkProps} props - The component props
+ * NavLink Component
+ *
+ * A reusable navigation link component.
+ *
+ * @param {NavLinkProps} props - The component props
  * @returns {JSX.Element} The rendered component
  */
-const DesktopNavLink = memo(function DesktopNavLink({
-  name,
-  path,
+const NavLink = memo(function NavLink({
+  item,
   className
-}: DesktopNavLinkProps) {
+}: NavLinkProps) {
   return (
-    <Link 
-      href={path}
+    <Link
+      href={item.path}
       className={cn(
         "text-white text-sm md:text-base font-montserrat tracking-widest uppercase hover:opacity-70 transition-opacity duration-300",
         className
       )}
     >
-      {name}
+      {item.name}
     </Link>
   );
 });
@@ -58,8 +52,8 @@ export interface DesktopNavigationProps {
   /**
    * Custom navigation items to override the default ones
    */
-  navItems?: Array<{ name: string; path: string }>;
-  
+  navItems?: NavItem[];
+
   /**
    * Additional CSS classes for the container
    */
@@ -68,10 +62,10 @@ export interface DesktopNavigationProps {
 
 /**
  * DesktopNavigation Component
- * 
+ *
  * A navigation component for desktop devices.
  * This component is hidden on mobile devices.
- * 
+ *
  * @param {DesktopNavigationProps} props - The component props
  * @returns {JSX.Element} The rendered component
  */
@@ -81,22 +75,19 @@ const DesktopNavigation = memo(function DesktopNavigation({
 }: DesktopNavigationProps) {
   // Use the navigation hook
   const { navItems } = useNavigation(customNavItems);
-  
+
   return (
     <header className={cn(
       "absolute top-0 left-0 right-0 z-40 px-4 md:px-8 py-4 md:py-6 hidden md:block",
       className
     )}>
-      <div className="flex justify-between items-center">
+      <nav className="flex justify-between items-center">
         {navItems.map((item) => (
           <div key={item.name} className="px-2 py-1">
-            <DesktopNavLink
-              name={item.name}
-              path={item.path}
-            />
+            <NavLink item={item} />
           </div>
         ))}
-      </div>
+      </nav>
     </header>
   );
 });

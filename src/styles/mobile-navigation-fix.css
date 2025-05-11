@@ -4,10 +4,11 @@
   body {
     padding-top: 0;
   }
-  
+
   /* Ensure the mobile navigation is always visible on mobile */
   .mobile-nav-header {
     display: flex !important;
+    height: 70px !important; /* Ensure consistent height across all styles */
   }
 }
 

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { memo } from "react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import AnimatedBackground from "@/components/ui/AnimatedBackground";
-import SectionHeading from "@/components/ui/SectionHeading";
+import SectionHeading from "@/components/ui/section-heading";
 import AnimatedText from "@/components/ui/AnimatedText";
 import DecorativeCorners from "@/components/ui/DecorativeCorners";
 
@@ -75,13 +75,10 @@ const WhatsHappeningSection = memo(function WhatsHappeningSection() {
 
           <div className="relative max-w-md mx-auto md:mx-0">
             <SectionHeading
-              label="Events & Offers"
+              subtitle="Events & Offers"
               title="What's Happening"
-              withAnimation={true}
-              withDivider={true}
-              labelDelay={0.1}
-              titleDelay={0.2}
-              dividerDelay={0.3}
+              showDivider={true}
+              centered={false}
             />
 
             <AnimatedText

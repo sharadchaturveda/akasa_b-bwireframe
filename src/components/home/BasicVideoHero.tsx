@@ -45,7 +45,7 @@ const BasicVideoHero = () => {
       {/* Fallback image - always visible */}
       <div className="absolute inset-0">
         <Image
-          src="/images/home/hero/mobile-video/placeholder.jpg"
+          src="/images/home/hero/mobile-poster.jpg"
           alt="Akasa restaurant ambiance"
           fill
           priority
@@ -63,6 +63,7 @@ const BasicVideoHero = () => {
         loop
         autoPlay
         preload="auto"
+        poster="/images/home/hero/mobile-poster.jpg"
         style={{
           objectFit: 'cover',
           width: '100%',

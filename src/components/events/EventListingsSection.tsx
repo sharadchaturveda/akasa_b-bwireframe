@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { OptimizedImage } from "@/components/ui/OptimizedImage";
 import Link from "next/link";
-import { memo, useEffect } from "react";
+import { memo, useEffect, useCallback } from "react";
+import { scrollToElement } from "@/utils/scrollUtils";
 
 /**
  * Props interface for the EventListingsSection component
@@ -47,6 +48,14 @@ const EventListingsSection = memo(function EventListingsSection({
   filteredEvents,
   eventCategories
 }: EventListingsSectionProps) {
+  // Function to handle smooth scrolling to the inquiry section
+  const scrollToInquiry = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+
+    // Use our optimized scroll utility
+    scrollToElement('inquiry', 80, 300);
+  }, []);
+
   useEffect(() => {
     // Force pattern visibility after component mounts - once is enough
     const forcePatternVisibility = () => {
@@ -208,16 +217,14 @@ const EventListingsSection = memo(function EventListingsSection({
                   {/* Buttons container - flex row for desktop, column for mobile */}
                   <div className="flex flex-col md:flex-row gap-3 md:gap-4">
                     {/* Inquire Now button */}
-                    <Link
-                      href="#inquiry"
-                      prefetch={true}
+                    <button
+                      onClick={scrollToInquiry}
+                      className="group inline-flex items-center justify-center rounded-full text-xs md:text-sm font-montserrat font-medium tracking-wider transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden bg-[#1A2A3A] hover:bg-[#E6C78B] text-white hover:text-black px-4 md:px-6 py-2 md:py-3 min-w-[120px] md:min-w-[160px]"
                     >
-                      <button className="group inline-flex items-center justify-center rounded-full text-xs md:text-sm font-montserrat font-medium tracking-wider transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden bg-[#1A2A3A] hover:bg-[#E6C78B] text-white hover:text-black px-4 md:px-6 py-2 md:py-3 min-w-[120px] md:min-w-[160px]">
-                        <span className="relative flex-1 text-center">
-                          Inquire Now
-                        </span>
-                      </button>
-                    </Link>
+                      <span className="relative flex-1 text-center">
+                        Inquire Now
+                      </span>
+                    </button>
 
                     {/* Event Menu button */}
                     <Link

@@ -14,7 +14,7 @@ const GrabAndGoSection = memo(function GrabAndGoSection() {
   }, []);
 
   return (
-    <section className="w-full bg-black py-24 relative overflow-hidden">
+    <section className="w-full bg-black pt-12 pb-24 relative overflow-hidden mt-[-2rem]">
       {/* Animated background pattern - matching other sections */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{

@@ -52,18 +52,15 @@ export default function ScrollBehavior() {
           /* Removed content-visibility which can cause layout issues */
         }
 
-        /* Optimize scroll behavior based on device type */
+        /* Standardize scroll behavior for better performance */
         html {
-          ${isMobile
-            ? 'scroll-behavior: smooth; -webkit-overflow-scrolling: touch;'
-            : 'scroll-behavior: auto;'
-          }
+          scroll-behavior: auto !important;
+          ${isMobile ? '-webkit-overflow-scrolling: touch;' : ''}
         }
 
-        /* Optimize only critical fixed elements */
-        .mobile-nav-header,
-        .floating-action-buttons {
-          transform: translateZ(0);
+        /* Only apply hardware acceleration to essential fixed elements */
+        .mobile-nav-header {
+          ${isMobile ? 'transform: translateZ(0);' : ''}
         }
 
         /* Ensure mobile navigation is visible and functional only on mobile */
@@ -72,6 +69,7 @@ export default function ScrollBehavior() {
             display: flex !important;
             z-index: 50 !important;
             pointer-events: auto !important;
+            height: 70px !important;
           }
 
           /* Ensure mobile menu overlay is visible and interactive */

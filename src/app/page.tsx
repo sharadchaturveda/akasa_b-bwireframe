@@ -38,7 +38,7 @@ export default function HomePage() {
           {/* Fallback image */}
           <div className="absolute inset-0">
             <Image
-              src="/images/home/hero/mobile-video/placeholder.jpg"
+              src="/images/home/hero/mobile-poster.jpg"
               alt="Akasa restaurant ambiance"
               fill
               priority
@@ -55,6 +55,7 @@ export default function HomePage() {
             loop
             autoPlay
             preload="auto"
+            poster="/images/home/hero/mobile-poster.jpg"
             style={{
               objectFit: 'cover',
               width: '100%',

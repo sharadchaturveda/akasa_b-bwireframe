@@ -4,6 +4,87 @@ import { memo } from 'react';
 import { cn } from '@/lib/utils';
 
 /**
+ * Size configuration for the hamburger button
+ */
+const BUTTON_SIZES = {
+  small: {
+    width: '24px',
+    height: '18px',
+    barHeight: '2px'
+  },
+  medium: {
+    width: '30px',
+    height: '24px',
+    barHeight: '3px'
+  },
+  large: {
+    width: '36px',
+    height: '30px',
+    barHeight: '4px'
+  }
+} as const;
+
+/**
+ * Props for the HamburgerBar component
+ */
+interface HamburgerBarProps {
+  /**
+   * Whether the menu is open
+   */
+  isOpen: boolean;
+
+  /**
+   * The color of the bar
+   */
+  color: string;
+
+  /**
+   * The height of the bar
+   */
+  barHeight: string;
+
+  /**
+   * The transform style for the bar when open
+   */
+  openTransform?: string;
+
+  /**
+   * The opacity of the bar when open
+   */
+  openOpacity?: number;
+}
+
+/**
+ * HamburgerBar Component
+ *
+ * A single bar in the hamburger button.
+ *
+ * @param {HamburgerBarProps} props - The component props
+ * @returns {JSX.Element} The rendered component
+ */
+const HamburgerBar = memo(function HamburgerBar({
+  isOpen,
+  color,
+  barHeight,
+  openTransform = 'none',
+  openOpacity = 1
+}: HamburgerBarProps) {
+  return (
+    <span
+      style={{
+        width: '100%',
+        height: barHeight,
+        backgroundColor: color,
+        borderRadius: '2px',
+        transition: 'transform 0.3s, opacity 0.3s',
+        transform: isOpen ? openTransform : 'none',
+        opacity: isOpen ? openOpacity : 1
+      }}
+    />
+  );
+});
+
+/**
  * Props for the HamburgerButton component
  */
 export interface HamburgerButtonProps {
@@ -11,35 +92,35 @@ export interface HamburgerButtonProps {
    * Whether the menu is open
    */
   isOpen: boolean;
-  
+
   /**
    * Function to call when the button is clicked
    */
   onClick: () => void;
-  
+
   /**
    * Additional CSS classes
    */
   className?: string;
-  
+
   /**
    * The color of the button
    * @default "white"
    */
   color?: string;
-  
+
   /**
    * The size of the button
    * @default "medium"
    */
-  size?: 'small' | 'medium' | 'large';
+  size?: keyof typeof BUTTON_SIZES;
 }
 
 /**
  * HamburgerButton Component
- * 
+ *
  * A button component for toggling a mobile menu.
- * 
+ *
  * @param {HamburgerButtonProps} props - The component props
  * @returns {JSX.Element} The rendered component
  */
@@ -50,27 +131,9 @@ const HamburgerButton = memo(function HamburgerButton({
   color = 'white',
   size = 'medium'
 }: HamburgerButtonProps) {
-  // Size configuration
-  const sizeConfig = {
-    small: {
-      width: '24px',
-      height: '18px',
-      barHeight: '2px'
-    },
-    medium: {
-      width: '30px',
-      height: '24px',
-      barHeight: '3px'
-    },
-    large: {
-      width: '36px',
-      height: '30px',
-      barHeight: '4px'
-    }
-  };
-  
-  const { width, height, barHeight } = sizeConfig[size];
-  
+  const { width, height, barHeight } = BUTTON_SIZES[size];
+  const barHeightNum = parseInt(barHeight);
+
   return (
     <button
       aria-label={isOpen ? "Close menu" : "Open menu"}
@@ -87,35 +150,23 @@ const HamburgerButton = memo(function HamburgerButton({
         height
       }}
     >
-      <span
-        style={{
-          width: '100%',
-          height: barHeight,
-          backgroundColor: color,
-          borderRadius: '2px',
-          transition: 'transform 0.3s, opacity 0.3s',
-          transform: isOpen ? `translateY(${parseInt(barHeight) * 3}px) rotate(45deg)` : 'none'
-        }}
+      <HamburgerBar
+        isOpen={isOpen}
+        color={color}
+        barHeight={barHeight}
+        openTransform={`translateY(${barHeightNum * 3}px) rotate(45deg)`}
       />
-      <span
-        style={{
-          width: '100%',
-          height: barHeight,
-          backgroundColor: color,
-          borderRadius: '2px',
-          transition: 'opacity 0.3s',
-          opacity: isOpen ? 0 : 1
-        }}
+      <HamburgerBar
+        isOpen={isOpen}
+        color={color}
+        barHeight={barHeight}
+        openOpacity={0}
       />
-      <span
-        style={{
-          width: '100%',
-          height: barHeight,
-          backgroundColor: color,
-          borderRadius: '2px',
-          transition: 'transform 0.3s, opacity 0.3s',
-          transform: isOpen ? `translateY(-${parseInt(barHeight) * 3}px) rotate(-45deg)` : 'none'
-        }}
+      <HamburgerBar
+        isOpen={isOpen}
+        color={color}
+        barHeight={barHeight}
+        openTransform={`translateY(-${barHeightNum * 3}px) rotate(-45deg)`}
       />
     </button>
   );

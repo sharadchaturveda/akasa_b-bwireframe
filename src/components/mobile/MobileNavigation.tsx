@@ -47,7 +47,7 @@ export default function MobileNavigation({ navItems }: MobileNavigationProps) {
           top: 0,
           left: 0,
           width: '100%',
-          height: '80px',
+          height: '70px',
           zIndex: 100,
           display: 'flex',
           justifyContent: 'space-between',
@@ -65,7 +65,7 @@ export default function MobileNavigation({ navItems }: MobileNavigationProps) {
             priority={true}
             quality={80}
             style={{
-              height: '100px',  // Increased from 80px to 100px
+              height: '70px',  // Reduced to match header height
               width: 'auto',
               maxWidth: '70vw', // Ensure it doesn't overflow on very small screens
               objectFit: 'contain'
