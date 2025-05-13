@@ -1,0 +1,31 @@
+/**
+ * Fix for testimonial section background
+ * 
+ * This CSS file prevents the background image in the testimonials section
+ * from moving up and down during scrolling.
+ */
+
+/* Target the background div in the testimonials section */
+section.w-full.relative.py-24.overflow-hidden.min-h-\[80vh\].bg-black .absolute.inset-0.w-full.h-full {
+  /* Ensure the background doesn't move during scroll */
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Ensure the background image is properly positioned */
+section.w-full.relative.py-24.overflow-hidden.min-h-\[80vh\].bg-black .absolute.inset-0.w-full.h-full[style*="background-image"] {
+  /* Prevent any movement */
+  transform: none !important;
+  transition: none !important;
+  
+  /* Ensure proper positioning */
+  background-attachment: scroll !important;
+  background-position: center !important;
+}
+
+/* Ensure the overlay is properly positioned */
+section.w-full.relative.py-24.overflow-hidden.min-h-\[80vh\].bg-black .absolute.inset-0.w-full.h-full + .absolute.inset-0.w-full.h-full {
+  /* Prevent any movement */
+  transform: none !important;
+  transition: none !important;
+}
