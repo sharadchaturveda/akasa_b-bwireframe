@@ -3,9 +3,6 @@
 import { memo } from 'react';
 import { cn } from '@/lib/utils';
 
-/**
- * Size configuration for the hamburger button
- */
 const BUTTON_SIZES = {
   small: {
     width: '24px',
@@ -24,44 +21,14 @@ const BUTTON_SIZES = {
   }
 } as const;
 
-/**
- * Props for the HamburgerBar component
- */
 interface HamburgerBarProps {
-  /**
-   * Whether the menu is open
-   */
   isOpen: boolean;
-
-  /**
-   * The color of the bar
-   */
   color: string;
-
-  /**
-   * The height of the bar
-   */
   barHeight: string;
-
-  /**
-   * The transform style for the bar when open
-   */
   openTransform?: string;
-
-  /**
-   * The opacity of the bar when open
-   */
   openOpacity?: number;
 }
 
-/**
- * HamburgerBar Component
- *
- * A single bar in the hamburger button.
- *
- * @param {HamburgerBarProps} props - The component props
- * @returns {JSX.Element} The rendered component
- */
 const HamburgerBar = memo(function HamburgerBar({
   isOpen,
   color,
@@ -84,46 +51,14 @@ const HamburgerBar = memo(function HamburgerBar({
   );
 });
 
-/**
- * Props for the HamburgerButton component
- */
 export interface HamburgerButtonProps {
-  /**
-   * Whether the menu is open
-   */
   isOpen: boolean;
-
-  /**
-   * Function to call when the button is clicked
-   */
   onClick: () => void;
-
-  /**
-   * Additional CSS classes
-   */
   className?: string;
-
-  /**
-   * The color of the button
-   * @default "white"
-   */
   color?: string;
-
-  /**
-   * The size of the button
-   * @default "medium"
-   */
   size?: keyof typeof BUTTON_SIZES;
 }
 
-/**
- * HamburgerButton Component
- *
- * A button component for toggling a mobile menu.
- *
- * @param {HamburgerButtonProps} props - The component props
- * @returns {JSX.Element} The rendered component
- */
 const HamburgerButton = memo(function HamburgerButton({
   isOpen,
   onClick,

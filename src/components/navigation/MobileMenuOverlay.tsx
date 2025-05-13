@@ -5,34 +5,12 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { NavItem } from './NavigationBase';
 
-/**
- * Props for the MobileNavLink component
- */
 interface MobileNavLinkProps {
-  /**
-   * The navigation item
-   */
   item: NavItem;
-
-  /**
-   * Function to call when the link is clicked
-   */
   onClick?: () => void;
-
-  /**
-   * Additional CSS classes
-   */
   className?: string;
 }
 
-/**
- * MobileNavLink Component
- *
- * A navigation link component for mobile navigation.
- *
- * @param {MobileNavLinkProps} props - The component props
- * @returns {JSX.Element} The rendered component
- */
 const MobileNavLink = memo(function MobileNavLink({
   item,
   onClick,
@@ -52,46 +30,19 @@ const MobileNavLink = memo(function MobileNavLink({
   );
 });
 
-/**
- * Props for the MobileMenuOverlay component
- */
 export interface MobileMenuOverlayProps {
-  /**
-   * Whether the menu is open
-   */
   isOpen: boolean;
-
-  /**
-   * Navigation items to display
-   */
   navItems: NavItem[];
-
-  /**
-   * Function to call when a link is clicked
-   */
   onLinkClick?: () => void;
-
-  /**
-   * Additional CSS classes
-   */
   className?: string;
 }
 
-/**
- * MobileMenuOverlay Component
- *
- * An overlay component for mobile navigation.
- *
- * @param {MobileMenuOverlayProps} props - The component props
- * @returns {JSX.Element | null} The rendered component or null if not open
- */
 const MobileMenuOverlay = memo(function MobileMenuOverlay({
   isOpen,
   navItems,
   onLinkClick,
   className
 }: MobileMenuOverlayProps) {
-  // Don't render anything if the menu is closed
   if (!isOpen) return null;
 
   return (
