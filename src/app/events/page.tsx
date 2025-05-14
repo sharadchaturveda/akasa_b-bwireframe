@@ -8,12 +8,25 @@ import CategoriesSection from "@/components/events/CategoriesSection";
 import EventListingsSection from "@/components/events/EventListingsSection";
 
 
+import dynamic from 'next/dynamic';
+
 /**
  * Import components directly for now to ensure they appear
  * We'll optimize with dynamic imports after fixing the layout issues
  */
-import TestimonialsSection from "@/components/events/TestimonialsSection";
-import InquiryFormSection from "@/components/events/InquiryFormSection";
+// import TestimonialsSection from "@/components/events/TestimonialsSection";
+// import InquiryFormSection from "@/components/events/InquiryFormSection";
+
+const TestimonialsSection = dynamic(() => import("@/components/events/TestimonialsSection"), {
+  loading: () => <p>Loading Testimonials...</p>, // Optional loading component
+  ssr: false // Disable server-side rendering for this component
+});
+
+const InquiryFormSection = dynamic(() => import("@/components/events/InquiryFormSection"), {
+  loading: () => <p>Loading Inquiry Form...</p>, // Optional loading component
+  ssr: false // Disable server-side rendering for this component
+});
+
 
 /**
  * EventsPage Component
@@ -97,7 +110,8 @@ export default function EventsPage() {
       image: "/images/events/listings/birthday.jpg", // Verify this path exists in your public folder
       category: "birthday",
       features: ["Customized menu", "Dedicated service staff", "Elegant table settings", "Capacity: 8-50 guests"],
-      price: "Starting at $1,200"
+      price: "Contact for pricing",
+      termsApply: true
     },
     {
       id: 2,
@@ -106,7 +120,7 @@ export default function EventsPage() {
       image: "/images/events/listings/anniversary.jpg",
       category: "anniversary",
       features: ["Elegant dining setup", "Romantic ambiance", "Special anniversary menu", "Complimentary glass of prosecco for the couple"],
-      price: "Starting at $180 per couple",
+      price: "Contact for pricing",
       termsApply: true
     },
     {
@@ -116,7 +130,8 @@ export default function EventsPage() {
       image: "/images/events/listings/office-lunch.jpg",
       category: "office-lunch",
       features: ["Express service option", "Customizable menu packages", "Private dining area", "Capacity: up to 50 guests"],
-      price: "Contact for pricing"
+      price: "Contact for pricing",
+      termsApply: true
     },
     {
       id: 4,
@@ -125,7 +140,8 @@ export default function EventsPage() {
       image: "/images/events/listings/office-parties.jpg",
       category: "office-parties",
       features: ["Full venue rental option", "Custom cocktail creation", "Entertainment options", "Capacity: up to 60 guests"],
-      price: "Starting at $2,500"
+      price: "Contact for pricing",
+      termsApply: true
     },
     {
       id: 5,
@@ -135,6 +151,7 @@ export default function EventsPage() {
       category: "networking",
       features: ["Professional setup", "Audio-visual equipment", "Networking-friendly layout", "Catering options available"],
       price: "Contact for pricing",
+      termsApply: true,
       pdfMenu: "/menus/event-menu.pdf"
     }
   ];

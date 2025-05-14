@@ -25,10 +25,10 @@ const GallerySection = memo(function GallerySection() {
             <Image src="/images/unused/event3.jpg"
               alt="Private dining"
               fill
+              priority
               sizes="100vw"
               className="object-cover"
               quality={75}
-              loading="lazy"
               style={{
                 objectPosition: "center"
               }}
@@ -51,5 +51,3 @@ const GallerySection = memo(function GallerySection() {
 });
 
 export default GallerySection;
-
-

@@ -103,13 +103,12 @@ export default function MenuPageClient() {
       </Suspense>
 
       <Suspense fallback={<div className="h-[50vh] bg-black"></div>}>
-        <FlavorExperienceSection />
+        <FeaturedDishesSection />
       </Suspense>
 
       <Suspense fallback={<div className="h-[50vh] bg-black"></div>}>
-        <FeaturedDishesSection />
+        <FlavorExperienceSection />
       </Suspense>
     </PageLayout>
   );
 }
-

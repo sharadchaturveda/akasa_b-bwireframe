@@ -30,10 +30,10 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
   // Featured signature dishes - vegetarian dishes first
   const featuredDishes = [
     {
-      name: "Paronthia Naan",
-      description: "Flaky, golden naan folded six times over with whispers of saffron and crushed nuts—each bite a soft, buttery echo of ancient feasts",
-      image: "/images/menu/featured-dishes/paronthia-naan.jpg",
-      price: "$8",
+      name: "Galouti Kebab",
+      description: "Melt-in-your-mouth lamb patties, infused with aromatic spices and pan-seared to perfection—a royal delicacy from the kitchens of Lucknow",
+      image: "/images/menu/featured-dishes/galouti.jpg",
+      price: "$25",
       category: "Signature"
     },
     {
@@ -51,11 +51,11 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
       category: "Vegetarian"
     },
     {
-      name: "Akasa-E-Lobster",
-      description: "Succulent Canadian lobster, bathed in a spiced yogurt marinade, kissed by fire and laced with red chili—plush, fiery, and unforgettable",
-      image: "/images/menu/featured-dishes/akasa-e-lobster.jpg",
-      price: "$72",
-      category: "Seafood"
+      name: "Paronthia Naan",
+      description: "Flaky, golden naan folded six times over with whispers of saffron and crushed nuts—each bite a soft, buttery echo of ancient feasts",
+      image: "/images/menu/featured-dishes/paronthia-naan.jpg",
+      price: "$8",
+      category: "Signature"
     },
     {
       name: "Tandoori Prawns",
@@ -210,5 +210,3 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
 });
 
 export default FeaturedDishesSection;
-
-

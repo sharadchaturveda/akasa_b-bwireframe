@@ -362,7 +362,7 @@ const LoyaltyProgramSection = memo(function LoyaltyProgramSection() {
               </h2>
 
               <p className="text-base md:text-lg font-montserrat mb-8 text-white/90 leading-relaxed first-letter:text-4xl first-letter:font-playfair first-letter:text-[#E6C78B] first-letter:mr-1 first-letter:float-left">
-                Join our exclusive loyalty program and earn points with every visit. Redeem your points for complimentary dishes, special experiences, and unique perks available only to our loyal guests.
+                Join our exclusive loyalty program, a visit-based program where you earn discounts and special treats based on your number of visits. Redeem your points for complimentary dishes, special experiences, and unique perks available only to our loyal guests.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -455,6 +455,3 @@ export default function OffersPage() {
     </main>
   );
 }
-
-
-

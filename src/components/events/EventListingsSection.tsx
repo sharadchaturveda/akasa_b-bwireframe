@@ -88,6 +88,7 @@ const EventListingsSection = memo(function EventListingsSection({
           Odd-indexed events (1, 3, 5, etc.) → image right, text left
         */}
         {filteredEvents.map((event, index) => {
+          console.log(`Event: ${event.title}, termsApply: ${event.termsApply}`);
           // Use standard flex-row for all, but control order for specific categories
           const isSpecialCategory = event.category === 'anniversary' || event.category === 'office-parties';
 
@@ -263,5 +264,3 @@ const EventListingsSection = memo(function EventListingsSection({
 });
 
 export default EventListingsSection;
-
-

@@ -38,7 +38,7 @@ const WhatsHappeningSection = memo(function WhatsHappeningSection() {
             duration={8}
             opacity={1}
             quality={75}
-            priority={false}
+            priority={true}
             sizes="(max-width: 768px) 100vw, 60vw"
             objectPosition="center"
             withOverlay={true}
@@ -55,7 +55,7 @@ const WhatsHappeningSection = memo(function WhatsHappeningSection() {
             isAnimated={false}
             opacity={1}
             quality={75}
-            priority={false}
+            priority={true}
             sizes="(max-width: 768px) 100vw, 40vw"
             objectPosition="center"
             withOverlay={true}
@@ -110,4 +110,3 @@ const WhatsHappeningSection = memo(function WhatsHappeningSection() {
 });
 
 export default WhatsHappeningSection;
-

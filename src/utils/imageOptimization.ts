@@ -22,7 +22,7 @@ import type { StaticImport } from 'next/dist/shared/lib/get-img-props';
  */
 export function getOptimizedImageProps({
   src,
-  quality = 75,
+  quality = 60,
   priority = false,
 }: {
   src: string | StaticImageData | StaticImport;

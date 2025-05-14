@@ -141,6 +141,20 @@
   }
 }
 
+/* Subheading for parking tables */
+.dining-info-subheading {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .dining-info-subheading {
+    text-align: left;
+  }
+}
+
+
 /* Text content */
 .dining-info-text {
   color: #E6C78B;
@@ -274,3 +288,32 @@
 }
 
 /* Button styling is now handled by the Button component */
+
+/* Parking Rates Table Styling */
+.dining-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem; /* Add some space between tables */
+  border: 1px solid #E6C78B; /* Golden border around the table */
+}
+
+.dining-info-table th,
+.dining-info-table td {
+  border: 1px solid #E6C78B; /* Golden borders for cells */
+  padding: 0.75rem;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+
+.dining-info-table th {
+  background-color: rgba(230, 199, 139, 0.1); /* Light golden background for headers */
+  font-weight: 600;
+  color: #E6C78B;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.dining-info-table-row:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.05); /* Subtle zebra striping */
+}

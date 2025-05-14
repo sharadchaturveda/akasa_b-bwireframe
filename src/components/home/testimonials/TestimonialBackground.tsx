@@ -26,7 +26,7 @@ const TestimonialBackground = memo(function TestimonialBackground({
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
-              transform: `translateY(${scrollY * ANIMATIONS.PARALLAX_FACTOR}px)`, // Subtle parallax effect
+              transform: 'none', // Removed parallax effect
               transition: 'transform 0.1s ease-out',
               width: '100%',
               height: `${LAYOUT.BACKGROUND_HEIGHT_PERCENT}%`, // Extend beyond the container to avoid gaps
@@ -49,4 +49,3 @@ const TestimonialBackground = memo(function TestimonialBackground({
 });
 
 export default TestimonialBackground;
-

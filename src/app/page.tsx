@@ -11,6 +11,7 @@ import GallerySection from "@/components/home/GallerySection";
 import WhatsHappeningSection from "@/components/home/WhatsHappeningSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import VisitUsSection from "@/components/home/VisitUsSection";
+import { applyPassiveScrollListeners } from "@/utils/scrollUtils";
 
 export default function HomePage() {
   useEffect(() => {
@@ -25,6 +26,9 @@ export default function HomePage() {
         };
       }
     });
+
+    // Apply passive scroll listeners
+    applyPassiveScrollListeners();
   }, []);
 
   return (
@@ -42,6 +46,7 @@ export default function HomePage() {
               alt="Akasa restaurant ambiance"
               fill
               priority
+              loading="eager"
               sizes="100vw"
               className="object-cover"
             />

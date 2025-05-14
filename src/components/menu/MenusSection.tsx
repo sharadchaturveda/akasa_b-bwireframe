@@ -219,11 +219,11 @@ export default function MenusSection() {
       </section>
 
       {/* Add the Grab & Go section */}
+      {/*
       <Suspense fallback={<div className="h-[50vh] bg-black"></div>}>
         <GrabAndGoSection />
       </Suspense>
+      */}
     </>
   );
 }
-
-

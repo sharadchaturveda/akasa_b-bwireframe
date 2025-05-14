@@ -1,6 +1,6 @@
 /**
  * Optimized Image Loader
- * 
+ *
  * A utility for optimizing image loading and preventing reloads during scroll.
  * This implementation uses a single IntersectionObserver instance to handle
  * all image loading, which is more efficient than creating multiple observers.
@@ -18,7 +18,7 @@ const processedBackgrounds = new Set<string>();
 
 /**
  * Initialize optimized image loading
- * 
+ *
  * This function sets up a single IntersectionObserver for all images
  * and applies optimizations to prevent reloading during scroll.
  */
@@ -39,31 +39,31 @@ export function initOptimizedImageLoading(): void {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const img = entry.target as HTMLImageElement;
-          
+
           // Generate a unique ID for this image
           const imageId = img.src || img.id || `img-${img.getAttribute('alt')}`;
-          
+
           // Skip if already processed
           if (processedImages.has(imageId)) {
             return;
           }
-          
+
           // Mark as processed
           processedImages.add(imageId);
-          
+
           // Handle data-src attribute if present
           if (img.dataset.src) {
             img.src = img.dataset.src;
             img.removeAttribute('data-src');
           }
-          
+
           // Stop observing this image
           imageObserver?.unobserve(img);
         }
       });
     },
     {
-      rootMargin: '200px', // Load images before they come into view
+      rootMargin: '500px', // Load images before they come into view
       threshold: 0.01 // Trigger when just 1% of the element is visible
     }
   );
@@ -74,31 +74,31 @@ export function initOptimizedImageLoading(): void {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const element = entry.target as HTMLElement;
-          
+
           // Generate a unique ID for this element
           const elementId = element.id || `bg-${element.className.replace(/\s+/g, '-')}`;
-          
+
           // Skip if already processed
           if (processedBackgrounds.has(elementId)) {
             return;
           }
-          
+
           // Mark as processed
           processedBackgrounds.add(elementId);
-          
+
           // Handle data-background attribute if present
           if (element.dataset.background) {
             element.style.backgroundImage = element.dataset.background;
             element.removeAttribute('data-background');
           }
-          
+
           // Stop observing this element
           backgroundObserver?.unobserve(element);
         }
       });
     },
     {
-      rootMargin: '200px', // Load backgrounds before they come into view
+      rootMargin: '500px', // Load backgrounds before they come into view
       threshold: 0.01 // Trigger when just 1% of the element is visible
     }
   );
@@ -117,7 +117,7 @@ function optimizeAllImages(): void {
     if (!img.hasAttribute('decoding')) {
       img.setAttribute('decoding', 'async');
     }
-    
+
     // Only observe images that aren't already loaded
     if (!img.complete && !processedImages.has(img.src)) {
       imageObserver?.observe(img);
@@ -138,12 +138,12 @@ export function cleanupImageObservers(): void {
     imageObserver.disconnect();
     imageObserver = null;
   }
-  
+
   if (backgroundObserver) {
     backgroundObserver.disconnect();
     backgroundObserver = null;
   }
-  
+
   // Clear processed sets
   processedImages.clear();
   processedBackgrounds.clear();

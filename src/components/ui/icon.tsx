@@ -1,38 +1,38 @@
 /**
  * Icon Component
- * 
+ *
  * A reusable component for rendering SVG icons with consistent styling.
  * This component centralizes icon rendering across the application.
  */
 import { memo } from 'react';
 import { cn } from '@/lib/utils';
 
-export type IconName = 'clock' | 'location' | 'phone' | 'email' | 'menu' | 'close';
+export type IconName = 'clock' | 'location' | 'phone' | 'email' | 'menu' | 'close' | 'map-pin' | 'calendar';
 
 export interface IconProps {
   /**
    * The name of the icon to render
    */
   name: IconName;
-  
+
   /**
    * The size of the icon in pixels
    * @default 24
    */
   size?: number;
-  
+
   /**
    * The color of the icon
    * @default "currentColor"
    */
   color?: string;
-  
+
   /**
    * The stroke width of the icon
    * @default 1.5
    */
   strokeWidth?: number;
-  
+
   /**
    * Additional CSS classes
    */
@@ -41,9 +41,9 @@ export interface IconProps {
 
 /**
  * Icon Component
- * 
+ *
  * Renders an SVG icon based on the provided name.
- * 
+ *
  * @param {IconProps} props - The component props
  * @returns {JSX.Element} The rendered icon
  */
@@ -108,6 +108,22 @@ const Icon = memo(function Icon({
         <svg {...iconProps}>
           <line x1="18" y1="6" x2="6" y2="18" />
           <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      );
+    case 'map-pin':
+      return (
+        <svg {...iconProps}>
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+          <circle cx="12" cy="10" r="3" />
+        </svg>
+      );
+    case 'calendar':
+      return (
+        <svg {...iconProps}>
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+          <line x1="16" y1="2" x2="16" y2="6" />
+          <line x1="8" y1="2" x2="8" y2="6" />
+          <line x1="3" y1="10" x2="21" y2="10" />
         </svg>
       );
     default:

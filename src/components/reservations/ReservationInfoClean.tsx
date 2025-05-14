@@ -11,7 +11,8 @@ import { Button } from "@/components/ui/button";
  * No optimization scripts, no interference, just clean code.
  */
 const ReservationInfo = memo(function ReservationInfo() {
-  const [isMobile, setIsMobile] = useState(false);
+  // State to track if device is mobile for responsive adjustments
+  const [, setIsMobile] = useState(false);
 
   // Load our clean CSS
   useEffect(() => {
@@ -128,6 +129,79 @@ const ReservationInfo = memo(function ReservationInfo() {
           </div>
         </div>
 
+        {/* Parking Rates */}
+        <div className="dining-info-section mb-16 border-b border-[#E6C78B]/30 pb-12">
+          <div className="dining-info-section-with-icon">
+            <div className="dining-info-icon">
+              <svg className="dining-info-icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3l1.65 3.824A9.953 9.953 0 003 12c0 2.97.96 5.72 2.65 7.926L3 21m18-18l-1.65 3.824A9.953 9.953 0 0121 12c0 2.97-.96 5.72-2.65 7.926L21 21m-1.65-3.824A9.953 9.953 0 0012 21c-2.97 0-5.72-.96-7.926-2.65L3 18.35m18-14.7l-1.65-3.824A9.953 9.953 0 0012 3c-2.97 0-5.72.96-7.926 2.65L3 5.65" />
+              </svg>
+            </div>
+            <div className="dining-info-content">
+              <h3 className="dining-info-heading font-playfair">Parking Rates</h3>
+              <div className="dining-info-content-inner">
+                {/* Car Parking Rates Table */}
+                <h4 className="dining-info-subheading font-playfair text-[#E6C78B] mb-4">Car Parking Rates</h4>
+                <table className="w-full border-collapse dining-info-table">
+                  <thead>
+                    <tr>
+                      <th className="dining-info-table-header">Days</th>
+                      <th className="dining-info-table-header">Time Range</th>
+                      <th className="dining-info-table-header">Rate</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="dining-info-table-row">
+                      <td className="dining-info-table-cell">Monday to Friday</td>
+                      <td className="dining-info-table-cell">7:00 am to 5:59 pm</td>
+                      <td className="dining-info-table-cell">$2.90 per 30 minutes</td>
+                    </tr>
+                    <tr className="dining-info-table-row">
+                      <td className="dining-info-table-cell">Monday to Friday</td>
+                      <td className="dining-info-table-cell">6:00 pm to 6:59 am</td>
+                      <td className="dining-info-table-cell">$3.80 per entry</td>
+                    </tr>
+                    <tr className="dining-info-table-row">
+                      <td className="dining-info-table-cell">Saturday</td>
+                      <td className="dining-info-table-cell">7:00 am to 12:59 pm</td>
+                      <td className="dining-info-table-cell">$2.90 per 30 minutes</td>
+                    </tr>
+                    <tr className="dining-info-table-row">
+                      <td className="dining-info-table-cell">Saturday</td>
+                      <td className="dining-info-table-cell">1:00 pm to 6:59 am</td>
+                      <td className="dining-info-table-cell">$3.80 per entry</td>
+                    </tr>
+                    <tr className="dining-info-table-row">
+                      <td className="dining-info-table-cell">Sunday and Public Holidays</td>
+                      <td className="dining-info-table-cell">7:00 am to 6:59 am</td>
+                      <td className="dining-info-table-cell">$3.80 per entry</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                {/* Motorcycle Parking Rates Table */}
+                <h4 className="dining-info-subheading font-playfair text-[#E6C78B] mt-8 mb-4">Motorcycle Parking Rates</h4>
+                <table className="w-full border-collapse dining-info-table">
+                  <thead>
+                    <tr>
+                      <th className="dining-info-table-header">Days</th>
+                      <th className="dining-info-table-header">Time Range</th>
+                      <th className="dining-info-table-header">Rate</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="dining-info-table-row">
+                      <td className="dining-info-table-cell">Monday to Friday</td>
+                      <td className="dining-info-table-cell">7:00 am to 6:59 am</td>
+                      <td className="dining-info-table-cell">$3.40 per entry</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Reservation Policies */}
         <div className="dining-info-section mb-16 border-b border-[#E6C78B]/30 pb-12">
           <div className="dining-info-section-with-icon">
@@ -173,15 +247,15 @@ const ReservationInfo = memo(function ReservationInfo() {
               <div className="dining-info-content-inner">
                 <div className="dining-info-label-value">
                   <span className="dining-info-label">Phone:</span>
-                  <span className="dining-info-value">+65 6123 4567</span>
+                  <span className="dining-info-value">+65 80121181</span>
                 </div>
                 <div className="dining-info-label-value">
                   <span className="dining-info-label">Email:</span>
-                  <span className="dining-info-value break-all">reservations@akasa.com</span>
+                  <span className="dining-info-value break-all">info@akasa.sg</span>
                 </div>
                 <div className="dining-info-label-value">
                   <span className="dining-info-label">For Events:</span>
-                  <span className="dining-info-value break-all">events@akasa.com</span>
+                  <span className="dining-info-value break-all">info@akasa.sg</span>
                 </div>
               </div>
             </div>

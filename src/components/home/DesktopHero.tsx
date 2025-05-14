@@ -119,6 +119,7 @@ const DesktopHero = () => {
               alt={image.alt}
               fill
               priority={index === 0}
+              loading="eager"
               sizes="100vw"
               className="object-cover opacity-60"
             />
@@ -139,6 +140,7 @@ const DesktopHero = () => {
             width={600} /* Increased from LOGO.SIZES.DESKTOP.width (500) */
             height={240} /* Increased from LOGO.SIZES.DESKTOP.height (200) */
             priority
+            loading="eager"
             className="w-full h-full object-contain opacity-100"
           />
         </div>
@@ -185,5 +187,3 @@ const DesktopHero = () => {
 };
 
 export default DesktopHero;
-
-

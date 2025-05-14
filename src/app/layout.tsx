@@ -65,6 +65,24 @@ export default function RootLayout({
           fetchPriority="high"
         />
 
+        {/* Preload testimonial background image */}
+        <link
+          rel="preload"
+          href="/images/home/testimonials/background-alt.jpg"
+          as="image"
+          type="image/jpeg" // Assuming it's a JPEG, adjust if needed
+          fetchPriority="high"
+        />
+
+        {/* Preload VisitUs background image */}
+        <link
+          rel="preload"
+          href="/images/home/gallery/location.jpg?quality=75"
+          as="image"
+          type="image/jpeg"
+          fetchPriority="high"
+        />
+
         {/* Preload WebM video for mobile */}
         <link
           rel="preload"
@@ -118,14 +136,14 @@ export default function RootLayout({
             z-index: 40;
             display: flex;
             justify-content: center;
-            padding-top: 6rem;
+            padding-top: 8rem;
             height: 180px;
             min-height: 180px;
             overflow: visible;
           }
 
           .hero-text-container {
-            margin-top: 8rem;
+            margin-top: 10rem;
             padding-top: 2rem;
             text-align: center;
             display: flex;

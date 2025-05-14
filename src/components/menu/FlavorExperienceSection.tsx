@@ -45,7 +45,7 @@ const FlavorExperienceSection = memo(function FlavorExperienceSection() {
               </h2>
 
               <p className="font-montserrat text-white/90 mb-8 text-base md:text-lg leading-relaxed">
-                {"Our menu celebrates India's diverse culinary landscape, from aromatic North Indian spices to South Indian coconut-infused curries. Each dish reflects our commitment to tradition and quality."}
+                {"Our menu celebrates India's rich culinary heritage, with a focus on the bold and aromatic flavors of North India.\nEvery dish reflects our commitment to tradition, authenticity, and uncompromising quality."}
               </p>
 
               {/* Fancy animated button */}
@@ -159,6 +159,3 @@ const FlavorExperienceSection = memo(function FlavorExperienceSection() {
 });
 
 export default FlavorExperienceSection;
-
-
-
