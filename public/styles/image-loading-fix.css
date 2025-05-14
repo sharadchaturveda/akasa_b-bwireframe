@@ -1,0 +1,93 @@
+/**
+ * Image Loading Fix CSS
+ * 
+ * This CSS file contains styles to prevent images from flickering or disappearing
+ * during scrolling on mobile devices.
+ */
+
+/* Apply to all images to prevent flickering */
+img {
+  /* Prevent content visibility changes during scroll */
+  content-visibility: auto;
+  
+  /* Ensure smooth transitions */
+  transition: opacity 0.2s ease-in-out;
+  
+  /* Use async decoding for all images */
+  decoding: async;
+}
+
+/* Apply only on mobile devices */
+@media (max-width: 767px) {
+  /* Prevent image flickering during scroll */
+  img {
+    /* Prevent unloading during scroll */
+    will-change: transform;
+    
+    /* Ensure smooth transitions */
+    transition: none !important;
+    
+    /* Prevent content visibility changes during scroll */
+    content-visibility: visible !important;
+    
+    /* Improve image rendering */
+    image-rendering: auto;
+  }
+  
+  /* Optimize video elements */
+  video {
+    /* Prevent unloading during scroll */
+    will-change: transform;
+    
+    /* Ensure smooth transitions */
+    transition: none !important;
+  }
+  
+  /* Optimize scrolling */
+  html, body {
+    /* Enable momentum-based scrolling on touch devices */
+    -webkit-overflow-scrolling: touch;
+    
+    /* Prevent overscroll effects */
+    overscroll-behavior: none;
+  }
+}
+
+/* Optimize for touch devices */
+@media (pointer: coarse) {
+  /* Improve touch targets */
+  button, a, input, select, textarea {
+    touch-action: manipulation;
+  }
+  
+  /* Disable hover effects that might cause jank */
+  [class*="hover:"] {
+    transition: none !important;
+  }
+}
+
+/* Optimize for high-performance devices */
+@media (min-width: 768px) {
+  /* Only apply hardware acceleration to critical elements */
+  .hero-section img,
+  .hero-section video {
+    transform: translateZ(0);
+  }
+  
+  /* Optimize critical animations only */
+  .animate-critical {
+    will-change: transform, opacity;
+  }
+}
+
+/* Prevent layout shifts during image loading */
+.image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ensure images maintain aspect ratio */
+img {
+  max-width: 100%;
+  height: auto;
+}

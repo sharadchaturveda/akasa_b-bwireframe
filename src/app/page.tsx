@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from 'react';
-import Image from "next/image";
 import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
 import ResponsiveHero from "@/components/home/ResponsiveHero";
@@ -11,10 +10,13 @@ import GallerySection from "@/components/home/GallerySection";
 import WhatsHappeningSection from "@/components/home/WhatsHappeningSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import VisitUsSection from "@/components/home/VisitUsSection";
-import { applyPassiveScrollListeners } from "@/utils/scrollUtils";
+import { applyScrollPerformanceOptimizations } from "@/utils/optimizedScrollUtils";
 
 export default function HomePage() {
   useEffect(() => {
+    // Apply scroll performance optimizations
+    applyScrollPerformanceOptimizations();
+
     // Add loaded class to images when they finish loading for better performance
     const images = document.querySelectorAll('img');
     images.forEach((img) => {
@@ -26,9 +28,6 @@ export default function HomePage() {
         };
       }
     });
-
-    // Apply passive scroll listeners
-    applyPassiveScrollListeners();
   }, []);
 
   return (
@@ -37,50 +36,8 @@ export default function HomePage() {
 
       {/* Hero and Brand Philosophy Sections - Wrapped to eliminate gap on mobile */}
       <div className="flex flex-col section-wrapper" style={{ marginBottom: '-2px' }}>
-        {/* Direct video element for mobile */}
-        <div className="md:hidden relative w-full h-screen overflow-hidden bg-black">
-          {/* Fallback image */}
-          <div className="absolute inset-0">
-            <Image
-              src="/images/home/hero/mobile-poster.jpg"
-              alt="Akasa restaurant ambiance"
-              fill
-              priority
-              loading="eager"
-              sizes="100vw"
-              className="object-cover"
-            />
-          </div>
-
-          {/* Direct video element - optimized for performance */}
-          <video
-            className="absolute inset-0 w-full h-full z-10"
-            muted
-            playsInline
-            loop
-            autoPlay
-            preload="auto"
-            poster="/images/home/hero/mobile-poster.jpg"
-            style={{
-              objectFit: 'cover',
-              width: '100%',
-              height: '100%',
-              transform: 'translateZ(0)' // Hardware acceleration
-            }}
-          >
-            {/* WebM format first for better performance */}
-            <source src="/images/home/hero/mobile-video/heromobilevid.webm" type="video/webm" />
-            {/* MP4 as fallback */}
-            <source src="/images/home/hero/mobile-video/heromobilevid.mp4" type="video/mp4" />
-          </video>
-
-          {/* No text overlay on mobile as per client request */}
-        </div>
-
-        {/* Desktop hero */}
-        <div className="hidden md:block">
-          <ResponsiveHero />
-        </div>
+        {/* Responsive hero component handles both mobile and desktop */}
+        <ResponsiveHero />
 
         <BrandPhilosophy />
       </div>

@@ -8,6 +8,8 @@ import '@/styles/mobile-section-fix.css';
 import '@/styles/mobile-hero-fix.css';
 import '../styles/hero-position-fix.css';
 import '@/styles/scroll-performance.css';
+// Add our new image loading fix CSS
+import '../styles/image-loading-fix.css';
 
 // Import components
 import MobileNavigation from '@/components/navigation/MobileNavigation';

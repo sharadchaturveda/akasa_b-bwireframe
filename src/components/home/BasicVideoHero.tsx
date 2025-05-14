@@ -1,13 +1,13 @@
 "use client";
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, memo } from 'react';
 import Image from 'next/image';
 
 /**
- * A very basic video hero component with minimal logic
+ * A very basic video hero component with minimal logic and optimized performance
  * Focused solely on playing the video with a fallback image
  */
-const BasicVideoHero = () => {
+const BasicVideoHero = memo(function BasicVideoHero() {
   // Reference to video element
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -25,18 +25,22 @@ const BasicVideoHero = () => {
     const playVideo = async () => {
       try {
         await video.play();
-        // Video playing successfully
       } catch (error) {
-        console.error('Video play failed:', error);
+        // Silently fail - fallback image will be shown
       }
     };
 
     // Play video after a short delay
-    setTimeout(playVideo, 100);
+    const timer = setTimeout(playVideo, 100);
 
     // Clean up
     return () => {
-      video.pause();
+      clearTimeout(timer);
+      if (video) {
+        video.pause();
+        video.src = '';
+        video.load();
+      }
     };
   }, []);
 
@@ -49,8 +53,8 @@ const BasicVideoHero = () => {
           alt="Akasa restaurant ambiance"
           fill
           priority
-          loading="eager"
           sizes="100vw"
+          quality={60}
           className="object-cover"
         />
       </div>
@@ -63,21 +67,16 @@ const BasicVideoHero = () => {
         playsInline
         loop
         autoPlay
-        preload="auto"
         poster="/images/home/hero/mobile-poster.jpg"
         style={{
           objectFit: 'cover',
-          width: '100%',
-          height: '100%'
         }}
       >
         <source src="/images/home/hero/mobile-video/heromobilevid.webm" type="video/webm" />
         <source src="/images/home/hero/mobile-video/heromobilevid.mp4" type="video/mp4" />
       </video>
-
-      {/* No text overlay on mobile as per client request */}
     </div>
   );
-};
+});
 
 export default BasicVideoHero;

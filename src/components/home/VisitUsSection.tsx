@@ -105,8 +105,31 @@ export default function VisitUsSection() {
               fullWidth={isMobile}
               className="font-montserrat"
             >
-              <Icon name="map-pin" className="mr-2 h-4 w-4" />
-              <span>Get Directions</span>
+              <div className="inline-flex items-center justify-center">
+                {isMobile ? (
+                  <>
+                    <div className="flex items-center justify-center w-5 h-5 mr-1.5">
+                      <Icon
+                        name="map-pin"
+                        size={14}
+                        color="#E6C78B"
+                        strokeWidth={2}
+                      />
+                    </div>
+                    <span className="text-xs">Get Directions</span>
+                  </>
+                ) : (
+                  <>
+                    <Icon
+                      name="map-pin"
+                      className="mr-2"
+                      size={16}
+                      strokeWidth={2}
+                    />
+                    <span>Get Directions</span>
+                  </>
+                )}
+              </div>
             </Button>
           </Link>
           <Link href="/reservations">
@@ -117,8 +140,31 @@ export default function VisitUsSection() {
               fullWidth={isMobile}
               className="font-montserrat"
             >
-              <Icon name="calendar" className="mr-2 h-4 w-4" />
-              <span>Reserve a Table</span>
+              <div className="inline-flex items-center justify-center">
+                {isMobile ? (
+                  <>
+                    <div className="flex items-center justify-center w-5 h-5 mr-1.5">
+                      <Icon
+                        name="calendar"
+                        size={14}
+                        color="#E6C78B"
+                        strokeWidth={2}
+                      />
+                    </div>
+                    <span className="text-xs">Reserve a Table</span>
+                  </>
+                ) : (
+                  <>
+                    <Icon
+                      name="calendar"
+                      className="mr-2"
+                      size={16}
+                      strokeWidth={2}
+                    />
+                    <span>Reserve a Table</span>
+                  </>
+                )}
+              </div>
             </Button>
           </Link>
         </div>
