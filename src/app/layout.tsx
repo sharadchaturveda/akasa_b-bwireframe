@@ -14,6 +14,8 @@ import '../styles/image-loading-fix.css';
 import '../styles/font-fallbacks.css';
 // Add hero loading fix CSS
 import '../styles/hero-loading-fix.css';
+// Add critical CSS
+import '../styles/critical.css';
 
 // Import components
 import MobileNavigation from '@/components/navigation/MobileNavigation';
@@ -104,65 +106,7 @@ export default function RootLayout({
           fetchPriority="high"
         />
 
-        {/* Critical CSS for immediate loading - prevents flash of content on mobile */}
-        <style dangerouslySetInnerHTML={{ __html: `
-          @media (max-width: 767px) {
-            /* Hide desktop content */
-            .hero-section > div.hidden {
-              display: none !important;
-            }
-
-            /* Hide logo on mobile */
-            .hero-section .logo,
-            .hero-section [alt="Akasa Logo"] {
-              display: none !important;
-            }
-
-            /* Background image */
-            .hero-section {
-              background-color: #000 !important;
-              background-image: url('/images/home/hero/hero-home.jpg') !important;
-              background-size: cover !important;
-              background-position: center !important;
-              background-repeat: no-repeat !important;
-            }
-
-            /* Style text in mobile hero */
-            .hero-section h1 {
-              font-size: 2rem !important;
-              line-height: 1.2 !important;
-              margin-bottom: 1rem !important;
-              text-shadow: 0 2px 4px rgba(0,0,0,0.5) !important;
-            }
-
-            /* No video styling */
-          }
-
-          /* Critical hero positioning - ensures logo and text are properly positioned */
-          .hero-logo-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 40;
-            display: flex;
-            justify-content: center;
-            padding-top: 8rem;
-            height: 180px;
-            min-height: 180px;
-            overflow: visible;
-          }
-
-          .hero-text-container {
-            margin-top: 10rem;
-            padding-top: 2rem;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-          }
-        ` }} />
+        {/* Critical CSS moved to external file for better performance */}
 
         {/* External script for mobile video optimization - moved from inline for better performance */}
         <script src="/scripts/mobileVideoOptimization.js" async></script>

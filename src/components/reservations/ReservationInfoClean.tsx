@@ -72,7 +72,7 @@ const ReservationInfo = memo(function ReservationInfo() {
 
       <div className="dining-info-sections">
         {/* Hours */}
-        <div className="dining-info-section mb-16 pb-12">
+        <div className="dining-info-section mb-16 border-b border-[#E6C78B]/30 pb-12">
           <div className="dining-info-section-with-icon">
             <div className="dining-info-icon">
               <svg className="dining-info-icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

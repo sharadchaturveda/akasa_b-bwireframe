@@ -19,33 +19,29 @@ import DesktopHero from './DesktopHero';
 const ImprovedResponsiveHero = memo(function ImprovedResponsiveHero() {
   // Use the device detection hook with complete detection status
   const { isMobile, isDetectionComplete } = useDeviceDetection();
-  
+
   // State to track if component is mounted (for SSR hydration issues)
   const [isMounted, setIsMounted] = useState(false);
-  
+
   // Set mounted state after component mounts
   useEffect(() => {
     setIsMounted(true);
   }, []);
-  
-  // Determine what to render based on detection and mount status
-  const renderHero = () => {
-    // If not mounted yet (SSR) or detection not complete, show loading state
-    if (!isMounted || !isDetectionComplete) {
-      return (
-        <div className="absolute inset-0 bg-black flex items-center justify-center">
-          {/* Optional: Add a subtle loading indicator here if needed */}
-        </div>
-      );
-    }
-    
-    // Once detection is complete, render the appropriate hero
-    return isMobile ? <PureMobileHero /> : <DesktopHero />;
-  };
 
+  // Simplified rendering logic - no function call overhead
+  // Early return for loading state
+  if (!isMounted || !isDetectionComplete) {
+    return (
+      <section className="relative w-full h-screen bg-black overflow-hidden m-0 p-0 hero-section">
+        <div className="absolute inset-0 bg-black"></div>
+      </section>
+    );
+  }
+
+  // Directly render the appropriate component based on device type
   return (
     <section className="relative w-full h-screen bg-black overflow-hidden m-0 p-0 hero-section">
-      {renderHero()}
+      {isMobile ? <PureMobileHero /> : <DesktopHero />}
     </section>
   );
 });
