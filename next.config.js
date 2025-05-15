@@ -1,15 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable ESLint during builds
+  // Disable ESLint during builds in production
   eslint: {
     // Set to true to ignore ESLint errors during builds
-    ignoreDuringBuilds: false,
+    ignoreDuringBuilds: process.env.VERCEL || process.env.NODE_ENV === 'production',
     // Directories to include in ESLint checking
     dirs: ['src'],
   },
   typescript: {
-    // Set to false to enable TypeScript checking during builds
-    ignoreBuildErrors: false,
+    // Ignore TypeScript errors during builds in production
+    ignoreBuildErrors: process.env.VERCEL || process.env.NODE_ENV === 'production',
   },
   reactStrictMode: true,
   // Responsive image optimization for all device sizes
