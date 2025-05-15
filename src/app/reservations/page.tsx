@@ -39,13 +39,13 @@ const ReservationsPage = memo(function ReservationsPage() {
         <div className="container mx-auto px-4 md:px-8 relative z-10">
           {/* Two-column layout for desktop */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
-            {/* Reservation form */}
-            <div className="order-2 lg:order-1">
+            {/* Reservation form - Order 1 on mobile to appear at the top */}
+            <div className="order-1 lg:order-1">
               <ReservationForm />
             </div>
 
-            {/* Restaurant information */}
-            <div className="order-1 lg:order-2">
+            {/* Restaurant information - Order 2 on mobile to appear below the form */}
+            <div className="order-2 lg:order-2">
               <ReservationInfo />
             </div>
           </div>

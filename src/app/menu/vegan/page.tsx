@@ -86,7 +86,28 @@ const veganMenuData = {
 //Transform the data to match the expected structure for MenuCategorySection
 const categories = veganMenuData.sections.map(section => ({
   category_name: section.name, // Correct mapping
-  items: section.items.map(item => ({ name: item.name, price: "TBD", description: null }))
+  items: section.items.map(item => {
+    // Set prices for specific items
+    let price = "TBD";
+
+    // APPETIZER prices
+    if (item.name.includes("Broccoli")) price = "$23";
+    if (item.name.includes("Soy Chaap")) price = "$22";
+
+    // MAIN COURSE prices
+    if (item.name.includes("Subz")) price = "$22";
+    if (item.name.includes("Palak")) price = "$23";
+    if (item.name.includes("Gajar")) price = "$22";
+    if (item.name.includes("Kheere") || item.name.includes("Tamatar")) price = "$20";
+    if (item.name === "Dal Dhaba") price = "$20";
+    if (item.name === "Dal Tadka") price = "$20";
+    if (item.name.includes("Matar") || item.name.includes("pulao")) price = "$24";
+
+    // DESSERT prices
+    if (item.name.includes("Payasam")) price = "$14";
+
+    return { name: item.name, price, description: null };
+  })
 }));
 
 

@@ -2,7 +2,7 @@
 
 import { memo } from 'react';
 import { useDeviceDetection } from '@/hooks/useDeviceDetection';
-import BasicVideoHero from './BasicVideoHero';
+import PureMobileHero from './PureMobileHero';
 import DesktopHero from './DesktopHero';
 
 /**
@@ -21,7 +21,7 @@ const ResponsiveHero = memo(function ResponsiveHero() {
   return (
     <section className="relative w-full h-screen bg-black overflow-hidden m-0 p-0 hero-section">
       {/* Render either mobile or desktop hero based on device detection */}
-      {isMobile ? <BasicVideoHero /> : <DesktopHero />}
+      {isMobile ? <PureMobileHero /> : <DesktopHero />}
     </section>
   );
 });

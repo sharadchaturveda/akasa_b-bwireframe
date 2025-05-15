@@ -1,0 +1,72 @@
+/* Font fallbacks in case Google Fonts fails to load */
+
+/* Fallback for Playfair Display */
+@font-face {
+  font-family: 'Playfair Display Fallback';
+  src: local('Georgia'), local('Times New Roman'), local('serif');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display Fallback';
+  src: local('Georgia Bold'), local('Times New Roman Bold'), local('serif');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Fallback for Montserrat */
+@font-face {
+  font-family: 'Montserrat Fallback';
+  src: local('Helvetica'), local('Arial'), local('sans-serif');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat Fallback';
+  src: local('Helvetica Medium'), local('Arial Medium'), local('sans-serif');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* CSS variables for fallback fonts */
+:root {
+  --font-playfair-fallback: 'Playfair Display Fallback', Georgia, 'Times New Roman', serif;
+  --font-montserrat-fallback: 'Montserrat Fallback', Helvetica, Arial, sans-serif;
+}
+
+/* Apply fallback fonts if Google Fonts fails to load */
+.font-playfair {
+  font-family: var(--font-playfair, var(--font-playfair-fallback));
+}
+
+.font-montserrat {
+  font-family: var(--font-montserrat, var(--font-montserrat-fallback));
+}
+
+/* When fonts fail to load, apply these styles */
+.fonts-failed h1,
+.fonts-failed h2,
+.fonts-failed h3,
+.fonts-failed h4,
+.fonts-failed h5,
+.fonts-failed h6 {
+  font-family: var(--font-playfair-fallback) !important;
+}
+
+.fonts-failed body,
+.fonts-failed p,
+.fonts-failed span,
+.fonts-failed div,
+.fonts-failed a,
+.fonts-failed button,
+.fonts-failed input,
+.fonts-failed textarea,
+.fonts-failed select {
+  font-family: var(--font-montserrat-fallback) !important;
+}

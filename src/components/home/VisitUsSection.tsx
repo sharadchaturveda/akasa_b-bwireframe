@@ -21,7 +21,7 @@ const BusinessHours = () => {
         </div>
         <div className="text-center">
           <p className="text-xs font-montserrat text-white/90 mb-1">{"Monday to Saturday:"}</p>
-          <p className="text-xs font-montserrat text-white/90">{"11:30am to 10:00pm"}</p>
+          <p className="text-xs font-montserrat text-white/90">{"11:30am to 10:30pm"}</p>
         </div>
       </div>
     );
@@ -33,7 +33,7 @@ const BusinessHours = () => {
         <Icon name="clock" size={14} color="#E6C78B" strokeWidth={1.5} className="sm:w-5 sm:h-5" />
       </div>
       <p className="text-xs sm:text-sm lg:text-base font-montserrat text-white/90">
-        {"Monday to Saturday: 11:30am to 10:00pm"}
+        {"Monday to Saturday: 11:30am to 10:30pm"}
       </p>
     </div>
   );

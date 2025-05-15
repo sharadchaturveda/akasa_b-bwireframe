@@ -41,7 +41,7 @@ The Akasa Restaurant Website is a Next.js application that showcases Akasa, an u
 ### Restaurant Information
 
 - **Location**: 79 Robinson Road, Singapore
-- **Opening Hours**: Monday to Saturday, 11:30am to 10:00pm
+- **Opening Hours**: Monday to Saturday, 11:30am to 10:30pm
 - **Phone**: +65 6123 4567
 - **Email**: info@akasa.sg
 - **Website**: https://akasa.sg

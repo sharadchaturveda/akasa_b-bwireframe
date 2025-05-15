@@ -218,7 +218,7 @@ const ReservationInfo = memo(function ReservationInfo() {
               <div className="space-y-2 text-white/80">
                 <div className="flex flex-col sm:flex-row sm:items-center">
                   <span className="label-span sm:w-36 font-medium mb-1 sm:mb-0" style={{flexShrink: 0}}>Monday - Saturday:</span>
-                  <span className="text-[#E6C78B]">11:30 AM - 10:00 PM</span>
+                  <span className="text-[#E6C78B]">11:30 AM - 10:30 PM</span>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center">
                   <span className="label-span sm:w-36 font-medium mb-1 sm:mb-0" style={{flexShrink: 0}}>Sunday:</span>
@@ -264,10 +264,7 @@ const ReservationInfo = memo(function ReservationInfo() {
                   <span className="text-[#E6C78B] mr-2 sm:mr-3 flex-shrink-0">•</span>
                   <span className="text-sm sm:text-base">Reservations are held for 15 minutes past the reserved time.</span>
                 </div>
-                <div className="flex items-start">
-                  <span className="text-[#E6C78B] mr-2 sm:mr-3 flex-shrink-0">•</span>
-                  <span className="text-sm sm:text-base">For parties of 6 or more, a credit card is required to secure your reservation.</span>
-                </div>
+
                 <div className="flex items-start">
                   <span className="text-[#E6C78B] mr-2 sm:mr-3 flex-shrink-0">•</span>
                   <span className="text-sm sm:text-base">Cancellations must be made at least 24 hours in advance to avoid a $25 per person fee.</span>

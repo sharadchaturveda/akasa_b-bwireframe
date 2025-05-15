@@ -142,7 +142,7 @@ const BrandPhilosophy = memo(function BrandPhilosophy() {
               </div>
               <div>
                 <p className="text-[#E6C78B]/80 text-xs sm:text-sm font-montserrat">hours:</p>
-                <p className="text-white text-base sm:text-lg font-montserrat">Monday to Saturday: 11:30am to 10:00pm</p>
+                <p className="text-white text-base sm:text-lg font-montserrat">Monday to Saturday: 11:30am to 10:30pm</p>
               </div>
             </AnimatedText>
 

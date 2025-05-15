@@ -72,7 +72,7 @@ const ReservationInfo = memo(function ReservationInfo() {
 
       <div className="dining-info-sections">
         {/* Hours */}
-        <div className="dining-info-section mb-16 border-b border-[#E6C78B]/30 pb-12">
+        <div className="dining-info-section mb-16 pb-12">
           <div className="dining-info-section-with-icon">
             <div className="dining-info-icon">
               <svg className="dining-info-icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -82,26 +82,22 @@ const ReservationInfo = memo(function ReservationInfo() {
             <div className="dining-info-content">
               <h3 className="dining-info-heading font-playfair">Hours of Operation</h3>
               <div className="dining-info-content-inner">
-                <table className="w-full border-collapse">
-                  <tbody>
-                    <tr className="dining-info-label-value">
-                      <td className="dining-info-label">Lunch:</td>
-                      <td className="dining-info-text">Monday - Friday: 11:30 AM - 2:30 PM</td>
-                    </tr>
-                    <tr className="dining-info-label-value">
-                      <td className="dining-info-label">Dinner:</td>
-                      <td className="dining-info-text">Monday - Saturday: 5:30 PM - 10:30 PM</td>
-                    </tr>
-                    <tr className="dining-info-label-value">
-                      <td className="dining-info-label">Soulful Weekend:</td>
-                      <td className="dining-info-text">Friday 5:00 PM - Saturday 10:30 PM</td>
-                    </tr>
-                    <tr className="dining-info-label-value">
-                      <td className="dining-info-label">Sunday:</td>
-                      <td className="dining-info-text">Closed</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div className="hours-container space-y-8">
+                  <div className="flex flex-col sm:flex-row sm:justify-between">
+                    <div className="dining-info-label font-medium">Monday - Saturday:</div>
+                    <div className="dining-info-text">11:30 AM - 10:30 PM</div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row sm:justify-between">
+                    <div className="dining-info-label font-medium">Soulful Weekend:</div>
+                    <div className="dining-info-text">Friday 5:00 PM - Saturday 10:30 PM</div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row sm:justify-between">
+                    <div className="dining-info-label font-medium">Sunday:</div>
+                    <div className="dining-info-text">Closed</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -140,63 +136,86 @@ const ReservationInfo = memo(function ReservationInfo() {
             <div className="dining-info-content">
               <h3 className="dining-info-heading font-playfair">Parking Rates</h3>
               <div className="dining-info-content-inner">
-                {/* Car Parking Rates Table */}
-                <h4 className="dining-info-subheading font-playfair text-[#E6C78B] mb-4">Car Parking Rates</h4>
-                <table className="w-full border-collapse dining-info-table">
-                  <thead>
-                    <tr>
-                      <th className="dining-info-table-header">Days</th>
-                      <th className="dining-info-table-header">Time Range</th>
-                      <th className="dining-info-table-header">Rate</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="dining-info-table-row">
-                      <td className="dining-info-table-cell">Monday to Friday</td>
-                      <td className="dining-info-table-cell">7:00 am to 5:59 pm</td>
-                      <td className="dining-info-table-cell">$2.90 per 30 minutes</td>
-                    </tr>
-                    <tr className="dining-info-table-row">
-                      <td className="dining-info-table-cell">Monday to Friday</td>
-                      <td className="dining-info-table-cell">6:00 pm to 6:59 am</td>
-                      <td className="dining-info-table-cell">$3.80 per entry</td>
-                    </tr>
-                    <tr className="dining-info-table-row">
-                      <td className="dining-info-table-cell">Saturday</td>
-                      <td className="dining-info-table-cell">7:00 am to 12:59 pm</td>
-                      <td className="dining-info-table-cell">$2.90 per 30 minutes</td>
-                    </tr>
-                    <tr className="dining-info-table-row">
-                      <td className="dining-info-table-cell">Saturday</td>
-                      <td className="dining-info-table-cell">1:00 pm to 6:59 am</td>
-                      <td className="dining-info-table-cell">$3.80 per entry</td>
-                    </tr>
-                    <tr className="dining-info-table-row">
-                      <td className="dining-info-table-cell">Sunday and Public Holidays</td>
-                      <td className="dining-info-table-cell">7:00 am to 6:59 am</td>
-                      <td className="dining-info-table-cell">$3.80 per entry</td>
-                    </tr>
-                  </tbody>
-                </table>
+                {/* Parking Rates Tables Container - Using a container to ensure column alignment */}
+                <div className="parking-tables-container">
+                  {/* We'll use CSS-only approach for column alignment to avoid hydration errors */}
 
-                {/* Motorcycle Parking Rates Table */}
-                <h4 className="dining-info-subheading font-playfair text-[#E6C78B] mt-8 mb-4">Motorcycle Parking Rates</h4>
-                <table className="w-full border-collapse dining-info-table">
-                  <thead>
-                    <tr>
-                      <th className="dining-info-table-header">Days</th>
-                      <th className="dining-info-table-header">Time Range</th>
-                      <th className="dining-info-table-header">Rate</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="dining-info-table-row">
-                      <td className="dining-info-table-cell">Monday to Friday</td>
-                      <td className="dining-info-table-cell">7:00 am to 6:59 am</td>
-                      <td className="dining-info-table-cell">$3.40 per entry</td>
-                    </tr>
-                  </tbody>
-                </table>
+                  {/* Car Parking Rates Table */}
+                  <div className="mb-8">
+                    <h4 className="dining-info-subheading font-playfair text-[#E6C78B] mb-6">Car Parking Rates</h4>
+                    <div className="bg-black/30 rounded-lg overflow-hidden">
+                      <table className="w-full dining-info-table parking-table" id="car-parking-table">
+                        <colgroup>
+                          <col className="days-col" />
+                          <col className="time-col" />
+                          <col className="rate-col" />
+                        </colgroup>
+                        <thead>
+                          <tr>
+                            <th className="days-col-header">Days</th>
+                            <th className="time-col-header">Time Range</th>
+                            <th className="rate-col-header">Rate</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Monday to Friday</td>
+                            <td>7:00 am to 5:59 pm</td>
+                            <td>$2.90 per 30 minutes</td>
+                          </tr>
+                          <tr>
+                            <td>Monday to Friday</td>
+                            <td>6:00 pm to 6:59 am</td>
+                            <td>$3.80 per entry</td>
+                          </tr>
+                          <tr>
+                            <td>Saturday</td>
+                            <td>7:00 am to 12:59 pm</td>
+                            <td>$2.90 per 30 minutes</td>
+                          </tr>
+                          <tr>
+                            <td>Saturday</td>
+                            <td>1:00 pm to 6:59 am</td>
+                            <td>$3.80 per entry</td>
+                          </tr>
+                          <tr>
+                            <td>Sunday and Public Holidays</td>
+                            <td>7:00 am to 6:59 am</td>
+                            <td>$3.80 per entry</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  {/* Motorcycle Parking Rates Table */}
+                  <div className="mb-4">
+                    <h4 className="dining-info-subheading font-playfair text-[#E6C78B] mb-6">Motorcycle Parking Rates</h4>
+                    <div className="bg-black/30 rounded-lg overflow-hidden">
+                      <table className="w-full dining-info-table parking-table" id="motorcycle-parking-table">
+                        <colgroup>
+                          <col className="days-col" />
+                          <col className="time-col" />
+                          <col className="rate-col" />
+                        </colgroup>
+                        <thead>
+                          <tr>
+                            <th className="days-col-header">Days</th>
+                            <th className="time-col-header">Time Range</th>
+                            <th className="rate-col-header">Rate</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Monday to Friday</td>
+                            <td>7:00 am to 6:59 am</td>
+                            <td>$3.40 per entry</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -217,10 +236,7 @@ const ReservationInfo = memo(function ReservationInfo() {
                   <span className="dining-info-bullet">•</span>
                   <span className="dining-info-list-text">Reservations are held for 15 minutes past the reserved time.</span>
                 </div>
-                <div className="dining-info-list-item">
-                  <span className="dining-info-bullet">•</span>
-                  <span className="dining-info-list-text">For parties of 6 or more, a credit card is required to secure your reservation.</span>
-                </div>
+
                 <div className="dining-info-list-item">
                   <span className="dining-info-bullet">•</span>
                   <span className="dining-info-list-text">Cancellations must be made at least 24 hours in advance to avoid a cancellation fee.</span>

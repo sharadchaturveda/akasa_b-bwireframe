@@ -214,12 +214,43 @@
 /* Table styling for hours */
 .dining-info-content-inner table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0 1.5rem; /* Increased vertical spacing between rows */
 }
 
 .dining-info-content-inner table td {
-  padding: 0.25rem 0;
+  padding: 0.5rem 0;
   vertical-align: baseline;
+}
+
+.dining-info-content-inner table tr {
+  margin-bottom: 1.25rem; /* Increased margin between rows */
+  position: relative; /* For potential ::after pseudo-element */
+}
+
+/* Specific styling for hours table */
+.hours-table {
+  border: none !important;
+  border-collapse: separate !important;
+  border-spacing: 0 1.5rem !important;
+}
+
+.hours-table tr {
+  margin-bottom: 2.5rem !important; /* Force more spacing */
+}
+
+/* Ensure the table cells have enough height */
+.hours-table td {
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+  line-height: 1.5;
+  border: none !important;
+}
+
+/* Make sure the label column is wide enough */
+.hours-table .dining-info-label {
+  min-width: 10rem;
+  white-space: nowrap; /* Prevent wrapping */
 }
 
 .dining-info-content-inner table td.dining-info-label {
@@ -228,9 +259,17 @@
   padding-right: 0.5rem;
 }
 
+.dining-info-content-inner table td.pb-3 {
+  padding-bottom: 1rem; /* Increased padding */
+}
+
 @media (min-width: 640px) {
   .dining-info-content-inner table td.dining-info-label {
     width: 9rem;
+  }
+
+  .dining-info-content-inner table {
+    border-spacing: 0 1.25rem; /* More spacing on larger screens */
   }
 }
 
@@ -289,31 +328,154 @@
 
 /* Button styling is now handled by the Button component */
 
-/* Parking Rates Table Styling */
+/* Modern Parking Rates Table Styling */
 .dining-info-table {
   width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 1.5rem; /* Add some space between tables */
-  border: 1px solid #E6C78B; /* Golden border around the table */
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 2rem; /* More space between tables */
+  border: none;
+  border-radius: 4px;
+  overflow: hidden;
+  table-layout: fixed; /* Fixed layout for consistent column widths */
 }
 
 .dining-info-table th,
 .dining-info-table td {
-  border: 1px solid #E6C78B; /* Golden borders for cells */
-  padding: 0.75rem;
+  border: none;
+  padding: 1rem 1.25rem;
   text-align: left;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+  line-height: 1.5; /* Improved line height for better readability */
+}
+
+/* Style for table cells */
+.dining-info-table td {
+  padding-top: 1.1rem;
+  padding-bottom: 1.1rem;
+  transition: background-color 0.15s ease; /* Smooth transition for hover effect */
 }
 
 .dining-info-table th {
-  background-color: rgba(230, 199, 139, 0.1); /* Light golden background for headers */
-  font-weight: 600;
-  color: #E6C78B;
+  background-color: rgba(0, 0, 0, 0.4); /* Darker background for better contrast */
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95); /* Brighter white for better readability */
   text-transform: uppercase;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  padding-top: 1.25rem; /* More top padding for better spacing */
+  padding-bottom: 1.25rem; /* More bottom padding for better spacing */
+  position: relative; /* For the bottom border positioning */
 }
 
-.dining-info-table-row:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.05); /* Subtle zebra striping */
+/* Minimal bottom border for header row - thin white line */
+.dining-info-table thead tr {
+  border-bottom: none; /* Remove the previous border */
+}
+
+/* Add a subtle bottom line to each header cell instead of the entire row */
+.dining-info-table th::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 1.25rem;
+  right: 1.25rem;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.15); /* Very subtle white line */
+}
+
+/* Add subtle bottom border to all rows except the last one */
+.dining-info-table tbody tr:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Hover effect for rows */
+.dining-info-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.04); /* Slightly more visible hover effect */
+}
+
+/* Alternating row styling for better readability */
+.dining-info-table tbody tr:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.2); /* Very subtle alternating row color */
+}
+
+/* Parking tables container for alignment */
+.parking-tables-container {
+  width: 100%;
+}
+
+/* Column width definitions for parking tables - using exact percentages for consistency */
+.parking-table .days-col {
+  width: 30%;
+}
+
+.parking-table .time-col {
+  width: 35%;
+}
+
+.parking-table .rate-col {
+  width: 35%;
+}
+
+/* Ensure both tables use the same fixed layout */
+.parking-table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+/* Ensure column headers have consistent styling */
+.days-col-header,
+.time-col-header,
+.rate-col-header {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Explicitly set widths for each column header to match colgroup */
+.days-col-header {
+  width: 30%;
+}
+
+.time-col-header {
+  width: 35%;
+}
+
+.rate-col-header {
+  width: 35%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .dining-info-table th,
+  .dining-info-table td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .dining-info-table th {
+    font-size: 0.75rem;
+    padding-top: 1rem; /* Slightly less padding on mobile */
+    padding-bottom: 1rem;
+  }
+
+  /* Adjust the bottom line for mobile */
+  .dining-info-table th::after {
+    left: 0.5rem;
+    right: 0.5rem;
+  }
+
+  /* Adjust column widths for mobile */
+  .parking-table .days-col {
+    width: 30%;
+  }
+
+  .parking-table .time-col {
+    width: 35%;
+  }
+
+  .parking-table .rate-col {
+    width: 35%;
+  }
 }

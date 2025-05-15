@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
-import ResponsiveHero from "@/components/home/ResponsiveHero";
+import ImprovedResponsiveHero from "@/components/home/ImprovedResponsiveHero";
 import BrandPhilosophy from "@/components/home/BrandPhilosophy";
 import SpicesSection from "@/components/home/SpicesSection";
 import GallerySection from "@/components/home/GallerySection";
@@ -36,8 +36,8 @@ export default function HomePage() {
 
       {/* Hero and Brand Philosophy Sections - Wrapped to eliminate gap on mobile */}
       <div className="flex flex-col section-wrapper" style={{ marginBottom: '-2px' }}>
-        {/* Responsive hero component handles both mobile and desktop */}
-        <ResponsiveHero />
+        {/* Improved responsive hero component prevents flashing of desktop content on mobile */}
+        <ImprovedResponsiveHero />
 
         <BrandPhilosophy />
       </div>
