@@ -88,7 +88,8 @@ export default function MenusSection() {
     { id: "soul-food", name: "Soul Food Weekends", description: "Special weekend offerings that nourish the soul", image: "/images/menu/soul-food-weekends/hero/hero.jpg", url: "/menu/soul-food-weekends" },
     { id: "drinks", name: "Drinks", description: "Signature cocktails, fine wines, and refreshing beverages", image: "/images/menu/drinks/hero/hero.jpg", url: "/menu/drinks" },
     { id: "bar-bites", name: "Bar Bites", description: "Perfect small plates to accompany your drinks", image: "/images/menu/bar-bites/hero/hero.jpg", url: "/menu/bar-bites" },
-    { id: "set-lunch", name: "3 Course Set Lunch", description: "A perfect midday dining experience with three exquisite courses", image: "/images/menu/set-lunch/hero/hero.jpg", url: "/menu/set-lunch" }
+    { id: "set-lunch", name: "3 Course Set Lunch", description: "A perfect midday dining experience with three exquisite courses", image: "/images/menu/set-lunch/hero/hero.jpg", url: "/menu/set-lunch" },
+    { id: "vegan", name: "Vegan Menu", description: "Explore our delicious plant-based options", image: "/images/menu/vegan/hero/hero.jpg", url: "/menu/vegan" } // Added Vegan Menu
   ];
 
   // Render different button styles based on device type
@@ -152,18 +153,18 @@ export default function MenusSection() {
             {menuTypes.map((menu) => (
               <div
                 key={menu.id}
-                className="group relative dish-card flex flex-col w-full sm:w-1/2 lg:w-1/3 xl:w-1/5 px-3 mb-6"
+                className="group relative dish-card flex flex-col w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 px-3 mb-12"
                 onClick={(e) => handleMenuCardClick(menu.id, menu.url, e)}
               >
                 {/* Removed card glow effect for better performance */}
 
                 <div className={`relative bg-black/80 border border-white/5 rounded-lg overflow-hidden ${!isMobile ? 'transition-colors duration-300 hover:border-[#E6C78B]/30' : ''} flex flex-col h-full`}>
                   {/* Menu image with overlay effects */}
-                  <div className="relative h-[180px] overflow-hidden">
+                  <div className="relative h-[240px] overflow-hidden">
                     <Image src={`${menu.image}?quality=60&width=800`}
                       alt={menu.name}
                       fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover"
                       loading="lazy"
                       quality={60}

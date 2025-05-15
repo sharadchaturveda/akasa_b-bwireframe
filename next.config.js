@@ -3,7 +3,7 @@ const nextConfig = {
   // Enable ESLint during builds
   eslint: {
     // Set to true to ignore ESLint errors during builds
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
     // Directories to include in ESLint checking
     dirs: ['src'],
   },
@@ -20,7 +20,20 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     minimumCacheTTL: 60,
-    domains: ['localhost', 'akasa-restaurant.vercel.app'], // Add your domain here
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'akasa-restaurant.vercel.app',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3000',
+        pathname: '/**',
+      },
+    ],
     unoptimized: false, // Enable Next.js image optimization
   },
   // Enable CSS optimization for better performance

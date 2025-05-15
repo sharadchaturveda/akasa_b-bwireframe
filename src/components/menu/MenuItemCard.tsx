@@ -5,9 +5,11 @@ import { MenuItem } from '@/types/menu';
 
 interface MenuItemCardProps {
   item: MenuItem;
+  isVegan?: boolean;
 }
 
-const MenuItemCard = memo(function MenuItemCard({ item }: MenuItemCardProps) {
+const MenuItemCard = memo(function MenuItemCard({ item, isVegan }: MenuItemCardProps) {
+  console.log("isVegan:", isVegan);
   return (
     <div className="group relative">
       {/* Card background with subtle glow effect */}
@@ -22,7 +24,7 @@ const MenuItemCard = memo(function MenuItemCard({ item }: MenuItemCardProps) {
             <div className="flex items-center">
               {/* Vegetarian/Non-vegetarian indicator */}
               <span className="mr-2 text-lg">
-                {item.vegetarian ? '🟢' : '🔴'}
+                🟢
               </span>
               <h3 className="text-xl font-playfair text-white group-hover:text-[#E6C78B] transition-colors duration-300">{item.name}</h3>
             </div>

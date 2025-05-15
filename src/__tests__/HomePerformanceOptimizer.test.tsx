@@ -1,4 +1,4 @@
-import React from 'react';
+// No need to import React for this test
 import { initPerformanceMonitoring } from '@/utils/performanceMonitor';
 
 // Instead of rendering the component, we'll test the functions it uses
@@ -77,7 +77,8 @@ describe('Home Performance Optimization Functions', () => {
     initPerformanceMonitoring();
 
     // Check if initPerformanceMonitoring was called
-    expect(require('@/utils/performanceMonitor').initPerformanceMonitoring).toHaveBeenCalled();
+    const performanceMonitor = jest.requireMock('@/utils/performanceMonitor');
+    expect(performanceMonitor.initPerformanceMonitoring).toHaveBeenCalled();
   });
 
   it('optimizes image loading', () => {

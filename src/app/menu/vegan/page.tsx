@@ -5,17 +5,94 @@ import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { soulFoodMenu } from "@/data/soulFoodMenu";
 import MenuCategorySection from "@/components/menu/MenuCategorySection";
 
+// Vegan Menu Data (Injected from user)
+const veganMenuData = {
+  "restaurant_name": "AKASA",
+  "menu_type": "VEGAN MENU",
+  "sections": [
+    {
+      "name": "APPETIZER",
+      "items": [
+        {
+          "name": "Pilla Mirch Broccoli Kebab"
+        },
+        {
+          "name": "Multani Soy Chaap"
+        }
+      ]
+    },
+    {
+      "name": "MAIN COURSE",
+      "items": [
+        {
+          "name": "Subz Hundi"
+        },
+        {
+          "name": "Palak Lessoni"
+        },
+        {
+          "name": "Gajar Matter Masala"
+        },
+        {
+          "name": "Gobi Aloo Adrakhi"
+        },
+        {
+          "name": "Kheere Tamatar Tarkari"
+        },
+        {
+          "name": "Aloo Jeera"
+        },
+        {
+          "name": "Mushroom Masala"
+        },
+        {
+          "name": "Dal Dhaba"
+        },
+        {
+          "name": "Dal Tadka"
+        },
+        {
+          "name": "Matar Dum pulao"
+        },
+        {
+          "name": "Jeera Rice"
+        },
+        {
+          "name": "Steamed Rice"
+        }
+      ]
+    },
+    {
+      "name": "INDIAN BREAD",
+      "items": [
+        {
+          "name": "Roti | Paratha"
+        }
+      ]
+    },
+    {
+      "name": "DESSERT",
+      "items": [
+        {
+          "name": "Dal Payasam"
+        }
+      ]
+    }
+  ]
+};
+
+//Transform the data to match the expected structure for MenuCategorySection
+const categories = veganMenuData.sections.map(section => ({
+  category_name: section.name, // Correct mapping
+  items: section.items.map(item => ({ name: item.name, price: "TBD", description: null }))
+}));
 
 
-export default function SoulFoodWeekendsMenuPage() {
-
+export default function VeganMenuPage() {
   // Load page-specific styles
   useEffect(() => {
-    // Add any page-specific effects here
-
     // Add loaded class to images when they finish loading for better performance
     const images = document.querySelectorAll('img');
     images.forEach((img) => {
@@ -31,22 +108,16 @@ export default function SoulFoodWeekendsMenuPage() {
 
   return (
     <main className="min-h-screen bg-black text-white">
-      <Navigation />
+      <Navigation />;
 
       {/* Hero Section */}
-      <section className="w-full bg-[url('/images/menu/soul-food-weekends/hero/hero.jpg')] bg-cover bg-center py-64 relative">
+      <section className="w-full bg-[url('/images/menu/vegan/hero/hero.jpg')] bg-cover bg-center py-64 relative">
         <div className="absolute inset-0 bg-black/70"></div>
         <div className="container mx-auto px-4 md:px-8 relative z-10 text-center">
-          <h1 className="text-4xl md:text-6xl font-playfair mb-6 text-white">Soul Food Weekends</h1>
+          <h1 className="text-4xl md:text-6xl font-playfair mb-6 text-white">Vegan Menu</h1>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#E6C78B] to-transparent mx-auto mb-6"></div>
           <p className="text-lg md:text-xl font-montserrat text-white/80 max-w-3xl mx-auto">
-            Treat your taste buds to a nostalgic culinary journey with Soul Food Weekends. We bring you heart-warming flavors of North India's most beloved dishes like Pindi Chole with Kulcha, Keema Pav, Dal Bhati Choorma, Saroson ka Saag & Gosht Bhuna Bheeja & more.
-          </p>
-          <p className="text-lg md:text-xl font-montserrat text-white/80 max-w-3xl mx-auto mt-4">
-            We are offering Unlimited Chaat for just 32++ per person
-          </p>
-          <p className="text-lg md:text-xl font-montserrat text-white/80 max-w-3xl mx-auto mt-2">
-            Available all Weekends
+            Explore our delicious plant-based options
           </p>
         </div>
       </section>
@@ -63,22 +134,8 @@ export default function SoulFoodWeekendsMenuPage() {
         </div>
 
         <div className="container mx-auto px-4 md:px-8 relative z-10">
-          {/* Menu Legend */}
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center justify-center gap-6 bg-black/40 backdrop-blur-sm px-6 py-3 rounded-lg border border-white/10">
-              <div className="flex items-center">
-                <span className="text-lg mr-2">🟢</span>
-                <span className="text-sm font-montserrat text-white/80">Vegetarian</span>
-              </div>
-              <div className="flex items-center">
-                <span className="text-lg mr-2">🔴</span>
-                <span className="text-sm font-montserrat text-white/80">Non-Vegetarian</span>
-              </div>
-            </div>
-          </div>
-
           {/* Menu Categories */}
-          {soulFoodMenu.categories.map((category, index) => (
+          {categories.map((category, index) => (
             <MenuCategorySection key={index} category={category} />
           ))}
 
@@ -105,4 +162,3 @@ export default function SoulFoodWeekendsMenuPage() {
     </main>
   );
 }
-

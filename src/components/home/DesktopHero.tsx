@@ -133,7 +133,7 @@ const DesktopHero = () => {
       <div className="absolute inset-0 flex flex-col items-stretch z-10">
 
       {/* Logo - Fixed at top with height constraint */}
-      <div className="hero-logo-container">
+      <div className="hero-logo-container relative mb-12">
         <div className="relative h-[180px] w-[360px]">
           <Image src="/images/brand/logo-white.png"
             alt="Akasa Logo"
@@ -141,7 +141,7 @@ const DesktopHero = () => {
             height={240} /* Increased from LOGO.SIZES.DESKTOP.height (200) */
             priority
             loading="eager"
-            className="w-full h-full object-contain opacity-100"
+            className="w-full h-full object-contain opacity-100 absolute top-0 left-0"
           />
         </div>
       </div>

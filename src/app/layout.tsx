@@ -159,7 +159,7 @@ export default function RootLayout({
         <script src="/scripts/mobileVideoOptimization.js" async></script>
 
         {/* Script for scroll optimization */}
-        <script src="/scripts/scrollOptimization.js"></script>
+        <script src="/scripts/scrollOptimization.js" async></script>
       </head>
       <body
         className={`${playfair.variable} ${montserrat.variable} antialiased bg-black`}

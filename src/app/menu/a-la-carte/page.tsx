@@ -29,7 +29,7 @@ export default function ALaCarteMenuPage() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="w-full bg-[url('/images/menu/a-la-carte/hero/hero.jpg')] bg-cover bg-center py-32 relative">
+      <section className="w-full bg-[url('/images/menu/a-la-carte/hero/hero.jpg')] bg-cover bg-center py-64 relative">
         <div className="absolute inset-0 bg-black/70"></div>
         <div className="container mx-auto px-4 md:px-8 relative z-10 text-center">
           <h1 className="text-4xl md:text-6xl font-playfair mb-6 text-white">À La Carte Menu</h1>

@@ -1,7 +1,6 @@
 "use client";
 
-import Image from "next/image"
-;
+import Image from "next/image";
 import { memo, useState, useEffect } from "react";
 
 const FeaturedDishesSection = memo(function FeaturedDishesSection() {
@@ -127,20 +126,20 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
               {/* Card background with subtle glow effect */}
               <div className="absolute -inset-0.5 bg-gradient-to-r from-[#E6C78B]/0 via-[#E6C78B]/30 to-[#E6C78B]/0 rounded-lg blur opacity-0 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
 
-              <div className="relative bg-black/80 backdrop-blur-sm border border-white/5 rounded-lg overflow-hidden transition-all duration-500 group-hover:shadow-[0_0_25px_rgba(230,199,139,0.2)] flex flex-col h-full">
+              <div className="relative bg-black/80 backdrop-blur-sm border border-white/5 rounded-lg overflow-hidden transition-all duration-[1000ms] group-hover:shadow-[0_0_25px_rgba(230,199,139,0.2)] flex flex-col h-full">
                 {/* Dish image with fancy overlay effects - Fixed height */}
                 <div className="relative h-[280px] overflow-hidden">
                   <Image src={`${dish.image}?quality=75&width=800`}
                     alt={dish.name}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+className="object-cover"
                     loading="lazy"
                     quality={80} /* Balanced for performance and quality */
                   />
 
                   {/* Elegant gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-[1000ms]"></div>
 
                   {/* Category badge with animation */}
                   <div className="absolute top-4 right-4 z-10">
@@ -150,13 +149,13 @@ const FeaturedDishesSection = memo(function FeaturedDishesSection() {
                   </div>
 
                   {/* Decorative corner accent */}
-                  <div className="absolute top-0 left-0 w-12 h-12 border-t border-l border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute top-0 left-0 w-12 h-12 border-t border-l border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-[1000ms]"></div>
                 </div>
 
                 {/* Dish content with elegant styling - Fixed height content area */}
                 <div className={`${isMobile ? 'p-6' : 'p-8'} relative flex flex-col flex-grow`}>
                   {/* Decorative corner accent */}
-                  <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-[1000ms]"></div>
 
                   <div className="flex justify-between items-start mb-4 gap-2">
                     <h3 className={`${isMobile ? 'text-xl' : 'text-2xl'} font-playfair text-white group-hover:text-[#E6C78B] transition-colors duration-300 flex-1`}>{dish.name}</h3>

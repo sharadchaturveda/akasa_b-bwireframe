@@ -7,9 +7,10 @@ import CategoryNotes from './CategoryNotes';
 
 interface MenuCategorySectionProps {
   category: MenuCategory;
+  isVegan?: boolean;
 }
 
-const MenuCategorySection = memo(function MenuCategorySection({ category }: MenuCategorySectionProps) {
+const MenuCategorySection = memo(function MenuCategorySection({ category, isVegan }: MenuCategorySectionProps) {
   return (
     <div className="mb-16">
       {/* Category heading with decorative elements */}
