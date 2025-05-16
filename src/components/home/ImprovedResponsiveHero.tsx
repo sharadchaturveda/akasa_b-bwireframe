@@ -6,13 +6,24 @@ import PureMobileHero from './PureMobileHero';
 import DesktopHero from './DesktopHero';
 
 /**
- * ImprovedResponsiveHero Component - Prevents flashing of desktop content on mobile
+ * LoadingHero Component
  *
- * This component uses a two-step approach to prevent the desktop hero from
- * briefly showing on mobile devices:
+ * A simple black loading screen shown while device detection is in progress
+ */
+const LoadingHero = memo(function LoadingHero() {
+  return (
+    <div className="absolute inset-0 bg-black transition-opacity duration-500 ease-in-out"></div>
+  );
+});
+
+/**
+ * ImprovedResponsiveHero Component
+ *
+ * A responsive hero section that renders the appropriate hero based on device type.
+ * This component prevents the desktop hero from briefly showing on mobile devices
+ * by using a two-step approach:
  * 1. It renders a black loading screen initially
  * 2. It only renders the appropriate hero component after device detection is complete
- * 3. It uses CSS to ensure smooth transitions between states
  *
  * @returns {JSX.Element} The rendered component
  */
@@ -28,20 +39,15 @@ const ImprovedResponsiveHero = memo(function ImprovedResponsiveHero() {
     setIsMounted(true);
   }, []);
 
-  // Simplified rendering logic - no function call overhead
-  // Early return for loading state
-  if (!isMounted || !isDetectionComplete) {
-    return (
-      <section className="relative w-full h-screen bg-black overflow-hidden m-0 p-0 hero-section">
-        <div className="absolute inset-0 bg-black"></div>
-      </section>
-    );
-  }
-
-  // Directly render the appropriate component based on device type
   return (
     <section className="relative w-full h-screen bg-black overflow-hidden m-0 p-0 hero-section">
-      {isMobile ? <PureMobileHero /> : <DesktopHero />}
+      {/* Show loading state until detection is complete */}
+      {(!isMounted || !isDetectionComplete) && <LoadingHero />}
+
+      {/* Render the appropriate hero once detection is complete */}
+      {isMounted && isDetectionComplete && (
+        isMobile ? <PureMobileHero /> : <DesktopHero />
+      )}
     </section>
   );
 });

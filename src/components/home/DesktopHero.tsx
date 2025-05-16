@@ -1,11 +1,12 @@
 "use client";
 
-import Image from "next/image"
-;
+import { memo } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useRef, useEffect } from "react";
-import { LOGO } from "@/constants";
+import { useImageCarousel } from "@/hooks/useImageCarousel";
+import { IMAGES, LOGO } from "@/constants";
+import Icon from "@/components/ui/icon";
 
 // Hero carousel images for desktop
 const HERO_IMAGES = [
@@ -28,162 +29,143 @@ const HERO_IMAGES = [
 ];
 
 /**
- * Desktop-only hero section with image carousel
- * This component is completely separate from the mobile hero
- * and will only be rendered on desktop devices
+ * HeroLogo Component
+ *
+ * The logo displayed in the hero section
  */
-const DesktopHero = () => {
-  // Refs to avoid state changes
-  const currentImageIndexRef = useRef(0);
-  const lastUpdateTimeRef = useRef(0);
-  const animationFrameRef = useRef<number | null>(null);
-  const carouselElementsRef = useRef<HTMLDivElement[]>([]);
-  const CAROUSEL_INTERVAL_MS = 2000; // 2 seconds between slides
+const HeroLogo = memo(function HeroLogo() {
+  return (
+    <div className="hero-logo-container relative mb-12">
+      <div className="relative h-[180px] w-[360px]">
+        <Image
+          src="/images/brand/logo-white.png"
+          alt="Akasa Logo"
+          width={600}
+          height={240}
+          priority
+          loading="eager"
+          quality={IMAGES.HIGH_QUALITY}
+          className="w-full h-full object-contain opacity-100 absolute top-0 left-0"
+        />
+      </div>
+    </div>
+  );
+});
 
-  // Set up carousel on mount
-  useEffect(() => {
-    // Only run on desktop
-    if (typeof window !== 'undefined' && window.innerWidth < 768) {
-      return;
-    }
+/**
+ * HeroContent Component
+ *
+ * The text content displayed in the hero section
+ */
+const HeroContent = memo(function HeroContent() {
+  return (
+    <div className="hero-text-container">
+      <p className="text-white/90 uppercase tracking-widest text-sm md:text-base mb-4">
+        Experience
+      </p>
 
-    // Function to animate the carousel using requestAnimationFrame
-    const animateCarousel = (timestamp: number) => {
-      // Initialize lastUpdateTime on first run
-      if (lastUpdateTimeRef.current === 0) {
-        lastUpdateTimeRef.current = timestamp;
-      }
+      <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-playfair italic mb-6"
+          style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
+        Exquisite Indian Cuisine
+      </h1>
 
-      // Calculate time elapsed since last update
-      const elapsed = timestamp - lastUpdateTimeRef.current;
+      <div className="flex items-center w-full max-w-xs md:max-w-md justify-center mb-6">
+        <div className="h-px bg-white/50 flex-1"></div>
+        <div className="mx-4">
+          <Icon name="clock" size={24} color="white" strokeWidth={1} />
+        </div>
+        <div className="h-px bg-white/50 flex-1"></div>
+      </div>
 
-      // If enough time has passed, update the carousel
-      if (elapsed >= CAROUSEL_INTERVAL_MS) {
-        // Update the carousel
-        const prevIndex = currentImageIndexRef.current;
-        currentImageIndexRef.current = (prevIndex + 1) % HERO_IMAGES.length;
+      <p className="text-white/80 mb-8 text-sm md:text-base">
+        Fine Dining at the Heart of Singapore
+      </p>
 
-        // Update visibility with hardware-accelerated properties
-        carouselElementsRef.current.forEach((el, index) => {
-          if (index === currentImageIndexRef.current) {
-            el.style.opacity = '1';
-            el.style.transform = 'translateZ(0)'; // Hardware acceleration
-            el.style.zIndex = '1';
-          } else {
-            el.style.opacity = '0';
-            el.style.zIndex = '0';
-          }
-        });
+      <Link href="/menu">
+        <Button className="bg-[#1A2A3A] hover:bg-[#0A1A2A] text-white uppercase px-8 py-2">
+          Explore Menu
+        </Button>
+      </Link>
+    </div>
+  );
+});
 
-        // Reset the timer
-        lastUpdateTimeRef.current = timestamp;
-      }
+/**
+ * ImageCarousel Component
+ *
+ * The image carousel displayed in the hero section
+ */
+const ImageCarousel = memo(function ImageCarousel() {
+  const {
+    registerElementRef,
+    transitionDuration
+  } = useImageCarousel({
+    images: HERO_IMAGES,
+    interval: 2000,
+    transitionDuration: 1000,
+    autoplay: true,
+    loop: true
+  });
 
-      // Continue the animation loop
-      animationFrameRef.current = requestAnimationFrame(animateCarousel);
-    };
+  return (
+    <div className="absolute inset-0">
+      {HERO_IMAGES.map((image, index) => (
+        <div
+          key={index}
+          ref={(el) => registerElementRef(el, index)}
+          className="absolute inset-0 transition-opacity ease-in-out"
+          style={{
+            opacity: index === 0 ? 1 : 0,
+            zIndex: index === 0 ? 1 : 0,
+            transitionDuration: `${transitionDuration}ms`
+          }}
+        >
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            priority={index === 0}
+            loading={index === 0 ? "eager" : "lazy"}
+            sizes="100vw"
+            quality={IMAGES.DEFAULT_QUALITY}
+            className="object-cover opacity-60"
+          />
+        </div>
+      ))}
+      {/* Bottom gradient for smooth transition */}
+      <div className="absolute left-0 right-0 bottom-0 h-[120px] bg-gradient-to-t from-black via-black/90 to-transparent z-[2]"></div>
+    </div>
+  );
+});
 
-    // Start the animation
-    animationFrameRef.current = requestAnimationFrame(animateCarousel);
-
-    // Clean up
-    return () => {
-      if (animationFrameRef.current !== null) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
-  }, []);
-
-  // Store carousel elements ref
-  const storeCarouselRef = (el: HTMLDivElement | null, index: number) => {
-    if (el) {
-      carouselElementsRef.current[index] = el;
-    }
-  };
-
+/**
+ * DesktopHero Component
+ *
+ * Desktop-only hero section with image carousel.
+ * This component is completely separate from the mobile hero
+ * and will only be rendered on desktop devices.
+ *
+ * @returns {JSX.Element} The rendered component
+ */
+const DesktopHero = memo(function DesktopHero() {
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden bg-black">
       {/* Background Image Carousel */}
-      <div className="absolute inset-0">
-        {HERO_IMAGES.map((image, index) => (
-          <div
-            key={index}
-            ref={(el) => storeCarouselRef(el, index)}
-            className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
-            style={{
-              opacity: index === 0 ? 1 : 0,
-              zIndex: index === 0 ? 1 : 0
-            }}
-          >
-            <Image src={image.src}
-              alt={image.alt}
-              fill
-              priority={index === 0}
-              loading="eager"
-              sizes="100vw"
-              className="object-cover opacity-60"
-            />
-          </div>
-        ))}
-        {/* Bottom gradient for smooth transition */}
-        <div className="absolute left-0 right-0 bottom-0 h-[120px] bg-gradient-to-t from-black via-black/90 to-transparent z-[2]"></div>
-      </div>
+      <ImageCarousel />
 
       {/* Structural container to enforce vertical layout */}
       <div className="absolute inset-0 flex flex-col items-stretch z-10">
+        {/* Logo - Fixed at top with height constraint */}
+        <HeroLogo />
 
-      {/* Logo - Fixed at top with height constraint */}
-      <div className="hero-logo-container relative mb-12">
-        <div className="relative h-[180px] w-[360px]">
-          <Image src="/images/brand/logo-white.png"
-            alt="Akasa Logo"
-            width={600} /* Increased from LOGO.SIZES.DESKTOP.width (500) */
-            height={240} /* Increased from LOGO.SIZES.DESKTOP.height (200) */
-            priority
-            loading="eager"
-            className="w-full h-full object-contain opacity-100 absolute top-0 left-0"
-          />
+        {/* Content Container - Part of the flex column layout */}
+        <div className="flex-grow flex items-center justify-center z-30">
+          {/* Text Content */}
+          <HeroContent />
         </div>
       </div>
-
-      {/* Content Container - Part of the flex column layout */}
-      <div className="flex-grow flex items-center justify-center z-30">
-        {/* Text Content - Using hero-text-container class for consistent positioning */}
-        <div className="hero-text-container">
-          <p className="text-white/90 uppercase tracking-widest text-sm md:text-base mb-4">
-            Experience
-          </p>
-
-          <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-playfair italic mb-6"
-              style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
-            Exquisite Indian Cuisine
-          </h1>
-
-          <div className="flex items-center w-full max-w-xs md:max-w-md justify-center mb-6">
-            <div className="h-px bg-white/50 flex-1"></div>
-            <div className="mx-4">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
-                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="1" />
-                <path d="M12 6V12L16 14" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-              </svg>
-            </div>
-            <div className="h-px bg-white/50 flex-1"></div>
-          </div>
-
-          <p className="text-white/80 mb-8 text-sm md:text-base">
-            Fine Dining at the Heart of Singapore
-          </p>
-
-          <Link href="/menu">
-            <Button className="bg-[#1A2A3A] hover:bg-[#0A1A2A] text-white uppercase px-8 py-2">
-              Explore Menu
-            </Button>
-          </Link>
-        </div>
-      </div>
-      </div> {/* End of structural container */}
     </div>
   );
-};
+});
 
 export default DesktopHero;
