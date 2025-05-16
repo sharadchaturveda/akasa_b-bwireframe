@@ -184,8 +184,7 @@ export default function HomePerformanceOptimizer() {
     // Apply optimizations immediately
     applyOptimizations();
 
-    // Clean up on unmount - nothing to clean up in this case
-    return () => {};
+    // No cleanup needed
   }, []);
 
   // This component doesn't render anything

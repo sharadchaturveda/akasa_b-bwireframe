@@ -31,16 +31,9 @@ const MobileVideoBackground = ({ videoUrl, fallbackImageUrl }: MobileVideoBackgr
     video.loop = true;
     video.controls = false;
     video.preload = 'auto';
-    video.style.position = 'absolute';
-    video.style.top = '0';
-    video.style.left = '0';
-    video.style.width = '100%';
-    video.style.height = '100%';
-    video.style.objectFit = 'cover';
-    video.style.zIndex = '10';
-    video.style.opacity = '1';
-    video.style.display = 'block';
-    video.style.visibility = 'visible';
+
+    // Apply styles as a single className via cssText for better performance
+    video.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:10;opacity:1;display:block;visibility:visible';
 
     // Set attributes for mobile
     video.setAttribute('playsinline', '');

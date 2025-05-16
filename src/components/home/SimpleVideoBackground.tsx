@@ -142,5 +142,3 @@ const SimpleVideoBackground = ({ videoSrc, fallbackImageSrc }: SimpleVideoBackgr
 };
 
 export default SimpleVideoBackground;
-
-

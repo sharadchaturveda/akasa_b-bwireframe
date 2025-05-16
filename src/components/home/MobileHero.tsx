@@ -30,7 +30,7 @@ const MobileHero = () => {
   useEffect(() => {
     // Double-check we're on mobile - if not, don't do anything
     if (typeof window !== 'undefined' && window.innerWidth >= 768) {
-      console.log('MobileHero mounted on desktop - this should not happen');
+      // This component should never be mounted on desktop
       return;
     }
 
@@ -38,7 +38,6 @@ const MobileHero = () => {
     const timer = setTimeout(() => {
       const video = videoRef.current;
       if (!video) {
-        console.log('Video element not found');
         return;
       }
 
@@ -56,11 +55,9 @@ const MobileHero = () => {
 
       // Try to play the video
       video.play().then(() => {
-        console.log('Video playing successfully');
         setVideoLoaded(true);
         setVideoError(false);
-      }).catch(error => {
-        console.log('Video play failed, using fallback image:', error);
+      }).catch(() => {
         setVideoError(true);
       });
     }, 500);
@@ -81,33 +78,21 @@ const MobileHero = () => {
       {!videoError && (
         <video
           ref={videoRef}
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 w-full h-full object-cover"
           playsInline
           muted
           loop
           autoPlay
           style={{
-            objectFit: 'cover',
             objectPosition: 'center',
-            width: '100%',
-            height: '100%',
             maxWidth: 'none',
-            minWidth: '100%',
-            minHeight: '100%',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
             zIndex: videoLoaded ? 5 : 0,
             opacity: videoLoaded ? 1 : 0
           }}
           onError={() => {
-            console.log('Video error event triggered');
             setVideoError(true);
           }}
           onCanPlay={() => {
-            console.log('Video can play event triggered');
             setVideoLoaded(true);
             setVideoError(false);
           }}
