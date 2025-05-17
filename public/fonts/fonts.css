@@ -1,73 +1,20 @@
-/* Playfair Display Font */
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('./playfair-display-regular.woff2') format('woff2');
+/* System font fallbacks */
+:root {
+  --font-playfair: Georgia, 'Times New Roman', Times, serif;
+  --font-montserrat: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('./playfair-display-500.woff2') format('woff2');
+/* Heading styles */
+h1, h2, h3, h4, h5, h6,
+.font-playfair,
+.font-playfair-display,
+[class*="font-playfair"] {
+  font-family: var(--font-playfair) !important;
 }
 
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('./playfair-display-600.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('./playfair-display-700.woff2') format('woff2');
-}
-
-/* Montserrat Font */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url('./montserrat-300.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('./montserrat-400.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('./montserrat-500.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('./montserrat-600.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('./montserrat-700.woff2') format('woff2');
+/* Body text styles */
+body, p, div, span, button, a,
+.font-montserrat,
+[class*="font-montserrat"] {
+  font-family: var(--font-montserrat) !important;
 }

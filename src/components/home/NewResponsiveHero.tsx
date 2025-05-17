@@ -2,7 +2,7 @@
 
 import { memo, useState, useEffect } from 'react';
 import { useDeviceDetection } from '@/hooks/useDeviceDetection';
-import VideoHero from './VideoHero';
+import MobileVideoWithAudio from './MobileVideoWithAudio';
 import DesktopHero from './DesktopHero';
 
 /**
@@ -17,7 +17,7 @@ const LoadingHero = memo(function LoadingHero() {
 });
 
 /**
- * ImprovedResponsiveHero Component
+ * NewResponsiveHero Component
  *
  * A responsive hero section that renders the appropriate hero based on device type.
  * This component prevents the desktop hero from briefly showing on mobile devices
@@ -27,7 +27,7 @@ const LoadingHero = memo(function LoadingHero() {
  *
  * @returns {JSX.Element} The rendered component
  */
-const ImprovedResponsiveHero = memo(function ImprovedResponsiveHero() {
+const NewResponsiveHero = memo(function NewResponsiveHero() {
   // Use the device detection hook with complete detection status
   const { isMobile, isDetectionComplete } = useDeviceDetection();
 
@@ -46,10 +46,10 @@ const ImprovedResponsiveHero = memo(function ImprovedResponsiveHero() {
 
       {/* Render the appropriate hero once detection is complete */}
       {isMounted && isDetectionComplete && (
-        isMobile ? <VideoHero /> : <DesktopHero />
+        isMobile ? <MobileVideoWithAudio /> : <DesktopHero />
       )}
     </section>
   );
 });
 
-export default ImprovedResponsiveHero;
+export default NewResponsiveHero;

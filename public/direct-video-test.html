@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Direct Video Test</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      max-width: 100%;
+      padding: 20px;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .video-container {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #111;
+    }
+    
+    video {
+      width: 100%;
+      display: block;
+    }
+    
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    button {
+      padding: 10px 15px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .status {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #222;
+      border-radius: 4px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Direct Video Test</h1>
+    
+    <div class="video-container">
+      <!-- Direct MP4 video with no source elements -->
+      <video id="directVideo" controls muted playsinline loop poster="/images/home/hero/carousel/hero1.jpg" src="/images/home/hero/mobile-video/heromobilevid.mp4"></video>
+    </div>
+    
+    <div class="controls">
+      <button id="playBtn">Play</button>
+      <button id="pauseBtn">Pause</button>
+      <button id="muteBtn">Toggle Mute</button>
+    </div>
+    
+    <div id="status" class="status">Status: Ready</div>
+    
+    <h2>Video Information</h2>
+    <div id="videoInfo" class="status">Loading...</div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const video = document.getElementById('directVideo');
+      const playBtn = document.getElementById('playBtn');
+      const pauseBtn = document.getElementById('pauseBtn');
+      const muteBtn = document.getElementById('muteBtn');
+      const status = document.getElementById('status');
+      const videoInfo = document.getElementById('videoInfo');
+      
+      // Update status
+      function updateStatus(message) {
+        status.textContent = 'Status: ' + message;
+      }
+      
+      // Update video info
+      function updateVideoInfo() {
+        if (!video) return;
+        
+        videoInfo.innerHTML = `
+          <p>Duration: ${video.duration ? video.duration.toFixed(2) + 's' : 'Unknown'}</p>
+          <p>Current Time: ${video.currentTime.toFixed(2)}s</p>
+          <p>Paused: ${video.paused ? 'Yes' : 'No'}</p>
+          <p>Muted: ${video.muted ? 'Yes' : 'No'}</p>
+          <p>Ready State: ${video.readyState} (${getReadyStateText(video.readyState)})</p>
+          <p>Network State: ${video.networkState} (${getNetworkStateText(video.networkState)})</p>
+          <p>Error: ${video.error ? video.error.code : 'None'}</p>
+        `;
+      }
+      
+      function getReadyStateText(state) {
+        switch(state) {
+          case 0: return 'HAVE_NOTHING';
+          case 1: return 'HAVE_METADATA';
+          case 2: return 'HAVE_CURRENT_DATA';
+          case 3: return 'HAVE_FUTURE_DATA';
+          case 4: return 'HAVE_ENOUGH_DATA';
+          default: return 'Unknown';
+        }
+      }
+      
+      function getNetworkStateText(state) {
+        switch(state) {
+          case 0: return 'NETWORK_EMPTY';
+          case 1: return 'NETWORK_IDLE';
+          case 2: return 'NETWORK_LOADING';
+          case 3: return 'NETWORK_NO_SOURCE';
+          default: return 'Unknown';
+        }
+      }
+      
+      // Play button
+      playBtn.addEventListener('click', function() {
+        video.play().then(() => {
+          updateStatus('Playing');
+          updateVideoInfo();
+        }).catch(err => {
+          updateStatus('Error: ' + err.message);
+          console.error('Play error:', err);
+        });
+      });
+      
+      // Pause button
+      pauseBtn.addEventListener('click', function() {
+        video.pause();
+        updateStatus('Paused');
+        updateVideoInfo();
+      });
+      
+      // Mute button
+      muteBtn.addEventListener('click', function() {
+        video.muted = !video.muted;
+        updateStatus(video.muted ? 'Muted' : 'Unmuted');
+        updateVideoInfo();
+      });
+      
+      // Video events
+      video.addEventListener('loadstart', () => {
+        updateStatus('Loading started');
+        updateVideoInfo();
+      });
+      
+      video.addEventListener('loadedmetadata', () => {
+        updateStatus('Metadata loaded');
+        updateVideoInfo();
+      });
+      
+      video.addEventListener('loadeddata', () => {
+        updateStatus('Data loaded');
+        updateVideoInfo();
+      });
+      
+      video.addEventListener('canplay', () => {
+        updateStatus('Can play');
+        updateVideoInfo();
+      });
+      
+      video.addEventListener('playing', () => {
+        updateStatus('Playing');
+        updateVideoInfo();
+      });
+      
+      video.addEventListener('pause', () => {
+        updateStatus('Paused');
+        updateVideoInfo();
+      });
+      
+      video.addEventListener('timeupdate', () => {
+        updateVideoInfo();
+      });
+      
+      video.addEventListener('error', (e) => {
+        updateStatus('Error: ' + (video.error ? video.error.code : 'unknown'));
+        console.error('Video error:', video.error);
+        updateVideoInfo();
+      });
+      
+      // Update video info every second
+      setInterval(updateVideoInfo, 1000);
+      
+      // Initial update
+      updateVideoInfo();
+    });
+  </script>
+</body>
+</html>

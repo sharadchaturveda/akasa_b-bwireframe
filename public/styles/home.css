@@ -11,11 +11,27 @@
   padding-top: 4rem;
 }
 
+/* Desktop hero overlay - not applied to mobile video */
 .hero-overlay {
   position: absolute;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 10;
+}
+
+/* Mobile hero video should have no overlay */
+@media (max-width: 767px) {
+  .hero-section video {
+    filter: brightness(1.1);
+    opacity: 1 !important;
+  }
+
+  /* Remove any overlay on mobile video */
+  .hero-section video + .hero-overlay,
+  .hero-section .hero-overlay {
+    background-color: transparent !important;
+    opacity: 0 !important;
+  }
 }
 
 .hero-content {

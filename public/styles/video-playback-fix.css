@@ -1,0 +1,95 @@
+/**
+ * Video Playback Fix CSS
+ * 
+ * This CSS file contains styles to help with video playback issues on mobile devices,
+ * particularly related to power-saving mode interruptions.
+ */
+
+/* Apply to all videos in the hero section */
+.hero-section video {
+  /* Force hardware acceleration */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  
+  /* Hint to browser to optimize */
+  will-change: transform;
+  
+  /* Ensure proper sizing */
+  object-fit: cover !important;
+  width: 100% !important;
+  height: 100% !important;
+  
+  /* Prevent layout shifts */
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  
+  /* Ensure full brightness */
+  filter: brightness(1.15) !important;
+  
+  /* Ensure full opacity */
+  opacity: 1 !important;
+  
+  /* Prevent background color */
+  background-color: transparent !important;
+}
+
+/* Ensure video container has proper positioning */
+.hero-section .video-container,
+.hero-section > div:has(video) {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  z-index: 10 !important;
+}
+
+/* Ensure video is visible */
+.hero-section video.visible,
+.hero-section video[data-loaded="true"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Ensure video poster is properly sized */
+.hero-section video[poster] {
+  object-fit: cover !important;
+  background-size: cover !important;
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 767px) {
+  /* Optimize video playback on mobile */
+  .hero-section video {
+    /* Additional mobile-specific optimizations */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    
+    /* Prevent content visibility changes during scroll */
+    content-visibility: visible !important;
+    
+    /* Ensure smooth transitions */
+    transition: none !important;
+  }
+  
+  /* Ensure video is visible on iOS */
+  .hero-section video::-webkit-media-controls {
+    display: none !important;
+  }
+  
+  /* Prevent iOS from showing video controls */
+  .hero-section video::-webkit-media-controls-panel,
+  .hero-section video::-webkit-media-controls-play-button,
+  .hero-section video::-webkit-media-controls-start-playback-button {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    -webkit-appearance: none !important;
+  }
+}

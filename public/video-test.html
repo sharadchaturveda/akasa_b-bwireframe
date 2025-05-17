@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Video Test</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+    
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .video-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #000;
+    }
+    
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .controls {
+      position: fixed;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      z-index: 10;
+    }
+    
+    button {
+      padding: 10px 15px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: 1px solid white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    .status {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      border-radius: 5px;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="status" id="status">Status: Loading...</div>
+    
+    <div class="video-container">
+      <video id="videoPlayer" muted playsinline loop poster="/images/home/hero/mobile-poster.jpg">
+        <source src="/images/home/hero/mobile-video/heromobilevid.webm" type="video/webm">
+        <source src="/images/home/hero/mobile-video/heromobilevid.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    
+    <div class="controls">
+      <button id="playBtn">Play</button>
+      <button id="pauseBtn">Pause</button>
+      <button id="muteBtn">Mute</button>
+      <button id="unmuteBtn">Unmute</button>
+      <button id="reloadBtn">Reload</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const video = document.getElementById('videoPlayer');
+      const playBtn = document.getElementById('playBtn');
+      const pauseBtn = document.getElementById('pauseBtn');
+      const muteBtn = document.getElementById('muteBtn');
+      const unmuteBtn = document.getElementById('unmuteBtn');
+      const reloadBtn = document.getElementById('reloadBtn');
+      const status = document.getElementById('status');
+      
+      // Update status
+      function updateStatus(message) {
+        status.textContent = 'Status: ' + message;
+      }
+      
+      // Event listeners for video
+      video.addEventListener('loadstart', () => updateStatus('Loading started'));
+      video.addEventListener('loadeddata', () => updateStatus('Data loaded'));
+      video.addEventListener('canplay', () => updateStatus('Can play'));
+      video.addEventListener('canplaythrough', () => updateStatus('Can play through'));
+      video.addEventListener('playing', () => updateStatus('Playing'));
+      video.addEventListener('pause', () => updateStatus('Paused'));
+      video.addEventListener('waiting', () => updateStatus('Waiting'));
+      video.addEventListener('error', (e) => {
+        updateStatus('Error: ' + (video.error ? video.error.code : 'unknown'));
+        console.error('Video error:', video.error);
+      });
+      
+      // Button event listeners
+      playBtn.addEventListener('click', () => {
+        video.play().catch(err => {
+          console.error('Play error:', err);
+          updateStatus('Play error: ' + err.message);
+        });
+      });
+      
+      pauseBtn.addEventListener('click', () => {
+        video.pause();
+      });
+      
+      muteBtn.addEventListener('click', () => {
+        video.muted = true;
+        updateStatus('Muted');
+      });
+      
+      unmuteBtn.addEventListener('click', () => {
+        video.muted = false;
+        updateStatus('Unmuted');
+      });
+      
+      reloadBtn.addEventListener('click', () => {
+        // Add cache-busting parameter
+        const timestamp = new Date().getTime();
+        const webmSource = video.querySelector('source[type="video/webm"]');
+        const mp4Source = video.querySelector('source[type="video/mp4"]');
+        
+        if (webmSource) {
+          webmSource.src = `/images/home/hero/mobile-video/heromobilevid.webm?v=${timestamp}`;
+        }
+        
+        if (mp4Source) {
+          mp4Source.src = `/images/home/hero/mobile-video/heromobilevid.mp4?v=${timestamp}`;
+        }
+        
+        video.load();
+        updateStatus('Reloaded');
+      });
+      
+      // Initial setup
+      video.muted = true;
+      video.playsInline = true;
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
+      
+      // Try to autoplay
+      video.play().catch(err => {
+        console.error('Autoplay error:', err);
+        updateStatus('Autoplay error: ' + err.message);
+      });
+    });
+  </script>
+</body>
+</html>

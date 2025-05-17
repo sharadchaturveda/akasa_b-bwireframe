@@ -52,8 +52,8 @@ const BasicVideoHero = memo(function BasicVideoHero() {
     };
 
     // Function to handle video error
-    const handleError = (e: Event) => {
-      console.error('Video error:', e);
+    const handleError = () => {
+      console.error('Video error occurred');
       if (video.error) {
         console.error('Video error code:', video.error.code);
         console.error('Video error message:', video.error.message);

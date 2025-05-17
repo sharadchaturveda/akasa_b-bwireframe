@@ -1,0 +1,64 @@
+// DEBUG VERSION - No blocking of video requests
+
+// Function to ensure video plays on mobile
+function ensureMobileVideoPlays() {
+  // Run on all devices for debugging
+  console.log('DEBUG: ensureMobileVideoPlays running on all devices');
+
+  // Create a video element
+  const video = document.createElement('video');
+  video.muted = true;
+  video.playsInline = true;
+  video.autoplay = true;
+  video.loop = true;
+  video.preload = 'auto';
+
+  // Use WebM format first
+  const source = document.createElement('source');
+  source.src = '/images/home/hero/mobile-video/heromobilevid.webm?nocache=' + Date.now();
+  source.type = 'video/webm';
+  video.appendChild(source);
+
+  video.style.position = 'absolute';
+  video.style.top = '0';
+  video.style.left = '0';
+  video.style.width = '100%';
+  video.style.height = '100%';
+  video.style.objectFit = 'cover';
+  video.style.zIndex = '10';
+  video.style.opacity = '0'; // Hide it
+
+  // Add to body temporarily to trigger autoplay
+  document.body.appendChild(video);
+
+  // Function to play video with retry
+  function playVideo() {
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(function() {
+        // If autoplay fails, try again after a short delay
+        setTimeout(playVideo, 100);
+      });
+    }
+  }
+
+  // Try to play
+  playVideo();
+
+  // Remove after 1 second
+  setTimeout(function() {
+    if (document.body.contains(video)) {
+      document.body.removeChild(video);
+    }
+  }, 1000);
+}
+
+// Run on page load
+if (document.readyState === 'complete') {
+  ensureMobileVideoPlays();
+} else {
+  window.addEventListener('load', ensureMobileVideoPlays);
+}
+
+// Add a debug message to the console
+console.log('DEBUG: mobileVideoOptimization.debug.js loaded - video requests are NOT being blocked');

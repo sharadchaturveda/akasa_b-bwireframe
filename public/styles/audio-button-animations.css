@@ -1,0 +1,36 @@
+/**
+ * Audio Button Animations
+ * 
+ * This file contains animations for the audio control button
+ */
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  }
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Apply animations to the audio control button */
+.audio-control-button.muted {
+  animation: pulse 2s infinite;
+}
+
+.audio-control-button .animation-ring {
+  animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}

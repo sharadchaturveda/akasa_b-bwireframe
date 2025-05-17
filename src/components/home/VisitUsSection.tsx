@@ -211,6 +211,7 @@ const VisitUsSection = memo(function VisitUsSection() {
     <section
       id="visit-us"
       className="relative min-h-[80vh] flex items-center justify-center text-center px-4 sm:px-8 py-12 sm:py-16 overflow-hidden"
+      style={{ height: '600px' }}
     >
       {/* Background image with optimized loading */}
       <OptimizedBackgroundImage
@@ -224,6 +225,7 @@ const VisitUsSection = memo(function VisitUsSection() {
         gradientViaColor="via-black/50"
         gradientToColor="to-black/40"
         objectPosition={isMobile ? "center center" : "center"}
+        className="h-full"
       />
 
       {/* Information card */}

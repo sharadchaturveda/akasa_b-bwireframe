@@ -158,7 +158,10 @@ export function useVideoPlayer({
   const [isReady, setIsReady] = useState(false);
   const [hasError, setHasError] = useState(false);
 
-  // We'll set the video source in the useEffect
+  // Generate a unique URL to bypass caching if needed
+  const videoSrc = preventCaching
+    ? `${src}?nocache=${Date.now()}-${Math.random()}`
+    : src;
 
   // Function to play the video
   const play = useCallback(async () => {
@@ -169,20 +172,9 @@ export function useVideoPlayer({
       setIsPlaying(true);
       onPlay?.();
     } catch (error) {
-      // Only log detailed error in development
-      if (process.env.NODE_ENV === 'development') {
-        console.error('Error playing video:', {
-          name: (error as Error)?.name,
-          message: (error as Error)?.message,
-          error
-        });
-      }
-
+      console.error('Error playing video:', error);
       setHasError(true);
-
-      // Create a more informative error
-      const errorMessage = (error as Error)?.message || 'Unknown error';
-      onError?.(new Error(`Failed to play video: ${errorMessage}`));
+      onError?.(error as Error);
     }
   }, [onPlay, onError]);
 
@@ -250,21 +242,6 @@ export function useVideoPlayer({
       video.setAttribute('webkit-playsinline', '');
     }
 
-    // Set the video source
-    if (preventCaching) {
-      // Add cache-busting parameters
-      const timestamp = Date.now();
-      const random = Math.floor(Math.random() * 1000000);
-      video.src = `${src}?t=${timestamp}&r=${random}`;
-    } else {
-      video.src = src;
-    }
-
-    // Set poster if provided
-    if (posterSrc) {
-      video.poster = posterSrc;
-    }
-
     // Event handlers
     const handleCanPlay = () => {
       setIsReady(true);
@@ -289,22 +266,55 @@ export function useVideoPlayer({
     };
 
     const handleError = (e: Event) => {
-      // Get more detailed error information if available
-      const videoElement = e.target as HTMLVideoElement;
-      const errorCode = videoElement?.error?.code;
-      const errorMessage = videoElement?.error?.message;
-
-      // Only log detailed error in development
+      // Log error in development mode
       if (process.env.NODE_ENV === 'development') {
-        console.error('Video error:', {
-          code: errorCode,
-          message: errorMessage || 'Unknown error',
-          event: e
-        });
+        console.error('Video error occurred');
+        if (video.error) {
+          console.error('Video error code:', video.error.code);
+          console.error('Video error message:', video.error.message);
+        }
       }
 
+      // Set error state
       setHasError(true);
-      onError?.(new Error(`Video playback error: ${errorMessage || 'Unknown error'}`));
+
+      // Try to recover by reloading the video with a different source
+      try {
+        if (video.childElementCount > 0) {
+          // If we have source elements, try to switch to MP4 if WebM failed
+          const sources = video.querySelectorAll('source');
+          const timestamp = Date.now();
+
+          sources.forEach(source => {
+            // Add cache busting
+            if (source.src.includes('webm')) {
+              source.src = `/images/home/hero/mobile-video/heromobilevid.webm?v=${timestamp}`;
+            } else if (source.src.includes('mp4')) {
+              source.src = `/images/home/hero/mobile-video/heromobilevid.mp4?v=${timestamp}`;
+            }
+          });
+
+          // Force reload
+          video.load();
+
+          // Try to play again after a short delay
+          setTimeout(() => {
+            video.play().catch(err => {
+              if (process.env.NODE_ENV === 'development') {
+                console.error('Recovery play error:', err);
+              }
+            });
+          }, 500);
+        }
+      } catch (err) {
+        // Silent catch for recovery attempts
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Recovery error:', err);
+        }
+      }
+
+      // Call error callback
+      onError?.(new Error('Video playback error'));
     };
 
     // Add event listeners
@@ -324,23 +334,24 @@ export function useVideoPlayer({
       video.removeEventListener('error', handleError);
 
       try {
-        // Properly clean up video element
+        // Pause the video
         video.pause();
 
-        // Remove all sources
-        while (video.firstChild) {
-          video.removeChild(video.firstChild);
+        // Handle cleanup differently based on whether we have source elements
+        if (video.childElementCount > 0) {
+          // If we have source elements, remove them
+          while (video.firstChild) {
+            video.removeChild(video.firstChild);
+          }
+        } else {
+          // Otherwise, clear the src attribute
+          video.src = '';
         }
 
-        // Clear the src attribute and load to reset the video element
-        video.src = '';
-        video.removeAttribute('src');
+        // Force reload
         video.load();
       } catch (err) {
-        // Silently handle any cleanup errors
-        if (process.env.NODE_ENV === 'development') {
-          console.warn('Error during video cleanup:', err);
-        }
+        // Silent catch for cleanup errors
       }
     };
   }, [src, autoplay, loop, muted, playsInline, play, onPlay, onPause, onEnded, onError]);

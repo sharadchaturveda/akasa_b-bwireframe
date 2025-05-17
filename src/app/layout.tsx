@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-// Import the fonts we need
-import { Playfair_Display, Montserrat } from "next/font/google";
+// Remove Google Fonts imports to fix font loading issues
 import "./globals.css";
 import "./performance-styles.css";
 import '@/styles/mobile-navigation-fix.css';
@@ -16,29 +15,21 @@ import '../styles/font-fallbacks.css';
 import '../styles/hero-loading-fix.css';
 // Add critical CSS
 import '../styles/critical.css';
+// Add mobile video brightness fix CSS
+import '../styles/mobile-video-brightness.css';
+// Add audio button animations CSS
+import '../styles/audio-button-animations.css';
 
 // Import components
 import MobileNavigation from '@/components/navigation/MobileNavigation';
 import FloatingActionButtons from '@/components/ui/FloatingActionButtons';
 import ScrollBehavior from '@/components/home/ScrollBehavior';
 
-// Limit to only the fonts we need
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  weight: ["400", "700"], // Only the weights we need
-  display: 'swap',
-  preload: true,
-  fallback: ['serif'], // Fallback font if Google Fonts fails
-});
-
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
-  subsets: ["latin"],
-  weight: ["400", "500"], // Only the weights we need
-  display: 'swap',
-  fallback: ['sans-serif'], // Fallback font if Google Fonts fails
-});
+// Define CSS variables for font fallbacks
+const fontVariables = {
+  playfair: "--font-playfair",
+  montserrat: "--font-montserrat"
+};
 
 export const metadata: Metadata = {
   title: "Akasa | Finest Indian Cuisine in Singapore",
@@ -69,56 +60,51 @@ export default function RootLayout({
         {/* Local fonts CSS as fallback */}
         <link rel="stylesheet" href="/fonts/fonts.css" />
 
-        {/* Preload critical images */}
-        <link
-          rel="preload"
-          href="/images/brand/logo-white.png"
-          as="image"
-          type="image/png"
-          fetchPriority="high"
-        />
+        {/* System font fallbacks */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          /* System font fallbacks */
+          :root {
+            --font-playfair: Georgia, 'Times New Roman', Times, serif;
+            --font-montserrat: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+          }
 
-        {/* Preload testimonial background image */}
-        <link
-          rel="preload"
-          href="/images/home/testimonials/background-alt.jpg"
-          as="image"
-          type="image/jpeg" // Assuming it's a JPEG, adjust if needed
-          fetchPriority="high"
-        />
+          .font-playfair,
+          .font-playfair-display,
+          [class*="font-playfair"],
+          h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-playfair) !important;
+          }
 
-        {/* Preload VisitUs background image */}
-        <link
-          rel="preload"
-          href="/images/home/gallery/location.jpg?quality=75"
-          as="image"
-          type="image/jpeg"
-          fetchPriority="high"
-        />
+          .font-montserrat,
+          [class*="font-montserrat"],
+          body, p, div, span, button, a {
+            font-family: var(--font-montserrat) !important;
+          }
+        `}} />
 
-        {/* Preload WebM video for mobile */}
-        <link
-          rel="preload"
-          href="/images/home/hero/mobile-video/heromobilevid.webm"
-          as="video"
-          type="video/webm"
-          media="(max-width: 767px)"
-          fetchPriority="high"
-        />
+        {/* Removed preload links that were causing warnings */}
 
         {/* Critical CSS moved to external file for better performance */}
 
-        {/* External script for mobile video optimization - moved from inline for better performance */}
-        <script src="/scripts/mobileVideoOptimization.js" async></script>
+        {/* Simple audio button script */}
+        <script src="/scripts/simple-audio-button.js"></script>
 
         {/* Script for scroll optimization */}
         <script src="/scripts/scrollOptimization.js" async></script>
 
         {/* Script for font fallbacks */}
         <script src="/scripts/fontFallback.js" async></script>
+
+        {/* Mobile video fixes */}
+        <link rel="stylesheet" href="/styles/mobile-video-brightness.css" />
+        <link rel="stylesheet" href="/styles/video-playback-fix.css" />
+
+        {/* Video fix scripts */}
+        <script src="/scripts/videoFix.js" async></script>
+        <script src="/scripts/videoPlaybackFix.js" async></script>
       </head>
       <body
-        className={`${playfair.variable} ${montserrat.variable} antialiased bg-black`}
+        className="antialiased bg-black font-system"
         style={{
           WebkitFontSmoothing: 'antialiased',
           MozOsxFontSmoothing: 'grayscale',
