@@ -1,9 +1,9 @@
 "use client";
 
 import { memo } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import HydrationSafeImage from '@/components/ui/HydrationSafeImage';
 
 export type LogoSize = 'small' | 'medium' | 'large' | 'custom';
 
@@ -54,7 +54,7 @@ const Logo = memo(function Logo({
   const logoContent = (
     <div className="relative h-full w-full">
       <div className="absolute inset-0 flex items-center">
-        <Image
+        <HydrationSafeImage
           src="/images/brand/logo-white.png"
           alt="Logo"
           fill

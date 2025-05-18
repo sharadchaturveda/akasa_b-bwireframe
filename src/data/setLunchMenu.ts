@@ -31,26 +31,26 @@ export const setLunchMenu: SetLunchMenu = {
       "description": "Served with your choice of Roti, Nan, or Laccha Paratha.",
       "options": [
         {
-          "name": "Balai Lababdar",
-          "description": "Decadent tomato gravy cooked with Cottage cheese, Kashmiri chili & cashew",
+          "name": "Paneer Curry",
+          "description": "Cottage cheese in a rich, aromatic curry sauce",
           "is_vegetarian": true,
           "surcharge": null
         },
         {
-          "name": "Murgh Tariwala",
-          "description": "Home-made Curry Chicken cooked with Kashmiri chili",
+          "name": "Chicken Curry",
+          "description": "Tender chicken pieces in a flavorful curry sauce",
           "is_vegetarian": false,
           "surcharge": null
         },
         {
-          "name": "Akasa-e-Zaika Mass",
-          "description": "Signature Awadh style dum cooked mutton with Mathiana Chili, Saffron, Cold pressed mustard oil",
+          "name": "Mutton Curry",
+          "description": "Slow-cooked mutton in a rich, spiced curry sauce",
           "is_vegetarian": false,
           "surcharge": "+$2"
         },
         {
-          "name": "Jheenga Sunehri",
-          "description": "Fresh large prawns | Fenugreek Seeds",
+          "name": "Prawn Curry",
+          "description": "Fresh prawns cooked in a delicious curry sauce",
           "is_vegetarian": false,
           "surcharge": "+$3"
         }

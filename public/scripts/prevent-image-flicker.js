@@ -1,16 +1,16 @@
 /**
  * Prevent Image Flicker During Scroll
- * 
+ *
  * This script prevents images from flickering (going black) during scrolling
  * by keeping them in memory and preventing the browser from unloading them.
- * 
+ *
  * It doesn't modify any layout or navigation elements.
  */
 
 (function() {
   // Only run on mobile devices
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-  
+
   if (!isMobile) {
     return; // Exit early on desktop
   }
@@ -35,19 +35,19 @@
         perspective: 1000px;
         -webkit-backface-visibility: hidden;
         -webkit-perspective: 1000px;
-        
+
         /* Prevent unloading during scroll */
         will-change: transform;
-        
+
         /* Ensure smooth transitions */
         transition: none !important;
       }
-      
+
       /* Prevent layout shifts */
       img[width][height] {
         aspect-ratio: attr(width) / attr(height);
       }
-      
+
       /* Ensure image containers maintain dimensions during load */
       span[style*="display: block; overflow: hidden;"] {
         background-color: #111;
@@ -55,66 +55,87 @@
       }
     `;
     document.head.appendChild(style);
-    
-    // Track all images to prevent them from being garbage collected
+
+    // Track only visible images to prevent memory leaks
+    // Limit the cache size to prevent memory issues
     const imageCache = new Set();
-    
+    const MAX_CACHE_SIZE = 50; // Limit cache to 50 images
+
     // Process all images on the page
     function processImages() {
-      document.querySelectorAll('img').forEach(img => {
+      // Get all unprocessed images
+      const images = Array.from(document.querySelectorAll('img:not([data-flicker-fixed])'));
+
+      // Process only visible images first to reduce memory usage
+      images.forEach(img => {
         // Skip already processed images
         if (img.hasAttribute('data-flicker-fixed')) {
           return;
         }
-        
+
         // Mark as processed
         img.setAttribute('data-flicker-fixed', 'true');
-        
-        // Add to cache to prevent garbage collection
-        imageCache.add(img);
-        
-        // Set decoding to sync to prevent flickering
-        img.decoding = 'sync';
-        
+
+        // Only cache images that are visible or close to viewport
+        const rect = img.getBoundingClientRect();
+        const isNearViewport = rect.top < window.innerHeight * 2; // Within 2x viewport height
+
+        if (isNearViewport) {
+          // Add to cache to prevent garbage collection, but maintain size limit
+          if (imageCache.size >= MAX_CACHE_SIZE) {
+            // Remove the oldest item if we're at capacity
+            const firstItem = imageCache.values().next().value;
+            imageCache.delete(firstItem);
+          }
+          imageCache.add(img);
+        }
+
+        // Set decoding to async for better performance
+        img.decoding = 'async';
+
         // Ensure image has proper loading attribute
         if (!img.hasAttribute('loading')) {
           // Only set lazy loading for images below the fold
-          const rect = img.getBoundingClientRect();
           if (rect.top > window.innerHeight) {
             img.loading = 'lazy';
           } else {
             img.loading = 'eager';
           }
         }
-        
+
         // Add error handling
         if (!img.hasAttribute('onerror')) {
           img.onerror = function() {
-            // Retry loading once
-            const src = this.src;
-            this.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-            setTimeout(() => {
-              if (this) this.src = src;
-            }, 500);
+            // Just hide broken images instead of retrying to avoid network issues
+            this.style.display = 'none';
           };
         }
       });
     }
-    
+
     // Process images initially
     processImages();
-    
-    // Process new images when they're added to the DOM
+
+    // Process new images when they're added to the DOM - with throttling
+    let processingImages = false;
+    let pendingMutations = false;
+
     const observer = new MutationObserver(mutations => {
+      // If we're already processing images, just mark that we have pending mutations
+      if (processingImages) {
+        pendingMutations = true;
+        return;
+      }
+
       let hasNewImages = false;
-      
+
       mutations.forEach(mutation => {
         if (mutation.type === 'childList') {
           mutation.addedNodes.forEach(node => {
             if (node.nodeName === 'IMG') {
               hasNewImages = true;
             } else if (node.querySelectorAll) {
-              const images = node.querySelectorAll('img');
+              const images = node.querySelectorAll('img:not([data-flicker-fixed])');
               if (images.length > 0) {
                 hasNewImages = true;
               }
@@ -122,31 +143,54 @@
           });
         }
       });
-      
+
       if (hasNewImages) {
-        processImages();
+        processingImages = true;
+
+        // Use requestAnimationFrame to process images during idle time
+        requestAnimationFrame(() => {
+          processImages();
+          processingImages = false;
+
+          // If we had pending mutations while processing, process again
+          if (pendingMutations) {
+            pendingMutations = false;
+            processImages();
+          }
+        });
       }
     });
-    
+
     // Observe the entire document for new images
     observer.observe(document.body, {
       childList: true,
       subtree: true
     });
-    
-    // Prevent scroll events from causing image flickering
+
+    // Prevent scroll events from causing image flickering - with throttling
     let scrollTimeout;
-    window.addEventListener('scroll', function() {
+    let lastScrollTime = 0;
+    const scrollThrottle = 100; // ms
+
+    const handleScroll = () => {
+      const now = Date.now();
+
+      // Throttle scroll events
+      if (now - lastScrollTime < scrollThrottle) return;
+      lastScrollTime = now;
+
       // Add a class to the body during scroll
       document.body.classList.add('is-scrolling');
-      
+
       // Remove the class after scrolling stops
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(function() {
         document.body.classList.remove('is-scrolling');
       }, 100);
-    }, { passive: true });
-    
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     // Add CSS for scrolling state
     const scrollStyle = document.createElement('style');
     scrollStyle.textContent = `

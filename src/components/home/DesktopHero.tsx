@@ -1,12 +1,12 @@
 "use client";
 
 import { memo } from "react";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useImageCarousel } from "@/hooks/useImageCarousel";
 import { IMAGES, LOGO } from "@/constants";
 import Icon from "@/components/ui/icon";
+import HydrationSafeImage from "@/components/ui/HydrationSafeImage";
 
 // Hero carousel images for desktop
 const HERO_IMAGES = [
@@ -37,13 +37,12 @@ const HeroLogo = memo(function HeroLogo() {
   return (
     <div className="hero-logo-container relative mb-12">
       <div className="relative h-[180px] w-[360px]">
-        <Image
+        <HydrationSafeImage
           src="/images/brand/logo-white.png"
           alt="Akasa Logo"
           width={600}
           height={240}
           priority
-          loading="eager"
           quality={IMAGES.HIGH_QUALITY}
           className="w-full h-full object-contain opacity-100 absolute top-0 left-0"
         />
@@ -120,12 +119,11 @@ const ImageCarousel = memo(function ImageCarousel() {
             transitionDuration: `${transitionDuration}ms`
           }}
         >
-          <Image
+          <HydrationSafeImage
             src={image.src}
             alt={image.alt}
             fill
-            priority={index === 0}
-            loading={index === 0 ? "eager" : "lazy"}
+            priority={true} // Mark all hero images as priority to fix LCP warning
             sizes="100vw"
             quality={IMAGES.DEFAULT_QUALITY}
             className="object-cover opacity-60"

@@ -5,6 +5,9 @@ import { useRouter } from 'next/router';
 // Import global styles
 import '@/app/globals.css';
 
+// Import tracking components
+import FacebookPixel from '@/components/tracking/FacebookPixel';
+
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
@@ -84,6 +87,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
+      {/* Facebook Pixel - Global tracking */}
+      <FacebookPixel />
       <Component {...pageProps} />
     </>
   );

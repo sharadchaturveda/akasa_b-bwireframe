@@ -5,33 +5,8 @@ if (window.innerWidth >= 768) {
   style.innerHTML = '.mobile-only { display: none !important; }';
   document.head.appendChild(style);
 
-  // Block requests for mobile video files
-  var originalFetch = window.fetch;
-  window.fetch = function(url, options) {
-    if (typeof url === 'string' && url.includes('heromobilevid')) {
-      console.log('Blocked fetch request for mobile video:', url);
-      return Promise.reject(new Error('Mobile video blocked on desktop'));
-    }
-    return originalFetch(url, options);
-  };
-
-  // Block video element loading
-  var originalCreateElement = document.createElement;
-  document.createElement = function(tagName) {
-    var element = originalCreateElement.call(document, tagName);
-    if (tagName.toLowerCase() === 'video') {
-      // Override the load method
-      var originalLoad = element.load;
-      element.load = function() {
-        if (window.innerWidth >= 768) {
-          console.log('Blocked video loading on desktop');
-          return;
-        }
-        return originalLoad.apply(this, arguments);
-      };
-    }
-    return element;
-  };
+  // Instead of blocking all fetch requests, we'll just log them
+  console.log('Desktop device detected, mobile video optimizations disabled');
 }
 
 // Function to ensure video plays on mobile
@@ -64,26 +39,49 @@ function ensureMobileVideoPlays() {
   // Add to body temporarily to trigger autoplay
   document.body.appendChild(video);
 
-  // Function to play video with retry
+  // Function to play video with retry - limit retries to prevent infinite loops
+  let retryCount = 0;
+  const maxRetries = 3;
+
   function playVideo() {
+    if (retryCount >= maxRetries) {
+      console.log('Max video play retries reached, giving up');
+      cleanup();
+      return;
+    }
+
+    retryCount++;
     const playPromise = video.play();
     if (playPromise !== undefined) {
-      playPromise.catch(function() {
+      playPromise.catch(function(error) {
+        console.log('Video play failed, retrying...', error);
         // If autoplay fails, try again after a short delay
         setTimeout(playVideo, 100);
       });
     }
   }
 
+  // Cleanup function to ensure video is removed
+  function cleanup() {
+    if (document.body.contains(video)) {
+      // Remove event listeners
+      video.oncanplay = null;
+      video.onplay = null;
+      video.onerror = null;
+
+      // Stop the video and remove it
+      video.pause();
+      video.src = '';
+      video.load();
+      document.body.removeChild(video);
+    }
+  }
+
   // Try to play
   playVideo();
 
-  // Remove after 1 second
-  setTimeout(function() {
-    if (document.body.contains(video)) {
-      document.body.removeChild(video);
-    }
-  }, 1000);
+  // Remove after 1 second regardless of play status
+  setTimeout(cleanup, 1000);
 }
 
 // Run on page load

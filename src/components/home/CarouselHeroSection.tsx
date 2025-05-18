@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { memo, useState, useEffect, useCallback, useRef } from "react";
 import { LOGO } from "@/constants";
 import { useDeviceDetection } from "@/hooks/useDeviceDetection";
+import HydrationSafeImage from "@/components/ui/HydrationSafeImage";
 
 // Hero carousel images for desktop
 const HERO_IMAGES = [
@@ -154,10 +154,11 @@ const CarouselHeroSection = memo(function CarouselHeroSection() {
               zIndex: currentImageIndex === index ? 1 : 0
             }}
           >
-            <Image src={image.src}
+            <HydrationSafeImage
+              src={image.src}
               alt={image.alt}
               fill
-              priority={index === 0}
+              priority={true} // Mark all hero images as priority to fix LCP warning
               sizes="100vw"
               quality={80} /* Balanced for performance and quality */
               className="object-cover opacity-60"
@@ -171,7 +172,8 @@ const CarouselHeroSection = memo(function CarouselHeroSection() {
       {/* Logo - Desktop only - Hidden by default on small screens */}
       <div className="absolute top-0 left-0 w-full z-40 hidden md:flex justify-center pt-24">
         <div className="relative h-[120px] w-[240px]">
-          <Image src="/images/brand/logo-white.png"
+          <HydrationSafeImage
+            src="/images/brand/logo-white.png"
             alt="Akasa Logo"
             width={LOGO.SIZES.LARGE.width}
             height={LOGO.SIZES.LARGE.height}

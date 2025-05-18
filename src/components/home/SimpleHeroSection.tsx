@@ -1,11 +1,10 @@
 "use client";
 
-import Image from "next/image"
-;
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { memo, useRef, useEffect } from "react";
 import { LOGO } from "@/constants";
+import HydrationSafeImage from "@/components/ui/HydrationSafeImage";
 
 // Hero carousel images for desktop
 const HERO_IMAGES = [
@@ -34,22 +33,22 @@ const SimpleHeroSection = memo(function SimpleHeroSection() {
   const isSmallScreenRef = useRef(false);
   const carouselIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const carouselElementsRef = useRef<HTMLDivElement[]>([]);
-  
+
   // Set up everything on mount only
   useEffect(() => {
     // Function to check screen size
     const checkScreenSize = () => {
       isSmallScreenRef.current = window.innerWidth < 768;
-      
+
       // Update visibility based on screen size
       document.querySelectorAll('.desktop-only').forEach(el => {
         (el as HTMLElement).style.display = isSmallScreenRef.current ? 'none' : '';
       });
-      
+
       document.querySelectorAll('.mobile-only').forEach(el => {
         (el as HTMLElement).style.display = isSmallScreenRef.current ? '' : 'none';
       });
-      
+
       // Start or stop carousel based on screen size
       if (isSmallScreenRef.current) {
         if (carouselIntervalRef.current) {
@@ -60,18 +59,18 @@ const SimpleHeroSection = memo(function SimpleHeroSection() {
         startCarousel();
       }
     };
-    
+
     // Function to start carousel
     const startCarousel = () => {
       if (carouselIntervalRef.current) {
         clearInterval(carouselIntervalRef.current);
       }
-      
+
       // Update carousel images
       const updateCarousel = () => {
         const prevIndex = currentImageIndexRef.current;
         currentImageIndexRef.current = (prevIndex + 1) % HERO_IMAGES.length;
-        
+
         // Update visibility
         carouselElementsRef.current.forEach((el, index) => {
           if (index === currentImageIndexRef.current) {
@@ -83,17 +82,17 @@ const SimpleHeroSection = memo(function SimpleHeroSection() {
           }
         });
       };
-      
+
       // Set interval
       carouselIntervalRef.current = setInterval(updateCarousel, 2000);
     };
-    
+
     // Initial check
     checkScreenSize();
-    
+
     // Set up resize listener
     window.addEventListener('resize', checkScreenSize);
-    
+
     // Try to play video if it exists
     const videoElement = document.getElementById('heroVideo') as HTMLVideoElement;
     if (videoElement) {
@@ -101,7 +100,7 @@ const SimpleHeroSection = memo(function SimpleHeroSection() {
         console.log('Video autoplay failed:', error);
       });
     }
-    
+
     // Clean up
     return () => {
       window.removeEventListener('resize', checkScreenSize);
@@ -110,14 +109,14 @@ const SimpleHeroSection = memo(function SimpleHeroSection() {
       }
     };
   }, []);
-  
+
   // Store carousel elements ref
   const storeCarouselRef = (el: HTMLDivElement | null, index: number) => {
     if (el) {
       carouselElementsRef.current[index] = el;
     }
   };
-  
+
   return (
     <section className="relative w-full h-screen bg-black overflow-hidden m-0 p-0 hero-section">
       {/* Mobile Hero Section - Video only */}
@@ -140,12 +139,12 @@ const SimpleHeroSection = memo(function SimpleHeroSection() {
             <p className="text-white/90 uppercase tracking-widest text-sm mb-4">
               Experience
             </p>
-            
+
             <h1 className="text-white text-4xl font-playfair italic mb-6"
                 style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
               Exquisite Indian Cuisine
             </h1>
-            
+
             <div className="flex items-center w-full max-w-xs justify-center mb-6">
               <div className="h-px bg-white/50 flex-1"></div>
               <div className="mx-4">
@@ -156,7 +155,7 @@ const SimpleHeroSection = memo(function SimpleHeroSection() {
               </div>
               <div className="h-px bg-white/50 flex-1"></div>
             </div>
-            
+
             <p className="text-white/80 mb-8 text-sm">
               Fine Dining at the Heart of Singapore
             </p>
@@ -176,10 +175,11 @@ const SimpleHeroSection = memo(function SimpleHeroSection() {
               zIndex: index === 0 ? 1 : 0
             }}
           >
-            <Image src={image.src}
+            <HydrationSafeImage
+              src={image.src}
               alt={image.alt}
               fill
-              priority={index === 0}
+              priority={true} // Mark all hero images as priority to fix LCP warning
               sizes="100vw"
               className="object-cover opacity-60"
             />
@@ -192,7 +192,8 @@ const SimpleHeroSection = memo(function SimpleHeroSection() {
       {/* Logo - Desktop only */}
       <div className="absolute top-0 left-0 w-full z-40 desktop-only flex justify-center pt-24">
         <div className="relative h-[120px] w-[240px]">
-          <Image src="/images/brand/logo-white.png"
+          <HydrationSafeImage
+            src="/images/brand/logo-white.png"
             alt="Akasa Logo"
             width={LOGO.SIZES.LARGE.width}
             height={LOGO.SIZES.LARGE.height}

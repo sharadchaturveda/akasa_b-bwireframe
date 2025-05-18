@@ -183,7 +183,7 @@ export const alacarteMenu: Menu = {
           "name": "AKASA-E-Dum Biryani",
           "price": "$28",
           "description": "Basmati Rice | Saffron | Aromatic Spices",
-          "vegetarian": false 
+          "vegetarian": false
         },
         {
           "name": "Chicken Dum Biryani",
@@ -201,7 +201,7 @@ export const alacarteMenu: Menu = {
           "name": "AKASA-E-Pulao",
           "price": "$32",
           "description": "Basmati Rice | Saffron | Aromatic Spices",
-          "vegetarian": false 
+          "vegetarian": true
         },
         {
           "name": "Fresh Prawn Pulao",

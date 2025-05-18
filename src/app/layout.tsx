@@ -24,6 +24,7 @@ import '../styles/audio-button-animations.css';
 import MobileNavigation from '@/components/navigation/MobileNavigation';
 import FloatingActionButtons from '@/components/ui/FloatingActionButtons';
 import ScrollBehavior from '@/components/home/ScrollBehavior';
+import FacebookPixel from '@/components/tracking/FacebookPixel';
 
 // Define CSS variables for font fallbacks
 const fontVariables = {
@@ -153,6 +154,12 @@ export default function RootLayout({
         {/* Video fix scripts */}
         <script src="/scripts/videoFix.js" async></script>
         <script src="/scripts/videoPlaybackFix.js" async></script>
+
+        {/* Memory cleanup script */}
+        <script src="/scripts/memory-cleanup.js" async></script>
+
+        {/* Image loaded class script */}
+        <script src="/scripts/image-loaded-class.js" async></script>
       </head>
       <body
         className="antialiased bg-black font-system"
@@ -164,6 +171,9 @@ export default function RootLayout({
           overflowX: 'hidden'
         }}
       >
+        {/* Facebook Pixel - Global tracking */}
+        <FacebookPixel />
+
         {/* Mobile Navigation - Fixed at the top of every page */}
         <MobileNavigation />
 

@@ -1,9 +1,8 @@
 "use client";
 
 import { memo } from 'react';
-import Image from 'next/image'
-;
 import { cn } from '@/lib/utils';
+import HydrationSafeImage from '@/components/ui/HydrationSafeImage';
 
 /**
  * Props for the AnimatedBackground component
@@ -156,7 +155,8 @@ const AnimatedBackground = memo(function AnimatedBackground({
   return (
     <div className={cn("absolute inset-0 overflow-hidden", className)}>
       {/* Background image */}
-      <Image src={src}
+      <HydrationSafeImage
+        src={src}
         alt={alt}
         fill
         sizes={sizes}

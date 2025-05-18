@@ -43,10 +43,10 @@ export default function SoulFoodWeekendsMenuPage() {
             Treat your taste buds to a nostalgic culinary journey with Soul Food Weekends. We bring you heart-warming flavors of North India's most beloved dishes like Pindi Chole with Kulcha, Keema Pav, Dal Bhati Choorma, Saroson ka Saag & Gosht Bhuna Bheeja & more.
           </p>
           <p className="text-lg md:text-xl font-montserrat text-white/80 max-w-3xl mx-auto mt-4">
-            We are offering Unlimited Chaat for just 32++ per person
+            We are offering Unlimited Chaat for just $32++ per person
           </p>
           <p className="text-lg md:text-xl font-montserrat text-white/80 max-w-3xl mx-auto mt-2">
-            Available all Weekends
+            Available from 5pm Friday & all day Saturday
           </p>
         </div>
       </section>

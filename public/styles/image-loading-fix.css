@@ -21,38 +21,20 @@ img {
 @media (max-width: 767px) {
   /* Prevent image flickering during scroll */
   img {
-    /* Prevent unloading during scroll */
-    will-change: transform;
-
-    /* Ensure smooth transitions */
-    transition: none !important;
-
-    /* Prevent content visibility changes during scroll */
-    content-visibility: visible !important;
-
     /* Improve image rendering */
     image-rendering: auto;
   }
 
+  /* Apply hardware acceleration only to critical images */
+  img.critical-image,
+  .hero-section img {
+    transform: translateZ(0);
+  }
+
   /* Optimize video elements */
   video {
-    /* Prevent unloading during scroll */
-    will-change: transform;
-
-    /* Ensure smooth transitions */
-    transition: none !important;
-
-    /* Prevent content visibility changes during scroll */
-    content-visibility: visible !important;
-
     /* Improve video rendering */
     object-fit: cover;
-
-    /* Ensure hardware acceleration */
-    transform: translateZ(0);
-
-    /* Prevent flickering */
-    backface-visibility: hidden;
   }
 
   /* Optimize scrolling */
@@ -62,6 +44,17 @@ img {
 
     /* Prevent overscroll effects */
     overscroll-behavior: none;
+  }
+
+  /* Add styles for loaded images using data attributes to avoid hydration errors */
+  img[data-img-loaded="true"] {
+    opacity: 1 !important;
+  }
+
+  /* Default styles for images - will be overridden by inline styles */
+  img:not([data-img-loaded]) {
+    /* We'll use inline styles instead to avoid hydration errors */
+    /* The script will set opacity and transition directly */
   }
 }
 

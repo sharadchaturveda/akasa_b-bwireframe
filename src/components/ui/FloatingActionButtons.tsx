@@ -2,10 +2,10 @@
 
 import { memo, useEffect, useState, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useDeviceDetection } from "@/hooks/useDeviceDetection";
 import { throttle } from "@/utils/functionUtils";
+import HydrationSafeImage from "@/components/ui/HydrationSafeImage";
 
 /**
  * FloatingActionButtons Component
@@ -116,7 +116,7 @@ const FloatingActionButtons = memo(function FloatingActionButtons() {
             padding: 0
           }}
         >
-          <Image
+          <HydrationSafeImage
             src={whatsAppIconPath}
             alt="WhatsApp"
             width={isMobile ? 40 : 48}

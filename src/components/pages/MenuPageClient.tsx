@@ -71,8 +71,10 @@ export default function MenuPageClient() {
       ];
 
       imagesToPreload.forEach(src => {
-        const img = new Image();
-        img.src = src + '?quality=60&width=800';
+        if (typeof window !== 'undefined') {
+          const img = new window.Image();
+          img.src = src + '?quality=60&width=800';
+        }
       });
     };
 

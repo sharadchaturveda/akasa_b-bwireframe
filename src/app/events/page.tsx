@@ -58,8 +58,10 @@ export default function EventsPage() {
 
       // Preload each image
       imagesToPreload.forEach(src => {
-        const img = new Image();
-        img.src = src;
+        if (typeof window !== 'undefined') {
+          const img = new window.Image();
+          img.src = src;
+        }
       });
     };
 

@@ -1,6 +1,6 @@
 /**
  * Mobile Image Optimization CSS
- * 
+ *
  * This file contains CSS optimizations specifically for improving image loading
  * on mobile devices. It helps prevent the blank spaces and reloading issues
  * during scrolling.
@@ -8,21 +8,15 @@
 
 /* Prevent layout shifts during image loading */
 img {
-  /* Ensure images maintain their aspect ratio */
+  /* Ensure images maintain their aspect ratio if dimensions are set */
   aspect-ratio: attr(width) / attr(height);
-  
-  /* Use hardware acceleration for images */
-  transform: translateZ(0);
-  
+
   /* Improve image rendering during scroll */
   image-rendering: auto;
-  
+
   /* Use async decoding for all images */
   decoding: async;
-  
-  /* Prevent content visibility changes during scroll */
-  content-visibility: auto;
-  
+
   /* Ensure smooth transitions */
   transition: opacity 0.2s ease-in-out;
 }
@@ -34,13 +28,13 @@ img {
 [class*="img-wrapper"] {
   /* Set a background color while images load */
   background-color: #111;
-  
+
   /* Ensure proper overflow handling */
   overflow: hidden;
-  
+
   /* Create a stacking context */
   isolation: isolate;
-  
+
   /* Prevent content visibility changes during scroll */
   contain: layout paint;
 }
@@ -49,7 +43,7 @@ img {
 span[style*="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute"] {
   /* Prevent layout shifts */
   min-height: 1px;
-  
+
   /* Set a background color while images load */
   background-color: #111;
 }
@@ -60,7 +54,7 @@ span[style*="box-sizing: border-box; display: block; overflow: hidden; width: in
 [class*="skeleton"] {
   /* Use hardware acceleration */
   transform: translateZ(0);
-  
+
   /* Prevent layout shifts */
   min-height: 1px;
 }
@@ -72,12 +66,6 @@ span[style*="box-sizing: border-box; display: block; overflow: hidden; width: in
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: none;
   }
-  
-  /* Optimize image loading during scroll */
-  img {
-    /* Prevent repaints during scroll */
-    will-change: transform;
-  }
 }
 
 /* Prevent image reloading during scroll */
@@ -86,17 +74,13 @@ span[style*="box-sizing: border-box; display: block; overflow: hidden; width: in
   img {
     /* Ensure images maintain their aspect ratio */
     aspect-ratio: attr(width) / attr(height);
-    
-    /* Use hardware acceleration for images */
-    transform: translateZ(0);
-    
-    /* Prevent repaints during scroll */
-    will-change: transform;
-    
-    /* Ensure smooth transitions */
-    transition: opacity 0.2s ease-in-out;
+
+    /* Apply hardware acceleration only to critical images */
+    &.critical-image {
+      transform: translateZ(0);
+    }
   }
-  
+
   /* Optimize image containers */
   .image-container,
   [class*="img-container"],
@@ -104,14 +88,14 @@ span[style*="box-sizing: border-box; display: block; overflow: hidden; width: in
   [class*="img-wrapper"] {
     /* Set a background color while images load */
     background-color: #111;
-    
+
     /* Ensure proper overflow handling */
     overflow: hidden;
-    
-    /* Create a stacking context */
-    isolation: isolate;
-    
-    /* Prevent content visibility changes during scroll */
-    contain: layout paint;
+  }
+
+  /* Apply hardware acceleration only to hero section images */
+  .hero-section img,
+  .hero-section video {
+    transform: translateZ(0);
   }
 }

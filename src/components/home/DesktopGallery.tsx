@@ -61,10 +61,12 @@ const DesktopGallery = memo(function DesktopGallery() {
 
     // Preload images for better performance
     const preloadImages = () => {
-      GALLERY_IMAGES.forEach((image) => {
-        const img = new Image();
-        img.src = image.src;
-      });
+      if (typeof window !== 'undefined') {
+        GALLERY_IMAGES.forEach((image) => {
+          const img = new window.Image();
+          img.src = image.src;
+        });
+      }
     };
 
     preloadImages();
