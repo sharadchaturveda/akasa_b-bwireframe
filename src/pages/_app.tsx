@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Script from 'next/script';
 
 // Import global styles
 import '@/app/globals.css';
@@ -8,10 +9,14 @@ import '@/app/globals.css';
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
-  // Optimize for Web Vitals
+  // Google Analytics tracking
   useEffect(() => {
-    // Function to handle route change complete
-    const handleRouteChangeComplete = (url: string) => {
+    const handleRouteChange = (url: string) => {
+      // Track page view with Google Analytics
+      window.gtag('config', 'G-7H8MPGV2RB', {
+        page_path: url,
+      });
+
       // Report Web Vitals
       if (window.performance) {
         // Create a performance mark for the route change
@@ -58,13 +63,34 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     };
 
     // Add event listeners
-    router.events.on('routeChangeComplete', handleRouteChangeComplete);
+    router.events.on('routeChangeComplete', handleRouteChange);
 
     // Clean up
     return () => {
-      router.events.off('routeChangeComplete', handleRouteChangeComplete);
+      router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router]);
 
-  return <Component {...pageProps} />;
+  return (
+    <>
+      {/* Google Analytics */}
+      <Script
+        strategy="afterInteractive"
+        src="https://www.googletagmanager.com/gtag/js?id=G-7H8MPGV2RB"
+      />
+      <Script
+        id="ga-init"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-7H8MPGV2RB');
+          `,
+        }}
+      />
+      <Component {...pageProps} />
+    </>
+  );
 }

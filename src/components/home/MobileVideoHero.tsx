@@ -164,7 +164,6 @@ return (
       <div className="absolute inset-0 z-20">
         <video
           ref={videoRef}
-          className="w-full h-full object-cover"
           // Add back the attributes in JSX as well for redundancy
           muted
           playsInline

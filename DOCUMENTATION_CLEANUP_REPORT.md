@@ -1,117 +1,137 @@
 # Documentation Cleanup Report
 
-This report summarizes the changes made during the documentation cleanup process. The goal was to create clean, concise, and accurate documentation for the Akasa Restaurant Website project.
+## Overview
 
-## Documentation Audit
+This report summarizes the documentation cleanup performed on the Akasa Restaurant Website project. The goal was to clean up redundant, outdated, or intermediate documentation and logs while preserving essential documentation.
 
-### Existing Documentation
+## Cleanup Criteria
 
-1. **README.md**
-   - Comprehensive but contained some outdated information
-   - Included references to removed features (chef page)
-   - Had some redundant information with DOCUMENTATION.md
-   - Was overly verbose in some sections
+The following criteria were used to determine which files to keep, archive, or delete:
 
-2. **DOCUMENTATION.md**
-   - Detailed technical documentation
-   - Some redundancy with README.md
-   - Contained useful information about architecture, components, hooks, etc.
+1. **Keep the most recent PROJECT_SCOPE, README, or SUMMARY file**
+2. **Keep any *_FIX.md or *_PLAN.md file that's still actively referenced**
+3. **Keep one primary cleanup or optimization log per category**
+4. **Keep anything referenced in README or linked in active code files**
+5. **Archive files over 10 days old that are not critical to current development**
+6. **Delete redundant files that don't meet the above criteria**
 
-3. **Template Files**
-   - Various template files for documentation standards
-   - Provided good guidelines for documenting different parts of the codebase
+## Files Kept
 
-4. **Directory-specific README.md files**
-   - Contained useful information about specific parts of the codebase
-   - Some were outdated or contained redundant information
+### Core Documentation
 
-5. **Code Comments**
-   - Some comments were outdated or unnecessary
-   - Others provided valuable context and explanations
+- **README.md** - Main project README with comprehensive overview
+- **Akasa_Restaurant_Project_Scope_Cost_Summary.md** - Most recent project scope
 
-## Changes Made
+### Active Fix/Plan Files
 
-### Created New README.md
+- **INQUIRY_SECTION_FIX.md** - Active fix for the inquiry section
+- **REFACTORING_PLAN.md** - Active plan for ongoing refactoring
+- **SCROLL_PERFORMANCE_FIXES.md** - Recent scroll performance fixes
 
-Created a new README.md file with:
+### Primary Optimization Logs
 
-- Concise project overview
-- Technology stack details
-- Setup and deployment instructions
-- Clear project structure
-- Routing and pages information
-- Component structure
-- Mobile-first design principles
-- Styling approach
-- Performance optimization details
-- Known issues and future work
+- **image-performance-optimization.log** - Primary image optimization log
+- **scroll-performance-optimizations.log** - Primary scroll optimization log
+- **mobile-hero-video-fix.log** - Primary mobile video optimization log
 
-### Removed Outdated Information
+### Documentation Referenced in Code
 
+- **docs/image-optimization.md** - Referenced in README
+- **docs/mobile-optimization.md** - Referenced in README
+- **docs/seo-implementation.md** - Referenced in code
+- **src/components/COMPONENT_DOCUMENTATION_TEMPLATE.md** - Template for component documentation
+- **src/data/DATA_DOCUMENTATION_TEMPLATE.md** - Template for data documentation
+- **src/hooks/HOOK_DOCUMENTATION_TEMPLATE.md** - Template for hook documentation
+- **src/types/TYPE_DOCUMENTATION_TEMPLATE.md** - Template for type documentation
+- **src/utils/UTILITY_DOCUMENTATION_TEMPLATE.md** - Template for utility documentation
+- **src/app/PAGE_DOCUMENTATION_TEMPLATE.md** - Template for page documentation
 
+## Files Archived
 
-2. **Deprecated Utilities**
-   - Marked deprecated utilities with appropriate comments
-   - Added explanations for why they are deprecated and what to use instead
+The following files were moved to the `docs/archive/` directory:
 
-3. **TODOs and FIXMEs**
-   - Cleaned up completed or outdated TODOs and FIXMEs
-   - Simplified the TODOs to be more concise and actionable
+### Documentation Files
 
-### Improved Documentation Structure
+- DOCUMENTATION_SUMMARY.md
+- DOCUMENTATION_CLEANUP_REPORT.md
+- DOCUMENTATION_CLEANUP_SUMMARY.md
+- DOCUMENTATION_AUDIT.md
+- DOCUMENTATION.md
+- Akasa_Website_Project_Scope.md
+- BLOAT_REMOVAL_REPORT.md
+- BLOAT_REMOVAL_REPORT_2023.md
+- BLOAT_REMOVAL_SUMMARY.md
+- EVENTS_PAGE_OPTIMIZATIONS.md
+- ADDITIONAL_EVENTS_PAGE_OPTIMIZATIONS.md
+- EVENT_BUTTONS_UPDATE.md
+- BACKGROUND_IMAGES_RESTORATION.md
+- GIT_HYGIENE_SUMMARY.md
+- NAVIGATION_BLOAT_REMOVAL.md
+- NAVIGATION_REFACTORING_SUMMARY.md
+- PERFORMANCE_OPTIMIZATIONS.md
+- REFACTORING_SUMMARY.md
+- NEW_README.md
 
-1. **Reduced Redundancy**
-   - Eliminated redundant information between README.md and DOCUMENTATION.md
-   - Each document now has a clear purpose and focus
+### Log Files
 
-2. **Enhanced Clarity**
-   - Used clear, concise language throughout
-   - Added proper formatting for better readability
-   - Included code examples where helpful
+- avif-optimization.log
+- cleanup.log
+- direct-video-implementation.log
+- image-quality-upgrade.log
+- mobile-hero-image-fix.log
+- mobile-hero-text-removal.log
+- optimize-images.log
+- revert-optimization.log
 
-3. **Consistent Style**
-   - Ensured consistent style throughout all documentation
-   - Used proper Markdown formatting
+## Benefits of Cleanup
 
-## Documentation Kept
+1. **Improved Documentation Clarity**: By keeping only the most relevant and up-to-date documentation, it's easier for developers to find the information they need.
 
-The following documentation was preserved as it adds value:
+2. **Reduced Clutter**: Removing redundant and outdated files reduces clutter in the repository.
 
-1. **Documentation Templates**
-   - Templates provide good guidelines for future documentation
+3. **Better Onboarding**: New developers can more easily understand the project structure and documentation.
 
-2. **Component Documentation**
-   - Documentation that explains non-obvious behavior
-   - JSDoc comments that provide context and explanations
+4. **Preserved History**: Important historical documentation is preserved in the archive directory for reference if needed.
 
-3. **Performance Optimization Documentation**
-   - Documentation that explains the reasoning behind certain choices
-   - Performance monitoring and optimization strategies
+5. **Focused Development**: The remaining documentation focuses on current development priorities.
 
-4. **Mobile-First Design Documentation**
-   - Documentation that explains the mobile-first approach
-   - Mobile-specific optimizations and considerations
+## Documentation Structure
 
-5. **Type Definitions**
-   - Type definitions and their documentation
-   - Interface definitions and property descriptions
+The documentation is now organized as follows:
 
-## Conclusion
+```
+akasa_b-bwireframe/
+├── README.md                                  # Main project README
+├── Akasa_Restaurant_Project_Scope_Cost_Summary.md # Project scope
+├── INQUIRY_SECTION_FIX.md                     # Active fix documentation
+├── REFACTORING_PLAN.md                        # Active refactoring plan
+├── SCROLL_PERFORMANCE_FIXES.md                # Scroll performance fixes
+├── image-performance-optimization.log         # Image optimization log
+├── scroll-performance-optimizations.log       # Scroll optimization log
+├── mobile-hero-video-fix.log                  # Mobile video fix log
+├── docs/                                      # Documentation directory
+│   ├── image-optimization.md                  # Image optimization guide
+│   ├── mobile-optimization.md                 # Mobile optimization guide
+│   ├── seo-implementation.md                  # SEO implementation guide
+│   └── archive/                               # Archived documentation
+│       └── [archived files]                   # Older documentation files
+└── src/                                       # Source code
+    ├── components/COMPONENT_DOCUMENTATION_TEMPLATE.md
+    ├── data/DATA_DOCUMENTATION_TEMPLATE.md
+    ├── hooks/HOOK_DOCUMENTATION_TEMPLATE.md
+    ├── types/TYPE_DOCUMENTATION_TEMPLATE.md
+    ├── utils/UTILITY_DOCUMENTATION_TEMPLATE.md
+    └── app/PAGE_DOCUMENTATION_TEMPLATE.md
+```
 
-The documentation cleanup process has resulted in a leaner, more maintainable set of documentation for the Akasa Restaurant Website project. The new README.md provides a clear, concise overview of the project, while the preserved documentation provides valuable context and explanations for specific parts of the codebase.
+## Recommendations for Future Documentation
 
-The documentation now follows best practices for clarity, conciseness, and consistency, making it easier for new developers to understand the codebase and contribute effectively.
+1. **Regular Cleanup**: Perform documentation cleanup regularly to prevent accumulation of outdated files.
 
-## Next Steps
+2. **Documentation Standards**: Follow consistent documentation standards for all new documentation.
 
-1. **Apply Documentation Standards to New Code**
-   - Ensure all new code follows the established documentation standards
+3. **Version Control**: Use version control for documentation to track changes over time.
 
-2. **Regular Documentation Reviews**
-   - Regularly review documentation to ensure it remains accurate and up-to-date
+4. **Documentation Review**: Review documentation during code reviews to ensure it stays up-to-date.
 
-3. **Documentation Automation**
-   - Consider implementing tools to automate documentation generation where possible
-
-4. **User Documentation**
-   - Consider creating user documentation for content managers and administrators
+5. **Documentation Testing**: Test documentation by having new team members follow it to ensure clarity.

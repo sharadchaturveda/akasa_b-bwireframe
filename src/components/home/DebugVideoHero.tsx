@@ -142,7 +142,6 @@ export default function DebugVideoHero() {
       <div className="absolute inset-0 z-20">
         <video
           ref={videoRef}
-          className="w-full h-full object-cover"
           muted
           playsInline
           loop

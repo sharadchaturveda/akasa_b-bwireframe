@@ -34,6 +34,50 @@ const fontVariables = {
 export const metadata: Metadata = {
   title: "Akasa | Finest Indian Cuisine in Singapore",
   description: "Experience the finest Indian cuisine at Akasa. Located at 79 Robinson Road, Singapore. Open Monday to Saturday, 11:30am to 10:30pm.",
+  keywords: "Indian cuisine, Singapore restaurant, fine dining, Akasa, Indian food, Robinson Road, authentic Indian, luxury dining",
+  authors: [{ name: "Akasa" }],
+
+  // Open Graph metadata
+  openGraph: {
+    title: "Akasa | Finest Indian Cuisine in Singapore",
+    description: "Experience the finest Indian cuisine at Akasa. Located at 79 Robinson Road, Singapore. Open Monday to Saturday, 11:30am to 10:30pm.",
+    url: "https://akasa.sg",
+    siteName: "Akasa",
+    locale: "en_SG",
+    type: "website",
+    images: [
+      {
+        url: "https://akasa.sg/images/seo/og-image.jpg", // Primary OG image
+        width: 1200,
+        height: 630,
+        alt: "Akasa Restaurant - Finest Indian Cuisine in Singapore",
+      },
+      {
+        url: "https://akasa.sg/images/home/hero/carousel/hero1.jpg", // Fallback image
+        width: 1200,
+        height: 630,
+        alt: "Akasa Restaurant - Finest Indian Cuisine in Singapore",
+      },
+    ],
+  },
+
+  // Twitter Card metadata
+  twitter: {
+    card: "summary_large_image",
+    title: "Akasa | Finest Indian Cuisine in Singapore",
+    description: "Experience the finest Indian cuisine at Akasa. Located at 79 Robinson Road, Singapore. Open Monday to Saturday, 11:30am to 10:30pm.",
+    images: [
+      "https://akasa.sg/images/seo/twitter-card.jpg", // Primary Twitter Card image
+      "https://akasa.sg/images/home/hero/carousel/hero1.jpg", // Fallback image
+    ],
+    creator: "@akasa_singapore",
+    site: "@akasa_singapore",
+  },
+
+  // Canonical URL
+  alternates: {
+    canonical: "https://akasa.sg",
+  },
 };
 
 export const viewport = {
@@ -56,6 +100,13 @@ export default function RootLayout({
       <head>
         {/* Safari-specific viewport fix */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+        {/* Additional SEO meta tags */}
+        <meta name="author" content="Akasa" />
+        <meta name="robots" content="index, follow" />
+        <meta name="geo.region" content="SG" />
+        <meta name="geo.placename" content="Singapore" />
+        <link rel="icon" href="/favicon.ico" />
 
         {/* Local fonts CSS as fallback */}
         <link rel="stylesheet" href="/fonts/fonts.css" />

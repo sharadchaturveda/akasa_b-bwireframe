@@ -10,6 +10,7 @@ import GallerySection from "@/components/home/GallerySection";
 import WhatsHappeningSection from "@/components/home/WhatsHappeningSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import LocationSection from "@/components/home/LocationSection";
+import RestaurantStructuredData from "@/components/seo/RestaurantStructuredData";
 import { applyScrollPerformanceOptimizations } from "@/utils/optimizedScrollUtils";
 
 export default function HomePage() {
@@ -32,6 +33,9 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-black text-white">
+      {/* Add structured data for SEO */}
+      <RestaurantStructuredData />
+
       <Navigation />
 
       {/* Hero and Brand Philosophy Sections - Wrapped to eliminate gap on mobile */}
