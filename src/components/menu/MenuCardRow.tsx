@@ -60,7 +60,7 @@ export default function MenuCardRow() {
     { id: "a-la-carte", name: "À La Carte", description: "Our signature dishes available for individual selection", image: "/images/menu/a-la-carte/hero/hero.jpg", url: "/menu/a-la-carte" },
     { id: "soul-food", name: "Soul Food Weekends", description: "Special weekend offerings that nourish the soul", image: "/images/menu/soul-food-weekends/hero/hero.jpg", url: "/menu/soul-food-weekends" },
     { id: "drinks", name: "Drinks", description: "Signature cocktails, fine wines, and refreshing beverages", image: "/images/menu/drinks/hero/hero.jpg", url: "/menu/drinks" },
-    { id: "bar-bites", name: "Bar Bites", description: "Perfect small plates to accompany your drinks", image: "/images/menu/bar-bites/hero/hero.jpg", url: "/menu/bar-bites" },
+    { id: "bar-bites", name: "Chaat & Bar Bites", description: "Perfect small plates to accompany your drinks", image: "/images/menu/bar-bites/hero/hero.jpg", url: "/menu/bar-bites" },
     { id: "set-lunch", name: "3 Course Set Lunch", description: "A perfect midday dining experience with three exquisite courses", image: "/images/menu/set-lunch/hero/hero.jpg", url: "/menu/set-lunch" },
     { id: "vegan", name: "Vegan Menu", description: "Explore our delicious plant-based options", image: "/images/menu/vegan/hero/hero.jpg", url: "/menu/vegan" },
     { id: "tasting-menu", name: "Tasting Menu", description: "A curated multi-course journey through Indian cuisine", image: "/images/menu/tasting-menu/hero/hero.jpg", url: "/menu/tasting-menu" }

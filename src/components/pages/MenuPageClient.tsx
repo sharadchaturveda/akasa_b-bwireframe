@@ -4,7 +4,6 @@ import { useEffect, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import ChefSection from "@/components/menu/ChefSection";
 
-
 // Add TypeScript declaration for requestIdleCallback
 interface RequestIdleCallbackOptions {
   timeout: number;
@@ -65,8 +64,10 @@ export default function MenuPageClient() {
     // Preload images that will be needed soon
     const preloadImages = () => {
       const imagesToPreload = [
-        '/images/menu/hero/gallery-1.jpg',
-        '/images/menu/hero/gallery-2.jpg'
+        '/images/menu/a-la-carte/hero/hero.jpg',
+        '/images/menu/drinks/hero/hero.jpg',
+        '/images/menu/bar-bites/hero/hero.jpg',
+        '/images/menu/chef/portrait.jpg'
       ];
 
       imagesToPreload.forEach(src => {
@@ -94,13 +95,13 @@ export default function MenuPageClient() {
   // Render the desktop version with the PageLayout component
   return (
     <PageLayout className="menu-page">
-      {/* Critical above-the-fold content */}
-      <ChefSection />
-
-      {/* Below-the-fold content with Suspense */}
+      {/* Menu pages section now as critical above-the-fold content */}
       <Suspense fallback={<div className="h-[50vh] bg-black"></div>}>
         <MenusSection />
       </Suspense>
+
+      {/* Chef section moved below */}
+      <ChefSection />
 
       <Suspense fallback={<div className="h-[50vh] bg-black"></div>}>
         <FeaturedDishesSection />

@@ -37,7 +37,7 @@ export default function BarBitesMenuPage() {
       <section className="w-full bg-[url('/images/menu/bar-bites/hero/hero.jpg')] bg-cover bg-center py-64 relative">
         <div className="absolute inset-0 bg-black/70"></div>
         <div className="container mx-auto px-4 md:px-8 relative z-10 text-center">
-          <h1 className="text-4xl md:text-6xl font-playfair mb-6 text-white">Bar Bites</h1>
+          <h1 className="text-4xl md:text-6xl font-playfair mb-6 text-white">Chaat & Bar Bites</h1>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#E6C78B] to-transparent mx-auto mb-6"></div>
           <p className="text-lg md:text-xl font-montserrat text-white/80 max-w-3xl mx-auto">
             Perfect small plates to accompany your drinks
