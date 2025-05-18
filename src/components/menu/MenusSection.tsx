@@ -24,7 +24,7 @@ export default function MenusSection() {
   // State to track if device is mobile
   const [isMobile, setIsMobile] = useState(false);
 
-  // Detect mobile device on client side
+  // Detect mobile device
   useEffect(() => {
     const checkMobile = () => {
       const userAgent = navigator.userAgent.toLowerCase();
@@ -89,31 +89,11 @@ export default function MenusSection() {
     { id: "drinks", name: "Drinks", description: "Signature cocktails, fine wines, and refreshing beverages", image: "/images/menu/drinks/hero/hero.jpg", url: "/menu/drinks" },
     { id: "bar-bites", name: "Bar Bites", description: "Perfect small plates to accompany your drinks", image: "/images/menu/bar-bites/hero/hero.jpg", url: "/menu/bar-bites" },
     { id: "set-lunch", name: "3 Course Set Lunch", description: "A perfect midday dining experience with three exquisite courses", image: "/images/menu/set-lunch/hero/hero.jpg", url: "/menu/set-lunch" },
-    { id: "vegan", name: "Vegan Menu", description: "Explore our delicious plant-based options", image: "/images/menu/vegan/hero/hero.jpg", url: "/menu/vegan" } // Added Vegan Menu
+    { id: "vegan", name: "Vegan Menu", description: "Explore our delicious plant-based options", image: "/images/menu/vegan/hero/hero.jpg", url: "/menu/vegan" },
+    { id: "tasting-menu", name: "Tasting Menu", description: "A curated multi-course journey through Indian cuisine", image: "/images/menu/tasting-menu/hero/hero.jpg", url: "/menu/tasting-menu" }
   ];
 
-  // Render different button styles based on device type
-  const renderButton = () => {
-    if (isMobile) {
-      // Mobile button - completely static with no hover effects or animations
-      return (
-        <button className="w-full rounded-full font-montserrat font-medium tracking-wider bg-[#1A2A3A] text-white px-4 py-2 text-sm shadow-md">
-          <span className="text-center font-medium tracking-wide w-full">
-            View Menu
-          </span>
-        </button>
-      );
-    } else {
-      // Desktop button - simplified for better performance
-      return (
-        <button className="w-full items-center justify-center rounded-full font-montserrat font-medium tracking-wider transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative bg-[#1A2A3A] hover:bg-[#E6C78B] text-white hover:text-black px-4 py-2 text-sm">
-          <span className="flex-1 text-center font-medium tracking-wide w-full">
-            View Menu
-          </span>
-        </button>
-      );
-    }
-  };
+  // No longer need the renderButton function as we're using inline buttons
 
   return (
     <>
@@ -127,7 +107,7 @@ export default function MenusSection() {
           }}></div>
         </div>
 
-        <div className="container mx-auto px-4 md:px-8 relative z-10">
+        <div className="container-fluid mx-auto px-1 relative z-10">
           <div className="text-center mb-16">
             <div className="flex justify-center mb-6">
               <div className="relative w-20 h-20 flex items-center justify-center">
@@ -148,23 +128,25 @@ export default function MenusSection() {
             </p>
           </div>
 
-          {/* Menu cards in a flex layout with fixed width to ensure 5 in a row */}
-          <div className="flex flex-wrap justify-center">
+          {/* Menu cards in a single row */}
+          <div className="relative">
+            <div className="pb-4 mb-8 px-2 md:px-6 lg:px-10 xl:px-16">
+              <div className="flex justify-between w-full">
             {menuTypes.map((menu) => (
               <div
                 key={menu.id}
-                className="group relative dish-card flex flex-col w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 px-3 mb-12"
+                className="group relative dish-card flex-shrink-0 flex flex-col w-[calc(100%/7-8px)] mx-[4px]"
                 onClick={(e) => handleMenuCardClick(menu.id, menu.url, e)}
               >
                 {/* Removed card glow effect for better performance */}
 
                 <div className={`relative bg-black/80 border border-white/5 rounded-lg overflow-hidden ${!isMobile ? 'transition-colors duration-300 hover:border-[#E6C78B]/30' : ''} flex flex-col h-full`}>
                   {/* Menu image with overlay effects */}
-                  <div className="relative h-[240px] overflow-hidden">
-                    <Image src={`${menu.image}?quality=60&width=800`}
+                  <div className="relative h-[220px] overflow-hidden">
+                    <Image src={`${menu.image}?quality=60&width=400`}
                       alt={menu.name}
                       fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      sizes="(max-width: 768px) 100vw, 14vw"
                       className="object-cover"
                       loading="lazy"
                       quality={60}
@@ -187,26 +169,34 @@ export default function MenusSection() {
                   </div>
 
                   {/* Menu content */}
-                  <div className="p-4 relative flex flex-col flex-grow">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-lg font-playfair text-white">{menu.name}</h3>
+                  <div className="p-4 relative flex flex-col flex-grow h-[220px]">
+                    <div className="flex justify-center items-start mb-3">
+                      <h3 className="text-lg font-playfair text-white text-center">{menu.name}</h3>
                     </div>
 
-                    {/* Description container */}
-                    <div className="mb-3 flex-grow">
-                      <p className="text-white/70 font-montserrat text-xs leading-relaxed">{menu.description}</p>
+                    {/* Description - with more space */}
+                    <div className="mb-6">
+                      <p className="text-white/70 font-montserrat text-sm text-center line-clamp-4 h-20 overflow-hidden">
+                        {menu.description}
+                      </p>
                     </div>
 
                     {/* Button with hover effect - using standard site button styling */}
                     <div className="mt-auto">
                       <a href={menu.url} className="block w-full" onClick={(e) => e.stopPropagation()}>
-                        {renderButton()}
+                        <button className="w-full rounded-full font-montserrat font-medium tracking-wider bg-[#1A2A3A] text-white px-4 py-2 text-sm shadow-md hover:bg-[#E6C78B] hover:text-black transition-colors duration-300">
+                          <span className="text-center font-medium tracking-wide w-full">
+                            View Menu
+                          </span>
+                        </button>
                       </a>
                     </div>
                   </div>
                 </div>
               </div>
             ))}
+            </div>
+            </div>
           </div>
         </div>
 

@@ -10,7 +10,7 @@ import { ANIMATIONS } from '@/constants';
 /**
  * Animation types
  */
-export type AnimationType = 
+export type AnimationType =
   | 'fade'
   | 'fadeUp'
   | 'fadeDown'
@@ -35,37 +35,37 @@ export interface AnimationOptions {
    * @default "fade"
    */
   type?: AnimationType;
-  
+
   /**
    * The animation duration in milliseconds
    * @default 500
    */
   duration?: number;
-  
+
   /**
    * The animation delay in milliseconds
    * @default 0
    */
   delay?: number;
-  
+
   /**
    * The animation easing function
    * @default "ease"
    */
   easing?: string;
-  
+
   /**
    * Whether to use hardware acceleration
    * @default true
    */
   useHardwareAcceleration?: boolean;
-  
+
   /**
    * Whether to animate on scroll
    * @default false
    */
   animateOnScroll?: boolean;
-  
+
   /**
    * The scroll threshold for animation (0-1)
    * @default 0.1
@@ -82,24 +82,24 @@ export interface AnimationOptions {
 export const getAnimationStyles = (options: AnimationOptions = {}): React.CSSProperties => {
   const {
     type = 'fade',
-    duration = ANIMATIONS.DURATION_MS,
+    duration = 500, // Default duration in milliseconds
     delay = 0,
     easing = 'ease',
     useHardwareAcceleration = true
   } = options;
-  
+
   // Base styles
   const styles: React.CSSProperties = {
     transition: `all ${duration}ms ${easing} ${delay}ms`,
     opacity: 1
   };
-  
+
   // Add hardware acceleration if enabled
   if (useHardwareAcceleration) {
     styles.transform = 'translateZ(0)';
     styles.willChange = 'opacity, transform';
   }
-  
+
   return styles;
 };
 
@@ -111,12 +111,12 @@ export const getAnimationStyles = (options: AnimationOptions = {}): React.CSSPro
  */
 export const getAnimationInitialStyles = (options: AnimationOptions = {}): React.CSSProperties => {
   const { type = 'fade' } = options;
-  
+
   // Base styles
   const styles: React.CSSProperties = {
     opacity: 0
   };
-  
+
   // Add transform based on animation type
   switch (type) {
     case 'fadeUp':
@@ -149,7 +149,7 @@ export const getAnimationInitialStyles = (options: AnimationOptions = {}): React
       styles.opacity = 1;
       break;
   }
-  
+
   return styles;
 };
 
@@ -164,7 +164,7 @@ export const getAnimationInitialStyles = (options: AnimationOptions = {}): React
 export const applyStaggeredAnimations = (
   elements: HTMLElement[],
   baseDelay = 0,
-  staggerDelay = ANIMATIONS.STAGGER_DELAY_MS
+  staggerDelay = 100 // Default stagger delay in milliseconds
 ): void => {
   elements.forEach((element, index) => {
     const delay = baseDelay + (index * staggerDelay);
@@ -185,21 +185,21 @@ export const setupScrollAnimations = (
 ): void => {
   // Return early if running on the server or if IntersectionObserver is not supported
   if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
-  
+
   const {
     scrollThreshold = 0.1,
     type = 'fade'
   } = options;
-  
+
   // Get all elements matching the selector
   const elements = document.querySelectorAll<HTMLElement>(selector);
-  
+
   // Apply initial styles
   elements.forEach((element) => {
     const initialStyles = getAnimationInitialStyles({ type });
     Object.assign(element.style, initialStyles);
   });
-  
+
   // Create an observer for scroll-triggered animations
   const observer = new IntersectionObserver(
     (entries) => {
@@ -214,7 +214,7 @@ export const setupScrollAnimations = (
     },
     { threshold: scrollThreshold }
   );
-  
+
   // Observe all elements
   elements.forEach((element) => {
     observer.observe(element);

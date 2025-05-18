@@ -61,7 +61,9 @@ export default function MenuCardRow() {
     { id: "soul-food", name: "Soul Food Weekends", description: "Special weekend offerings that nourish the soul", image: "/images/menu/soul-food-weekends/hero/hero.jpg", url: "/menu/soul-food-weekends" },
     { id: "drinks", name: "Drinks", description: "Signature cocktails, fine wines, and refreshing beverages", image: "/images/menu/drinks/hero/hero.jpg", url: "/menu/drinks" },
     { id: "bar-bites", name: "Bar Bites", description: "Perfect small plates to accompany your drinks", image: "/images/menu/bar-bites/hero/hero.jpg", url: "/menu/bar-bites" },
-    { id: "set-lunch", name: "3 Course Set Lunch", description: "A perfect midday dining experience with three exquisite courses", image: "/images/menu/set-lunch/hero/hero.jpg", url: "/menu/set-lunch" }
+    { id: "set-lunch", name: "3 Course Set Lunch", description: "A perfect midday dining experience with three exquisite courses", image: "/images/menu/set-lunch/hero/hero.jpg", url: "/menu/set-lunch" },
+    { id: "vegan", name: "Vegan Menu", description: "Explore our delicious plant-based options", image: "/images/menu/vegan/hero/hero.jpg", url: "/menu/vegan" },
+    { id: "tasting-menu", name: "Tasting Menu", description: "A curated multi-course journey through Indian cuisine", image: "/images/menu/tasting-menu/hero/hero.jpg", url: "/menu/tasting-menu" }
   ];
 
   return (
@@ -69,8 +71,8 @@ export default function MenuCardRow() {
       <div className="min-w-max px-4">
         <div className="flex flex-row space-x-10">
           {menuTypes.map((menu) => (
-            <div 
-              key={menu.id} 
+            <div
+              key={menu.id}
               className="group cursor-pointer flex-shrink-0"
               style={{ width: "800px" }}
               onClick={(e) => handleMenuCardClick(menu.id, menu.url, e)}
@@ -154,7 +156,7 @@ export default function MenuCardRow() {
           50% { box-shadow: 0 0 20px rgba(230, 199, 139, 0.5); }
           100% { box-shadow: 0 0 5px rgba(230, 199, 139, 0.3); }
         }
-        
+
         .drop-shadow-lg {
           filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.4)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.2));
         }

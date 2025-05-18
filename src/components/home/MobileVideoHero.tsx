@@ -155,8 +155,15 @@ const MobileVideoHero = memo(function MobileVideoHero() {
     };
   }, []); // Empty dependency array, runs once on mount
 
-  return (
-    <div className="relative w-full h-screen overflow-hidden bg-black">
+return (
+  <div 
+    className="relative w-full h-screen overflow-hidden bg-black"
+    style={{
+      transform: 'translateZ(0)',
+      contain: 'paint',
+      willChange: 'transform, opacity'
+    }}
+  >
       {/* --- DEBUG VISUAL CUE & LOGS --- */}
       <div style={{
         position: 'fixed', top: '30px', left: '0px', color: 'yellow',
@@ -175,10 +182,10 @@ const MobileVideoHero = memo(function MobileVideoHero() {
         style={{ opacity: 1, transition: 'opacity 0.3s ease-in-out' }}
       >
         <Image
-          src="/images/home/hero/carousel/hero1.jpg" // VERIFY THIS PATH
-          alt="Akasa restaurant ambiance fallback"
-          fill
-          priority
+            src="/images/home/hero/mobile-video/mobile-poster.png"
+            alt="Akasa restaurant ambiance fallback"
+            fill
+            priority
           sizes="100vw"
           quality={80}
           className="object-cover"
@@ -198,7 +205,7 @@ const MobileVideoHero = memo(function MobileVideoHero() {
           loop
           autoPlay
           preload="auto"
-          poster="/images/home/hero/carousel/hero1.jpg" // VERIFY THIS PATH
+          poster="/images/home/hero/mobile-video/mobile-poster.png"
           style={{
             position: 'absolute',
             top: 0,

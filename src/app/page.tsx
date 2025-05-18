@@ -9,7 +9,7 @@ import SpicesSection from "@/components/home/SpicesSection";
 import GallerySection from "@/components/home/GallerySection";
 import WhatsHappeningSection from "@/components/home/WhatsHappeningSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
-import VisitUsSection from "@/components/home/VisitUsSection";
+import LocationSection from "@/components/home/LocationSection";
 import { applyScrollPerformanceOptimizations } from "@/utils/optimizedScrollUtils";
 
 export default function HomePage() {
@@ -55,7 +55,7 @@ export default function HomePage() {
       <TestimonialsSection />
 
       {/* Visit Us Section */}
-      <VisitUsSection />
+      <LocationSection />
 
       <Footer />
     </main>

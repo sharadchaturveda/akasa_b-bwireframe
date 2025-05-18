@@ -201,7 +201,7 @@ const InfoCard = memo(function InfoCard() {
 });
 
 /**
- * VisitUsSection Component
+ * LocationSection Component
  *
  * Displays location information and call-to-action buttons.
  * This component uses smaller, focused components for better organization.
@@ -209,7 +209,7 @@ const InfoCard = memo(function InfoCard() {
  *
  * @returns {JSX.Element} The rendered component
  */
-const VisitUsSection = memo(function VisitUsSectionComponent() {
+const LocationSection = memo(function LocationSection() {
   const { isMobile } = useDeviceDetection();
 
   return (
@@ -246,4 +246,4 @@ const VisitUsSection = memo(function VisitUsSectionComponent() {
   );
 });
 
-export default VisitUsSection;
+export default LocationSection;

@@ -261,7 +261,6 @@ const PureMobileHero = memo(function PureMobileHero() {
             zIndex: 1
           }}
           data-wf-ignore="true" // Webflow ignore attribute to prevent interference
-          playsInline={true} // React attribute for iOS
           disablePictureInPicture // Prevent picture-in-picture
           disableRemotePlayback // Prevent remote playback
         >

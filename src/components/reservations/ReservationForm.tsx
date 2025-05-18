@@ -62,13 +62,13 @@ const ReservationForm = memo(function ReservationForm() {
 
   return (
     <div className="relative">
-      {/* Chope Widget */}
+      {/* Quandoo Widget */}
       <iframe
-        src="https://book.chope.co/booking?rid=akasa2406sg&source=rest_akasa.sg"
+        src="https://widget.quandoo.sg/widget/reservation/merchant/HUsUS?aid=2&countryId=SGP"
         width="100%"
         height="600px"
         frameBorder="0"
-        title="Chope Reservations"
+        title="Quandoo Reservations"
         style={{ marginBottom: '2rem' }}
       ></iframe>
     </div>

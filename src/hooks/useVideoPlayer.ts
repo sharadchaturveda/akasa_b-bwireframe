@@ -74,7 +74,7 @@ export interface VideoPlayerResult {
   /**
    * Reference to the video element
    */
-  videoRef: React.RefObject<HTMLVideoElement>;
+  videoRef: React.RefObject<HTMLVideoElement | null>;
 
   /**
    * Whether the video is currently playing

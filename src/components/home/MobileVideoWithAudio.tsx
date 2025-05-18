@@ -49,10 +49,13 @@ const MobileVideoWithAudio = memo(function MobileVideoWithAudio() {
     video.style.width = '100%';
     video.style.height = '100%';
     video.style.objectFit = 'cover';
-    video.style.objectPosition = 'center';
-    video.style.opacity = '0';
-    video.style.transition = 'opacity 0.5s ease-in-out';
-    video.style.zIndex = '20';
+video.style.objectPosition = 'center';
+video.style.opacity = '0';
+video.style.transition = 'opacity 0.5s ease-in-out';
+video.style.zIndex = '20';
+video.style.transform = 'translateZ(0)';
+video.style.willChange = 'opacity';
+video.style.contain = 'paint';
 
     // Add timestamp to prevent caching
     const timestamp = new Date().getTime();
@@ -115,9 +118,12 @@ const MobileVideoWithAudio = memo(function MobileVideoWithAudio() {
     videoWrapper.style.position = 'absolute';
     videoWrapper.style.top = '0';
     videoWrapper.style.left = '0';
-    videoWrapper.style.width = '100%';
-    videoWrapper.style.height = '100%';
-    videoWrapper.style.zIndex = '20';
+videoWrapper.style.width = '100%';
+videoWrapper.style.height = '100%';
+videoWrapper.style.zIndex = '20';
+videoWrapper.style.transform = 'translateZ(0)';
+videoWrapper.style.willChange = 'transform, opacity';
+videoWrapper.style.contain = 'paint';
 
     // Add video to wrapper
     videoWrapper.appendChild(video);
