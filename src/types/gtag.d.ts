@@ -1,20 +1,28 @@
 /**
- * Google Analytics (GA4) Type Definitions
- * 
- * This file contains TypeScript type definitions for Google Analytics 4 (GA4).
- * These types are used for the global gtag function.
+ * Google Tag Manager and Google Analytics Type Definitions
+ *
+ * This file contains TypeScript type definitions for Google Tag Manager (GTM)
+ * and Google Analytics 4 (GA4). These types are used for the global dataLayer
+ * and gtag functions.
  */
 
 interface Window {
   /**
-   * Google Analytics 4 (GA4) dataLayer
+   * Google Tag Manager dataLayer
+   * Used to push events and data to GTM
    */
-  dataLayer: any[];
-  
+  dataLayer: Array<{
+    event?: string;
+    page?: string;
+    pageTitle?: string;
+    [key: string]: any;
+  }>;
+
   /**
    * Google Analytics 4 (GA4) gtag function
+   * This may be loaded by GTM if GA4 is configured in the GTM container
    */
-  gtag: Gtag.Gtag;
+  gtag?: Gtag.Gtag;
 }
 
 /**
