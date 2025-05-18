@@ -52,7 +52,7 @@ const FlavorExperienceSection = memo(function FlavorExperienceSection() {
               <Link href="/reservations">
                 <button className="group relative overflow-hidden inline-flex items-center px-8 py-4 bg-transparent border-2 border-[#E6C78B] text-white text-sm font-medium transition-all duration-300 rounded-full">
                   {/* Button background animation */}
-                  <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#E6C78B] to-[#D4B679] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
+                  <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[#E6C78B] to-[#D4B679] transform -translate-x-[105%] group-hover:translate-x-0 transition-transform duration-500 will-change-transform"></span>
 
                   <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
                     Reserve a Table

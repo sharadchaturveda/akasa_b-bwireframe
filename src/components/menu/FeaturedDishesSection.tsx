@@ -181,7 +181,7 @@ className="object-cover"
                         // Desktop button - with hover effects and animations
                         <button className="group inline-flex items-center justify-center rounded-full text-sm font-montserrat font-medium tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden shadow-md hover:shadow-lg bg-[#1A2A3A] text-white px-4 py-2">
                           {/* Gold fill animation - only on desktop */}
-                          <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
+                          <span className="absolute inset-0 rounded-full bg-[#E6C78B] transform -translate-x-[105%] group-hover:translate-x-0 transition-transform duration-500 will-change-transform"></span>
 
                           <span className="relative flex-1 text-center group-hover:text-black transition-colors duration-300">
                             Order Now
