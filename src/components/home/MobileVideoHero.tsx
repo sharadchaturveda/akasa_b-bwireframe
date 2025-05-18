@@ -7,38 +7,13 @@ const MobileVideoHero = memo(function MobileVideoHero() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [internalLog, setInternalLog] = useState<string[]>(["MVH Initializing..."]);
 
+  // REVIEW: Debug logging function - kept for future debugging if needed
   const addLog = (message: string) => {
-    console.log(`MobileVideoHero LOG: ${message}`);
     setInternalLog(prev => [...prev.slice(-10), message]); // Keep last 10 logs
   };
 
   useEffect(() => {
     addLog("useEffect triggered.");
-
-    // Check if video files exist using fetch
-    fetch('/images/home/hero/mobile-video/heromobilevid.mp4', { method: 'HEAD' })
-      .then(response => {
-        if (response.ok) {
-          addLog(`MP4 file exists (fetch test passed): ${response.status} ${response.statusText}`);
-        } else {
-          addLog(`ERROR: MP4 file fetch failed: ${response.status} ${response.statusText}`);
-        }
-      })
-      .catch(error => {
-        addLog(`ERROR: MP4 file fetch exception: ${error.message}`);
-      });
-
-    fetch('/images/home/hero/mobile-video/heromobilevid.webm', { method: 'HEAD' })
-      .then(response => {
-        if (response.ok) {
-          addLog(`WebM file exists (fetch test passed): ${response.status} ${response.statusText}`);
-        } else {
-          addLog(`ERROR: WebM file fetch failed: ${response.status} ${response.statusText}`);
-        }
-      })
-      .catch(error => {
-        addLog(`ERROR: WebM file fetch exception: ${error.message}`);
-      });
 
     // Check if video element exists
     const video = videoRef.current;
@@ -156,7 +131,7 @@ const MobileVideoHero = memo(function MobileVideoHero() {
   }, []); // Empty dependency array, runs once on mount
 
 return (
-  <div 
+  <div
     className="relative w-full h-screen overflow-hidden bg-black"
     style={{
       transform: 'translateZ(0)',
@@ -164,16 +139,7 @@ return (
       willChange: 'transform, opacity'
     }}
   >
-      {/* --- DEBUG VISUAL CUE & LOGS --- */}
-      <div style={{
-        position: 'fixed', top: '30px', left: '0px', color: 'yellow',
-        backgroundColor: 'rgba(0,0,0,0.8)', zIndex: 10001, padding: '5px',
-        fontSize: '10px', border: '1px solid yellow', maxHeight: '150px', overflowY: 'auto', width: '100%'
-      }}>
-        <p>MobileVideoHero IS ACTIVE. Logs:</p>
-        {internalLog.map((log, i) => <p key={i} style={{margin:0, padding:0}}>{log}</p>)}
-      </div>
-      {/* --- END DEBUG VISUAL CUE --- */}
+      {/* Debug overlay removed */}
 
       {/* Fallback image - initially visible */}
       <div
@@ -206,20 +172,10 @@ return (
           autoPlay
           preload="auto"
           poster="/images/home/hero/mobile-video/mobile-poster.png"
+          className="absolute inset-0 w-full h-full object-cover object-center transform-gpu will-change-opacity z-30"
           style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            objectFit: 'cover',
-            objectPosition: 'center',
-            width: '100%',
-            height: '100%',
             opacity: 0, // Start hidden, made visible on play
             transition: 'opacity 0.5s ease-in-out',
-            backgroundColor: 'transparent',
-            transform: 'translateZ(0)',
-            willChange: 'opacity',
-            zIndex: 30, // Ensure it's above the fallback image
           }}
         >
           {/* VERIFY THESE PATHS - they must be relative to /public */}
@@ -229,57 +185,7 @@ return (
         </video>
       </div>
 
-      {/* Debug video indicator */}
-      <div style={{
-        position: 'fixed',
-        bottom: '10px',
-        right: '10px',
-        backgroundColor: 'red',
-        color: 'white',
-        padding: '5px',
-        fontSize: '12px',
-        zIndex: 10002,
-        border: '1px solid white'
-      }}>
-        VIDEO SHOULD BE HERE
-      </div>
-
-      {/* Direct test video - completely separate from the main video */}
-      <div style={{
-        position: 'fixed',
-        bottom: '50px',
-        right: '10px',
-        width: '100px',
-        height: '100px',
-        backgroundColor: 'blue',
-        zIndex: 10003,
-        border: '2px solid white'
-      }}>
-        <video
-          autoPlay
-          muted
-          playsInline
-          loop
-          controls
-          src="/images/home/hero/mobile-video/heromobilevid.mp4"
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover'
-          }}
-        />
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          color: 'white',
-          fontSize: '10px',
-          backgroundColor: 'rgba(0,0,0,0.5)',
-          padding: '2px'
-        }}>
-          TEST VIDEO
-        </div>
-      </div>
+      {/* Debug elements removed */}
     </div>
   );
 });

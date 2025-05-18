@@ -1,14 +1,14 @@
 import { useEffect, useRef } from 'react';
 
 /**
+ * REVIEW: This hook is deprecated and should be removed in a future update.
+ * It's kept for backward compatibility with older components that might still use it.
+ * The new clean dining info component doesn't need optimization disabling.
+ *
  * Custom hook to disable performance optimizations for a specific component
  *
  * @param options Configuration options
  * @returns A ref to be attached to the component's root element
- */
-/**
- * NOTE: This hook is now deprecated and will be removed in a future update.
- * The new clean dining info component doesn't need optimization disabling.
  */
 export function useDisableOptimizations(options: {
   disableMutationObservers?: boolean;

@@ -1,6 +1,6 @@
 /**
  * Mobile Video Helper Utilities
- * 
+ *
  * This file contains utility functions to help with mobile video playback issues.
  */
 
@@ -21,19 +21,19 @@ export const createNoCacheUrl = (url: string): string => {
  */
 export const prepareVideoForMobile = (videoElement: HTMLVideoElement | null): void => {
   if (!videoElement) return;
-  
+
   // Set required attributes for mobile autoplay
   videoElement.muted = true;
   videoElement.playsInline = true;
   videoElement.autoplay = true;
   videoElement.loop = true;
   videoElement.preload = 'auto';
-  
+
   // Set attributes for iOS
   videoElement.setAttribute('playsinline', '');
   videoElement.setAttribute('webkit-playsinline', '');
   videoElement.setAttribute('muted', '');
-  
+
   // Force load the video
   videoElement.load();
 };
@@ -55,34 +55,30 @@ export const playVideoWithRetries = (
   retryDelay = 1000
 ): (() => void) => {
   if (!videoElement) return () => {};
-  
+
   let retryCount = 0;
   let timeoutId: NodeJS.Timeout | null = null;
-  
+
   const attemptPlay = async () => {
     if (!videoElement) return;
-    
+
     try {
-      console.log(`Attempting to play video, attempt: ${retryCount + 1}`);
       await videoElement.play();
       onSuccess();
     } catch (error) {
-      console.log('Video play failed:', error);
-      
+
       if (retryCount < maxRetries) {
         retryCount++;
-        console.log(`Retrying video play, attempt ${retryCount} of ${maxRetries}`);
         timeoutId = setTimeout(attemptPlay, retryDelay);
       } else {
-        console.log('Max retries reached, using fallback');
         onError();
       }
     }
   };
-  
+
   // Start the first attempt
   timeoutId = setTimeout(attemptPlay, 100);
-  
+
   // Return cleanup function
   return () => {
     if (timeoutId) {
@@ -97,8 +93,8 @@ export const playVideoWithRetries = (
  */
 export const isIOS = (): boolean => {
   if (typeof navigator === 'undefined') return false;
-  
-  return /iPad|iPhone|iPod/.test(navigator.userAgent) && 
+
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) &&
          !(window as any).MSStream;
 };
 
@@ -108,6 +104,6 @@ export const isIOS = (): boolean => {
  */
 export const isSafari = (): boolean => {
   if (typeof navigator === 'undefined') return false;
-  
+
   return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 };

@@ -1,30 +1,10 @@
 /**
  * Utility to forcefully stop optimization interference
- * This is a nuclear option to identify and stop whatever is modifying our component
+ *
+ * REVIEW: This file contains simplified stubs of functions that were previously
+ * used for debugging. They are kept as placeholders in case they need to be
+ * reimplemented in the future.
  */
-
-// Store original methods that we'll monkey patch
-const originalMethods = {
-  querySelector: Document.prototype.querySelector,
-  querySelectorAll: Document.prototype.querySelectorAll,
-  getElementById: Document.prototype.getElementById,
-  getElementsByClassName: Document.prototype.getElementsByClassName,
-  getElementsByTagName: Document.prototype.getElementsByTagName,
-  setAttribute: Element.prototype.setAttribute,
-  removeAttribute: Element.prototype.removeAttribute,
-  setProperty: CSSStyleDeclaration.prototype.setProperty
-};
-
-// Store stack traces of modifications
-const modifications: {
-  type: string;
-  selector?: string;
-  element?: string;
-  property?: string;
-  value?: string;
-  stack: string;
-  timestamp: number;
-}[] = [];
 
 /**
  * Monkey patch DOM methods to trace what's modifying our component

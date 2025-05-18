@@ -85,8 +85,8 @@ const CarouselHeroSection = memo(function CarouselHeroSection() {
     const video = videoRef.current;
 
     // Just try to play the video
-    video.play().catch(error => {
-      // Video autoplay failed, fallback image will be shown
+    video.play().catch(() => {
+      // Silent catch - fallback image will be shown
     });
 
     // Clean up
@@ -96,7 +96,7 @@ const CarouselHeroSection = memo(function CarouselHeroSection() {
   }, [isSmallScreen]);
 
   return (
-    <section className={`relative w-full ${isSmallScreen ? 'h-[100dvh] mobile-height-fix hero-section mobile-hero-no-content' : 'h-screen'} bg-black overflow-hidden m-0 p-0`}>
+    <section className={`relative w-full ${isSmallScreen ? 'h-[100dvh] mobile-height-fix hero-section mobile-hero-no-content' : 'h-screen'} bg-black overflow-hidden`}>
       {/* Mobile Hero Section - Video only */}
       {isSmallScreen && (
         <div className="absolute inset-0 w-full h-full overflow-hidden bg-black">

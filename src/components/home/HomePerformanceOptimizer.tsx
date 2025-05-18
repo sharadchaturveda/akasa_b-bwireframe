@@ -187,6 +187,5 @@ export default function HomePerformanceOptimizer() {
     // No cleanup needed
   }, []);
 
-  // This component doesn't render anything
   return null;
 }

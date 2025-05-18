@@ -252,10 +252,7 @@ section {
   overflow: hidden;
 }
 
-/* Minimal image optimizations */
-img {
-  image-rendering: auto;
-}
+/* Image optimizations handled by Tailwind */
 
 /* Prevent layout shifts */
 .image-container {

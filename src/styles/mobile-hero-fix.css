@@ -32,24 +32,7 @@
     margin-bottom: 1rem !important;
   }
 
-  /* Helper classes for visibility */
-  .mobile-only {
-    display: none !important;
-  }
-
-  .desktop-only {
-    display: block !important;
-  }
-
-  @media (max-width: 767px) {
-    .mobile-only {
-      display: block !important;
-    }
-
-    .desktop-only {
-      display: none !important;
-    }
-  }
+  /* Visibility classes handled by Tailwind */
 }
 
 /* Ensure fallback image is visible during page load */
