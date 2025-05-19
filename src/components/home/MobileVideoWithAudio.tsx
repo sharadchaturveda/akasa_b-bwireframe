@@ -68,7 +68,11 @@ const MobileVideoWithAudio = memo(function MobileVideoWithAudio() {
 
   // Set up video on mount
   useEffect(() => {
-    console.log('MobileVideoWithAudio: Component mounted');
+    console.log('MobileVideoWithAudio: Component mounted', {
+      isMobile: window.innerWidth < 768,
+      width: window.innerWidth,
+      userAgent: navigator.userAgent
+    });
 
     // Create a new video element to bypass the blocking script
     const video = document.createElement('video');

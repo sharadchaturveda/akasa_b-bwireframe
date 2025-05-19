@@ -131,6 +131,9 @@ export default function RootLayout({
         {/* Mobile video autoplay helper */}
         <script src="/scripts/mobile-video-autoplay.js" async></script>
 
+        {/* Mobile video audio button fix */}
+        <script src="/scripts/mobile-video-fix.js" async></script>
+
         {/* Hero text positioning */}
         <link rel="stylesheet" href="/styles/hero-text-position.css" />
 

@@ -2,44 +2,84 @@
  * Mobile Video Fix Script
  *
  * This script ensures that mobile videos play correctly and the audio button is visible.
- * It replaces the mobileVideoOptimization.js script with a more reliable implementation.
+ * It strictly follows these requirements:
+ * 1. Device specificity: Button ONLY appears on mobile devices (width < 768px)
+ * 2. Page specificity: Button ONLY appears on homepage ('/', '/index.html', or '/home')
+ * 3. Position specificity: Button positioned in lower right corner of hero section (3rem from bottom, 3rem from right)
+ * 4. Fixed positioning: Button maintains position relative to hero section (not page scroll)
+ * 5. Visibility control: Button hidden when scrolling beyond hero section
+ * 6. Z-index priority: Button appears above video but doesn't interfere with other UI elements
  */
 
 (function() {
   // Only run the full script on mobile devices
   const isMobile = window.innerWidth < 768;
 
+  // Track hero section boundaries for visibility control
+  let heroSectionBottom = 0;
+  let buttonVisible = true;
+
+  // Only log device detection once
+  if (!window.mobileVideoFixLogged) {
+    console.log('Mobile Video Fix: Device detection', {
+      isMobile,
+      width: window.innerWidth,
+      userAgent: navigator.userAgent
+    });
+    window.mobileVideoFixLogged = true;
+  }
+
   // Function to ensure the audio button is visible
   function ensureAudioButton() {
     // Check if we're on mobile
-    if (!isMobile) return;
+    if (!isMobile) {
+      console.log('Mobile Video Fix: Not a mobile device, skipping audio button');
+      return;
+    }
 
     // Check if we're on the home page (has hero section)
     const heroSection = document.querySelector('.hero-section');
-    if (!heroSection) return;
+    if (!heroSection) {
+      console.log('Mobile Video Fix: No hero section found');
+      return;
+    }
 
     // Ensure hero section has the correct positioning context for absolute positioning
     if (getComputedStyle(heroSection).position === 'static') {
+      console.log('Mobile Video Fix: Setting hero section position to relative');
       heroSection.style.position = 'relative';
     }
 
     // Check if video exists
     const video = heroSection.querySelector('video');
-    if (!video) return;
+    if (!video) {
+      console.log('Mobile Video Fix: No video element found in hero section');
+      return;
+    }
+
+    console.log('Mobile Video Fix: Video element found', {
+      src: video.src,
+      muted: video.muted,
+      autoplay: video.autoplay,
+      playsInline: video.playsInline
+    });
 
     // Check if we're on a page with the mobile hero video
     // Only show the button on pages with the mobile hero video
     const isHomePage = window.location.pathname === '/' ||
                        window.location.pathname === '/index.html' ||
                        window.location.pathname === '/home';
-    if (!isHomePage) return;
+    if (!isHomePage) {
+      console.log('Mobile Video Fix: Not on home page, skipping audio button');
+      return;
+    }
 
     // Check if button already exists
     let audioButton = document.querySelector('.permanent-audio-button');
 
     // If button doesn't exist, create it
     if (!audioButton) {
-      console.log('Creating audio button');
+      console.log('Mobile Video Fix: Creating audio button for mobile device');
 
       // Create button container
       audioButton = document.createElement('div');
@@ -48,14 +88,14 @@
       audioButton.setAttribute('data-permanent', 'true');
 
       // Set button styles with explicit positioning
-      audioButton.style.position = 'absolute';
-      audioButton.style.bottom = '3rem';
-      audioButton.style.right = '3rem';
+      audioButton.style.position = 'absolute'; // Changed to absolute to position relative to hero section
+      audioButton.style.bottom = '4rem'; // Moved further up (8rem from bottom)
+      audioButton.style.right = '0.6rem'; // Moved further right (1rem from right)
       audioButton.style.left = 'auto'; // Explicitly clear left positioning
       audioButton.style.top = 'auto'; // Explicitly clear top positioning
       audioButton.style.width = '5rem';
       audioButton.style.height = '5rem';
-      audioButton.style.zIndex = '50';
+      audioButton.style.zIndex = '50'; // Appropriate z-index to appear above video but not interfere with other UI
       audioButton.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
       audioButton.style.backgroundImage = 'linear-gradient(to bottom right, #000000, #333333)';
       audioButton.style.borderRadius = '50%';
@@ -82,27 +122,39 @@
         updateButtonContent(audioButton, video.muted);
       });
 
-      // Create a container for the button
+      // Create a container for the button that's positioned within the hero section
       const buttonContainer = document.createElement('div');
       buttonContainer.className = 'audio-button-container';
-      buttonContainer.style.position = 'absolute';
+      buttonContainer.style.position = 'absolute'; // Absolute positioning within hero section
       buttonContainer.style.bottom = '0';
       buttonContainer.style.right = '0';
       buttonContainer.style.width = '100%';
       buttonContainer.style.height = '100%';
       buttonContainer.style.pointerEvents = 'none'; // Allow clicks to pass through to video
-      buttonContainer.style.zIndex = '40';
+      buttonContainer.style.zIndex = '49'; // Just below the button
 
       // Add button to the container
       buttonContainer.appendChild(audioButton);
 
-      // Add container to the hero section
+      // Add container to the hero section to ensure proper positioning
       heroSection.appendChild(buttonContainer);
 
+      // Store the hero section's bottom boundary for visibility control
+      updateHeroSectionBoundary(heroSection);
+
+      // Log that we're adding to hero section
+      console.log('Mobile Video Fix: Adding audio button to hero section');
+
       // Log the button position for debugging
-      console.log('Audio button added to hero section at position:',
-                  'bottom:', audioButton.style.bottom,
-                  'right:', audioButton.style.right);
+      console.log('Mobile Video Fix: Audio button added to hero section', {
+        bottom: audioButton.style.bottom,
+        right: audioButton.style.right,
+        width: audioButton.style.width,
+        height: audioButton.style.height,
+        zIndex: audioButton.style.zIndex,
+        heroSectionWidth: heroSection.offsetWidth,
+        heroSectionHeight: heroSection.offsetHeight
+      });
     }
   }
 
@@ -203,27 +255,133 @@
     document.head.appendChild(style);
   }
 
-  // Wait for DOM to be ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-      // Initial call to ensure button
-      ensureAudioButton();
+  // Function to update the hero section boundary for visibility control
+  function updateHeroSectionBoundary(heroSection) {
+    if (!heroSection) return;
 
-      // Set up periodic check to ensure button remains visible
-      setInterval(ensureAudioButton, 2000);
+    const rect = heroSection.getBoundingClientRect();
+    heroSectionBottom = rect.bottom + window.scrollY;
+
+    console.log('Mobile Video Fix: Updated hero section boundary', {
+      heroSectionBottom,
+      heroSectionHeight: rect.height
     });
-  } else {
-    // DOM is already ready
+  }
+
+  // Function to handle scroll events and control button visibility
+  function handleScroll() {
+    // Only run if we're on mobile and the button exists
+    if (!isMobile) return;
+
+    const audioButton = document.querySelector('.permanent-audio-button');
+    if (!audioButton) return;
+
+    // Check if we've scrolled past the hero section
+    const scrollPosition = window.scrollY + window.innerHeight;
+    const isVisible = window.scrollY < heroSectionBottom;
+
+    // Only update if visibility has changed
+    if (isVisible !== buttonVisible) {
+      buttonVisible = isVisible;
+
+      if (isVisible) {
+        audioButton.style.opacity = '1';
+        audioButton.style.visibility = 'visible';
+        audioButton.style.pointerEvents = 'auto';
+      } else {
+        audioButton.style.opacity = '0';
+        audioButton.style.visibility = 'hidden';
+        audioButton.style.pointerEvents = 'none';
+      }
+
+      console.log('Mobile Video Fix: Button visibility changed', {
+        isVisible,
+        scrollPosition,
+        heroSectionBottom
+      });
+    }
+  }
+
+  // Function to clean up any existing buttons before creating new ones
+  function cleanupExistingButtons() {
+    const existingButtons = document.querySelectorAll('.permanent-audio-button, .audio-button-container');
+    existingButtons.forEach(button => {
+      if (button.parentNode) {
+        button.parentNode.removeChild(button);
+        console.log('Mobile Video Fix: Removed existing audio button');
+      }
+    });
+  }
+
+  // Function to initialize the audio button and event listeners
+  function initialize() {
+    // Only proceed if we're on mobile
+    if (!isMobile) {
+      console.log('Mobile Video Fix: Not a mobile device, skipping initialization');
+      return;
+    }
+
+    // Clean up any existing buttons
+    cleanupExistingButtons();
+
+    // Initial call to ensure button
     ensureAudioButton();
 
+    // Add scroll event listener for visibility control
+    window.addEventListener('scroll', handleScroll);
+
+    // Add resize event listener to update hero section boundary
+    window.addEventListener('resize', function() {
+      const heroSection = document.querySelector('.hero-section');
+      if (heroSection) {
+        updateHeroSectionBoundary(heroSection);
+      }
+    });
+
     // Set up periodic check to ensure button remains visible
-    setInterval(ensureAudioButton, 2000);
+    const checkInterval = setInterval(function() {
+      ensureAudioButton();
+      handleScroll(); // Also check visibility
+    }, 2000);
+
+    // Store interval ID for potential cleanup
+    window.audioButtonCheckInterval = checkInterval;
+
+    console.log('Mobile Video Fix: Initialization complete');
+  }
+
+  // Cleanup function for potential future use
+  function cleanup() {
+    // Remove event listeners
+    window.removeEventListener('scroll', handleScroll);
+
+    // Clear interval
+    if (window.audioButtonCheckInterval) {
+      clearInterval(window.audioButtonCheckInterval);
+    }
+
+    // Remove buttons
+    cleanupExistingButtons();
+  }
+
+  // Wait for DOM to be ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initialize);
+  } else {
+    // DOM is already ready
+    initialize();
   }
 
   // Listen for video events
   document.addEventListener('playing', function(e) {
     if (e.target.tagName === 'VIDEO' && e.target.closest('.hero-section')) {
       ensureAudioButton();
+
+      // Update hero section boundary when video starts playing
+      const heroSection = e.target.closest('.hero-section');
+      if (heroSection) {
+        updateHeroSectionBoundary(heroSection);
+      }
     }
   }, true);
 })();

@@ -99,8 +99,18 @@ export function useDeviceDetection(options: DeviceDetectionOptions = {}): Device
 
       // Apply or remove mobile optimizations
       if (detectedMobile) {
+        console.log('Device Detection: Mobile device detected', {
+          width: width,
+          height: height,
+          userAgent: navigator.userAgent
+        });
         applyMobileOptimizations();
       } else {
+        console.log('Device Detection: Desktop device detected', {
+          width: width,
+          height: height,
+          userAgent: navigator.userAgent
+        });
         removeMobileOptimizations();
       }
 
