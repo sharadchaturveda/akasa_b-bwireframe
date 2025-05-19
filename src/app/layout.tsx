@@ -1,24 +1,10 @@
 import type { Metadata } from "next";
-// Remove Google Fonts imports to fix font loading issues
+// Import essential CSS files
 import "./globals.css";
-import "./performance-styles.css";
-import '@/styles/mobile-navigation-fix.css';
-import '@/styles/mobile-section-fix.css';
-import '@/styles/mobile-hero-fix.css';
-import '../styles/hero-position-fix.css';
-import '@/styles/scroll-performance.css';
-// Add our new image loading fix CSS
-import '../styles/image-loading-fix.css';
-// Add font fallbacks CSS
-import '../styles/font-fallbacks.css';
-// Add hero loading fix CSS
-import '../styles/hero-loading-fix.css';
-// Add critical CSS
-import '../styles/critical.css';
-// Add mobile video brightness fix CSS
-import '../styles/mobile-video-brightness.css';
-// Add audio button animations CSS
-import '../styles/audio-button-animations.css';
+// Import consolidated performance CSS
+import "../styles/performance-optimizations.css";
+// Import hero position fix CSS
+import "../styles/hero-position-fix.css";
 
 // Import components
 import MobileNavigation from '@/components/navigation/MobileNavigation';
@@ -138,28 +124,18 @@ export default function RootLayout({
 
         {/* Critical CSS moved to external file for better performance */}
 
-        {/* Simple audio button script */}
-        <script src="/scripts/simple-audio-button.js"></script>
+        {/* Consolidated performance optimizations */}
+        <link rel="stylesheet" href="/styles/performance-optimizations.css" />
+        <script src="/scripts/performance-optimizations.js" async></script>
 
-        {/* Script for scroll optimization */}
-        <script src="/scripts/scrollOptimization.js" async></script>
+        {/* Mobile video autoplay helper */}
+        <script src="/scripts/mobile-video-autoplay.js" async></script>
 
-        {/* Script for font fallbacks */}
-        <script src="/scripts/fontFallback.js" async></script>
+        {/* Hero text positioning */}
+        <link rel="stylesheet" href="/styles/hero-text-position.css" />
 
-        {/* Mobile video fixes */}
-        <link rel="stylesheet" href="/styles/mobile-video-brightness.css" />
-        <link rel="stylesheet" href="/styles/video-playback-fix.css" />
-
-        {/* Video fix scripts */}
-        <script src="/scripts/videoFix.js" async></script>
-        <script src="/scripts/videoPlaybackFix.js" async></script>
-
-        {/* Memory cleanup script */}
-        <script src="/scripts/memory-cleanup.js" async></script>
-
-        {/* Image loaded class script */}
-        <script src="/scripts/image-loaded-class.js" async></script>
+        {/* Desktop hero fix - load last to override other styles */}
+        <link rel="stylesheet" href="/styles/desktop-hero-fix.css" />
       </head>
       <body
         className="antialiased bg-black font-system"

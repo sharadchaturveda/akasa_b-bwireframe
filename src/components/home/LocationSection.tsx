@@ -228,7 +228,11 @@ const LocationSection = memo(function LocationSection() {
           quality={95}
           sizes="100vw"
           className="object-cover"
-          style={{ objectPosition: "center" }}
+          style={{
+            objectPosition: "center",
+            // Remove dynamic styles that cause hydration issues
+          }}
+          suppressHydrationWarning
         />
 
         {/* Gradient overlay for better text readability */}

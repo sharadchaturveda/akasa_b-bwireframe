@@ -70,6 +70,8 @@ const ReservationForm = memo(function ReservationForm() {
         frameBorder="0"
         title="Quandoo Reservations"
         style={{ marginBottom: '2rem' }}
+        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+        loading="lazy"
       ></iframe>
     </div>
   );

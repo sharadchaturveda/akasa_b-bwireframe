@@ -1,8 +1,7 @@
 "use client";
 
 import { memo, useEffect, useState } from "react";
-import Image from "next/image"
-;
+import HydrationSafeImage from "@/components/ui/HydrationSafeImage";
 
 const HeroSection = memo(function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -15,13 +14,17 @@ const HeroSection = memo(function HeroSection() {
     <section className="h-[80vh] w-full relative overflow-hidden">
       {/* Background image with parallax effect */}
       <div className="absolute inset-0">
-        <Image src="/images/reservations/hero/hero.jpg"
+        <HydrationSafeImage
+          src="/images/reservations/hero/hero.jpg"
           alt="Elegant dining table setting"
           fill
           priority
           className="object-cover"
           sizes="100vw"
           quality={80} /* Balanced for performance and quality */
+          style={{
+            objectFit: 'cover',
+          }}
         />
       </div>
 

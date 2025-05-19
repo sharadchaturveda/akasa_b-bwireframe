@@ -1,12 +1,13 @@
 "use client";
 
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useCallback, memo } from 'react';
 import Image from 'next/image';
 
 /**
  * A simplified mobile video hero component with prominent unmute controls
+ * Memoized to prevent unnecessary re-renders
  */
-export default function MobileVideoWithControls() {
+const MobileVideoWithControls = memo(function MobileVideoWithControls() {
   // Video reference
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -16,7 +17,10 @@ export default function MobileVideoWithControls() {
 
   // Set up video on mount
   useEffect(() => {
-    console.log('MobileVideoWithControls mounted');
+    // Only log in development mode
+    if (process.env.NODE_ENV === 'development') {
+      console.log('MobileVideoWithControls mounted');
+    }
 
     const video = videoRef.current;
     if (!video) return;
@@ -39,13 +43,15 @@ export default function MobileVideoWithControls() {
     const timestamp = new Date().getTime();
     video.src = `/images/home/hero/mobile-video/heromobilevid.mp4?v=${timestamp}`;
 
-    // Log initial state
-    console.log('Initial video state:', {
-      muted: video.muted,
-      volume: video.volume,
-      paused: video.paused,
-      src: video.src
-    });
+    // Log initial state only in development mode
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Initial video state:', {
+        muted: video.muted,
+        volume: video.volume,
+        paused: video.paused,
+        src: video.src
+      });
+    }
 
     // Add event listener for iOS audio unlock
     const unlockAudio = () => {
@@ -53,7 +59,11 @@ export default function MobileVideoWithControls() {
       // It helps iOS devices to enable audio later
       if (video.muted) {
         // Just play the video to register the interaction
-        video.play().catch(e => console.error('Error in unlockAudio:', e));
+        video.play().catch(e => {
+          if (process.env.NODE_ENV === 'development') {
+            console.error('Error in unlockAudio:', e);
+          }
+        });
       }
     };
 
@@ -64,10 +74,14 @@ export default function MobileVideoWithControls() {
     const playVideo = async () => {
       try {
         await video.play();
-        console.log('Video playing successfully');
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Video playing successfully');
+        }
         setIsVideoPlaying(true);
       } catch (error) {
-        console.error('Error playing video:', error);
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Error playing video:', error);
+        }
       }
     };
 
@@ -85,14 +99,17 @@ export default function MobileVideoWithControls() {
   }, []);
 
   // Toggle mute state - simplified and reliable
-  const toggleMute = () => {
+  // Using useCallback to prevent recreation on each render
+  const toggleMute = useCallback(() => {
     const video = videoRef.current;
     if (!video) {
       console.error('Video element not found');
       return;
     }
 
-    console.log('Toggle mute clicked, current state:', isMuted);
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Toggle mute clicked, current state:', isMuted);
+    }
 
     try {
       if (isMuted) {
@@ -112,33 +129,45 @@ export default function MobileVideoWithControls() {
           }, 300);
         }
 
-        console.log('Video unmuted, new muted state:', video.muted, 'volume:', video.volume);
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Video unmuted, new muted state:', video.muted, 'volume:', video.volume);
+        }
       } else {
         // Mute
         video.muted = true;
 
         // Update state after changing video properties
         setIsMuted(true);
-        console.log('Video muted, new muted state:', video.muted);
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Video muted, new muted state:', video.muted);
+        }
       }
 
       // Force play to ensure video continues
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.catch(e => {
-          console.error('Error playing video after mute toggle:', e);
+          if (process.env.NODE_ENV === 'development') {
+            console.error('Error playing video after mute toggle:', e);
+          }
 
           // If play fails, try again with user interaction
           document.addEventListener('touchstart', function playOnTouch() {
-            video.play().catch(err => console.error('Play on touch failed:', err));
+            video.play().catch(err => {
+              if (process.env.NODE_ENV === 'development') {
+                console.error('Play on touch failed:', err);
+              }
+            });
             document.removeEventListener('touchstart', playOnTouch);
           }, { once: true });
         });
       }
     } catch (error) {
-      console.error('Error toggling mute state:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error toggling mute state:', error);
+      }
     }
-  };
+  }, [isMuted]);
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-black">
@@ -165,12 +194,22 @@ export default function MobileVideoWithControls() {
         autoPlay
         preload="auto"
         poster="/images/home/hero/mobile-poster.jpg"
-        onCanPlay={() => console.log('Video can play')}
-        onPlaying={() => console.log('Video is playing')}
+        onCanPlay={() => {
+          if (process.env.NODE_ENV === 'development') {
+            console.log('Video can play');
+          }
+        }}
+        onPlaying={() => {
+          if (process.env.NODE_ENV === 'development') {
+            console.log('Video is playing');
+          }
+        }}
         onVolumeChange={() => {
           const video = videoRef.current;
           if (video) {
-            console.log('Volume changed, muted:', video.muted, 'volume:', video.volume);
+            if (process.env.NODE_ENV === 'development') {
+              console.log('Volume changed, muted:', video.muted, 'volume:', video.volume);
+            }
             // Ensure state matches actual video state
             setIsMuted(video.muted);
           }
@@ -211,4 +250,6 @@ export default function MobileVideoWithControls() {
       </div>
     </div>
   );
-}
+});
+
+export default MobileVideoWithControls;

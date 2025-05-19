@@ -1,0 +1,79 @@
+/**
+ * Prevent Image Flicker CSS
+ * 
+ * This CSS file contains styles to prevent images from flickering (going black)
+ * during scrolling on mobile devices.
+ */
+
+/* Apply only on mobile devices */
+@media (max-width: 767px) {
+  /* Prevent image flickering during scroll */
+  img {
+    /* Force hardware acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    
+    /* Prevent unloading during scroll */
+    will-change: transform;
+    
+    /* Ensure smooth transitions */
+    transition: none !important;
+    
+    /* Prevent content visibility changes during scroll */
+    content-visibility: visible !important;
+    
+    /* Improve image rendering */
+    image-rendering: auto;
+  }
+  
+  /* Ensure Next.js image containers maintain dimensions */
+  span[style*="box-sizing: border-box; display: block; overflow: hidden;"] {
+    background-color: #111;
+    min-height: 1px;
+    
+    /* Force hardware acceleration */
+    transform: translateZ(0);
+    
+    /* Prevent unloading during scroll */
+    will-change: transform;
+  }
+  
+  /* Prevent layout shifts for image placeholders */
+  .placeholder,
+  [class*="placeholder"],
+  [class*="skeleton"] {
+    /* Force hardware acceleration */
+    transform: translateZ(0);
+    
+    /* Prevent unloading during scroll */
+    will-change: transform;
+  }
+  
+  /* Optimize scrolling */
+  html, body {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none;
+  }
+}
+
+/* Prevent image flickering during scroll for all devices */
+.image-container,
+[class*="img-container"],
+[class*="image-wrapper"],
+[class*="img-wrapper"] {
+  /* Set a background color while images load */
+  background-color: #111;
+  
+  /* Ensure proper overflow handling */
+  overflow: hidden;
+  
+  /* Create a stacking context */
+  isolation: isolate;
+  
+  /* Force hardware acceleration */
+  transform: translateZ(0);
+  
+  /* Prevent unloading during scroll */
+  will-change: transform;
+}

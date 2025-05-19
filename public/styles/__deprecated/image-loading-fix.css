@@ -1,0 +1,125 @@
+/**
+ * Image Loading Fix CSS
+ *
+ * This CSS file contains styles to prevent images from flickering or disappearing
+ * during scrolling on mobile devices.
+ */
+
+/* Apply to all images to prevent flickering */
+img {
+  /* Prevent content visibility changes during scroll */
+  content-visibility: auto;
+
+  /* Ensure smooth transitions */
+  transition: opacity 0.2s ease-in-out;
+
+  /* Use async decoding for all images */
+  decoding: async;
+}
+
+/* Apply only on mobile devices */
+@media (max-width: 767px) {
+  /* Prevent image flickering during scroll */
+  img {
+    /* Improve image rendering */
+    image-rendering: auto;
+  }
+
+  /* Apply hardware acceleration only to critical images */
+  img.critical-image,
+  .hero-section img {
+    transform: translateZ(0);
+  }
+
+  /* Optimize video elements */
+  video {
+    /* Improve video rendering */
+    object-fit: cover;
+  }
+
+  /* Optimize scrolling */
+  html, body {
+    /* Enable momentum-based scrolling on touch devices */
+    -webkit-overflow-scrolling: touch;
+
+    /* Prevent overscroll effects */
+    overscroll-behavior: none;
+  }
+
+  /* Add styles for loaded images using data attributes to avoid hydration errors */
+  img[data-img-loaded="true"] {
+    opacity: 1 !important;
+  }
+
+  /* Default styles for images - will be overridden by inline styles */
+  img:not([data-img-loaded]) {
+    /* We'll use inline styles instead to avoid hydration errors */
+    /* The script will set opacity and transition directly */
+  }
+}
+
+/* Optimize for touch devices */
+@media (pointer: coarse) {
+  /* Improve touch targets */
+  button, a, input, select, textarea {
+    touch-action: manipulation;
+  }
+
+  /* Disable hover effects that might cause jank */
+  [class*="hover:"] {
+    transition: none !important;
+  }
+}
+
+/* Optimize for high-performance devices */
+@media (min-width: 768px) {
+  /* Only apply hardware acceleration to critical elements */
+  .hero-section img,
+  .hero-section video {
+    transform: translateZ(0);
+  }
+
+  /* Optimize critical animations only */
+  .animate-critical {
+    will-change: transform, opacity;
+  }
+}
+
+/* Mobile video specific optimizations */
+.hero-section video {
+  /* Force hardware acceleration */
+  transform: translateZ(0);
+
+  /* Prevent flickering */
+  backface-visibility: hidden;
+
+  /* Ensure proper sizing */
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+
+  /* Prevent layout shifts */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  /* Ensure full brightness */
+  filter: brightness(1.1);
+
+  /* Remove any potential darkening effects */
+  opacity: 1 !important;
+}
+
+/* Prevent layout shifts during image loading */
+.image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ensure images maintain aspect ratio */
+img {
+  max-width: 100%;
+  height: auto;
+}

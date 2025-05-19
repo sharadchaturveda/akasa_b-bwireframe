@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import { trackScrollPosition, preventBodyScrolling } from '@/utils/scrollUtils';
 
 export interface NavigationStateOptions {
   scrollThreshold?: number;
@@ -16,6 +17,15 @@ export interface NavigationStateResult {
   setMenuOpen: (isOpen: boolean) => void;
 }
 
+/**
+ * Custom hook for managing navigation state
+ *
+ * This hook handles menu open/close state, scroll position tracking,
+ * and body scroll locking when the menu is open.
+ *
+ * @param {NavigationStateOptions} options - Configuration options
+ * @returns {NavigationStateResult} Navigation state and controls
+ */
 export function useNavigationState(
   options: NavigationStateOptions = {}
 ): NavigationStateResult {
@@ -39,61 +49,23 @@ export function useNavigationState(
 
   // Handle scroll events with performance optimizations
   useEffect(() => {
-    let ticking = false;
-    let lastScrollY = window.scrollY;
+    // Use the trackScrollPosition utility to handle scroll events
+    const cleanup = trackScrollPosition(setIsScrolled, {
+      threshold: scrollThreshold,
+      useRAF: true
+    });
 
-    const handleScroll = () => {
-      if (ticking) return;
-
-      const currentScrollY = window.scrollY;
-      const currentIsScrolled = currentScrollY > scrollThreshold;
-      const previousIsScrolled = lastScrollY > scrollThreshold;
-
-      if (currentIsScrolled !== previousIsScrolled) {
-        ticking = true;
-        window.requestAnimationFrame(() => {
-          setIsScrolled(currentIsScrolled);
-          lastScrollY = currentScrollY;
-          ticking = false;
-        });
-      }
-    };
-
-    setIsScrolled(window.scrollY > scrollThreshold);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return cleanup;
   }, [scrollThreshold]);
 
   // Prevent body scroll when menu is open
   useEffect(() => {
     if (!preventBodyScroll) return;
 
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
-      document.body.style.top = `-${window.scrollY}px`;
-    } else {
-      const scrollY = document.body.style.top;
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
-      document.body.style.top = '';
+    // Use the preventBodyScrolling utility to handle body scroll locking
+    const cleanup = preventBodyScrolling(isMenuOpen);
 
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
-      }
-    }
-
-    return () => {
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
-      document.body.style.top = '';
-    };
+    return cleanup;
   }, [isMenuOpen, preventBodyScroll]);
 
   return {

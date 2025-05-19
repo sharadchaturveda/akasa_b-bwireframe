@@ -1,0 +1,56 @@
+/**
+ * Mobile Video Brightness Fix
+ * 
+ * This CSS file contains styles to ensure the mobile hero video
+ * is displayed at full brightness without any darkening overlays.
+ */
+
+/* Target mobile devices only */
+@media (max-width: 767px) {
+  /* Ensure video has full brightness */
+  .hero-section video,
+  video.mobile-hero-video,
+  .mobile-hero video {
+    /* Increase brightness slightly */
+    filter: brightness(1.15) !important;
+    
+    /* Ensure full opacity */
+    opacity: 1 !important;
+    
+    /* Ensure proper z-index */
+    z-index: 5 !important;
+  }
+  
+  /* Remove any overlay elements that might darken the video */
+  .hero-section .hero-overlay,
+  .hero-section [class*="overlay"],
+  .hero-section .bg-black,
+  .hero-section .bg-black\/20,
+  .hero-section .bg-black\/30,
+  .hero-section .bg-black\/40,
+  .hero-section .bg-black\/50,
+  .hero-section .bg-black\/60,
+  .hero-section .bg-black\/70,
+  .hero-section .bg-black\/80,
+  .hero-section .bg-black\/90 {
+    /* Make overlay transparent when video is playing */
+    background-color: transparent !important;
+    opacity: 0 !important;
+  }
+  
+  /* Ensure video container has no background color */
+  .hero-section > div:has(video) {
+    background-color: transparent !important;
+  }
+  
+  /* Ensure video poster image is also bright */
+  video[poster] {
+    filter: brightness(1.15) !important;
+  }
+}
+
+/* Ensure fallback image is also bright */
+.fallback-image,
+.hero-section .fallback-image {
+  filter: brightness(1.15) !important;
+}

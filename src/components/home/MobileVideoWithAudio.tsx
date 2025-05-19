@@ -2,6 +2,54 @@
 
 import { memo, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import {
+  optimizeVideoForMobile,
+  logVideoError,
+  addCacheBustingToVideoSources,
+  VideoSource
+} from '@/utils/videoUtils';
+
+// Define video sources
+const VIDEO_SOURCES: VideoSource[] = [
+  {
+    src: '/images/home/hero/mobile-video/heromobilevid.webm',
+    type: 'video/webm'
+  },
+  {
+    src: '/images/home/hero/mobile-video/heromobilevid.mp4',
+    type: 'video/mp4'
+  }
+];
+
+// Define video element styles
+const VIDEO_STYLES = {
+  position: 'absolute',
+  top: '0',
+  left: '0',
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  objectPosition: 'center',
+  opacity: '0',
+  transition: 'opacity 0.5s ease-in-out',
+  zIndex: '20',
+  transform: 'translateZ(0)',
+  willChange: 'opacity',
+  contain: 'paint'
+};
+
+// Define video wrapper styles
+const WRAPPER_STYLES = {
+  position: 'absolute',
+  top: '0',
+  left: '0',
+  width: '100%',
+  height: '100%',
+  zIndex: '20',
+  transform: 'translateZ(0)',
+  willChange: 'transform, opacity',
+  contain: 'paint'
+};
 
 /**
  * MobileVideoWithAudio Component
@@ -18,60 +66,32 @@ const MobileVideoWithAudio = memo(function MobileVideoWithAudio() {
   // Reference to store the video element
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  // State and refs are managed directly in the DOM event handlers
-
   // Set up video on mount
   useEffect(() => {
     console.log('MobileVideoWithAudio: Component mounted');
 
     // Create a new video element to bypass the blocking script
     const video = document.createElement('video');
-
-    // Store reference to the video element
     videoRef.current = video;
 
-    // Set video attributes
-    video.muted = true;
-    video.playsInline = true;
-    video.autoplay = true;
-    video.loop = true;
-    video.preload = 'auto';
+    // Apply video attributes and styles
+    optimizeVideoForMobile(video);
 
-    // Set attributes for iOS
-    video.setAttribute('playsinline', '');
-    video.setAttribute('webkit-playsinline', '');
-    video.setAttribute('muted', '');
+    // Apply additional styles not covered by the utility
+    Object.entries(VIDEO_STYLES).forEach(([key, value]) => {
+      video.style[key as any] = value;
+    });
 
-    // Set video style
-    video.style.position = 'absolute';
-    video.style.top = '0';
-    video.style.left = '0';
-    video.style.width = '100%';
-    video.style.height = '100%';
-    video.style.objectFit = 'cover';
-video.style.objectPosition = 'center';
-video.style.opacity = '0';
-video.style.transition = 'opacity 0.5s ease-in-out';
-video.style.zIndex = '20';
-video.style.transform = 'translateZ(0)';
-video.style.willChange = 'opacity';
-video.style.contain = 'paint';
+    // Add cache busting to prevent caching issues
+    addCacheBustingToVideoSources(video);
 
-    // Add timestamp to prevent caching
-    const timestamp = new Date().getTime();
-
-    // Create sources
-    const webmSource = document.createElement('source');
-    webmSource.src = `/images/home/hero/mobile-video/heromobilevid.webm?t=${timestamp}`;
-    webmSource.type = 'video/webm';
-
-    const mp4Source = document.createElement('source');
-    mp4Source.src = `/images/home/hero/mobile-video/heromobilevid.mp4?t=${timestamp}`;
-    mp4Source.type = 'video/mp4';
-
-    // Add sources to video
-    video.appendChild(webmSource);
-    video.appendChild(mp4Source);
+    // Create and add sources
+    VIDEO_SOURCES.forEach(({ src, type }) => {
+      const source = document.createElement('source');
+      source.src = src;
+      source.type = type;
+      video.appendChild(source);
+    });
 
     // Add event listeners
     video.addEventListener('loadeddata', () => {
@@ -101,7 +121,7 @@ video.style.contain = 'paint';
     });
 
     video.addEventListener('error', () => {
-      console.error('MobileVideoWithAudio: Video error:', video.error);
+      logVideoError(video);
       setHasError(true);
     });
 
@@ -115,20 +135,14 @@ video.style.contain = 'paint';
     // Create a wrapper for the video
     const videoWrapper = document.createElement('div');
     videoWrapper.className = 'mobile-hero-video-wrapper';
-    videoWrapper.style.position = 'absolute';
-    videoWrapper.style.top = '0';
-    videoWrapper.style.left = '0';
-videoWrapper.style.width = '100%';
-videoWrapper.style.height = '100%';
-videoWrapper.style.zIndex = '20';
-videoWrapper.style.transform = 'translateZ(0)';
-videoWrapper.style.willChange = 'transform, opacity';
-videoWrapper.style.contain = 'paint';
 
-    // Add video to wrapper
+    // Apply wrapper styles
+    Object.entries(WRAPPER_STYLES).forEach(([key, value]) => {
+      videoWrapper.style[key as any] = value;
+    });
+
+    // Add video to wrapper and wrapper to container
     videoWrapper.appendChild(video);
-
-    // Add wrapper to container
     container.appendChild(videoWrapper);
 
     // We're now using the mobile-video-fix.js script to handle the audio button
@@ -140,19 +154,46 @@ videoWrapper.style.contain = 'paint';
     video.load();
 
     const playVideo = () => {
-      video.play().then(() => {
-        console.log('MobileVideoWithAudio: Video play successful');
-        video.style.opacity = '1';
+      // Check if the document is visible to avoid power-saving errors
+      if (document.visibilityState === 'visible') {
+        video.play().then(() => {
+          console.log('MobileVideoWithAudio: Video play successful');
+          video.style.opacity = '1';
 
-        // Notify that the video is playing
-        document.dispatchEvent(new CustomEvent('videoPlaying', {
-          detail: { videoElement: video }
-        }));
-      }).catch(err => {
-        console.error('MobileVideoWithAudio: Video play error:', err.message);
-        // Retry after a delay
-        setTimeout(playVideo, 500);
-      });
+          // Notify that the video is playing
+          document.dispatchEvent(new CustomEvent('videoPlaying', {
+            detail: { videoElement: video }
+          }));
+        }).catch(err => {
+          // Don't log power-saving related errors as they're expected
+          if (!err.message.includes('power') && !err.message.includes('battery')) {
+            console.error('MobileVideoWithAudio: Video play error:', err.message);
+          }
+
+          // Retry after a delay, but only if the document is visible
+          if (document.visibilityState === 'visible') {
+            setTimeout(playVideo, 1000);
+          } else {
+            // Add visibility change listener to try again when document becomes visible
+            const onVisibilityChange = () => {
+              if (document.visibilityState === 'visible') {
+                document.removeEventListener('visibilitychange', onVisibilityChange);
+                setTimeout(playVideo, 500);
+              }
+            };
+            document.addEventListener('visibilitychange', onVisibilityChange);
+          }
+        });
+      } else {
+        // Add visibility change listener to try again when document becomes visible
+        const onVisibilityChange = () => {
+          if (document.visibilityState === 'visible') {
+            document.removeEventListener('visibilitychange', onVisibilityChange);
+            setTimeout(playVideo, 500);
+          }
+        };
+        document.addEventListener('visibilitychange', onVisibilityChange);
+      }
     };
 
     // Try to play after a short delay

@@ -1,0 +1,48 @@
+/**
+ * Hero Loading Fix CSS
+ *
+ * This CSS file provides styles to prevent flashing of desktop content on mobile
+ * and ensure smooth transitions between loading and hero states.
+ */
+
+/* Ensure the hero section has a black background to prevent white flashes */
+.hero-section {
+  background-color: #000;
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Ensure the hero section children are properly positioned */
+.hero-section > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Hide desktop hero elements on mobile to prevent flashing */
+@media (max-width: 767px) {
+  .desktop-hero-element {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+}
+
+/* Hide mobile hero elements on desktop to prevent flashing */
+@media (min-width: 768px) {
+  .mobile-hero-element {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+}
+
+/* Ensure smooth transitions between loading and hero states */
+.hero-transition {
+  transition: opacity 0.5s ease-in-out;
+}

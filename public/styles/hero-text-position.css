@@ -1,0 +1,116 @@
+/**
+ * Hero Text Position
+ *
+ * This CSS file ensures the hero text is properly positioned on desktop view
+ * and never intersects with the logo.
+ */
+
+/* Ensure the hero text is always positioned correctly */
+.hero-text-container {
+  /* Position in the vertical center but shifted up */
+  position: absolute;
+  top: 42%; /* Moved up from 50% to shift text upward */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+
+  /* No margin-top to allow text to be higher */
+  margin-top: 0;
+
+  /* Center content */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  /* Ensure text stays in its container */
+  width: 100%;
+  max-width: 100%;
+
+  /* Force center alignment */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Add a clear separation between logo and text */
+.hero-logo-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 40;
+
+  /* Center content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Fixed height to ensure consistent spacing */
+  height: 260px;
+  min-height: 260px;
+  max-height: 260px;
+  padding-top: 11rem; /* Restored to original position */
+
+  /* Force center alignment */
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Add a clear separation marker */
+.hero-logo-container::after {
+  content: '';
+  display: block;
+  height: 20px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+/* Desktop-specific adjustments */
+@media (min-width: 1024px) {
+  .hero-text-container {
+    /* Position shifted up from center */
+    top: 42%;
+
+    /* Ensure text is properly centered */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+
+    /* No margin-top to allow text to be higher */
+    margin-top: 0;
+  }
+}
+
+/* Safari-specific fixes */
+@media not all and (min-resolution:.001dpcm) {
+  @supports (-webkit-appearance:none) {
+    .hero-text-container {
+      /* Ensure text is properly positioned in Safari */
+      position: absolute;
+      top: 42%; /* Shifted up from center */
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
+
+      /* No margin-top to allow text to be higher */
+      margin-top: 0;
+    }
+  }
+}
+
+/* Specific class for desktop hero text */
+.desktop-hero-text {
+  /* Position higher up on the page */
+  top: 40% !important;
+
+  /* Ensure proper transform */
+  transform: translate(-50%, -50%) !important;
+  -webkit-transform: translate(-50%, -50%) !important;
+
+  /* Ensure proper spacing from logo */
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}

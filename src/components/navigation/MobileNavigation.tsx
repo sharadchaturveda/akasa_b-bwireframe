@@ -7,6 +7,14 @@ import HamburgerButton from './HamburgerButton';
 import MobileMenuOverlay from './MobileMenuOverlay';
 import Logo from '@/components/brand/Logo';
 import { cn } from '@/lib/utils';
+import { injectMobileNavStyles } from '@/utils/navigationUtils';
+
+// Header styles extracted to constants
+const HEADER_STYLES = {
+  height: '70px',
+  padding: '0 20px 0 16px',
+  transition: 'background-color 0.3s ease',
+};
 
 interface MobileHeaderProps {
   isMenuOpen: boolean;
@@ -15,6 +23,12 @@ interface MobileHeaderProps {
   className?: string;
 }
 
+/**
+ * MobileHeader Component
+ *
+ * The header component for mobile navigation.
+ * Contains the logo and hamburger menu button.
+ */
 const MobileHeader = memo(function MobileHeader({
   isMenuOpen,
   isScrolled,
@@ -28,11 +42,7 @@ const MobileHeader = memo(function MobileHeader({
         isScrolled ? "bg-black/85" : "bg-transparent",
         className
       )}
-      style={{
-        height: '70px',
-        padding: '0 20px 0 16px',
-        transition: 'background-color 0.3s ease',
-      }}
+      style={HEADER_STYLES}
     >
       <Logo
         size="large"
@@ -58,6 +68,12 @@ interface MobileNavigationProps {
   className?: string;
 }
 
+/**
+ * MobileNavigation Component
+ *
+ * The main mobile navigation component.
+ * Includes the header and menu overlay.
+ */
 const MobileNavigation = memo(function MobileNavigation({
   navItems: customNavItems,
   className
@@ -69,31 +85,10 @@ const MobileNavigation = memo(function MobileNavigation({
     preventBodyScroll: true
   });
 
-  // Add styles to hide navigation on desktop
+  // Add styles to hide navigation on desktop using the utility function
   useEffect(() => {
-    const styleId = 'mobile-nav-styles';
-    const style = document.createElement('style');
-    style.id = styleId;
-    style.innerHTML = `
-      .mobile-nav-header {
-        display: flex;
-      }
-
-      @media (min-width: 768px) {
-        .mobile-nav-header {
-          display: none !important;
-        }
-      }
-    `;
-
-    document.head.appendChild(style);
-
-    return () => {
-      const styleElement = document.getElementById(styleId);
-      if (styleElement) {
-        document.head.removeChild(styleElement);
-      }
-    };
+    const cleanup = injectMobileNavStyles();
+    return cleanup;
   }, []);
 
   return (

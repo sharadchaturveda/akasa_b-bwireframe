@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useState, useEffect } from "react";
+import { memo, useState, useEffect, useRef } from "react";
 // Import with a different name to avoid conflict with the native Image constructor
 import NextImage from "next/image";
 
@@ -23,29 +23,50 @@ const GalleryImage = memo(function GalleryImage({
   alt: string;
   priority?: boolean;
 }) {
+  // Use a ref to track if component is mounted to avoid hydration issues
+  const hasMounted = useRef(false);
+  // Use state for loaded status, but don't render different HTML based on it initially
   const [isLoaded, setIsLoaded] = useState(false);
+
+  // Effect to mark component as mounted after hydration
+  useEffect(() => {
+    hasMounted.current = true;
+  }, []);
+
+  // Handle image load event
+  const handleImageLoad = () => {
+    if (hasMounted.current) {
+      setIsLoaded(true);
+    }
+  };
 
   return (
     <div className="flex-none w-[400px] h-[400px] relative overflow-hidden bg-black">
-      {/* Placeholder while image loads */}
+      {/* Placeholder while image loads - always render with opacity-100 for SSR */}
       <div
-        className={`absolute inset-0 bg-black transition-opacity duration-500 ${isLoaded ? 'opacity-0' : 'opacity-100'}`}
+        className="absolute inset-0 bg-black transition-opacity duration-500 opacity-100"
+        style={{
+          opacity: hasMounted.current && isLoaded ? 0 : 1,
+        }}
+        suppressHydrationWarning
       ></div>
 
       <NextImage
         src={src}
         alt={alt}
         fill
-        className={`object-cover transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        className="object-cover transition-opacity duration-500 opacity-0"
+        style={{
+          opacity: hasMounted.current && isLoaded ? 1 : 0,
+          transform: "translateZ(0)", // Hardware acceleration
+        }}
         sizes="400px"
         loading="eager" // Always use eager to avoid hydration mismatch
         quality={75}
         priority={priority}
-        onLoad={() => setIsLoaded(true)}
+        onLoad={handleImageLoad}
         fetchPriority={priority ? "high" : "auto"}
-        style={{
-          transform: "translateZ(0)", // Hardware acceleration
-        }}
+        suppressHydrationWarning
       />
     </div>
   );
@@ -53,11 +74,12 @@ const GalleryImage = memo(function GalleryImage({
 
 // Desktop gallery component with optimized scrolling and performance
 const DesktopGallery = memo(function DesktopGallery() {
-  const [isVisible, setIsVisible] = useState(false);
+  // Use a ref to track if component is mounted to avoid hydration issues
+  const hasMounted = useRef(false);
 
   useEffect(() => {
-    // Set gallery to visible immediately
-    setIsVisible(true);
+    // Mark as mounted after hydration
+    hasMounted.current = true;
 
     // Preload images for better performance
     const preloadImages = () => {
@@ -87,8 +109,10 @@ const DesktopGallery = memo(function DesktopGallery() {
           transform: 'translateZ(0)', // Hardware acceleration
           willChange: 'transform',
           transition: 'opacity 0.5s ease-in-out',
-          opacity: isVisible ? 1 : 0
+          // Always render with opacity 1 for SSR, then use inline style for client
+          opacity: 1
         }}
+        suppressHydrationWarning
       >
         {/* First set of images */}
         {GALLERY_IMAGES.map((image, index) => (
