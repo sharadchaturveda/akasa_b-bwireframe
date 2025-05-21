@@ -1,5 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: '/blog/:slug*',
+        destination: 'https://blog.akasa.sg/blog/:slug*',
+        permanent: true,
+      },
+    ];
+  },
   // Disable ESLint during builds in production
   eslint: {
     // Set to true to ignore ESLint errors during builds
