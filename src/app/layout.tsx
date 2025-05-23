@@ -126,7 +126,7 @@ export default function RootLayout({
 
         {/* Consolidated performance optimizations */}
         <link rel="stylesheet" href="/styles/performance-optimizations.css" />
-        <script src="/scripts/performance-optimizations.js" async></script>
+        {/* <script src="/scripts/performance-optimizations.js" async></script> */}
 
         {/* Mobile video autoplay helper */}
         <script src="/scripts/mobile-video-autoplay.js" async></script>
