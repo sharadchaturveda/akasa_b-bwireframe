@@ -163,9 +163,6 @@ export const addCacheBustingToVideoSources = (video: HTMLVideoElement | null): v
     url.searchParams.set('v', timestamp.toString());
     source.src = url.toString();
   });
-
-  // Force reload
-  video.load();
 };
 
 /**

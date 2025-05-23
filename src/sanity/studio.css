@@ -1,0 +1,19 @@
+/* Custom styles for Sanity Studio */
+
+/* Attempt to hide common floating action button patterns */
+/* This might need adjustment based on actual Sanity Studio HTML structure */
+.fixed.bottom-4,
+.fixed.bottom-6,
+.fixed.right-4,
+.fixed.right-6,
+.fixed.left-4,
+.fixed.left-6 {
+  display: none !important;
+}
+
+/* More specific selectors if needed, based on the actual buttons in Sanity Studio */
+/* For example, if they have specific IDs or classes: */
+/* #whatsapp-button, */
+/* #book-now-button { */
+/*   display: none !important; */
+/* } */

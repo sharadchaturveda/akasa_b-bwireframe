@@ -88,14 +88,16 @@
      * @returns {boolean} Whether the image is a priority image
      */
     function isPriority(img) {
-      // Check if the image has priority attribute
+      // Check if the image has priority attribute or fetchpriority="high"
       if (img.hasAttribute('priority') || img.getAttribute('fetchpriority') === 'high') {
         return true;
       }
       
-      // Check if the image is in the viewport
+      // Check if the image is in the initial viewport with a small buffer
       const rect = img.getBoundingClientRect();
-      return rect.top < window.innerHeight;
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      const buffer = 100; // Pixels to consider as "above the fold" buffer
+      return rect.top < viewportHeight + buffer && rect.bottom > -buffer;
     }
   }
 })();

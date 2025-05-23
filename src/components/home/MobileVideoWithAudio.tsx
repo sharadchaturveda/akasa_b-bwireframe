@@ -203,8 +203,18 @@ const MobileVideoWithAudio = memo(function MobileVideoWithAudio() {
     // Try to play after a short delay
     setTimeout(playVideo, 500);
 
+    // Add a timeout to ensure fallback image is shown if video doesn't load
+    const videoLoadTimeout = setTimeout(() => {
+      if (!videoReady) {
+        console.warn('MobileVideoWithAudio: Video did not become ready within timeout, showing fallback image.');
+        setHasError(true); // Force fallback image display
+      }
+    }, 7000); // 7 seconds timeout
+
     // Clean up on unmount
     return () => {
+      clearTimeout(videoLoadTimeout); // Clear timeout if video loads or component unmounts
+
       // Remove video wrapper
       if (container.contains(videoWrapper)) {
         container.removeChild(videoWrapper);

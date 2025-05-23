@@ -15,5 +15,27 @@ export const dynamic = 'force-static'
 export { metadata, viewport } from 'next-sanity/studio'
 
 export default function StudioPage() {
-  return <NextStudio config={config} />
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{ __html: `
+        /* Custom styles for Sanity Studio - Directly injected */
+
+        /* Hide the WhatsApp button */
+        .fixed.left-4.md\\:left-6.z-50.transition-all.duration-300 {
+          display: none !important;
+        }
+
+        /* Hide the Book Now button (assuming similar class structure but with 'right') */
+        .fixed.right-4.md\\:right-6.z-50.transition-all.duration-300 {
+          display: none !important;
+        }
+
+        /* Fallback for any other floating buttons */
+        .fixed[class*="bottom-"][class*="z-50"] {
+          display: none !important;
+        }
+      `}} />
+      <NextStudio config={config} />
+    </>
+  );
 }
