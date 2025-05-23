@@ -21,7 +21,7 @@ const PageLayout = memo(function PageLayout({
 }: LayoutProps) {
   return (
     <ErrorBoundary>
-      <main className={`min-h-screen bg-black text-white ${className}`}>
+      <main className={`min-h-screen text-white ${className}`}>
         <Navigation />
         <ErrorBoundary>
           {children}

@@ -11,6 +11,7 @@ import MobileNavigation from '@/components/navigation/MobileNavigation';
 import FloatingActionButtons from '@/components/ui/FloatingActionButtons';
 import ScrollBehavior from '@/components/home/ScrollBehavior';
 import FacebookPixel from '@/components/tracking/FacebookPixel';
+import { ANIMATED_BACKGROUND_STYLE } from "@/constants/menuConstants";
 
 // Define CSS variables for font fallbacks
 const fontVariables = {
@@ -141,7 +142,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="/styles/desktop-hero-fix.css" />
       </head>
       <body
-        className="antialiased bg-black font-system"
+        className="antialiased font-system relative" // Added relative
         style={{
           WebkitFontSmoothing: 'antialiased',
           MozOsxFontSmoothing: 'grayscale',
@@ -150,19 +151,27 @@ export default function RootLayout({
           overflowX: 'hidden'
         }}
       >
-        {/* Facebook Pixel - Global tracking */}
-        <FacebookPixel />
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 overflow-hidden" style={{ opacity: 0.13 }}>
+          <div className="absolute inset-0" style={ANIMATED_BACKGROUND_STYLE}></div>
+        </div>
 
-        {/* Mobile Navigation - Fixed at the top of every page */}
-        <MobileNavigation />
+        {/* This div will contain the main content and have a semi-transparent background */}
+        <div className="relative z-10 min-h-screen">
+          {/* Facebook Pixel - Global tracking */}
+          <FacebookPixel />
 
-        {/* Floating Action Buttons - Fixed on all pages */}
-        <FloatingActionButtons />
+          {/* Mobile Navigation - Fixed at the top of every page */}
+          <MobileNavigation />
 
-        {/* Apply scroll behavior optimizations */}
-        <ScrollBehavior />
+          {/* Floating Action Buttons - Fixed on all pages */}
+          <FloatingActionButtons />
 
-        {children}
+          {/* Apply scroll behavior optimizations */}
+          <ScrollBehavior />
+
+          {children}
+        </div>
       </body>
     </html>
   );

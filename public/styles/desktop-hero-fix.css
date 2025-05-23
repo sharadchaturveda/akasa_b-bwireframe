@@ -100,11 +100,12 @@
 
 /* Final overrides for all browsers */
 body .desktop-hero-logo {
-  padding-top: 6rem !important; /* Adjusted to move logo up slightly */
-  margin-bottom: 4rem !important;
+  padding-top: 0 !important; /* Removed to rely on top positioning */
+  margin-bottom: 6rem !important; /* Increased space below the logo */
 }
 
 body .desktop-hero-text {
-  top: 52% !important; /* Moved up further */
-  padding-top: 2rem !important; /* Reduced space above the text */
+  top: 60% !important; /* Adjusted to move text down further */
+  padding-top: 0 !important; /* Removed to rely on top positioning */
+  margin-top: 1rem !important; /* Added small margin to push text down */
 }
