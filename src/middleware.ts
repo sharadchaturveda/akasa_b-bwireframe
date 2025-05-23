@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-export function middleware(request: NextRequest) {
-  const host = request.headers.get('host') || ''
-  
-  if (host.startsWith('studio.akasa.sg')) {
-    // Force redirect all traffic from this subdomain to the embedded Sanity Studio
-    return NextResponse.rewrite(new URL('/studio', request.url))
+export function middleware(req: NextRequest) {
+  const host = req.headers.get('host');
+  const url = req.nextUrl.clone();
+
+  if (host === 'studio.akasa.sg') {
+    url.pathname = `/studio${url.pathname}`;
+    return NextResponse.rewrite(url);
   }
 
   return NextResponse.next()
