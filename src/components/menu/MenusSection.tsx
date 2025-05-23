@@ -62,7 +62,7 @@ export default function MenusSection() {
     <>
       <section className="w-full bg-black pt-20 pb-10 relative overflow-hidden">
         {/* Animated background pattern */}
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0" style={{ opacity: 0.13 }}>
           <div className="absolute inset-0" style={ANIMATED_BACKGROUND_STYLE}></div>
         </div>
 
