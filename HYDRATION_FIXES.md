@@ -15,23 +15,11 @@ Hydration errors occur when the HTML generated on the server doesn't match what 
 
 ### 1. Updated `HeroSection.tsx` Component
 
-- Replaced the standard Next.js `Image` component with `HydrationSafeImage` component
-- Removed client-side only attributes that were causing hydration mismatches
-- Added proper `style` object with `objectFit` property
+- Replaced the standard Next.js `Image` component with `HydrationSafeImage`.
+- Removed client-side only attributes causing hydration mismatches.
+- Added `style` object with `objectFit` property.
 
 ```tsx
-// Before
-<Image
-  src="/images/reservations/hero/hero.jpg"
-  alt="Elegant dining table setting"
-  fill
-  priority
-  className="object-cover"
-  sizes="100vw"
-  quality={80}
-/>
-
-// After
 <HydrationSafeImage
   src="/images/reservations/hero/hero.jpg"
   alt="Elegant dining table setting"
@@ -50,23 +38,11 @@ Hydration errors occur when the HTML generated on the server doesn't match what 
 
 - Modified the image selector to exclude Next.js Image components:
   ```js
-  // Before
-  imageSelector: 'img:not([data-no-optimization])',
-  
-  // After
   imageSelector: 'img:not([data-no-optimization]):not([data-nimg])',
   ```
 
 - Delayed script initialization to allow React hydration to complete:
   ```js
-  // Before
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initialize);
-  } else {
-    initialize();
-  }
-  
-  // After
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       setTimeout(initialize, 500);
@@ -80,14 +56,6 @@ Hydration errors occur when the HTML generated on the server doesn't match what 
 
 - Delayed script initialization to avoid hydration issues:
   ```js
-  // Before
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', ensureMobileVideoAutoplay);
-  } else {
-    ensureMobileVideoAutoplay();
-  }
-  
-  // After
   const initWithDelay = () => {
     setTimeout(ensureMobileVideoAutoplay, 500);
   };
@@ -101,12 +69,6 @@ Hydration errors occur when the HTML generated on the server doesn't match what 
 
 - Delayed mutation observer callbacks to avoid conflicts with React hydration:
   ```js
-  // Before
-  if (hasNewVideos) {
-    ensureMobileVideoAutoplay();
-  }
-  
-  // After
   if (hasNewVideos) {
     setTimeout(ensureMobileVideoAutoplay, 100);
   }

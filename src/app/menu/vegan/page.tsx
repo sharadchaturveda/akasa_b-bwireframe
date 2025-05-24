@@ -94,7 +94,6 @@ const categories = veganMenuData.sections.map(section => ({
     if (item.name.includes("Broccoli")) price = "$23";
     if (item.name.includes("Soy Chaap")) price = "$22";
 
-    // MAIN COURSE prices
     if (item.name.includes("Subz")) price = "$22";
     if (item.name.includes("Palak")) price = "$23";
     if (item.name.includes("Gajar")) price = "$22";

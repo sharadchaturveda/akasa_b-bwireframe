@@ -25,12 +25,6 @@ The following new dependency was added:
 
 The blog pages and components are styled using Tailwind CSS, consistent with the existing site aesthetics.
 
-## Constraints Adhered To
-
-- Existing API routes (e.g., `/api/send-inquiry`) remain untouched.
-- Current global and page layouts are preserved.
-- Existing code style, TypeScript conventions, and project structure have been followed.
-
 ## Testing
 
 To test the integration:

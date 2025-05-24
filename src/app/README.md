@@ -22,69 +22,11 @@ This directory contains the Next.js App Router pages and layouts. The App Router
 
 ## Page Structure
 
-Each page should follow this structure:
-
-```tsx
-// For client components
-"use client";
-
-import { useEffect, useState } from "react";
-import PageLayout from "@/components/layout/PageLayout";
-import { useDeviceDetection } from "@/hooks/useDeviceDetection";
-
-/**
- * PageName Component
- * 
- * Description of the page's purpose.
- * 
- * @returns {JSX.Element} The rendered page
- */
-export default function PageName() {
-  // Page logic
-  const { isMobile, isDetectionComplete } = useDeviceDetection();
-
-  // Show loading state if device detection is not complete
-  if (!isDetectionComplete) {
-    return <Loading text="Loading..." />;
-  }
-
-  return (
-    <PageLayout>
-      {/* Page content */}
-    </PageLayout>
-  );
-}
-```
+Pages are typically React components, often wrapped in `PageLayout`. Client components use `"use client";` directive.
 
 ## Layout Structure
 
-Layouts should follow this structure:
-
-```tsx
-import { ReactNode } from "react";
-
-/**
- * LayoutName Component
- * 
- * Description of the layout's purpose.
- * 
- * @param {Object} props - The component props
- * @param {ReactNode} props.children - The content to render inside the layout
- * @returns {JSX.Element} The rendered layout
- */
-export default function LayoutName({
-  children,
-}: {
-  children: ReactNode;
-}) {
-  return (
-    <div>
-      {/* Layout content */}
-      {children}
-    </div>
-  );
-}
-```
+Layouts are React components that wrap child content (`{children}`).
 
 ## Page Guidelines
 
@@ -98,130 +40,42 @@ export default function LayoutName({
 
 ### Best Practices
 
-1. **Use Server Components When Possible**: Server Components are rendered on the server and don't include client-side JavaScript.
-
-2. **Use "use client" for Client Components**: Add the "use client" directive at the top of files that need to run on the client.
-
-3. **Use Layouts for Shared UI**: Use layouts to share UI between pages.
-
-4. **Use Loading Components**: Add loading components to show loading states.
-
-5. **Use Error Components**: Add error components to handle errors.
-
-6. **Use Not Found Components**: Add not found components to handle 404 errors.
-
-7. **Keep Pages Simple**: Move complex logic to components.
-
-8. **Use TypeScript**: Define proper types for props and state.
-
-9. **Document Pages**: Add JSDoc comments to explain the purpose of pages.
-
-10. **Use the PageLayout Component**: Use the PageLayout component for consistent page structure.
+1.  **Server Components**: Use Server Components when possible (rendered on the server, no client-side JavaScript).
+2.  **Client Components**: Use `"use client"` directive for client-side logic.
+3.  **Layouts**: Use layouts for shared UI.
+4.  **Loading Components**: Add `loading.tsx` for loading states.
+5.  **Error Components**: Add `error.tsx` to handle errors.
+6.  **Not Found Components**: Add `not-found.tsx` to handle 404 errors.
+7.  **Page Simplicity**: Keep pages simple; move complex logic to components.
+8.  **TypeScript**: Define proper types for props and state.
+9.  **Documentation**: Add JSDoc comments to explain page purpose.
+10. **PageLayout**: Use `PageLayout` for consistent page structure.
 
 ## Creating New Pages
 
-1. Create a new directory in the `app/` directory with the page name (e.g., `newPage/`).
-2. Create a `page.tsx` file in the new directory.
-3. Follow the page structure and guidelines.
-4. Add the page to the navigation if necessary.
+1.  Create a new directory in `app/` (e.g., `newPage/`).
+2.  Create a `page.tsx` file within the new directory.
+3.  Follow page structure and guidelines.
+4.  Add to navigation if needed.
 
 ## Using Layouts
 
 ### Root Layout
 
-The root layout is defined in `app/layout.tsx` and applies to all pages:
-
-```tsx
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="en">
-      <body>
-        {children}
-      </body>
-    </html>
-  );
-}
-```
+The root layout is defined in `app/layout.tsx` and applies to all pages.
 
 ### Nested Layouts
 
-Nested layouts can be defined in subdirectories:
-
-```tsx
-// app/menu/layout.tsx
-export default function MenuLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <div>
-      <nav>Menu Navigation</nav>
-      {children}
-    </div>
-  );
-}
-```
+Nested layouts can be defined in subdirectories (e.g., `app/menu/layout.tsx`).
 
 ## Using Loading States
 
-Add a `loading.tsx` file to show a loading state:
-
-```tsx
-// app/menu/loading.tsx
-import Loading from "@/components/ui/Loading";
-
-export default function MenuLoading() {
-  return <Loading text="Loading menu..." />;
-}
-```
+Add a `loading.tsx` file (e.g., `app/menu/loading.tsx`) to show a loading state for a route segment.
 
 ## Using Error Handling
 
-Add an `error.tsx` file to handle errors:
-
-```tsx
-// app/menu/error.tsx
-"use client";
-
-import { useEffect } from "react";
-
-export default function MenuError({
-  error,
-  reset,
-}: {
-  error: Error;
-  reset: () => void;
-}) {
-  useEffect(() => {
-    console.error(error);
-  }, [error]);
-
-  return (
-    <div>
-      <h2>Something went wrong!</h2>
-      <button onClick={reset}>Try again</button>
-    </div>
-  );
-}
-```
+Add an `error.tsx` file (e.g., `app/menu/error.tsx`) to handle errors within a route segment.
 
 ## Using Not Found Handling
 
-Add a `not-found.tsx` file to handle 404 errors:
-
-```tsx
-// app/menu/not-found.tsx
-export default function MenuNotFound() {
-  return (
-    <div>
-      <h2>Menu not found</h2>
-      <p>The menu you're looking for doesn't exist.</p>
-    </div>
-  );
-}
-```
+Add a `not-found.tsx` file (e.g., `app/menu/not-found.tsx`) to handle 404 errors for a route segment.

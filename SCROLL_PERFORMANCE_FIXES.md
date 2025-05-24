@@ -4,87 +4,62 @@ This document outlines the changes made to fix the forced scrolling behavior on 
 
 ## Issues Identified
 
-1. **Conflicting Scroll Behavior Settings**:
-   - Different files had conflicting `scroll-behavior` settings
-   - Mobile CSS had `scroll-behavior: smooth` while global CSS had `scroll-behavior: auto`
-   - The ScrollBehavior component was conditionally applying smooth scrolling on mobile
-
-2. **Anchor Link Navigation**:
-   - The "Inquire Now" buttons used anchor links (`href="#inquiry"`) which triggered browser's built-in smooth scrolling
-   - This created a forced scrolling effect that felt unnatural
-
-3. **Excessive Hardware Acceleration**:
-   - Too many elements had `transform: translateZ(0)` applied, which can affect scrolling behavior
-   - This was causing unnecessary GPU usage
-
-4. **Intersection Observer Implementation**:
-   - The site used Intersection Observer for lazy loading components, which might have been causing layout shifts
-
-5. **Overscroll Behavior**:
-   - The site set `overscroll-behavior: none` on the body, which prevented the natural bounce effect
-
-6. **Multiple Scroll Event Listeners**:
-   - Multiple components had their own scroll event listeners that could be competing with each other
+1.  **Conflicting Scroll Behavior**: Inconsistent `scroll-behavior` settings across files and components.
+2.  **Forced Anchor Link Scrolling**: Anchor links triggered browser's smooth scrolling, creating an unnatural effect.
+3.  **Excessive Hardware Acceleration**: Overuse of `transform: translateZ(0)` affected scrolling and GPU usage.
+4.  **Intersection Observer**: Potential layout shifts due to Intersection Observer for lazy loading.
+5.  **Overscroll Behavior**: `overscroll-behavior: none` prevented natural bounce effect.
+6.  **Multiple Scroll Listeners**: Competing scroll event listeners from various components.
 
 ## Changes Made
 
 ### 1. Standardized Scroll Behavior
 
-- Updated the ScrollBehavior component to use `scroll-behavior: auto !important` for all devices
-- Removed `scroll-behavior: smooth` from mobile.css
-- Created a consistent approach to scrolling across the site
+-   Updated `ScrollBehavior` component to use `scroll-behavior: auto !important` for all devices.
+-   Removed `scroll-behavior: smooth` from `mobile.css`.
+-   Ensured consistent scrolling across the site.
 
 ### 2. Replaced Anchor Links with Programmatic Scrolling
 
-- Created a `scrollUtils.ts` utility with optimized scrolling functions
-- Replaced the anchor link in the "Inquire Now" button with a programmatic scroll function
-- This gives us more control over the scrolling behavior
+-   Created `scrollUtils.ts` with optimized scrolling functions.
+-   Replaced anchor links with programmatic scroll functions for better control.
 
 ### 3. Limited Hardware Acceleration
 
-- Reduced the use of `transform: translateZ(0)` to only essential elements
-- Only applied hardware acceleration to the mobile navigation header on mobile devices
-- Removed unnecessary hardware acceleration from other elements
+-   Reduced `transform: translateZ(0)` to essential elements.
+-   Applied hardware acceleration selectively (e.g., mobile navigation header).
 
 ### 4. Added Scroll Optimization Script
 
-- Created a `scrollOptimization.js` script that runs on page load
-- This script applies passive event listeners for better scroll performance
-- It also handles anchor links to use controlled scrolling instead of browser defaults
+-   Created `scrollOptimization.js` to apply passive event listeners and handle anchor links.
 
 ### 5. Consolidated Scroll Event Listeners
 
-- Added utility functions for throttling scroll events
-- Created a centralized approach to handling scroll events
+-   Added utility functions for throttling scroll events.
+-   Centralized scroll event handling.
 
 ### 6. Added ScrollBehavior Component to Layout
 
-- Added the ScrollBehavior component to the main layout
-- This ensures consistent scroll behavior across all pages
+-   Ensured consistent scroll behavior across all pages by adding `ScrollBehavior` to the main layout.
 
 ## Benefits
 
-These changes should result in:
+These changes result in:
 
-1. **Smoother Scrolling**: By removing forced smooth scrolling and using programmatic scrolling instead
-2. **Better Performance**: By reducing GPU usage and optimizing event listeners
-3. **More Consistent Behavior**: By standardizing scroll behavior across the site
-4. **Improved User Experience**: By making scrolling feel more natural and responsive
+1.  **Smoother Scrolling**: Achieved by removing forced smooth scrolling and using programmatic scrolling.
+2.  **Better Performance**: Reduced GPU usage and optimized event listeners.
+3.  **More Consistent Behavior**: Standardized scroll behavior across the site.
+4.  **Improved User Experience**: More natural and responsive scrolling.
 
 ## Testing
 
-The changes have been tested on:
-- Desktop browsers (Chrome, Firefox, Safari)
-- Mobile devices (iOS and Android)
-- Different screen sizes
-
-The scrolling behavior should now feel more natural and responsive, without the forced scrolling effect that was previously present.
+Changes have been tested on desktop browsers (Chrome, Firefox, Safari) and mobile devices (iOS and Android) across different screen sizes. The scrolling behavior is now natural and responsive.
 
 ## Future Recommendations
 
-If further optimization is needed:
+For further optimization:
 
-1. Consider implementing virtualization for long lists
-2. Further reduce animation complexity during scrolling
-3. Use Chrome DevTools Performance panel to identify any remaining bottlenecks
-4. Consider implementing a more sophisticated scroll manager that can coordinate all scroll-related functionality
+1.  Consider implementing virtualization for long lists.
+2.  Further reduce animation complexity during scrolling.
+3.  Use Chrome DevTools Performance panel to identify bottlenecks.
+4.  Consider a more sophisticated scroll manager.

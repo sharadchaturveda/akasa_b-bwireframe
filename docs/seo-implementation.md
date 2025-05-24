@@ -4,68 +4,21 @@ This document explains the SEO implementation for the Akasa website.
 
 ## Overview
 
-The website uses Next.js App Router's built-in metadata API to implement SEO best practices across all pages. This includes:
-
-1. Basic meta tags (title, description, keywords)
-2. Open Graph meta tags for social media sharing
-3. Twitter Card meta tags for Twitter sharing
-4. Canonical URLs
-5. Structured metadata for search engines
+The website utilizes Next.js App Router's metadata API for SEO, including basic meta tags, Open Graph, Twitter Cards, canonical URLs, and structured metadata.
 
 ## Implementation Details
 
 ### Root Layout Metadata
 
-The root layout file (`src/app/layout.tsx`) contains the default site-wide metadata:
-
-```typescript
-export const metadata: Metadata = {
-  title: "Akasa | Finest Indian Cuisine in Singapore",
-  description: "Experience the finest Indian cuisine at Akasa...",
-  keywords: "Indian cuisine, Singapore restaurant, fine dining...",
-  // ... other metadata
-};
-```
-
-This provides fallback metadata for all pages.
+`src/app/layout.tsx` defines default site-wide metadata, serving as a fallback for all pages.
 
 ### Page-Specific Metadata
 
-Each page can define its own metadata by creating a `metadata.ts` file in its directory:
-
-```typescript
-// src/app/menu/a-la-carte/metadata.ts
-import { Metadata } from "next";
-import { generateMetadata } from "@/utils/seo";
-
-export const metadata: Metadata = generateMetadata({
-  title: "À la Carte Menu",
-  description: "Explore our exquisite à la carte dishes at Akasa...",
-  keywords: "à la carte, Indian menu, fine dining menu...",
-  path: "/menu/a-la-carte",
-  ogImagePath: "/images/menu/a-la-carte/hero/hero.jpg",
-});
-```
+Individual pages can define their own metadata by creating a `metadata.ts` file in their respective directories, overriding the root layout.
 
 ### SEO Utility Function
 
-The `src/utils/seo.ts` file contains a utility function to generate consistent metadata:
-
-```typescript
-export function generateMetadata({
-  title,
-  description,
-  keywords,
-  path = '',
-  ogImagePath,
-  twitterImagePath,
-  isHomePage = false,
-}: PageSEOProps): Metadata {
-  // ... implementation
-}
-```
-
-This ensures all pages follow the same metadata structure while allowing for customization.
+`src/utils/seo.ts` provides a `generateMetadata` utility function to ensure consistent metadata structure across pages while allowing customization.
 
 ## SEO Assets
 
@@ -78,69 +31,46 @@ SEO-specific images are stored in the `public/images/seo/` directory:
 
 ### Titles
 
-- Keep titles under 60 characters
-- Include the most important keywords near the beginning
-- Use the format "Page Title – Akasa" for consistency (except homepage)
+-   Keep titles under 60 characters.
+-   Include important keywords early.
+-   Use "Page Title – Akasa" format (except homepage).
 
 ### Descriptions
 
-- Keep descriptions between 150-160 characters
-- Include relevant keywords naturally
-- Make them compelling and descriptive
+-   Keep descriptions between 150-160 characters.
+-   Include relevant keywords naturally.
+-   Make them compelling.
 
 ### Images
 
-- Optimize images for fast loading (compress, proper dimensions)
-- Include descriptive alt text
-- Use high-quality, visually appealing images
+-   Optimize for fast loading (compress, proper dimensions).
+-   Include descriptive alt text.
+-   Use high-quality, visually appealing images.
 
 ### Keywords
 
-- Include 5-10 relevant keywords per page
-- Don't keyword stuff
-- Focus on natural language and user intent
+-   Include 5-10 relevant keywords per page.
+-   Avoid keyword stuffing.
+-   Focus on natural language and user intent.
 
 ## Testing SEO
 
-To test the SEO implementation:
+To test SEO implementation, use:
 
-1. Use the [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
-2. Use the [Twitter Card Validator](https://cards-dev.twitter.com/validator)
-3. Use [Google's Rich Results Test](https://search.google.com/test/rich-results)
-4. Use [Google's Mobile-Friendly Test](https://search.google.com/test/mobile-friendly)
+1.  [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
+2.  [Twitter Card Validator](https://cards-dev.twitter.com/validator)
+3.  [Google's Rich Results Test](https://search.google.com/test/rich-results)
+4.  [Google's Mobile-Friendly Test](https://search.google.com/test/mobile-friendly)
 
 ## Maintenance
 
 When adding new pages:
 
-1. Create a `metadata.ts` file in the page directory
-2. Use the `generateMetadata` function to generate metadata
-3. Include relevant, unique content in the title and description
-4. Add page-specific Open Graph images when appropriate
+1.  Create a `metadata.ts` file.
+2.  Use `generateMetadata` function.
+3.  Include relevant, unique title and description.
+4.  Add page-specific Open Graph images if appropriate.
 
 ## Structured Data
 
-For pages that benefit from structured data (like restaurant information), add JSON-LD scripts in the page component:
-
-```typescript
-<script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Restaurant",
-      "name": "Akasa",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "79 Robinson Road",
-        "addressLocality": "Singapore",
-        "postalCode": "068897",
-        "addressCountry": "SG"
-      },
-      // ... other restaurant data
-    })
-  }}
-/>
-```
-
-This helps search engines understand the content and can lead to rich results in search listings.
+For pages benefiting from structured data (e.g., restaurant info), add JSON-LD scripts directly in the page component. This helps search engines understand content and can lead to rich results.

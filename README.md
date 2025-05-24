@@ -17,17 +17,17 @@ A modern, performance-optimized website for Akasa, a fine dining Indian restaura
 
 ## Project Overview
 
-The Akasa Restaurant Website showcases an upscale Indian restaurant located at 79 Robinson Road, Singapore. The website features the restaurant's culinary offerings, special events, promotional offers, and reservation capabilities. Built with modern web technologies and following a mobile-first approach, the website is designed to be fast, responsive, and provide an excellent user experience on both desktop and mobile devices.
+This project is the official website for Akasa, a fine dining Indian restaurant in Singapore. It showcases the restaurant's culinary offerings, special events, promotional offers, and reservation capabilities. The website is built with modern web technologies, following a mobile-first approach to ensure a fast, responsive, and excellent user experience across all devices.
 
 ### Key Features
 
-- **Responsive Design**: Fully optimized for both desktop and mobile devices
-- **Menu System**: 5 distinct menu categories with detailed dish information
-- **Events Section**: 5 event categories with detailed information and inquiry form
-- **Offers Section**: Current promotions and special offers
-- **Reservation System**: User-friendly online reservation form
-- **Brand Philosophy**: Dedicated section showcasing the restaurant's story and values
-- **Testimonials**: Customer reviews and ratings
+- **Responsive Design**: Optimized for desktop and mobile.
+- **Menu System**: Five distinct menu categories with detailed dish information.
+- **Events Section**: Five event categories with detailed information and an inquiry form.
+- **Offers Section**: Displays current promotions and special offers.
+- **Reservation System**: User-friendly online reservation form.
+- **Brand Philosophy**: Dedicated section detailing the restaurant's story and values.
+- **Testimonials**: Customer reviews and ratings.
 
 ## Tech Stack
 
@@ -131,34 +131,15 @@ The website uses Next.js App Router for routing and consists of the following ma
 
 ### Mobile-First Design Strategy
 
-The website follows a strict mobile-first design approach:
+The website adopts a mobile-first design approach, ensuring optimal performance and user experience on smaller screens before scaling up to larger displays. Key aspects include:
 
-1. **Separate Mobile Components**: Mobile-specific components are completely separated from desktop components for easier debugging and maintenance.
-
-2. **Device Detection**: The `useDeviceDetection` hook is used to detect mobile devices and render appropriate components:
-   ```tsx
-   const { isMobile, isDetectionComplete } = useDeviceDetection();
-
-   if (isMobile) {
-     return <MobileComponent />;
-   } else {
-     return <DesktopComponent />;
-   }
-   ```
-
-3. **Touch Optimization**: Touch interactions are optimized for mobile devices with appropriate touch targets and gestures.
-
-4. **Disabled Hover Effects**: Hover effects are disabled on mobile devices to prevent unwanted behavior.
-
-5. **Responsive Typography**: Font sizes are responsive and scale appropriately down to 320px screens.
-
-6. **Optimized Images**: Images are optimized for mobile devices with appropriate sizes and loading strategies.
-
-7. **Layout Adaptations**:
-   - Single-column layouts for narrow screens
-   - Horizontal scrolling for menu cards on mobile
-   - Adjusted spacing and typography for mobile readability
-   - Consistent button sizing across mobile views
+1.  **Component Separation**: Mobile-specific components are distinct from desktop components, simplifying debugging and maintenance.
+2.  **Device Detection**: The `useDeviceDetection` hook dynamically renders components based on device type.
+3.  **Touch Optimization**: Interactions are optimized for touch, with appropriate targets and gestures.
+4.  **Hover Effects**: Hover effects are disabled on mobile to prevent unintended behavior.
+5.  **Responsive Typography**: Font sizes scale appropriately for various screen sizes, down to 320px.
+6.  **Image Optimization**: Images are optimized for mobile, ensuring efficient loading.
+7.  **Layout Adaptations**: Includes single-column layouts, horizontal scrolling for menus, adjusted spacing, and consistent button sizing.
 
 ### Key UI Components
 
@@ -195,35 +176,16 @@ Tailwind CSS is used for utility-first styling, with custom configuration in `ta
 
 ### Mobile-Specific CSS
 
-Mobile-specific CSS is loaded dynamically based on device detection:
-
-```typescript
-// In deviceUtils.ts
-export const applyMobileOptimizations = (): void => {
-  // Add mobile class to html element
-  document.documentElement.classList.add('mobile-device');
-
-  // Load mobile CSS dynamically
-  if (!document.getElementById('mobile-css')) {
-    const link = document.createElement('link');
-    link.id = 'mobile-css';
-    link.rel = 'stylesheet';
-    link.href = '/mobile.css';
-    document.head.appendChild(link);
-  }
-};
-```
-
-The mobile.css file contains optimizations specifically for mobile devices and is only loaded when needed.
+Mobile-specific CSS is dynamically loaded based on device detection, ensuring that styles relevant only to mobile devices are applied efficiently.
 
 ### Performance Optimizations
 
-- CSS is minimized and critical CSS is inlined for faster loading
-- Unused CSS is purged during the build process
-- Mobile-specific CSS is loaded dynamically only on mobile devices
-- Responsive images are used to reduce bandwidth usage on mobile devices
-- WebM format is used for video files to optimize performance
-- Video elements use appropriate fallback images when videos fail to load
+- CSS is minimized, and critical CSS is inlined for faster loading.
+- Unused CSS is purged during the build process.
+- Mobile-specific CSS loads dynamically only on mobile devices.
+- Responsive images reduce bandwidth usage.
+- WebM format is used for video files to optimize performance.
+- Video elements include fallback images for reliability.
 
 ## Deployment
 
@@ -281,14 +243,6 @@ npm run build
 npm test
 ```
 
-## Documentation
-
-The project includes comprehensive documentation:
-
-1. **README.md**: This file, providing an overview of the project.
-2. **DOCUMENTATION.md**: Detailed documentation of the project.
-3. **docs/image-optimization.md**: Guide for image optimization.
-4. **docs/mobile-optimization.md**: Guide for mobile optimization.
 
 ## Future Work / Known Issues
 

@@ -15,89 +15,27 @@ The refactoring followed these principles:
 
 ### 1. MobileVideoWithAudio.tsx
 
-**Before**:
-- Inline styles mixed with component logic
-- Hardcoded video sources
-- Manual event handling and DOM manipulation
-
-**After**:
-- Extracted video styles to constants
-- Extracted video sources to constants
-- Used existing utility functions from videoUtils.ts
-- Improved error handling with logVideoError
+-   **After Refactoring**: Video styles and sources extracted to constants. Uses existing utility functions from `videoUtils.ts`. Improved error handling with `logVideoError`.
 
 ### 2. MobileNavigation.tsx
 
-**Before**:
-- Inline styles in component
-- Direct DOM manipulation for style injection
-- Nested component with no JSDoc documentation
-
-**After**:
-- Extracted header styles to constants
-- Used injectMobileNavStyles utility from navigationUtils.ts
-- Added JSDoc documentation for components
-- Improved component organization
+-   **After Refactoring**: Header styles extracted to constants. Uses `injectMobileNavStyles` utility from `navigationUtils.ts`. Added JSDoc documentation. Improved component organization.
 
 ### 3. useNavigationState.ts
 
-**Before**:
-- Scroll handling logic mixed with navigation state
-- Body scroll prevention logic inline
-- No JSDoc documentation
-
-**After**:
-- Used trackScrollPosition utility from scrollUtils.ts
-- Used preventBodyScrolling utility from scrollUtils.ts
-- Added JSDoc documentation
-- Simplified code with better separation of concerns
+-   **After Refactoring**: Uses `trackScrollPosition` and `preventBodyScrolling` utilities from `scrollUtils.ts`. Added JSDoc documentation. Simplified code with better separation of concerns.
 
 ### 4. DesktopHero.tsx
 
-**Before**:
-- Hardcoded hero images
-- Inline styles for text shadow
-- Duplicated carousel settings
-
-**After**:
-- Extracted hero images to heroConstants.ts
-- Extracted text shadow style to constants
-- Extracted carousel settings to constants
-- Improved component organization
+-   **After Refactoring**: Hero images extracted to `heroConstants.ts`. Text shadow style and carousel settings extracted to constants. Improved component organization.
 
 ### 5. MenusSection.tsx
 
-**Before**:
-- Large monolithic component (283 lines)
-- Inline device detection logic
-- Duplicated card rendering logic for mobile and desktop
-- Hardcoded menu data
-- Complex click handling logic mixed with rendering
-
-**After**:
-- Split into smaller components (DesktopMenuCard.tsx, MobileMenuCard.tsx)
-- Extracted menu data to menuConstants.ts
-- Extracted device detection to menuUtils.ts
-- Extracted click handling logic to menuUtils.ts
-- Improved component organization and readability
-- Added JSDoc documentation
+-   **After Refactoring**: Split into smaller components (`DesktopMenuCard.tsx`, `MobileMenuCard.tsx`). Menu data extracted to `menuConstants.ts`. Device detection and click handling logic extracted to `menuUtils.ts`. Improved component organization, readability, and added JSDoc documentation.
 
 ### 6. ChefSection.tsx
 
-**Before**:
-- Large monolithic component (173 lines)
-- Inline LCP (Largest Contentful Paint) optimization logic
-- Hardcoded chef data and styling
-- Duplicated SVG elements
-- No separation of concerns
-
-**After**:
-- Split into smaller components (ChefBackground.tsx, ChefPortrait.tsx, ChefBio.tsx, DecorativeSpice.tsx)
-- Extracted chef data to chefConstants.ts
-- Created reusable LCP optimization utility in lcpUtils.ts
-- Improved component organization and readability
-- Added JSDoc documentation
-- Enhanced performance optimization
+-   **After Refactoring**: Split into smaller components (`ChefBackground.tsx`, `ChefPortrait.tsx`, `ChefBio.tsx`, `DecorativeSpice.tsx`). Chef data extracted to `chefConstants.ts`. Reusable LCP optimization utility created in `lcpUtils.ts`. Improved component organization, readability, and added JSDoc documentation. Enhanced performance optimization.
 
 ## New Files Created
 
@@ -131,35 +69,29 @@ The refactoring followed these principles:
 
 ## Visual Verification
 
-All refactored components maintain the exact same visual appearance and functionality as before. No layout, style, or behavior changes were introduced.
+All refactored components maintain the exact same visual appearance and functionality.
 
 ## Bug Fixes
 
 ### 1. Desktop Hero Logo Issue
-- Fixed an issue where the logo in DesktopHero.tsx wasn't displaying due to an invalid template string in className
-- Replaced dynamic className with hardcoded values to ensure consistent rendering
+-   Fixed logo display in `DesktopHero.tsx` by replacing dynamic `className` with hardcoded values.
 
 ### 2. Mobile Video Error Handling
-- Improved error handling for mobile video playback to handle power-saving mode errors
-- Added visibility state detection to prevent unnecessary error logging
-- Enhanced retry logic to resume playback when the document becomes visible again
+-   Improved error handling for mobile video playback, including power-saving mode errors.
+-   Added visibility state detection to prevent unnecessary error logging.
+-   Enhanced retry logic for playback resumption.
 
 ### 3. Hydration Error Fixes
-- Fixed hydration errors in the GalleryImage component by using a more robust approach:
-  - Replaced useState with useRef for tracking mounted state to avoid re-renders
-  - Used consistent initial HTML for server and client rendering
-  - Added suppressHydrationWarning to prevent React warnings
-  - Applied opacity changes via inline styles only after hydration
-- Fixed hydration errors in the DesktopGallery component using the same approach
-- Added suppressHydrationWarning to the LocationSection image to prevent hydration errors
-- Removed dynamic styles that were causing hydration mismatches
-- Fixed a runtime error by adding missing useRef import
-- Fixed Next.js image aspect ratio warning while maintaining original logo size by using explicit width/height props with height: 'auto' style
+-   Fixed hydration errors in `GalleryImage` and `DesktopGallery` components using a robust approach (e.g., `useRef` for mounted state, consistent initial HTML, `suppressHydrationWarning`).
+-   Added `suppressHydrationWarning` to `LocationSection` image.
+-   Removed dynamic styles causing hydration mismatches.
+-   Fixed missing `useRef` import.
+-   Fixed Next.js image aspect ratio warning by using explicit `width`/`height` props with `height: 'auto'`.
 
 ### 4. Quandoo Reservation Widget Fix
-- Fixed console errors related to OneTrust cookie banner in the Quandoo reservation widget
-- Added proper sandbox permissions to the iframe to allow scripts to run
-- Added loading="lazy" attribute to improve performance
+-   Fixed console errors related to OneTrust cookie banner in the Quandoo reservation widget.
+-   Added proper sandbox permissions to the iframe.
+-   Added `loading="lazy"` attribute for performance.
 
 ## Next Steps
 

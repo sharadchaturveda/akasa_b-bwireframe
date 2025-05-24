@@ -168,23 +168,21 @@ Examples:
 
 ## Adding New Images
 
-1. Place the image in the appropriate directory based on its purpose
-2. Follow the naming conventions outlined above
-3. Optimize the image for web use (compress, resize)
-4. Update the code to reference the new image
+1.  Place the image in the appropriate directory.
+2.  Follow the naming conventions.
+3.  Optimize the image for web use (compress, resize).
+4.  Update code to reference the new image.
 
 ## Image Optimization
 
 All images should be optimized for web use:
 
-1. Resize images to the appropriate dimensions
-2. Compress images to reduce file size
-3. Use the appropriate format (JPG for photographs, PNG for images with transparency)
-4. Use the Next.js Image component for automatic optimization
+1.  Resize to appropriate dimensions.
+2.  Compress to reduce file size.
+3.  Use appropriate format (JPG for photographs, PNG for transparency).
+4.  Use the Next.js `Image` component for automatic optimization.
 
 ```jsx
-import Image from "next/image";
-
 <Image
   src="/images/menu/a-la-carte/items/butter-chicken.jpg"
   alt="Butter Chicken"

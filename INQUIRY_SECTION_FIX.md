@@ -14,55 +14,23 @@ The inquiry section was not appearing on the Events page after implementing the 
 
 To fix the issue, we simplified the approach by:
 
-1. **Removing Dynamic Imports**: Changed from dynamic imports to direct imports to ensure components are always available
+1. **Removing Dynamic Imports**: Changed from dynamic imports to direct imports to ensure components are always available.
    ```javascript
-   // Before
-   const InquiryFormSection = dynamic(() => import("@/components/events/InquiryFormSection"), {
-     loading: () => <div className="h-[50vh] bg-black"></div>,
-     ssr: false
-   });
-   
-   // After
    import InquiryFormSection from "@/components/events/InquiryFormSection";
    ```
 
-2. **Removing Intersection Observer Logic**: Eliminated the intersection observer implementation that was conditionally rendering components
+2. **Removing Intersection Observer Logic**: Eliminated the intersection observer implementation that was conditionally rendering components.
    ```javascript
-   // Before
-   useEffect(() => {
-     if (!testimonialsRef.current || !inquiryFormRef.current) return;
-     
-     const observerOptions = {
-       root: null,
-       rootMargin: '100px',
-       threshold: 0.1
-     };
-     
-     // Observer setup and logic...
-   }, []);
-   
-   // After
    // No intersection observer logic
    ```
 
-3. **Simplifying Component Rendering**: Directly rendered the components without conditional logic
+3. **Simplifying Component Rendering**: Directly rendered the components without conditional logic.
    ```javascript
-   // Before
-   <div ref={inquiryFormRef}>
-     {inquiryFormVisible && <InquiryFormSection />}
-   </div>
-   
-   // After
    <InquiryFormSection />
    ```
 
-4. **Removing State Variables**: Eliminated the state variables used to track component visibility
+4. **Removing State Variables**: Eliminated the state variables used to track component visibility.
    ```javascript
-   // Before
-   const [testimonialsVisible, setTestimonialsVisible] = useState(false);
-   const [inquiryFormVisible, setInquiryFormVisible] = useState(false);
-   
-   // After
    // No visibility state variables
    ```
 

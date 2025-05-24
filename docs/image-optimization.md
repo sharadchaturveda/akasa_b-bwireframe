@@ -4,65 +4,27 @@ This document explains the image optimization strategy used in the Akasa website
 
 ## Overview
 
-The website uses Next.js built-in image optimization to automatically serve images in the most efficient format based on browser support. The priority order is:
-
-1. AVIF (best compression, smaller file sizes)
-2. WebP (good compression, wide support)
-3. Original format (JPEG/PNG as fallback)
+The website leverages Next.js built-in image optimization to automatically serve images in the most efficient format (AVIF, WebP, or original fallback).
 
 ## Implementation
 
 ### Next.js Configuration
 
-The `next.config.js` file is configured to prioritize AVIF format:
-
-```js
-images: {
-  formats: ['image/avif', 'image/webp'],
-  deviceSizes: [320, 420, 640, 768, 1024, 1280, 1536, 1920, 2048, 3840],
-  imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 512, 1024, 2048],
-  dangerouslyAllowSVG: true,
-  contentDispositionType: 'attachment',
-  minimumCacheTTL: 60,
-},
-```
+`next.config.js` prioritizes AVIF and WebP formats, and defines `deviceSizes` and `imageSizes` for responsive image generation.
 
 ### Optimization Utilities
 
-The `src/utils/imageOptimization.ts` file provides utilities for optimizing images:
-
-```typescript
-// Get optimized image props for Next.js Image component
-export function getOptimizedImageProps({
-  src,
-  quality = 75,
-  priority = false,
-}) {
-  return {
-    src,
-    quality,
-    priority,
-    unoptimized: false,
-  };
-}
-```
+`src/utils/imageOptimization.ts` provides utilities like `getOptimizedImageProps` for generating props for the Next.js `Image` component.
 
 ### OptimizedImage Component
 
-The `src/components/ui/OptimizedImage.tsx` component is a wrapper around Next.js Image component that:
-
-- Uses Next.js built-in image optimization for AVIF format
-- Shows a placeholder while the image is loading
-- Handles loading state and errors
-- Optimizes image loading based on priority
+`src/components/ui/OptimizedImage.tsx` wraps the Next.js `Image` component, handling AVIF optimization, placeholders, loading states, errors, and priority-based loading.
 
 ## Usage
 
 ### Basic Usage
 
 ```tsx
-import OptimizedImage from '@/components/ui/OptimizedImage';
-
 <OptimizedImage
   src="/images/home/hero/hero-home.jpg"
   alt="Hero background"
@@ -88,48 +50,31 @@ import OptimizedImage from '@/components/ui/OptimizedImage';
 
 ## Best Practices
 
-1. **Use the OptimizedImage component** for all images to ensure consistent optimization.
-
-2. **Set appropriate width and height** to prevent layout shifts.
-
-3. **Use the `sizes` attribute** for responsive images:
-
-   ```tsx
-   <OptimizedImage
-     src="/images/example.jpg"
-     alt="Example"
-     width={1200}
-     height={800}
-     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-   />
-   ```
-
-4. **Set `priority={true}` or `isCritical={true}`** for above-the-fold images.
-
-5. **Use appropriate quality settings**:
-   - `quality={75}` for most images (default)
-   - `quality={85}` for high-quality images where detail is important
-   - `quality={60}` for background images where quality is less critical
+1.  **Use `OptimizedImage`**: Ensure consistent optimization.
+2.  **Set `width` and `height`**: Prevent layout shifts.
+3.  **Use `sizes` attribute**: For responsive images.
+4.  **Set `priority={true}` or `isCritical={true}`**: For above-the-fold images.
+5.  **Use appropriate quality settings**: `quality={75}` (default), `quality={85}` (high-quality), `quality={60}` (background).
 
 ## Performance Benefits
 
-- **Smaller file sizes**: AVIF typically reduces file size by 50% compared to JPEG.
-- **Better quality**: AVIF provides better quality at the same file size.
-- **Automatic format selection**: The browser gets the best format it supports.
-- **Lazy loading**: Images are loaded only when they enter the viewport.
-- **Prevents layout shifts**: By setting width and height attributes.
+-   **Smaller file sizes**: AVIF reduces file size significantly.
+-   **Better quality**: AVIF offers improved quality at smaller sizes.
+-   **Automatic format selection**: Browser receives the most efficient supported format.
+-   **Lazy loading**: Images load only when in viewport.
+-   **Prevents layout shifts**: Achieved by setting `width` and `height`.
 
 ## Browser Support
 
-- **AVIF**: Chrome 85+, Firefox 93+, Edge 92+
-- **WebP**: All modern browsers
-- **JPEG/PNG**: All browsers (fallback)
+-   **AVIF**: Chrome 85+, Firefox 93+, Edge 92+.
+-   **WebP**: All modern browsers.
+-   **JPEG/PNG**: All browsers (fallback).
 
 ## Troubleshooting
 
 If images are not loading or performance is slow:
 
-1. Check that the image path is correct
-2. Verify that the width and height are set correctly
-3. For critical images, set `priority={true}`
-4. For background images in CSS, consider using the `getAvifPath` utility
+1.  Verify correct image path.
+2.  Ensure `width` and `height` are set correctly.
+3.  For critical images, set `priority={true}`.
+4.  For CSS background images, consider `getAvifPath` utility.
