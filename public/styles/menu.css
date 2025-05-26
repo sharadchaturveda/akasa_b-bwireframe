@@ -32,10 +32,6 @@
 }
 
 
-}
-
-
-}
 
 /* Menu card */
 .menu-card {
@@ -133,4 +129,11 @@ html, body {
     margin-right: 0;
     width: 100%;
   }
+}
+
+/* Styles for Daily Sides table container to allow horizontal and vertical scrolling on mobile */
+.table-container {
+  overflow-x: auto; /* Allow horizontal scrolling if content overflows */
+  overflow-y: auto; /* Allow vertical scrolling within the table container */
+  -webkit-overflow-scrolling: touch; /* Improve scrolling performance on touch devices */
 }

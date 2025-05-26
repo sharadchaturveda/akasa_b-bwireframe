@@ -90,10 +90,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   }
 
   return (
-    <main className="container mx-auto px-4 py-12 md:px-8 lg:px-16">
-      <Link href="/blog" className="inline-flex items-center text-[#E6C78B] hover:underline mb-8 transition-colors duration-200">
-        &larr; Back to Blog
-      </Link>
+    <main className="container mx-auto px-4 pt-24 pb-12 md:px-8 lg:px-16">
       <article className="max-w-4xl mx-auto bg-neutral-900 p-6 md:p-10 rounded-lg shadow-xl border border-neutral-800 animate-fadeSlideUp">
         {post.mainImage && (
           <div className="relative w-full h-64 md:h-96 mb-8 rounded-lg overflow-hidden shadow-lg">
@@ -113,6 +110,15 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         <hr className="border-neutral-700 mb-8" />
         <div className="prose prose-invert max-w-none">
           <PortableText value={post.body} components={components} />
+        </div>
+        {/* Back to Blog Button - Placed at the bottom */}
+        <div className="mt-8 text-center">
+          <Link href="/blog" className="inline-flex items-center px-6 py-3 text-white bg-neutral-800 rounded-full hover:bg-neutral-700 transition-colors duration-200 shadow-md text-lg font-semibold">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Blog
+          </Link>
         </div>
       </article>
     </main>

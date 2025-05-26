@@ -127,6 +127,15 @@ The website uses Next.js App Router for routing and consists of the following ma
 4. **Bar Bites** (`src/app/menu/bar-bites/page.tsx`)
 5. **3 Course Set Lunch** (`src/app/menu/set-lunch/page.tsx`)
 
+### Other Pages
+
+1. **Blog Pages** (`src/app/blog/page.tsx` and `src/app/blog/[slug]/page.tsx`)
+   - Displays blog posts fetched from the CMS.
+   - Includes an index page and individual post pages.
+
+2. **Sanity Studio** (`src/app/studio/[[...tool]]/page.tsx`)
+   - Interface for managing content via the Sanity CMS.
+
 ## Components and UI Design
 
 ### Mobile-First Design Strategy

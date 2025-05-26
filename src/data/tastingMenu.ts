@@ -59,19 +59,19 @@ export const tastingMenu: Menu = {
         {
           "name": "Steamed Sea Bass Bhapa Style",
           "price": "",
-          "description": "Sea Bass | Yellow Mustard | Onion | Coconut | Green Chilli",
+          "description": "Sea Bass or Yellow Mustard or Onion or Coconut or Green Chilli",
           "vegetarian": false
         },
         {
           "name": "Mutton Chaap Masala with Garlic Naan",
           "price": "",
-          "description": "Australian Mutton Chop | Yoghurt | Signature Spices",
+          "description": "Australian Mutton Chop or Yoghurt or Signature Spices",
           "vegetarian": false
         },
         {
           "name": "Cottage Cheese Dumpling with Mustard Greens",
           "price": "",
-          "description": "Cottage Cheese | Organic Greens | Garlic | Cumin | Onion",
+          "description": "Cottage Cheese or Organic Greens or Garlic or Cumin or Onion",
           "vegetarian": true
         }
       ]

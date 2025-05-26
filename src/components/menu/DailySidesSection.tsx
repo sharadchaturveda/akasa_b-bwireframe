@@ -26,7 +26,7 @@ const DailySidesSection = memo(function DailySidesSection({ includedSides }: Dai
       </div>
 
       {/* Daily menu table */}
-      <div className="overflow-x-auto table-container">
+      <div className="table-container">
         <table className="w-full border-collapse">
           <thead>
             <tr className="border-b border-[#E6C78B]/30">

@@ -17,21 +17,15 @@ export { metadata, viewport } from 'next-sanity/studio'
 export default function StudioPage() {
   return (
     <>
+      {/* Inject CSS to hide floating action buttons specifically in Sanity Studio */}
       <style dangerouslySetInnerHTML={{ __html: `
-        /* Custom styles for Sanity Studio - Directly injected */
-
         /* Hide the WhatsApp button */
         .fixed.left-4.md\\:left-6.z-50.transition-all.duration-300 {
           display: none !important;
         }
 
-        /* Hide the Book Now button (assuming similar class structure but with 'right') */
+        /* Hide the Book Now button */
         .fixed.right-4.md\\:right-6.z-50.transition-all.duration-300 {
-          display: none !important;
-        }
-
-        /* Fallback for any other floating buttons */
-        .fixed[class*="bottom-"][class*="z-50"] {
           display: none !important;
         }
       `}} />

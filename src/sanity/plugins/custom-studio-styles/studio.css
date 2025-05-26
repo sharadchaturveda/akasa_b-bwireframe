@@ -1,5 +1,17 @@
 /* Custom styles for Sanity Studio */
 
+
+
+/* Hide the WhatsApp button */
+.fixed.left-4.md\:left-6.z-50.transition-all.duration-300 {
+  display: none !important;
+}
+
+/* Hide the Book Now button (assuming similar class structure but with 'right') */
+.fixed.right-4.md\:right-6.z-50.transition-all.duration-300 {
+  display: none !important;
+}
+
 /* Hide the WhatsApp button */
 .fixed.left-4.md\:left-6.z-50.transition-all.duration-300 {
   display: none !important;

@@ -32,9 +32,14 @@ const nextConfig = {
         hostname: 'localhost',
         port: '3000',
         pathname: '/**',
-      },
-    ],
-    unoptimized: false, // Enable Next.js image optimization
+       },
+       {
+         protocol: 'https',
+         hostname: 'cdn.sanity.io',
+         pathname: '/**',
+       },
+     ],
+     unoptimized: false, // Enable Next.js image optimization
   },
   // Enable CSS optimization for better performance
   experimental: {
