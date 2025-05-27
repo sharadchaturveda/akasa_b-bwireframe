@@ -1,0 +1,11 @@
+{
+  "regions": ["sin1"],
+  "functions": {
+    "api/**.js": {
+      "regions": ["sin1"]
+    },
+    "pages/blog/**.js": {
+      "regions": ["sin1"]
+    }
+  }
+}
