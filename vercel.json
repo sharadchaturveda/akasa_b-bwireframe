@@ -4,7 +4,6 @@
     "api/**.js": {
     },
     "pages/blog/**.js": {
-      "regions": ["sin1"]
     }
   }
 }
