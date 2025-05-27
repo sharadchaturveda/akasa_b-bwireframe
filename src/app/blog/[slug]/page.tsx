@@ -1,11 +1,13 @@
-import { sanityClient } from '@/utils/sanityClient';
+import { client } from '@/sanity/lib/client';
 import { PortableText } from '@portabletext/react';
 import imageUrlBuilder from '@sanity/image-url';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { generateMetadata as generateSEOMetadata } from '@/utils/seo';
+import { Metadata } from 'next';
 
-const builder = imageUrlBuilder(sanityClient);
+const builder = imageUrlBuilder(client);
 
 function urlFor(source: any) {
   return builder.image(source);
@@ -65,7 +67,7 @@ const components = {
 
 export async function generateStaticParams() {
   const query = `*[_type == "post"]{"slug": slug.current}`;
-  const posts = await sanityClient.fetch(query);
+  const posts = await client.fetch(query);
   return posts.map((post: any) => ({
     slug: post.slug,
   }));
@@ -73,22 +75,45 @@ export async function generateStaticParams() {
 
 export const revalidate = 60; // Cache page for 60 seconds (ISR)
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const { slug } = await params;
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const { slug } = params;
+
   const query = `*[_type == "post" && slug.current == $slug][0]{
     title,
-    "slug": slug.current,
+    description,
+    mainImage
+  }`;
+  const post = await client.fetch(query, { slug });
+
+  if (!post) {
+    return {
+      title: 'Post not found',
+      description: 'This blog post could not be found.',
+    };
+  }
+
+  return generateSEOMetadata({
+    title: post.title,
+    description: post.description || '',
+    ogImagePath: post.mainImage ? urlFor(post.mainImage).url() : undefined,
+    path: `/blog/${slug}`,
+  });
+}
+
+export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+  const { slug } = params;
+  const query = `*[_type == "post" && slug.current == $slug][0]{
+    title,
+    slug,
     publishedAt,
     mainImage,
     body,
-    author->{name, image}
+    author
   }`;
-  const post = await sanityClient.fetch(query, { slug });
+  const post = await client.fetch(query, { slug });
 
-  if (!post) {
-    notFound();
-  }
-
+  if (!post) notFound();
+  
   return (
     <main className="container mx-auto px-4 pt-24 pb-12 md:px-8 lg:px-16">
       <article className="max-w-4xl mx-auto bg-neutral-900 p-6 md:p-10 rounded-lg shadow-xl border border-neutral-800 animate-fadeSlideUp">
