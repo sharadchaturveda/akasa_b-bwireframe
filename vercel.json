@@ -2,8 +2,10 @@
   "regions": ["sin1"],
   "functions": {
     "api/**.js": {
+      "runtime": "nodejs18.x"
     },
     "pages/blog/**.js": {
+      "runtime": "nodejs18.x"
     }
   }
 }
