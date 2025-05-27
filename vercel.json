@@ -2,10 +2,10 @@
   "regions": ["sin1"],
   "functions": {
     "api/**.js": {
-      "runtime": "nodejs18.x"
+      "runtime": "@vercel/node@4.0.0"
     },
     "pages/blog/**.js": {
-      "runtime": "nodejs18.x"
+      "runtime": "@vercel/node@4.0.0"
     }
   }
 }
