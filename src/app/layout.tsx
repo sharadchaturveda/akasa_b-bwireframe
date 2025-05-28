@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Analytics from '@/components/Analytics';
 // Import essential CSS files
 import "./globals.css";
 // Import consolidated performance CSS
@@ -86,6 +87,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Google Site Verification */}
+        <meta name="google-site-verification" content="con9e04JeylhS4iXu1ZBZVUJPohnV9cRTrc0oyBkask" />
+
         {/* Safari-specific viewport fix */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
@@ -142,7 +146,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="/styles/desktop-hero-fix.css" />
       </head>
       <body
-        className="antialiased font-system relative" // Added relative
+        className="antialiased font-system relative"
         style={{
           WebkitFontSmoothing: 'antialiased',
           MozOsxFontSmoothing: 'grayscale',
@@ -158,6 +162,7 @@ export default function RootLayout({
 
         {/* This div will contain the main content and have a semi-transparent background */}
         <div className="relative z-10 min-h-screen">
+          <Analytics />
           {/* Facebook Pixel - Global tracking */}
           <FacebookPixel />
 

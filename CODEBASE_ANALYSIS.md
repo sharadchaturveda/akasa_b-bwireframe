@@ -1,101 +1,60 @@
-# Codebase Overview
+# Codebase Analysis
 
-## 1. Project Overview
+This project is a website for a restaurant called Akasa, built with Next.js and Sanity. It uses Tailwind CSS for styling and includes various components and sections to display information about the restaurant, its menu, events, and location. The website also includes performance optimizations and SEO enhancements.
 
-*   **Technology Stack:**
-    *   Next.js (React Framework)
-    *   React (UI Library)
-    *   TypeScript (Static Typing)
-    *   Tailwind CSS (Utility-first CSS Framework)
-*   **Purpose:**
-    *   The project is the official website for Akasa Restaurant, an Indian fine-dining establishment.
-    *   It provides information about the restaurant, showcases menus, handles inquiries, and highlights events.
+## Key Technologies
 
-## 2. Project Structure
+- **Next.js:** A React framework for building web applications.
+- **Sanity:** A headless CMS for managing content.
+- **Tailwind CSS:** A utility-first CSS framework.
+- **React:** A JavaScript library for building user interfaces.
 
-*   **Key Directories:**
-    *   `src/app`: Main application logic, Next.js App Router, and page components.
-    *   `src/components`: Reusable UI components, organized by `common` (general-purpose), `layout` (page structure), and `ui` (feature-specific).
-    *   `src/data`: Static data (menus, testimonials, events).
-    *   `src/hooks`: Custom React hooks for reusable logic.
-    *   `src/lib`: Utility functions and helper modules.
-    *   `src/styles`: Global styles and Tailwind CSS base configuration.
-    *   `public`: Static assets (images, fonts, favicons).
-    *   `emails`: Email templates (e.g., inquiry confirmations).
-*   **Routing Strategy:**
-    *   Uses Next.js App Router, with routes defined by the directory structure in `src/app`.
-    *   Dynamic routes use bracket notation (e.g., `src/app/blog/[slug]/page.tsx`).
-*   **Key Configuration Files:**
-    *   `next.config.js`: Configures Next.js behavior, including:
-        *   `eslint.ignoreDuringBuilds`: `true` for production builds (ESLint errors won't fail the build).
-        *   `typescript.ignoreBuildErrors`: `true` for production builds (TypeScript errors won't fail the build).
-        *   `images`: Extensive configuration for image optimization (formats, sizes, remote patterns).
-        *   `experimental.optimizeCss`: Enabled for CSS performance.
-        *   `compiler.removeConsole`: Removes `console.*` calls in production (excluding `error` and `warn`).
-        *   `webpack` customizations: Rules for image handling and chunk splitting optimization.
-        *   **Redirect Rule:** Includes a redirect for `/blog/:slug*` to `https://blog.akasa.sg/blog/:slug*`.
-    *   `tailwind.config.js`: Configures Tailwind CSS, including:
-        *   `content`: Specifies files to scan for utility classes.
-        *   `theme.extend`: Customizes the default Tailwind theme with project-specific design tokens.
-    *   `tsconfig.json`: Configures TypeScript compiler options, including:
-        *   `target`: "es5".
-        *   `strict`: `true`.
-        *   `moduleResolution`: "bundler".
-        *   `plugins`: Includes `@ianvs/prettier-plugin-sort-imports`.
-        *   `paths`: Defines path aliases (e.g., `@/*` maps to `src/*`).
-    *   `.eslintrc.json`: Configures ESLint for code linting and style checking, including:
-        *   Extends recommended ESLint and Next.js Core Web Vitals configurations.
-        *   Includes TypeScript ESLint parser and plugins.
-        *   Configures specific rules (e.g., `@typescript-eslint/no-explicit-any` is "warn").
+## Project Structure
 
-## 3. Components
+The project is structured as follows:
 
-*   **Organization:** Components are organized into:
-    *   `src/components/common`: Generic, reusable UI elements (e.g., `Button`, `Modal`).
-    *   `src/components/layout`: Overall page structure components (e.g., `Header`, `Footer`).
-    *   `src/components/ui`: Feature-specific UI elements (e.g., `MenuContent`, `HeroSection`).
-*   **Key Components:**
-    *   `src/app/layout.tsx`: Root layout, sets up HTML structure and global styles.
-    *   `src/components/layout/PageLayout.tsx`: Wrapper for consistent page layout.
-    *   `src/components/layout/Header.tsx`: Main navigation bar.
-    *   `src/components/layout/Footer.tsx`: Site footer.
-    *   `src/components/ui/HeroSection.tsx`: Prominent hero image/video with call to action.
-    *   `src/components/common/Button.tsx`: General-purpose button.
-    *   `src/components/ui/Menu/MenuCard.tsx`: Displays individual menu items.
-    *   `src/app/(routes)/inquire/components/InquiryForm.tsx`: Handles inquiry form submissions.
+- `package.json`: Contains the project's dependencies and scripts.
+- `next.config.js` or `next.config.ts`: Configures the Next.js application.
+- `sanity.config.ts`: Configures the Sanity Studio.
+- `src/app/page.tsx`: Defines the main page of the website.
+- `src/components/`: Contains the React components used in the website.
+- `src/styles/`: Contains the CSS styles for the website.
+- `public/`: Contains static assets such as images and fonts.
 
-## 4. Data Handling
+## Key Components
 
-*   **Static Data:** Stored in TypeScript files within `src/data` (e.g., `src/data/menu.ts`). Imported directly into components.
-*   **Dynamic Data (Inquiry Form):**
-    *   The inquiry form (`src/app/(routes)/inquire/components/InquiryForm.tsx`) collects user data.
-    *   Data is sent to a Next.js API route (`src/app/api/inquire/route.ts`).
-    *   The API route processes data and uses `resend` to send email notifications.
-    *   Email templates are in `emails` and rendered using React Email.
+The main page of the website (`src/app/page.tsx`) includes the following components:
 
-## 5. Performance Optimization
+- `Navigation`: The navigation bar.
+- `Footer`: The footer.
+- `NewResponsiveHero`: The hero section.
+- `BrandPhilosophy`: The brand philosophy section.
+- `SpicesSection`: The spices section.
+- `GallerySection`: The gallery section.
+- `WhatsHappeningSection`: The "What's Happening" section.
+- `TestimonialsSection`: The testimonials section.
+- `LocationSection`: The location section.
+- `RestaurantStructuredData`: For SEO.
 
-*   **Next.js Built-in Optimizations:**
-    *   Automatic Code Splitting.
-    *   Image Optimization using `next/image` (WebP, AVIF formats).
-    *   Support for SSG/SSR/ISR.
-    *   Caching mechanisms.
-    *   Route Prefetching with `next/link`.
-    *   Optimized CSS (`experimental.optimizeCss`).
-*   **Custom Performance Techniques:**
-    *   Lazy Loading with `next/dynamic`.
-    *   Client-Side Monitoring with Sentry.
-    *   Webpack Optimizations for chunk splitting.
+## Performance Optimizations
 
-## 6. Testing and Quality Assurance
+The website includes various performance optimizations, such as:
 
-*   **Testing Frameworks:** Jest and React Testing Library.
-*   **Types of Tests:** Unit, Component, Integration, and Accessibility (using `jest-axe`).
-*   **Linting:** ESLint (configured in `.eslintrc.json`) for code style and quality, integrates with Prettier.
-*   **Type Checking:** TypeScript (configured in `tsconfig.json`) for static type checking.
+- Scroll performance optimizations using `applyScrollPerformanceOptimizations` in `src/utils/optimizedScrollUtils.ts`.
+- Lazy loading of images using the `Lazy` component in `src/components/performance/Lazy.tsx`.
+- Image optimization using the `MobileImageOptimizer` component in `src/components/performance/MobileImageOptimizer.tsx`.
+- Code splitting and prefetching using Next.js features.
 
-## 7. Potential Areas of Concern/Improvement
+## SEO Enhancements
 
-*   **Ignoring Errors in Production Builds:** `eslint.ignoreDuringBuilds` and `typescript.ignoreBuildErrors` are `true` in `next.config.js` for production. This can lead to deploying code with underlying issues. Recommendation: Enforce error-free builds or establish a rigorous review process for ignored errors.
-*   **`@typescript-eslint/no-explicit-any` Rule:** Set to `"warn"` in `.eslintrc.json`. Overuse of `any` reduces type safety. Recommendation: Prefer specific types or `unknown`; consider changing to `"error"` in the future.
-*   **Webpack Cache Disabled in Development:** `config.cache = false` in `next.config.js` for development. This can slow down development build times. Recommendation: Investigate the root cause of "corruption" to re-enable caching if possible.
+The website includes SEO enhancements, such as:
+
+- Structured data for the restaurant using the `RestaurantStructuredData` component.
+- Metadata for each page using the `metadata` object in the `src/app` directory.
+- Optimized images using the `optimizedImageLoader` in `src/utils/optimizedImageLoader.ts`.
+
+## Sanity CMS
+
+The website uses Sanity as a headless CMS to manage content. The Sanity Studio is configured in `sanity.config.ts` and the schema types are defined in `src/sanity/schemaTypes`. The `structure` is defined in `src/sanity/structure.ts`.
+
+This analysis provides a good overview of the codebase and can be used as a starting point for further exploration and development.
