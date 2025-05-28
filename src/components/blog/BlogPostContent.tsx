@@ -1,17 +1,22 @@
 "use client";
 
-import { client } from '@/sanity/lib/client';
 import { PortableText } from '@portabletext/react';
-import imageUrlBuilder from '@sanity/image-url';
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { urlFor } from '@/sanity/lib/image';
 
-const builder = imageUrlBuilder(client);
+interface Post {
+  title: string;
+  description: string;
+  slug: string;
+  publishedAt: string;
+  mainImage: any;
+  body: any;
+  author: any;
+}
 
-function urlFor(source: any) {
-  return builder?.image(source);
+interface BlogPostContentProps {
+  post: Post;
 }
 
 const components = {
@@ -25,8 +30,7 @@ const components = {
           <Image
             src={urlFor(value).url()}
             alt={value.alt || 'Blog Post Image'}
-            layout="fill"
-            objectFit="cover"
+            fill
             className="object-cover"
           />
         </div>
@@ -66,49 +70,7 @@ const components = {
   },
 };
 
-interface BlogPostContentProps {
-  slug: string;
-}
-
-interface Post {
-  title: string;
-  description: string;
-  slug: string;
-  publishedAt: string;
-  mainImage: any;
-  body: any;
-  author: any;
-}
-
-export default function BlogPostContent({ slug }: BlogPostContentProps) {
-  const [post, setPost] = useState<Post | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function getPost() {
-      const query = `*[_type == "post" && slug.current == $slug][0]{
-        title,
-        description,
-        slug,
-        publishedAt,
-        mainImage,
-        body,
-        author
-      }`;
-      const postData = await client.fetch(query, { slug });
-      setPost(postData);
-      setLoading(false);
-    }
-
-    getPost();
-  }, [slug]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!post) notFound();
-  
+export default function BlogPostContent({ post }: BlogPostContentProps) {
   return (
     <article className="max-w-4xl mx-auto bg-neutral-900 p-6 md:p-10 rounded-lg shadow-xl border border-neutral-800 animate-fadeSlideUp">
       {post.mainImage && (
@@ -116,8 +78,7 @@ export default function BlogPostContent({ slug }: BlogPostContentProps) {
           <Image
             src={urlFor(post.mainImage).url()}
             alt={post.title}
-            layout="fill"
-            objectFit="cover"
+            fill
             className="object-cover"
           />
         </div>
