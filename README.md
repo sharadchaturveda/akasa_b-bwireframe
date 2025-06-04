@@ -7,6 +7,9 @@ A modern, performance-optimized website for Akasa, a fine dining Indian restaura
 - [Project Overview](#project-overview)
 - [Tech Stack](#tech-stack)
 - [Directory Structure](#directory-structure)
+- [Sanity CMS Integration](#sanity-cms-integration)
+- [Image Optimization Strategy](#image-optimization-strategy)
+- [Overall Performance Optimization Strategy](#overall-performance-optimization-strategy)
 - [Routing and Pages](#routing-and-pages)
 - [Components and UI Design](#components-and-ui-design)
 - [State & Logic](#state--logic)
@@ -31,12 +34,12 @@ This project is the official website for Akasa, a fine dining Indian restaurant 
 
 ## Tech Stack
 
-- **Next.js 15.3.0**: React framework for server-rendered applications
-- **React 19.0.0**: JavaScript library for building user interfaces
-- **TypeScript**: Typed superset of JavaScript for enhanced code quality
-- **Tailwind CSS**: Utility-first CSS framework for responsive styling
-- **Jest**: Testing framework for unit and integration tests
-- **ESLint**: Code linting tool for maintaining code quality
+- **Next.js ^15.3.0**: React framework for server-rendered applications
+- **React ^19.1.0**: JavaScript library for building user interfaces
+- **TypeScript 5.8.3**: Typed superset of JavaScript for enhanced code quality
+- **Tailwind CSS ^4**: Utility-first CSS framework for responsive styling
+- **Jest ^29.7.0**: Testing framework for unit and integration tests
+- **ESLint ^9**: Code linting tool for maintaining code quality
 - **Vercel**: Deployment platform optimized for Next.js applications
 - **GitHub**: Version control and collaboration platform
 
@@ -46,41 +49,72 @@ This project is the official website for Akasa, a fine dining Indian restaurant 
 akasa_b-bwireframe/
 ├── public/                 # Static assets
 │   ├── images/             # Image assets organized by page and section
+│   │   ├── blog/           # Images for blog posts and hero sections
 │   │   ├── brand/          # Brand assets like logos
-│   │   ├── home/           # Homepage-specific images
+│   │   ├── chef/           # Images related to the chef section
+│   │   ├── common/         # Common images used across multiple pages (e.g., footer background)
+│   │   ├── events/         # Images for events, including backgrounds and listings
+│   │   ├── home/           # Homepage-specific images, including gallery, hero carousels, and mobile videos
 │   │   ├── menu/           # Menu page images
-│   │   ├── events/         # Events page images
-│   │   └── offers/         # Offers page images
-│   ├── mobile.css          # Mobile-specific CSS (dynamically loaded)
-│   └── styles/             # Page-specific CSS
-├── docs/                   # Documentation files
-│   ├── image-optimization.md # Image optimization guide
-│   └── mobile-optimization.md # Mobile optimization guide
+│   │   ├── offers/         # Images for promotions and loyalty programs
+│   │   ├── reservations/   # Images for the reservations page
+│   │   ├── seo/            # Images related to SEO (e.g., social share images)
+│   │   ├── testimonials/   # Images for testimonials (avatars, backgrounds)
+│   │   └── unused/         # Unused or deprecated image assets
+│   ├── scripts/            # Client-side JavaScript for performance and fixes
+│   └── *.css               # Various global and page-specific CSS files
+├── docs/                   # Project documentation
+│   ├── mobile-optimization.md # Mobile optimization guide
+│   ├── seo-implementation.md # SEO implementation guide
+│   ├── sanity-cms-integration.md # Sanity CMS Integration and Data Flow
+│   └── image-optimization-strategy.md # Comprehensive image optimization strategy
 ├── src/                    # Source code
-│   ├── app/                # Next.js App Router pages
+│   ├── app/                # Next.js App Router pages and API routes
 │   │   ├── page.tsx        # Home page
+│   │   ├── blog/           # Blog pages and individual post pages
 │   │   ├── events/         # Events page
 │   │   ├── offers/         # Offers page
 │   │   ├── reservations/   # Reservations page
-│   │   └── menu/           # Menu pages and subpages
-│   ├── components/         # React components
+│   │   ├── studio/         # Sanity Studio CMS interface
+│   │   └── menu/           # Menu pages and subpages (e.g., a-la-carte, drinks)
+│   ├── components/         # React components organized by feature or type
+│   │   ├── blog/           # Blog-related components
+│   │   ├── brand/          # Brand-specific components (e.g., Logo)
 │   │   ├── events/         # Event page components
+│   │   ├── examples/       # Example components for documentation
 │   │   ├── home/           # Homepage components
-│   │   ├── layout/         # Layout components
+│   │   ├── layout/         # Layout components (e.g., Container, Section)
 │   │   ├── menu/           # Menu page components
 │   │   ├── mobile/         # Mobile-specific components
 │   │   ├── navigation/     # Navigation components
 │   │   ├── pages/          # Page-specific client components
 │   │   ├── performance/    # Performance optimization components
 │   │   ├── reservations/   # Reservation page components
-│   │   └── ui/             # Reusable UI components
-│   ├── data/               # Static data files
+│   │   ├── seo/            # SEO-related components
+│   │   ├── templates/      # Component templates
+│   │   ├── tracking/       # Analytics and tracking components
+│   │   └── ui/             # Reusable UI components (e.g., Button, Card)
+│   ├── constants/          # Application-wide constants
+│   ├── data/               # Static data files (e.g., menu data, testimonials)
+│   ├── emails/             # Email templates
 │   ├── hooks/              # Custom React hooks
-│   ├── styles/             # Global styles
+│   ├── lib/                # Utility functions and helpers
+│   ├── sanity/             # Sanity CMS configuration and schema definitions
+│   ├── styles/             # Global styles and module CSS
 │   ├── types/              # TypeScript type definitions
 │   ├── utils/              # Utility functions
 │   └── __tests__/          # Test files
-├── next.config.js          # Next.js configuration
+├── .eslintrc.json          # ESLint configuration
+├── eslint.config.mjs       # ESLint flat configuration
+├── jest.config.js          # Jest test runner configuration
+├── jest.setup.js           # Jest setup file
+├── next.config.js          # Main Next.js configuration (active)
+├── next.config.ts          # Alternative Next.js configuration (not active by default)
+├── package.json            # Project dependencies and scripts
+├── package-lock.json       # Exact dependency versions
+├── postcss.config.mjs      # PostCSS configuration
+├── sanity.cli.ts           # Sanity CLI configuration
+├── sanity.config.ts        # Sanity Studio configuration
 ├── tailwind.config.js      # Tailwind CSS configuration
 └── tsconfig.json           # TypeScript configuration
 ```
@@ -126,6 +160,8 @@ The website uses Next.js App Router for routing and consists of the following ma
 3. **Drinks** (`src/app/menu/drinks/page.tsx`)
 4. **Bar Bites** (`src/app/menu/bar-bites/page.tsx`)
 5. **3 Course Set Lunch** (`src/app/menu/set-lunch/page.tsx`)
+6. **Tasting Menu** (`src/app/menu/tasting-menu/page.tsx`)
+7. **Vegan Menu** (`src/app/menu/vegan/page.tsx`)
 
 ### Other Pages
 
@@ -135,6 +171,18 @@ The website uses Next.js App Router for routing and consists of the following ma
 
 2. **Sanity Studio** (`src/app/studio/[[...tool]]/page.tsx`)
    - Interface for managing content via the Sanity CMS.
+
+3. **Error Page** (`src/app/error.tsx`)
+   - Custom error page for handling unexpected errors.
+
+4. **Loading Page** (`src/app/loading.tsx`)
+   - Custom loading UI for pages.
+
+5. **Not Found Page** (`src/app/not-found.tsx`)
+   - Custom 404 page for handling unfound routes.
+
+6. **Example Documented Page** (`src/app/examples/DocumentedPage.tsx`)
+   - An example page demonstrating documentation practices.
 
 ## Components and UI Design
 
@@ -189,12 +237,39 @@ Mobile-specific CSS is dynamically loaded based on device detection, ensuring th
 
 ### Performance Optimizations
 
-- CSS is minimized, and critical CSS is inlined for faster loading.
-- Unused CSS is purged during the build process.
-- Mobile-specific CSS loads dynamically only on mobile devices.
-- Responsive images reduce bandwidth usage.
-- WebM format is used for video files to optimize performance.
-- Video elements include fallback images for reliability.
+The project is heavily optimized for performance, focusing on fast loading times and a smooth user experience. Key optimizations include:
+
+- **Image Optimization**:
+    - Next.js Image Optimization is enabled, with `image/avif` and `image/webp` formats prioritized for better compression.
+    - `deviceSizes` and `imageSizes` are configured to serve responsive images across various screen resolutions (from 320px to 4K).
+    - Remote patterns are configured for image loading from Vercel, localhost, and Sanity CDN.
+- **CSS Optimization**:
+    - CSS is minimized, and critical CSS is inlined for faster loading.
+    - Unused CSS is purged during the build process.
+    - Mobile-specific CSS loads dynamically only on mobile devices.
+- **Code Splitting and Bundling (Webpack)**:
+    - Webpack is configured for aggressive code splitting, creating separate chunks for framework, libraries, pages, and components to improve caching and reduce initial load times.
+    - Console logs (except errors and warnings) are removed in production builds to reduce bundle size.
+- **Build Process Enhancements**:
+    - ESLint and TypeScript errors are ignored during production builds (`process.env.VERCEL` or `process.env.NODE_ENV === 'production'`) to prevent build failures in deployment environments.
+    - Webpack cache is disabled in development to prevent corruption.
+- **Video Optimization**:
+    - WebM format is used for video files to optimize performance.
+    - Video elements include fallback images for reliability.
+- **Core Web Vitals**:
+    - Optimizations are in place for Largest Contentful Paint (LCP) and Cumulative Layout Shift (CLS).
+
+## Image Optimization Strategy
+
+For a detailed understanding of the project's image optimization techniques, including Next.js Image component usage, configuration, and custom utilities, please refer to the dedicated documentation:
+
+- [Image Optimization Strategy](docs/image-optimization-strategy.md)
+
+## Overall Performance Optimization Strategy
+
+For a detailed understanding of the project's comprehensive performance optimization techniques, including build-time, client-side, and monitoring strategies, please refer to the dedicated documentation:
+
+- [Overall Performance Optimization Strategy](docs/overall-performance-strategy.md)
 
 ## Deployment
 
@@ -253,22 +328,26 @@ npm test
 ```
 
 
+## Sanity CMS Integration
+
+For a detailed understanding of the Sanity CMS setup, data modeling, and data flow within the application, please refer to the dedicated documentation:
+
+- [Sanity CMS Integration and Data Flow](docs/sanity-cms-integration.md)
+
 ## Future Work / Known Issues
 
 ### Current Limitations
 
-1. **Static Data**: The website currently uses static data files instead of fetching data from an API.
-2. **Limited Form Validation**: The reservation and inquiry forms have basic validation but could be enhanced.
-3. **No Authentication**: There is no user authentication or admin panel for content management.
-4. **No Internationalization**: The website is currently only available in English.
+1. **Limited Form Validation**: The reservation and inquiry forms have basic validation but could be enhanced.
+2. **No Authentication**: There is no user authentication or admin panel for content management.
+3. **No Internationalization**: The website is currently only available in English.
 
 ### Future Improvements
 
-1. **API Integration**: Implement server-side data fetching for menus and events.
+1. **API Integration**: Implement server-side data fetching for menus and events (currently Sanity CMS is used for blog posts).
 2. **Form Validation and Submission**: Enhance form validation and implement form submission handling.
 3. **Accessibility Enhancements**: Improve accessibility for screen readers and keyboard navigation.
 4. **Internationalization**: Add support for multiple languages.
 5. **Analytics Integration**: Implement analytics tracking.
-6. **Content Management System**: Add a CMS for content management.
-7. **Performance Optimization**: Further optimize performance for faster loading times.
-8. **Enhanced Mobile Experience**: Further improve the mobile experience.
+6. **Performance Optimization**: Further optimize performance for faster loading times.
+7. **Enhanced Mobile Experience**: Further improve the mobile experience.
