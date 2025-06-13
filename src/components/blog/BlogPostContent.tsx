@@ -4,27 +4,35 @@ import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { urlFor } from '@/sanity/lib/image';
+import { BlogFAQ } from './BlogFAQ';
+import { BlogPost } from '@/app/blog/[slug]/page';
 
-interface Post {
-  title: string;
-  description: string;
-  slug: string;
-  publishedAt: string;
-  mainImage: any;
-  body: any;
-  author: any;
-}
+// export interface Post {
+//   title: string;
+//   description: string;
+//   slug: string;
+//   publishedAt: string;
+//   mainImage: any;
+//   body: any;
+//   author: any;
+//   faqSection?: {
+//     faqTitle: string;
+//     faqItems: {
+//       _key?: string;
+//       question: string;
+//       answer: string;
+//     }[];
+//   }[];
+// }
 
 interface BlogPostContentProps {
-  post: Post;
+  post: BlogPost;
 }
 
 const components = {
   types: {
     image: ({ value }: any) => {
-      if (!value.asset) {
-        return null;
-      }
+      if (!value.asset) return null;
       return (
         <div className="relative w-full h-64 md:h-96 my-6 rounded-lg overflow-hidden shadow-lg">
           <Image
@@ -62,7 +70,12 @@ const components = {
     link: ({ value, children }: any) => {
       const target = (value?.href || '').startsWith('http') ? '_blank' : undefined;
       return (
-        <a href={value?.href} target={target} rel={target === '_blank' ? 'noindex nofollow' : undefined} className="text-[#E6C78B] hover:underline transition-colors duration-200">
+        <a
+          href={value?.href}
+          target={target}
+          rel={target === '_blank' ? 'noindex nofollow' : undefined}
+          className="text-[#E6C78B] hover:underline transition-colors duration-200"
+        >
           {children}
         </a>
       );
@@ -72,7 +85,7 @@ const components = {
 
 export default function BlogPostContent({ post }: BlogPostContentProps) {
   return (
-    <article className="max-w-4xl mx-auto bg-neutral-900 p-6 md:p-10 rounded-lg shadow-xl border border-neutral-800 animate-fadeSlideUp">
+    <article className="max-w-8xl mx-auto bg-neutral-900 p-6 md:p-10 rounded-lg shadow-xl border border-neutral-800 animate-fadeSlideUp">
       {post.mainImage && (
         <div className="relative w-full h-64 md:h-96 mb-8 rounded-lg overflow-hidden shadow-lg">
           <Image
@@ -83,23 +96,59 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
           />
         </div>
       )}
+
       <h1 className="text-4xl md:text-5xl font-playfair text-white mb-4 leading-tight">{post.title}</h1>
-      <p className="text-white/60 font-montserrat text-base md:text-lg mb-6">
-        Published on {new Date(post.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-      </p>
+
+      <div className="flex flex-col md:flex-row md:items-center justify-between md:gap-6 mb-6 text-white/60 font-montserrat">
+        {post.author && (
+          <div className="flex items-center gap-4 mt-4 md:mt-0">
+            <Image
+              src={urlFor(post.author.image).width(64).height(64).url()}
+              alt={post.author.name}
+              width={64}
+              height={64}
+              className="rounded-full border border-white/10"
+            />
+            <div className="text-white/80">
+              <p className="text-base md:text-lg">{post.author.name}</p>
+              <p className="text-sm text-white/50">Author</p>
+            </div>
+          </div>
+        )}
+        <p className="text-base md:text-lg">
+          Published on{" "}
+          {new Date(post._createdAt).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </p>
+
+
+      </div>
+
+
+
       <hr className="border-neutral-700 mb-8" />
+
       <div className="prose prose-invert max-w-none">
         <PortableText value={post.body} components={components} />
       </div>
-      {/* Back to Blog Button - Placed at the bottom */}
+
+      {post.faqSection && <BlogFAQ faqSections={post.faqSection} />}
+
+      {/* Back to Blog Button */}
       <div className="mt-8 text-center">
-        <Link href="/blog" className="inline-flex items-center px-6 py-3 text-white bg-neutral-800 rounded-full hover:bg-neutral-700 transition-colors duration-200 shadow-md text-lg font-semibold">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to Blog
-          </Link>
-        </div>
-      </article>
+        <Link
+          href="/blog"
+          className="inline-flex items-center px-6 py-3 text-white bg-neutral-800 rounded-full hover:bg-neutral-700 transition-colors duration-200 shadow-md text-lg font-semibold"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Blog
+        </Link>
+      </div>
+    </article>
   );
 }

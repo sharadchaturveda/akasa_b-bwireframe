@@ -1,124 +1,21 @@
-import {DocumentTextIcon} from '@sanity/icons'
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import { DocumentTextIcon } from '@sanity/icons'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const postType = defineType({
   name: 'post',
   title: 'Post',
   type: 'document',
   icon: DocumentTextIcon,
-  fields: [
-    defineField({
-      name: 'title',
-      type: 'string',
-    }),
-    defineField({
-      name: 'slug',
-      type: 'slug',
-      options: {
-        source: 'title',
-      },
-    }),
-    defineField({
-      name: 'description',
-      title: 'Meta Description',
-      type: 'text',
-      description: 'Short SEO-friendly description of the blog post',
-      validation: (Rule) => Rule.max(160),
-    }),
-    defineField({
-      name: 'author',
-      type: 'reference',
-      to: {type: 'author'},
-    }),
-    defineField({
-      name: 'mainImage',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-      fields: [
-        defineField({
-          name: 'alt',
-          type: 'string',
-          title: 'Alternative text',
-        })
-      ]
-    }),
-    defineField({
-      name: 'categories',
-      type: 'array',
-      of: [defineArrayMember({type: 'reference', to: {type: 'category'}})],
-    }),
-    defineField({
-      name: 'publishedAt',
-      type: 'datetime',
-    }),
-    defineField({
-      name: 'body',
-      type: 'blockContent',
-    }),
-    defineField({
-      name: 'metaRobots',
-      title: 'Meta Robots',
-      type: 'string',
-      description: 'e.g., "max-snippet:-1, max-image-preview:large, max-video-preview:-1"',
-      fieldset: 'seoMetadata',
-    }),
-    defineField({
-      name: 'canonicalUrl',
-      title: 'Canonical URL',
-      type: 'url',
-      description: 'canonical URL of the blog post',
-      fieldset: 'seoMetadata',
-    }),
-    defineField({
-      name: 'ogTitle',
-      title: 'Open Graph Title',
-      type: 'string',
-      description: 'title for Open Graph previews',
-      fieldset: 'openGraphMetadata',
-    }),
-    defineField({
-      name: 'ogDescription',
-      title: 'Open Graph Description',
-      type: 'text',
-      description: 'description for Open Graph',
-      fieldset: 'openGraphMetadata',
-    }),
-    defineField({
-      name: 'ogType',
-      title: 'Open Graph Type',
-      type: 'string',
-      description: 'og:type property',
-      initialValue: 'website',
-      fieldset: 'openGraphMetadata',
-    }),
-    defineField({
-      name: 'ogImage',
-      title: 'Open Graph Image',
-      type: 'image',
-      description: 'featured image for sharing',
-      options: {
-        hotspot: true,
-      },
-      fields: [
-        defineField({
-          name: 'alt',
-          type: 'string',
-          title: 'Alternative text',
-        })
-      ],
-      fieldset: 'openGraphMetadata',
-    }),
-    defineField({
-      name: 'ogUrl',
-      title: 'Open Graph URL',
-      type: 'url',
-      description: 'full URL of the post',
-      fieldset: 'openGraphMetadata',
-    }),
-  ],
+
   fieldsets: [
+    // {
+    //   name: 'faqSection',
+    //   title: 'FAQ Section',
+    //   options: {
+    //     collapsible: true,
+    //     collapsed: true,
+    //   },
+    // },
     {
       name: 'seoMetadata',
       title: 'SEO Metadata',
@@ -127,24 +24,184 @@ export const postType = defineType({
         collapsed: true,
       },
     },
-    {
-      name: 'openGraphMetadata',
-      title: 'Open Graph Metadata',
-      options: {
-        collapsible: true,
-        collapsed: true,
-      },
-    },
   ],
+
+  fields: [
+    defineField({
+      name: 'title',
+      title: 'Post Title',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: { source: 'title', maxLength: 96 },
+      validation: (Rule) => Rule.required(),
+    }),
+
+    defineField({
+      name: 'description',
+      title: 'Meta Description',
+      type: 'text',
+      description: 'Short SEO-friendly description of the blog post',
+      validation: (Rule) => Rule.max(160),
+    }),
+
+    defineField({
+      name: 'mainImage',
+      title: 'Banner Image',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [
+        {
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          initialValue: 'Banner image',
+        },
+      ],
+    }),
+
+    // defineField({
+    //   name: 'categories',
+    //   type: 'array',
+    //   of: [defineArrayMember({type: 'reference', to: {type: 'category'}})],
+    // }),
+
+    defineField({
+      name: 'body',
+      type: 'blockContent',
+    }),
+
+    defineField({
+      name: 'publishedAt',
+      title: 'Published At',
+      type: 'datetime',
+      description: 'The date and time this post was published',
+      validation: (Rule) => Rule.required(),
+      initialValue: () => new Date().toISOString(), // defaults to current datetime on creation
+    }),
+    
+    // FAQ section with a title and FAQ items
+    // defineField({
+    //   name: 'faqTitle',
+    //   title: 'FAQ Title',
+    //   type: 'string',
+    //   fieldset: 'faqSection',
+    //   validation: (Rule) => Rule.required(),
+    // }),
+    defineField({
+      name: 'faqSection',
+      title: 'FAQ Section',
+      type: 'array',
+      // fieldset: 'faqSection',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          title: 'FAQ Group',
+          fields: [
+            defineField({
+              name: 'faqTitle',
+              title: 'FAQ Title',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'faqItems',
+              title: 'FAQs',
+              type: 'array',
+              of: [
+                defineArrayMember({
+                  type: 'object',
+                  fields: [
+                    defineField({
+                      name: 'question',
+                      title: 'Question',
+                      type: 'string',
+                      validation: (Rule) => Rule.required(),
+                    }),
+                    defineField({
+                      name: 'answer',
+                      title: 'Answer',
+                      type: 'text',
+                      validation: (Rule) => Rule.required(),
+                    }),
+                  ],
+                }),
+              ],
+            }),
+          ],
+        }),
+      ],
+    }),
+
+    // SEO Metadata fields inside collapsible SEO section
+    defineField({
+      name: 'canonicalUrl',
+      title: 'Canonical URL',
+      type: 'url',
+      fieldset: 'seoMetadata',
+    }),
+
+    defineField({
+      name: 'metaRobots',
+      title: 'Meta Robots',
+      type: 'string',
+      description: 'e.g., "max-snippet:-1, max-image-preview:large, max-video-preview:-1"',
+      fieldset: 'seoMetadata',
+    }),
+
+    defineField({
+      name: 'ogTitle',
+      title: 'Open Graph Title',
+      type: 'string',
+      fieldset: 'seoMetadata',
+    }),
+
+    defineField({
+      name: 'ogDescription',
+      title: 'Open Graph Description',
+      type: 'text',
+      fieldset: 'seoMetadata',
+    }),
+
+    defineField({
+      name: 'ogType',
+      title: 'Open Graph Type',
+      type: 'string',
+      initialValue: 'website',
+      fieldset: 'seoMetadata',
+    }),
+
+    defineField({
+      name: 'ogImgUrl',
+      title: 'Open Graph Img URL',
+      type: 'url',
+      fieldset: 'seoMetadata',
+    }),
+
+    defineField({
+      name: 'author',
+      type: 'reference',
+      to: {type: 'author'},
+    }),
+  ],
+
   preview: {
     select: {
       title: 'title',
-      author: 'author.name',
       media: 'mainImage',
+      slug: 'slug.current',
     },
-    prepare(selection) {
-      const {author} = selection
-      return {...selection, subtitle: author && `by ${author}`}
+    prepare({ title, media, slug }) {
+      return {
+        title,
+        media,
+        subtitle: slug ? `/${slug}` : '',
+      }
     },
   },
 })

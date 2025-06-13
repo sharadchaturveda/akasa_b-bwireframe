@@ -55,6 +55,7 @@ export const tastingMenu: Menu = {
     {
       "category_name": "MAIN COURSE",
       "category_notes": ["Served with Chick Pea Flour Bread."],
+      "showOptinal": true,
       "items": [
         {
           "name": "Steamed Sea Bass Bhapa Style",
@@ -156,6 +157,7 @@ export const tastingMenu: Menu = {
     {
       "category_name": "MAIN COURSE (Vegetarian)",
       "category_notes": ["Served with Chick Pea Flour Bread."],
+      "showOptinal": true,
       "items": [
         {
           "name": "Paneer Tikka Masala",
