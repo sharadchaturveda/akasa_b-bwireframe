@@ -1,133 +1,117 @@
 import type { Metadata } from 'next';
 
-/**
- * Interface for page-specific SEO metadata
- */
-export interface PageSEOProps {
-  /**
-   * Page title (without site name)
-   */
-  title: string;
-  
-  /**
-   * Page description
-   */
-  description: string;
-  
-  /**
-   * Page-specific keywords
-   */
+export interface MetadataOptions {
+  title?: string;
+  description?: string;
+  url?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImageUrl?: string;
+  type?: 'website' | 'article';
+  metaRobots?: string;
   keywords?: string;
-  
-  /**
-   * Page path (relative to domain root, e.g., "/menu/a-la-carte")
-   */
-  path?: string;
-  
-  /**
-   * Open Graph image path (relative to domain root, e.g., "/images/menu/og-image.jpg")
-   */
-  ogImagePath?: string;
-  
-  /**
-   * Twitter Card image path (relative to domain root, e.g., "/images/menu/twitter-card.jpg")
-   */
-  twitterImagePath?: string;
-  
-  /**
-   * Whether this is the homepage
-   */
-  isHomePage?: boolean;
+  authors?: { name: string; url?: string }[];
 }
 
-/**
- * Default SEO values
- */
-const DEFAULT_SEO = {
-  siteName: 'Akasa',
-  domain: 'https://akasa.sg',
-  defaultTitle: 'Finest Indian Cuisine in Singapore',
-  defaultDescription: 'Experience the finest Indian cuisine at Akasa. Located at 79 Robinson Road, Singapore. Open Monday to Saturday, 11:30am to 10:30pm.',
-  defaultKeywords: 'Indian cuisine, Singapore restaurant, fine dining, Akasa, Indian food, Robinson Road, authentic Indian, luxury dining',
-  defaultOgImage: '/images/seo/og-image.jpg',
-  defaultTwitterImage: '/images/seo/twitter-card.jpg',
-};
 
-/**
- * Generate metadata for a page
- * 
- * @param props - Page-specific SEO properties
- * @returns Metadata object for Next.js
- */
+
+
 export function generateMetadata({
   title,
   description,
-  keywords,
-  path = '',
-  ogImagePath,
-  twitterImagePath,
-  isHomePage = false,
-}: PageSEOProps): Metadata {
-  // Full title with or without site name
-  const fullTitle = isHomePage 
-    ? `${DEFAULT_SEO.siteName} | ${DEFAULT_SEO.defaultTitle}`
-    : `${title} – ${DEFAULT_SEO.siteName}`;
-  
-  // Full URL for canonical and OG
-  const url = `${DEFAULT_SEO.domain}${path}`;
-  
-  // OG image URL
-  const ogImageUrl = ogImagePath 
-    ? `${DEFAULT_SEO.domain}${ogImagePath}` 
-    : `${DEFAULT_SEO.domain}${DEFAULT_SEO.defaultOgImage}`;
-  
-  // Twitter image URL
-  const twitterImageUrl = twitterImagePath 
-    ? `${DEFAULT_SEO.domain}${twitterImagePath}` 
-    : `${DEFAULT_SEO.domain}${DEFAULT_SEO.defaultTwitterImage}`;
-  
-  // Combined keywords
-  const combinedKeywords = keywords 
-    ? `${keywords}, ${DEFAULT_SEO.defaultKeywords}`
-    : DEFAULT_SEO.defaultKeywords;
-  
+  url,
+  ogTitle,
+  ogDescription,
+  ogImageUrl,
+  type = 'website',
+  metaRobots = 'index, follow',
+  keywords = "Indian cuisine, Singapore restaurant, fine dining, Akasa, Indian food, Robinson Road, authentic Indian, luxury dining",
+  authors = [
+    { name: "Akasa", url: "https://akasa.sg" },                   // example second author
+  ],
+}: MetadataOptions): Metadata {
+  // Default metadata fallbacks
+  const fallback = {
+    title: "Akasa | Finest Indian Cuisine in Singapore",
+    description:
+      "Experience the finest Indian cuisine at Akasa. Located at 79 Robinson Road, Singapore. Open Monday to Saturday, 11:30am to 10:30am.",
+    url: "https://akasa.sg",
+    image: "https://akasa.sg/images/seo/og-image.jpg",
+    twitterImage: "https://akasa.sg/images/seo/twitter-card.jpg",
+  };
+
+  const formattedTitle = title ? `${title} - Akasa` : fallback.title;
+  const formattedOGTitle = ogTitle ? `${ogTitle} - Akasa` : fallback.title;
+  const formattedDescription = description ?? fallback.description;
+  const formattedOGDescription = ogDescription ?? fallback.description;
+  const finalUrl = url?.startsWith('https') ? url : fallback.url;
+  const finalImage = ogImageUrl?.startsWith('https') ? ogImageUrl : fallback.image;
+
+  // Robots directive handling
+  const robotsObject = {
+    index: /INDEX/i.test(metaRobots),
+    follow: /FOLLOW/i.test(metaRobots),
+    nocache: /NO-CACHE/i.test(metaRobots),
+    noarchive: /NOARCHIVE/i.test(metaRobots),
+    notranslate: /NOTRANSLATE/i.test(metaRobots),
+    nosnippet: /NOSNIPPET/i.test(metaRobots),
+    noimageindex: /NOIMAGEINDEX/i.test(metaRobots),
+  };
+  const extraDirectives = metaRobots
+    .split(',')
+    .map((v) => v.trim())
+    .filter((v) => v.includes(':'))
+    .join(', ');
+  const robotsMetaString = [
+    ...Object.entries(robotsObject)
+      .filter(([, value]) => value)
+      .map(([key]) => key.toLowerCase()),
+    ...(extraDirectives ? [extraDirectives] : []),
+  ].join(', ');
+
   return {
-    title: fullTitle,
-    description: description,
-    keywords: combinedKeywords,
-    authors: [{ name: DEFAULT_SEO.siteName }],
-    
-    // Open Graph metadata
+    title: formattedTitle,
+    description: formattedDescription,
+    alternates: { canonical: finalUrl },
+    robots: robotsMetaString,
+    keywords: keywords,
+    authors: authors,
+
     openGraph: {
-      title: fullTitle,
-      description: description,
-      url: url,
-      siteName: DEFAULT_SEO.siteName,
+      title: formattedOGTitle,
+      description: formattedOGDescription,
+      url: finalUrl,
+      siteName: 'Akasa',
       locale: 'en_SG',
-      type: isHomePage ? 'website' : 'article',
+      type,
       images: [
         {
-          url: ogImageUrl,
+          url: finalImage,
           width: 1200,
           height: 630,
-          alt: `${title} - ${DEFAULT_SEO.siteName}`,
+          alt: formattedTitle,
+        },
+        {
+          url: "https://akasa.sg/images/home/hero/carousel/hero1.jpg",
+          width: 1200,
+          height: 630,
+          alt: formattedTitle,
         },
       ],
     },
-    
-    // Twitter Card metadata
+
     twitter: {
       card: 'summary_large_image',
-      title: fullTitle,
-      description: description,
-      images: [twitterImageUrl],
+      title: formattedOGTitle,
+      description: formattedOGDescription,
+      images: [
+        ogImageUrl ?? fallback.twitterImage,
+        "https://akasa.sg/images/home/hero/carousel/hero1.jpg",
+      ],
       creator: '@akasa_singapore',
       site: '@akasa_singapore',
     },
-    
-    // Canonical URL
-    alternates: {
-      canonical: url,
-    },
   };
 }
+
+

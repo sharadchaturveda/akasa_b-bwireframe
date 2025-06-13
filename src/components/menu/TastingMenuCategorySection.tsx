@@ -12,6 +12,8 @@ interface TastingMenuCategorySectionProps {
 
 const TastingMenuCategorySection = memo(function TastingMenuCategorySection({ category, isVegan }: TastingMenuCategorySectionProps) {
   // Check if the category has only one item or no items
+  const totalItmes = category.items.length
+  const showOptinal = category.showOptinal && category.showOptinal
   const hasSingleItem = category.items.length === 1;
   const hasNoItems = category.items.length === 0;
 
@@ -37,7 +39,9 @@ const TastingMenuCategorySection = memo(function TastingMenuCategorySection({ ca
             <TastingMenuItemCard
               key={`${category.category_name}-${index}`}
               item={item}
+              totalItems={totalItmes}
               isSingleItem={hasSingleItem}
+              showOptional = {showOptinal}
             />
           ))}
         </div>

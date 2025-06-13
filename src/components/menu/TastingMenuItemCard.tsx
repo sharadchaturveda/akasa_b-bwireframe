@@ -7,15 +7,23 @@ interface TastingMenuItemCardProps {
   item: MenuItem;
   isVegan?: boolean;
   isSingleItem?: boolean;
+  totalItems: number
+  showOptional?: boolean;
 }
 
-const TastingMenuItemCard = memo(function TastingMenuItemCard({ item, isVegan, isSingleItem }: TastingMenuItemCardProps) {
+const TastingMenuItemCard = memo(function TastingMenuItemCard({ item, isVegan, isSingleItem, totalItems, showOptional =false}: TastingMenuItemCardProps) {
   // Use either vegetarian or is_vegetarian property
   const isVegetarian = item.vegetarian !== undefined ? item.vegetarian :
-                       item.is_vegetarian !== undefined ? item.is_vegetarian : true;
-                       
+    item.is_vegetarian !== undefined ? item.is_vegetarian : true;
+
+
   return (
     <div className={`group relative ${isSingleItem ? 'max-w-md mx-auto' : ''}`}>
+      {showOptional && (
+        <div className="absolute top-2 right-2 bg-[#E6C78B]/20 text-[#E6C78B] px-2 py-1 rounded text-xs font-medium z-10">
+          Choose one of {totalItems}
+        </div>
+      )}
       {/* Card background with subtle glow effect */}
       <div className="absolute -inset-0.5 bg-gradient-to-r from-[#E6C78B]/0 via-[#E6C78B]/30 to-[#E6C78B]/0 rounded-lg blur opacity-0 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
 
@@ -24,7 +32,7 @@ const TastingMenuItemCard = memo(function TastingMenuItemCard({ item, isVegan, i
           {/* Decorative corner accent */}
           <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-          <div className="flex justify-between items-start mb-3">
+          <div className="flex justify-between items-start mb-3 mt-4">
             <div className="flex items-center">
               {/* Vegetarian/Non-vegetarian indicator */}
               <span className="mr-2 text-lg">

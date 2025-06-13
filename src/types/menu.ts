@@ -24,6 +24,7 @@ export interface MenuCategory {
   category_name: string;
   category_notes?: string[];
   pourNote?: string;
+  showOptinal?: boolean;
   items: MenuItem[];
 }
 
