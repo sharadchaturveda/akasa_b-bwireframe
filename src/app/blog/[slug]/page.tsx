@@ -26,16 +26,16 @@ export interface SanityImageAsset {
 export interface Author {
   name: string;
   image: SanityImageSource;
-  url:string
+  url: string
 }
 
 export interface FAQ {
   faqTitle: string;
-      faqItems: {
-        _key?: string;
-        question: string;
-        answer: string;
-      }[];
+  faqItems: {
+    _key?: string;
+    question: string;
+    answer: string;
+  }[];
 }
 
 export interface BlogPost {
@@ -53,7 +53,7 @@ export interface BlogPost {
   ogTitle?: string;
   ogDescription?: string;
   ogImgUrl?: string;
-  ogType?: 'article' | 'website' ;
+  ogType?: 'article' | 'website';
 }
 
 interface BlogPostPageProps {
@@ -105,7 +105,7 @@ async function getPost<T = BlogPost>(slug: string, query: string): Promise<T | n
 // ----------------------------------
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-  const {slug: newslug} = await params
+  const { slug: newslug } = await params;
   const post = await getPost<BlogPost>(newslug, seoPostQuery);
   if (!post) notFound();
 
@@ -118,44 +118,63 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     ogType,
     ogImgUrl,
     metaRobots,
-    mainImage,
     slug,
+    mainImage,
   } = post;
+
+  const ogImageUrl = ogImgUrl || (mainImage?.asset ? urlFor(mainImage).url() : undefined);
 
   return buildMetadata({
     title: ogTitle || title,
     description: ogDescription || description,
-    url: canonicalUrl || `/blog/${slug.current}`,
-    ogImageUrl: ogImgUrl || urlFor(post.mainImage).url(),
+    url: canonicalUrl || (slug?.current ? `/blog/${slug.current}` : ''),
+    ogImageUrl,
     type: ogType || 'article',
     metaRobots: metaRobots || 'INDEX, FOLLOW',
   });
 }
+
 
 // ----------------------------------
 // Page Component
 // ----------------------------------
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const {slug} = await params
+  const { slug } = await params
   const post = await getPost<BlogPost>(slug, fullPostQuery);
 
   if (!post) notFound();
 
-  const schemaData = generateSchema({
-    type:'BlogPosting',
+  const schemaData: any = {
+    type: 'BlogPosting',
     title: post.title,
     description: post.description,
-    url:post.canonicalUrl || `https://akasa.sg/blog/${post.slug.current}`,
-    image: urlFor(post.mainImage).url(),
-    blogbody : portableTextToPlainText(post.body),
-    author: {name: post.author.name, url: urlFor(post.author.image).url()},
+    url: post.canonicalUrl || (post.slug?.current && `https://akasa.sg/blog/${post.slug.current}`),
+    blogbody: post.body && portableTextToPlainText(post.body),
     _createdAt: post._createdAt,
     _updatedAt: post._updatedAt,
-    faqs: post.faqSection?.[0].faqItems
-  });
+  };
 
-  console.log(JSON.stringify(schemaData))
+  // Only include image if available
+  if (post.mainImage?.asset) {
+    schemaData.image = urlFor(post.mainImage).url();
+  }
+
+  // Only include author if name is available
+  if (post.author?.name) {
+    schemaData.author = {
+      name: post.author.name,
+      ...(post.author.image?.asset && {
+        url: urlFor(post.author.image).url()
+      }),
+    };
+  }
+
+  // Only include FAQs if present
+  if (post.faqSection?.[0]?.faqItems?.length) {
+    schemaData.faqs = post.faqSection[0].faqItems;
+  }
+
 
   return (
     <>

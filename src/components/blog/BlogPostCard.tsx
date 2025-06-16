@@ -21,16 +21,19 @@ interface BlogPostCardProps {
 }
 
 export default function BlogPostCard({ post }: BlogPostCardProps) {
+  const imageUrl = post?.mainImage?.asset ? urlFor(post.mainImage)?.url() : null;
+
   return (
     <Link href={`/blog/${post.slug.current}`} className="group relative block h-full animate-fadeIn">
       {/* Card background with subtle glow effect */}
       <div className="absolute -inset-0.5 bg-gradient-to-r from-[#E6C78B]/0 via-[#E6C78B]/30 to-[#E6C78B]/0 rounded-lg blur opacity-0 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
 
       <div className="relative bg-black/80 backdrop-blur-sm border border-white/5 rounded-lg overflow-hidden flex flex-col md:flex-row h-full transition-all duration-500 group-hover:shadow-[0_0_25px_rgba(230,199,139,0.2)]">
-        {post.mainImage && (
+        {imageUrl && (
           <div className="relative w-full md:w-1/2 lg:w-2/5 h-64 md:h-auto flex-shrink-0">
+
             <Image
-              src={urlFor(post.mainImage).url()}
+              src={urlFor(post.mainImage)?.url()}
               alt={post.title}
               layout="fill"
               objectFit="cover"
@@ -38,6 +41,7 @@ export default function BlogPostCard({ post }: BlogPostCardProps) {
             />
           </div>
         )}
+
         <div className="p-6 relative flex flex-col flex-grow md:w-1/2 lg:w-3/5">
           {/* Decorative corner accent */}
           <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-[#E6C78B]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>

@@ -84,9 +84,11 @@ const components = {
 };
 
 export default function BlogPostContent({ post }: BlogPostContentProps) {
+  const imageUrl = post?.mainImage?.asset ? urlFor(post.mainImage)?.url() : null;
+  const authorImageUrl = post?.author?.image?.asset ? urlFor(post.mainImage)?.url() : null;
   return (
     <article className="max-w-8xl mx-auto bg-neutral-900 p-6 md:p-10 rounded-lg shadow-xl border border-neutral-800 animate-fadeSlideUp">
-      {post.mainImage && (
+      {imageUrl && (
         <div className="relative w-full h-64 md:h-96 mb-8 rounded-lg overflow-hidden shadow-lg">
           <Image
             src={urlFor(post.mainImage).url()}
@@ -102,13 +104,13 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
       <div className="flex flex-col md:flex-row md:items-center justify-between md:gap-6 mb-6 text-white/60 font-montserrat">
         {post.author && (
           <div className="flex items-center gap-4 mt-4 md:mt-0">
-            <Image
+            {authorImageUrl && <Image
               src={urlFor(post.author.image).width(64).height(64).url()}
               alt={post.author.name}
               width={64}
               height={64}
               className="rounded-full border border-white/10"
-            />
+            />}
             <div className="text-white/80">
               <p className="text-base md:text-lg">{post.author.name}</p>
               <p className="text-sm text-white/50">Author</p>
