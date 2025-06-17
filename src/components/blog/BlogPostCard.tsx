@@ -10,6 +10,7 @@ function urlFor(source: any) {
 }
 
 interface BlogPostCardProps {
+  isService? :boolean
   post: {
     _id: string;
     title: string;
@@ -20,11 +21,11 @@ interface BlogPostCardProps {
   };
 }
 
-export default function BlogPostCard({ post }: BlogPostCardProps) {
+export default function BlogPostCard({ post, isService =false }: BlogPostCardProps) {
   const imageUrl = post?.mainImage?.asset ? urlFor(post.mainImage)?.url() : null;
 
   return (
-    <Link href={`/blog/${post.slug.current}`} className="group relative block h-full animate-fadeIn">
+    <Link href={`/${isService ? 'service' : 'blog'}/${post.slug.current}`} className="group relative block h-full animate-fadeIn">
       {/* Card background with subtle glow effect */}
       <div className="absolute -inset-0.5 bg-gradient-to-r from-[#E6C78B]/0 via-[#E6C78B]/30 to-[#E6C78B]/0 rounded-lg blur opacity-0 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
 
