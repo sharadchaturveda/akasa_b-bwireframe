@@ -146,7 +146,7 @@ export default async function BlogServicePage({ params }: BlogservicePageProps) 
 
   if (!service) notFound();
 
-  const schemaData: any = {
+  const schemaProps: any = {
     type: 'Blogposting',
     title: service.title,
     description: service.description,
@@ -158,12 +158,12 @@ export default async function BlogServicePage({ params }: BlogservicePageProps) 
 
   // Only include image if available
   if (service.mainImage?.asset) {
-    schemaData.image = urlFor(service.mainImage).url();
+    schemaProps.image = urlFor(service.mainImage).url
   }
 
   // Only include author if name is available
   if (service.author?.name) {
-    schemaData.author = {
+    schemaProps.author = {
       name: service.author.name,
       ...(service.author.image?.asset && {
         url: urlFor(service.author.image).url()
@@ -173,9 +173,10 @@ export default async function BlogServicePage({ params }: BlogservicePageProps) 
 
   // Only include FAQs if present
   if (service.faqSection?.[0]?.faqItems?.length) {
-    schemaData.faqs = service.faqSection[0].faqItems;
+    schemaProps.faqs = service.faqSection[0].faqItems;
   }
 
+  const schemaData = generateSchema(schemaProps)
 
   return (
     <>
