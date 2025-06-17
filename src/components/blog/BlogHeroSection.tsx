@@ -3,7 +3,9 @@
 import { memo, useEffect, useState } from "react";
 import HydrationSafeImage from "@/components/ui/HydrationSafeImage";
 
-const BlogHeroSection = memo(function BlogHeroSection() {
+const BlogHeroSection = memo(function BlogHeroSection({bannerSrc, title, desc} :{
+  bannerSrc:string, title:string, desc:string
+}) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -15,7 +17,7 @@ const BlogHeroSection = memo(function BlogHeroSection() {
       {/* Background image with parallax effect */}
       <div className="absolute inset-0">
         <HydrationSafeImage
-          src="/images/blog/hero/hero.jpg" // Updated to new blog hero directory
+          src={bannerSrc} // Updated to new blog hero directory
           alt="Blog Hero Background"
           fill
           priority
@@ -51,14 +53,14 @@ const BlogHeroSection = memo(function BlogHeroSection() {
             className={`text-4xl md:text-6xl lg:text-7xl font-playfair mb-6 text-white opacity-0 ${isVisible ? 'animate-fadeSlideUp' : ''}`}
             style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}
           >
-            Our Blog
+            {title}
           </h1>
 
           <p
             className={`text-lg md:text-xl font-montserrat text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto opacity-0 ${isVisible ? 'animate-fadeSlideUp' : ''}`}
             style={{ animationDelay: '0.7s', animationFillMode: 'forwards' }}
           >
-            Explore our latest articles, culinary insights, and stories from Akasa.
+            {desc}
           </p>
 
           {/* Decorative separator */}

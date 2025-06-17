@@ -56,6 +56,7 @@ const Footer = memo(function Footer() {
             <Link href="/offers" className="text-white/80 hover:text-[#E6C78B] transition-colors text-xs sm:text-sm font-montserrat py-1 px-2 touch-manipulation">Offers</Link>
             <Link href="/reservations" className="text-white/80 hover:text-[#E6C78B] transition-colors text-xs sm:text-sm font-montserrat py-1 px-2 touch-manipulation">Reservations</Link>
             <Link href="/blog" className="text-white/80 hover:text-[#E6C78B] transition-colors text-xs sm:text-sm font-montserrat py-1 px-2 touch-manipulation">Blogs</Link>
+            <Link href="/service" className="text-white/80 hover:text-[#E6C78B] transition-colors text-xs sm:text-sm font-montserrat py-1 px-2 touch-manipulation">Services</Link>
           </div>
 
           {/* Social icons */}
