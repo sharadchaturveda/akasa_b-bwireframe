@@ -49,12 +49,12 @@ const nextConfig = {
     largePageDataBytes: 128 * 1000,
   },
   // Optimize for code splitting and minimal JS/CSS
-  // compiler: {
-  //   // Remove console logs in production, but keep error and warn logs
-  //   removeConsole: {
-  //     exclude: ['error', 'warn'],
-  //   },
-  // },
+  compiler: {
+    // Remove console logs in production, but keep error and warn logs
+    removeConsole: {
+      exclude: ['error', 'warn'],
+    },
+  },
   // Optimize for Cumulative Layout Shift (CLS)
   poweredByHeader: false,
   // Optimize webpack for code splitting and Web Vitals
