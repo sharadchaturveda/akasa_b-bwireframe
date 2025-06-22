@@ -217,11 +217,11 @@ const ReservationInfo = memo(function ReservationInfo() {
               <h3 className="text-lg sm:text-xl font-playfair text-white mb-2 sm:mb-4">Hours of Operation</h3>
               <div className="space-y-2 text-white/80">
                 <div className="flex flex-col sm:flex-row sm:items-center">
-                  <span className="label-span sm:w-36 font-medium mb-1 sm:mb-0" style={{flexShrink: 0}}>Monday - Saturday:</span>
+                  <span className="label-span sm:w-36 font-medium mb-1 sm:mb-0" style={{flexShrink: 0}}>Sunday - Friday:</span>
                   <span className="text-[#E6C78B]">11:30 AM - 10:30 PM</span>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center">
-                  <span className="label-span sm:w-36 font-medium mb-1 sm:mb-0" style={{flexShrink: 0}}>Sunday:</span>
+                  <span className="label-span sm:w-36 font-medium mb-1 sm:mb-0" style={{flexShrink: 0}}>Saturday:</span>
                   <span className="text-[#E6C78B]">Closed</span>
                 </div>
               </div>

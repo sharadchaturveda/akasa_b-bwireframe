@@ -25,7 +25,7 @@ const BusinessHours = memo(function BusinessHours() {
           <Icon name="clock" size={14} color={COLORS.GOLD} strokeWidth={1.5} />
         </div>
         <div className="text-center">
-          <p className="text-xs font-montserrat text-white drop-shadow-md mb-1">{"Monday to Saturday:"}</p>
+          <p className="text-xs font-montserrat text-white drop-shadow-md mb-1">{"Monday to Sautrady:"}</p>
           <p className="text-xs font-montserrat text-white drop-shadow-md">{"11:30am to 10:30pm"}</p>
         </div>
       </div>
@@ -38,7 +38,7 @@ const BusinessHours = memo(function BusinessHours() {
         <Icon name="clock" size={14} color={COLORS.GOLD} strokeWidth={1.5} className="sm:w-5 sm:h-5" />
       </div>
       <p className="text-xs sm:text-sm lg:text-base font-montserrat text-white drop-shadow-md">
-        {"Monday to Saturday: 11:30am to 10:30pm"}
+        {"Sunday to Friday: 11:30am to 10:30pm"}
       </p>
     </div>
   );

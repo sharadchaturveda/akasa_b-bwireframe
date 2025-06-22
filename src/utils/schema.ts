@@ -10,8 +10,8 @@ export interface FAQ {
   answer: string;
 }
 
-export interface Author{
-  name? :string;
+export interface Author {
+  name?: string;
   img?: string;
   url?: string
 }
@@ -22,7 +22,7 @@ export interface BlogSchemaOptions {
   description: string;
   url: string;
   image: string;
-  blogbody?:string;
+  blogbody?: string;
   datePublished?: string;
   dateModified?: string;
   author?: Author;
@@ -30,13 +30,14 @@ export interface BlogSchemaOptions {
   faqs?: FAQ[];
   includeOrganization?: boolean;
   includeWebPage?: boolean;
+  includeRestaurent?: boolean;
   _createdAt?: string;
   _updatedAt?: string
 }
 
 export const defaultOrganization = {
   name: 'NxtDev',
-  url: 'https://nxtdev.in',
+  url: 'https://akasa.sg',
   logo: 'https://github.com/godspeed-03/Stylesheets/blob/main/public/Images/OgImg.png',
   social: [
     'https://twitter.com/yourtwitter',
@@ -47,11 +48,11 @@ export const defaultOrganization = {
   contactType: 'customer service',
   areaServed: 'IN',
   availableLanguage: 'English',
-  founderName: 'Satyam Anand',
-  founderUrl: 'https://nxtdev.in',
-  author : {
+  founderName: 'N/A',
+  founderUrl: 'https://akasa.sg',
+  author: {
     name: 'Satyam Anand',
-    url:'https://cdn.sanity.io/images/hhvs5stc/production/b886302552bd3e5a465c1d24c540e93cb91c6f31-1024x1024.png'
+    url: 'https://cdn.sanity.io/images/hhvs5stc/production/b886302552bd3e5a465c1d24c540e93cb91c6f31-1024x1024.png'
   }
 };
 
@@ -65,8 +66,9 @@ export function generateSchema({
   author,
   breadcrumbs = [],
   faqs = [],
-  includeOrganization = true,
+  includeOrganization = false,
   includeWebPage = true,
+  includeRestaurent = true,
   _createdAt,
   _updatedAt
 }: BlogSchemaOptions): any[] {
@@ -122,6 +124,50 @@ export function generateSchema({
     });
   }
 
+  if (includeRestaurent) {
+    schemas.push(
+      {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "Akasa",
+        "image": "https://akasa.sg/images/home/hero/carousel/hero1.jpg",
+        "url": "https://akasa.sg",
+        "telephone": "+6580121181",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "79 Robinson Road",
+          "addressLocality": "Singapore",
+          "postalCode": "068897",
+          "addressCountry": "SG"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 1.2789, // Replace with actual coordinates
+          "longitude": 103.8496 // Replace with actual coordinates
+        },
+        "priceRange": "$$$$",
+        "servesCuisine": "Indian",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Sunday"
+            ],
+            "opens": "11:30",
+            "closes": "22:30"
+          }
+        ],
+        "menu": "https://akasa.sg/menu",
+        "acceptsReservations": "True"
+      }
+    )
+  }
+
   // ✅ BlogPosting (or Article)
   if (type === 'BlogPosting') {
     schemas.push({
@@ -131,30 +177,30 @@ export function generateSchema({
       description: description,
       image: Array.isArray(image)
         ? image.map((img) => ({
-            '@type': 'ImageObject',
-            url: img,
-            width: 1200,
-            height: 630,
-          }))
+          '@type': 'ImageObject',
+          url: img,
+          width: 1200,
+          height: 630,
+        }))
         : {
-            '@type': 'ImageObject',
-            url: image,
-            width: 1200,
-            height: 630,
-          },
+          '@type': 'ImageObject',
+          url: image,
+          width: 1200,
+          height: 630,
+        },
       datePublished: _createdAt,
       dateModified: _updatedAt,
       author: Array.isArray(author)
         ? author.map((a) => ({
-            '@type': 'Person',
-            name: a.name,
-            url: a.url,
-          }))
+          '@type': 'Person',
+          name: a.name,
+          url: a.url,
+        }))
         : {
-            '@type': 'Person',
-            name: author?.name || defaultOrganization.author.name,
-            url: author?.url || defaultOrganization.url,
-          },
+          '@type': 'Person',
+          name: author?.name || defaultOrganization.author.name,
+          url: author?.url || defaultOrganization.url,
+        },
       publisher: {
         '@type': 'Organization',
         name: defaultOrganization.name,
@@ -172,10 +218,10 @@ export function generateSchema({
       },
       // keywords: keywords || undefined, // optional
       // genre: genre || 'Blog', // optional
-      articleBody:  blogbody + '..' || undefined // optional (e.g., truncated)
+      articleBody: blogbody + '..' || undefined // optional (e.g., truncated)
     });
   }
-  
+
 
   // ✅ FAQ
   if (faqs.length > 0) {

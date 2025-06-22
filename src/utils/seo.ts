@@ -34,7 +34,7 @@ export function generateMetadata({
   const fallback = {
     title: "Akasa | Finest Indian Cuisine in Singapore",
     description:
-      "Experience the finest Indian cuisine at Akasa. Located at 79 Robinson Road, Singapore. Open Monday to Saturday, 11:30am to 10:30am.",
+      "Experience the finest Indian cuisine at Akasa. Located at 79 Robinson Road, Singapore. Open Sunday to Friday, 11:30am to 10:30am.",
     url: "https://akasa.sg",
     image: "https://akasa.sg/images/seo/og-image.jpg",
     twitterImage: "https://akasa.sg/images/seo/twitter-card.jpg",

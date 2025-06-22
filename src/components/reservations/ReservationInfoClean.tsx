@@ -84,17 +84,17 @@ const ReservationInfo = memo(function ReservationInfo() {
               <div className="dining-info-content-inner">
                 <div className="hours-container space-y-8">
                   <div className="flex flex-col sm:flex-row sm:justify-between">
-                    <div className="dining-info-label font-medium">Monday - Saturday:</div>
+                    <div className="dining-info-label font-medium">Sunday - Friday:</div>
                     <div className="dining-info-text">11:30 AM - 10:30 PM</div>
                   </div>
 
                   <div className="flex flex-col sm:flex-row sm:justify-between">
                     <div className="dining-info-label font-medium">Soulful Weekend:</div>
-                    <div className="dining-info-text">Friday 5:00 PM - Saturday 10:30 PM</div>
+                    <div className="dining-info-text">Friday 5:00 PM - Sunday 10:30 PM (except Saturday)</div>
                   </div>
 
                   <div className="flex flex-col sm:flex-row sm:justify-between">
-                    <div className="dining-info-label font-medium">Sunday:</div>
+                    <div className="dining-info-label font-medium">Saturday:</div>
                     <div className="dining-info-text">Closed</div>
                   </div>
                 </div>
