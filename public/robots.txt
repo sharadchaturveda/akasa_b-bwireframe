@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://akasa.sg
+
+# Sitemaps
+Sitemap: https://akasa.sg/sitemap.xml
+Sitemap: https://akasa.sg/sitemap-pages.xml
+Sitemap: https://akasa.sg/sitemap-product.xml
