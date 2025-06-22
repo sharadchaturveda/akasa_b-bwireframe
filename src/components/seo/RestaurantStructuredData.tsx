@@ -41,7 +41,7 @@ const RestaurantStructuredData = memo(function RestaurantStructuredData() {
           "Wednesday",
           "Thursday",
           "Friday",
-          "Saturday"
+          "Sunday"
         ],
         "opens": "11:30",
         "closes": "22:30"
