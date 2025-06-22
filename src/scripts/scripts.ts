@@ -13,3 +13,13 @@ export async function generateAllSitemaps() {
     await generateRobotsTxt();
 }
 
+
+(async () => {
+  try {
+    await generateAllSitemaps();
+    console.log('✅ All sitemaps generated successfully.');
+  } catch (err) {
+    console.error('❌ Failed to generate sitemaps:', err);
+    process.exit(1);
+  }
+})();
