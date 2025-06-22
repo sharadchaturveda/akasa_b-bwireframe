@@ -158,7 +158,7 @@ export default async function BlogServicePage({ params }: BlogservicePageProps) 
 
   // Only include image if available
   if (service.mainImage?.asset) {
-    schemaProps.image = urlFor(service.mainImage).url();
+    schemaProps.image = urlFor(service.mainImage).url
   }
 
   // Only include author if name is available
