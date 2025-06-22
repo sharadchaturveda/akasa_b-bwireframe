@@ -59,12 +59,6 @@ const nextConfig = {
   poweredByHeader: false,
   // Optimize webpack for code splitting and Web Vitals
   webpack: (config, { isServer, dev }) => {
-      if (isServer) {
-    config.externals = config.externals || [];
-    config.externals.push('@sanity/client');
-  }
-
-  
     // Add a fallback for missing image files
     config.module.rules.push({
       test: /\.(jpg|jpeg|png|gif|svg)$/i,
