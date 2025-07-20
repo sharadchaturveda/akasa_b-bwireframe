@@ -13,6 +13,7 @@ const navItems = [
   { name: 'Menu', href: '/menu' },
   { name: 'Events', href: '/events' },
   { name: 'Offers', href: '/offers' },
+  { name: 'Loyalty Program', href: '/loyalty-program' },
   { name: 'Reservations', href: '/reservations' },
   { name: 'Blogs', href: '/blog' },
   { name: 'Services', href: '/service' },
