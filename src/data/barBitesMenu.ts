@@ -96,12 +96,12 @@ export const barBitesMenu: Menu = {
           "description": "Chicken | Yoghurt | Cashew",
           "is_vegetarian": false
         },
-        {
-          "name": "CHICKEN/VEGETABLE GYOZA",
-          "price": "$18",
-          "description": "With Garlic Tomato Dip",
-          "is_vegetarian": false
-        }
+        // {
+        //   "name": "CHICKEN/VEGETABLE GYOZA",
+        //   "price": "$18",
+        //   "description": "With Garlic Tomato Dip",
+        //   "is_vegetarian": false
+        // }
       ]
     },
     {

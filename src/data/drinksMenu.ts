@@ -33,6 +33,29 @@ export const drinksMenu: Menu = {
       ]
     },
     {
+      "category_name": "COFFEE",
+      "items": [
+        {
+          "name": "ESPRESSO",
+          "description": "",
+          "price": "$3",
+          "is_vegetarian": true
+        },
+        {
+          "name": "AMERICANO / LONG BLACK",
+          "description": "Iced +1",
+          "price": "$5",
+          "is_vegetarian": true
+        },
+        {
+          "name": "CAPPUCCINO / LATTE / FLAT WHITE",
+          "description": "Iced +1",
+          "price": "$6",
+          "is_vegetarian": true
+        }
+      ]
+    },
+    {
       "category_name": "BEER",
       "items": [
         {
@@ -94,9 +117,15 @@ export const drinksMenu: Menu = {
           "price": "$18",
           "is_vegetarian": true
         },
+        // {
+        //   "name": "AKASA LYCHEE-TINI",
+        //   "description": "Bacardi rum | lychee | Lime | Coconut water",
+        //   "price": "$18",
+        //   "is_vegetarian": true
+        // },
         {
-          "name": "AKASA LYCHEE-TINI",
-          "description": "Bacardi rum | lychee | Lime | Coconut water",
+          "name": "BLOODY MARY",
+          "description": "Vodka | Tomato Juice | Lime | Tobasco | Worcestershire Sauce",
           "price": "$18",
           "is_vegetarian": true
         },
@@ -120,41 +149,41 @@ export const drinksMenu: Menu = {
         }
       ]
     },
-    {
-      "category_name": "ALLPRESS ESPRESSO",
-      "items": [
-        {
-          "name": "ESPRESSO",
-          "price": "$3",
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "AMERICANO / LONG BLACK",
-          "price": "$5",
-          "description": null,
-          "is_vegetarian": true,
-          "variants": [
-            {
-              "type": "Iced",
-              "price": "$6"
-            }
-          ]
-        },
-        {
-          "name": "CAPPUCCINO / LATTE / FLAT WHITE",
-          "price": "$6",
-          "description": null,
-          "is_vegetarian": true,
-          "variants": [
-            {
-              "type": "Iced",
-              "price": "$7"
-            }
-          ]
-        }
-      ]
-    },
+    // {
+    //   "category_name": "ALLPRESS ESPRESSO",
+    //   "items": [
+    //     {
+    //       "name": "ESPRESSO",
+    //       "price": "$3",
+    //       "description": null,
+    //       "is_vegetarian": true
+    //     },
+    //     {
+    //       "name": "AMERICANO / LONG BLACK",
+    //       "price": "$5",
+    //       "description": null,
+    //       "is_vegetarian": true,
+    //       "variants": [
+    //         {
+    //           "type": "Iced",
+    //           "price": "$6"
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       "name": "CAPPUCCINO / LATTE / FLAT WHITE",
+    //       "price": "$6",
+    //       "description": null,
+    //       "is_vegetarian": true,
+    //       "variants": [
+    //         {
+    //           "type": "Iced",
+    //           "price": "$7"
+    //         }
+    //       ]
+    //     }
+    //   ]
+    // },
     {
       "category_name": "NON ALCOHOLIC",
       "items": [
@@ -171,10 +200,26 @@ export const drinksMenu: Menu = {
           "is_vegetarian": true
         },
         {
-          "name": "EVIAN STILL / SPARKLING WATER 800 ml",
+          "name": "EVIAN STILL / SPARKLING WATER",
+          "description": "800 ml",
           "price": "$7",
-          "description": null,
           "is_vegetarian": true
+        },
+        {
+          "name": "FRESH JUICE",
+          "description": null,
+          "price": "$10-$12",
+          "is_vegetarian": true,
+          "variants": [
+            {
+              "type": "Beetroot | Carrot | Pineapple | Cucumber ",
+              "price": "$10"
+            },
+            {
+              "type": "Orange | Blend",
+              "price": "$12"
+            }
+          ]
         },
         {
           "name": "LIME - SODA / WATER",
@@ -183,16 +228,16 @@ export const drinksMenu: Menu = {
           "is_vegetarian": true
         },
         {
-          "name": "LASSI - SWEET / SALT",
+          "name": "LASSI",
           "price": "$8",
-          "description": null,
+          "description": "SWEET / SALT / MANGO + 2",
           "is_vegetarian": true,
-          "variants": [
-            {
-              "type": "Mango",
-              "price": "$10"
-            }
-          ]
+          // "variants": [
+          //   {
+          //     "type": "Mango",
+          //     "price": "$10"
+          //   }
+          // ]
         },
         {
           "name": "MOCKTAIL OF THE DAY",
@@ -203,32 +248,179 @@ export const drinksMenu: Menu = {
       ]
     },
     {
-      "category_name": "RED WINE",
+      "category_name": "CHAMPAGNE",
       "items": [
         {
-          "name": "CANTINA TREVIGIANA 2021",
-          "description": "Italy, Veneto, Merlot",
+          "name": "EDOUARD DUVAL BRUT D’EULALIE",
+          "description": null,
           "price": {
-            "glass": "$15",
+            "bottle": "$148"
+          },
+        },
+        {
+          "name": "VEUVE CLICQUOT YELLOW LABEL BRUT CHAMPAGNE",
+          "description": null,
+          "price": {
+            "bottle": "$168"
+          },
+        },
+        
+      ]
+    },
+    {
+      "category_name": "SPARKLING",
+      "pourNote": "Prices by the glass based on our standard pour of 30 ml",
+      "items": [
+        {
+          "name": "TERESA RIZZI PROSECCO DOC",
+          "description": null,
+          "price": {
+            "glass": "$16",
+            "bottle": "$68"
+          },
+        },
+      ]
+    },
+    {
+      "category_name": "WHITE WINE",
+      "pourNote": "Prices by the glass based on our standard pour of 30 ml",
+      "items": [
+        {
+          "name": "LAMBERTI DELLE VENEZIE",
+          "description": "Italy, Pinot Grigio",
+          "price": {
+            "glass": "$16",
+            "bottle": "$58"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "JOURNEY'S END HAYSTACK",
+          "description": "South Africa, Chardonnay",
+          "price": {
+            "glass": "$18",
             "bottle": "$68"
           },
           "is_vegetarian": true
         },
         {
-          "name": "GOLD TREES 2021",
-          "description": "Australia, Cabernet Sauvignon",
+          "name": "ALAIN & ADRIEN GAUTHERIN CHABLIS SIGNATURE",
+          "description": "France, Chardonnay",
+          "price": {
+            "bottle": "$158"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "BODEGA CONTADOR PREDICADOR 2018",
+          "description": "Spain, Rioja, Macabeo",
+          "price": {
+            "bottle": "$128"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "VILLA MARIA RESERVA",
+          "description": "New Zealand, Sauvignon Blanc",
+          "price": {
+            "bottle": "$118"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "FAMILLE PAQUET MACONVILLAGES",
+          "description": "France, Chardonnay",
+          "price": {
+            "bottle": "$118"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "LAURENZ V FORBIDDEN",
+          "description": "Austria, Niederosterreich, Gruner Veltliner",
+          "price": {
+            "bottle": "$98"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "GUILLAUME GONNET \"LE REVEUR\" 2022",
+          "description": "France, Rhone, Viognier / Roussane / Grenache",
+          "price": {
+            "bottle": "$78"
+          },
+          "is_vegetarian": true
+        }
+      ]
+    },
+    {
+      "category_name": "RED WINE",
+      "pourNote": "Prices by the glass based on our standard pour of 30 ml",
+      "items": [
+        {
+          "name": "ZUCCARDI FUZION",
+          "description": "Argentina, Shiraz Malbec",
           "price": {
             "glass": "$16",
+            "bottle": "$68"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "NUNEZ DE GARAY BOBAL",
+          "description": "Spain, Tempralino",
+          "price": {
+            "glass": "$18",
             "bottle": "$78"
           },
           "is_vegetarian": true
         },
         {
-          "name": "SALENTEIN PORTILO 2021",
-          "description": "Argentina, UCO Valley, Malbec",
+          "name": "ERRAZURIZ ESTATE RES",
+          "description": "Chile, Cabernet Sauvignon",
           "price": {
-            "glass": "$16",
+            "glass": "$20",
             "bottle": "$78"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "LE VOLTE DELLORNELLAIA TOSCANA",
+          "description": "Italy, Barbera",
+          "price": {
+            "bottle": "$158"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "BERONIA RESERVA 2018",
+          "description": "Spain, Rioja, Tempranillo",
+          "price": {
+            "bottle": "$128"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "DOMAINE ST PATRICE COTES DU RHONE 2019",
+          "description": "France, Grenache / Syrah / Mourvèdre",
+          "price": {
+            "bottle": "$128"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "CA BIANCA BARBERA D'ASTI DOGC",
+          "description": "Italy, Sangiovese",
+          "price": {
+            "bottle": "$118"
+          },
+          "is_vegetarian": true
+        },
+        {
+          "name": "CONTI SERRISTORI CHIANTI CLASSICO DOCG",
+          "description": "Italy, sangiovese",
+          "price": {
+            "bottle": "$88"
           },
           "is_vegetarian": true
         },
@@ -239,126 +431,31 @@ export const drinksMenu: Menu = {
             "bottle": "$78"
           },
           "is_vegetarian": true
-        },
-        {
-          "name": "BERONIA RESERVA 2018",
-          "description": "Spain, Rioja, Tempranillo",
-          "price": {
-            "bottle": "$88"
-          },
-          "is_vegetarian": true
-        },
-        {
-          "name": "DOMAINE ST PATRICE COTES DU RHONE 2019",
-          "description": "France, Grenache / Syrah / Mourvèdre",
-          "price": {
-            "bottle": "$118"
-          },
-          "is_vegetarian": true
-        },
-        {
-          "name": "ALTANZA GRAN RESERVA 2011",
-          "description": "Spain, Rioja, Tempranillo",
-          "price": {
-            "bottle": "$128"
-          },
-          "is_vegetarian": true
-        },
-        {
-          "name": "LA CROIX BONIS 2015",
-          "description": "France, Saint-Estephe, Petit Verdot",
-          "price": {
-            "bottle": "$128"
-          },
-          "is_vegetarian": true
-        },
-        {
-          "name": "CHATEAU GIGOGNAN CHATEAUNEUF DU PAPE 2017",
-          "description": "France, Grenache / Syrah / Mourvèdre",
-          "price": {
-            "bottle": "$148"
-          },
-          "is_vegetarian": true
         }
       ]
     },
-    {
-      "category_name": "SPARKLING WINE",
-      "items": [
-        {
-          "name": "TERESA RIZZI PROSECCO DOC",
-          "price": {
-            "glass": "$14",
-            "bottle": "$62"
-          },
-          "description": null,
-          "is_vegetarian": true
-        },
-        {
-          "name": "VEUVE CLICQUOT YELLOW LABEL BRUT CHAMPAGNE",
-          "price": {
-            "bottle": "$168"
-          },
-          "description": null,
-          "is_vegetarian": true
-        }
-      ]
-    },
-    {
-      "category_name": "WHITE WINE",
-      "items": [
-        {
-          "name": "CANTINA DELLE VENEZIE 2021",
-          "description": "Italy, Veneto, Pinot Grigio",
-          "price": {
-            "glass": "$14",
-            "bottle": "$58"
-          },
-          "is_vegetarian": true
-        },
-        {
-          "name": "GOLD TREES 2022",
-          "description": "South Australia, Chardonnay",
-          "price": {
-            "glass": "$16",
-            "bottle": "$68"
-          },
-          "is_vegetarian": true
-        },
-        {
-          "name": "GUILLAUME GONNET \"LE REVEUR\" 2022",
-          "description": "France, Rhone, Viognier / Roussane / Grenache",
-          "price": {
-            "bottle": "$72"
-          },
-          "is_vegetarian": true
-        },
-        {
-          "name": "LAURENZ V FORBIDDEN",
-          "description": "Austria, Niederösterreich, Grüner Veltliner",
-          "price": {
-            "bottle": "$72"
-          },
-          "is_vegetarian": true
-        },
-        {
-          "name": "BODEGA CONTADOR PREDICADOR 2018",
-          "description": "Spain, Rioja, Macabeo",
-          "price": {
-            "bottle": "$98"
-          },
-          "is_vegetarian": true
-        },
-        {
-          "name": "CHATEAU DE POMMARD BOURGOGNE 2019",
-          "description": "France, Burgundy, Chardonnay",
-          "price": {
-            "bottle": "$138"
-          },
-          "is_vegetarian": true
-        }
-      ]
-    },
+    // {
+    //   "category_name": "SPARKLING WINE",
+    //   "items": [
+    //     {
+    //       "name": "TERESA RIZZI PROSECCO DOC",
+    //       "price": {
+    //         "glass": "$14",
+    //         "bottle": "$62"
+    //       },
+    //       "description": null,
+    //       "is_vegetarian": true
+    //     },
+    //     {
+    //       "name": "VEUVE CLICQUOT YELLOW LABEL BRUT CHAMPAGNE",
+    //       "price": {
+    //         "bottle": "$168"
+    //       },
+    //       "description": null,
+    //       "is_vegetarian": true
+    //     }
+    //   ]
+    // },
     {
       "category_name": "RUM & TEQUILA",
       "pourNote": "Prices by the glass based on our standard pour of 30 ml",
