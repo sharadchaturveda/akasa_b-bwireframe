@@ -40,7 +40,7 @@ export function generateMetadata({
     twitterImage: "https://akasa.sg/images/seo/twitter-card.jpg",
   };
 
-  const formattedTitle = title ? `${title} - Akasa` : fallback.title;
+  const formattedTitle = title ? title : fallback.title;
   const formattedOGTitle = ogTitle ? `${ogTitle} - Akasa` : fallback.title;
   const formattedDescription = description ?? fallback.description;
   const formattedOGDescription = ogDescription ?? fallback.description;
