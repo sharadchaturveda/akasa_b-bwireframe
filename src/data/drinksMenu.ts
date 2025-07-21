@@ -457,14 +457,14 @@ export const drinksMenu: Menu = {
     //   ]
     // },
     {
-      "category_name": "RUM & TEQUILA",
+      "category_name": "RUM",
       "pourNote": "Prices by the glass based on our standard pour of 30 ml",
       "items": [
         {
           "name": "BACARDI WHITE RUM",
           "price": {
-            "pour_30ml": "$12",
-            "bottle_larger": "$118"
+            "glass": "$12",
+            "bottle": "$118"
           },
           "description": null,
           "is_vegetarian": true
@@ -472,17 +472,23 @@ export const drinksMenu: Menu = {
         {
           "name": "DIPLOMATICO RESERVA EXCLUSIVA",
           "price": {
-            "pour_30ml": "$15",
-            "bottle_larger": "$158"
+            "glass": "$15",
+            "bottle": "$158"
           },
           "description": null,
           "is_vegetarian": true
         },
+      ]
+    },
+    {
+      "category_name": "TEQUILA",
+      "pourNote": "Prices by the glass based on our standard pour of 30 ml",
+      "items": [
         {
           "name": "DON JULIO BLANCO",
           "price": {
-            "pour_30ml": "$18",
-            "bottle_larger": "$178"
+            "glass": "$18",
+            "bottle": "$178"
           },
           "description": null,
           "is_vegetarian": true
@@ -490,8 +496,8 @@ export const drinksMenu: Menu = {
         {
           "name": "DON JULIO ANEJO",
           "price": {
-            "pour_30ml": "$20",
-            "bottle_larger": "$188"
+            "glass": "$20",
+            "bottle": "$188"
           },
           "description": null,
           "is_vegetarian": true
@@ -499,8 +505,26 @@ export const drinksMenu: Menu = {
         {
           "name": "KAH ANEJO TEQUILA",
           "price": {
-            "pour_30ml": "$28",
-            "bottle_larger": "$258"
+            "glass": "$28",
+            "bottle": "$258"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "LOCA LOKA BIANCO",
+          "price": {
+            "glass": "$24",
+            "bottle": "$218"
+          },
+          "description": null,
+          "is_vegetarian": true
+        },
+        {
+          "name": "LOCA LOKA RESPOSADO",
+          "price": {
+            "glass": "$28",
+            "bottle": "$258"
           },
           "description": null,
           "is_vegetarian": true
@@ -514,8 +538,8 @@ export const drinksMenu: Menu = {
         {
           "name": "ABSOLUT BLUE",
           "price": {
-            "pour_30ml": "$12",
-            "bottle_larger": "$128"
+            "glass": "$12",
+            "bottle": "$128"
           },
           "description": null,
           "is_vegetarian": true
@@ -523,8 +547,8 @@ export const drinksMenu: Menu = {
         {
           "name": "BELVEDERE PURE",
           "price": {
-            "pour_30ml": "$14",
-            "bottle_larger": "$148"
+            "glass": "$14",
+            "bottle": "$148"
           },
           "description": null,
           "is_vegetarian": true
@@ -532,8 +556,8 @@ export const drinksMenu: Menu = {
         {
           "name": "GREY GOOSE ORIGINAL",
           "price": {
-            "pour_30ml": "$16",
-            "bottle_larger": "$158"
+            "glass": "$16",
+            "bottle": "$158"
           },
           "description": null,
           "is_vegetarian": true
@@ -541,8 +565,8 @@ export const drinksMenu: Menu = {
         {
           "name": "FORD'S GIN",
           "price": {
-            "pour_30ml": "$14",
-            "bottle_larger": "$128"
+            "glass": "$14",
+            "bottle": "$128"
           },
           "description": null,
           "is_vegetarian": true
@@ -550,8 +574,8 @@ export const drinksMenu: Menu = {
         {
           "name": "HENDRICK'S GIN",
           "price": {
-            "pour_30ml": "$18",
-            "bottle_larger": "$168"
+            "glass": "$18",
+            "bottle": "$168"
           },
           "description": null,
           "is_vegetarian": true
@@ -559,7 +583,7 @@ export const drinksMenu: Menu = {
         {
           "name": "JAISALMER GOLD GIN (500ML)",
           "price": {
-            "pour_30ml": "$18",
+            "glass": "$18",
             "bottle_500ml": "$178"
           },
           "description": null,
@@ -568,8 +592,8 @@ export const drinksMenu: Menu = {
         {
           "name": "GIN MARE",
           "price": {
-            "pour_30ml": "$20",
-            "bottle_larger": "$188"
+            "glass": "$20",
+            "bottle": "$188"
           },
           "description": null,
           "is_vegetarian": true
@@ -577,8 +601,8 @@ export const drinksMenu: Menu = {
         {
           "name": "THE LONDON NO. 1 SHERRY GIN",
           "price": {
-            "pour_30ml": "$24",
-            "bottle_larger": "$238"
+            "glass": "$24",
+            "bottle": "$238"
           },
           "description": null,
           "is_vegetarian": true
@@ -586,7 +610,7 @@ export const drinksMenu: Menu = {
         {
           "name": "SASAKI XV JAPANESE CRAFT GIN (500 ML)",
           "price": {
-            "pour_30ml": "$26",
+            "glass": "$26",
             "bottle_500ml": "$198"
           },
           "description": null,
@@ -601,7 +625,7 @@ export const drinksMenu: Menu = {
         {
           "name": "REMY MARTIN VSOP",
           "price": {
-            "pour_30ml": "$18"
+            "glass": "$18"
           },
           "description": null,
           "is_vegetarian": true
@@ -609,7 +633,7 @@ export const drinksMenu: Menu = {
         {
           "name": "ABK6 VSOP",
           "price": {
-            "pour_30ml": "$20"
+            "glass": "$20"
           },
           "description": null,
           "is_vegetarian": true
@@ -617,7 +641,7 @@ export const drinksMenu: Menu = {
         {
           "name": "MARTELL VSOP",
           "price": {
-            "pour_30ml": "$22"
+            "glass": "$22"
           },
           "description": null,
           "is_vegetarian": true
@@ -631,8 +655,8 @@ export const drinksMenu: Menu = {
         {
           "name": "RAMPUR DOUBLE CASK",
           "price": {
-            "pour_30ml": "$25",
-            "bottle_larger": "$240"
+            "glass": "$25",
+            "bottle": "$240"
           },
           "description": null,
           "is_vegetarian": true
@@ -640,14 +664,15 @@ export const drinksMenu: Menu = {
         {
           "name": "RAMPUR SELECT",
           "price": {
-            "pour_30ml": "$32",
-            "bottle_larger": "$320"
+            "glass": "$32",
+            "bottle": "$320"
           },
           "description": null,
           "is_vegetarian": true
         }
       ]
     },
+    
     {
       "category_name": "AMERICAN WHISKY",
       "pourNote": "Prices by the glass based on our standard pour of 30 ml",
@@ -655,7 +680,7 @@ export const drinksMenu: Menu = {
         {
           "name": "JACK DANIEL'S OLD NO. 7",
           "price": {
-            "pour_30ml": "$12"
+            "glass": "$12"
           },
           "description": null,
           "is_vegetarian": true
@@ -663,7 +688,7 @@ export const drinksMenu: Menu = {
         {
           "name": "JACK DANIEL'S TENESSEE RYE",
           "price": {
-            "pour_30ml": "$17"
+            "glass": "$17"
           },
           "description": null,
           "is_vegetarian": true
@@ -671,7 +696,7 @@ export const drinksMenu: Menu = {
         {
           "name": "WOODFORD RESERVE AMERICAN BOURBON",
           "price": {
-            "pour_30ml": "$18"
+            "glass": "$18"
           },
           "description": null,
           "is_vegetarian": true
@@ -685,7 +710,7 @@ export const drinksMenu: Menu = {
         {
           "name": "STARWARD NOVA SINGLE MALT",
           "price": {
-            "pour_30ml": "$16"
+            "glass": "$16"
           },
           "description": null,
           "is_vegetarian": true
@@ -693,7 +718,7 @@ export const drinksMenu: Menu = {
         {
           "name": "STARWARD DOLCE SINGLE MALT",
           "price": {
-            "pour_30ml": "$18"
+            "glass": "$18"
           },
           "description": null,
           "is_vegetarian": true
@@ -707,7 +732,7 @@ export const drinksMenu: Menu = {
         {
           "name": "UMIKI BLENDED",
           "price": {
-            "pour_30ml": "$18"
+            "glass": "$18"
           },
           "description": null,
           "is_vegetarian": true
@@ -715,7 +740,7 @@ export const drinksMenu: Menu = {
         {
           "name": "KAMIKI INTENSE MALT",
           "price": {
-            "pour_30ml": "$18"
+            "glass": "$18"
           },
           "description": null,
           "is_vegetarian": true
@@ -729,8 +754,8 @@ export const drinksMenu: Menu = {
         {
           "name": "MONKEY SHOULDER",
           "price": {
-            "pour_30ml": "$18",
-            "bottle_larger": "$188"
+            "glass": "$18",
+            "bottle": "$188"
           },
           "description": null,
           "is_vegetarian": true
@@ -738,8 +763,8 @@ export const drinksMenu: Menu = {
         {
           "name": "CHIVAS REGAL 12 YEARS",
           "price": {
-            "pour_30ml": "$14",
-            "bottle_larger": "$138"
+            "glass": "$14",
+            "bottle": "$138"
           },
           "description": null,
           "is_vegetarian": true
@@ -753,7 +778,7 @@ export const drinksMenu: Menu = {
         {
           "name": "DEWARS'S WHITE LABEL",
           "price": {
-            "pour_30ml": "$14"
+            "glass": "$14"
           },
           "description": null,
           "is_vegetarian": true
@@ -761,8 +786,8 @@ export const drinksMenu: Menu = {
         {
           "name": "TALISKER 10 YRS",
           "price": {
-            "pour_30ml": "$18",
-            "bottle_larger": "$208"
+            "glass": "$18",
+            "bottle": "$208"
           },
           "description": null,
           "is_vegetarian": true
@@ -770,8 +795,8 @@ export const drinksMenu: Menu = {
         {
           "name": "GLENFIDDICH 12 YRS",
           "price": {
-            "pour_30ml": "$18",
-            "bottle_larger": "$198"
+            "glass": "$18",
+            "bottle": "$198"
           },
           "description": null,
           "is_vegetarian": true
@@ -779,8 +804,8 @@ export const drinksMenu: Menu = {
         {
           "name": "GLENFIDDICH 15 YRS",
           "price": {
-            "pour_30ml": "$26",
-            "bottle_larger": "$308"
+            "glass": "$26",
+            "bottle": "$308"
           },
           "description": null,
           "is_vegetarian": true
@@ -788,7 +813,7 @@ export const drinksMenu: Menu = {
         {
           "name": "GLENFIDDICH 18 YRS",
           "price": {
-            "pour_30ml": "$32"
+            "glass": "$32"
           },
           "description": null,
           "is_vegetarian": true
@@ -796,8 +821,8 @@ export const drinksMenu: Menu = {
         {
           "name": "GLENLIVET 12 YRS",
           "price": {
-            "pour_30ml": "$18",
-            "bottle_larger": "$198"
+            "glass": "$18",
+            "bottle": "$198"
           },
           "description": null,
           "is_vegetarian": true
@@ -805,8 +830,8 @@ export const drinksMenu: Menu = {
         {
           "name": "GLENLIVET 15 YRS",
           "price": {
-            "pour_30ml": "$28",
-            "bottle_larger": "$328"
+            "glass": "$28",
+            "bottle": "$328"
           },
           "description": null,
           "is_vegetarian": true
@@ -814,8 +839,8 @@ export const drinksMenu: Menu = {
         {
           "name": "BALVENIE DBL WOOD 12 YRS",
           "price": {
-            "pour_30ml": "$20",
-            "bottle_larger": "$258"
+            "glass": "$20",
+            "bottle": "$258"
           },
           "description": null,
           "is_vegetarian": true
@@ -823,8 +848,8 @@ export const drinksMenu: Menu = {
         {
           "name": "GLENGLASSAUGH PORTSOY",
           "price": {
-            "pour_30ml": "$20",
-            "bottle_larger": "$238"
+            "glass": "$20",
+            "bottle": "$238"
           },
           "description": null,
           "is_vegetarian": true
@@ -832,8 +857,8 @@ export const drinksMenu: Menu = {
         {
           "name": "GLENGLASSAUGH PORTWOOD",
           "price": {
-            "pour_30ml": "$20",
-            "bottle_larger": "$238"
+            "glass": "$20",
+            "bottle": "$238"
           },
           "description": null,
           "is_vegetarian": true
@@ -841,8 +866,8 @@ export const drinksMenu: Menu = {
         {
           "name": "LAGAVULIN 16 YRS",
           "price": {
-            "pour_30ml": "$24",
-            "bottle_larger": "$298"
+            "glass": "$24",
+            "bottle": "$298"
           },
           "description": null,
           "is_vegetarian": true
