@@ -42,6 +42,7 @@ export interface BlogPost {
   title: string;
   description: string;
   slug: { current: string };
+  publishedAt: string;
   _createdAt: string;
   _updatedAt: string;
   mainImage: SanityImageAsset;
