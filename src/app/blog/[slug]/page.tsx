@@ -70,6 +70,7 @@ const fullPostQuery = `*[_type == "post" && slug.current == $slug][0]{
   slug,
   publishedAt,
   _updatedAt,
+  _createdAt,
   mainImage,
   body,
   author->{
