@@ -42,6 +42,7 @@ export interface BlogPost {
   title: string;
   description: string;
   slug: { current: string };
+  publishedAt: string;
   _createdAt: string;
   _updatedAt: string;
   mainImage: SanityImageAsset;
@@ -70,6 +71,7 @@ const fullPostQuery = `*[_type == "post" && slug.current == $slug][0]{
   slug,
   publishedAt,
   _updatedAt,
+  _createdAt,
   mainImage,
   body,
   author->{

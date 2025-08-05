@@ -156,7 +156,7 @@ export function generateSchema({
               "Wednesday",
               "Thursday",
               "Friday",
-              "Sunday"
+              "Saturday",
             ],
             "opens": "11:30",
             "closes": "22:30"
