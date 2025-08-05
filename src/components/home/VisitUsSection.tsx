@@ -25,8 +25,12 @@ const BusinessHours = memo(function BusinessHours() {
           <Icon name="clock" size={14} color={COLORS.GOLD} strokeWidth={1.5} />
         </div>
         <div className="text-center">
-          <p className="text-xs font-montserrat text-white drop-shadow-md mb-1">{"Monday to Sautrady:"}</p>
-          <p className="text-xs font-montserrat text-white drop-shadow-md">{"11:30am to 10:30pm"}</p>
+          <p className="text-xs font-montserrat text-white drop-shadow-md mb-1">
+            {"Monday to Sautrady:"}
+          </p>
+          <p className="text-xs font-montserrat text-white drop-shadow-md">
+            {"11:30am to 10:30pm"}
+          </p>
         </div>
       </div>
     );
@@ -35,10 +39,16 @@ const BusinessHours = memo(function BusinessHours() {
   return (
     <div className="flex items-center justify-center mb-4 sm:mb-6">
       <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-full bg-[#1A2A3A]/80 flex items-center justify-center mr-2 sm:mr-4 flex-shrink-0 shadow-sm">
-        <Icon name="clock" size={14} color={COLORS.GOLD} strokeWidth={1.5} className="sm:w-5 sm:h-5" />
+        <Icon
+          name="clock"
+          size={14}
+          color={COLORS.GOLD}
+          strokeWidth={1.5}
+          className="sm:w-5 sm:h-5"
+        />
       </div>
       <p className="text-xs sm:text-sm lg:text-base font-montserrat text-white drop-shadow-md">
-        {"Sunday to Friday: 11:30am to 10:30pm"}
+        {"Monday to Saturday: 11:30am to 10:30pm"}
       </p>
     </div>
   );
@@ -90,9 +100,17 @@ const ActionButtons = memo(function ActionButtons() {
 /**
  * DirectionsButton component for the "Get Directions" button
  */
-const DirectionsButton = memo(function DirectionsButton({ isMobile }: { isMobile: boolean }) {
+const DirectionsButton = memo(function DirectionsButton({
+  isMobile,
+}: {
+  isMobile: boolean;
+}) {
   return (
-    <Link href="https://maps.app.goo.gl/fVFNWkTNBQhbW91J7" target="_blank" rel="noopener noreferrer">
+    <Link
+      href="https://maps.app.goo.gl/fVFNWkTNBQhbW91J7"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       <Button
         variant="default"
         size={isMobile ? "small" : "medium"}
@@ -115,12 +133,7 @@ const DirectionsButton = memo(function DirectionsButton({ isMobile }: { isMobile
             </>
           ) : (
             <>
-              <Icon
-                name="map-pin"
-                className="mr-2"
-                size={16}
-                strokeWidth={2}
-              />
+              <Icon name="map-pin" className="mr-2" size={16} strokeWidth={2} />
               <span>Get Directions</span>
             </>
           )}
@@ -133,7 +146,11 @@ const DirectionsButton = memo(function DirectionsButton({ isMobile }: { isMobile
 /**
  * ReservationButton component for the "Reserve a Table" button
  */
-const ReservationButton = memo(function ReservationButton({ isMobile }: { isMobile: boolean }) {
+const ReservationButton = memo(function ReservationButton({
+  isMobile,
+}: {
+  isMobile: boolean;
+}) {
   return (
     <Link href="/reservations">
       <Button
@@ -216,7 +233,7 @@ const VisitUsSection = memo(function VisitUsSectionComponent() {
     <section
       id="visit-us"
       className="relative min-h-[80vh] flex items-center justify-center text-center px-4 sm:px-8 py-12 sm:py-16 overflow-hidden"
-      style={{ height: '600px' }}
+      style={{ height: "600px" }}
     >
       {/* Background image with high quality */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
@@ -232,10 +249,12 @@ const VisitUsSection = memo(function VisitUsSectionComponent() {
         />
 
         {/* Gradient overlay for better text readability */}
-        <div className={cn(
-          "absolute inset-0",
-          "bg-gradient-to-t from-black/70 via-black/40 to-black/30"
-        )} />
+        <div
+          className={cn(
+            "absolute inset-0",
+            "bg-gradient-to-t from-black/70 via-black/40 to-black/30"
+          )}
+        />
       </div>
 
       {/* Information card - centered horizontally and vertically */}

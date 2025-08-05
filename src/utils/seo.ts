@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export interface MetadataOptions {
   title?: string;
@@ -7,14 +7,11 @@ export interface MetadataOptions {
   ogTitle?: string;
   ogDescription?: string;
   ogImageUrl?: string;
-  type?: 'website' | 'article';
+  type?: "website" | "article";
   metaRobots?: string;
   keywords?: string;
   authors?: { name: string; url?: string }[];
 }
-
-
-
 
 export function generateMetadata({
   title,
@@ -23,18 +20,18 @@ export function generateMetadata({
   ogTitle,
   ogDescription,
   ogImageUrl,
-  type = 'website',
-  metaRobots = 'index, follow',
+  type = "website",
+  metaRobots = "index, follow",
   keywords = "Indian cuisine, Singapore restaurant, fine dining, Akasa, Indian food, Robinson Road, authentic Indian, luxury dining",
   authors = [
-    { name: "Akasa", url: "https://akasa.sg" },                   // example second author
+    { name: "Akasa", url: "https://akasa.sg" }, // example second author
   ],
 }: MetadataOptions): Metadata {
   // Default metadata fallbacks
   const fallback = {
     title: "Akasa | Finest Indian Cuisine in Singapore",
     description:
-      "Experience the finest Indian cuisine at Akasa. Located at 79 Robinson Road, Singapore. Open Sunday to Friday, 11:30am to 10:30am.",
+      "Experience the finest Indian cuisine at Akasa. Located at 79 Robinson Road, Singapore. Open Monday to Saturday, 11:30am to 10:30am.",
     url: "https://akasa.sg",
     image: "https://akasa.sg/images/seo/og-image.jpg",
     twitterImage: "https://akasa.sg/images/seo/twitter-card.jpg",
@@ -44,8 +41,10 @@ export function generateMetadata({
   const formattedOGTitle = ogTitle ? `${ogTitle} - Akasa` : fallback.title;
   const formattedDescription = description ?? fallback.description;
   const formattedOGDescription = ogDescription ?? fallback.description;
-  const finalUrl = url?.startsWith('https') ? url : fallback.url;
-  const finalImage = ogImageUrl?.startsWith('https') ? ogImageUrl : fallback.image;
+  const finalUrl = url?.startsWith("https") ? url : fallback.url;
+  const finalImage = ogImageUrl?.startsWith("https")
+    ? ogImageUrl
+    : fallback.image;
 
   // Robots directive handling
   const robotsObject = {
@@ -58,16 +57,16 @@ export function generateMetadata({
     noimageindex: /NOIMAGEINDEX/i.test(metaRobots),
   };
   const extraDirectives = metaRobots
-    .split(',')
+    .split(",")
     .map((v) => v.trim())
-    .filter((v) => v.includes(':'))
-    .join(', ');
+    .filter((v) => v.includes(":"))
+    .join(", ");
   const robotsMetaString = [
     ...Object.entries(robotsObject)
       .filter(([, value]) => value)
       .map(([key]) => key.toLowerCase()),
     ...(extraDirectives ? [extraDirectives] : []),
-  ].join(', ');
+  ].join(", ");
 
   return {
     title: formattedTitle,
@@ -81,8 +80,8 @@ export function generateMetadata({
       title: formattedOGTitle,
       description: formattedOGDescription,
       url: finalUrl,
-      siteName: 'Akasa',
-      locale: 'en_SG',
+      siteName: "Akasa",
+      locale: "en_SG",
       type,
       images: [
         {
@@ -101,17 +100,15 @@ export function generateMetadata({
     },
 
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: formattedOGTitle,
       description: formattedOGDescription,
       images: [
         ogImageUrl ?? fallback.twitterImage,
         "https://akasa.sg/images/home/hero/carousel/hero1.jpg",
       ],
-      creator: '@akasa_singapore',
-      site: '@akasa_singapore',
+      creator: "@akasa_singapore",
+      site: "@akasa_singapore",
     },
   };
 }
-
-
