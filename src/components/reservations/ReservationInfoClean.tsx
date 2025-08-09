@@ -112,12 +112,12 @@ const ReservationInfo = memo(function ReservationInfo() {
                     </div>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row sm:justify-between">
+                  {/* <div className="flex flex-col sm:flex-row sm:justify-between">
                     <div className="dining-info-label font-medium">
                       Saturday:
                     </div>
                     <div className="dining-info-text">Closed</div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
