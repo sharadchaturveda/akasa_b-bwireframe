@@ -280,7 +280,7 @@ const ReservationInfo = memo(function ReservationInfo() {
                   </span>
                   <span className="text-[#E6C78B]">11:30 AM - 10:30 PM</span>
                 </div>
-                <div className="flex flex-col sm:flex-row sm:items-center">
+                {/* <div className="flex flex-col sm:flex-row sm:items-center">
                   <span
                     className="label-span sm:w-36 font-medium mb-1 sm:mb-0"
                     style={{ flexShrink: 0 }}
@@ -288,7 +288,7 @@ const ReservationInfo = memo(function ReservationInfo() {
                     Saturday:
                   </span>
                   <span className="text-[#E6C78B]">Closed</span>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
