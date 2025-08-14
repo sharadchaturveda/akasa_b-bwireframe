@@ -73,8 +73,8 @@ const components = {
       return (
         <a
           href={value?.href}
-          target={target}
-          rel={target === '_blank' ? 'noindex nofollow' : undefined}
+          // target={target}
+          // rel={target === '_blank' ? 'noindex nofollow' : undefined}
           className="text-[#E6C78B] hover:underline transition-colors duration-200"
         >
           {children}
