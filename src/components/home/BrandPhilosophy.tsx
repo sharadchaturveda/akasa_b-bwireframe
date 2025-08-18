@@ -187,7 +187,7 @@ const BrandPhilosophy = memo(function BrandPhilosophy() {
                 rel="noopener noreferrer"
               >
                 <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] w-[200px] sm:w-[240px] px-4 sm:px-6 py-2 sm:py-3 text-center shadow-lg text-sm sm:text-base">
-                  Order Online
+                  Island wide delivery
                 </Button>
               </Link>
               <Link href="/reservations" className="w-full sm:w-auto">
