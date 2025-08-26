@@ -6,6 +6,7 @@ import FloatingActionButtons from '@/components/ui/FloatingActionButtons';
 import ScrollBehavior from '@/components/home/ScrollBehavior';
 import FacebookPixel from '@/components/tracking/FacebookPixel';
 import React from "react";
+import Footer from "@/components/home/Footer";
 
 export default function BlogLayout({
   children,
@@ -32,6 +33,7 @@ export default function BlogLayout({
         <ScrollBehavior />
 
         {children}
+                <Footer />
       </div>
     </>
   );

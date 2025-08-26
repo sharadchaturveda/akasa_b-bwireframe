@@ -1,32 +1,33 @@
-import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import Script from 'next/script';
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Script from "next/script";
 
-import { client } from '@/sanity/lib/client';
-import { urlFor } from '@/sanity/lib/image';
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
 
-import BlogPostContent from '@/components/blog/BlogPostContent';
-import { generateMetadata as buildMetadata } from '@/utils/seo';
-import { SanityImageSource } from '@sanity/image-url/lib/types/types';
-import { generateSchema } from '@/utils/schema';
-import { portableTextToPlainText } from '@/utils/portableTextToPlainText';
+import BlogPostContent from "@/components/blog/BlogPostContent";
+import { generateMetadata as buildMetadata } from "@/utils/seo";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { generateSchema } from "@/utils/schema";
+import { portableTextToPlainText } from "@/utils/portableTextToPlainText";
+import GoogleMap from "@/components/ui/GoogleMap";
 
 // ----------------------------------
 // Interfaces
 // ----------------------------------
 
 export interface SanityImageAsset {
-  _type: 'image';
+  _type: "image";
   asset: {
     _ref: string;
-    _type: 'reference';
+    _type: "reference";
   };
 }
 
 export interface Author {
   name: string;
   image: SanityImageSource;
-  url: string
+  url: string;
 }
 
 export interface FAQ {
@@ -54,7 +55,7 @@ export interface BlogPost {
   ogTitle?: string;
   ogDescription?: string;
   ogImgUrl?: string;
-  ogType?: 'article' | 'website';
+  ogType?: "article" | "website";
 }
 
 interface BlogPostPageProps {
@@ -98,7 +99,10 @@ const seoPostQuery = `*[_type == "post" && slug.current == $slug][0]{
 // Fetch Helper
 // ----------------------------------
 
-async function getPost<T = BlogPost>(slug: string, query: string): Promise<T | null> {
+async function getPost<T = BlogPost>(
+  slug: string,
+  query: string
+): Promise<T | null> {
   return client.fetch(query, { slug });
 }
 
@@ -106,7 +110,9 @@ async function getPost<T = BlogPost>(slug: string, query: string): Promise<T | n
 // Metadata Generator
 // ----------------------------------
 
-export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: BlogPostPageProps): Promise<Metadata> {
   const { slug: newslug } = await params;
   const post = await getPost<BlogPost>(newslug, seoPostQuery);
   if (!post) notFound();
@@ -124,34 +130,36 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     mainImage,
   } = post;
 
-  const ogImageUrl = ogImgUrl || (mainImage?.asset ? urlFor(mainImage).url() : undefined);
+  const ogImageUrl =
+    ogImgUrl || (mainImage?.asset ? urlFor(mainImage).url() : undefined);
 
   return buildMetadata({
     title: ogTitle || title,
     description: ogDescription || description,
-    url: canonicalUrl || (slug?.current ? `/blog/${slug.current}` : ''),
+    url: canonicalUrl || (slug?.current ? `/blog/${slug.current}` : ""),
     ogImageUrl,
-    type: ogType || 'article',
-    metaRobots: metaRobots || 'INDEX, FOLLOW',
+    type: ogType || "article",
+    metaRobots: metaRobots || "INDEX, FOLLOW",
   });
 }
-
 
 // ----------------------------------
 // Page Component
 // ----------------------------------
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = await params
+  const { slug } = await params;
   const post = await getPost<BlogPost>(slug, fullPostQuery);
 
   if (!post) notFound();
 
   const schemaProps: any = {
-    type: 'BlogPosting',
+    type: "BlogPosting",
     title: post.title,
     description: post.description,
-    url: post.canonicalUrl || (post.slug?.current && `https://akasa.sg/blog/${post.slug.current}`),
+    url:
+      post.canonicalUrl ||
+      (post.slug?.current && `https://akasa.sg/blog/${post.slug.current}`),
     blogbody: post.body && portableTextToPlainText(post.body),
     _createdAt: post._createdAt,
     _updatedAt: post._updatedAt,
@@ -167,7 +175,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     schemaProps.author = {
       name: post.author.name,
       ...(post.author.image?.asset && {
-        url: urlFor(post.author.image).url()
+        url: urlFor(post.author.image).url(),
       }),
     };
   }
@@ -177,7 +185,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     schemaProps.faqs = post.faqSection[0].faqItems;
   }
 
-  const schemaData = generateSchema(schemaProps)
+  const schemaData = generateSchema(schemaProps);
 
   return (
     <>
@@ -189,6 +197,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       />
       <main className="container mx-auto px-4 pt-24 pb-12 md:px-8 lg:px-16">
         <BlogPostContent post={post} />
+
+        {/* Google Map for location */}
+        <GoogleMap />
       </main>
     </>
   );
