@@ -1,0 +1,67 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import Image from "next/image";
+import { memo } from "react";
+
+/**
+ * FestiveMenuCTA Component
+ *
+ * A Call-to-Action section highlighting the festive menus: Satvik & Diwali
+ */
+const FestiveMenuCTA = memo(function FestiveMenuCTA() {
+  return (
+    <section className="relative w-full min-h-[50vh] sm:min-h-[60vh] overflow-hidden py-16 sm:py-24">
+      {/* Background image */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/unused/event3.jpg" // same background as GallerySection
+          alt="Festive background"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+          style={{ objectPosition: "center" }}
+          quality={75}
+        />
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/60"></div>
+      </div>
+
+      {/* Decorative floating particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/3 left-1/4 w-2 h-2 rounded-full bg-[#E6C78B] animate-float" style={{ animationDuration: '18s' }}></div>
+        <div className="absolute top-2/3 right-1/3 w-2 h-2 rounded-full bg-[#E6C78B] animate-float" style={{ animationDuration: '22s' }}></div>
+      </div>
+
+      {/* Content container */}
+      <div className="relative z-10 max-w-5xl mx-auto text-center px-6 sm:px-12">
+        <h2 className="text-[#E6C78B] text-sm sm:text-base tracking-widest uppercase mb-2 font-montserrat">
+          Festive Specials
+        </h2>
+        <h3 className="text-3xl sm:text-4xl font-playfair text-white/90 mb-4 sm:mb-6">
+          Celebrate with Satvik & Diwali Menus
+        </h3>
+        <p className="text-white/80 font-montserrat text-sm sm:text-base mb-8 sm:mb-12 leading-relaxed">
+          Experience the richness of flavors this festive season. Carefully curated Satvik and Diwali menus to make your celebration unforgettable.
+        </p>
+
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <Link href="/menu/satvik" className="w-full sm:w-auto">
+            <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] px-6 py-3 sm:px-8 sm:py-4 shadow-lg text-sm sm:text-base w-full sm:w-auto">
+              Explore Satvik Menu
+            </Button>
+          </Link>
+          <Link href="/menu/diwali" className="w-full sm:w-auto">
+            <Button className="bg-[#E6C78B] text-black hover:bg-[#d4b567] px-6 py-3 sm:px-8 sm:py-4 shadow-lg text-sm sm:text-base w-full sm:w-auto">
+              Explore Diwali Menu
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+});
+
+export default FestiveMenuCTA;

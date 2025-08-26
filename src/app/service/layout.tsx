@@ -1,11 +1,12 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Navigation from '@/components/home/Navigation';
-import FloatingActionButtons from '@/components/ui/FloatingActionButtons';
-import ScrollBehavior from '@/components/home/ScrollBehavior';
-import FacebookPixel from '@/components/tracking/FacebookPixel';
+import Navigation from "@/components/home/Navigation";
+import FloatingActionButtons from "@/components/ui/FloatingActionButtons";
+import ScrollBehavior from "@/components/home/ScrollBehavior";
+import FacebookPixel from "@/components/tracking/FacebookPixel";
 import React from "react";
+import Footer from "@/components/home/Footer";
 
 export default function BlogLayout({
   children,
@@ -13,7 +14,9 @@ export default function BlogLayout({
   children: React.ReactNode;
 }>) {
   const pathname = usePathname();
-  const hideFloatingButtons = pathname && (pathname === "/blog/studio" || pathname.startsWith("/blog/studio/"));
+  const hideFloatingButtons =
+    pathname &&
+    (pathname === "/blog/studio" || pathname.startsWith("/blog/studio/"));
 
   return (
     <>
@@ -32,6 +35,7 @@ export default function BlogLayout({
         <ScrollBehavior />
 
         {children}
+        <Footer />
       </div>
     </>
   );
