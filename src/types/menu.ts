@@ -32,4 +32,5 @@ export interface Menu {
   menu_name: string;
   source_url?: string;
   categories: MenuCategory[];
+  disclaimer?: string;
 }
