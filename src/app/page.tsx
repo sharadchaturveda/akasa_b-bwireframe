@@ -12,6 +12,7 @@ import TestimonialsSection from "@/components/home/TestimonialsSection";
 import LocationSection from "@/components/home/LocationSection";
 import RestaurantStructuredData from "@/components/seo/RestaurantStructuredData";
 import { applyScrollPerformanceOptimizations } from "@/utils/optimizedScrollUtils";
+import FestiveMenuCTA from "@/components/CTA/FestiveMenuCTA";
 
 export default function HomePage() {
   useEffect(() => {
@@ -46,7 +47,7 @@ export default function HomePage() {
         {/* New responsive hero component with mobile video support */}
         <NewResponsiveHero />
 
-        {/* <FestiveMenuCTA /> */}
+        <FestiveMenuCTA />
         
         <BrandPhilosophy />
       </div>
