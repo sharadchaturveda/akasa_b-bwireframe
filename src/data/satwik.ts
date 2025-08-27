@@ -4,29 +4,34 @@ export const satwikMenu: Menu = {
   menu_name: "Satwik Menu",
   categories: [
     {
-      category_name: "MAIN COURSE",
+      category_name: "APPETIZER",
       items: [
         {
           name: "Kela aur Shakarkand Kebab",
-          price: "$26",
+          price: "$22",
           description: "Banana | Cottage Cheese | Green Chili | Coriander | Spices",
           is_vegetarian: true,
-        },
+        }
+      ],
+    },
+    {
+      category_name: "MAIN COURSE",
+      items: [
         {
           name: "Safed Paneer Masala",
-          price: "$24",
+          price: "$26",
           description: "Cottage Cheese | Green Chili | Cream | Indian Spices",
           is_vegetarian: true,
         },
         {
           name: "Kheera aur Channa Subzi",
-          price: "$22",
+          price: "$24",
           description: "Cucumber | Bengal gram | Tomato | Yoghurt | Indian Spices",
           is_vegetarian: true,
         },
         {
           name: "Tamatar Sev ki Subzi",
-          price: "$7",
+          price: "$22",
           description: "Tomato | Green Chili | Cashew Nuts | Indian Spices",
           is_vegetarian: true,
         },
@@ -37,7 +42,7 @@ export const satwikMenu: Menu = {
       items: [
         {
           name: "Kuttu Roti",
-          price: "$22",
+          price: "$7",
           description: "Indian bread made from Buckwheat Flour",
           is_vegetarian: true,
         },
@@ -48,7 +53,7 @@ export const satwikMenu: Menu = {
       items: [
         {
           name: "Dalia Khichdi",
-          price: "$16",
+          price: "$22",
           description: "Wholesome cracked wheat khichdi",
           is_vegetarian: true,
         },
@@ -59,7 +64,7 @@ export const satwikMenu: Menu = {
       items: [
         {
           name: "Bhatt Angoori Rabdi",
-          price: "$22",
+          price: "$16",
           description: "Rice | Milk | Saffron | Nuts",
           is_vegetarian: true,
         },

@@ -16,7 +16,7 @@ const FestiveMenuCTA = memo(function FestiveMenuCTA() {
       {/* Background image */}
       <div className="absolute inset-0">
         <Image
-          src="/images/unused/event3.jpg" // same background as GallerySection
+          src="/images/menu/festive/image.png" // same background as GallerySection
           alt="Festive background"
           fill
           priority
