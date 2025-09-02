@@ -7,13 +7,13 @@ import { Metadata } from "next";
 import { generateMetadata } from "@/utils/seo";
 
 export const metadata: Metadata = generateMetadata({
-  title: "Loyalty Program | Akasa - Exclusive Member Benefits",
+  title: "Akasa Loyalty Program – Rewards & Exclusive Perks",
   description:
-    "Join Akasa's exclusive loyalty program and enjoy exclusive benefits, discounts, and special treats. Earn points with every visit and unlock exclusive member perks.",
+    "Join Akasa’s loyalty program and enjoy exclusive dining rewards, member perks, and special offers every time you experience authentic Indian flavors.",
   url: "https://akasa.sg/loyalty-program",
-  ogTitle: "Loyalty Program | Akasa - Exclusive Member Benefits",
+  ogTitle: "Akasa Loyalty Program – Rewards & Exclusive Perks",
   ogDescription:
-    "Join Akasa's exclusive loyalty program and enjoy exclusive benefits, discounts, and special treats. Earn points with every visit and unlock exclusive member perks.",
+    "Join Akasa’s loyalty program and enjoy exclusive dining rewards, member perks, and special offers every time you experience authentic Indian flavors.",
   ogImageUrl: "https://akasa.sg/images/offers/loyalty_program/loyalty.jpg",
   keywords: "Akasa loyalty program, premium dining rewards, exclusive member benefits, Singapore restaurant loyalty, fine dining rewards, Akasa membership, Indian restaurant rewards, VIP dining perks, member discounts, Akasa SG loyalty",
 });

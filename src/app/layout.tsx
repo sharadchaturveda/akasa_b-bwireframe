@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Analytics from '@/components/Analytics';
+import Analytics from "@/components/Analytics";
 // Import essential CSS files
 import "./globals.css";
 // Import consolidated performance CSS
@@ -8,21 +8,25 @@ import "../styles/performance-optimizations.css";
 import "../styles/hero-position-fix.css";
 
 // Import components
-import MobileNavigation from '@/components/navigation/MobileNavigation';
-import FloatingActionButtons from '@/components/ui/FloatingActionButtons';
-import ScrollBehavior from '@/components/home/ScrollBehavior';
-import FacebookPixel from '@/components/tracking/FacebookPixel';
+import MobileNavigation from "@/components/navigation/MobileNavigation";
+import FloatingActionButtons from "@/components/ui/FloatingActionButtons";
+import ScrollBehavior from "@/components/home/ScrollBehavior";
+import FacebookPixel from "@/components/tracking/FacebookPixel";
 import { ANIMATED_BACKGROUND_STYLE } from "@/constants/menuConstants";
 import { generateMetadata } from "@/utils/seo";
 
 // Define CSS variables for font fallbacks
 const fontVariables = {
   playfair: "--font-playfair",
-  montserrat: "--font-montserrat"
+  montserrat: "--font-montserrat",
 };
 
-export const metadata: Metadata = generateMetadata({});
-
+export const metadata: Metadata = generateMetadata({
+  title: "Indian Restaurant in Singapore | Akasa Lunch and Dinner",
+  description:
+    "Akasa is the best Indian restaurant in Singapore, serving flavorful lunch and dinner with aromatic curries, tandoori delights, and authentic regional dishes.",
+  url: "https://akasa.sg",
+});
 
 // export const metadata: Metadata = {
 //   title: "Akasa | Finest Indian Cuisine in Singapore",
@@ -92,23 +96,31 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         {/* Google Site Verification */}
-        <meta name="google-site-verification" content="con9e04JeylhS4iXu1ZBZVUJPohnV9cRTrc0oyBkask" />
+        <meta
+          name="google-site-verification"
+          content="con9e04JeylhS4iXu1ZBZVUJPohnV9cRTrc0oyBkask"
+        />
 
         {/* Safari-specific viewport fix */}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        />
 
         {/* Additional SEO meta tags */}
         <meta name="author" content="Akasa" />
         <meta name="robots" content="index, follow" />
         <meta name="geo.region" content="SG" />
         <meta name="geo.placename" content="Singapore" />
-        <link rel="icon" href="/favicon.ico" />
+        {/* <link rel="icon" href="/favicon.ico" /> */}
 
         {/* Local fonts CSS as fallback */}
         <link rel="stylesheet" href="/fonts/fonts.css" />
 
         {/* System font fallbacks */}
-        <style dangerouslySetInnerHTML={{ __html: `
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
           /* System font fallbacks */
           :root {
             --font-playfair: Georgia, 'Times New Roman', Times, serif;
@@ -127,7 +139,9 @@ export default function RootLayout({
           body, p, div, span, button, a {
             font-family: var(--font-montserrat) !important;
           }
-        `}} />
+        `,
+          }}
+        />
 
         {/* Removed preload links that were causing warnings */}
 
@@ -152,16 +166,22 @@ export default function RootLayout({
       <body
         className="antialiased font-system relative"
         style={{
-          WebkitFontSmoothing: 'antialiased',
-          MozOsxFontSmoothing: 'grayscale',
-          textRendering: 'optimizeLegibility',
-          overscrollBehavior: 'none',
-          overflowX: 'hidden'
+          WebkitFontSmoothing: "antialiased",
+          MozOsxFontSmoothing: "grayscale",
+          textRendering: "optimizeLegibility",
+          overscrollBehavior: "none",
+          overflowX: "hidden",
         }}
       >
         {/* Decorative background elements */}
-        <div className="absolute inset-0 overflow-hidden" style={{ opacity: 0.13 }}>
-          <div className="absolute inset-0" style={ANIMATED_BACKGROUND_STYLE}></div>
+        <div
+          className="absolute inset-0 overflow-hidden"
+          style={{ opacity: 0.13 }}
+        >
+          <div
+            className="absolute inset-0"
+            style={ANIMATED_BACKGROUND_STYLE}
+          ></div>
         </div>
 
         {/* This div will contain the main content and have a semi-transparent background */}
