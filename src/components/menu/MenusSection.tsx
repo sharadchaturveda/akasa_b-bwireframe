@@ -141,6 +141,9 @@ export default function MenusSection() {
                     featuring traditional holiday favorites with an elegant
                     Akasa twist. Limited time only.
                   </p>
+                  <div className="bg-[#E6C78B] text-black w-[30%] px-4 py-2 rounded-full text-xs font-medium shadow-lg mb-4">
+                    Valid from 27th Aug - 1st Oct
+                  </div>
 
                   <div className="flex flex-wrap gap-3 mb-6">
                     <span className="px-3 py-1 bg-[#E6C78B]/10 text-[#E6C78B] text-sm rounded-full border border-[#E6C78B]/20">
