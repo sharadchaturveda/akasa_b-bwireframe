@@ -41,7 +41,7 @@ export function generateMetadata({
   const formattedOGTitle = ogTitle ? `${ogTitle} - Akasa` : fallback.title;
   const formattedDescription = description ?? fallback.description;
   const formattedOGDescription = ogDescription ?? fallback.description;
-  const finalUrl = url?.startsWith("https") ? url : fallback.url;
+  const finalUrl = url?.startsWith("https") ? url : `${fallback.url}/${url}`;
   const finalImage = ogImageUrl?.startsWith("https")
     ? ogImageUrl
     : fallback.image;

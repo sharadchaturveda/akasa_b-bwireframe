@@ -310,15 +310,7 @@ const LoyaltyProgramSection = memo(function LoyaltyProgramSection() {
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         {/* Coming Soon Banner */}
-        <div className="w-full max-w-3xl mx-auto mb-10 bg-gradient-to-r from-[#1A2A3A] via-[#1A2A3A] to-[#1A2A3A] rounded-lg overflow-hidden shadow-lg">
-          <div className="h-1 w-full bg-gradient-to-r from-[#E6C78B] via-[#E6C78B] to-transparent"></div>
-          <div className="flex items-center justify-center py-3 px-6">
-            <div className="w-2 h-2 rounded-full bg-[#E6C78B] mr-3 animate-pulse"></div>
-            <p className="text-white font-montserrat text-sm md:text-base tracking-wider">
-              <span className="text-[#E6C78B] font-medium">Coming Soon:</span> Our Loyalty Program is being crafted for your enjoyment
-            </p>
-          </div>
-        </div>
+
 
         <div className="flex flex-col lg:flex-row gap-12 items-center">
           {/* Loyalty Program image with elegant frame */}
