@@ -7,7 +7,7 @@ export const metadata: Metadata = generateMetadata({
   title: "Akasa Restaurant Bar Bites Menu – Small Plates & Chaat",
   description:
     "Akasa’s bar bites menu features Indian chaat, street food flavors, and small plates perfectly paired with creative cocktails in Singapore.",
-  url: "bar-bites",
+  url: "menu/bar-bites",
   ogTitle: "Akasa Restaurant Bar Bites Menu – Small Plates & Chaat",
   ogDescription:
     "Akasa’s bar bites menu features Indian chaat, street food flavors, and small plates perfectly paired with creative cocktails in Singapore.",

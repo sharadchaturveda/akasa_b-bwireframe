@@ -7,7 +7,7 @@ export const metadata: Metadata = generateMetadata({
   title: "Akasa Restaurant Menu – À La Carte, Explore Dishes",
   description:
     "Explore Akasa’s à la carte menu with Indian curries, biryanis, tandoor grills, and vegetarian specialties crafted with authentic flavors in Singapore.",
-  url: "a-la-carte",
+  url: "menu/a-la-carte",
   ogTitle: "Akasa Restaurant Menu – À La Carte, Explore Dishes",
   ogDescription:
     "Explore Akasa’s à la carte menu in Singapore with authentic Indian curries, biryanis, tandoor grills, and vegetarian specialties.",
