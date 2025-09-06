@@ -7,7 +7,7 @@ export const metadata: Metadata = generateMetadata({
   title: "Tasting Menu Akasa Restaurant – Multi-Course Indian Menu",
   description:
     "Experience Akasa’s tasting menu in Singapore with multi-course Indian dining, combining traditional recipes, modern flavors, and perfect pairings.",
-  url: "tasting-menu",
+  url: "menu/tasting-menu",
   ogTitle: "Akasa Restaurant Tasting Menu – Multi-Course Indian Menu",
   ogDescription:
     "Experience Akasa’s tasting menu in Singapore with multi-course Indian dining, combining traditional recipes, modern flavors, and perfect pairings.",

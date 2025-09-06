@@ -7,7 +7,7 @@ export const metadata: Metadata = generateMetadata({
   title: "Vegan Menu Akasa Restaurant – Authentic Indian Vegan Dining",
   description:
     "Akasa’s vegan menu in Singapore offers flavorful plant-based curries, spiced lentils, and authentic Indian vegan specialties crafted with passion.",
-  url: "vegan",
+  url: "menu/vegan",
   ogTitle: "Akasa Restaurant Vegan Menu – Authentic Indian Vegan Dining",
   ogDescription:
     "Akasa’s vegan menu in Singapore offers flavorful plant-based curries, spiced lentils, and authentic Indian vegan specialties crafted with passion.",

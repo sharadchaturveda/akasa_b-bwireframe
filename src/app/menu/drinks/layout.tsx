@@ -7,7 +7,7 @@ export const metadata: Metadata = generateMetadata({
   title: "Akasa Restaurant Drinks Menu – Cocktails, Wine & Tea",
   description:
     "Sip Akasa’s drinks menu with handcrafted cocktails, fine wines, and Indian teas thoughtfully crafted to enhance your dining experience in Singapore.",
-  url: "drinks",
+  url: "menu/drinks",
   ogTitle: "Akasa Restaurant Drinks Menu – Cocktails, Wine & Tea",
   ogDescription:
     "Sip Akasa’s drinks menu with handcrafted cocktails, fine wines, and Indian teas thoughtfully crafted to enhance your dining experience in Singapore.",

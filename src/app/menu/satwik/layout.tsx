@@ -7,7 +7,7 @@ export const metadata: Metadata = generateMetadata({
   title: "Satwik Menu Akasa Restaurant – Vegetarian Indian Dining",
   description:
     "Explore Akasa’s Satwik menu with Indian curries, biryanis, tandoor grills, and vegetarian specialties crafted with authentic flavors in Singapore.",
-  url: "satwik",
+  url: "menu/satwik",
   ogTitle: "Akasa Restaurant Menu – Satwik, Explore Dishes",
   ogDescription:
     "Explore Akasa’s Satwik menu in Singapore with authentic Indian curries, biryanis, tandoor grills, and vegetarian specialties.",
