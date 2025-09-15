@@ -16,6 +16,7 @@ import {
 import DesktopMenuCard from "./DesktopMenuCard";
 import MobileMenuCard from "./MobileMenuCard";
 import Image from "next/image";
+import Link from "next/link";
 
 // Dynamically import the GrabAndGoSection component
 const GrabAndGoSection = dynamic(
@@ -141,42 +142,42 @@ export default function MenusSection() {
                     featuring traditional holiday favorites with an elegant
                     Akasa twist. Limited time only.
                   </p>
-                  <div className="bg-[#E6C78B] text-black w-[30%] px-4 py-2 rounded-full text-xs font-medium shadow-lg mb-4">
-                    Valid from 27th Aug - 1st Oct
+                  <div className="bg-[#E6C78B] text-black px-4 py-2 rounded-full text-xs sm:text-sm font-medium shadow-lg mb-4 text-center mx-auto">
+                    Valid for Satwik: 27th Aug - 1st Oct
+                    <br />
+                    Valid for Diwali: 20th Oct - 5th Nov
                   </div>
 
-                  <div className="flex flex-wrap gap-3 mb-6">
-                    <span className="px-3 py-1 bg-[#E6C78B]/10 text-[#E6C78B] text-sm rounded-full border border-[#E6C78B]/20">
-                      Limited Time
-                    </span>
-                    <span className="px-3 py-1 bg-[#E6C78B]/10 text-[#E6C78B] text-sm rounded-full border border-[#E6C78B]/20">
-                      Special Dishes
-                    </span>
-                    <span className="px-3 py-1 bg-[#E6C78B]/10 text-[#E6C78B] text-sm rounded-full border border-[#E6C78B]/20">
-                      Group Packages
-                    </span>
+                  <div className="flex flex-col items-center justify-between sm:flex-row gap-4 mb-4">
+                    <Link
+                      href="/menu/satwik"
+                      className="inline-block px-6 py-3 bg-gradient-to-r from-[#E6C78B] to-[#CD9B3F] text-black font-medium rounded-lg transform transition-transform hover:scale-105 hover:shadow-xl text-center w-full sm:w-auto"
+                    >
+                      View Satwik Menu
+                    </Link>
+                    <Link
+                      href="/menu/diwali"
+                      className="inline-block px-6 py-3 bg-gradient-to-r from-[#CD9B3F] to-[#E6C78B] text-black font-medium rounded-lg transform transition-transform hover:scale-105 hover:shadow-xl text-center w-full sm:w-auto"
+                    >
+                      View Diwali Menu
+                    </Link>
                   </div>
-
-                  <a
-                    href="/menu/satwik"
-                    className="inline-block px-6 py-3 bg-gradient-to-r from-[#E6C78B] to-[#CD9B3F] text-black font-medium rounded-lg transform transition-transform hover:scale-105 hover:shadow-xl"
-                  >
-                    View Satwik Menu
-                  </a>
                 </div>
 
-                <div className="md:w-1/2 relative">
-                  <div className="w-full h-64 md:h-80 overflow-hidden rounded-lg relative">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                <div className="md:w-1/2 max-md:hidden relative flex items-center justify-center">
+                  <div className="w-full h-64 md:h-80 overflow-hidden rounded-lg relative flex items-end">
                     <Image
                       width={400}
                       height={300}
                       src="/images/menu/festive/image.png"
                       alt="Akasa Festive Menu Special"
-                      className="w-full h-full object-cover transition-transform hover:scale-105 duration-700"
+                      className="w-full !h-full"
+                      priority
                     />
-                    <div className="absolute bottom-4 left-4 z-20 px-3 py-1 bg-[#E6C78B] text-black text-sm font-bold rounded">
-                      LIMITED TIME
+                    <div className="absolute bottom-4 left-4 right-4 z-20 flex justify-center">
+                      <span className="px-3 py-1 bg-[#E6C78B] text-black text-sm font-bold rounded shadow-lg">
+                        LIMITED TIME
+                      </span>
                     </div>
                   </div>
                 </div>
