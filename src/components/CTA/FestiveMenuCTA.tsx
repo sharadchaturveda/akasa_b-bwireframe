@@ -56,22 +56,31 @@ const FestiveMenuCTA = memo(function FestiveMenuCTA() {
           unforgettable.
         </p>
 
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <div className="satwik flex flex-col space-y-4">
+        <div className="flex flex-col sm:flex-row justify-center items-stretch gap-8 mt-8">
+          {/* Satwik Menu */}
+          <div className="flex flex-col items-center sm:items-stretch flex-1 space-y-4">
             <Link href="/menu/satwik" className="w-full sm:w-auto">
               <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] px-6 py-3 sm:px-8 sm:py-4 shadow-lg text-sm sm:text-base w-full sm:w-auto">
                 Explore Satwik Menu
               </Button>
             </Link>
-            <div className="bg-[#E6C78B] text-black px-4 py-2 rounded-full text-xs font-medium shadow-lg">
-              {`Valid frpom 27th Aug - 1st Oct`}
+            <div className="bg-[#232B38] text-[#E6C78B] px-4 py-2 rounded-md text-xs font-medium shadow border border-[#E6C78B]/30 w-fit sm:w-full mx-auto sm:mx-0">
+              <span className="inline-block align-middle mr-1">🛈</span>
+              {`Valid from 27th Aug - 1st Oct`}
             </div>
           </div>
-          {/* <Link href="/menu/diwali" className="w-full sm:w-auto">
-            <Button className="bg-[#E6C78B] text-black hover:bg-[#d4b567] px-6 py-3 sm:px-8 sm:py-4 shadow-lg text-sm sm:text-base w-full sm:w-auto">
-              Explore Diwali Menu
-            </Button>
-          </Link> */}
+          {/* Diwali Menu */}
+          <div className="flex flex-col items-center sm:items-stretch flex-1 space-y-4">
+            <Link href="/menu/diwali" className="w-full sm:w-auto">
+              <Button className="bg-[#1A2A3A] text-white hover:bg-[#0A1A2A] px-6 py-3 sm:px-8 sm:py-4 shadow-lg text-sm sm:text-base w-full sm:w-auto">
+                Explore Diwali Menu
+              </Button>
+            </Link>
+            <div className="bg-[#232B38] text-[#E6C78B] px-4 py-2 rounded-md text-xs font-medium shadow border border-[#E6C78B]/30 w-fit sm:w-full mx-auto sm:mx-0">
+              <span className="inline-block align-middle mr-1">🛈</span>
+              {`Valid from 2nd Oct - 8th Nov`}
+            </div>
+          </div>
         </div>
       </div>
     </section>
