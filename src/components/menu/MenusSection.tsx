@@ -145,7 +145,7 @@ export default function MenusSection() {
                   <div className="bg-[#E6C78B] text-black px-4 py-2 rounded-full text-xs sm:text-sm font-medium shadow-lg mb-4 text-center mx-auto">
                     Valid for Satwik: 27th Aug - 1st Oct
                     <br />
-                    Valid for Diwali: 20th Oct - 5th Nov
+                    Valid for Diwali: 2nd Oct - 8th Nov
                   </div>
 
                   <div className="flex flex-col items-center justify-between sm:flex-row gap-4 mb-4">
