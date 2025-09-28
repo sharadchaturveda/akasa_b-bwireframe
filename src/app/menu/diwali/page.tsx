@@ -37,7 +37,7 @@ export default function DiwaliMenuPage() {
             Festive vegetarian & non-vegetarian thali and ala-carte specialties
           </p>
           <div className="bg-[#232B38] text-[#E6C78B] px-4 py-2 rounded-md text-xs font-medium shadow border border-[#E6C78B]/30 w-fit mx-auto">
-            Valid from 20th Oct - 5th Nov
+            Valid from 2nd Oct - 8th Nov
           </div>
           <div className="text-xs text-white/70 mt-2">
             Thali menu available for 4 guests and above. All prices subject to
