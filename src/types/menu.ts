@@ -13,11 +13,12 @@ export interface Variant {
 
 export interface MenuItem {
   name: string;
-  price: string | PriceOption;
+  price?: string | PriceOption;
   description: string | null;
   vegetarian?: boolean;
   is_vegetarian?: boolean;
   variants?: Variant[];
+  allergens?: string;
 }
 
 export interface MenuCategory {
