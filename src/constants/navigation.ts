@@ -28,6 +28,7 @@ export const NAVIGATION = {
    */
   HOME_NAV_ITEMS: [
     { name: "MENUS", path: "/menu" },
+    { name: "MITHAI", path: "/menu/mithai" },
     { name: "EVENTS", path: "/events" },
     { name: "OFFERS", path: "/offers" },
     { name: "Loyalty", path: "/loyalty-program" },
@@ -40,6 +41,7 @@ export const NAVIGATION = {
   OTHER_NAV_ITEMS: [
     { name: "HOME", path: "/" },
     { name: "MENUS", path: "/menu" },
+    { name: "MITHAI", path: "/menu/mithai" },
     { name: "EVENTS", path: "/events" },
     { name: "Loyalty", path: "/loyalty-program" },
     { name: "OFFERS", path: "/offers" },
