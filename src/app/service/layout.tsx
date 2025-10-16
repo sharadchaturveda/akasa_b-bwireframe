@@ -11,7 +11,7 @@ export const metadata: Metadata = generateMetadata({
   title: "Akasa Restaurant Services – Lunch, Dinner & Event Guides",
   description:
     "Akasa in Singapore offers curated services including Indian lunch, dinner, and private dining event guides for every celebration and special occasion.",
-  url: "services",
+  url: "service",
   ogTitle: "Akasa Restaurant Services – Lunch, Dinner & Event Guides",
   ogDescription:
     "Discover Akasa's curated services for Indian lunch, dinner, and private dining events in Singapore.",
