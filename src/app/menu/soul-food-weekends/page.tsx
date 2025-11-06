@@ -31,7 +31,7 @@ export default function SoulFoodWeekendsMenuPage() {
 
   return (
     <main className="min-h-screen bg-black text-white">
-      <Navigation />
+      <Navigation/>
 
       {/* Hero Section */}
       <section className="w-full bg-[url('/images/menu/soul-food-weekends/hero/hero.jpg')] bg-cover bg-center py-64 relative">
@@ -95,13 +95,6 @@ export default function SoulFoodWeekendsMenuPage() {
 
       <Footer />
 
-      {/* Add custom CSS for animations */}
-      <style jsx>{`
-        @keyframes slideBackground {
-          0% { background-position: 0 0; }
-          100% { background-position: 100% 100%; }
-        }
-      `}</style>
     </main>
   );
 }

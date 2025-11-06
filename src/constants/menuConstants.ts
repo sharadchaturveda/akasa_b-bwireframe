@@ -46,6 +46,13 @@ export const MENU_TYPES: MenuType[] = [
     url: "/menu/a-la-carte",
   },
   {
+    id: "soul-weekend-brunch",
+    name: "Soul Weekend Brunch",
+    description: "Indulge in your cravings with our weekend brunch experience",
+    image: "/menus/soul-weekend-brunch/Akasa-41737-Edit.png",
+    url: "/menu/soul-weekend-brunch",
+  },
+  {
     id: "soul-food",
     name: "Soul Food Weekends",
     description: "Special weekend offerings that nourish the soul",
@@ -81,21 +88,21 @@ export const MENU_TYPES: MenuType[] = [
     image: "/images/menu/vegan/hero/hero.jpg",
     url: "/menu/vegan",
   },
-  {
-    id: "tasting-menu",
-    name: "Tasting Menu",
-    description: "A curated multi-course journey through Indian cuisine",
-    image: "/images/menu/tasting-menu/hero/hero.jpg",
-    url: "/menu/tasting-menu",
-  },
-  {
-    id: "mithai",
-    name: "Mithai Menu",
-    description:
-      "Traditional Indian sweet delicacies made with authentic recipes",
-    image: "/images/menu/festive/image.png",
-    url: "/menu/mithai",
-  },
+  // {
+  //   id: "tasting-menu",
+  //   name: "Tasting Menu",
+  //   description: "A curated multi-course journey through Indian cuisine",
+  //   image: "/images/menu/tasting-menu/hero/hero.jpg",
+  //   url: "/menu/tasting-menu",
+  // },
+  // {
+  //   id: "mithai",
+  //   name: "Mithai Menu",
+  //   description:
+  //     "Traditional Indian sweet delicacies made with authentic recipes",
+  //   image: "/images/menu/festive/image.png",
+  //   url: "/menu/mithai",
+  // },
 ];
 
 /**
