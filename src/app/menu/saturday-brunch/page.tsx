@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Navigation from "@/components/home/Navigation";
+// import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,7 @@ import DesktopNavigation from "@/components/navigation/DesktopNavigation";
 
 // Menu data
 const soulBrunchMenu = {
-  menu_name: "Soul Weekend Brunch",
+  menu_name: "Saturday Brunch",
   subtitle: "Indulge in Your Cravings",
   price: "$38++",
   launch_date: "15th November 2025",
@@ -22,13 +22,13 @@ const soulBrunchMenu = {
       category_name: "FROM THE COUNTER",
       items: [
         {
-          name: "Aam Ar Papya Salad",
-          description: "Raw Mango | Papaya | Indian Dressing",
+          name: "Aam Aur Papya Salad",
+          description: "Raw Mango | Papaya | Signature Dressing",
           is_vegetarian: true,
         },
         {
           name: "Chickpeas Quinoa Salad",
-          description: "Quinoa | Chick P7kl keas | Mix Vegetables | Lemon Dressing",
+          description: "Quinoa | Chickpeas | Mix Vegetables | Lemon Dressing",
           is_vegetarian: true,
         },
         {
@@ -165,7 +165,7 @@ const soulBrunchMenu = {
 const brunchImages = [
   {
     src: "/menus/soul-weekend-brunch/DSC06273-topaz.jpg",
-    alt: "Soul Weekend Brunch Spread",
+    alt: "Saturday Brunch",
   },
   {
     src: "/menus/soul-weekend-brunch/DSC06290-topaz.jpg",
@@ -326,7 +326,7 @@ export default function SoulWeekendBrunchPage() {
         <div className="container mx-auto px-4 md:px-8 relative z-10 text-center">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-playfair mb-6 text-white leading-tight">
-              Soul Weekend
+              Saturday
               <span className="block text-[#D4AF37] mt-2">Brunch</span>
             </h1>
 

@@ -77,7 +77,6 @@ export default function MenusSection() {
   return (
     <>
       <section className="w-full bg-black pt-20 pb-10 relative overflow-hidden">
-        {/* Animated background pattern */}
         <div className="absolute inset-0" style={{ opacity: 0.13 }}>
           <div
             className="absolute inset-0"
@@ -86,7 +85,6 @@ export default function MenusSection() {
         </div>
 
         <div className="container-fluid mx-auto px-1 relative z-10">
-          {/* Section Header */}
           <div className="text-center mb-16">
             <div className="flex justify-center mb-6">
               <div className="relative w-20 h-20 flex items-center justify-center">
@@ -113,7 +111,7 @@ export default function MenusSection() {
           </div>
 
           {/* Festive Menu Special Section */}
-          <section className="w-full bg-gradient-to-b from-black to-[#0A0A0A] py-16 relative overflow-hidden">
+          {/* <section className="w-full bg-gradient-to-b from-black to-[#0A0A0A] py-16 relative overflow-hidden">
             <div className="absolute inset-0 opacity-10">
               <div className="absolute inset-0 bg-[url('/images/menu/festive/bg-pattern.jpg')] bg-repeat opacity-30"></div>
             </div>
@@ -143,29 +141,12 @@ export default function MenusSection() {
                     Akasa twist. Limited time only.
                   </p>
                   <div className="bg-[#E6C78B] text-black px-4 py-2 rounded-full text-xs sm:text-sm font-medium shadow-lg mb-4 text-center mx-auto">
-                    {/* Valid for Satwik: 27th Aug - 1st Oct
-                    <br /> */}
                     Valid for Diwali: 2nd Oct - 8th Nov
                     <br />
                     <span className="font-bold">
                       Mithai Menu Available Year Round!
                     </span>
                   </div>
-
-                  {/* <div className="flex flex-col items-center justify-between sm:flex-row gap-4 mb-4">
-                     <Link
-                      href="/menu/satwik"
-                      className="inline-block px-6 py-3 bg-gradient-to-r from-[#E6C78B] to-[#CD9B3F] text-black font-medium rounded-lg transform transition-transform hover:scale-105 hover:shadow-xl text-center w-full sm:w-auto"
-                    >
-                      View Satwik Menu
-                    </Link> 
-                    <Link
-                      href="/menu/diwali"
-                      className="inline-block px-6 py-3 bg-gradient-to-r from-[#CD9B3F] to-[#E6C78B] text-black font-medium rounded-lg transform transition-transform hover:scale-105 hover:shadow-xl text-center w-full sm:w-auto"
-                    >
-                      View 
-                    </Link>
-                  </div> */}
 
                   <div className="flex justify-center mt-2">
                     <Link
@@ -222,7 +203,7 @@ export default function MenusSection() {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
 
           {/* Desktop Menu cards in a single row */}
           <div className="relative hidden md:block">
