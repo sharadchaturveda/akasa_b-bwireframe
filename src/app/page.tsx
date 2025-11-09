@@ -47,7 +47,7 @@ export default function HomePage() {
         {/* New responsive hero component with mobile video support */}
         <NewResponsiveHero />
 
-        <FestiveMenuCTA />
+        {/* <FestiveMenuCTA /> */}
         
         <BrandPhilosophy />
       </div>
