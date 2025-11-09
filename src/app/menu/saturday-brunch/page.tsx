@@ -479,7 +479,7 @@ export default function SoulWeekendBrunchPage() {
             <h2 className="text-3xl md:text-4xl font-playfair text-center text-[#D4AF37] mb-8">
               New to Indian Cuisine? We've Got You Covered!
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
               <div className="bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
                 <h3 className="text-xl font-playfair text-[#D4AF37] mb-4">
                   🥗 Chaat - Indian Street Food
@@ -492,6 +492,21 @@ export default function SoulWeekendBrunchPage() {
                 <p className="text-white/70 font-montserrat text-xs">
                   Try: Pani Puri (crispy shells with flavored water) or Chole
                   Aloo Tikki (spiced chickpeas with potato patties)
+                </p>
+              </div>
+              <div className="bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
+                <h3 className="text-xl font-playfair text-[#D4AF37] mb-4">
+                  🔥 Small Plates - Kebabs & Tikkas
+                </h3>
+                <p className="text-white/80 font-montserrat text-sm leading-relaxed mb-3">
+                  Kebabs are marinated meats, seafood, or vegetables grilled in
+                  our traditional tandoor clay oven. These smoky, aromatic small
+                  plates are perfect for sharing and showcase the art of Indian
+                  grilling.
+                </p>
+                <p className="text-white/70 font-montserrat text-xs">
+                  Try: Bhatti Paneer Multani Tikka (grilled cottage cheese) or
+                  Dhaba Murgh Dhuadar Tikka (smoky chicken tikka)
                 </p>
               </div>
               <div className="bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
