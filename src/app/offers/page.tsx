@@ -199,7 +199,7 @@ const CurrentOffersSection = memo(function CurrentOffersSection() {
   const offers = [
     {
       title: { text: "Akasa Happy Hour Specials!", emphasize: "" },
-      description: "Unwind in style with our fantastic Happy Hour deals,\navailable Monday to Friday, 4 PM – 7 PM.\n\nSip, relax, and enjoy amazing prices and 1-for-1 specials on your favorite drinks.\n\nHere's the lineup:\n🟤 Monday: $8 Cocktails & $8 Beers\n🟤 Tuesday: 1-for-1 on Wines\n🟤 Wednesday: 1-for-1 on Draught Beer\n🟤 Thursday: 1-for-1 on Draught Beer, House Wines & Spirits\n🟤 Friday: 1-for-1 on Cocktails\n\n📍 Only at Akasa.\n🧾 T&Cs apply.",
+      description: "Unwind in style with our fantastic Happy Hour deals,\navailable Monday to Friday, 4 PM – 7 PM.\n\nSip, relax, and enjoy amazing prices and 1-for-1 specials on your favorite drinks.\n\nHere's the lineup:\n🟤 Monday: $8 Cocktails & $8 Beers\n🟤 Tuesday: 1-for-1 on Wines & Cocktails\n🟤 Wednesday: 1-for-1 on Draught Beer & Cocktails\n🟤 Thursday: 1-for-1 on Draught Beer ($8++), House Wines ($8++), Spirits & Cocktails\n🟤 Friday: 1-for-1 on Cocktails\n\n📍 Only at Akasa.\n🧾 T&Cs apply.",
       details: [],
       footnote: "Terms and conditions apply. GST & service charges are additional.",
       image: "/images/offers/promotions/happy-hours.jpg",
