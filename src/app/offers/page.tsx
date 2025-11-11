@@ -199,7 +199,7 @@ const CurrentOffersSection = memo(function CurrentOffersSection() {
   const offers = [
     {
       title: { text: "Akasa Happy Hour Specials!", emphasize: "" },
-      description: "Unwind in style with our fantastic Happy Hour deals,\navailable Monday to Friday, 4 PM – 7 PM.\n\nSip, relax, and enjoy amazing prices and 1-for-1 specials on your favorite drinks.\n\nHere's the lineup:\n🟤 Monday: $8 Cocktails & $8 Beers\n🟤 Tuesday: 1-for-1 on Wines\n🟤 Wednesday: 1-for-1 on Draught Beer\n🟤 Thursday: 1-for-1 on Draught Beer, House Wines & Spirits\n🟤 Friday: 1-for-1 on Cocktails\n\n📍 Only at Akasa.\n🧾 T&Cs apply.",
+      description: "Unwind in style with our fantastic Happy Hour deals,\navailable Monday to Friday, 4 PM – 7 PM.\n\nSip, relax, and enjoy amazing prices and 1-for-1 specials on your favorite drinks.\n\nHere's the lineup:\n🟤 Monday: $8 Cocktails & $8 Beers\n🟤 Tuesday: 1-for-1 on Wines & Cocktails\n🟤 Wednesday: 1-for-1 on Draught Beer & Cocktails\n🟤 Thursday: 1-for-1 on Draught Beer ($8++), House Wines ($8++), Spirits & Cocktails\n🟤 Friday: 1-for-1 on Cocktails\n\n📍 Only at Akasa.\n🧾 T&Cs apply.",
       details: [],
       footnote: "Terms and conditions apply. GST & service charges are additional.",
       image: "/images/offers/promotions/happy-hours.jpg",
@@ -207,15 +207,15 @@ const CurrentOffersSection = memo(function CurrentOffersSection() {
       code: "CHEERSAKASA",
       link: "/menu/drinks"
     },
-    {
-      title: { text: "Akasa Turns ", emphasize: "1" },
-      description: "We're turning one, and you're invited to the party.\nThis isn't just any celebration—it's a toast to flavor, friends, and unforgettable moments.\n\nEnjoy an exclusive 10% discount on:\n\n🍸 Happy Hour cocktails\n\n🍽️ A La Carte delights\n\n🍷 Curated drink selections\n\nJust show up hungry—we've got the rest.\nOffer valid only for Capitasky tenants.\n\n📅 Limited-time offer.",
-      details: [],
-      image: "/images/offers/promotions/akasa-turns-1.jpg",
-      validUntil: "15th May to 30th June 2025",
-      code: "AKASA1YR",
-      link: "/reservations"
-    },
+    // {
+    //   title: { text: "Akasa Turns ", emphasize: "1" },
+    //   description: "We're turning one, and you're invited to the party.\nThis isn't just any celebration—it's a toast to flavor, friends, and unforgettable moments.\n\nEnjoy an exclusive 10% discount on:\n\n🍸 Happy Hour cocktails\n\n🍽️ A La Carte delights\n\n🍷 Curated drink selections\n\nJust show up hungry—we've got the rest.\nOffer valid only for Capitasky tenants.\n\n📅 Limited-time offer.",
+    //   details: [],
+    //   image: "/images/offers/promotions/akasa-turns-1.jpg",
+    //   validUntil: "15th May to 30th June 2025",
+    //   code: "AKASA1YR",
+    //   link: "/reservations"
+    // },
     {
       title: { text: "Weekend Family Feast", emphasize: "" },
       description: "Because good food tastes better when it's shared.\n\nGather your tribe—friends, family, neighbors, even your work fam.\nWhen you dine in with a group of 4 or more, you'll enjoy a full spread:\n\n🥟 Shared appetizers to kick things off\n\n🍛 Hearty mains for every taste\n\n🍰 Sweet finales to round out the meal\n\nAll at 10% off the regular price.\nPerfect for birthdays, reunions, or just because.",
@@ -267,7 +267,7 @@ const CurrentOffersSection = memo(function CurrentOffersSection() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 auto-rows-fr min-h-[600px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 auto-rows-fr min-h-[600px]">
           {offers.map((offer, index) => (
             <OfferCard
               key={index}
