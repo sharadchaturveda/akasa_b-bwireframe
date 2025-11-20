@@ -88,13 +88,13 @@ export const MENU_TYPES: MenuType[] = [
     image: "/images/menu/set-lunch/hero/hero.jpg",
     url: "/menu/set-lunch",
   },
-  {
-    id: "vegan",
-    name: "Vegan Menu",
-    description: "Explore our delicious plant-based options",
-    image: "/images/menu/vegan/hero/hero.jpg",
-    url: "/menu/vegan",
-  },
+  // {
+  //   id: "vegan",
+  //   name: "Vegan Menu",
+  //   description: "Explore our delicious plant-based options",
+  //   image: "/images/menu/vegan/hero/hero.jpg",
+  //   url: "/menu/vegan",
+  // },
   // {
   //   id: "tasting-menu",
   //   name: "Tasting Menu",
