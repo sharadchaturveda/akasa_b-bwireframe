@@ -20,6 +20,7 @@ const navItems = [
   { name: 'A la carte Menu', href: '/menu/a-la-carte' },
   { name: 'Bar bites Menu', href: '/menu/bar-bites' },
   { name: 'Drinks Menu', href: '/menu/drinks' },
+  { name: 'Wine Pairing Menu', href: '/menu/wine-pairing' },
   { name: 'Mithai', href: '/menu/mithai' },
   { name: 'Saturday Brunch', href: '/menu/saturday-brunch' },
   { name: 'Set Lunch Menu', href: '/menu/set-lunch' },
