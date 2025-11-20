@@ -119,8 +119,8 @@ export default function BlogPostContent({ post, isService=false }: BlogPostConte
           </div>
         )}
         <p className="text-base md:text-lg">
-          Published on{" "}
-          {new Date(post.publishedAt).toLocaleDateString("en-US", {
+          Updated at{" "}
+          {new Date(post._updatedAt).toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
             day: "numeric",
