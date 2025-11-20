@@ -42,8 +42,7 @@ export const winePairingMenu = {
       dishes: [
         {
           name: "Tandoori Prawns",
-          description:
-            "Char-grilled Tiger Prawns | Methaina Chilli | Rajwada (Royal) Spices",
+          description: "Char-grilled Tiger Prawns | Methaina Chilli | Rajwada (Royal) Spices",
           is_vegetarian: false,
         },
         {
@@ -78,6 +77,7 @@ export const winePairingMenu = {
         name: "Errazuriz Estate Cabernet Sauvignon",
         type: "Red Wine",
         origin: "Chile",
+        description: "Bold tannins and dark fruit notes complement the rich, spiced curry and tender mutton perfectly",
         color: "red",
       },
     },
@@ -92,6 +92,7 @@ export const winePairingMenu = {
         name: "Penfolds Koonunga Hill Autumn Riesling",
         type: "Riesling Wine",
         origin: "Australia",
+        description: "Sweet Riesling with honeyed notes and floral aromas elevates the saffron-infused dessert",
         color: "white",
       },
     },

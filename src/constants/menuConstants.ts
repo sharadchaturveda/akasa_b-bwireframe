@@ -52,6 +52,13 @@ export const MENU_TYPES: MenuType[] = [
     image: "/menus/soul-weekend-brunch/DSC06273-topaz.jpg",
     url: "/menu/saturday-brunch",
   },
+  {
+    id: "wine-pairing",
+    name: "Wine Pairing Menu",
+    description: "Experience Akasa's exclusive Festive Wine Pairing Menu by Chef Akhilesh Pathak",
+    image: "/images/menu/gallery5.jpg",
+    url: "/menu/wine-pairing",
+  },
   // {
   //   id: "soul-food",
   //   name: "Soul Food Weekends",
