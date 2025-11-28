@@ -67,13 +67,6 @@ export const MENU_TYPES: MenuType[] = [
     image: "/images/menu/gallery5.jpg",
     url: "/menu/wine-pairing",
   },
-  {
-    id: "menu",
-    name: "Menu",
-    description: "Explore all our menus and discover a world of flavors.",
-    image: "/images/menu/menu/hero/hero.jpg",
-    url: "/menu",
-  },
   // {
   //   id: "soul-food",
   //   name: "Soul Food Weekends",
@@ -95,13 +88,13 @@ export const MENU_TYPES: MenuType[] = [
     image: "/images/menu/bar-bites/hero/hero.jpg",
     url: "/menu/bar-bites",
   },
-  {
-    id: "set-lunch",
-    name: "3 Course Set Lunch",
-    description: "A perfect midday dining experience with three exquisite courses",
-    image: "/images/menu/set-lunch/hero/hero.jpg",
-    url: "/menu/set-lunch",
-  },
+  // {
+  //   id: "set-lunch",
+  //   name: "3 Course Set Lunch",
+  //   description: "A perfect midday dining experience with three exquisite courses",
+  //   image: "/images/menu/set-lunch/hero/hero.jpg",
+  //   url: "/menu/set-lunch",
+  // },
   // {
   //   id: "vegan",
   //   name: "Vegan Menu",
