@@ -29,6 +29,7 @@ export const NAVIGATION = {
   HOME_NAV_ITEMS: [
     { name: "MENUS", path: "/menu" },
     { name: "SATURDAY BRUNCH", path: "/menu/saturday-brunch" },
+    { name: "FESTIVE BRUNCH", path: "/menu/festive-brunch" },
     { name: "EVENTS", path: "/events" },
     { name: "OFFERS", path: "/offers" },
     { name: "Loyalty", path: "/loyalty-program" },
@@ -42,6 +43,7 @@ export const NAVIGATION = {
     { name: "HOME", path: "/" },
     { name: "MENUS", path: "/menu" },
     { name: "SATURDAY BRUNCH", path: "/menu/saturday-brunch" },
+    { name: "FESTIVE BRUNCH", path: "/menu/festive-brunch" },
     { name: "EVENTS", path: "/events" },
     { name: "Loyalty", path: "/loyalty-program" },
     { name: "OFFERS", path: "/offers" },

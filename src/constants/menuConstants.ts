@@ -46,6 +46,14 @@ export const MENU_TYPES: MenuType[] = [
     url: "/menu/a-la-carte",
   },
   {
+    id: "festive-brunch",
+    name: "Festive Brunch",
+    description:
+      "Celebrate the season with our exclusive Festive Brunch menu, featuring special holiday dishes and drinks.",
+    image: "/menus/soul-weekend-brunch/DSC06277-topaz.jpg",
+    url: "/menu/festive-brunch",
+  },
+  {
     id: "saturday-brunch",
     name: "Saturday Brunch",
     description: "Indulge in your cravings with our weekend brunch experience",
@@ -58,6 +66,13 @@ export const MENU_TYPES: MenuType[] = [
     description: "Experience Akasa's exclusive Festive Wine Pairing Menu by Chef Akhilesh Pathak",
     image: "/images/menu/gallery5.jpg",
     url: "/menu/wine-pairing",
+  },
+  {
+    id: "menu",
+    name: "Menu",
+    description: "Explore all our menus and discover a world of flavors.",
+    image: "/images/menu/menu/hero/hero.jpg",
+    url: "/menu",
   },
   // {
   //   id: "soul-food",
@@ -83,8 +98,7 @@ export const MENU_TYPES: MenuType[] = [
   {
     id: "set-lunch",
     name: "3 Course Set Lunch",
-    description:
-      "A perfect midday dining experience with three exquisite courses",
+    description: "A perfect midday dining experience with three exquisite courses",
     image: "/images/menu/set-lunch/hero/hero.jpg",
     url: "/menu/set-lunch",
   },
@@ -105,8 +119,7 @@ export const MENU_TYPES: MenuType[] = [
   {
     id: "mithai",
     name: "Mithai Menu",
-    description:
-      "Traditional Indian sweet delicacies made with authentic recipes",
+    description: "Traditional Indian sweet delicacies made with authentic recipes",
     image: "/menus/soul-weekend-brunch/Akasa-41737-Edit.png",
     url: "/menu/mithai",
   },
