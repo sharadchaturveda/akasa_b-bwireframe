@@ -23,7 +23,7 @@ const navItems = [
   { name: "Wine Pairing Menu", href: "/menu/wine-pairing" },
   { name: "Mithai", href: "/menu/mithai" },
   { name: "Saturday Brunch", href: "/menu/saturday-brunch" },
-  { name: "Festive Brunch", href: "/menu/festive-brunch" },
+  { name: "Christmas/NY Eve", href: "/menu/christmas-ny-eve" },
   { name: "Set Lunch Menu", href: "/menu/set-lunch" },
   { name: "Soul Food Weekends Menu", href: "/menu/soul-food-weekends" },
   { name: "Tasting Menu", href: "/menu/tasting-menu" },

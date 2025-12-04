@@ -158,7 +158,7 @@ export default function FestiveBrunchPage() {
       <div className="relative z-50 bg-gradient-to-r from-red-700 via-[#D4AF37] to-green-700 py-3">
         <div className="container mx-auto px-4 text-center">
           <p className="text-white font-montserrat font-semibold text-sm md:text-base">
-            🎄 CHRISTMAS SPECIAL: Festive Brunch | {festiveBrunchMenu.availability} | {festiveBrunchMenu.price} per
+            🎄 CHRISTMAS SPECIAL: Christmas | {festiveBrunchMenu.availability} | {festiveBrunchMenu.price} per
             person
           </p>
         </div>
@@ -208,7 +208,7 @@ export default function FestiveBrunchPage() {
 
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-playfair mb-6 text-white leading-tight">
               Festive
-              <span className="block text-[#D4AF37] mt-2">Christmas Brunch</span>
+              <span className="block text-[#D4AF37] mt-2">Christmas & NY Eve Special</span>
             </h1>
 
             <div className="w-32 h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mx-auto mb-8"></div>
@@ -318,7 +318,12 @@ export default function FestiveBrunchPage() {
 
             {videoError && (
               <div className="absolute inset-0 bg-gray-900 z-20">
-                <Image src={festiveBrunchVideo.poster} alt="Festive Brunch Experience" fill className="object-cover" />
+                <Image
+                  src={festiveBrunchVideo.poster}
+                  alt="Christmas/NY Eve Experience"
+                  fill
+                  className="object-cover"
+                />
                 <div className="absolute inset-0 flex items-center justify-center bg-black/50">
                   <div className="text-center px-2">
                     <p className="text-white text-xs font-montserrat">Video unavailable</p>
@@ -331,7 +336,7 @@ export default function FestiveBrunchPage() {
             <div className="absolute top-2 left-2 z-30 md:hidden">
               <button
                 onClick={toggleVideoVisibility}
-                 className="bg-gradient-to-br from-red-600 to-green-600 hover:from-red-500 hover:to-green-500 
+                className="bg-gradient-to-br from-red-600 to-green-600 hover:from-red-500 hover:to-green-500 
                          backdrop-blur-md text-white rounded-full p-2 transition-all duration-200 
                          hover:scale-110 active:scale-95 shadow-xl border border-white/30"
                 aria-label="Hide video"
@@ -447,7 +452,7 @@ export default function FestiveBrunchPage() {
               <div className="bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
                 <h3 className="text-xl font-playfair text-[#D4AF37] mb-4">🎄 Perfect for Families</h3>
                 <p className="text-white/80 font-montserrat text-sm leading-relaxed mb-3">
-                  Our festive brunch is designed for families to come together and celebrate. With a variety of
+                  Our Christmas/NY Eve is designed for families to come together and celebrate. With a variety of
                   vegetarian and non-vegetarian options, there's something for everyone to enjoy during this special
                   season.
                 </p>

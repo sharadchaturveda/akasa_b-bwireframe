@@ -1,12 +1,12 @@
-// Festive Brunch Menu data
+// Christmas/NY Eve Menu data
 export const festiveBrunchMenu = {
-  menu_name: "Festive Brunch",
+  menu_name: "Christmas/NY Eve",
   subtitle: "Celebrate the Season with Chef Akhilesh",
   price: "$48++",
-  availability: "24th Dec Dinner & 25th Dec Brunch/Dinner",
+  availability: "New Year's Eve — in addition to 24th Dec Dinner and 25th Dec Brunch/Dinner.",
   chef: "Chef Akhilesh Pathak",
   description:
-    "Celebrate Christmas with an exquisite festive brunch featuring Chef Akhilesh's signature Indian flavors. A perfect blend of traditional favorites and seasonal specialties.",
+    "Celebrate Christmas with an exquisite Christmas/NY Eve featuring Chef Akhilesh's signature Indian flavors. A perfect blend of traditional favorites and seasonal specialties.",
   categories: [
     {
       category_name: "FROM THE COUNTER",
@@ -141,11 +141,11 @@ export const festiveBrunchMenu = {
   ],
 };
 
-// Festive brunch images - using Saturday brunch images
+// Christmas/NY Eve images - using Saturday brunch images
 export const festiveBrunchImages = [
   {
     src: "/menus/soul-weekend-brunch/DSC06273-topaz.jpg",
-    alt: "Festive Brunch",
+    alt: "Christmas/NY Eve",
   },
   {
     src: "/menus/soul-weekend-brunch/DSC06290-topaz.jpg",
@@ -169,9 +169,9 @@ export const festiveBrunchImages = [
   },
 ];
 
-// Festive brunch video
+// Christmas/NY Eve video
 export const festiveBrunchVideo = {
-  src: "/video/festive-brunch.mp4",
+  src: "/video/christmas-ny-eve.mp4",
   poster: "/menus/soul-weekend-brunch/DSC06273-topaz.jpg",
-  alt: "Festive Brunch Experience at Akasa",
+  alt: "Christmas/NY Eve Experience at Akasa",
 };

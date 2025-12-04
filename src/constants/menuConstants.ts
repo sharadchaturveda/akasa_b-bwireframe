@@ -46,12 +46,19 @@ export const MENU_TYPES: MenuType[] = [
     url: "/menu/a-la-carte",
   },
   {
-    id: "festive-brunch",
-    name: "Festive Brunch",
+    id: "set-lunch",
+    name: "3 Course Set Lunch",
+    description: "A perfect midday dining experience with three exquisite courses",
+    image: "/images/menu/set-lunch/hero/hero.jpg",
+    url: "/menu/set-lunch",
+  },
+  {
+    id: "christmas-ny-eve",
+    name: "Christmas/NY Eve",
     description:
-      "Celebrate the season with our exclusive Festive Brunch menu, featuring special holiday dishes and drinks.",
+      "Celebrate the season with our exclusive Christmas/NY Eve menu, featuring special holiday dishes and drinks.",
     image: "/menus/soul-weekend-brunch/DSC06277-topaz.jpg",
-    url: "/menu/festive-brunch",
+    url: "/menu/christmas-ny-eve",
   },
   {
     id: "saturday-brunch",
@@ -81,20 +88,14 @@ export const MENU_TYPES: MenuType[] = [
     image: "/images/menu/drinks/hero/hero.jpg",
     url: "/menu/drinks",
   },
-  {
-    id: "bar-bites",
-    name: "Chaat & Bar Bites",
-    description: "Perfect small plates to accompany your drinks",
-    image: "/images/menu/bar-bites/hero/hero.jpg",
-    url: "/menu/bar-bites",
-  },
   // {
-  //   id: "set-lunch",
-  //   name: "3 Course Set Lunch",
-  //   description: "A perfect midday dining experience with three exquisite courses",
-  //   image: "/images/menu/set-lunch/hero/hero.jpg",
-  //   url: "/menu/set-lunch",
+  //   id: "bar-bites",
+  //   name: "Chaat & Bar Bites",
+  //   description: "Perfect small plates to accompany your drinks",
+  //   image: "/images/menu/bar-bites/hero/hero.jpg",
+  //   url: "/menu/bar-bites",
   // },
+
   // {
   //   id: "vegan",
   //   name: "Vegan Menu",
